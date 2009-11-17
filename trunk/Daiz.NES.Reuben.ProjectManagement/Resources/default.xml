@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graphicsinfo>
+  <graphics bank="0" name="Raccoon Sprites #1" />
+  <graphics bank="1" name="Raccoon Sprites #2" />
+  <graphics bank="2" name="Raccoon Sprites #3" />
+  <graphics bank="3" name="Raccoon Sprites #4" />
+  <graphics bank="4" name="Global Level Sprites" />
+  <graphics bank="5" name="Inventory Sprtes" />
+  <graphics bank="6" name="Battle Mode Sprites #1" />
+  <graphics bank="7" name="Battle Mode Sprites #2" />
+  <graphics bank="8" name="Plains #1 A" />
+  <graphics bank="9" name="Plains #2 B" />
+  <graphics bank="10" name="Spike/Chomp/Nipper Sprites" />
+  <graphics bank="11" name="Spiny/Buzzy/Lakitu Sprites" />
+  <graphics bank="12" name="Sky A" />
+  <graphics bank="13" name="Sky B" />
+  <graphics bank="14" name="Fire Snake/Parabeetle/Platforms Sprites" />
+  <graphics bank="15" name="Unused" />
+  <graphics bank="16" name="Dungeon A" />
+  <graphics bank="17" name="Dungeon B" />
+  <graphics bank="18" name="Fortress Sprites" />
+  <graphics bank="19" name="Bones/Princess Sprites" />
+  <graphics bank="20" name="Map Tiles #1 A" />
+  <graphics bank="21" name="Map Tiles #1 B" />
+  <graphics bank="22" name="Map Tiles #2 A" />
+  <graphics bank="23" name="Map Tiles #2 B" />
+  <graphics bank="24" name="Ice Tiles A" />
+  <graphics bank="25" name="Ice Tiles B" />
+  <graphics bank="26" name="Boss Bass/Blooper Sprites" />
+  <graphics bank="27" name="Lava Lotus/Spiny Cheep Sprites" />
+  <graphics bank="28" name="Underground Tiles A" />
+  <graphics bank="29" name="Underground Tiles B" />
+  <graphics bank="30" name="King Sprites #1" />
+  <graphics bank="31" name="King Sprites #2" />
+  <graphics bank="32" name="Map Sprites #1" />
+  <graphics bank="33" name="Map Sprites #2" />
+  <graphics bank="34" name="Map Sprites #3" />
+  <graphics bank="35" name="Map Sprites #4" />
+  <graphics bank="36" name="Bonus Game Sprites #1" />
+  <graphics bank="37" name="Bonus Game Sprites #2" />
+  <graphics bank="38" name="Transformed Sprites #1" />
+  <graphics bank="39" name="Transformed Sprites #2" />
+  <graphics bank="40" name="King Hall Tiles A" />
+  <graphics bank="41" name="King Hall Tiles B" />
+  <graphics bank="42" name="Toad Sprites #1" />
+  <graphics bank="43" name="Bonus Game Sprites #3" />
+  <graphics bank="44" name="Roulette Game Tiles A" />
+  <graphics bank="45" name="Roulette Game Tiles B" />
+  <graphics bank="46" name="Roulette Game Tiles C" />
+  <graphics bank="47" name="Roulette Game Tiles D" />
+  <graphics bank="48" name="Desert Tiles A" />
+  <graphics bank="49" name="Desert Tiles B" />
+  <graphics bank="50" name="Pause/Angry Sun Sprites" />
+  <graphics bank="51" name="Boom Boom Sprites #1" />
+  <graphics bank="52" name="Airship Tiles A" />
+  <graphics bank="53" name="Airship Tiles B" />
+  <graphics bank="54" name="Rock Wrench/Bobomb/Canon Sprites" />
+  <graphics bank="55" name="Rock Flames/Wand Blast Sprites" />
+  <graphics bank="56" name="Clouds Tiles A" />
+  <graphics bank="57" name="Clouds Tiles B" />
+  <graphics bank="58" name="Bowser Sprites #1" />
+  <graphics bank="59" name="Bower Sprites #2" />
+  <graphics bank="60" name="Giant Level Global Sprites" />
+  <graphics bank="61" name="Giant Sprites" />
+  <graphics bank="62" name="P-Switch Global Tiles A" />
+  <graphics bank="63" name="P-Switch Global Tiles B" />
+  <graphics bank="64" name="Tanooki Sprites #1" />
+  <graphics bank="65" name="Tanooki Sprites #2" />
+  <graphics bank="66" name="Tanooki Sprites #3" />
+  <graphics bank="67" name="Tanooki Sprites #4" />
+  <graphics bank="68" name="Hammer Sprites #1" />
+  <graphics bank="69" name="Hammer Sprites #2" />
+  <graphics bank="70" name="Hammer Sprites #3" />
+  <graphics bank="71" name="Hammer Sprites #4" />
+  <graphics bank="72" name="Koopa Kid Sprites #1" />
+  <graphics bank="73" name="Koopa Kid Sprites #2" />
+  <graphics bank="74" name="Koopa Kid Sprites #3" />
+  <graphics bank="75" name="Koopa Kid Sprites #4" />
+  <graphics bank="76" name="Giant ? Block Sprites" />
+  <graphics bank="77" name="Para Boom Boom Sprites" />
+  <graphics bank="78" name="Hammer Bros Sprites" />
+  <graphics bank="79" name="Koopa/Goomba/Piranha Sprites" />
+  <graphics bank="80" name="Frog Sprites #1" />
+  <graphics bank="81" name="Frog Sprites #2" />
+  <graphics bank="82" name="Frog Sprites #3/Small Sprites #1" />
+  <graphics bank="83" name="Small Sprites #2" />
+  <graphics bank="84" name="Mario Sprites #1" />
+  <graphics bank="85" name="Mario Sprites #2" />
+  <graphics bank="86" name="Mario Sprites #3" />
+  <graphics bank="87" name="Mario Sprites #4" />
+  <graphics bank="88" name="Water/Pipe Tiles A" />
+  <graphics bank="89" name="Water/Pipe Tiles B" />
+  <graphics bank="90" name="Side Piranha/Platform Sprites" />
+  <graphics bank="91" name="Bonus Game Sprites #4" />
+  <graphics bank="92" name="Status Bar Tiles A" />
+  <graphics bank="93" name="Status Bar Tiles B" />
+  <graphics bank="94" name="Status Bar Tiles C/Text" />
+  <graphics bank="95" name="Status Bar Tiles D/Text" />
+  <graphics bank="96" name="Animated Tiles #1 A" />
+  <graphics bank="97" name="Animated Tiles #1 B" />
+  <graphics bank="98" name="Animated Tiles #2 A" />
+  <graphics bank="99" name="Animated Tiles #2 B" />
+  <graphics bank="100" name="Animated Tiles #3 A" />
+  <graphics bank="101" name="Animated Tiles #3 B" />
+  <graphics bank="102" name="Animated Tiles #4 A" />
+  <graphics bank="103" name="Animated Tiles #4 B" />
+  <graphics bank="104" name="Plains Tiles #2 A" />
+  <graphics bank="105" name="Plains Tiles #2 B" />
+  <graphics bank="106" name="Airship Tiles #2 A" />
+  <graphics bank="107" name="Airship Tiles #2 B" />
+  <graphics bank="108" name="Hilly Tiles A" />
+  <graphics bank="109" name="Hilly Tiles B" />
+  <graphics bank="110" name="Giant Tiles A" />
+  <graphics bank="111" name="Giant Tiles B" />
+  <graphics bank="112" name="Map Tiles #3 A" />
+  <graphics bank="113" name="Map Tiles #3 B" />
+  <graphics bank="114" name="Map Tiles #4 A" />
+  <graphics bank="115" name="Map Tiles #4 B" />
+  <graphics bank="116" name="Map Tiles #5 A" />
+  <graphics bank="117" name="Map Tiles #5 A" />
+  <graphics bank="118" name="Credits Tiles A" />
+  <graphics bank="119" name="Credits Tiles B" />
+  <graphics bank="120" name="Title Screen Tiles A" />
+  <graphics bank="121" name="Title Screen Tiles B" />
+  <graphics bank="122" name="Title Screen Tiles C" />
+  <graphics bank="123" name="Title Screen Tiles D" />
+  <graphics bank="124" name="Credit Map Tiles A" />
+  <graphics bank="125" name="Credit Map Tiles B" />
+  <graphics bank="126" name="Title Screen Sprites #1" />
+  <graphics bank="127" name="Title Screen Sprites #2" />
+  <graphics bank="128" name="Empty" />
+  <graphics bank="129" name="Empty" />
+  <graphics bank="130" name="Empty" />
+  <graphics bank="131" name="Empty" />
+  <graphics bank="132" name="Empty" />
+  <graphics bank="133" name="Empty" />
+  <graphics bank="134" name="Empty" />
+  <graphics bank="135" name="Empty" />
+  <graphics bank="136" name="Empty" />
+  <graphics bank="137" name="Empty" />
+  <graphics bank="138" name="Empty" />
+  <graphics bank="139" name="Empty" />
+  <graphics bank="140" name="Empty" />
+  <graphics bank="141" name="Empty" />
+  <graphics bank="142" name="Empty" />
+  <graphics bank="143" name="Empty" />
+  <graphics bank="144" name="Empty" />
+  <graphics bank="145" name="Empty" />
+  <graphics bank="146" name="Empty" />
+  <graphics bank="147" name="Empty" />
+  <graphics bank="148" name="Empty" />
+  <graphics bank="149" name="Empty" />
+  <graphics bank="150" name="Empty" />
+  <graphics bank="151" name="Empty" />
+  <graphics bank="152" name="Empty" />
+  <graphics bank="153" name="Empty" />
+  <graphics bank="154" name="Empty" />
+  <graphics bank="155" name="Empty" />
+  <graphics bank="156" name="Empty" />
+  <graphics bank="157" name="Empty" />
+  <graphics bank="158" name="Empty" />
+  <graphics bank="159" name="Empty" />
+  <graphics bank="160" name="Empty" />
+  <graphics bank="161" name="Empty" />
+  <graphics bank="162" name="Empty" />
+  <graphics bank="163" name="Empty" />
+  <graphics bank="164" name="Empty" />
+  <graphics bank="165" name="Empty" />
+  <graphics bank="166" name="Empty" />
+  <graphics bank="167" name="Empty" />
+  <graphics bank="168" name="Empty" />
+  <graphics bank="169" name="Empty" />
+  <graphics bank="170" name="Empty" />
+  <graphics bank="171" name="Empty" />
+  <graphics bank="172" name="Empty" />
+  <graphics bank="173" name="Empty" />
+  <graphics bank="174" name="Empty" />
+  <graphics bank="175" name="Empty" />
+  <graphics bank="176" name="Empty" />
+  <graphics bank="177" name="Empty" />
+  <graphics bank="178" name="Empty" />
+  <graphics bank="179" name="Empty" />
+  <graphics bank="180" name="Empty" />
+  <graphics bank="181" name="Empty" />
+  <graphics bank="182" name="Empty" />
+  <graphics bank="183" name="Empty" />
+  <graphics bank="184" name="Empty" />
+  <graphics bank="185" name="Empty" />
+  <graphics bank="186" name="Empty" />
+  <graphics bank="187" name="Empty" />
+  <graphics bank="188" name="Empty" />
+  <graphics bank="189" name="Empty" />
+  <graphics bank="190" name="Empty" />
+  <graphics bank="191" name="Empty" />
+  <graphics bank="192" name="Empty" />
+  <graphics bank="193" name="Empty" />
+  <graphics bank="194" name="Empty" />
+  <graphics bank="195" name="Empty" />
+  <graphics bank="196" name="Empty" />
+  <graphics bank="197" name="Empty" />
+  <graphics bank="198" name="Empty" />
+  <graphics bank="199" name="Empty" />
+  <graphics bank="200" name="Empty" />
+  <graphics bank="201" name="Empty" />
+  <graphics bank="202" name="Empty" />
+  <graphics bank="203" name="Empty" />
+  <graphics bank="204" name="Empty" />
+  <graphics bank="205" name="Empty" />
+  <graphics bank="206" name="Empty" />
+  <graphics bank="207" name="Empty" />
+  <graphics bank="208" name="Empty" />
+  <graphics bank="209" name="Empty" />
+  <graphics bank="210" name="Empty" />
+  <graphics bank="211" name="Empty" />
+  <graphics bank="212" name="Empty" />
+  <graphics bank="213" name="Empty" />
+  <graphics bank="214" name="Empty" />
+  <graphics bank="215" name="Empty" />
+  <graphics bank="216" name="Empty" />
+  <graphics bank="217" name="Empty" />
+  <graphics bank="218" name="Empty" />
+  <graphics bank="219" name="Empty" />
+  <graphics bank="220" name="Empty" />
+  <graphics bank="221" name="Empty" />
+  <graphics bank="222" name="Empty" />
+  <graphics bank="223" name="Empty" />
+  <graphics bank="224" name="Empty" />
+  <graphics bank="225" name="Empty" />
+  <graphics bank="226" name="Empty" />
+  <graphics bank="227" name="Empty" />
+  <graphics bank="228" name="Empty" />
+  <graphics bank="229" name="Empty" />
+  <graphics bank="230" name="Empty" />
+  <graphics bank="231" name="Empty" />
+  <graphics bank="232" name="Empty" />
+  <graphics bank="233" name="Empty" />
+  <graphics bank="234" name="Empty" />
+  <graphics bank="235" name="Empty" />
+  <graphics bank="236" name="Empty" />
+  <graphics bank="237" name="Empty" />
+  <graphics bank="238" name="Empty" />
+  <graphics bank="239" name="Empty" />
+  <graphics bank="240" name="Empty" />
+  <graphics bank="241" name="Empty" />
+  <graphics bank="242" name="Empty" />
+  <graphics bank="243" name="Empty" />
+  <graphics bank="244" name="Empty" />
+  <graphics bank="245" name="Empty" />
+  <graphics bank="246" name="Empty" />
+  <graphics bank="247" name="Empty" />
+  <graphics bank="248" name="Empty" />
+  <graphics bank="249" name="Empty" />
+  <graphics bank="250" name="Empty" />
+  <graphics bank="251" name="Empty" />
+  <graphics bank="252" name="Empty" />
+  <graphics bank="253" name="Empty" />
+  <graphics bank="254" name="Empty" />
+  <graphics bank="255" name="Empty" />
+</graphicsinfo>

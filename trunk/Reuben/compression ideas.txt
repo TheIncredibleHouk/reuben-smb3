@@ -1,0 +1,425 @@
+Level themes:
+Ancient Lands (Birdo's, dino's, etc)
+Koopa Prison
+Chaos Season (levels change based on season changes)
+
+Ideas:
+4 Characters
+Mario - Fire, Boo
+Luigi - Ice, Cheep Cheep
+Toad - Steel, Buzzy Beetle
+Peach - Veggies, 
+
+Cheep Cheep - jump high/swim
+
+Compression Commands:
+XY  PP ZZ ZZ...
+
+if X < Y
+    X = start writing offset
+    Y = end writing offset
+    ZZ = data to write
+
+if X == F && Y < E
+    Skip Y rows
+
+if X == E && Y == 0
+    Fill row with ZZ
+
+if X == E && Y > 0
+    Starting at Y, fill rows with ZZ
+
+
+
+FE F1
+7A ZZ ZZ ZZ ZZ
+7A ZZ ZZ ZZ ZZ
+EF ZZ ZZ
+F1
+5C ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ
+1F ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ
+1F ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ
+0F ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ
+0F ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ ZZ
+
+Level Header
+CCCC CCCC = Clear level with value;
+GGGG GGGG = Graphics bank;
+PPPP PPPP = Palette Index;
+SSSS TTTT = StartAction, Length;
+XXXX XXXX = X Position;
+YYYY YYYY = Y Starting position;
+MMMM MMMM = M - music, L = length (up to 0xE);
+TTTT TTTT = Time (times 10, up to 999);
+VYSS LLLL = V-Scroll, Y Extended Y position, Scroll Type, Level type;
+UUUU UUUU = Unused 1;
+UUUU UUUU = Unused 2;
+UUUU UUUU = Unused 3;
+
+Pointer data...
+BBBB BBBB = Bank
+LLLL LLLL = Address
+LLLL LLLL = Address
+SSSS SSSS = Sprite Address
+XXXX XXXX = X Enter
+YYYY YYYY = Y Enter
+XXXX XXXX = X Exit
+YYYY YYYY = Y Exit
+UTTT UUYZ = Exit Type, Y extended Y enter position, Z extended y exit position
+
+
+    LDY #$00
+    LDA $(61), Y
+    TAX
+    LDA #$60
+    STA $62
+    LDA #$00
+    STA $63
+L1:
+    TXA
+L2:
+    STA $(63), Y
+    CPY #$stopvalue_Y
+    BEQ L3
+    INY
+    BNE L2
+    INC $62
+    JMP L2
+L3:
+    LDA $62
+    CMP #$stopvalue_63
+    BNE L1:
+*    LDY #$01
+    LDA $(61), Y
+    STA $718
+*    LDA #$palette bank
+    STA $5112; not sure about the register
+*    LDY #$02
+    LDA $(61), Y
+    TAX
+    AND #$F8
+    LSR #$03
+    ADC $A0
+    STA $63
+    TXA
+    ASL
+    ASL
+    ASL
+    ASL
+    ASL
+    STA $62
+    LDY #$00
+    LDX #$00
+L4:
+    LDA ($63), Y
+    STA $Palette, X
+    INX
+    INY
+    CPY #$32
+    BNE L4
+*    LDY #$03
+    LDA $(61), Y
+    TAX
+    AND #$F0
+    LSR #$04
+    STA $Start_type
+    TXA
+    AND #$0F
+*    STA $level_type
+    INY
+    LDA $(61),Y
+    TAX
+    AND #$F0
+    STA $Scroll_X
+    TXA
+    AND #$0F
+    ASL
+    ASL
+    ASL
+    ASL
+    STA $x_pos
+    INY
+    LDA $(61), Y
+*    STA $y_pos
+    INY
+    LDA $(61), Y
+    TAX
+    AND #$F0
+    ASL
+    ASL
+    ASL
+    ASL
+    STA $music
+    TXA
+    AND #$0F
+    STA $length
+    INY
+    LDA #$00
+    STA $62
+    STA $63
+    STA $64
+    STA $65
+    LDA $(61), Y
+    STA $63
+    STA $65
+    LDY #$00
+L5:
+    ASL $62
+    ASL $63
+    BCL L6
+    LDA #$01
+    ORA $62
+    STA $62
+L6:
+    INY
+    CPY #$03
+    BNE L5
+    ASL $64
+    ASL $65
+    BCL L7
+    LDA #$01
+    ORA $64
+    STA $64
+    LDA $63
+    ADC $65
+    STA $timer1
+    BCL L16
+    INC $62
+L16:
+    LDA $62
+    ADC $64
+    STA $timer2
+L7:
+    LDY #$07
+    LDA $(61), Y
+    AND #$E0
+    LSR #$05
+    STA $scroll_type
+L8:
+    INY
+    LDA $(61), Y
+    CMP #$FF
+    BNE L9
+    JMP L10
+L9:
+    ;do pointer stuff
+    JMP L8
+
+L10: *
+    TYA
+    ADC $61
+    STA $61
+    BCL L11
+    INC $60
+
+L11:
+    LDY #$00
+    LDA #$60
+    STA $62
+    LDA #$00
+    STA $63
+L15:
+    LDA $(61),Y
+    TAX
+    AND #$3F
+    STA $parameter
+    TXA
+    AND #$C0
+    LSR #$05
+    LDA $jmp_table, X
+    STA $00
+    LDA $jmp_table + 1, X
+    STA $01
+    JMP $(0000)   
+
+jmp_table:
+    Addresses for skip, write and repeat
+
+skip routine:
+    LDX $parameter
+L12:
+    INC $63
+    BCL L13
+    INC $62
+L13:
+    DEX
+    BNE L12
+    INC $61
+    BCL L14
+    INC $60
+L14:
+    JMP L15
+
+write routine:
+    LDX $parameter
+L17:
+    INC $61
+    BCL L18
+    INC $60
+L18:
+    INC $63
+    BCL L19
+    INC $62
+L19:
+    LDA $(61), Y
+    STA $(63), Y
+    INY
+    DEX
+    BNE L17
+    INC $61
+    BCL L20
+    INC $60
+L20:
+    INC $63
+    BCL L21
+    INC $62
+L21:
+    JMP L15
+
+repeat_routine
+    LDX $parameter
+    INC $61
+    BCL L22
+    INC $60
+L22:
+    LDA $(61), Y
+L23:
+    STA $(63), Y
+    INC $63
+    BCL L24
+    INC $62
+L24:
+    DEX
+    BNE L24
+    INC $61
+    BCL L25
+    INC $60
+L25:
+    JMP L15
+
+
+
+$A0xx-$DFxx
+
+
+if XZ = 00
+    Skip Command PP spaces
+
+if XZ == 10
+    Write command PP data ZZ
+
+if XZ == 11
+    Write command repeat ZZ PP times
+
+if XZ == 12
+    Alternate Data PP times with ZZ value
+
+
+00 FF 
+00 0E
+01 02 PP PP PP PP
+00 10
+01 04 PP PP PP PP
+00 13
+01 PP PP
+00 25
+01 02 PP PP
+00 04
+01 02 PP PP
+00 04
+00 02 PP PP
+00 01
+01 05 PP PP PP PP PP
+00 06
+01 01 PP
+00 01
+01 08 PP PP PP PP PP PP PP PP
+00 06
+01 0A PP PP PP PP PP PP PP PP PP PP
+00 01
+01 03 PP PP PP
+00 02
+00 11 PP PP PP PP PP PP PP PP PP PP PP PP PP PP PP PP PP
+bytes = 109
+
+
+WW DD SS
+WW = how much data to write
+DD = data
+SS = how much data to skip
+
+00 FF
+00 28
+04 PP PP PP PP 0C
+04 PP PP PP PP 12
+02 PP PP 27
+02 PP PP 04
+02 PP PP 04
+02 PP PP 01
+05 PP PP PP PP PP 06
+01 PP 01
+08 PP PP PP PP PP PP PP PP 06
+09 PP PP PP PP PP PP PP PP PP 01
+03 PP PP PP 02
+11 PP PP PP PP PP PP PP PP PP PP PP PP PP PP PP PP PP
+
+bytes = 85
+
+%CCPP PPPP = CC = command number, PP PPPP = paramter
+DD
+
+CC = 00 - skip
+CC = 01 - skip row
+CC = 10 - write
+CC = 11 - repeat data
+
+91
+07
+C1 DD
+E2 DD
+C1 DD
+0C
+C1 DD
+E2 DD
+C1 DD
+2B
+CC DD
+CC DD
+CC DD DD
+CC
+CC DD
+CC
+CC DD DD
+CC
+CC DD DD DD DD DD
+CC
+CC DD
+CC
+CC DD DD DD DD DD DD DD DD
+CC
+CC DD DD DD DD DD DD DD DD DD DD
+CC
+CC CC
+CC
+CC DD DD
+CC DD
+bytes = 71
+
+level lodaing routine
+
+Startyping types 0x01 = sliding;
+
+
+NOTEs
+RAM
+4E5 - Level music storage
+545 - Starting Action
+70A - Current Level Type
+75 - Current Scroll position
+90 - current x position
+22 - Level length
+375 - scroll type
+567 - P-Switch Time
+
+ROM
+0x11653 - P-Switch Time
