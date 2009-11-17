@@ -1204,14 +1204,6 @@ namespace Daiz.NES.Reuben
             BlsSelector.Redraw();
         }
 
-        private void BtnCompress_Click(object sender, EventArgs e)
-        {
-            if (ReubenController.SaveTestLevel(CurrentLevel))
-            {
-                MessageBox.Show("Rom successfully saved!");
-            }
-        }
-
         private bool _SelectingStartPositionMode;
         private void BtnStartPoint_Click(object sender, EventArgs e)
         {
