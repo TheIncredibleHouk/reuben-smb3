@@ -10,7 +10,7 @@ Luigi - Ice, Cheep Cheep
 Toad - Steel, Buzzy Beetle
 Peach - Veggies, 
 
-Cheep Cheep - jump high/swim
+Cheep Cheep - jump high/swims
 
 Compression Commands:
 XY  PP ZZ ZZ...
