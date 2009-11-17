@@ -1,0 +1,3951 @@
+Key: "B" is Background, "S" is Solid, "OWS" is One-Way Solid, "W" is Water, "WF" is waterfall. Blank entries or "I" is indicated by you otherwise. At the end of this file there is a level template to copy and paste into RAM at $6000 using common solid and background tiles for use in hopefully all tilesets. The lower section of the level area starts with tile $00 and goes through to $7F where you start back at the beginning on the upper platform where it continues from $80 through $FF.
+
+For the Ice tileset, I noticed there were two different kinds of slippery blocks. One of them wasn't as slippery and the other is very slippery. Marked "S1" and "S2" respectively.
+
+============================================================
+============================================================
+
+------
+Plains
+------
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - B
+20 - B
+21 - B
+22 - B
+23 - B
+24 - B
+25 - OWS
+26 - OWS
+27 - OWS
+28 - OWS
+29 - OWS
+2A - OWS
+2B - OWS
+2C - OWS
+2D - S
+2E - 
+2F - 
+30 - 
+31 - 
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - B
+4B - B
+4C - B
+4D - B
+4E - B
+4F - B
+50 - OWS
+51 - OWS
+52 - OWS
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B
+95 - B
+96 - B
+97 - B
+98 - B
+99 - B
+9A - B
+9B - B
+9C - B
+9D - B
+9E - B
+9F - B
+A0 - OWS
+A1 - OWS
+A2 - OWS
+A3 - OWS
+A4 - OWS
+A5 - OWS
+A6 - OWS
+A7 - OWS
+A8 - OWS
+A9 - OWS
+AA - OWS
+AB - OWS
+AC - OWS
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - OWS
+E3 - OWS
+E4 - OWS
+E5 - OWS
+E6 - OWS
+E7 - OWS
+E8 - OWS
+E9 - OWS
+EA - OWS
+EB - OWS
+EC - OWS
+ED - OWS
+EE - OWS
+EF - OWS
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - B
+
+============================================================
+============================================================
+
+-------
+Dungeon
+-------
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - INSTANT KILL, I DONT KNOW IF THIS IS SOLID OR NOT
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - S
+1C - S
+1D - S
+1E - S
+1F - S
+20 - S
+21 - S
+22 - S
+23 - S
+24 - S
+25 - S
+26 - S
+27 - S
+28 - S
+29 - S
+2A - S
+2B - S
+2C - S
+2D - S
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - B
+4B - B
+4C - B
+4D - B
+4E - B
+4F - B
+50 - B
+51 - B
+52 - B
+53 - B
+54 - B
+55 - B
+56 - B
+57 - B
+58 - B
+59 - B
+5A - B
+5B - W
+5C - W
+5D - W
+5E - W
+5F - W
+60 - WF
+61 - WF
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S (BOUNCES)
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - S
+92 - S
+93 - S
+94 - S
+95 - S
+96 - S
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - S
+DB - S
+DC - S
+DD - S
+DE - S
+DF - S
+E0 - S
+E1 - S
+E2 - S
+E3 - S
+E4 - S
+E5 - S
+E6 - S
+E7 - S
+E8 - S
+E9 - S
+EA - S
+EB - S
+EC - S
+ED - S
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+-----
+Hilly
+-----
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - SL
+16 - FILLER (SOLID TOP)
+17 - SL
+18 - SL
+19 - SL
+1A - SL
+1B - SL
+1C - FILLER (SOLID TOP)
+1D - S
+1E - S
+1F - S
+20 - B
+21 - B
+22 - B
+23 - B
+24 - B
+25 - SL
+26 - FILLER (SOLID TOP)
+27 - SL
+28 - SL
+29 - SL
+2a - SL
+2b - SL
+2c - S
+2d - S
+2e - S
+2f - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - FILLER (SOLID TOP)
+35 - FILLER
+36 - FILLER (SOLID TOP)
+37 - FILLER
+38 - FILLER
+39 - S
+3A - S
+3B - S
+3C - S
+3D - FILLER (SOLID TOP)
+3E - FILLER
+3F - FILLER (SOLID TOP)
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - I
+4A - I
+4B - B
+4C - B
+4D - B
+4E - B
+4F - B
+50 - B
+51 - B
+52 - B
+53 - B
+54 - B
+55 - B
+56 - B
+57 - B
+58 - B
+59 - B
+5A - B
+5B - B
+5C - B
+5D - B
+5E - B
+5F - B
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - SL
+7D - FILLER (SOLID TOP)
+7E - SL
+7F - SL
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B
+95 - B
+96 - B
+97 - B
+98 - B
+99 - SL
+9A - FILLER (SOLID TOP)
+9B - SL
+9C - SL
+9D - SL
+9E - SL
+9F - SL
+A0 - SL
+A1 - SL
+A2 - SL
+A3 - SL
+A4 - SL
+A5 - SL
+A6 - FILLER (SOLID BOTTOM)
+A7 - FILLER (SOLID TOP)
+A8 - FILLER 
+A9 - FILLER (SOLID TOP)
+AA - FILLER
+AB - FILLER
+AC - FILLER (SOLID BOTTOM)
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - FILLER
+C0 - B
+C1 - B
+C2 - W
+C3 - W
+C4 - W
+C5 - W
+C6 - W
+C7 - W
+C8 - W
+C9 - W
+CA - W
+CB - W
+CC - W
+CD - W
+CE - W
+CF - W
+D0 - W
+D1 - W
+D2 - W
+D3 - W
+D4 - W
+D5 - W
+D6 - W
+D7 - B
+D8 - W
+D9 - W
+DA - W
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - W
+E1 - WF
+E2 - WF
+E3 - SL
+E4 - FILLER (SOLID TOP)
+E5 - SL
+E6 - SL
+E7 - SL
+E8 - SL
+E9 - SL
+EA - SL
+EB - SL
+EC - SL
+ED - SL
+EE - SL
+EF - FILLER (SOLID TOP)
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - FILLER (SOLID BOTTOM)
+F5 - FILLER (SOLID TOP)
+F6 - FILLER
+F7 - FILLER (SOLID TOP)
+F8 - FILLER
+F9 - FILLER
+FA - FILLER (SOLID BOTTOM)
+FB - FILLER (SOLID TOP)
+FC - FILLER
+FD - weird - These are solid on the left
+FE - weird - and right sides. When inside
+FF - weird - them, Mario shakes.
+
+---
+Sky
+---
+00 - B
+01 - B
+02 - B
+03 - 
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - S
+20 - S
+21 - S
+22 - S
+23 - S
+24 - S
+25 - S
+26 - S
+27 - S
+28 - S
+29 - S
+2A - S
+2B - S
+2C - ows
+2D - S
+2E - 
+2F - 
+30 - 
+31 - 
+32 - B
+33 - 
+34 - 
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - S
+4B - S
+4C - S
+4D - S
+4E - S
+4F - S
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - OWS
+8B - OWS
+8C - OWS
+8D - S
+8E - S
+8F - S
+90 - S
+91 - S
+92 - S
+93 - S
+94 - S
+95 - S
+96 - S
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - W
+E3 - W
+E4 - W
+E5 - W
+E6 - W
+E7 - W
+E8 - W
+E9 - W
+EA - W
+EB - W
+EC - W
+ED - W
+EE - W
+EF - W
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+-------------
+Pihrana Plant
+-------------
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - OWS
+20 - OWS
+21 - OWS
+22 - OWS
+23 - OWS
+24 - OWS
+25 - OWS
+26 - OWS
+27 - OWS
+28 - OWS
+29 - OWS
+2A - OWS
+2B - OWS
+2C - OWS
+2D - OWS
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S (CONVEY LEFT)
+35 - S (CONVEY RIGHT)
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - S
+48 - S
+49 - S
+4A - S
+4B - S
+4C - S
+4D - S
+4E - S
+4F - S
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B
+95 - B
+96 - S
+97 - S
+98 - S (HURT BLOCK A)
+99 - S (HURT BLOCK B)
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B (MUNCHER A)
+C1 - B
+C2 - B (MUNCHER B)
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - OWS
+E3 - OWS
+E4 - OWS
+E5 - OWS
+E6 - OWS
+E7 - OWS
+E8 - OWS
+E9 - OWS
+EA - OWS
+EB - OWS
+EC - OWS
+ED - OWS
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+--------
+Mushroom
+--------
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - S
+0b - S
+0c - S
+0d - S
+0E - S
+0F - S
+10 - S
+11 - S
+12 - S
+13 - S
+14 - S
+15 - S
+16 - S
+17 - S
+18 - S
+19 - S
+1A - S
+1B - S
+1C - S
+1D - S
+1E - S
+1F - S
+20 - S
+21 - S
+22 - S
+23 - S
+24 - S
+25 - S
+26 - S
+27 - S
+28 - S
+29 - S
+2A - S
+2B - S
+2C - S
+2D - S
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - B
+4B - B
+4C - S
+4D - S
+4E - S
+4F - S
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B (LEFT BOTTOM OF LARGE TREASURE CHEST)
+83 - B (RIGHT BOTTOM OF LARGE TREASURE CHEST)
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - S
+92 - S
+93 - S
+94 - S
+95 - S
+96 - S
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - S
+E3 - S
+E4 - S
+E5 - S
+E6 - S
+E7 - S
+E8 - S
+E9 - S
+EA - S
+EB - S
+EC - S
+ED - S
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+-----
+Water
+-----
+00 - B
+01 - B
+02 - B
+03 - B
+04 - W
+05 - W
+06 - W
+07 - W
+08 - W
+09 - W
+0a - S
+0b - S
+0c - S
+0d - S
+0E - S
+0F - S
+10 - S
+11 - S
+12 - S
+13 - S
+14 - S
+15 - S
+16 - S
+17 - S
+18 - S
+19 - S
+1A - S
+1B - S
+1C - S
+1D - S
+1E - S
+1F - S
+20 - S
+21 - S
+22 - S
+23 - S
+24 - S
+25 - S
+26 - S
+27 - S
+28 - S
+29 - S
+2A - S
+2B - S
+2C - S
+2D - S
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - W
+41 - W
+42 - W
+43 - W
+44 - W
+45 - W
+46 - W
+47 - W
+48 - W
+49 - W
+4A - W
+4B - W
+4C - S
+4D - S
+4E - S
+4F - S
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - W
+8C - W
+8D - W
+8E - W
+8F - W
+90 - W
+91 - S
+92 - S
+93 - S
+94 - S
+95 - S
+96 - S
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - W
+C2 - W
+C3 - W
+C4 - W
+C5 - W
+C6 - W
+C7 - W
+C8 - W
+C9 - W
+CA - W
+CB - W
+CC - W
+CD - W
+CE - W
+CF - W
+D0 - W
+D1 - W
+D2 - W
+D3 - W
+D4 - W
+D5 - W
+D6 - W
+D7 - B
+D8 - W
+D9 - W
+DA - W
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - S
+E3 - S
+E4 - S
+E5 - S
+E6 - S
+E7 - S
+E8 - S
+E9 - S
+EA - S
+EB - S
+EC - S
+ED - S
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S (HURT BLOCK)
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+----
+Pipe
+----
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - S
+0b - S
+0c - S (HURT BLOCK)
+0d - S (HURT BLOCK)
+0E - S
+0F - S
+10 - S
+11 - S
+12 - S
+13 - S
+14 - S
+15 - S
+16 - S
+17 - S
+18 - S
+19 - S
+1A - S
+1B - S
+1C - S
+1D - S
+1E - S
+1F - S
+20 - S
+21 - S
+22 - S
+23 - S
+24 - S
+25 - S
+26 - S
+27 - S
+28 - S
+29 - S
+2A - S
+2B - S
+2C - S
+2D - S
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - B
+4B - S
+4C - S
+4D - S
+4E - S
+4F - S
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - W
+8B - W
+8C - W
+8D - W
+8E - W
+8F - W
+90 - W
+91 - W
+92 - S
+93 - S
+94 - S
+95 - S
+96 - S
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - S
+E3 - S
+E4 - S
+E5 - S
+E6 - S
+E7 - S
+E8 - S
+E9 - S
+EA - S
+EB - S
+EC - S
+ED - S
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+------
+Desert
+------
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - B
+20 - B
+21 - B
+22 - B
+23 - B
+24 - B
+25 - B
+26 - B
+27 - B
+28 - B
+29 - B
+2A - B
+2B - B
+2C - OWS
+2D - OWS
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - B
+4B - B
+4C - B
+4D - B
+4E - B
+4F - B
+50 - B
+51 - B
+52 - B
+53 - B
+54 - B
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B
+95 - B
+96 - B
+97 - B
+98 - OWS
+99 - OWS
+9A - OWS
+9B - OWS
+9C - OWS
+9D - OWS
+9E - OWS
+9F - OWS
+A0 - OWS
+A1 - OWS
+A2 - OWS
+A3 - OWS
+A4 - OWS
+A5 - OWS
+A6 - OWS
+A7 - OWS
+A8 - OWS
+A9 - OWS
+AA - OWS
+AB - OWS
+AC - OWS
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - S
+E3 - S
+E4 - S
+E5 - S
+E6 - S
+E7 - S
+E8 - S
+E9 - S
+EA - S
+EB - S
+EC - S
+ED - S
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+----
+Ship
+----
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - B
+20 - B
+21 - B
+22 - B
+23 - B
+24 - S
+25 - S
+26 - S
+27 - S
+28 - S
+29 - S
+2A - S
+2B - S
+2C - S
+2D - S
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - B
+4B - B
+4C - B
+4D - B
+4E - B
+4F - B
+50 - B
+51 - B
+52 - B
+53 - B
+54 - B
+55 - B
+56 - B
+57 - B
+58 - B
+59 - B
+5A - B
+5B - B
+5C - OWS
+5D - OWS
+5E - OWS
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B
+95 - B
+96 - B
+97 - B
+98 - B
+99 - B
+9A - B
+9B - B
+9C - OWS
+9D - OWS
+9E - OWS
+9F - OWS
+A0 - OWS
+A1 - OWS
+A2 - OWS
+A3 - OWS
+A4 - OWS
+A5 - OWS
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - B
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - S
+E3 - S
+E4 - S
+E5 - S
+E6 - S
+E7 - S
+E8 - S
+E9 - S
+EA - S
+EB - S
+EC - S
+ED - S
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+-----
+Giant
+-----
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - OWS
+20 - OWS
+21 - OWS
+22 - OWS
+23 - OWS
+24 - OWS
+25 - OWS
+26 - OWS
+27 - OWS
+28 - OWS
+29 - OWS
+2A - OWS
+2B - OWS
+2C - OWS
+2D - OWS
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - S (GIANT BRICK TOP LEFT)
+49 - S (GIANT BRICK TOP RIGHT)
+4A - S (GIANT BRICK BOTTOM LEFT)
+4B - S (GIANT BRICK BOTTOM RIGHT)
+4C - S (GIANT ? TOP LEFT - COIN)
+4D - S (GIANT ? TOP RIGHT - COIN)
+4E - S (GIANT ? BOTTOM LEFT - COIN)
+4F - S (GIANT ? BOTTOM RIGHT - COIN)
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S (GIANT ? TOP LEFT - LEAF)
+5C - S (GIANT ? TOP RIGHT - LEAF)
+5D - S (GIANT ? BOTTOM LEFT - LEAF)
+5E - S (GIANT ? BOTTOM RIGHT - LEAF)
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B (INSTANT KILL)
+95 - B
+96 - S
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - OWS
+E3 - OWS
+E4 - OWS
+E5 - OWS
+E6 - OWS
+E7 - OWS
+E8 - OWS
+E9 - OWS
+EA - OWS
+EB - OWS
+EC - OWS
+ED - OWS
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+---
+Ice
+---
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - B
+20 - OWS
+21 - OWS
+22 - OWS
+23 - OWS S1
+24 - OWS S1
+25 - OWS S1
+26 - OWS
+27 - OWS
+28 - OWS
+29 - OWS
+2A - OWS
+2B - OWS
+2C - OWS
+2D - OWS
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S S2
+39 - S S2
+3a - S S2
+3b - S S2
+3c - S S2
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - B
+49 - B
+4A - B
+4B - S S1
+4C - S S1
+4D - S S1
+4E - S
+4F - S
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S S2 (FROZEN COIN)
+57 - S S2 (FROZEN MUNCHER)
+58 - S
+59 - S
+5A - S
+5B - S (DONUT LIFT)
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - OWS
+8B - OWS
+8C - OWS
+8D - S
+8E - S
+8F - S
+90 - S
+91 - S
+92 - S
+93 - S
+94 - S
+95 - S
+96 - S
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - W
+E3 - W
+E4 - W
+E5 - W
+E6 - W
+E7 - W
+E8 - W
+E9 - W
+EA - W
+EB - W
+EC - W
+ED - W
+EE - W
+EF - W
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+------
+Cloudy
+------
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - OWS
+20 - OWS
+21 - OWS
+22 - OWS
+23 - OWS
+24 - OWSOWS
+25 - OWS
+26 - OWS
+27 - OWS
+28 - OWS
+29 - OWS
+2A - OWS
+2B - OWS
+2C - OWS
+2D - OWS
+2E - S
+2F - S
+30 - S
+31 - S
+32 - S
+33 - S
+34 - S
+35 - S
+36 - S
+37 - S
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - S
+3e - S
+3f - S
+40 - B
+41 - B
+42 - B
+43 - B
+44 - B
+45 - B
+46 - B
+47 - B
+48 - S
+49 - S
+4A - S
+4B - S
+4C - S
+4D - S
+4E - S
+4F - S
+50 - S
+51 - S
+52 - S
+53 - S
+54 - S
+55 - S
+56 - S
+57 - S
+58 - S
+59 - S
+5A - S
+5B - S
+5C - S
+5D - S
+5E - S
+5F - S
+60 - S
+61 - S
+62 - S
+63 - S
+64 - S
+65 - S
+66 - S
+67 - S
+68 - S
+69 - S
+6A - S
+6B - S
+6C - S
+6D - S
+6E - S
+6F - S
+70 - S
+71 - S
+72 - S
+73 - S
+74 - S
+75 - S
+76 - S
+77 - S
+78 - S
+79 - S
+7A - S
+7B - S
+7C - S
+7D - S
+7E - S
+7F - S
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - B
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B
+95 - B
+96 - B
+97 - S
+98 - S
+99 - S
+9A - S
+9B - S
+9C - S
+9D - S
+9E - S
+9F - S
+A0 - S
+A1 - S
+A2 - S
+A3 - S
+A4 - S
+A5 - S
+A6 - S
+A7 - S
+A8 - S
+A9 - S
+AA - S
+AB - S
+AC - S
+AD - S
+AE - S
+AF - S
+B0 - S
+B1 - S
+B2 - S
+B3 - S
+B4 - S
+B5 - S
+B6 - S
+B7 - S
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - S
+BD - S
+BE - S
+BF - S
+C0 - B
+C1 - B
+C2 - B
+C3 - B
+C4 - B
+C5 - B
+C6 - B
+C7 - B
+C8 - B
+C9 - B
+CA - B
+CB - B
+CC - B
+CD - B
+CE - B
+CF - B
+D0 - B
+D1 - B
+D2 - B
+D3 - B
+D4 - B
+D5 - B
+D6 - B
+D7 - B
+D8 - B
+D9 - B
+DA - B
+DB - W
+DC - W
+DD - W
+DE - W
+DF - W
+E0 - WF
+E1 - WF
+E2 - OWS
+E3 - OWS
+E4 - OWS
+E5 - OWS
+E6 - OWS
+E7 - OWS
+E8 - OWS
+E9 - OWS
+EA - OWS
+EB - OWS
+EC - OWS
+ED - OWS
+EE - S
+EF - S
+F0 - S
+F1 - S
+F2 - S
+F3 - S
+F4 - S
+F5 - S
+F6 - S
+F7 - S
+F8 - S
+F9 - S
+FA - S
+FB - S
+FC - S
+FD - S
+FE - S
+FF - S
+
+============================================================
+============================================================
+
+-----------
+Underground
+-----------
+00 - B
+01 - B
+02 - B
+03 - B
+04 - B
+05 - B
+06 - B
+07 - B
+08 - B
+09 - B
+0a - B
+0b - B
+0c - B
+0d - B
+0E - B
+0F - B
+10 - B
+11 - B
+12 - B
+13 - B
+14 - B
+15 - B
+16 - B
+17 - B
+18 - B
+19 - B
+1A - B
+1B - B
+1C - B
+1D - B
+1E - B
+1F - B
+20 - B
+21 - B
+22 - B
+23 - B
+24 - B
+25 - Slope, 45 Degree Left
+26 - Ledge (Top)
+27 - Slope, 45 Degree Right
+28 - Slope, 30 Degree Lower Left
+29 - Slope, 30 Degree Upper Left
+2A - Slope, 30 Degree Upper Right
+2B - Slope, 30 Degree Lower Right
+2C - Ledge (Top)
+2D - S
+2E - Note Block
+2F - Note Block with Fire Flower
+30 - Note Block With Leaf
+31 - Note Block with Star
+32 - White Magic Brick
+33 - Ledge (Top Left)
+34 - Ledge (left)
+35 - Ledge (Top Right)
+36 - Ledge (Right)
+37 - Builder Block (Solid, inhibits movement)
+38 - S
+39 - S
+3a - S
+3b - S
+3c - S
+3d - Ledge (Top)
+3e - Builder Block (Solid, inhibits movement)
+3f - Ledge (Top)
+40 - Coin
+41 - Missing Coin
+42 - B
+43 - B
+44 - B
+45 - B
+46 - Invisible Magical note Block
+47 - B
+48 - B
+49 - Quicksand
+4A - Quicksand
+4B - B
+4C - B
+4D - B
+4E - B
+4F - B
+50 - B
+51 - B
+52 - B
+53 - B
+54 - B
+55 - B
+56 - B
+57 - B
+58 - B
+59 - B
+5A - B
+5B - B
+5C - B
+5D - B
+5E - B
+5F - B - Question Blocks turn into this tile
+60 - Question Block with Fire Flower
+61 - Question Block with Leaf
+62 - Question Block with Star
+63 - Question Block with Coin
+64 - Question Block with Continuous Star
+65 - Question Block with Coin
+66 - Hurt Block, except for bottom. Acts like brick with nothing inside.
+67 - Brick
+68 - Brick With Fire Flower
+69 - Brick with Leaf
+6A - Brick with Star
+6B - Brick with Coin
+6C - Brick with Continuous Star
+6D - Brick with Multiple Coins
+6E - Brick with 1up
+6F - Brick with Vine
+70 - Brick with P switch
+71 - Magical Note Block
+72 - Wooden Brick (Movable)
+73 - Wooden Brick (Movable, Fire Flower Inside)
+74 - Wooden Brick (Movable, Leaf Inside)
+75 - Wooden Brick (Movable, Star Inside)
+76 - s
+77 - s
+78 - S
+79 - S
+7A - S
+7B - S
+7C - Slope (45 Degree, Left)
+7D - Ledge
+7E - Slope (45 Degree, Right)
+7F - Slope (30 Degree, Lower Left)
+80 - B
+81 - B
+82 - B
+83 - B
+84 - B
+85 - Vine
+86 - B
+87 - B
+88 - B
+89 - B
+8A - B
+8B - B
+8C - B
+8D - B
+8E - B
+8F - B
+90 - B
+91 - B
+92 - B
+93 - B
+94 - B
+95 - B
+96 - B
+97 - B
+98 - B
+99 - Slope (45 Degree, Left)
+9A - Ledge
+9B - Slope (45 Degree, Right)
+9C - Slope (30 Degree, Lower Left)
+9D - Slope (30 Degree, Upper Left)
+9E - Slope (30 Degree, Upper Right)
+9F - Slope (30 Degree, Lower Right)
+A0 - Slope (45 Degree, Left, Upside-Down)
+A1 - Slope (45 Degree, Right, Upside-Down)
+A2 - Slope (30 Degree, Lower Left, Upside-Down)
+A3 - Slope (30 Degree, Upper Left, Upside-Down)
+A4 - Slope (30 Degree, Upper Right, Upside-Down)
+A5 - Slope (30 Degree, Lower Right, Upside-Down)
+A6 - Ledge (Upside-Down)
+A7 - Ledge (Top Left Corner)
+A8 - Ledge (Left Side)
+A9 - Ledge (Top Right Corner)
+AA - Ledge (Right Side)
+AB - Building Block (Solid, inhibits movement)
+AC - Ledge (Bottom Left)
+AD - Pipe Tile (V) (Enterable, Left)
+AE - Pipe Tile (V) (Enterable, Right)
+AF - Pipe Tile (V) (Enterable 2, Left)
+B0 - Pipe Tile (V) (Enterable 2, Right)
+B1 - S
+B2 - S
+B3 - Pipe Tile (V) (Point-To-Point, Left)
+B4 - Pipe Tile (V) (Point-To-Point, Right)
+B5 - Pipe Tile (H) (Enterable, Bottom)
+B6 - S
+B7 - S 
+B8 - S
+B9 - S
+BA - S
+BB - S
+BC - Note Block
+BD - Pipe Tile (V) (Enterable 3, Left)
+BE - Pipe Tile (V) (Enterable 3, Right)
+BF - Ledge (Bottom Right)
+C0 - B
+C1 - B
+C2 - Water
+C3 - Water
+C4 - Water
+C5 - Water
+C6 - Water
+C7 - Water
+C8 - Water
+C9 - Water
+CA - Water
+CB - Water
+CC - Water
+CD - Water
+CE - Water
+CF - Water
+D0 - Water
+D1 - Water
+D2 - Water
+D3 - Water
+D4 - Water
+D5 - Water
+D6 - Water
+D7 - B (P-Switch tile turns into this)
+D8 - B
+D9 - B
+DA - B
+DB - Water
+DC - Water
+DD - Water
+DE - Water
+DF - Water
+E0 - Waterfall
+E1 - Waterfall
+E2 - Slope (45 Degree, Left)
+E3 - Ledge
+E4 - Slope (45 Degree, Right)
+E5 - Slope (30 Degree, Lower Left)
+E6 - Slope (30 Degree, Upper Left)
+E7 - Slope (30 Degree, Upper Right)
+E8 - Slope (30 Degree, Lower Right)
+E9 - Slope (45 Degree, Left, Upside-Down)
+EA - Slope (45 Degree, Right, Upside-Down)
+EB - Slope (30 Degree, Lower Left, Upside-Down)
+EC - Slope (30 Degree, Upper Left, Upside-Down)
+ED - Slope (30 Degree, Upper Right, Upside-Down)
+EE - Slope (30 Degree, Lower Right, Upside-Down)
+EF - Ledge (Upside-Down)
+F0 - Empty Question Block (Question blocks, Bricks, and Munchers turn into this)
+F1 - S
+F2 - P-Switch
+F3 - S
+F4 - Ledge (Bottom)
+F5 - Ledge (Top Left)
+F6 - Ledge (Left Side)
+F7 - Ledge (Top Right)
+F8 - Ledge (Right Side)
+F9 - Building Block (Solid, Inhibits Movement)
+FA - Ledge (Bottom Left)
+FB - Ledge (Bottom Right)
+FC - Ledge (Bottom)
+FD - Ledge (Unknown)
+FE - Ledge (Unknown)
+FF - Ledge (Unknown)
+
+============================================================
+========= Reference Table ==================================
+============================================================
+
+000102030405060708090A0B0C0D0E0F
+101112131415161718191A1B1C1D1E1F
+202122232425262728292A2B2C2D2E2F
+303132333435363738393A3B3C3D3E3F
+404142434445464748494A4B4C4D4E4F
+505152535455565758595A5B5C5D5E5F
+606162636465666768696A6B6C6D6E6F
+707172737475767778797A7B7C7D7E7F
+808182838485868788898A8B8C8D8E8F
+909192939495969798999A9B9C9D9E9F
+A0A1A2A3A4A5A6A7A8A9AAABACADAEAF
+B0B1B2B3B4B5B6B7B8B9BABBBCBDBEBF
+C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF
+D0D1D2D3D4D5D6D7D8D9DADBDCDDDEDF
+E0E1E2E3E4E5E6E7E8E9EAEBECEDEEEF
+F0F1F2F3F4F5F6F7F8F9FAFBFCFDFEFF
+
+============================================================
+========== Level Data Template =============================
+============================================================
+
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808079797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+808182838485868788898A8B8C8D8E8F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+000102030405060708090A0B0C0D0E0F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+909192939495969798999A9B9C9D9E9F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+101112131415161718191A1B1C1D1E1F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+A0A1A2A3A4A5A6A7A8A9AAABACADAEAF
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+202122232425262728292A2B2C2D2E2F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+B0B1B2B3B4B5B6B7B8B9BABBBCBDBEBF
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+303132333435363738393A3B3C3D3E3F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+404142434445464748494A4B4C4D4E4F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+D0D1D2D3D4D5D6D7D8D9DADBDCDDDEDF
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+505152535455565758595A5B5C5D5E5F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+E0E1E2E3E4E5E6E7E8E9EAEBECEDEEEF
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+606162636465666768696A6B6C6D6E6F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+80808080808080808080808080808080
+F0F1F2F3F4F5F6F7F8F9FAFBFCFDFEFF
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960
+80808080808080808080808080808080
+80808080808080808080808080808080
+707172737475767778797A7B7C7D7E7F
+80808080808080808080808080808080
+80808080808080808080808080808080
+79797979797979797979797979797960

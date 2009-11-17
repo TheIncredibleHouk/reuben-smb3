@@ -1,0 +1,167 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using Daiz.NES.Reuben.ProjectManagement;
+
+namespace Daiz.NES.Reuben
+{
+    public partial class PaletteManager : Form
+    {
+
+        public PaletteManager()
+        {
+            InitializeComponent();
+            CmbPalettes.DisplayMember = "Name";
+
+            foreach (var p in ProjectController.PaletteManager.Palettes)
+            {
+                CmbPalettes.Items.Add(p);
+            }
+
+            CmbPalettes.SelectedIndex = 0;
+
+            ProjectController.PaletteManager.PaletteAdded += new EventHandler<TEventArgs<PaletteInfo>>(PaletteManager_PaletteAdded);
+            ProjectController.PaletteManager.PaletteRemoved += new EventHandler<TEventArgs<PaletteInfo>>(PaletteManager_PaletteRemoved);
+            FpsFull.SelectedPaletteChanged += new EventHandler(FpsFull_SelectedPaletteChanged);
+        }
+
+        void PaletteManager_PaletteRemoved(object sender, TEventArgs<PaletteInfo> e)
+        {
+            int index = CmbPalettes.SelectedIndex;
+            CmbPalettes.Items.Remove(e.Data);
+            if (CmbPalettes.Items.Count == 1)
+            {
+                BtnRemove.Enabled = BtnRename.Enabled = false;
+            }
+            else
+            {
+                if (CmbPalettes.Items.Count - 1 < index)
+                {
+                    CmbPalettes.SelectedIndex = CmbPalettes.Items.Count - 1;
+                }
+                else
+                {
+                    CmbPalettes.SelectedIndex = index;
+                }
+            }
+        }
+
+        void PaletteManager_PaletteAdded(object sender, TEventArgs<PaletteInfo> e)
+        {
+            CmbPalettes.Items.Add(e.Data);
+            CmbPalettes.SelectedItem = e.Data;
+        }
+
+        void FpsFull_SelectedPaletteChanged(object sender, EventArgs e)
+        {
+            if (FpsFull.SelectedColor >= 0)
+                LblSelected.Text = string.Format("Selected:  {0:X2}", FpsFull.SelectedColor);
+            else
+                LblSelected.Text = "Selected: None";
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            InputForm iForm = new InputForm();
+            string name = iForm.GetInput("Enter a name for this palette");
+            if (name != null)
+            {
+                ProjectController.PaletteManager.AddNewPalette(name);
+            }
+        }
+
+        private void CmbPalettes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(CmbPalettes.SelectedItem == null)
+            {
+                PslCurrent.CurrentPalette = null;
+                BtnRemove.Enabled = BtnRename.Enabled = false;
+            }
+            else
+            {
+                PaletteInfo pi = CmbPalettes.SelectedItem as PaletteInfo;
+                pi.NameChanged -= CurrentPalette_NameChanged;
+                PslCurrent.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
+                PslCurrent.CurrentPalette.NameChanged += new EventHandler<TEventArgs<string>>(CurrentPalette_NameChanged);
+                BtnRemove.Enabled = BtnRename.Enabled = true;
+            }
+        }
+
+        void CurrentPalette_NameChanged(object sender, TEventArgs<string> e)
+        {
+            int index = CmbPalettes.SelectedIndex;
+            object o = CmbPalettes.SelectedItem;
+            CmbPalettes.Items.RemoveAt(index);
+            CmbPalettes.Items.Insert(index, o);
+            CmbPalettes.SelectedIndex = index;
+        }
+
+        private void PslCurrent_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (PslCurrent.CurrentPalette == null) return;
+            int offset = (e.X % 64) / 16;
+            int index = ((e.Y / 16) * 4) + (e.X / 64);
+            if (index == 4) return;
+            if (offset == 0)
+            {
+                PslCurrent.CurrentPalette.Background = FpsFull.SelectedColor;
+            }
+            else
+            {
+                
+                if (ModifierKeys == Keys.Control)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if (i != 4)
+                        {
+                            PslCurrent.CurrentPalette[i, offset] = FpsFull.SelectedColor;
+                        }
+                    }
+                }
+                else
+                {
+                    PslCurrent.CurrentPalette[index, offset] = FpsFull.SelectedColor;
+                }
+            }
+        }
+
+        private void BtnRename_Click(object sender, EventArgs e)
+        {
+            InputForm form = new InputForm();
+            string newName = form.GetInput("Enter a name for this palette");
+            if (newName != null)
+            {
+                (CmbPalettes.SelectedItem as PaletteInfo).Name = newName;
+            }
+        }
+
+        private void BtnRemove_Click(object sender, EventArgs e)
+        {
+            ConfirmForm cf = new ConfirmForm();
+            if (cf.Confirm("Are you sure you want to remove this palette? Any\nlevel referring to this palette will resort to the first\npalette in your list."))
+            {
+                ProjectController.PaletteManager.RemovePalette(CmbPalettes.SelectedItem as PaletteInfo);
+            }
+            cf.Dispose();
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            ProjectController.Save();
+            this.Close();
+        }
+
+        public void ShowDialog(int palette)
+        {
+            CmbPalettes.SelectedIndex = palette;
+            this.ShowDialog();
+        }
+    }
+}
