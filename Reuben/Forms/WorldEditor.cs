@@ -39,7 +39,7 @@ namespace Daiz.NES.Reuben
                 CmbPalettes.Items.Add(p);
             }
 
-            for (int i = 1; i < 16; i++)
+            for (int i = 1; i < 5; i++)
             {
                 CmbLength.Items.Add(i);
             }
@@ -1047,55 +1047,35 @@ namespace Daiz.NES.Reuben
 
         private void LoadSpriteSelector()
         {
-            List<Sprite> CurrentList;
-            foreach (var s in ProjectController.SpriteManager.SpriteGroups.Keys)
+            SpriteViewer spViewer = new SpriteViewer(8);
+            spViewer.IsViewingMapSprites = true;
+            spViewer.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;
+
+            int x = 0;
+            List<Sprite> CurrentList = new List<Sprite>();
+            foreach (var ks in ProjectController.SpriteManager.MapSpriteDefinitions.Values)
             {
-                foreach (var k in from l in ProjectController.SpriteManager.SpriteGroups[s].Keys orderby l select l)
-                {
-                    SpriteViewer spViewer = new SpriteViewer(ProjectController.SpriteManager.SpriteGroups[s][k].Count);
-                    spViewer.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;
-                    CurrentList = new List<Sprite>();
-
-                    int x = 0;
-                    foreach (var ks in ProjectController.SpriteManager.SpriteGroups[s][k])
-                    {
-                        Sprite next = new Sprite();
-                        next.X = x;
-                        next.Y = 0;
-                        next.InGameID = ks.InGameId;
-                        CurrentList.Add(next);
-                        x += next.Width + 1;
-                    }
-
-                    spViewer.SpriteList = CurrentList;
-                    spViewer.Location = new Point(0, 0);
-                    SpriteViewers.Add(spViewer);
-                    spViewer.CurrentPalette = CurrentPalette;
-                    spViewer.UpdateSprites();
-                    spViewer.SelectionChanged += new EventHandler<TEventArgs<Sprite>>(spViewer_SelectionChanged);
-
-                    TabPage tPage = new TabPage();
-                    tPage.Text = k;
-                    tPage.AutoScroll = true;
-                    tPage.Controls.Add(spViewer);
-
-
-                    switch (s)
-                    {
-                        case 1:
-                            TabClass1.TabPages.Add(tPage);
-                            break;
-
-                        case 2:
-                            TabClass2.TabPages.Add(tPage);
-                            break;
-
-                        case 3:
-                            TabClass3.TabPages.Add(tPage);
-                            break;
-                    }
-                }
+                Sprite next = new Sprite();
+                next.X = x;
+                next.Y = 0;
+                next.InGameID = ks.InGameId;
+                CurrentList.Add(next);
+                x += next.Width + 1;
             }
+
+            spViewer.SpriteList = CurrentList;
+            spViewer.Location = new Point(0, 0);
+            SpriteViewers.Add(spViewer);
+            spViewer.CurrentPalette = CurrentPalette;
+            spViewer.UpdateSprites();
+            spViewer.SelectionChanged += new EventHandler<TEventArgs<Sprite>>(spViewer_SelectionChanged);
+
+            TabPage tPage = new TabPage();
+            tPage.Text = "Map";
+            tPage.AutoScroll = true;
+            tPage.Controls.Add(spViewer);
+
+            TabClass1.TabPages.Add(tPage);
         }
 
         private Sprite CurrentSelectorSprite;

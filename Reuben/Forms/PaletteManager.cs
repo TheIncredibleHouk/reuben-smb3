@@ -68,11 +68,18 @@ namespace Daiz.NES.Reuben
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            InputForm iForm = new InputForm();
+            NewPaletteForm iForm = new NewPaletteForm();
             string name = iForm.GetInput("Enter a name for this palette");
             if (name != null)
             {
-                ProjectController.PaletteManager.AddNewPalette(name);
+                if (iForm.UseCurentPalette)
+                {
+                    ProjectController.PaletteManager.AddNewPalette(name, (PaletteInfo)CmbPalettes.SelectedItem);
+                }
+                else
+                {
+                    ProjectController.PaletteManager.AddNewPalette(name);
+                }
             }
         }
 

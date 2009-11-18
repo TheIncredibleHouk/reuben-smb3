@@ -47,6 +47,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Data = new int[8,4];
         }
 
+        public PaletteInfo(int[,] data)
+        {
+            Data = data;
+        }
+
         public int this[int index, int offset]
         {
             get { return Data[index, offset]; }
