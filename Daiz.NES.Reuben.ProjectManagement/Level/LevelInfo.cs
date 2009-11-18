@@ -10,17 +10,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class LevelInfo : IXmlIO
     {
-        public byte[] CompressedLevelData { get; private set; }
         public string Name { get; set; }
         public Guid WorldGuid { get; set; }
         public Guid LevelGuid { get; set; }
+        public byte[] CompressionCache { get; private set; }
         public int LevelType { get; set; }
-        public int CompressionSize { get; private set; }
 
         public void SetCompressedDataCache(byte[] data)
         {
-            CompressedLevelData = data;
-            CompressionSize = data.Length;
+            CompressionCache = data;
         }
 
         #region IXmlIO Members
@@ -35,23 +33,23 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             StringBuilder sb = new StringBuilder();
             bool first = true;
-            if (CompressedLevelData != null)
+            if (CompressionCache != null)
             {
-                for (int i = 0; i < CompressedLevelData.Length; i++)
+                for (int i = 0; i < CompressionCache.Length; i++)
                 {
                     if (first)
                     {
-                        sb.Append(CompressedLevelData[i]);
+                        sb.Append(CompressionCache[i]);
                     }
                     else
                     {
-                        sb.Append("," + CompressedLevelData[i]);
+                        sb.Append("," + CompressionCache[i]);
                     }
                     first = false;
                 }
 
                 x.SetAttributeValue("compressioncache", sb);
-                x.SetAttributeValue("compressionsize", CompressionSize);
+                x.SetAttributeValue("compressionsize", CompressionCache.Length);
             }
             else
             {
@@ -69,17 +67,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
             WorldGuid = e.Attribute("worldguid").Value.ToGuid();
             LevelGuid = e.Attribute("levelguid").Value.ToGuid();
             LevelType = e.Attribute("leveltype").Value.ToInt();
-            CompressionSize = e.Attribute("compressionsize").Value.ToInt();
-            CompressedLevelData = new byte[CompressionSize];
+            int CompressionSize = e.Attribute("compressionsize").Value.ToInt();
+            CompressionCache = new byte[CompressionSize];
 
-            if (e.Attribute("compressioncache") != null && e.Attribute("compressioncache").Value != "")
+            string[] compressionString = e.Attribute("compressioncache").Value.Split(',');
+            int i = 0;
+            foreach (var s in compressionString)
             {
-                string[] compressionString = e.Attribute("compressioncache").Value.Split(',');
-                int i = 0;
-                foreach (var s in compressionString)
-                {
-                    CompressedLevelData[i++] = (byte)s.ToInt();
-                }
+                CompressionCache[i++] = (byte)s.ToInt();
             }
 
             return true;

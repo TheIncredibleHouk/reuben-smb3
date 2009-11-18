@@ -8,8 +8,43 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class ROMManager
     {
+        Dictionary<Guid, byte> levelIndexTable;
         private string Filename;
         public byte[] Rom;
+
+        public bool CompileRom(string fileName)
+        {
+            if (!LoadRom(fileName)) return false;
+            if(!IsPatchedRom()) return false;
+            if (IsCleanRom())
+            {
+                SignRom(ProjectController.ProjectManager.CurrentProject.Guid);
+            }
+
+            if (!VerifyRomGuid(ProjectController.ProjectManager.CurrentProject.Guid)) return false;
+            if (!CompileLevels()) return false;
+
+            return true;
+        }
+
+        private bool CompileLevels()
+        {
+            int address = 0x44010;
+            byte levelIndex = 0;
+            foreach(LevelInfo li in ProjectController.LevelManager.Levels)
+            {
+                levelIndexTable.Add(li.LevelGuid, levelIndex++);
+            }
+
+            Level l = new Level();
+            foreach (LevelInfo li in ProjectController.LevelManager.Levels)
+            {
+                l.Load(li);
+                address = WriteLevel(l, address);
+            }
+
+            return true;
+        }
         public bool LoadRom(string filename)
         {
             if(!File.Exists(filename)) return false;
@@ -21,7 +56,44 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return true;
         }
 
-        public bool WriteLevel(Level l, int levelAddress, int spriteAddress)
+        public bool IsCleanRom()
+        {
+            byte[] guid = new byte[16];
+            for (int i = 0; i < 16; i++)
+            {
+                guid[i] = Rom[0xFE000 + i];
+            }
+
+            return new Guid(guid) == Guid.Empty;
+        }
+
+        public bool IsPatchedRom()
+        {
+            return true;
+        }
+
+        public bool VerifyRomGuid(Guid projectGuid)
+        {
+            byte[] guid = new byte[16];
+            for (int i = 0; i < 16; i++)
+            {
+                guid[i] = Rom[0xFE000 + i];
+            }
+
+            Guid compareGuid = new Guid(guid);
+            return compareGuid == projectGuid;
+        }
+
+        public void SignRom(Guid projectGuid)
+        {
+            byte[] guidArray = projectGuid.ToByteArray();
+            for (int i = 0; i < 16; i++)
+            {
+                Rom[0xFE000 + i] = guidArray[i];
+            };
+        }
+
+        public int WriteLevel(Level l, int levelAddress)
         {
             int yStart = 0;
             switch (l.LevelLayout)
@@ -70,6 +142,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             foreach (var p in l.Pointers)
             {
+                Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
+                Rom[levelAddress++] = (byte)p.XEnter;
+                Rom[levelAddress++] = (byte)p.YEnter;
+                Rom[levelAddress++] = (byte)p.XExit;
+                Rom[levelAddress++] = (byte)p.YExit;
+                Rom[levelAddress++] = (byte)p.ExitType;
             }
 
             Rom[levelAddress++] = (byte)0xFF;
@@ -81,29 +159,49 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             Rom[levelAddress] = (byte) 0xFF;
 
-            Rom[spriteAddress++] = 0x01;
-
             switch (l.LevelLayout)
             {
                 case LevelLayout.Horizontal:
                     foreach (var s in from sprites in l.SpriteData orderby sprites.X select sprites)
                     {
-                        Rom[spriteAddress++] = (byte)s.InGameID;
-                        Rom[spriteAddress++] = (byte)s.X;
-                        Rom[spriteAddress++] = (byte)s.Y;
+                        Rom[levelAddress++] = (byte)s.InGameID;
+                        Rom[levelAddress++] = (byte)s.X;
+                        Rom[levelAddress++] = (byte)s.Y;
                     }
                     break;
 
                 case LevelLayout.Vertical:
                     foreach (var s in from sprites in l.SpriteData orderby sprites.Y select sprites)
                     {
-                        Rom[spriteAddress++] = (byte)s.InGameID;
-                        Rom[spriteAddress++] = (byte)s.X;
-                        Rom[spriteAddress++] = (byte)s.Y;
+                        Rom[levelAddress++] = (byte)s.InGameID;
+                        Rom[levelAddress++] = (byte)s.X;
+                        Rom[levelAddress++] = (byte)s.Y;
                     }
                     break;
             }
-            Rom[spriteAddress] = 0xFF;
+            Rom[levelAddress++] = 0xFF;
+            return levelAddress;
+        }
+
+
+        public bool WriteBlockDefinitions(List<BlockDefinition> definitions)
+        {
+            int defCount = 0;
+            foreach (var d in definitions)
+            {
+                int address = 0x3E010 + defCount * 0x400;
+
+                for (int i = 0; i < 256; i++)
+                {
+                    Rom[address] = d[i][0, 0];
+                    Rom[address + 0x100] = d[i][0, 1];
+                    Rom[address + 0x200] = d[i][1, 0];
+                    Rom[address + 0x300] = d[i][1, 1];
+                    address++;
+                }
+
+                defCount++;
+            }
             return true;
         }
 

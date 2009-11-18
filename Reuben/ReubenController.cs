@@ -250,7 +250,7 @@ namespace Daiz.NES.Reuben
             {
                 ROMManager rom = new ROMManager();
                 rom.LoadRom(OFD.FileName);
-                rom.WriteLevel(l, 0x1FB92, 0xC537);
+                rom.WriteLevel(l, 0x1FB92);
                 rom.WritePalette(ProjectController.PaletteManager.Palettes);
                 return rom.Save();
             }

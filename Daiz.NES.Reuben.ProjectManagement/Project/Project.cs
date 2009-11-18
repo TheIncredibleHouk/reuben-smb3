@@ -10,6 +10,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class Project : IXmlIO
     {
+        public Guid Guid { get; private set; }
         private string _Name;
         public string Name
         {
@@ -24,7 +25,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public Project()
         {
-            
+            Guid = Guid.NewGuid();
         }
 
         #region IXmlIO Members
@@ -33,7 +34,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             XElement x = new XElement("project");
             x.SetAttributeValue("name", Name);
-            x.SetAttributeValue("directory", WorkingDirectory);
+            x.SetAttributeValue("guid", WorkingDirectory);
             x.Add(ProjectController.PaletteManager.CreateElement());
             x.Add(ProjectController.LayoutManager.CreateElement());
             x.Add(ProjectController.WorldManager.CreateElement());
@@ -45,6 +46,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public bool LoadFromElement(XElement e)
         {
             Name = e.Attribute("name").Value;
+            Guid = e.Attribute("guid").Value.ToGuid();
             XAttribute xa = e.Attribute("palettefile");
 
             if (xa == null)

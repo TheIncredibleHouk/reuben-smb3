@@ -52,12 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\LayoutManager.cs" />
+    <Compile Include="Layout\LayoutManager.cs" />
     <Compile Include="Enums\Music.cs" />
-    <Compile Include="Graphics\Block.cs" />
-    <Compile Include="Graphics\BlockDefinition.cs" />
-    <Compile Include="Graphics\BlockLayout.cs" />
-    <Compile Include="Graphics\BlockManager.cs" />
+    <Compile Include="Blocks\Block.cs" />
+    <Compile Include="Blocks\BlockDefinition.cs" />
+    <Compile Include="Layout\BlockLayout.cs" />
+    <Compile Include="Blocks\BlockManager.cs" />
     <Compile Include="Graphics\GraphicsBank.cs" />
     <Compile Include="Graphics\GraphicsInfo.cs" />
     <Compile Include="Graphics\GraphicsManager.cs" />
