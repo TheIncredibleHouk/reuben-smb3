@@ -103,7 +103,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 ResetTSA(0);
             }
 
-            for (int i =  retroFit ? 1 : 0; i < 14; i++)
+            for (int i =  retroFit ? 1 : 0; i < 15; i++)
             {
                 BlockDefinition bd = new BlockDefinition();
                 int bankOffset = i * 0x400;

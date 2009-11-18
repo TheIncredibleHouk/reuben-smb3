@@ -199,7 +199,7 @@
             this.TabLevelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabLevelInfo.Location = new System.Drawing.Point(23, 23);
             this.TabLevelInfo.Name = "TabLevelInfo";
-            this.TabLevelInfo.SelectedIndex = 2;
+            this.TabLevelInfo.SelectedIndex = 0;
             this.TabLevelInfo.Size = new System.Drawing.Size(753, 137);
             this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabLevelInfo.TabIndex = 20;

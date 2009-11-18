@@ -257,11 +257,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
             byte parameter = 0;
             int previousValue = -1;
             int repeatCount = 0;
+            int clearCount = 0;
             int x;
             int breakAt = Length - 1;
             for (int i = 0; i < Length; i++)
             {
-                for (int j = 0; j < 27; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     x = i * 16;
 
@@ -304,9 +305,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                 break;
 
                             case CompressionCommand.Write:
-                                if (currentByte == previousValue)
+                                if (currentByte == previousValue && currentByte != ClearValue)
                                 {
                                     repeatCount++;
+                                    clearCount = 0;
 
                                     if (parameter == 1)
                                     {
@@ -335,22 +337,45 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         repeatCount = 0;
                                     }
                                 }
-                                else if(currentByte == ClearValue || parameter == 0x3F)
+                                else if (currentByte == ClearValue || parameter == 0x40)
                                 {
-                                    outputData[dataPointer++] = (byte)(64 | parameter);
-                                    for (int l = 0; l < parameter; l++)
+                                    if (clearCount == 1 || parameter == 0x40)
                                     {
-                                        outputData[dataPointer++] = nextChunk[l];
+                                        if (clearCount == 1)
+                                        {
+                                            nextChunk.RemoveAt(nextChunk.Count - 1);
+                                        }
+
+                                        outputData[dataPointer++] = (byte)(64 | nextChunk.Count);
+                                        for (int l = 0; l < nextChunk.Count; l++)
+                                        {
+                                            outputData[dataPointer++] = nextChunk[l];
+                                        }
+
+                                        currentCommand = CompressionCommand.None;
+                                        if (clearCount == 1)
+                                        {
+                                            k--;
+                                        }
+
+                                        k--;
+                                        clearCount = 0;
+                                    }
+                                    else
+                                    {
+                                        clearCount++;
+                                        nextChunk.Add(currentByte);
+                                        parameter++;
+                                        repeatCount = 0;
                                     }
 
-                                    currentCommand = CompressionCommand.None;
-                                    k--;
                                 }
                                 else
                                 {
                                     nextChunk.Add(currentByte);
                                     parameter++;
                                     repeatCount = 0;
+                                    clearCount = 0;
                                 }
                                 break;
 
