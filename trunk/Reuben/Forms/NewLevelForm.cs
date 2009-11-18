@@ -18,7 +18,7 @@ namespace Daiz.NES.Reuben
             InitializeComponent();
             CmbWorlds.DisplayMember = "Name";
             CmbType.DisplayMember = "Name";
-            CmbType.DataSource = from l in ProjectController.LevelManager.LevelTypes where l.InGameID != 0 select l;
+            CmbType.DataSource = (from l in ProjectController.LevelManager.LevelTypes where l.InGameID != 0 select l).ToList();
             CmbWorlds.DataSource = ProjectController.WorldManager.Worlds;
             CmbLayout.SelectedIndex = 0;
         }

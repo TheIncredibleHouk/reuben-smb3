@@ -62,6 +62,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             Level l = new Level();
             l.LevelLayout = layout;
+            l.Palette = levelType.InGameID;
             switch (levelType.InGameID)
             {
                 case 1:
@@ -156,7 +157,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             l.Length = 0x0A;
             l.Type = levelType.InGameID;
             l.Music = 0x00;
-            l.Palette = 0;
             l.Time = 300;
             l.Unused1 = l.Unused2 = l.Unused3 = 0;
             l.XStart = 0x00;

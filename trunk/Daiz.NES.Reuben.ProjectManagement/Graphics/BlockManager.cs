@@ -75,7 +75,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     bd[j][1, 0] = data[bankOffset + 0x200 + j];
                     bd[j][1, 1] = data[bankOffset + 0x300 + j];
                 }
-                lookupTable.Add(i + 1, bd);
+                lookupTable.Add(i, bd);
             }
         }
 

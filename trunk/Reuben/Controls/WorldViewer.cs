@@ -66,7 +66,7 @@ namespace Daiz.NES.Reuben
 
         private void _CurrentLevel_SpriteAdded(object sender, TEventArgs<Sprite> e)
         {
-            SpriteDefinition sp = ProjectController.SpriteManager.GetDefinition(e.Data.InGameID);
+            SpriteDefinition sp = ProjectController.SpriteManager.GetMapDefinition(e.Data.InGameID);
             Rectangle r = new Rectangle(e.Data.X * 16 + sp.MaxLeftX, e.Data.Y * 16 + sp.MaxTopY, sp.MaxRightX - sp.MaxLeftX, sp.MaxBottomY - sp.MaxTopY);
             FullSpriteRender(r);
             Redraw();
@@ -299,7 +299,7 @@ namespace Daiz.NES.Reuben
 
             foreach (var s in CurrentWorld.SpriteData)
             {
-                SpriteDefinition def = ProjectController.SpriteManager.GetDefinition(s.InGameID);
+                SpriteDefinition def = ProjectController.SpriteManager.GetMapDefinition(s.InGameID);
                 if (def == null) continue;
                 foreach (var sp in def.Sprites)
                 {

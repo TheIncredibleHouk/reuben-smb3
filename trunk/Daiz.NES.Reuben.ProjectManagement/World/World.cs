@@ -22,7 +22,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public Guid Guid { get; set; }
         public int Type { get { return 0; } }
-        public int ClearValue { get { return 0; } }
+        public int ClearValue { get { return 0x41; } }
         public int GraphicsBank { get; set; }
         public int AnimationBank { get; set; }
         public int Music { get; set; }
@@ -39,7 +39,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             Pointers = new List<WorldPointer>();
             SpriteData = new List<Sprite>();
-            LevelData = new byte[240, 9];
+            LevelData = new byte[64, 9];
         }
 
         public void New(WorldInfo wi)
@@ -55,7 +55,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public int Width
         {
-            get { return Length * 16; }
+            get { return 64; }
         }
 
         public int Height
@@ -97,7 +97,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     first = false;
                 }
             }
-            root.SetAttributeValue("leveldata", sb);
+            root.SetAttributeValue("worlddata", sb);
             XElement s = new XElement("spritedata");
 
             foreach (var spr in SpriteData)

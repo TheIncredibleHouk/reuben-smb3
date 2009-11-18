@@ -1236,6 +1236,7 @@ namespace Daiz.NES.Reuben
             {
                 foreach (var k in from l in ProjectController.SpriteManager.SpriteGroups[s].Keys orderby l select l)
                 {
+                    if (k == "Map") continue;
                     SpriteViewer spViewer = new SpriteViewer(ProjectController.SpriteManager.SpriteGroups[s][k].Count);
                     spViewer.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;
                     CurrentList = new List<Sprite>();

@@ -85,7 +85,7 @@ namespace Daiz.NES.Reuben
 
             foreach (var s in SpriteList)
             {
-                SpriteDefinition def = ProjectController.SpriteManager.GetDefinition(s.InGameID);
+                SpriteDefinition def = IsViewingMapSprites ?  ProjectController.SpriteManager.GetMapDefinition(s.InGameID) : ProjectController.SpriteManager.GetDefinition(s.InGameID);
                 foreach (var sp in def.Sprites)
                 {
                     if (sp.Table < 0) continue;
@@ -325,5 +325,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
+
+        public bool IsViewingMapSprites { get; set; }
     }
 }
