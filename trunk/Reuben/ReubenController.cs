@@ -193,7 +193,7 @@ namespace Daiz.NES.Reuben
 
         private static void le_Activated(object sender, EventArgs e)
         {
-            ActiveEditor = (LevelEditor)sender;
+            ActiveEditor = (Form)sender;
         }
 
         public static void CloseLevel(Guid guid)
