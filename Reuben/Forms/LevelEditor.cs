@@ -26,7 +26,7 @@ namespace Daiz.NES.Reuben
         {
             InitializeComponent();
 
-            LvlView.SetDrawDelay();
+            LvlView.DelayDrawing = true;
             UndoBuffer = new List<IUndoableAction>();
             RedoBuffer = new List<IUndoableAction>();
             CmbLayouts.DisplayMember = CmbTypes.DisplayMember = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
@@ -87,6 +87,8 @@ namespace Daiz.NES.Reuben
             LvlView.HorizontalGuide2 = PnlHorizontalGuide.Guide2;
             LvlView.VerticalGuide1 = PnlVerticalGuide.Guide1;
             LvlView.VerticalGuide2 = PnlVerticalGuide.Guide2;
+            LvlView.DelayDrawing = false;
+            LvlView.FullUpdate();
         }
 
         void BlsSelector_SelectionChanged(object sender, TEventArgs<MouseButtons> e)
@@ -660,7 +662,7 @@ namespace Daiz.NES.Reuben
                                     }
                                 }
 
-                                LvlView.SetDrawDelay();
+                                LvlView.DelayDrawing = true;
                                 if (checkValue == CurrentLevel.LevelData[i, j])
                                 {
                                     CurrentMultiTile.AddTileChange(i, j, CurrentLevel.LevelData[i, j]);
@@ -676,6 +678,7 @@ namespace Daiz.NES.Reuben
                                     stack.Push(new Point(i, j - 1));
                                 }
                                 UndoBuffer.Add(CurrentMultiTile);
+                                LvlView.DelayDrawing = false;
                                 LvlView.UpdateArea(new Rectangle(lowestX, lowestY, highestX - lowestX + 1, highestY - lowestY + 1));
                             }
 
@@ -705,8 +708,9 @@ namespace Daiz.NES.Reuben
                     Rectangle r = new Rectangle(rectX, rectY, width, height);
                     CurrentSprite.X = x;
                     CurrentSprite.Y = y;
-                    LvlView.SetDrawDelay();
+                    LvlView.DelayDrawing = true;
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
+                    LvlView.DelayDrawing = false;
                     LvlView.UpdateSprites(r);
                 }
                 else if (CurrentSelectorSprite != null && MouseButtons == MouseButtons.Right)
@@ -857,8 +861,9 @@ namespace Daiz.NES.Reuben
                         Rectangle r = new Rectangle(rectX, rectY, width, height);
                         CurrentSprite.X = x;
                         CurrentSprite.Y = y;
-                        LvlView.SetDrawDelay();
+                        LvlView.DelayDrawing = true;
                         LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
+                        LvlView.DelayDrawing = false;
                         LvlView.UpdateSprites(r);
                     }
                 }
@@ -871,7 +876,7 @@ namespace Daiz.NES.Reuben
                     if (CurrentPointer.XEnter == x && CurrentPointer.YEnter == y) return;
                     int oldX = CurrentPointer.XEnter;
                     int oldY = CurrentPointer.YEnter;
-                    LvlView.SetDrawDelay();
+                    LvlView.DelayDrawing = true;
                     CurrentPointer.XEnter = x;
                     CurrentPointer.YEnter = y;
                     LvlView.UpdatePoint(oldX, oldY);
@@ -882,6 +887,7 @@ namespace Daiz.NES.Reuben
                     LvlView.UpdatePoint(x + 1, y);
                     LvlView.UpdatePoint(x, y + 1);
                     LvlView.UpdatePoint(x + 1, y + 1);
+                    LvlView.DelayDrawing = false;
                     LvlView.SelectionRectangle = new Rectangle(CurrentPointer.XEnter, CurrentPointer.YEnter, 2, 2);
                     PntEditor.UpdatePosition();
                 }
@@ -934,7 +940,7 @@ namespace Daiz.NES.Reuben
 
                             UndoBuffer.Add(new TileAreaAction(sX, sY, CurrentLevel.GetData(sX, sY, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height)));
 
-                            LvlView.SetDrawDelay();
+                            LvlView.DelayDrawing = true;
                             for (int y = LvlView.SelectionRectangle.Y, i = 0; i < LvlView.SelectionRectangle.Height; y++, i++)
                             {
                                 for (int x = LvlView.SelectionRectangle.X, j = 0; j < LvlView.SelectionRectangle.Width; x++, j++)
@@ -942,6 +948,7 @@ namespace Daiz.NES.Reuben
                                     CurrentLevel.SetTile(x, y, (byte)_DrawTile);
                                 }
                             }
+                            LvlView.DelayDrawing = false;
                             LvlView.UpdateArea();
                             break;
 
@@ -951,7 +958,7 @@ namespace Daiz.NES.Reuben
 
                             UndoBuffer.Add(new TileAreaAction(sX, sY, CurrentLevel.GetData(sX, sY, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height)));
 
-                            LvlView.SetDrawDelay();
+                            LvlView.DelayDrawing = true;
                             for (int x = LvlView.SelectionRectangle.X, i = 0; i < LvlView.SelectionRectangle.Width; i++, x++)
                             {
                                 CurrentLevel.SetTile(x, LvlView.SelectionRectangle.Y, (byte)_DrawTile);
@@ -963,12 +970,13 @@ namespace Daiz.NES.Reuben
                                 CurrentLevel.SetTile(LvlView.SelectionRectangle.X, y, (byte)_DrawTile);
                                 CurrentLevel.SetTile(LvlView.SelectionRectangle.X + LvlView.SelectionRectangle.Width - 1, y, (byte)_DrawTile);
                             }
+                            LvlView.DelayDrawing = false;
                             LvlView.UpdateArea();
                             break;
 
                         case DrawMode.Line:
 
-                            LvlView.SetDrawDelay();
+                            LvlView.DelayDrawing = true;
                             CurrentMultiTile = new MultiTileAction();
                             int breakAt = Math.Abs(LvlView.SelectionLine.End.X - LvlView.SelectionLine.Start.X) + 1;
                             if (LvlView.SelectionLine.End.X > LvlView.SelectionLine.Start.X)
@@ -1023,7 +1031,7 @@ namespace Daiz.NES.Reuben
                             }
 
                             UndoBuffer.Add(CurrentMultiTile);
-
+                            LvlView.DelayDrawing = false;
                             LvlView.ClearLine();
                             break;
 
@@ -1168,7 +1176,7 @@ namespace Daiz.NES.Reuben
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
-            LvlView.SetDrawDelay();
+            LvlView.DelayDrawing = true;
             for (int y = 0; y < CurrentLevel.Height; y++)
             {
                 for (int x = 0; x < CurrentLevel.Width; x++)
@@ -1176,9 +1184,10 @@ namespace Daiz.NES.Reuben
                     if (CurrentLevel.LevelData[x, y] == CurrentLevel.ClearValue)
                         CurrentLevel.SetTile(x, y, (byte)NumBackground.Value);
                 }
-
-                LvlView.Redraw();
             }
+
+            LvlView.DelayDrawing = true;
+            LvlView.Redraw();
 
             CurrentLevel.ClearValue = (int)NumBackground.Value;
         }
@@ -1454,8 +1463,9 @@ namespace Daiz.NES.Reuben
                         if (CurrentSprite != null && EditMode == EditMode.Sprites)
                         {
                             CurrentLevel.SpriteData.Remove(CurrentSprite);
-                            LvlView.SetDrawDelay();
+                            LvlView.DelayDrawing = true;
                             LvlView.ClearSelection();
+                            LvlView.DelayDrawing = false;
                             LvlView.UpdateSprites();
                             CurrentSprite = null;
                         }
@@ -1493,7 +1503,7 @@ namespace Daiz.NES.Reuben
             int sX = LvlView.SelectionRectangle.X;
             int sY = LvlView.SelectionRectangle.Y;
             UndoBuffer.Add(new TileAreaAction(sX, sY, CurrentLevel.GetData(sX, sY, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height)));
-            LvlView.SetDrawDelay();
+            LvlView.DelayDrawing = true;
             for (int y = sY, i = 0; i < LvlView.SelectionRectangle.Height; y++, i++)
             {
                 for (int x = sX, j = 0; j < LvlView.SelectionRectangle.Width; x++, j++)
@@ -1501,6 +1511,7 @@ namespace Daiz.NES.Reuben
                     CurrentLevel.SetTile(x, y, (byte)NumBackground.Value);
                 }
             }
+            LvlView.DelayDrawing = false;
             LvlView.UpdateArea();
         }
 
@@ -1518,7 +1529,7 @@ namespace Daiz.NES.Reuben
 
         private void Paste(bool transparentTile)
         {
-            LvlView.SetDrawDelay();
+            LvlView.DelayDrawing = true;
             Rectangle usedRectangle = LvlView.SelectionRectangle;
 
             if (LvlView.SelectionRectangle.Width == 1 && LvlView.SelectionRectangle.Height == 1)
@@ -1539,6 +1550,7 @@ namespace Daiz.NES.Reuben
                     CurrentLevel.SetTile(usedRectangle.X + i, usedRectangle.Y + j, TileBuffer[i % TileBuffer.GetLength(0), j % TileBuffer.GetLength(1)]);
                 }
             }
+            LvlView.DelayDrawing = false;
             LvlView.UpdateArea(usedRectangle);
             UpdateCoinTotalText();
         }
@@ -1629,11 +1641,12 @@ namespace Daiz.NES.Reuben
         {
             CurrentLevel.AddPointer();
             PntEditor.CurrentPointer = CurrentLevel.Pointers[CurrentLevel.Pointers.Count - 1];
-            LvlView.SetDrawDelay();
+            LvlView.DelayDrawing = true;
             LvlView.UpdatePoint(0, 0);
             LvlView.UpdatePoint(1, 0);
             LvlView.UpdatePoint(0, 1);
             LvlView.UpdatePoint(1, 1);
+            LvlView.DelayDrawing = false;
             LvlView.SelectionRectangle = new Rectangle(0, 0, 2, 2);
             CurrentPointer = PntEditor.CurrentPointer;
             BtnAddPointer.Enabled = CurrentLevel.Pointers.Count < 4;
@@ -1648,12 +1661,13 @@ namespace Daiz.NES.Reuben
         {
             if (CurrentPointer != null)
             {
-                LvlView.SetDrawDelay();
+                LvlView.DelayDrawing = true;
                 CurrentLevel.Pointers.Remove(CurrentPointer);
                 LvlView.UpdatePoint(CurrentPointer.XEnter, CurrentPointer.YEnter);
                 LvlView.UpdatePoint(CurrentPointer.XEnter, CurrentPointer.YEnter + 1);
                 LvlView.UpdatePoint(CurrentPointer.XEnter + 1, CurrentPointer.YEnter);
                 LvlView.UpdatePoint(CurrentPointer.XEnter + 1, CurrentPointer.YEnter + 1);
+                LvlView.DelayDrawing = false;
                 LvlView.ClearSelection();
                 PntEditor.CurrentPointer = null;
                 BtnDeletePointer.Enabled = false;
@@ -1764,7 +1778,7 @@ namespace Daiz.NES.Reuben
 
         private void UndoTileArea(TileAreaAction action)
         {
-            LvlView.SetDrawDelay();
+            LvlView.DelayDrawing = true;
             Rectangle usedRectangle = new Rectangle(action.X, action.Y, action.Data.GetLength(0), action.Data.GetLength(1));
 
             int sX = usedRectangle.X;
@@ -1778,6 +1792,7 @@ namespace Daiz.NES.Reuben
                     CurrentLevel.SetTile(usedRectangle.X + i, usedRectangle.Y + j, action.Data[i ,j]);
                 }
             }
+            LvlView.DelayDrawing = false;
             LvlView.UpdateArea(usedRectangle);
             UpdateCoinTotalText();
             UndoBuffer.Remove(action);
@@ -1788,12 +1803,12 @@ namespace Daiz.NES.Reuben
             RedoBuffer.Add(action);
             UndoBuffer.Remove(action);
 
-            LvlView.SetDrawDelay();
+            LvlView.DelayDrawing = true;
             foreach (SingleTileChange stc in action.TileChanges.Reverse<SingleTileChange>())
             {
                 CurrentLevel.SetTile(stc.X, stc.Y, (byte)stc.Tile);
             }
-
+            LvlView.DelayDrawing = false;
             LvlView.UpdateArea(action.InvalidArea);
         }
 
