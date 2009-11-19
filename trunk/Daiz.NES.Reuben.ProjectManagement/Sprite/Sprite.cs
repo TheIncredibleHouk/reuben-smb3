@@ -13,20 +13,39 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int X { get; set; }
         public int Y { get; set; }
         public int InGameID { get; set; }
+        public bool IsMapSprite { get; set; }
 
         public string Name
         {
-            get { return ProjectController.SpriteManager.GetDefinition(InGameID).Name; }
+            get
+            {
+                if (IsMapSprite)
+                    return ProjectController.SpriteManager.GetMapDefinition(InGameID).Name;
+
+                return ProjectController.SpriteManager.GetDefinition(InGameID).Name;
+            }
         }
 
         public int Width
         {
-            get { return ProjectController.SpriteManager.GetDefinition(InGameID).Width; }
+            get
+            {
+                if (IsMapSprite)
+                    return ProjectController.SpriteManager.GetMapDefinition(InGameID).Width;
+
+                return ProjectController.SpriteManager.GetDefinition(InGameID).Width;
+            }
         }
 
         public int Height
         {
-            get { return ProjectController.SpriteManager.GetDefinition(InGameID).Height;  }
+            get
+            {
+                if(IsMapSprite)
+                return ProjectController.SpriteManager.GetMapDefinition(InGameID).Height;
+
+                return ProjectController.SpriteManager.GetDefinition(InGameID).Height;
+            }
         }
         #region IXmlIO Members
 

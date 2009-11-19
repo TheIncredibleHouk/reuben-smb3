@@ -34,7 +34,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             XElement x = new XElement("project");
             x.SetAttributeValue("name", Name);
-            x.SetAttributeValue("guid", WorkingDirectory);
+            x.SetAttributeValue("guid", Guid);
             x.Add(ProjectController.PaletteManager.CreateElement());
             x.Add(ProjectController.LayoutManager.CreateElement());
             x.Add(ProjectController.WorldManager.CreateElement());

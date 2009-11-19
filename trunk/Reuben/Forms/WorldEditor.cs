@@ -561,7 +561,7 @@ namespace Daiz.NES.Reuben
                 }
                 else if (CurrentSelectorSprite != null && MouseButtons == MouseButtons.Right)
                 {
-                    Sprite newSprite = new Sprite() { X = x, Y = y, InGameID = CurrentSelectorSprite.InGameID };
+                    Sprite newSprite = new Sprite() {IsMapSprite = true,  X = x, Y = y, InGameID = CurrentSelectorSprite.InGameID };
                     CurrentWorld.AddSprite(newSprite);
                     CurrentSprite = newSprite;
                     WldView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
@@ -1056,6 +1056,7 @@ namespace Daiz.NES.Reuben
             foreach (var ks in ProjectController.SpriteManager.MapSpriteDefinitions.Values)
             {
                 Sprite next = new Sprite();
+                next.IsMapSprite = true;
                 next.X = x;
                 next.Y = 0;
                 next.InGameID = ks.InGameId;

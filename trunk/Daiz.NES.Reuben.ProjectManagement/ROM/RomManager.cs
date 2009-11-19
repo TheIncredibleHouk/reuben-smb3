@@ -9,8 +9,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
     public class ROMManager
     {
         Dictionary<Guid, byte> levelIndexTable;
+
         private string Filename;
         public byte[] Rom;
+
+        public ROMManager()
+        {
+            levelIndexTable = new Dictionary<Guid, byte>();
+        }
 
         public bool CompileRom(string fileName)
         {
@@ -45,6 +51,23 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             return true;
         }
+
+        private bool CompileWorlds()
+        {
+            int address = 0x40010;
+
+            World w = new World();
+            foreach (WorldInfo wi in ProjectController.WorldManager.Worlds)
+            {
+                w.Load(wi);
+                address = WriteWorld(w, address);
+                if (address >= 0x4400F)
+                    return false;
+            }
+
+            return true;
+        }
+
         public bool LoadRom(string filename)
         {
             if(!File.Exists(filename)) return false;
@@ -183,6 +206,49 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return levelAddress;
         }
 
+
+        public int WriteWorld(World w, int levelAddress)
+        {
+            Rom[levelAddress++] = (byte)w.GraphicsBank;
+            Rom[levelAddress++] = (byte)w.Palette;
+            Rom[levelAddress++] = (byte)((w.XStart << 4) | (w.YStart));
+
+            if (w.Music < 15)
+            {
+                Rom[levelAddress++] = (byte)w.Music;
+            }
+            else
+            {
+                Rom[levelAddress++] = (byte)((w.Music - 15) << 4);
+            }
+
+            Rom[levelAddress++] = (byte)((w.XStart & 0xF0) >> 4);
+            Rom[levelAddress++] = (byte)w.Unused1;
+
+            foreach (var p in w.Pointers)
+            {
+                Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
+                Rom[levelAddress++] = (byte)p.X;
+                Rom[levelAddress++] = (byte)p.Y;
+            }
+
+            Rom[levelAddress++] = (byte)0xFF;
+            byte[] levelData = w.GetCompressedData();
+            for (int i = 0; i < levelData.Length; i++)
+            {
+                Rom[levelAddress++] = levelData[i];
+            }
+
+            Rom[levelAddress] = (byte)0xFF;
+            foreach (var s in from sprites in w.SpriteData orderby sprites.X select sprites)
+            {
+                Rom[levelAddress++] = (byte)s.InGameID;
+                Rom[levelAddress++] = (byte)s.X;
+                Rom[levelAddress++] = (byte)s.Y;
+            }
+
+            return levelAddress;
+        }
 
         public bool WriteBlockDefinitions(List<BlockDefinition> definitions)
         {

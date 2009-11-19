@@ -28,6 +28,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public void LoadDefaultSprites()
         {
             SpriteDefinitions.Clear();
+            MapSpriteDefinitions.Clear();
             SpriteGroups[1] = new Dictionary<string, List<SpriteDefinition>>();
             SpriteGroups[2] = new Dictionary<string, List<SpriteDefinition>>();
             SpriteGroups[3] = new Dictionary<string, List<SpriteDefinition>>();
