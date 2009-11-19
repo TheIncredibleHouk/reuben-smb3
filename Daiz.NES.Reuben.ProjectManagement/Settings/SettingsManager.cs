@@ -29,7 +29,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             defaultSettings["VGuideColor"] = new Setting("VGuideColor", DataType.Color, Color.Red);
             defaultSettings["HGuideColor"] = new Setting("HGuideColor", DataType.Color, Color.Blue);
             defaultSettings["TransSpecials"] = new Setting("TransSpecials", DataType.Decimal, .75);
-            defaultSettings["TransProperties"] = new Setting("TransProperties", DataType.Decimal, .75);
+            defaultSettings["TransProps"] = new Setting("TransProps", DataType.Decimal, .75);
 
         }
 
