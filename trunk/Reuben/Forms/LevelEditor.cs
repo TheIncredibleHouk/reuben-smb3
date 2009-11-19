@@ -26,6 +26,7 @@ namespace Daiz.NES.Reuben
         {
             InitializeComponent();
 
+            LvlView.SetDrawDelay();
             UndoBuffer = new List<IUndoableAction>();
             RedoBuffer = new List<IUndoableAction>();
             CmbLayouts.DisplayMember = CmbTypes.DisplayMember = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
@@ -207,6 +208,7 @@ namespace Daiz.NES.Reuben
             this.Show();
             SetMiscText(0);
             BtnShowHideInfo_Click(null, null);
+            LvlView.FullUpdate();
         }
 
         private void GetLevelInfo(Level l)
@@ -236,6 +238,8 @@ namespace Daiz.NES.Reuben
             CurrentLevel.TilesModified += new EventHandler<TEventArgs<TileInformation>>(CurrentLevel_TilesModified);
             GetCoinTotals();
             UpdateCoinTotalText();
+            NumSpecials.Value = (decimal) ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransSpecials");
+            NumProperties.Value = (decimal) ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransProps");
         }
 
         #region guide events
@@ -758,7 +762,7 @@ namespace Daiz.NES.Reuben
 
             if (EditMode == EditMode.Tiles)
             {
-                LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
+                LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
                     switch (DrawMode)
@@ -1813,6 +1817,18 @@ namespace Daiz.NES.Reuben
                 ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "HGuideColor", cDialog.Color);
                 PnlHorizontalGuide.GuideColor = cDialog.Color;
             }
+        }
+
+        private void NumSpecials_ValueChanged(object sender, EventArgs e)
+        {
+            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "TransSpecials", (double) NumSpecials.Value);
+            LvlView.FullUpdate();
+        }
+
+        private void NumProperties_ValueChanged(object sender, EventArgs e)
+        {
+            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "TransProps", (double) NumProperties.Value);
+            LvlView.FullUpdate();
         }
     }
 

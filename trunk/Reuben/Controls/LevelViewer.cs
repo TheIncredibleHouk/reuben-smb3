@@ -46,9 +46,12 @@ namespace Daiz.NES.Reuben
                     CompositeBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
                     this.Width = _CurrentLevel.Width * 16; ;
                     this.Height = _CurrentLevel.Height * 16;
-                    FullRender();
-                    FullSpriteRender();
-                    Redraw();
+                    if (!DelayDrawing)
+                    {
+                        FullRender();
+                        FullSpriteRender();
+                        Redraw();
+                    }
                 }
             }
         }
@@ -79,8 +82,11 @@ namespace Daiz.NES.Reuben
             set
             {
                 _SpecialTable = value;
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -92,8 +98,11 @@ namespace Daiz.NES.Reuben
             {
                 if (BackBuffer == null) return;
                 _ShowSpecialBlocks = value;
-                FullRender();
-                Redraw(new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height));
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -118,8 +127,11 @@ namespace Daiz.NES.Reuben
                     _CurrentTable.GraphicsChanged += new EventHandler<TEventArgs<int>>(_CurrentTable_GraphicsChanged);
                 }
 
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -138,8 +150,11 @@ namespace Daiz.NES.Reuben
             set
             {
                 _CurrentDefiniton = value;
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -150,9 +165,12 @@ namespace Daiz.NES.Reuben
             {
                 _CurrentPalette = value;
                 UpdateColors();
-                FullRender();
-                FullSpriteRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    FullSpriteRender();
+                    Redraw();
+                }
             }
         }
 
@@ -201,6 +219,9 @@ namespace Daiz.NES.Reuben
 
             BitmapData data = BackBuffer.LockBits(new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
+            double transSpecial = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransSpecials");
+            double transProperties = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransProps");
+
             for (int i = 0; i < _CurrentLevel.Height; i++)
             {
                 for (int j = 0; j < _CurrentLevel.Width; j++)
@@ -218,22 +239,22 @@ namespace Daiz.NES.Reuben
                         switch(ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, tileValue))
                         {
                             case BlockProperty.Solid:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16 + 8, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16 + 8, 6, data, .50);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16, 6, data, transProperties);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16 + 8, 6, data, transProperties);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16, 6, data, transProperties);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16 + 8, 6, data, transProperties);
                                 break;
 
                             case BlockProperty.TopSolid:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16, 6, data, .50);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16, 6, data, transProperties);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16, 6, data, transProperties);
                                 break;
 
                             case BlockProperty.Water:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16 + 8, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16 + 8, 6, data, .50);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16, 6, data, transProperties);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16 + 8, 6, data, transProperties);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16, 6, data, transProperties);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16 + 8, 6, data, transProperties);
                                 break;
                         }
                     }
@@ -244,10 +265,10 @@ namespace Daiz.NES.Reuben
                         if (sb != null)
                         {
                             int SpecialPaletteIndex = sb.Palette;
-                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], j * 16, i * 16, SpecialPaletteIndex, data, .50);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], j * 16, i * 16 + 8, SpecialPaletteIndex, data, .50);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], j * 16 + 8, i * 16, SpecialPaletteIndex, data, .50);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], j * 16 + 8, i * 16 + 8, SpecialPaletteIndex, data, .50);
+                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], j * 16, i * 16, SpecialPaletteIndex, data, transSpecial);
+                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], j * 16, i * 16 + 8, SpecialPaletteIndex, data, transSpecial);
+                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], j * 16 + 8, i * 16, SpecialPaletteIndex, data, transSpecial);
+                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], j * 16 + 8, i * 16 + 8, SpecialPaletteIndex, data, transSpecial);
                         }
                     }
 
@@ -495,27 +516,30 @@ namespace Daiz.NES.Reuben
             RenderTile(_CurrentTable[b[1, 0]], 8, 0, PaletteIndex, data);
             RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
 
+            double transSpecial = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransSpecials");
+            double transProperties = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransProps");
+
             if (_ShowBlockProperties)
             {
                 switch (ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, tileValue))
                 {
                     case BlockProperty.Solid:
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 8, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 8, 6, data, .50); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 0, 6, data, transProperties); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 8, 6, data, transProperties); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 0, 6, data, transProperties);
+                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 8, 6, data, transProperties); 
                         break;
 
                     case BlockProperty.TopSolid:
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 0, 6, data, .50);
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 0, 6, data, .50); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 0, 6, data, transProperties);
+                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 0, 6, data, transProperties); 
                         break;
 
                     case BlockProperty.Water:
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 8, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 8, 6, data, .50); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 0, 6, data, transProperties); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 8, 6, data, transProperties); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 0, 6, data, transProperties); 
+                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 8, 6, data, transProperties); 
                         break;
                 }
             }
@@ -526,10 +550,10 @@ namespace Daiz.NES.Reuben
                 if (sb != null)
                 {
                     int SpecialPaletteIndex = sb.Palette;
-                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], 0, 0, SpecialPaletteIndex, data, .50);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], 0, 8, SpecialPaletteIndex, data, .50);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], 8, 0, SpecialPaletteIndex, data, .50);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], 8, 8, SpecialPaletteIndex, data, .50);
+                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], 0, 0, SpecialPaletteIndex, data, transSpecial);
+                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], 0, 8, SpecialPaletteIndex, data, transSpecial);
+                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], 8, 0, SpecialPaletteIndex, data, transSpecial);
+                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], 8, 8, SpecialPaletteIndex, data, transSpecial);
                 }
             }
 
@@ -740,8 +764,11 @@ namespace Daiz.NES.Reuben
             {
                 if (_ShowGrid == value) return;
                 _ShowGrid = value;
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -835,8 +862,11 @@ namespace Daiz.NES.Reuben
             set
             {
                 _ShowSpecial = value;
-                FullSpriteRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullSpriteRender();
+                    Redraw();
+                }
             }
         }
 
@@ -847,8 +877,11 @@ namespace Daiz.NES.Reuben
             set
             {
                 _ShowBlockProperties = value;
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -939,5 +972,13 @@ namespace Daiz.NES.Reuben
 
         public bool HasSelection { get; private set; }
         public bool HasSelectionLine { get; private set; }
+
+        public void FullUpdate()
+        {
+            DelayDrawing = false;
+            FullRender();
+            FullSpriteRender();
+            Redraw();
+        }
     }
 }

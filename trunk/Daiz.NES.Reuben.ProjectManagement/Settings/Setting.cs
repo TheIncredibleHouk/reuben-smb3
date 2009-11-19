@@ -61,7 +61,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     break;
 
                 case DataType.Decimal:
-                    Value = value.ToDouble();
+                    Value = Double.Parse(value, System.Globalization.NumberStyles.Any);
                     break;
 
                 case DataType.Integer:

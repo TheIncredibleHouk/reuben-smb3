@@ -110,7 +110,7 @@ namespace Daiz.NES.Reuben
             {
                 if (_CurrentDefiniton == value) return;
                 _CurrentDefiniton = value;
-                DefinitionIndex = ProjectController.BlockManager.AllDefinitions.IndexOf(value) + 1;
+                DefinitionIndex = ProjectController.BlockManager.AllDefinitions.IndexOf(value);
                 FullRender();
             }
         }

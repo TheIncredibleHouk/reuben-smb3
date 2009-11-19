@@ -134,5 +134,10 @@ namespace Daiz.NES.Reuben
         {
             ReubenController.ReloadDefaults();
         }
+
+        private void dumpRawLevelToFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReubenController.DumpRawLevel();
+        }
     }
 }
