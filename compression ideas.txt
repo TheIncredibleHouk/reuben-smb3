@@ -56,6 +56,7 @@ UUUU UUUU = Unused 1;
 UUUU UUUU = Unused 2;
 UUUU UUUU = Unused 3;
 
+
 Pointer data...
 IIII IIII
 XXXX XXXX = X Enter
@@ -63,6 +64,15 @@ YYYY YYYY = Y Enter
 XXXX XXXX = X Exit
 YYYY YYYY = Y Exit
 UUUU UTTT = Exit Type
+
+
+Map Header
+GGGG GGGG - Graphics
+PPPP PPPP - Palette index
+XXXX YYYY - X-start, Y-Start
+MMMM MMMM - Music
+PPPP SSSS - Page, Scroll
+UUUU UUUU - Unused
 
 Map pointer data
 IIII IIII = Level index
@@ -88,7 +98,8 @@ RAM
 545 - Starting Action
 70A - Current Level Type
 727 - Current World
-75 - Current Scroll position
+75 - Current Scroll position (also with map)
+79 - Current x position (map)
 90 - current x position
 22 - Level length
 375 - scroll type
@@ -99,6 +110,9 @@ ROM
 
 Reuben ROM Map:
 
-0x3C010-0x4000F - Palettes
-0x40010-0x4400F - TSA data
-0x
+0x3C010-0x3E00F - Palettes
+0x3E010-0x3FC0F - TSA data
+0x3FC10-0x4000F - Level index table
+0x40010-0x4400F - Map/Sprite data
+0x44010-0xFD00F - Level/Sprite data
+0xFD010-0xFE00F - Project use
