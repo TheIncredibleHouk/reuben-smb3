@@ -129,7 +129,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             if (!File.Exists(filename)) return false;
             SpecialDefinitions.Clear();
-            for (int j = 1; j < 15; j++)
+            for (int j = 0; j < 15; j++)
             {
                 SpecialDefinitions.Add(j, new SpecialDefinition());
             }
@@ -138,18 +138,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             foreach (var s in e.Elements("specialblocks"))
             {
                 int lvlType = s.Attribute("leveltype").Value.ToInt();
-
-                if (lvlType == 0)
-                {
-                    for (int j = 1; j < 15; j++)
-                    {
-                        SpecialDefinitions[j].LoadFromElement(s);
-                    }
-                }
-                else
-                {
-                    SpecialDefinitions[lvlType].LoadFromElement(s);
-                }
+                SpecialDefinitions[lvlType].LoadFromElement(s);
             }
 
             SpecialPalette.LoadFromElement(e.Element("palette"));
@@ -168,18 +157,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             foreach (var s in root.Elements("specialblocks"))
             {
                 int lvlType = s.Attribute("leveltype").Value.ToInt();
-
-                if (lvlType == 0)
-                {
-                    for (int j = 1; j < 15; j++)
-                    {
-                        SpecialDefinitions[j].LoadFromElement(s);
-                    }
-                }
-                else
-                {
-                    SpecialDefinitions[lvlType].LoadFromElement(s);
-                }
+                SpecialDefinitions[lvlType].LoadFromElement(s);
             }
             SpecialPalette = new PaletteInfo();
             SpecialPalette.LoadFromElement(root.Element("palette"));
@@ -237,6 +215,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Background,
         Solid,
         TopSolid,
-        Water
+        Water,
+        WaterFall,
+        Slope,
+        SlopeFiller,
+        SlopeFillerSolidTop,
+        SlopeFillerSolidBottom,
+        Harmful,
+        ConveyorLeft,
+        ConveyorRight,
+        Ice,
     }
 }

@@ -824,12 +824,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private bool DelayDrawing = false;
-
-        public void SetDrawDelay()
-        {
-            DelayDrawing = true;
-        }
+        public bool DelayDrawing { get; set; }
 
         public void UpdateArea()
         {
@@ -839,7 +834,6 @@ namespace Daiz.NES.Reuben
 
         public void UpdateArea(Rectangle rect)
         {
-            
             Redraw(new Rectangle(rect.X * 16, rect.Y * 16, rect.Width * 16, rect.Height * 16));
         }
 
@@ -899,16 +893,20 @@ namespace Daiz.NES.Reuben
 
         public void Redraw()
         {
-            if (BackBuffer == null) return;
-            DelayDrawing = false;
-            Redraw(new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom));
+            if (!DelayDrawing)
+            {
+                if (BackBuffer == null) return;
+                Redraw(new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom));
+            }
         }
 
         public void Redraw(Rectangle rect)
         {
-            if (BackBuffer == null) return;
-            DelayDrawing = false;
-            Invalidate(new Rectangle(rect.X * Zoom, rect.Y * Zoom, rect.Width * Zoom, rect.Height * Zoom));
+            if (!DelayDrawing)
+            {
+                if (BackBuffer == null) return;
+                Invalidate(new Rectangle(rect.X * Zoom, rect.Y * Zoom, rect.Width * Zoom, rect.Height * Zoom));
+            }
         }
 
         public void UpdatePoint(int x, int y)
@@ -975,10 +973,12 @@ namespace Daiz.NES.Reuben
 
         public void FullUpdate()
         {
-            DelayDrawing = false;
-            FullRender();
-            FullSpriteRender();
-            Redraw();
+            if (!DelayDrawing)
+            {
+                FullRender();
+                FullSpriteRender();
+                Redraw();
+            }
         }
     }
 }
