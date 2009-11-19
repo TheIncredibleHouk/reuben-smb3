@@ -12,6 +12,7 @@
     <AssemblyName>Daiz.NES.Reuben</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>reuben.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -290,6 +291,8 @@
     <None Include="Images\specialtile.png" />
     <Content Include="Images\selection.png" />
     <Content Include="Images\up.png" />
+    <Content Include="Resources\reuben.ico" />
+    <Content Include="reuben.ico" />
     <None Include="Resources\saveHS.png" />
     <None Include="Images\zoom.png" />
   </ItemGroup>

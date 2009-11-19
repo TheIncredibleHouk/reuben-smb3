@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
@@ -354,6 +355,24 @@ namespace Daiz.NES.Reuben
             ProjectController.Save();
         }
 
+
+        public static void DumpRawLevel()
+        {
+            SaveFileDialog SFD = new SaveFileDialog();
+            if (SFD.ShowDialog() == DialogResult.OK)
+            {
+                if (ActiveEditor is LevelEditor)
+                {
+                    LevelEditor le = ((LevelEditor)ActiveEditor);
+                    Level l = le.CurrentLevel;
+                    FileStream fs = new FileStream(SFD.FileName, FileMode.OpenOrCreate, FileAccess.Write);
+                    byte[] data = l.GetCompressedData();
+                    fs.Write(data, 0, data.Length);
+                    fs.Close();
+                    MessageBox.Show("Raw level data dumped");
+                }
+            }
+        }
         private static Form ActiveEditor;
         public static Main MainWindow { get; set; }
     }
