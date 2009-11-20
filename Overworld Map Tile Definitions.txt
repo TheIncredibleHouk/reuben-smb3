@@ -1,0 +1,260 @@
+==============================  =======================  	==================
+Overworld Map Tile Definitions  == Used as connector ==  	== Used as Road ==
+==============================  =======================  	==================
+
+00 - Mario Completed Block A    Non-Enterable, Passable		No Movement
+01 - Luigi Completed Block A	Non-Enterable, Passable		No Movement
+02 - Black Tile			Non-Enterable, Passable		No Movement
+03 - Level 1			Enterable, Blocked		No Movement
+04 - Level 2			Enterable, Blocked		No Movement
+05 - Level 3			Enterable, Blocked		No Movement
+06 - Level 4			Enterable, Blocked		No Movement
+07 - Level 5			Enterable, Blocked		No Movement
+08 - Level 6			Enterable, Blocked		No Movement
+09 - Level 7			Enterable, Blocked		No Movement
+0a - Level 8			Enterable, Blocked		No Movement
+0b - Level 9			Enterable, Blocked		No Movement
+0c - Level 10			Enterable, Blocked		No Movement
+0d - Level 11?			Enterable, Blocked		No Movement
+0E - Level 12?			Enterable, Blocked		No Movement
+0F - Level 13?			Enterable, Blocked		No Movement
+10 - Level 14?			Enterable, Blocked		No Movement
+11 - Level 15?			Enterable, Blocked		No Movement
+12 - Level 16?			Enterable, Blocked		No Movement
+13 - Level 17?			Enterable, Blocked		No Movement
+14 - Level 18?			Enterable, Blocked		No Movement
+15 - Level 19?			Enterable, Blocked		No Movement
+16 - Black Tile			Enterable, Blocked		No Movement
+17 - Black Tile			Enterable, Blocked		No Movement
+18 - Black Tile			Enterable, Blocked		No Movement
+19 - Black Tile			Enterable, Blocked		No Movement
+1A - Black Tile			Enterable, Blocked		No Movement
+1B - Black Tile			Enterable, Blocked		No Movement
+1C - Black Tile			Enterable, Blocked		No Movement
+1D - Black Tile			Enterable, Blocked		No Movement
+1E - Black Tile			Enterable, Blocked		No Movement
+1F - Black Tile			Enterable, Blocked		No Movement
+20 - Black Tile			Enterable, Blocked		No Movement
+21 - Black Tile			Enterable, Blocked		No Movement
+22 - Black Tile			Enterable, Blocked		No Movement
+23 - Black Tile			Enterable, Blocked		No Movement
+24 - Black Tile			Enterable, Blocked		No Movement
+25 - Black Tile			Enterable, Blocked		No Movement
+26 - Black Tile			Enterable, Blocked		No Movement
+27 - Black Tile			Enterable, Blocked		No Movement
+28 - Black Tile			Enterable, Blocked		No Movement
+29 - Black Tile			Enterable, Blocked		No Movement
+2A - Black Tile			Enterable, Blocked		No Movement
+2B - Black Tile			Enterable, Blocked		No Movement
+2C - Black Tile			Enterable, Blocked		No Movement
+2D - Black Tile			Enterable, Blocked		No Movement
+2E - Black Tile			Enterable, Blocked		No Movement
+2F - Black Tile			Enterable, Blocked		No Movement
+30 - Black Tile			Enterable, Blocked		No Movement
+31 - Black Tile			Enterable, Blocked		No Movement
+32 - Black Tile			Enterable, Blocked		No Movement
+33 - Black Tile			Enterable, Blocked		No Movement
+34 - Black Tile			Enterable, Blocked		No Movement
+35 - Black Tile			Enterable, Blocked		No Movement
+36 - Black Tile			Enterable, Blocked		No Movement
+37 - Black Tile			Enterable, Blocked		No Movement
+38 - Black Tile			Enterable, Blocked		No Movement
+39 - Black Tile			Enterable, Blocked		No Movement
+3a - Black Tile			Enterable, Blocked		No Movement
+3b - Black Tile			Enterable, Blocked		No Movement
+3c - Black Tile			Enterable, Blocked		No Movement
+3d - Black Tile			Enterable, Blocked		No Movement
+3e - Black Tile			Enterable, Blocked		No Movement
+3f - Black Tile			Enterable, Blocked		No Movement
+40 - Mario Completed Tile B	Non-Enterable, Passable		No Movement
+41 - Luigi Completed Tile B	Non-Enterable, Passable		No Movement
+42 - Land			Non-Enterable, Passable		No Movement
+43 - Sandy Land			Non-Enterable, Passable		No Movement
+44 - Road Connector A, E/S	Non-Enterable, Passable		No Movement
+45 - Horizontal Road		Non-Enterable, Passable		Horizontal Movement
+46 - Vertical Road A		Non-Enterable, Passable		Vertical Movement
+47 - Road Connector A, E/S/W	Non-Enterable, Passable		No Movement
+48 - Road Connector A, N/E/S	Non-Enterable, Passable		No Movement
+49 - Vertical Road B		Non-Enterable, Passable		No Movement
+4A - Road Connector A, N/E/S/W	Non-Enterable, Passable		No Movement
+4B - Dock			Non-Enterable, Passable		No Movement
+4C - Garbage Tile		Non-Enterable, Passable		No Movement
+4D - Garbage Tile		Non-Enterable, Passable		No Movement
+4E - Black Vertical Road 1	Non-Enterable, Passable		No Movement
+4F - Black Vertical Road 2	Non-Enterable, Passable		No Movement
+50 - Mushroom House A		Enterable, Passable		No Movement
+51 - Boulder A			Non-Enterable, Passable		No Movement
+52 - Boulder B			Non-Enterable, Passable		No Movement
+53 - Boulder C			Non-Enterable, Passable		No Movement
+54 - Lock A			Non-Enterable, Passable		No Movement
+55 - Garbage Tile		Non-Enterable, Passable		No Movement
+56 - Lock B			Non-Enterable, Passable		No Movement
+57 - Garbage Tile		Non-Enterable, Passable		No Movement
+58 - Garbage Tile		Non-Enterable, Passable		No Movement
+59 - Garbage Tile		Non-Enterable, Passable		No Movement
+5A - Garbage Tile		Non-Enterable, Passable		No Movement
+5B - Garbage Tile		Non-Enterable, Passable		No Movement
+5C - Garbage Tile		Non-Enterable, Passable		No Movement
+5D - Garbage Tile		Non-Enterable, Passable		No Movement
+5E - Garbage Tile		Non-Enterable, Passable		No Movement
+5F - Garbage Tile (Sky Tower A)	Enterable, Blocked		No Movement
+60 - Conquered Fortress A	Non-Enterable, Passable		No Movement
+61 - Garbage Tile		Non-Enterable, Passable		No Movement
+62 - Garbage Tile		Non-Enterable, Passable		No Movement
+63 - Garbage Tile		Non-Enterable, Passable		No Movement
+64 - Garbage Tile		Non-Enterable, Passable		No Movement
+65 - Garbage Tile		Non-Enterable, Passable		No Movement
+66 - Road Connector (H) E/S/W	Enterable, Passable		No Movement
+67 - Fortress A			Enterable, Blocked		No Movement
+68 - Quicksand			Enterable, Blocked		No Movement
+69 - Pyramid			Enterable, Blocked		No Movement
+6A - Garbage Tile		Enterable, Blocked		No Movement
+6B - Black Tile			Enterable, Blocked		No Movement
+6C - Black Tile			Enterable, Blocked		No Movement
+6D - Black Tile			Enterable, Blocked		No Movement
+6E - Black Tile			Enterable, Blocked		No Movement
+6F - Black Tile			Enterable, Blocked		No Movement
+70 - Black Tile			Enterable, Blocked		No Movement
+71 - Black Tile			Enterable, Blocked		No Movement
+72 - Black Tile			Enterable, Blocked		No Movement
+73 - Black Tile			Enterable, Blocked		No Movement
+74 - Black Tile			Enterable, Blocked		No Movement
+75 - Black Tile			Enterable, Blocked		No Movement
+76 - Black Tile			Enterable, Blocked		No Movement
+77 - Black Tile			Enterable, Blocked		No Movement
+78 - Black Tile			Enterable, Blocked		No Movement
+79 - Black Tile			Enterable, Blocked		No Movement
+7A - Black Tile			Enterable, Blocked		No Movement
+7B - Black Tile			Enterable, Blocked		No Movement
+7C - Black Tile			Enterable, Blocked		No Movement
+7D - Black Tile			Enterable, Blocked		No Movement
+7E - Black Tile			Enterable, Blocked		No Movement
+7F - Black Tile			Enterable, Blocked		No Movement
+80 - Mario Completed Tile C	Non-Enterable, Passable		No Movement
+81 - Luigi Completed Tile C	Non-Enterable, Passable		No Movement
+82 - Water 1			Non-Enterable, Passable		No Movement
+83 - Water 2			Non-Enterable, Passable		No Movement
+84 - Water 3			Non-Enterable, Passable		No Movement
+85 - Water 4			Non-Enterable, Passable		No Movement
+86 - Water 5			Non-Enterable, Passable		No Movement
+87 - Water 6			Non-Enterable, Passable		No Movement
+88 - Water 7			Non-Enterable, Passable		No Movement
+89 - Water 8			Non-Enterable, Passable		No Movement
+8A - Water 9			Non-Enterable, Passable		No Movement
+8B - Water 10			Non-Enterable, Passable		No Movement
+8C - Water 11			Non-Enterable, Passable		No Movement
+8D - Water 12			Non-Enterable, Passable		No Movement
+8E - Water 13			Non-Enterable, Passable		No Movement
+8F - Water 14			Non-Enterable, Passable		No Movement
+90 - Water 15			Non-Enterable, Passable		No Movement
+91 - Water 16			Non-Enterable, Passable		No Movement
+92 - Water 17			Non-Enterable, Passable		No Movement
+93 - Water 18			Non-Enterable, Passable		No Movement
+94 - Water 19			Non-Enterable, Passable		No Movement
+95 - Water 20			Non-Enterable, Passable		No Movement
+96 - Water 21			Non-Enterable, Passable		No Movement
+97 - Water 22			Non-Enterable, Passable		No Movement
+98 - Water 23			Non-Enterable, Passable		No Movement
+99 - Water 24			Non-Enterable, Passable		No Movement
+9A - Water 25			Non-Enterable, Passable		No Movement
+9B - Water 26			Non-Enterable, Passable		No Movement
+9C - Water 27			Non-Enterable, Passable		No Movement
+9D - Water 28			Non-Enterable, Passable		No Movement
+9E - Water 29			Non-Enterable, Passable		No Movement
+9F - Water 30			Non-Enterable, Passable		No Movement
+A0 - Water 31			Non-Enterable, Passable		No Movement
+A1 - Water 32			Non-Enterable, Passable		No Movement
+A2 - Water 33			Non-Enterable, Passable		No Movement
+A3 - Water 34			Non-Enterable, Passable		No Movement
+A4 - Water 35			Non-Enterable, Passable		No Movement
+A5 - Water 36			Non-Enterable, Passable		No Movement
+A6 - Water 37			Non-Enterable, Passable		No Movement
+A7 - Water 38			Non-Enterable, Passable		No Movement
+A8 - Water 39			Non-Enterable, Passable		No Movement
+A9 - Water 40			Non-Enterable, Passable		No Movement
+AA - Vertical Road C		Non-Enterable, Passable		Vertical Movement
+AB - Vertical Road D		Non-Enterable, Passable		Vertical Movement
+AC - Horizontal Road D		Non-Enterable, Passable		Horizontal movement
+AD - Water 41			Non-Enterable, Passable		No Movement
+AE - Road Connector B, E/S/W	Non-Enterable, Passable		No Movement
+AF - Road Connector B, N/E/S/W	Non-Enterable, Passable		No Movement
+B0 - Vertical Road E		Non-Enterable, Passable		Vertical Movement
+B1 - Vertical Boat Bridge	Non-Enterable, Passable		No Movement
+B2 - Horizontal Boat Bridge	Non-Enterable, Passable		No Movement
+B3 - Horizontal Bridge		Non-Enterable, Passable		Horizontal Movement
+B4 - Hills			Non-Enterable, Passable		No Movement
+B5 - Road Connector B, N/E/S	Non-Enterable, Passable		No Movement
+B6 - Road Connector B, E/S	Non-Enterable, Passable		No Movement
+B7 - Horizontal Road E		Non-Enterable, Passable		Horizontal Movement
+B8 - Horizontal Road F		Non-Enterable, Passable		Horizontal movement
+B9 - Horizontal Road G		Non-Enterable, Passable		Horizontal Movement
+BA - Vertical Road F		Non-Enterable, Passable		Vertical movement
+BB - Pine Tree			Non-Enterable, Passable		No Movement
+BC - Pipe			Enterable, Passable		No Movement
+BD - Flower			Enterable, Passable		No Movement
+BE - Pihrana Plant/Muncher	Non-Enterable, Passable		No Movement
+BF - Water 42			Enterable, Blocked		No Movement
+C0 - Mario Completed Tile D	Non-Enterable, Passable		No Movement
+C1 - Luigi Completed Tile D	Non-Enterable, Passable		No Movement
+C2 - Garbage Tile		Non-Enterable, Passable		No Movement
+C3 - Garbage Tile		Non-Enterable, Passable		No Movement
+C4 - Garbage Tile		Non-Enterable, Passable		No Movement
+C5 - Garbage Tile		Non-Enterable, Passable		No Movement
+C6 - Garbage Tile		Non-Enterable, Passable		No Movement
+C7 - Garbage Tile		Non-Enterable, Passable		No Movement
+C8 - King's Castle Top		Non-Enterable, Passable		No Movement
+C9 - King's Castle Bottom	Enterable, Passable		No Movement
+CA - Garbage Tile		Non-Enterable, Passable		No Movement
+CB - Garbage Tile		Non-Enterable, Passable		No Movement
+CC - Garbage Tile		Enterable, Passable		No Movement
+CD - Garbage Tile		Non-Enterable, Passable		No Movement
+CE - Garbage Tile		Non-Enterable, Passable		No Movement
+CF - Garbage Tile		Non-Enterable, Passable		No Movement
+D0 - Garbage Tile		Non-Enterable, Passable		No Movement
+D1 - Garbage Tile		Non-Enterable, Passable		No Movement
+D2 - Garbage Tile		Non-Enterable, Passable		No Movement
+D3 - Garbage Tile		Non-Enterable, Passable		No Movement
+D4 - Garbage Tile		Non-Enterable, Passable		No Movement
+D5 - Garbage Tile		Non-Enterable, Passable		No Movement
+D6 - Garbage Tile		Non-Enterable, Passable		No Movement
+D7 - Garbage Tile		Non-Enterable, Passable		No Movement
+D8 - Garbage Tile		Non-Enterable, Passable		No Movement
+D9 - Road Connector C, E/S	Non-Enterable, Passable		No Movement
+DA - Horizontal Road H		Non-Enterable, Passable		Horizontal Movement
+DB - Vertical Road G		Non-Enterable, Passable		Vertical Movement
+DC - Road Connector C, E/S/W	Non-Enterable, Passable		No Movement
+DD - Road Connector C, N/E/S	Non-Enterable, Passable		No Movement
+DE - Road Connector C, N/E/S/W	Non-Enterable, Passable		No Movement
+DF - Garbage Tile (Sky Tower B)	Enterable, Passable		No Movement
+E0 - Mushroom House B		Enterable, Passable		No Movement
+E1 - Garbage Tile		Non-Enterable, Passable		No Movement
+E2 - Skull			Non-Enterable, Passable		No Movement
+E3 - Conquered Fortress B	Non-Enterable, Passable		No Movement
+E4 - Lock C			Non-Enterable, Passable		No Movement
+E5 - Start Tile			Non-Enterable, Passable		No Movement
+E6 - Snatch Tile (W8)		Enterable, Passable		No Movement
+E7 - Black Vertical Road 3	Non-Enterable, Passable		No Movement
+E8 - Spade Tile			Enterable, Passable		No Movement
+E9 - Garbage Tile		Enterable, Blocked		No Movement
+EA - Glacier			Enterable, Blocked		No Movement
+EB - Fortress B			Enterable, Blocked		No Movement
+EC - Black Tile			Enterable, Blocked		No Movement
+ED - Black Tile			Enterable, Blocked		No Movement
+EE - Black Tile			Enterable, Blocked		No Movement
+EF - Black Tile			Enterable, Blocked		No Movement
+F0 - Black Tile			Enterable, Blocked		No Movement
+F1 - Black Tile			Enterable, Blocked		No Movement
+F2 - Black Tile			Enterable, Blocked		No Movement
+F3 - Black Tile			Enterable, Blocked		No Movement
+F4 - Black Tile			Enterable, Blocked		No Movement
+F5 - Black Tile			Enterable, Blocked		No Movement
+F6 - Black Tile			Enterable, Blocked		No Movement
+F7 - Black Tile			Enterable, Blocked		No Movement
+F8 - Black Tile			Enterable, Blocked		No Movement
+F9 - Black Tile			Enterable, Blocked		No Movement
+FA - Black Tile			Enterable, Blocked		No Movement
+FB - Black Tile			Enterable, Blocked		No Movement
+FC - Black Tile			Enterable, Blocked		No Movement
+FD - Black Tile			Enterable, Blocked		No Movement
+FE - Black Tile			Enterable, Blocked		No Movement
+FF - Black Tile			Enterable, Blocked		No Movement
