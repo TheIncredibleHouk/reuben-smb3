@@ -252,7 +252,7 @@ namespace Daiz.NES.Reuben
                 ROMManager rom = new ROMManager();
                 rom.LoadRom(OFD.FileName);
                 rom.WriteLevel(l, 0x1FB92);
-                rom.WritePalette(ProjectController.PaletteManager.Palettes);
+                
                 return rom.Save();
             }
 
@@ -371,6 +371,37 @@ namespace Daiz.NES.Reuben
                     fs.Close();
                     MessageBox.Show("Raw level data dumped");
                 }
+
+                else
+                {
+                    WorldEditor we = ((WorldEditor)ActiveEditor);
+                    World w = we.CurrentWorld;
+                    FileStream fs = new FileStream(SFD.FileName, FileMode.OpenOrCreate, FileAccess.Write);
+                    byte[] output = new byte[0x40 * 0x10];
+                    for (int i = 0; i < 0x1B; i++)
+                    {
+                        for (int j = 0; j < 0x10; j++)
+                        {
+                            output[i * 0x1B + j] = w.LevelData[j, i];
+                        }
+                    }
+
+                    fs.Write(output, 0, output.Length);
+                    fs.Close();
+                    MessageBox.Show("Raw level data dumped");
+                }
+            }
+        }
+
+        public static void CompileRom()
+        {
+            ROMManager romMan = new ROMManager();
+
+            SaveFileDialog SFD = new SaveFileDialog();
+            SFD.Filter = "NES ROM Images|*.nes";
+            if (SFD.ShowDialog() == DialogResult.OK)
+            {
+                romMan.CompileRom(SFD.FileName);
             }
         }
         private static Form ActiveEditor;

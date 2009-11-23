@@ -139,5 +139,10 @@ namespace Daiz.NES.Reuben
         {
             ReubenController.DumpRawLevel();
         }
+
+        private void compileROMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReubenController.CompileRom();
+        }
     }
 }
