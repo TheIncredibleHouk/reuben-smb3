@@ -80,7 +80,10 @@
             this.PnlDrawing = new System.Windows.Forms.Panel();
             this.TabEditSelector = new Dotnetrix.Controls.TabControlEX();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
@@ -150,10 +153,8 @@
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
+            this.TsbScatter = new System.Windows.Forms.ToolStripButton();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -831,6 +832,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
             // 
+            // BlvRight
+            // 
+            this.BlvRight.CurrentBlock = null;
+            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Name = "BlvRight";
+            this.BlvRight.Size = new System.Drawing.Size(32, 32);
+            this.BlvRight.TabIndex = 21;
+            this.BlvRight.Text = "blockViewer1";
+            // 
             // LblSelectorHover
             // 
             this.LblSelectorHover.AutoSize = true;
@@ -839,6 +849,34 @@
             this.LblSelectorHover.Size = new System.Drawing.Size(37, 13);
             this.LblSelectorHover.TabIndex = 20;
             this.LblSelectorHover.Text = "Block:";
+            // 
+            // BlvLeft
+            // 
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 19;
+            this.BlvLeft.Text = "blockViewer1";
+            // 
+            // BlsSelector
+            // 
+            this.BlsSelector.BlockLayout = null;
+            this.BlsSelector.CurrentDefiniton = null;
+            this.BlsSelector.HaltRendering = false;
+            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
+            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.BlsSelector.Name = "BlsSelector";
+            this.BlsSelector.SelectedIndex = 0;
+            this.BlsSelector.SelectedTileIndex = 0;
+            this.BlsSelector.ShowBlockProperties = false;
+            this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
+            this.BlsSelector.SpecialTable = null;
+            this.BlsSelector.TabIndex = 0;
+            this.BlsSelector.Text = "blockSelector1";
+            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
+            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
             // 
             // CmbLayouts
             // 
@@ -956,13 +994,14 @@
             this.TsbLine,
             this.TsbRectangle,
             this.TsbOutline,
-            this.TsbBucket});
+            this.TsbBucket,
+            this.TsbScatter});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TlsDrawing.Location = new System.Drawing.Point(170, 0);
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.TlsDrawing.Size = new System.Drawing.Size(117, 25);
+            this.TlsDrawing.Size = new System.Drawing.Size(171, 25);
             this.TlsDrawing.TabIndex = 15;
             this.TlsDrawing.Text = "toolStrip1";
             // 
@@ -1521,6 +1560,7 @@
             this.LvlView.CurrentDefiniton = null;
             this.LvlView.CurrentLevel = null;
             this.LvlView.CurrentTable = null;
+            this.LvlView.DelayDrawing = false;
             this.LvlView.DisplayStartingPosition = false;
             this.LvlView.HorizontalGuide1 = null;
             this.LvlView.HorizontalGuide2 = null;
@@ -1559,43 +1599,6 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 332);
             this.PnlVerticalGuide.TabIndex = 29;
             // 
-            // BlvRight
-            // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
-            // 
-            // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
-            // 
-            // BlsSelector
-            // 
-            this.BlsSelector.BlockLayout = null;
-            this.BlsSelector.CurrentDefiniton = null;
-            this.BlsSelector.HaltRendering = false;
-            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
-            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.BlsSelector.Name = "BlsSelector";
-            this.BlsSelector.SelectedIndex = 0;
-            this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockProperties = false;
-            this.BlsSelector.ShowSpecialBlocks = false;
-            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
-            this.BlsSelector.SpecialTable = null;
-            this.BlsSelector.TabIndex = 0;
-            this.BlsSelector.Text = "blockSelector1";
-            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
-            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
-            // 
             // PntEditor
             // 
             this.PntEditor.CurrentPointer = null;
@@ -1604,6 +1607,17 @@
             this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
             this.PntEditor.Size = new System.Drawing.Size(239, 193);
             this.PntEditor.TabIndex = 0;
+            // 
+            // TsbScatter
+            // 
+            this.TsbScatter.CheckOnClick = true;
+            this.TsbScatter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbScatter.Image = ((System.Drawing.Image)(resources.GetObject("TsbScatter.Image")));
+            this.TsbScatter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbScatter.Name = "TsbScatter";
+            this.TsbScatter.Size = new System.Drawing.Size(23, 22);
+            this.TsbScatter.Text = "toolStripButton1";
+            this.TsbScatter.Click += new System.EventHandler(this.TsbScatter_Click);
             // 
             // LevelEditor
             // 
@@ -1785,5 +1799,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.NumericUpDown NumSpecials;
         private System.Windows.Forms.NumericUpDown NumProperties;
+        private System.Windows.Forms.ToolStripButton TsbScatter;
     }
 }
