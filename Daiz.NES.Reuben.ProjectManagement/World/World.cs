@@ -22,7 +22,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public Guid Guid { get; set; }
         public int Type { get { return 0; } }
-        public int ClearValue { get { return 0x41; } }
+        public int ClearValue { get { return 0x02; } }
         public int GraphicsBank { get; set; }
         public int AnimationBank { get; set; }
         public int Music { get; set; }
@@ -39,7 +39,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             Pointers = new List<WorldPointer>();
             SpriteData = new List<Sprite>();
-            LevelData = new byte[64, 9];
+            LevelData = new byte[0x40, 0x1B];
         }
 
         public void New(WorldInfo wi)
@@ -51,16 +51,29 @@ namespace Daiz.NES.Reuben.ProjectManagement
             YStart = 2;
             GraphicsBank = 0x14;
             AnimationBank = 0x16;
+            for (int i = 0; i < 0x10; i++)
+            {
+                for (int j = 0; j < 0x40; j++)
+                {
+                    LevelData[j, i] = 0x02;
+                }
+            }
+
+            for(int i = 0; i < 0x40; i++)
+            {
+                LevelData[i, 0x10] = 0x4E;
+                LevelData[i, 0x1A] = 0x4F;
+            }
         }
 
         public int Width
         {
-            get { return 64; }
+            get { return 0x40; }
         }
 
         public int Height
         {
-            get { return 9; }
+            get { return 0x1B; }
         }
 
         public bool Save()
@@ -262,7 +275,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             int breakAt = Length - 1;
             for (int i = 0; i < Length; i++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < 27; j++)
                 {
                     x = i * 16;
 
@@ -380,7 +393,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                 break;
 
                             case CompressionCommand.Repeat:
-                                if (currentByte == previousValue && parameter < 0x3F)
+                                if (currentByte == previousValue && parameter <= 0x3F)
                                 {
                                     parameter++;
                                 }

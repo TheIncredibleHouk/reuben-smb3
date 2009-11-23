@@ -9,13 +9,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
     public class ROMManager
     {
         Dictionary<Guid, byte> levelIndexTable;
+        Dictionary<Guid, byte> worldIndexTable;
+        Dictionary<byte, int> levelAddressTable;
 
         private string Filename;
         public byte[] Rom;
+        private int levelDataPointer;
 
         public ROMManager()
         {
             levelIndexTable = new Dictionary<Guid, byte>();
+            worldIndexTable = new Dictionary<Guid, byte>();
+            levelAddressTable = new Dictionary<byte, int>();
         }
 
         public bool CompileRom(string fileName)
@@ -28,14 +33,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             if (!VerifyRomGuid(ProjectController.ProjectManager.CurrentProject.Guid)) return false;
-            if (!CompileLevels()) return false;
+            
+            levelDataPointer = 0x40010;
+            CompileWorlds();
+            WritePalette(ProjectController.PaletteManager.Palettes);
+            Save();
+            //if (!CompileLevels()) return false;
 
             return true;
         }
 
         private bool CompileLevels()
         {
-            int address = 0x44010;
             byte levelIndex = 0;
             foreach(LevelInfo li in ProjectController.LevelManager.Levels)
             {
@@ -46,7 +55,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
             foreach (LevelInfo li in ProjectController.LevelManager.Levels)
             {
                 l.Load(li);
-                address = WriteLevel(l, address);
+                levelDataPointer = WriteLevel(l, levelDataPointer);
+                if (levelDataPointer >= 0xFC000)
+                    return false;
             }
 
             return true;
@@ -54,16 +65,24 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         private bool CompileWorlds()
         {
-            int address = 0x40010;
-
             World w = new World();
-            foreach (WorldInfo wi in ProjectController.WorldManager.Worlds)
+            int bank, address;
+            foreach (WorldInfo wi in from world in ProjectController.WorldManager.Worlds orderby world.Ordinal select world)
             {
                 w.Load(wi);
-                address = WriteWorld(w, address);
-                if (address >= 0x4400F)
+                worldIndexTable.Add(wi.WorldGuid, (byte) wi.Ordinal);
+                bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
+                address = levelDataPointer - (bank * 0x2000) + 0xA000;
+
+                Rom[0x18BD0 + (wi.Ordinal * 4)] = (byte)bank;
+                Rom[0x18BD0 + (wi.Ordinal * 4) + 1] = (byte)((address & 0xFF00) >> 8);
+                Rom[0x18BD0 + (wi.Ordinal * 4) + 2] = (byte)(address & 0x00FF);
+
+                levelDataPointer = WriteWorld(w, levelDataPointer);
+                if (levelDataPointer >= 0xFC000)
                     return false;
             }
+
 
             return true;
         }
@@ -84,7 +103,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             byte[] guid = new byte[16];
             for (int i = 0; i < 16; i++)
             {
-                guid[i] = Rom[0xFE000 + i];
+                guid[i] = Rom[0xFC000 + i];
             }
 
             return new Guid(guid) == Guid.Empty;
@@ -100,7 +119,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             byte[] guid = new byte[16];
             for (int i = 0; i < 16; i++)
             {
-                guid[i] = Rom[0xFE000 + i];
+                guid[i] = Rom[0xFC000 + i];
             }
 
             Guid compareGuid = new Guid(guid);
@@ -112,30 +131,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
             byte[] guidArray = projectGuid.ToByteArray();
             for (int i = 0; i < 16; i++)
             {
-                Rom[0xFE000 + i] = guidArray[i];
+                Rom[0xFC000 + i] = guidArray[i];
             };
         }
 
         public int WriteLevel(Level l, int levelAddress)
         {
-            int yStart = 0;
-            switch (l.LevelLayout)
-            {
-                case LevelLayout.Horizontal:
-                    yStart = l.YStart - 1;
-                    break;
-
-                case LevelLayout.Vertical:
-                    yStart = l.YStart - 1;
-                    break;
-            }
-
             Rom[levelAddress++] = (byte) l.ClearValue;
             Rom[levelAddress++] = (byte) l.GraphicsBank;
             Rom[levelAddress++] = (byte) l.Palette;
             Rom[levelAddress++] = (byte)((l.StartAction << 4) | l.Type);
             Rom[levelAddress++] = (byte)(((l.XStart & 0x0F) << 4) | ((l.XStart & 0xF0) >> 4));
-            Rom[levelAddress++] = (byte)(((yStart & 0x0F) << 4) | ((yStart & 0xF0) >> 4));
+            Rom[levelAddress++] = (byte)(((l.YStart & 0x0F) << 4) | ((l.YStart & 0xF0) >> 4));
 
             if (l.Music < 15)
             {
