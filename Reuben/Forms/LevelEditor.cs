@@ -199,6 +199,11 @@ namespace Daiz.NES.Reuben
                     TsbBucket.Checked = true;
                     DrawMode = DrawMode.Fill;
                     break;
+
+                case "Scatter":
+                    TsbScatter.Checked = true;
+                    DrawMode = DrawMode.Scatter;
+                    break;
             }
 
             CmbLayouts.SelectedIndex = ProjectController.SettingsManager.GetLevelSetting<int>(l.Guid, "Layout");
@@ -616,6 +621,7 @@ namespace Daiz.NES.Reuben
 
                         case DrawMode.Outline:
                         case DrawMode.Rectangle:
+                        case DrawMode.Scatter:
                         case DrawMode.Selection:
                             StartX = x;
                             StartY = y;
@@ -779,6 +785,7 @@ namespace Daiz.NES.Reuben
                         case DrawMode.Outline:
                         case DrawMode.Rectangle:
                         case DrawMode.Selection:
+                        case DrawMode.Scatter:
                             if (StartX == x && StartY == y) return;
                             if (x > StartX)
                             {
@@ -830,7 +837,6 @@ namespace Daiz.NES.Reuben
                                 }
                             }
                             break;
-
                     }
                 }
             }
@@ -1038,6 +1044,10 @@ namespace Daiz.NES.Reuben
                         case DrawMode.Selection:
                             useTransparentTile = e.Button == MouseButtons.Right;
                             break;
+
+                        case DrawMode.Scatter:
+                            LvlView.DelayDrawing = true;
+                            CurrentMultiTile = new MultiTileAction();
                     }
                 }
             }
@@ -1093,7 +1103,7 @@ namespace Daiz.NES.Reuben
         {
             DrawMode = DrawMode.Pencil;
             TsbPencil.Checked = true;
-            TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
+            TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
             SetMiscText(0);
         }
 
@@ -1101,7 +1111,7 @@ namespace Daiz.NES.Reuben
         {
             DrawMode = DrawMode.Rectangle;
             TsbRectangle.Checked = true;
-            TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
+            TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
             SetMiscText(4);
         }
 
@@ -1109,7 +1119,7 @@ namespace Daiz.NES.Reuben
         {
             DrawMode = DrawMode.Outline;
             TsbOutline.Checked = true;
-            TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
+            TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
             SetMiscText(5);
         }
 
@@ -1117,7 +1127,7 @@ namespace Daiz.NES.Reuben
         {
             DrawMode = DrawMode.Fill;
             TsbBucket.Checked = true;
-            TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
+            TsbScatter.Checked = TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
             SetMiscText(6);
         }
 
@@ -1125,10 +1135,18 @@ namespace Daiz.NES.Reuben
         {
             DrawMode = DrawMode.Line;
             TsbLine.Checked = true;
-            TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
+            TsbScatter.Checked = TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
             SetMiscText(4);
         }
 
+        
+        private void TsbScatter_Click(object sender, EventArgs e)
+        {
+            DrawMode = DrawMode.Scatter;
+            TsbScatter.Checked = true;
+            TsbLine.Checked = TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
+            SetMiscText(4);        
+        }
         #endregion
 
         #region level header changes
@@ -1373,6 +1391,10 @@ namespace Daiz.NES.Reuben
                             break;
 
                         case DrawMode.Fill:
+                            SetMiscText(6);
+                            break;
+
+                        case DrawMode.Scatter:
                             SetMiscText(6);
                             break;
                     }
@@ -1854,6 +1876,7 @@ namespace Daiz.NES.Reuben
         Fill,
         Rectangle,
         Outline,
+        Scatter,
         Selection
     }
 
