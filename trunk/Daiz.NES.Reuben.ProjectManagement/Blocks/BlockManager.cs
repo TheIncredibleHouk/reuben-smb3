@@ -36,8 +36,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public string GetBlockString(int defIndex, int block)
         {
-            if (blockStrings[0].ContainsKey(block))
-                return blockStrings[0][block];
 
             if (blockStrings[defIndex].ContainsKey(block))
                 return blockStrings[defIndex][block];
