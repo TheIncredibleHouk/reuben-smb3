@@ -968,7 +968,7 @@ namespace Daiz.NES.Reuben
         private void CmbLength_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentWorld.Length = CmbLength.SelectedItem.ToInt();
-            PnlLengthControl.Size = new Size(CurrentWorld.Length * 256 * WldView.Zoom, 144 * WldView.Zoom);
+            PnlLengthControl.Size = new Size(CurrentWorld.Length * 256 * WldView.Zoom, 9 * 16 * WldView.Zoom);
         }
 
         public void SwitchObjects(PatternTable table, BlockDefinition definition, PaletteInfo palette)
