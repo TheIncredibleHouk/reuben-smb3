@@ -43,6 +43,7 @@
             this.FpsFull = new Daiz.NES.Reuben.FullPaletteSelector();
             this.PslCurrent = new Daiz.NES.Reuben.PaletteSelector();
             this.BtnClose = new System.Windows.Forms.Button();
+            this.LblTransparent = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -197,11 +198,21 @@
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // LblTransparent
+            // 
+            this.LblTransparent.AutoSize = true;
+            this.LblTransparent.Location = new System.Drawing.Point(24, 112);
+            this.LblTransparent.Name = "LblTransparent";
+            this.LblTransparent.Size = new System.Drawing.Size(189, 13);
+            this.LblTransparent.TabIndex = 18;
+            this.LblTransparent.Text = "Right click to set a color to transparent";
+            // 
             // PaletteManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(305, 434);
+            this.Controls.Add(this.LblTransparent);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnRename);
             this.Controls.Add(this.groupBox1);
@@ -243,5 +254,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button BtnRename;
         private System.Windows.Forms.Button BtnClose;
+        private System.Windows.Forms.Label LblTransparent;
     }
 }

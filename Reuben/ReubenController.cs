@@ -409,6 +409,13 @@ namespace Daiz.NES.Reuben
                 romMan.CompileRom(SFD.FileName);
             }
         }
+
+        public static void ShowSpecialBlockEditor()
+        {
+            SpecialEditor se = new SpecialEditor();
+            se.ShowDialog();
+        }
+
         private static Form ActiveEditor;
         public static Main MainWindow { get; set; }
     }

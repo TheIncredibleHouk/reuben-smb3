@@ -78,7 +78,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             SpecialManager.LoadDefaultSpecialGraphics();
             SpecialManager.LoadDefaultSpecials();
             SpecialManager.SaveGraphics(RootDirectory + @"\" + "special.chr");
-            SpecialManager.SaveDefinitions(RootDirectory + @"\" + "special.xml");
+            SpecialManager.SaveSepcials(RootDirectory + @"\" + "special.xml");
 
             LayoutManager.LoadDefault();
             ProjectManager.New(name);

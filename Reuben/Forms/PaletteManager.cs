@@ -36,7 +36,7 @@ namespace Daiz.NES.Reuben
         {
             int index = CmbPalettes.SelectedIndex;
             CmbPalettes.Items.Remove(e.Data);
-            if (CmbPalettes.Items.Count == 1)
+            if (CmbPalettes.Items.Count == 2)
             {
                 BtnRemove.Enabled = BtnRename.Enabled = false;
             }
@@ -99,6 +99,8 @@ namespace Daiz.NES.Reuben
                 PslCurrent.CurrentPalette.NameChanged += new EventHandler<TEventArgs<string>>(CurrentPalette_NameChanged);
                 BtnRemove.Enabled = BtnRename.Enabled = CmbPalettes.SelectedIndex != 0;
             }
+
+            LblTransparent.Visible = CmbPalettes.SelectedIndex == 0;
         }
 
         void CurrentPalette_NameChanged(object sender, TEventArgs<string> e)
@@ -129,13 +131,27 @@ namespace Daiz.NES.Reuben
                     {
                         if (i != 4)
                         {
-                            PslCurrent.CurrentPalette[i, offset] = FpsFull.SelectedColor;
+                            if (MouseButtons == MouseButtons.Right && PslCurrent.CurrentPalette.IsSpecial)
+                            {
+                                PslCurrent.CurrentPalette[i, offset] = 0x40;
+                            }
+                            else
+                            {
+                                PslCurrent.CurrentPalette[i, offset] = FpsFull.SelectedColor;
+                            }
                         }
                     }
                 }
                 else
                 {
-                    PslCurrent.CurrentPalette[index, offset] = FpsFull.SelectedColor;
+                    if (MouseButtons == MouseButtons.Right && PslCurrent.CurrentPalette.IsSpecial)
+                    {
+                        PslCurrent.CurrentPalette[index, offset] = 0x40;
+                    }
+                    else
+                    {
+                        PslCurrent.CurrentPalette[index, offset] = FpsFull.SelectedColor;
+                    }
                 }
             }
         }

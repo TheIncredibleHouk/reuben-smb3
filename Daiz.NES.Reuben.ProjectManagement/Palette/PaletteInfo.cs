@@ -14,6 +14,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public event EventHandler<TEventArgs<string>> NameChanged;
         public event EventHandler BackgroundChanged;
         public event EventHandler<TEventArgs<DoubleValue<int, int>>> PaletteChanged;
+        public bool IsSpecial { get; internal set; }
 
         private int[,] Data;
 
@@ -45,12 +46,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public PaletteInfo()
         {
             Data = new int[8,4];
+            IsSpecial = false;
         }
 
-        public PaletteInfo(int[,] data)
-        {
-            Data = data;
-        }
 
         public int this[int index, int offset]
         {

@@ -112,11 +112,24 @@ namespace Daiz.NES.Reuben
 
         private void UpdateColor(Graphics g, int index, int offset)
         {
-            Brush brush = new SolidBrush(ProjectController.ColorManager.Colors[_CurrentPalette[index,offset]]);
+            Color c = ProjectController.ColorManager.Colors[_CurrentPalette[index, offset]];
+            bool isTransparent = false;
+            if(c == Color.Empty)
+            {
+                c = Color.Black;
+                isTransparent = true;
+            }
+
+            Brush brush = new SolidBrush(c);
             Rectangle rect = new Rectangle(((index % 4) * 64) + (offset * 16),
                                            (index / 4) * 16,
                                            16, 16);
             g.FillRectangle(brush, rect);
+
+            if (isTransparent)
+            {
+                g.FillRectangle(Brushes.White, rect.X + 4, rect.Y + 4, rect.Width / 2, rect.Height / 2);
+            }
 
             if (SelectablePaletteMode && SelectedIndex == index && SelectedOffset == offset)
             {
@@ -129,6 +142,8 @@ namespace Daiz.NES.Reuben
                 rect.Height -= 2;
                 g.DrawRectangle(Pens.Red, rect);
             }
+
+            brush.Dispose();
         }
 
         protected override void OnPaint(PaintEventArgs e)
