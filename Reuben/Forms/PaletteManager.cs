@@ -18,13 +18,14 @@ namespace Daiz.NES.Reuben
         {
             InitializeComponent();
             CmbPalettes.DisplayMember = "Name";
+            CmbPalettes.Items.Add(ProjectController.SpecialManager.SpecialPalette);
 
             foreach (var p in ProjectController.PaletteManager.Palettes)
             {
                 CmbPalettes.Items.Add(p);
             }
 
-            CmbPalettes.SelectedIndex = 0;
+            CmbPalettes.SelectedIndex = 1;
 
             ProjectController.PaletteManager.PaletteAdded += new EventHandler<TEventArgs<PaletteInfo>>(PaletteManager_PaletteAdded);
             ProjectController.PaletteManager.PaletteRemoved += new EventHandler<TEventArgs<PaletteInfo>>(PaletteManager_PaletteRemoved);
@@ -96,7 +97,7 @@ namespace Daiz.NES.Reuben
                 pi.NameChanged -= CurrentPalette_NameChanged;
                 PslCurrent.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
                 PslCurrent.CurrentPalette.NameChanged += new EventHandler<TEventArgs<string>>(CurrentPalette_NameChanged);
-                BtnRemove.Enabled = BtnRename.Enabled = true;
+                BtnRemove.Enabled = BtnRename.Enabled = CmbPalettes.SelectedIndex != 0;
             }
         }
 
@@ -114,8 +115,8 @@ namespace Daiz.NES.Reuben
             if (PslCurrent.CurrentPalette == null) return;
             int offset = (e.X % 64) / 16;
             int index = ((e.Y / 16) * 4) + (e.X / 64);
-            if (index == 4) return;
-            if (offset == 0)
+            if (index == 4 && CmbPalettes.SelectedIndex != 0) return;
+            if (offset == 0 && CmbPalettes.SelectedIndex != 0)
             {
                 PslCurrent.CurrentPalette.Background = FpsFull.SelectedColor;
             }
@@ -167,7 +168,7 @@ namespace Daiz.NES.Reuben
 
         public void ShowDialog(int palette)
         {
-            CmbPalettes.SelectedIndex = palette;
+            CmbPalettes.SelectedIndex = palette + 1;
             this.ShowDialog();
         }
     }
