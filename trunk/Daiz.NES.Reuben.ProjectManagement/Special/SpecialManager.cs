@@ -142,6 +142,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             SpecialPalette.LoadFromElement(e.Element("palette"));
+            SpecialPalette.IsSpecial = true;
             return true;
         }
 
@@ -161,6 +162,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
             SpecialPalette = new PaletteInfo();
             SpecialPalette.LoadFromElement(root.Element("palette"));
+            SpecialPalette.IsSpecial = true;
         }
 
         public SpecialDefinition GetSpecialDefinition(int leveltype)
@@ -173,7 +175,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return null;
         }
 
-        public void SaveDefinitions(string filename1)
+        public void SaveSepcials(string filename1)
         {
             XDocument xDoc = new XDocument();
             XElement root = new XElement("specials");
