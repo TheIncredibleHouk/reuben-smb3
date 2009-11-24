@@ -69,18 +69,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
             int bank, address;
             foreach (WorldInfo wi in from world in ProjectController.WorldManager.Worlds orderby world.Ordinal select world)
             {
-                w.Load(wi);
-                worldIndexTable.Add(wi.WorldGuid, (byte) wi.Ordinal);
-                bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
-                address = levelDataPointer - (bank * 0x2000) + 0xA000;
+                if (w.Load(wi))
+                {
+                    worldIndexTable.Add(wi.WorldGuid, (byte)wi.Ordinal);
+                    bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
+                    address = levelDataPointer - (bank * 0x2000) + 0xA000;
 
-                Rom[0x18BD0 + (wi.Ordinal * 4)] = (byte)bank;
-                Rom[0x18BD0 + (wi.Ordinal * 4) + 1] = (byte)((address & 0xFF00) >> 8);
-                Rom[0x18BD0 + (wi.Ordinal * 4) + 2] = (byte)(address & 0x00FF);
+                    Rom[0x18BD0 + (wi.Ordinal * 4)] = (byte)bank;
+                    Rom[0x18BD0 + (wi.Ordinal * 4) + 1] = (byte)((address & 0xFF00) >> 8);
+                    Rom[0x18BD0 + (wi.Ordinal * 4) + 2] = (byte)(address & 0x00FF);
 
-                levelDataPointer = WriteWorld(w, levelDataPointer);
-                if (levelDataPointer >= 0xFC000)
-                    return false;
+                    levelDataPointer = WriteWorld(w, levelDataPointer);
+                    if (levelDataPointer >= 0xFC000)
+                        return false;
+                }
             }
 
 
@@ -137,12 +139,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public int WriteLevel(Level l, int levelAddress)
         {
+            int yStart = l.YStart + 1;
             Rom[levelAddress++] = (byte) l.ClearValue;
             Rom[levelAddress++] = (byte) l.GraphicsBank;
             Rom[levelAddress++] = (byte) l.Palette;
             Rom[levelAddress++] = (byte)((l.StartAction << 4) | l.Type);
             Rom[levelAddress++] = (byte)(((l.XStart & 0x0F) << 4) | ((l.XStart & 0xF0) >> 4));
-            Rom[levelAddress++] = (byte)(((l.YStart & 0x0F) << 4) | ((l.YStart & 0xF0) >> 4));
+            Rom[levelAddress++] = (byte)(((yStart & 0x0F) << 4) | ((yStart & 0xF0) >> 4));
 
             if (l.Music < 15)
             {

@@ -180,7 +180,12 @@ namespace Daiz.NES.Reuben
             }
 
             World w = new World();
-            w.Load(wi);
+
+            if (!w.Load(wi))
+            {
+                w.New(wi);
+            }
+
             WorldEditor we = new WorldEditor();
             we.MdiParent = MainWindow;
             we.EditWorld(w);

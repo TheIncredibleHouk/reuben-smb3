@@ -140,8 +140,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 return Load(ProjectController.WorldDirectory + @"\" + li.WorldGuid + ".map");
             }
 
-            New(li);
-            return true;
+            return false;
         }
         
         public bool Load(string filename)
