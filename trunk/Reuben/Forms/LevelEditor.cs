@@ -1048,6 +1048,7 @@ namespace Daiz.NES.Reuben
                         case DrawMode.Scatter:
                             LvlView.DelayDrawing = true;
                             CurrentMultiTile = new MultiTileAction();
+                            break;
                     }
                 }
             }

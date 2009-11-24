@@ -141,8 +141,21 @@ namespace Daiz.NES.Reuben
             if (PreviousBlockX == x && PreviousBlockY == y) return;
             PreviousBlockX = x;
             PreviousBlockY = y;
+            int index = (y * 16) + x;
+            int defIndex = CmbDefinitions.SelectedIndex;
 
-            TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, ((y * 16) + x)) + "\n(" + ((y * 16) + x).ToHexString() + ")");
+            if (index > -1 && index < 256)
+            {
+                if (defIndex == 0)
+                {
+                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index) + "\n(" + (index).ToHexString() + ")");
+                }
+
+                else
+                {
+                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index) + "\n(" + (index).ToHexString() + ")\n" + ProjectController.SpecialManager.GetProperty(defIndex, index));
+                }
+            }
         }
 
         private void BlsBlocks_MouseDown(object sender, MouseEventArgs e)
