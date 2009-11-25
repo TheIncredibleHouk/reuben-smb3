@@ -80,6 +80,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     Rom[0x18BD0 + (wi.Ordinal * 4) + 2] = (byte)(address & 0x00FF);
 
                     levelDataPointer = WriteWorld(w, levelDataPointer);
+                    Rom[0x14F44 + wi.Ordinal - 1] = (byte) (w.Length << 4);
                     if (levelDataPointer >= 0xFC000)
                         return false;
                 }
@@ -221,7 +222,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             Rom[levelAddress++] = (byte)w.GraphicsBank;
             Rom[levelAddress++] = (byte)w.Palette;
-            Rom[levelAddress++] = (byte)((w.XStart << 4) | (w.YStart));
+            Rom[levelAddress++] = (byte)((w.XStart << 4) | (w.YStart - 0x0F));
 
             if (w.Music < 15)
             {
@@ -233,7 +234,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             Rom[levelAddress++] = (byte)((w.XStart & 0xF0) >> 4);
-            Rom[levelAddress++] = (byte)w.Unused1;
+            Rom[levelAddress++] = (byte)(w.Unused1);
 
             foreach (var p in w.Pointers)
             {
