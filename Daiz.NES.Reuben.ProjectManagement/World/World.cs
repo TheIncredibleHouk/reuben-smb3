@@ -392,7 +392,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                 break;
 
                             case CompressionCommand.Repeat:
-                                if (currentByte == previousValue && parameter <= 0x3F)
+                                if (currentByte == previousValue && parameter < 0x3F)
                                 {
                                     parameter++;
                                 }

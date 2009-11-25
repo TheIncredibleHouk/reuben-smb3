@@ -410,12 +410,6 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public static void ShowSpecialBlockEditor()
-        {
-            SpecialEditor se = new SpecialEditor();
-            se.ShowDialog();
-        }
-
         private static Form ActiveEditor;
         public static Main MainWindow { get; set; }
     }

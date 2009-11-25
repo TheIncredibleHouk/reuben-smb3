@@ -215,7 +215,7 @@ namespace Daiz.NES.Reuben
             PntEditor.CurrentPointer = null;
             BtnAddPointer.Enabled = CurrentWorld.Pointers.Count <= 4;
             BtnDeletePointer.Enabled = false;
-
+            LblStartPoint.Text = "X:" + w.XStart.ToHexString() + " Y: " + (w.YStart - 0x0F).ToHexString();
         }
 
         #region guide events
@@ -439,6 +439,7 @@ namespace Daiz.NES.Reuben
                 _SelectingStartPositionMode = false;
                 PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
                 SetMiscText(PreviousTextIndex);
+                LblStartPoint.Text = "X:" + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
             }
 
             else if (EditMode == EditMode.Tiles)
@@ -609,6 +610,8 @@ namespace Daiz.NES.Reuben
 
             int XDiff = x - StartX;
             int YDiff = y - StartY;
+
+            LblCoordinates.Text = "X: " + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
 
             if (EditMode == EditMode.Tiles)
             {

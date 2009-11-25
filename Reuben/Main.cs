@@ -145,9 +145,5 @@ namespace Daiz.NES.Reuben
             ReubenController.CompileRom();
         }
 
-        private void specialBlockEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ReubenController.ShowSpecialBlockEditor();
-        }
     }
 }

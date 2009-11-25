@@ -64,7 +64,7 @@ namespace Daiz.NES.Reuben
         private BlockDefinition _SpecialDefinitions;
         public BlockDefinition SpecialDefnitions
         {
-            private get { return _SpecialDefinitions; }
+            get { return _SpecialDefinitions; }
             set
             {
                 _SpecialDefinitions = value;
