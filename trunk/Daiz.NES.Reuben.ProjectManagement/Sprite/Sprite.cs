@@ -14,6 +14,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Y { get; set; }
         public int InGameID { get; set; }
         public bool IsMapSprite { get; set; }
+        public int Item { get; set; }
 
         public string Name
         {
@@ -55,6 +56,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("x", X);
             x.SetAttributeValue("y", Y);
             x.SetAttributeValue("value", InGameID);
+            x.SetAttributeValue("item", Item);
             return x;
         }
 
@@ -63,6 +65,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             X = e.Attribute("x").Value.ToInt();
             Y = e.Attribute("y").Value.ToInt();
             InGameID = e.Attribute("value").Value.ToInt();
+            Item = e.Attribute("item").Value.ToInt();
             return true;
         }
 
