@@ -107,8 +107,12 @@ RAM
 
 ROM
 0x11653 - P-Switch Time
+0x14F44 - Table for map lengths in the format LLLL xxxx where LLLL is the length and xxxx is unused
+
 
 Reuben ROM Map:
+
+0x15610-0x1501F - Map lengths table
 
 0x3C010-0x3E00F - Palettes
 0x3E010-0x3FC0F - TSA data

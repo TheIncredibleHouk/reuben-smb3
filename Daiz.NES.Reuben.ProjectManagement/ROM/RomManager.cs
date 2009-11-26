@@ -73,14 +73,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 {
                     worldIndexTable.Add(wi.WorldGuid, (byte)wi.Ordinal);
                     bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
-                    address = levelDataPointer - (bank * 0x2000) + 0xA000;
+                    address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
 
-                    Rom[0x18BD0 + (wi.Ordinal * 4)] = (byte)bank;
-                    Rom[0x18BD0 + (wi.Ordinal * 4) + 1] = (byte)((address & 0xFF00) >> 8);
-                    Rom[0x18BD0 + (wi.Ordinal * 4) + 2] = (byte)(address & 0x00FF);
+                    Rom[0x18BD0 + ((wi.Ordinal - 1) * 4)] = (byte)bank;
+                    Rom[0x18BD0 + ((wi.Ordinal - 1) * 4) + 1] = (byte)((address & 0xFF00) >> 8);
+                    Rom[0x18BD0 + ((wi.Ordinal - 1) * 4) + 2] = (byte)(address & 0x00FF);
 
                     levelDataPointer = WriteWorld(w, levelDataPointer);
-                    Rom[0x14F44 + wi.Ordinal - 1] = (byte) (w.Length << 4);
+                    Rom[0x15610 + wi.Ordinal - 1] = (byte) (w.Length << 4);
                     if (levelDataPointer >= 0xFC000)
                         return false;
                 }
@@ -220,6 +220,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public int WriteWorld(World w, int levelAddress)
         {
+
             Rom[levelAddress++] = (byte)w.GraphicsBank;
             Rom[levelAddress++] = (byte)w.Palette;
             Rom[levelAddress++] = (byte)((w.XStart << 4) | (w.YStart - 0x0F));
@@ -232,8 +233,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 Rom[levelAddress++] = (byte)((w.Music - 15) << 4);
             }
-
-            Rom[levelAddress++] = (byte)((w.XStart & 0xF0) >> 4);
+            int scrollOffset = 0, xOffset;
+            xOffset = (w.XStart & 0xF0) >> 4;
+            scrollOffset = xOffset << 4;
+            Rom[levelAddress++] = (byte)(scrollOffset | xOffset);
             Rom[levelAddress++] = (byte)(w.Unused1);
 
             foreach (var p in w.Pointers)
@@ -250,14 +253,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 Rom[levelAddress++] = levelData[i];
             }
 
-            Rom[levelAddress] = (byte)0xFF;
+            Rom[levelAddress++] = (byte)0xFF;
             foreach (var s in from sprites in w.SpriteData orderby sprites.X select sprites)
             {
                 Rom[levelAddress++] = (byte)s.InGameID;
                 Rom[levelAddress++] = (byte)s.X;
-                Rom[levelAddress++] = (byte)s.Y;
+                Rom[levelAddress++] = (byte)(s.Y - 0x0F);
+                Rom[levelAddress++] = (byte)s.Item;
             }
 
+            Rom[levelAddress++] = (byte) 0xFF;
             return levelAddress;
         }
 
