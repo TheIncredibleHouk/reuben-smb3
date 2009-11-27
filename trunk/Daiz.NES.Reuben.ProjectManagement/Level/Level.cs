@@ -143,6 +143,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public bool Load(string filename)
         {
             XDocument xDoc;
+            SpriteData.Clear();
+            
             try
             {
                 xDoc = XDocument.Load(filename);
@@ -371,7 +373,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         repeatCount = 0;
                                     }
                                 }
-                                else if(currentByte == ClearValue || parameter == 0x40)
+                                else if (currentByte == ClearValue || parameter == 0x40)
                                 {
                                     if (clearCount == 1 || parameter == 0x40)
                                     {
@@ -393,6 +395,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         }
 
                                         k--;
+
                                         clearCount = 0;
                                     }
                                     else
@@ -426,6 +429,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                     k--;
                                 }
                                 break;
+                        }
+
+                        if (k < 0)
+                        {
+                            k += 0x10;
+                            j--;
                         }
 
                         previousValue = currentByte;
@@ -608,6 +617,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                 break;
                         }
 
+                        if (k < 0)
+                        {
+                            k += 0x10;
+                            j--;
+                        }
                         previousValue = currentByte;
                     }
                 }

@@ -215,8 +215,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             WorldPointer p = new WorldPointer()
             {
-                X = 0,
-                Y = 0,
+                X = 8,
+                Y = 0x16,
                 LevelGuid = Guid.Empty
             };
 
@@ -406,6 +406,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                 break;
                         }
 
+                        if (k < 0)
+                        {
+                            k += 0x10;
+                            j--;
+                        }
                         previousValue = currentByte;
                     }
                 }

@@ -11,6 +11,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Dictionary<Guid, byte> levelIndexTable;
         Dictionary<Guid, byte> worldIndexTable;
         Dictionary<byte, int> levelAddressTable;
+        Dictionary<byte, int> levelTypeTable;
 
         private string Filename;
         public byte[] Rom;
@@ -21,6 +22,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             levelIndexTable = new Dictionary<Guid, byte>();
             worldIndexTable = new Dictionary<Guid, byte>();
             levelAddressTable = new Dictionary<byte, int>();
+            levelTypeTable = new Dictionary<byte, int>();
         }
 
         public bool CompileRom(string fileName)
@@ -34,32 +36,47 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             if (!VerifyRomGuid(ProjectController.ProjectManager.CurrentProject.Guid)) return false;
             
-            levelDataPointer = 0x40010;
-            CompileWorlds();
             WritePalette(ProjectController.PaletteManager.Palettes);
-            Save();
-            //if (!CompileLevels()) return false;
 
+            levelDataPointer = 0x40010;
+
+            byte levelIndex = 0;
+            foreach (LevelInfo li in ProjectController.LevelManager.Levels)
+            {
+                levelIndexTable.Add(li.LevelGuid, levelIndex);
+                levelTypeTable.Add(levelIndex++, li.LevelType);
+            }
+
+            CompileWorlds();
+            CompileLevels();
+            Save();
             return true;
         }
 
         private bool CompileLevels()
         {
-            byte levelIndex = 0;
-            foreach(LevelInfo li in ProjectController.LevelManager.Levels)
-            {
-                levelIndexTable.Add(li.LevelGuid, levelIndex++);
-            }
-
             Level l = new Level();
             foreach (LevelInfo li in ProjectController.LevelManager.Levels)
             {
                 l.Load(li);
+                levelAddressTable.Add(levelIndexTable[l.Guid], levelDataPointer);
                 levelDataPointer = WriteLevel(l, levelDataPointer);
                 if (levelDataPointer >= 0xFC000)
                     return false;
             }
 
+            int bank, address;
+
+            foreach (var index in levelAddressTable.Keys)
+            {
+                levelDataPointer = levelAddressTable[index];
+                bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
+                address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
+                Rom[0x18C10 + (index * 4)] = (byte)bank;
+                Rom[0x18C11 + (index * 4)] = (byte)((address & 0xFF00) >> 8);
+                Rom[0x18C12 + (index * 4)] = (byte)(address & 0x00FF);
+                Rom[0x18C13 + (index * 4)] = (byte)levelTypeTable[index];
+            }
             return true;
         }
 
@@ -76,8 +93,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
 
                     Rom[0x18BD0 + ((wi.Ordinal - 1) * 4)] = (byte)bank;
-                    Rom[0x18BD0 + ((wi.Ordinal - 1) * 4) + 1] = (byte)((address & 0xFF00) >> 8);
-                    Rom[0x18BD0 + ((wi.Ordinal - 1) * 4) + 2] = (byte)(address & 0x00FF);
+                    Rom[0x18BD1 + ((wi.Ordinal - 1) * 4)] = (byte)((address & 0xFF00) >> 8);
+                    Rom[0x18BD2 + ((wi.Ordinal - 1) * 4)] = (byte)(address & 0x00FF);
 
                     levelDataPointer = WriteWorld(w, levelDataPointer);
                     Rom[0x15610 + wi.Ordinal - 1] = (byte) (w.Length << 4);
@@ -140,7 +157,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public int WriteLevel(Level l, int levelAddress)
         {
-            int yStart = l.YStart + 1;
+            int yStart = l.YStart - 1;
             Rom[levelAddress++] = (byte) l.ClearValue;
             Rom[levelAddress++] = (byte) l.GraphicsBank;
             Rom[levelAddress++] = (byte) l.Palette;
@@ -181,7 +198,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 Rom[levelAddress++] = (byte)p.YEnter;
                 Rom[levelAddress++] = (byte)p.XExit;
                 Rom[levelAddress++] = (byte)p.YExit;
-                Rom[levelAddress++] = (byte)p.ExitType;
+                Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x00 : 0x80) | p.ExitType);
             }
 
             Rom[levelAddress++] = (byte)0xFF;
@@ -191,7 +208,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 Rom[levelAddress++] = levelData[i];
             }
 
-            Rom[levelAddress] = (byte) 0xFF;
+            Rom[levelAddress++] = (byte) 0xFF;
 
             switch (l.LevelLayout)
             {
@@ -241,9 +258,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             foreach (var p in w.Pointers)
             {
-                Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
                 Rom[levelAddress++] = (byte)p.X;
-                Rom[levelAddress++] = (byte)p.Y;
+                Rom[levelAddress++] = (byte)(p.Y - 0x0F) ;
+                Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
             }
 
             Rom[levelAddress++] = (byte)0xFF;
