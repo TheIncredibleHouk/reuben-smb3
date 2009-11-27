@@ -770,6 +770,8 @@ namespace Daiz.NES.Reuben
             int XDiff = x - StartX;
             int YDiff = y - StartY;
 
+            LblPositition.Text = "X: " + x.ToHexString() + " Y: " + y.ToHexString();
+
             if (EditMode == EditMode.Tiles)
             {
                 LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");

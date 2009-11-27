@@ -213,7 +213,6 @@ namespace Daiz.NES.Reuben
             CmbMusic.SelectedIndex = w.Music;
             CmbLength.SelectedItem = w.Length;
             PntEditor.CurrentPointer = null;
-            BtnAddPointer.Enabled = CurrentWorld.Pointers.Count <= 4;
             BtnDeletePointer.Enabled = false;
             LblStartPoint.Text = "X:" + w.XStart.ToHexString() + " Y: " + (w.YStart - 0x0F).ToHexString();
         }
@@ -1412,13 +1411,9 @@ namespace Daiz.NES.Reuben
             CurrentWorld.AddPointer();
             PntEditor.CurrentPointer = CurrentWorld.Pointers[CurrentWorld.Pointers.Count - 1];
             WldView.SetDrawDelay();
-            WldView.UpdatePoint(0, 0);
-            WldView.UpdatePoint(1, 0);
-            WldView.UpdatePoint(0, 1);
-            WldView.UpdatePoint(1, 1);
-            WldView.SelectionRectangle = new Rectangle(0, 0, 2, 2);
+            WldView.UpdatePoint(8, 0x16);
+            WldView.SelectionRectangle = new Rectangle(0, 0, 1, 1);
             CurrentPointer = PntEditor.CurrentPointer;
-            BtnAddPointer.Enabled = CurrentWorld.Pointers.Count < 4;
         }
 
         private void BtnDeletePointer_Click(object sender, EventArgs e)
