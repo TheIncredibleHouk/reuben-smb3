@@ -63,21 +63,19 @@ XXXX XXXX = X Enter
 YYYY YYYY = Y Enter
 XXXX XXXX = X Exit
 YYYY YYYY = Y Exit
-UUUU UTTT = Exit Type
+EUUU UTTT = Ends level, Exit Type
 
 
 Map Header
 GGGG GGGG - Graphics
 PPPP PPPP - Palette index
-XXXX YYYY - X-start, Y-Start
 MMMM MMMM - Music
-PPPP SSSS - Page, Scroll
 UUUU UUUU - Unused
 
 Map pointer data
 IIII IIII = Level index
 XXXX XXXX = X Enter
-YYYY YYYY = Y Enter
+YYYY YYYY = Y Enter`````````
 
 $A0xx-$DFxx
 %CCPP PPPP = CC = command number, PP PPPP = paramter
@@ -93,30 +91,49 @@ maximum sprite size: 769
 
 
 NOTEs
+
+
+5C00-5C18 : current level pointer data
+
+5F00-5F20: Temp storage, DO NOT USE!
+
+5F14 : Temp storage for level # during level pointers
+5F15 : Temp storage for x exit level pointers
+5F16 : Temp storage for y exit level pointers
+5F17 : Temp storage for exit type level pointers
+5F18 : Temp storage, if set, override level exit points and actions
+5F19 : First map 
+
 RAM
-4E5 - Level music storage
-545 - Starting Action
-70A - Current Level Type
-727 - Current World
-75 - Current Scroll position (also with map)
-79 - Current x position (map)
-90 - current x position
-22 - Level length
-375 - scroll type
-567 - P-Switch Time
+75 : Current X position in levels (high end)
+81 : Current y position in levels (high end)
+90 : Current x position (low end)
+A2 : Current y position in levels (low end)
+
+373 : exit type when using pointers
+375 : if set to 80, entering or pipes will end level, low 2 bits is the scroll type
+4E5 : Level music storage
+545 : if set to > 0, mario is in slide mode, also the start level type when set before a level
+567 : P-Switch Time
+70A : Current Level Type
+727 : Current World
+75 : Current y position (map)
+77 : current map scroll screen
+79 : Current x position (map)
+22 : Level length
 
 ROM
-0x11653 - P-Switch Time
-0x14F44 - Table for map lengths in the format LLLL xxxx where LLLL is the length and xxxx is unused
+11653 : P-Switch Time
+14F44 : Table for map lengths in the format LLLL xxxx where LLLL is the length and xxxx is unused
 
 
 Reuben ROM Map:
 
-0x15610-0x1501F - Map lengths table
+15610-1501F : Map lengths table
 
-0x3C010-0x3E00F - Palettes
-0x3E010-0x3FC0F - TSA data
-0x18C10-0x1800F - Level index table
-0x40010-0x4400F - Map/Sprite data
-0x44010-0xFD00F - Level/Sprite data
-0xFD010-0xFE00F - Project use
+3C010-3E00F : Palettes
+3E010-3FC0F : TSA data
+18C10-1800F : Level index table
+40010-4400F : Map/Sprite data
+44010-FD00F : Level/Sprite data
+FD010-FE00F : Project use

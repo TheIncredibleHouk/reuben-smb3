@@ -50,13 +50,10 @@
             this.CmbActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbActions.FormattingEnabled = true;
             this.CmbActions.Items.AddRange(new object[] {
-            "None",
-            "Sliding",
             "Up Pipe",
             "Down Pipe",
             "Right Pipe",
-            "Left Pipe",
-            "Anchor Cut Scene"});
+            "Left Pipe"});
             this.CmbActions.Location = new System.Drawing.Point(69, 129);
             this.CmbActions.Name = "CmbActions";
             this.CmbActions.Size = new System.Drawing.Size(159, 21);
@@ -196,7 +193,7 @@
             this.BtnOpenLevel.UseVisualStyleBackColor = true;
             this.BtnOpenLevel.Click += new System.EventHandler(this.BtnOpenLevel_Click);
             // 
-            // PointerEditor
+            // LevelPointerEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -213,7 +210,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LblPointsToLevel);
             this.Controls.Add(this.CmbActions);
-            this.Name = "PointerEditor";
+            this.Name = "LevelPointerEditor";
             this.Padding = new System.Windows.Forms.Padding(4);
             this.Size = new System.Drawing.Size(239, 193);
             ((System.ComponentModel.ISupportInitialize)(this.NumXExit)).EndInit();

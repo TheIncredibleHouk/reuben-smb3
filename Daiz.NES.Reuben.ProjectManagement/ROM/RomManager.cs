@@ -98,6 +98,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     levelDataPointer = WriteWorld(w, levelDataPointer);
                     Rom[0x15610 + wi.Ordinal - 1] = (byte) (w.Length << 4);
+                    Rom[0x17CD0 + wi.Ordinal - 1] = (byte)((w.YStart - 0x0F) << 4);
+                    
+                    Rom[0x17CE0 + wi.Ordinal - 1] = (byte)((w.XStart & 0x0F) << 4);
+                    Rom[0x17CF0 + wi.Ordinal - 1] = (byte)(w.XStart & 0xF0);
+
                     if (levelDataPointer >= 0xFC000)
                         return false;
                 }
@@ -193,12 +198,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             foreach (var p in l.Pointers)
             {
+                yStart = p.YExit;
                 Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
                 Rom[levelAddress++] = (byte)p.XEnter;
                 Rom[levelAddress++] = (byte)p.YEnter;
-                Rom[levelAddress++] = (byte)p.XExit;
-                Rom[levelAddress++] = (byte)p.YExit;
-                Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x00 : 0x80) | p.ExitType);
+                Rom[levelAddress++] = (byte)(((p.XExit & 0x0F) << 4) | ((p.XExit & 0xF0) >> 4));
+                Rom[levelAddress++] = (byte)(((yStart & 0x0F) << 4) | ((yStart & 0xF0) >> 4));
+                Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x00 : 0x80) | (p.ExitType + 1));
             }
 
             Rom[levelAddress++] = (byte)0xFF;
@@ -237,10 +243,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public int WriteWorld(World w, int levelAddress)
         {
-
+            
             Rom[levelAddress++] = (byte)w.GraphicsBank;
             Rom[levelAddress++] = (byte)w.Palette;
-            Rom[levelAddress++] = (byte)((w.XStart << 4) | (w.YStart - 0x0F));
 
             if (w.Music < 15)
             {
@@ -250,10 +255,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 Rom[levelAddress++] = (byte)((w.Music - 15) << 4);
             }
-            int scrollOffset = 0, xOffset;
-            xOffset = (w.XStart & 0xF0) >> 4;
-            scrollOffset = xOffset << 4;
-            Rom[levelAddress++] = (byte)(scrollOffset | xOffset);
+
             Rom[levelAddress++] = (byte)(w.Unused1);
 
             foreach (var p in w.Pointers)
