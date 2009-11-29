@@ -46,9 +46,12 @@ namespace Daiz.NES.Reuben
                     CompositeBuffer = new Bitmap(_CurrentWorld.Width * 16, _CurrentWorld.Height * 16, PixelFormat.Format32bppArgb);
                     this.Width = _CurrentWorld.Width * 16; ;
                     this.Height = _CurrentWorld.Height * 16;
-                    FullRender();
-                    FullSpriteRender();
-                    Redraw();
+                    if (!DelayDrawing)
+                    {
+                        FullRender();
+                        FullSpriteRender();
+                        Redraw();
+                    }
                 }
             }
         }
@@ -60,6 +63,7 @@ namespace Daiz.NES.Reuben
 
         private void _CurrentWorld_SpriteRemoved(object sender, TEventArgs<Sprite> e)
         {
+
             FullSpriteRender();
             Redraw();
         }
@@ -79,21 +83,12 @@ namespace Daiz.NES.Reuben
             set
             {
                 _SpecialTable = value;
-                FullRender();
-                Redraw();
-            }
-        }
 
-        private bool _ShowSpecialBlocks;
-        public bool ShowSpecialBlocks
-        {
-            get { return _ShowSpecialBlocks; }
-            set
-            {
-                if (BackBuffer == null) return;
-                _ShowSpecialBlocks = value;
-                FullRender();
-                Redraw(new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height));
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -118,18 +113,22 @@ namespace Daiz.NES.Reuben
                     _CurrentTable.GraphicsChanged += new EventHandler<TEventArgs<int>>(_CurrentTable_GraphicsChanged);
                 }
 
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
         void _CurrentTable_GraphicsChanged(object sender, TEventArgs<int> e)
         {
-            FullRender();
-            Redraw();
+            if (!DelayDrawing)
+            {
+                FullRender();
+                Redraw();
+            }
         }
-
-        public BlockDefinition SpecialDefnitions { private get; set; }
 
         private BlockDefinition _CurrentDefiniton;
         public BlockDefinition CurrentDefiniton
@@ -138,8 +137,11 @@ namespace Daiz.NES.Reuben
             set
             {
                 _CurrentDefiniton = value;
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -150,9 +152,12 @@ namespace Daiz.NES.Reuben
             {
                 _CurrentPalette = value;
                 UpdateColors();
-                FullRender();
-                FullSpriteRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    FullSpriteRender();
+                    Redraw();
+                }
             }
         }
 
@@ -213,44 +218,6 @@ namespace Daiz.NES.Reuben
                     RenderTile(_CurrentTable[b[1, 0]], j * 16 + 8, i * 16, PaletteIndex, data);
                     RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
 
-                    if (_ShowBlockProperties)
-                    {
-                        switch(ProjectController.SpecialManager.GetProperty(CurrentWorld.Type, tileValue))
-                        {
-                            case BlockProperty.Solid:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16 + 8, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16 + 8, 6, data, .50);
-                                break;
-
-                            case BlockProperty.TopSolid:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16, 6, data, .50);
-                                break;
-
-                            case BlockProperty.Water:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16 + 8, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16, 6, data, .50);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16 + 8, 6, data, .50);
-                                break;
-                        }
-                    }
-
-                    if (_ShowSpecialBlocks)
-                    {
-                        SpecialBlock sb = (SpecialBlock)SpecialDefnitions[tileValue];
-                        if (sb != null)
-                        {
-                            int SpecialPaletteIndex = sb.Palette;
-                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], j * 16, i * 16, SpecialPaletteIndex, data, .50);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], j * 16, i * 16 + 8, SpecialPaletteIndex, data, .50);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], j * 16 + 8, i * 16, SpecialPaletteIndex, data, .50);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], j * 16 + 8, i * 16 + 8, SpecialPaletteIndex, data, .50);
-                        }
-                    }
-
                     WorldPointer p = CurrentWorld.Pointers.Find(pt => (pt.X == j && pt.Y == i));
                     if(p != null)
                     {
@@ -303,7 +270,7 @@ namespace Daiz.NES.Reuben
                 if (def == null) continue;
                 foreach (var sp in def.Sprites)
                 {
-                    if (sp.Table < 0 && !_ShowSpecial) continue;
+                    if (sp.Table < 0) continue;
                     definiteX = s.X * 16 + sp.X;
                     definiteY = s.Y * 16 + sp.Y;
 
@@ -494,44 +461,6 @@ namespace Daiz.NES.Reuben
             RenderTile(_CurrentTable[b[0, 1]], 0, 8, PaletteIndex, data);
             RenderTile(_CurrentTable[b[1, 0]], 8, 0, PaletteIndex, data);
             RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
-
-            if (_ShowBlockProperties)
-            {
-                switch (ProjectController.SpecialManager.GetProperty(CurrentWorld.Type, tileValue))
-                {
-                    case BlockProperty.Solid:
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 8, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 8, 6, data, .50); 
-                        break;
-
-                    case BlockProperty.TopSolid:
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 0, 6, data, .50);
-                        RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 0, 6, data, .50); 
-                        break;
-
-                    case BlockProperty.Water:
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 8, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 0, 6, data, .50); 
-                        RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 8, 6, data, .50); 
-                        break;
-                }
-            }
-
-            if (_ShowSpecialBlocks)
-            {
-                SpecialBlock sb = (SpecialBlock)SpecialDefnitions[tileValue];
-                if (sb != null)
-                {
-                    int SpecialPaletteIndex = sb.Palette;
-                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], 0, 0, SpecialPaletteIndex, data, .50);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], 0, 8, SpecialPaletteIndex, data, .50);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], 8, 0, SpecialPaletteIndex, data, .50);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], 8, 8, SpecialPaletteIndex, data, .50);
-                }
-            }
 
             WorldPointer p = CurrentWorld.Pointers.Find(pt => pt.X == x && pt.Y == y);
             if (p != null)
@@ -740,8 +669,11 @@ namespace Daiz.NES.Reuben
             {
                 if (_ShowGrid == value) return;
                 _ShowGrid = value;
-                FullRender();
-                Redraw();
+                if (!DelayDrawing)
+                {
+                    FullRender();
+                    Redraw();
+                }
             }
         }
 
@@ -797,12 +729,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private bool DelayDrawing = false;
-
-        public void SetDrawDelay()
-        {
-            DelayDrawing = true;
-        }
+        public bool DelayDrawing { get; set; }
 
         public void UpdateArea()
         {
@@ -828,30 +755,6 @@ namespace Daiz.NES.Reuben
             Redraw(r);
         }
 
-        private bool _ShowSpecial;
-        public bool ShowSpecialSprites
-        {
-            get { return _ShowSpecial; }
-            set
-            {
-                _ShowSpecial = value;
-                FullSpriteRender();
-                Redraw();
-            }
-        }
-
-        private bool _ShowBlockProperties;
-        public bool ShowBlockProperties
-        {
-            get { return _ShowBlockProperties; }
-            set
-            {
-                _ShowBlockProperties = value;
-                FullRender();
-                Redraw();
-            }
-        }
-
         private bool _DisplayStartingPosition;
         public bool DisplayStartingPosition
         {
@@ -859,6 +762,7 @@ namespace Daiz.NES.Reuben
             set
             {
                 _DisplayStartingPosition = value;
+
                 if(CurrentWorld != null)    
                     UpdateBlock(CurrentWorld.XStart, CurrentWorld.YStart);
             }
@@ -866,16 +770,20 @@ namespace Daiz.NES.Reuben
 
         public void Redraw()
         {
-            if (BackBuffer == null) return;
-            DelayDrawing = false;
-            Redraw(new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom));
+            if (!DelayDrawing)
+            {
+                if (BackBuffer == null) return;
+                Redraw(new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom));
+            }
         }
 
         public void Redraw(Rectangle rect)
         {
-            if (BackBuffer == null) return;
-            DelayDrawing = false;
-            Invalidate(new Rectangle(rect.X * Zoom, rect.Y * Zoom, rect.Width * Zoom, rect.Height * Zoom));
+            if (!DelayDrawing)
+            {
+                if (BackBuffer == null) return;
+                Invalidate(new Rectangle(rect.X * Zoom, rect.Y * Zoom, rect.Width * Zoom, rect.Height * Zoom));
+            }
         }
 
         public void UpdatePoint(int x, int y)
@@ -939,5 +847,16 @@ namespace Daiz.NES.Reuben
 
         public bool HasSelection { get; private set; }
         public bool HasSelectionLine { get; private set; }
+
+
+        public void FullUpdate()
+        {
+            if (!DelayDrawing)
+            {
+                FullRender();
+                FullSpriteRender();
+                Redraw();
+            }
+        }
     }
 }

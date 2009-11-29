@@ -398,7 +398,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public static void CompileRom()
+        public static void CompileRom(bool withGfx)
         {
             ROMManager romMan = new ROMManager();
 
@@ -406,7 +406,7 @@ namespace Daiz.NES.Reuben
             SFD.Filter = "NES ROM Images|*.nes";
             if (SFD.ShowDialog() == DialogResult.OK)
             {
-                romMan.CompileRom(SFD.FileName);
+                romMan.CompileRom(SFD.FileName, withGfx);
             }
         }
 

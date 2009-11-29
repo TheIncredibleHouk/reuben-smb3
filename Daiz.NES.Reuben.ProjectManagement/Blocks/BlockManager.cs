@@ -83,25 +83,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             lookupTable.Clear();
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
-            byte[] data = new byte[0x3C00];
-            bool retroFit = fs.Length < 0x3C00;
-            if (retroFit)
-            {
-                fs.Read(data, 0x400, (int)fs.Length);
-            }
-            else
-            {
-                fs.Read(data, 0, (int)fs.Length);
-            }
+            byte[] data = new byte[0x4000];
+
+            fs.Read(data, 0, (int)fs.Length);
             fs.Close();
 
 
-            if (retroFit)
-            {
-                ResetTSA(0);
-            }
-
-            for (int i =  retroFit ? 1 : 0; i < 15; i++)
+            for (int i =  0; i < 15; i++)
             {
                 BlockDefinition bd = new BlockDefinition();
                 int bankOffset = i * 0x400;
@@ -142,10 +130,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool SaveDefinitions(string filename)
         {
-            byte[] data = new byte[0x3800];
+            byte[] data = new byte[0x3C00];
             int dataPointer = 0;
 
-            for (int i = 1; i < 15; i++)
+            for (int i = 0; i < 15; i++)
             {
                 byte[] blockData = lookupTable[i].GetBlockData();
                 for (int j = 0; j < 0x400; j++)

@@ -1006,7 +1006,7 @@ namespace Daiz.NES.Reuben
                                     {
                                         if (LvlView.SelectionLine.Start.X + i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y - i >= CurrentLevel.Height) continue;
                                         sX = LvlView.SelectionLine.Start.X + i;
-                                        sY = LvlView.SelectionLine.Start.Y = i;
+                                        sY = LvlView.SelectionLine.Start.Y - i;
                                         CurrentMultiTile.AddTileChange(sX, sY, CurrentLevel.LevelData[sX, sY]);
                                         CurrentLevel.SetTile(sX, sY, (byte)_DrawTile);
                                     }

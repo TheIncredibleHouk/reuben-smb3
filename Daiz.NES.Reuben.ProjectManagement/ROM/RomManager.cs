@@ -25,7 +25,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             levelTypeTable = new Dictionary<byte, int>();
         }
 
-        public bool CompileRom(string fileName)
+        public bool CompileRom(string fileName, bool includeGfx)
         {
             if (!LoadRom(fileName)) return false;
             if(!IsPatchedRom()) return false;
@@ -38,8 +38,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             
             WritePalette(ProjectController.PaletteManager.Palettes);
 
-            levelDataPointer = 0x40010;
-
+            levelDataPointer = 0x42010;
             byte levelIndex = 0;
             foreach (LevelInfo li in ProjectController.LevelManager.Levels)
             {
@@ -49,6 +48,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             CompileWorlds();
             CompileLevels();
+
+            if (includeGfx)
+            {
+                SaveGraphics();
+            }
+
+            SaveTSA();
             Save();
             return true;
         }
@@ -328,6 +334,34 @@ namespace Daiz.NES.Reuben.ProjectManagement
             FileStream fs = new FileStream(Filename, FileMode.Open, FileAccess.Write);
             fs.Write(Rom, 0, Rom.Length);
             return true;
+        }
+
+        private void SaveGraphics()
+        {
+            List<GraphicsBank> allGfx = ProjectController.GraphicsManager.GraphicsBanks;
+            int dataPointer = 0x100010;
+            foreach (var b in allGfx)
+            {
+                byte[] bankData = b.GetInterpolatedData();
+                for (int i = 0; i < 1024; i++)
+                {
+                    Rom[dataPointer++] = bankData[i];
+                }
+            } 
+        }
+
+        private void SaveTSA()
+        {
+            List<BlockDefinition> lookupTable = ProjectController.BlockManager.AllDefinitions;
+            int dataPointer = 0x3E010;
+            for (int i = 0; i < 15; i++)
+            {
+                byte[] blockData = lookupTable[i].GetBlockData();
+                for (int j = 0; j < 0x400; j++)
+                {
+                    Rom[dataPointer++] = blockData[j];
+                }
+            }
         }
     }
 }

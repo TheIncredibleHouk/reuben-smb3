@@ -80,6 +80,7 @@
             this.TsbBucket = new System.Windows.Forms.ToolStripButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblSprite = new System.Windows.Forms.Label();
+            this.LblCoordinates = new System.Windows.Forms.Label();
             this.LblSelected = new System.Windows.Forms.Label();
             this.LblRightClickMode = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -92,7 +93,6 @@
             this.TsbSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbGrid = new System.Windows.Forms.ToolStripButton();
-            this.TsbTileSpecials = new System.Windows.Forms.ToolStripButton();
             this.TsbStartPoint = new System.Windows.Forms.ToolStripButton();
             this.TsbZoom = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -126,7 +126,6 @@
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.WldView = new Daiz.NES.Reuben.WorldViewer();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.LblCoordinates = new System.Windows.Forms.Label();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -668,7 +667,7 @@
             this.TsbOutline,
             this.TsbBucket});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TlsDrawing.Location = new System.Drawing.Point(124, 0);
+            this.TlsDrawing.Location = new System.Drawing.Point(132, 0);
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -758,6 +757,18 @@
             this.LblSprite.TabIndex = 21;
             this.LblSprite.Text = "Sprite";
             this.LblSprite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblCoordinates
+            // 
+            this.LblCoordinates.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblCoordinates.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LblCoordinates.Location = new System.Drawing.Point(344, 0);
+            this.LblCoordinates.Margin = new System.Windows.Forms.Padding(3);
+            this.LblCoordinates.Name = "LblCoordinates";
+            this.LblCoordinates.Size = new System.Drawing.Size(78, 29);
+            this.LblCoordinates.TabIndex = 24;
+            this.LblCoordinates.Text = "X: FF Y: FF";
+            this.LblCoordinates.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LblSelected
             // 
@@ -852,14 +863,13 @@
             this.TsbSave,
             this.toolStripSeparator2,
             this.TsbGrid,
-            this.TsbTileSpecials,
             this.TsbStartPoint,
             this.TsbZoom});
             this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(124, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(132, 25);
             this.toolStrip2.TabIndex = 22;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -890,17 +900,6 @@
             this.TsbGrid.Text = "toolStripButton1";
             this.TsbGrid.ToolTipText = "Toggle Grid";
             this.TsbGrid.CheckStateChanged += new System.EventHandler(this.TsbGrid_CheckedChanged);
-            // 
-            // TsbTileSpecials
-            // 
-            this.TsbTileSpecials.CheckOnClick = true;
-            this.TsbTileSpecials.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbTileSpecials.Image = global::Daiz.NES.Reuben.Properties.Resources.specialtile;
-            this.TsbTileSpecials.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbTileSpecials.Name = "TsbTileSpecials";
-            this.TsbTileSpecials.Size = new System.Drawing.Size(23, 22);
-            this.TsbTileSpecials.Text = "Toggle Special Tile Icons";
-            this.TsbTileSpecials.CheckStateChanged += new System.EventHandler(this.TsbTileSpecials_CheckedChanged);
             // 
             // TsbStartPoint
             // 
@@ -1155,6 +1154,7 @@
             this.WldView.CurrentDefiniton = null;
             this.WldView.CurrentTable = null;
             this.WldView.CurrentWorld = null;
+            this.WldView.DelayDrawing = false;
             this.WldView.DisplayStartingPosition = false;
             this.WldView.HorizontalGuide1 = null;
             this.WldView.HorizontalGuide2 = null;
@@ -1162,10 +1162,7 @@
             this.WldView.Name = "WldView";
             this.WldView.SelectionLine = null;
             this.WldView.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.WldView.ShowBlockProperties = false;
             this.WldView.ShowGrid = false;
-            this.WldView.ShowSpecialBlocks = false;
-            this.WldView.ShowSpecialSprites = false;
             this.WldView.Size = new System.Drawing.Size(3577, 270);
             this.WldView.SpecialTable = null;
             this.WldView.TabIndex = 0;
@@ -1192,18 +1189,6 @@
             this.PnlVerticalGuide.Name = "PnlVerticalGuide";
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 332);
             this.PnlVerticalGuide.TabIndex = 29;
-            // 
-            // LblCoordinates
-            // 
-            this.LblCoordinates.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LblCoordinates.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LblCoordinates.Location = new System.Drawing.Point(344, 0);
-            this.LblCoordinates.Margin = new System.Windows.Forms.Padding(3);
-            this.LblCoordinates.Name = "LblCoordinates";
-            this.LblCoordinates.Size = new System.Drawing.Size(78, 29);
-            this.LblCoordinates.TabIndex = 24;
-            this.LblCoordinates.Text = "X: FF Y: FF";
-            this.LblCoordinates.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // WorldEditor
             // 
@@ -1290,7 +1275,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton TsbGrid;
-        private System.Windows.Forms.ToolStripButton TsbTileSpecials;
         private System.Windows.Forms.ToolStripButton TsbStartPoint;
         private System.Windows.Forms.ToolStripButton TsbZoom;
         private System.Windows.Forms.ToolStripButton TsbSave;

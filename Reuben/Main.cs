@@ -142,7 +142,12 @@ namespace Daiz.NES.Reuben
 
         private void compileROMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReubenController.CompileRom();
+            ReubenController.CompileRom(true);
+        }
+
+        private void rOMWoGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReubenController.CompileRom(false);
         }
 
     }

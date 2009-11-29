@@ -51,6 +51,7 @@ namespace Daiz.NES.Reuben
 
             CmbLayouts.SelectedIndex = 0;
             CurrentTable = new PatternTable();
+            WldView.DelayDrawing = true;
             WldView.CurrentTable = CurrentTable;
 
             BlsSelector.CurrentTable = CurrentTable;
@@ -159,8 +160,6 @@ namespace Daiz.NES.Reuben
             }
 
             TsbGrid.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(w.Guid, "ShowGrid");
-            TsbTileSpecials.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(w.Guid, "SpecialTiles");
-            TsbStartPoint.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(w.Guid, "ShowStart");
             TsbZoom.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(w.Guid, "Zoom");
 
             switch (ProjectController.SettingsManager.GetLevelSetting<string>(w.Guid, "Draw"))
@@ -215,6 +214,8 @@ namespace Daiz.NES.Reuben
             PntEditor.CurrentPointer = null;
             BtnDeletePointer.Enabled = false;
             LblStartPoint.Text = "X:" + w.XStart.ToHexString() + " Y: " + (w.YStart - 0x0F).ToHexString();
+            WldView.DelayDrawing = false;
+            WldView.FullUpdate();
         }
 
         #region guide events
@@ -510,7 +511,7 @@ namespace Daiz.NES.Reuben
                                     continue;
                                 }
 
-                                WldView.SetDrawDelay();
+                                WldView.DelayDrawing = true;
                                 if (checkValue == CurrentWorld.LevelData[i, j])
                                 {
                                     CurrentMultiTile.AddTileChange(i, j, CurrentWorld.LevelData[i, j]);
@@ -526,6 +527,7 @@ namespace Daiz.NES.Reuben
                                     stack.Push(new Point(i, j - 1));
                                 }
                                 UndoBuffer.Add(CurrentMultiTile);
+                                WldView.DelayDrawing = false;
                                 WldView.UpdateArea(new Rectangle(lowestX, lowestY, highestX - lowestX + 1, highestY - lowestY + 1));
                             }
 
@@ -555,8 +557,9 @@ namespace Daiz.NES.Reuben
                     Rectangle r = new Rectangle(rectX, rectY, width, height);
                     CurrentSprite.X = x;
                     CurrentSprite.Y = y;
-                    WldView.SetDrawDelay();
+                    WldView.DelayDrawing = true;
                     WldView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
+                    WldView.DelayDrawing = false;
                     WldView.UpdateSprites(r);
                 }
                 else if (CurrentSelectorSprite != null && MouseButtons == MouseButtons.Right)
@@ -709,8 +712,9 @@ namespace Daiz.NES.Reuben
                         Rectangle r = new Rectangle(rectX, rectY, width, height);
                         CurrentSprite.X = x;
                         CurrentSprite.Y = y;
-                        WldView.SetDrawDelay();
+                        WldView.DelayDrawing = true;
                         WldView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
+                        WldView.DelayDrawing = false;
                         WldView.UpdateSprites(r);
                     }
                 }
@@ -723,13 +727,14 @@ namespace Daiz.NES.Reuben
                     if (CurrentPointer.X == x && CurrentPointer.Y == y) return;
                     int oldX = CurrentPointer.X;
                     int oldY = CurrentPointer.Y;
-                    WldView.SetDrawDelay();
+                    WldView.DelayDrawing = true;
                     CurrentPointer.X = x;
                     CurrentPointer.Y = y;
                     WldView.UpdatePoint(oldX, oldY);
                     WldView.UpdatePoint(oldX, oldY + 1);
                     WldView.UpdatePoint(x, y);
                     WldView.UpdatePoint(x, y + 1);
+                    WldView.DelayDrawing = false;
                     WldView.SelectionRectangle = new Rectangle(CurrentPointer.X, CurrentPointer.Y, 1, 1);
                     PntEditor.UpdatePosition();
                 }
@@ -782,7 +787,7 @@ namespace Daiz.NES.Reuben
 
                             UndoBuffer.Add(new TileAreaAction(sX, sY, CurrentWorld.GetData(sX, sY, WldView.SelectionRectangle.Width, WldView.SelectionRectangle.Height)));
 
-                            WldView.SetDrawDelay();
+                            WldView.DelayDrawing = true;
                             for (int y = WldView.SelectionRectangle.Y, i = 0; i < WldView.SelectionRectangle.Height; y++, i++)
                             {
                                 for (int x = WldView.SelectionRectangle.X, j = 0; j < WldView.SelectionRectangle.Width; x++, j++)
@@ -790,6 +795,7 @@ namespace Daiz.NES.Reuben
                                     CurrentWorld.SetTile(x, y, (byte)_DrawTile);
                                 }
                             }
+                            WldView.DelayDrawing = false;
                             WldView.UpdateArea();
                             break;
 
@@ -799,7 +805,7 @@ namespace Daiz.NES.Reuben
 
                             UndoBuffer.Add(new TileAreaAction(sX, sY, CurrentWorld.GetData(sX, sY, WldView.SelectionRectangle.Width, WldView.SelectionRectangle.Height)));
 
-                            WldView.SetDrawDelay();
+                            WldView.DelayDrawing = true;
                             for (int x = WldView.SelectionRectangle.X, i = 0; i < WldView.SelectionRectangle.Width; i++, x++)
                             {
                                 CurrentWorld.SetTile(x, WldView.SelectionRectangle.Y, (byte)_DrawTile);
@@ -811,12 +817,13 @@ namespace Daiz.NES.Reuben
                                 CurrentWorld.SetTile(WldView.SelectionRectangle.X, y, (byte)_DrawTile);
                                 CurrentWorld.SetTile(WldView.SelectionRectangle.X + WldView.SelectionRectangle.Width - 1, y, (byte)_DrawTile);
                             }
+                            WldView.DelayDrawing = false;
                             WldView.UpdateArea();
                             break;
 
                         case DrawMode.Line:
 
-                            WldView.SetDrawDelay();
+                            WldView.DelayDrawing = true;
                             CurrentMultiTile = new MultiTileAction();
                             int breakAt = Math.Abs(WldView.SelectionLine.End.X - WldView.SelectionLine.Start.X) + 1;
                             if (WldView.SelectionLine.End.X > WldView.SelectionLine.Start.X)
@@ -838,7 +845,7 @@ namespace Daiz.NES.Reuben
                                     {
                                         if (WldView.SelectionLine.Start.X + i >= CurrentWorld.Width || WldView.SelectionLine.Start.Y - i >= CurrentWorld.Height) continue;
                                         sX = WldView.SelectionLine.Start.X + i;
-                                        sY = WldView.SelectionLine.Start.Y = i;
+                                        sY = WldView.SelectionLine.Start.Y - i;
                                         CurrentMultiTile.AddTileChange(sX, sY, CurrentWorld.LevelData[sX, sY]);
                                         CurrentWorld.SetTile(sX, sY, (byte)_DrawTile);
                                     }
@@ -871,7 +878,7 @@ namespace Daiz.NES.Reuben
                             }
 
                             UndoBuffer.Add(CurrentMultiTile);
-
+                            WldView.DelayDrawing = false;
                             WldView.ClearLine();
                             break;
 
@@ -892,11 +899,6 @@ namespace Daiz.NES.Reuben
         private void TsbGrid_CheckedChanged(object sender, EventArgs e)
         {
             WldView.ShowGrid = TsbGrid.Checked;
-        }
-
-        private void TsbTileSpecials_CheckedChanged(object sender, EventArgs e)
-        {
-            BlsSelector.ShowSpecialBlocks = WldView.ShowSpecialBlocks = TsbTileSpecials.Checked;
         }
 
         private void TsbStartPoint_CheckedChanged(object sender, EventArgs e)
@@ -1213,9 +1215,6 @@ namespace Daiz.NES.Reuben
                         Paste(useTransparentTile);
                         break;
 
-                    case Keys.W:
-                        TsbTileSpecials.Checked = !TsbTileSpecials.Checked;
-                        break;
 
                     case Keys.R:
                         TsbStartPoint.Checked = !TsbStartPoint.Checked;
@@ -1244,8 +1243,9 @@ namespace Daiz.NES.Reuben
                         if (CurrentSprite != null && EditMode == EditMode.Sprites)
                         {
                             CurrentWorld.SpriteData.Remove(CurrentSprite);
-                            WldView.SetDrawDelay();
+                            WldView.DelayDrawing = true;
                             WldView.ClearSelection();
+                            WldView.DelayDrawing = false;
                             WldView.UpdateSprites();
                             CurrentSprite = null;
                         }
@@ -1283,7 +1283,7 @@ namespace Daiz.NES.Reuben
             int sX = WldView.SelectionRectangle.X;
             int sY = WldView.SelectionRectangle.Y;
             UndoBuffer.Add(new TileAreaAction(sX, sY, CurrentWorld.GetData(sX, sY, WldView.SelectionRectangle.Width, WldView.SelectionRectangle.Height)));
-            WldView.SetDrawDelay();
+            WldView.DelayDrawing = true;
             for (int y = sY, i = 0; i < WldView.SelectionRectangle.Height; y++, i++)
             {
                 for (int x = sX, j = 0; j < WldView.SelectionRectangle.Width; x++, j++)
@@ -1291,6 +1291,7 @@ namespace Daiz.NES.Reuben
                     CurrentWorld.SetTile(x, y, 0);
                 }
             }
+            WldView.DelayDrawing = false;
             WldView.UpdateArea();
         }
 
@@ -1307,7 +1308,7 @@ namespace Daiz.NES.Reuben
 
         private void Paste(bool transparentTile)
         {
-            WldView.SetDrawDelay();
+            WldView.DelayDrawing = true;
             Rectangle usedRectangle = WldView.SelectionRectangle;
 
             if (WldView.SelectionRectangle.Width == 1 && WldView.SelectionRectangle.Height == 1)
@@ -1328,6 +1329,7 @@ namespace Daiz.NES.Reuben
                     CurrentWorld.SetTile(usedRectangle.X + i, usedRectangle.Y + j, TileBuffer[i % TileBuffer.GetLength(0), j % TileBuffer.GetLength(1)]);
                 }
             }
+            WldView.DelayDrawing = false;
             WldView.UpdateArea(usedRectangle);
         }
 
@@ -1410,8 +1412,9 @@ namespace Daiz.NES.Reuben
         {
             CurrentWorld.AddPointer();
             PntEditor.CurrentPointer = CurrentWorld.Pointers[CurrentWorld.Pointers.Count - 1];
-            WldView.SetDrawDelay();
+            WldView.DelayDrawing = true;
             WldView.UpdatePoint(8, 0x16);
+            WldView.DelayDrawing = false;
             WldView.SelectionRectangle = new Rectangle(0, 0, 1, 1);
             CurrentPointer = PntEditor.CurrentPointer;
         }
@@ -1425,9 +1428,10 @@ namespace Daiz.NES.Reuben
         {
             if (CurrentPointer != null)
             {
-                WldView.SetDrawDelay();
+                WldView.DelayDrawing = true;
                 CurrentWorld.Pointers.Remove(CurrentPointer);
                 WldView.UpdatePoint(CurrentPointer.X, CurrentPointer.Y);
+                WldView.DelayDrawing = false;
                 WldView.ClearSelection();
                 PntEditor.CurrentPointer = null;
                 BtnDeletePointer.Enabled = false;
@@ -1501,7 +1505,6 @@ namespace Daiz.NES.Reuben
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "ShowGrid", TsbGrid.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "SpecialTiles", TsbTileSpecials.Checked);
             ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "ShowStart", TsbStartPoint.Checked);
             ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "Zoom", TsbZoom.Checked);
             ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "Draw", DrawMode.ToString());
@@ -1531,7 +1534,7 @@ namespace Daiz.NES.Reuben
 
         private void UndoTileArea(TileAreaAction action)
         {
-            WldView.SetDrawDelay();
+            WldView.DelayDrawing = true;
             Rectangle usedRectangle = new Rectangle(action.X, action.Y, action.Data.GetLength(0), action.Data.GetLength(1));
 
             int sX = usedRectangle.X;
@@ -1545,6 +1548,7 @@ namespace Daiz.NES.Reuben
                     CurrentWorld.SetTile(usedRectangle.X + i, usedRectangle.Y + j, action.Data[i ,j]);
                 }
             }
+            WldView.DelayDrawing = false;
             WldView.UpdateArea(usedRectangle);
             UndoBuffer.Remove(action);
         }
@@ -1554,12 +1558,13 @@ namespace Daiz.NES.Reuben
             RedoBuffer.Add(action);
             UndoBuffer.Remove(action);
 
-            WldView.SetDrawDelay();
+            WldView.DelayDrawing = true;
             foreach (SingleTileChange stc in action.TileChanges.Reverse<SingleTileChange>())
             {
                 CurrentWorld.SetTile(stc.X, stc.Y, (byte)stc.Tile);
             }
 
+            WldView.DelayDrawing = false;
             WldView.UpdateArea(action.InvalidArea);
         }
 
