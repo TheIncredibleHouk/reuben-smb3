@@ -65,6 +65,8 @@
             this.PrvProject = new Daiz.NES.Reuben.ProjectView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnShowHide = new System.Windows.Forms.Button();
+            this.rOMWithGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rOMWoGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.PnlRightSide.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -258,7 +260,7 @@
             // layoutManagerToolStripMenuItem
             // 
             this.layoutManagerToolStripMenuItem.Name = "layoutManagerToolStripMenuItem";
-            this.layoutManagerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.layoutManagerToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.layoutManagerToolStripMenuItem.Text = "Layout Editor";
             this.layoutManagerToolStripMenuItem.Click += new System.EventHandler(this.layoutManagerToolStripMenuItem_Click);
             // 
@@ -300,10 +302,12 @@
             // 
             // compileROMToolStripMenuItem
             // 
+            this.compileROMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rOMWithGraphicsToolStripMenuItem,
+            this.rOMWoGraphicsToolStripMenuItem});
             this.compileROMToolStripMenuItem.Name = "compileROMToolStripMenuItem";
             this.compileROMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.compileROMToolStripMenuItem.Text = "Compile ROM";
-            this.compileROMToolStripMenuItem.Click += new System.EventHandler(this.compileROMToolStripMenuItem_Click);
+            this.compileROMToolStripMenuItem.Text = "Compile";
             // 
             // debugToolStripMenuItem
             // 
@@ -356,6 +360,20 @@
             this.BtnShowHide.Text = ">>";
             this.BtnShowHide.UseVisualStyleBackColor = true;
             this.BtnShowHide.Click += new System.EventHandler(this.BtnShowHide_Click);
+            // 
+            // rOMWithGraphicsToolStripMenuItem
+            // 
+            this.rOMWithGraphicsToolStripMenuItem.Name = "rOMWithGraphicsToolStripMenuItem";
+            this.rOMWithGraphicsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.rOMWithGraphicsToolStripMenuItem.Text = "ROM w/ Graphics";
+            this.rOMWithGraphicsToolStripMenuItem.Click += new System.EventHandler(this.compileROMToolStripMenuItem_Click);
+            // 
+            // rOMWoGraphicsToolStripMenuItem
+            // 
+            this.rOMWoGraphicsToolStripMenuItem.Name = "rOMWoGraphicsToolStripMenuItem";
+            this.rOMWoGraphicsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.rOMWoGraphicsToolStripMenuItem.Text = "ROM w/o Graphics";
+            this.rOMWoGraphicsToolStripMenuItem.Click += new System.EventHandler(this.rOMWoGraphicsToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -416,6 +434,8 @@
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dumpRawLevelToFileToolStripMenuItem;
         private ProjectView PrvProject;
+        private System.Windows.Forms.ToolStripMenuItem rOMWithGraphicsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rOMWoGraphicsToolStripMenuItem;
 
 
     }

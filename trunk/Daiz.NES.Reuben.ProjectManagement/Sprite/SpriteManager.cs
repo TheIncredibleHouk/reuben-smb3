@@ -62,6 +62,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             if (!File.Exists(filename)) return false;
             SpriteDefinitions.Clear();
+            MapSpriteDefinitions.Clear();
             SpriteGroups[1] = new Dictionary<string, List<SpriteDefinition>>();
             SpriteGroups[2] = new Dictionary<string, List<SpriteDefinition>>();
             SpriteGroups[3] = new Dictionary<string, List<SpriteDefinition>>();

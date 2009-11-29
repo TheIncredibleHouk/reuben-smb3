@@ -47,8 +47,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Guid = wi.WorldGuid;
             Length = 1;
             Palette = 0;
-            XStart = 2;
-            YStart = 2;
+            XStart = 0x02;
+            YStart = 0x14;
             GraphicsBank = 0x14;
             AnimationBank = 0x16;
             for (int i = 0; i < 0x10; i++)
