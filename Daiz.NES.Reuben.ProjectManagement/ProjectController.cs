@@ -51,7 +51,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 Directory.CreateDirectory(RootDirectory);
             }
             LevelDirectory = string.Format("{0}{1}Levels", RootDirectory, Path.DirectorySeparatorChar);
-            WorldDirectory = string.Format("{0}{1}Worlds" + RootDirectory, Path.DirectorySeparatorChar);
+            WorldDirectory = string.Format("{0}{1}Worlds", RootDirectory, Path.DirectorySeparatorChar);
             Directory.CreateDirectory(LevelDirectory);
             Directory.CreateDirectory(WorldDirectory);
             ProjectName = name;
