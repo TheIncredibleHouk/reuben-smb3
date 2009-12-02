@@ -94,7 +94,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbGrid = new System.Windows.Forms.ToolStripButton();
             this.TsbStartPoint = new System.Windows.Forms.ToolStripButton();
-            this.TsbZoom = new System.Windows.Forms.ToolStripButton();
+            this.TsbPointers = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -864,7 +864,7 @@
             this.toolStripSeparator2,
             this.TsbGrid,
             this.TsbStartPoint,
-            this.TsbZoom});
+            this.TsbPointers});
             this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
@@ -912,16 +912,16 @@
             this.TsbStartPoint.Text = "Toggle Start Point Display";
             this.TsbStartPoint.CheckStateChanged += new System.EventHandler(this.TsbStartPoint_CheckedChanged);
             // 
-            // TsbZoom
+            // TsbPointers
             // 
-            this.TsbZoom.CheckOnClick = true;
-            this.TsbZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbZoom.Image = global::Daiz.NES.Reuben.Properties.Resources.zoom;
-            this.TsbZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbZoom.Name = "TsbZoom";
-            this.TsbZoom.Size = new System.Drawing.Size(23, 22);
-            this.TsbZoom.Text = "Toggle 2x Zoom";
-            this.TsbZoom.CheckStateChanged += new System.EventHandler(this.TsbZoom_CheckedChanged);
+            this.TsbPointers.CheckOnClick = true;
+            this.TsbPointers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbPointers.Image = global::Daiz.NES.Reuben.Properties.Resources.pointers;
+            this.TsbPointers.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbPointers.Name = "TsbPointers";
+            this.TsbPointers.Size = new System.Drawing.Size(23, 22);
+            this.TsbPointers.ToolTipText = "Toggle Pointer Display";
+            this.TsbPointers.CheckedChanged += new System.EventHandler(this.TsbPointers_CheckedChanged);
             // 
             // panel2
             // 
@@ -1163,6 +1163,7 @@
             this.WldView.SelectionLine = null;
             this.WldView.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.WldView.ShowGrid = false;
+            this.WldView.ShowPointers = false;
             this.WldView.Size = new System.Drawing.Size(3577, 270);
             this.WldView.SpecialTable = null;
             this.WldView.TabIndex = 0;
@@ -1276,7 +1277,6 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton TsbGrid;
         private System.Windows.Forms.ToolStripButton TsbStartPoint;
-        private System.Windows.Forms.ToolStripButton TsbZoom;
         private System.Windows.Forms.ToolStripButton TsbSave;
         private System.Windows.Forms.Panel panel2;
         private BlockViewer BlvLeft;
@@ -1334,5 +1334,6 @@
         private System.Windows.Forms.Label LblLevelSize;
         private WorldPointerEditor PntEditor;
         private System.Windows.Forms.Label LblCoordinates;
+        private System.Windows.Forms.ToolStripButton TsbPointers;
     }
 }

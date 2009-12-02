@@ -116,6 +116,13 @@ namespace Daiz.NES.Reuben.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap pointers {
+            get {
+                object obj = ResourceManager.GetObject("pointers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap rectangle {
             get {
                 object obj = ResourceManager.GetObject("rectangle", resourceCulture);

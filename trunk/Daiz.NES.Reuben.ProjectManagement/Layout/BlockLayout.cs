@@ -62,13 +62,24 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
- 	        string[] layout = e.Attribute("order").Value.Split(',');
-            int index = 0;
-            foreach(string s in layout)
+            foreach (var a in e.Attributes())
             {
-                Layout[index++] = s.ToInt();
+                switch (a.Name.LocalName)
+                {
+                    case "order":
+                        string[] layout = e.Attribute("order").Value.Split(',');
+                        int index = 0;
+                        foreach (string s in layout)
+                        {
+                            Layout[index++] = s.ToInt();
+                        }
+                        break;
+
+                    case "name":
+                        Name = e.Attribute("name").Value;
+                        break;
+                }
             }
-            Name = e.Attribute("name").Value;
             return true;
         }
 

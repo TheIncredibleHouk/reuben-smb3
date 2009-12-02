@@ -39,26 +39,57 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.Add(ProjectController.LayoutManager.CreateElement());
             x.Add(ProjectController.WorldManager.CreateElement());
             x.Add(ProjectController.LevelManager.CreateElement());
-            x.Add(ProjectController.SettingsManager.CreateElement());
             return x;
         }
 
         public bool LoadFromElement(XElement e)
         {
-            Name = e.Attribute("name").Value;
-            Guid = e.Attribute("guid").Value.ToGuid();
-            XAttribute xa = e.Attribute("palettefile");
+            bool customPalette = false;
+            foreach (var a in e.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "name":
+                        Name = e.Attribute("name").Value;
+                        break;
 
-            if (xa == null)
+                    case "guid":
+                        Guid = e.Attribute("guid").Value.ToGuid();
+                        break;
+
+                    case "palettefile":
+                        ProjectController.ColorManager.LoadColorInfo(a.Value);
+                        customPalette = true;
+                        break;
+                }
+            }
+
+            if (!customPalette)
+            {
                 ProjectController.ColorManager.LoadDefaultColor();
-            else
-                ProjectController.ColorManager.LoadColorInfo(xa.Value);
+            }
 
-            ProjectController.LayoutManager.LoadFromElement(e.Element("blocklayouts"));
-            ProjectController.WorldManager.LoadFromElement(e.Element("worldinfo"));
-            ProjectController.LevelManager.LoadFromElement(e.Element("levelinfo"));
-            ProjectController.PaletteManager.LoadFromElement(e.Element("paletteinfo"));
-            ProjectController.SettingsManager.LoadFromElement(e.Element("settings"));
+            foreach (var x in e.Elements())
+            {
+                switch (x.Name.LocalName)
+                {
+                    case "blocklayouts":
+                        ProjectController.LayoutManager.LoadFromElement(x);
+                        break;
+
+                    case "worldinfo":
+                        ProjectController.WorldManager.LoadFromElement(x);
+                        break;
+
+                    case "levelinfo":
+                        ProjectController.LevelManager.LoadFromElement(x);
+                        break;
+
+                    case "paletteinfo":
+                        ProjectController.PaletteManager.LoadFromElement(x);
+                        break;
+                }
+            }
             return true;
         }
 

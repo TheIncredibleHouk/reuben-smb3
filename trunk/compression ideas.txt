@@ -102,12 +102,14 @@ NOTEs
 5F16 : Temp storage for y exit level pointers
 5F17 : Temp storage for exit type level pointers
 5F18 : Temp storage, if set, override level exit points and actions
-5F19 : First map 
+5F19 : First map load toggle
+5F1A : Needed to incidate that the pipe set is used
+5F1B : current map music storage
 
 RAM
 75 : Current X position in levels (high end)
 81 : Current y position in levels (high end)
-90 : Current x position (low end)
+90 : Current x position in levels (low end)
 A2 : Current y position in levels (low end)
 
 373 : exit type when using pointers
@@ -132,7 +134,7 @@ Reuben ROM Map:
 15610-1501F : Map lengths table
 
 3C010-3E00F : Palettes
-3E010-3FC0F : TSA data
+3E010-41C0F : TSA data
 18C10-1800F : Level index table
 40010-4400F : Map/Sprite data
 44010-FD00F : Level/Sprite data

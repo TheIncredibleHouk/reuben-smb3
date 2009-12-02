@@ -12,7 +12,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
     public class PaletteInfo : IXmlIO
     {
         public event EventHandler<TEventArgs<string>> NameChanged;
-        public event EventHandler BackgroundChanged;
         public event EventHandler<TEventArgs<DoubleValue<int, int>>> PaletteChanged;
         public bool IsSpecial { get; internal set; }
 
@@ -37,7 +36,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 _Background = value;
                 Data[0, 0] = Data[1, 0] = Data[2, 0] = Data[3, 0] = Data[4, 0] = Data[5, 0] = Data[6, 0] = Data[7, 0] = value;
-                if (BackgroundChanged != null) BackgroundChanged(this, null);
+                if (PaletteChanged != null)
+                {
+                    PaletteChanged(this, new TEventArgs<DoubleValue<int, int>>(new DoubleValue<int, int>(0, 0)));
+                    PaletteChanged(this, new TEventArgs<DoubleValue<int, int>>(new DoubleValue<int, int>(1, 0)));
+                    PaletteChanged(this, new TEventArgs<DoubleValue<int, int>>(new DoubleValue<int, int>(2, 0)));
+                    PaletteChanged(this, new TEventArgs<DoubleValue<int, int>>(new DoubleValue<int, int>(3, 0)));
+                    PaletteChanged(this, new TEventArgs<DoubleValue<int, int>>(new DoubleValue<int, int>(5, 0)));
+                    PaletteChanged(this, new TEventArgs<DoubleValue<int, int>>(new DoubleValue<int, int>(6, 0)));
+                    PaletteChanged(this, new TEventArgs<DoubleValue<int, int>>(new DoubleValue<int, int>(7, 0)));
+                }
             }
         }
 
@@ -75,9 +83,24 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
-            Background = e.Attribute("background").Value.ToIntFromHex();
-            Name = e.Attribute("name").Value;
-            Guid = e.Attribute("guid").Value.ToGuid();
+            foreach (var a in e.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "background":
+                        Background = a.Value.ToIntFromHex();
+                        break;
+
+                    case "name":
+                        Name = a.Value;
+                        break;
+
+                    case "guid":
+                        Guid = a.Value.ToGuid();
+                        break;
+                }
+            }
+
             ConvertData(e);
             return true;
         }

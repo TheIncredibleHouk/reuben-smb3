@@ -49,10 +49,11 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public static void OpenProject()
+        public static bool OpenProject()
         {
             OpenFileDialog OFD = new OpenFileDialog();
             OFD.Filter = "Reuben Project Files|*.rbn";
+            bool success = false;
             DialogResult result = OFD.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -61,9 +62,11 @@ namespace Daiz.NES.Reuben
                     editorTable[k].Close();
                 }
 
-                ProjectController.LoadProject(OFD.FileName);
+                success = ProjectController.LoadProject(OFD.FileName);
             }
             OFD.Dispose();
+
+            return success;
         }
 
         public static void ImportGraphics()

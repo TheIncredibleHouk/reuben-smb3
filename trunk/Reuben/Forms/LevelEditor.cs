@@ -56,11 +56,8 @@ namespace Daiz.NES.Reuben
                 CmbLayouts.Items.Add(l);
             }
 
-            CmbLayouts.SelectedIndex = 0;
             CurrentTable = new PatternTable();
-            LvlView.CurrentTable = CurrentTable;
-
-            BlsSelector.CurrentTable = CurrentTable;
+            LvlView.CurrentTable = BlsSelector.CurrentTable = CurrentTable;
             BlsSelector.BlockLayout = ProjectController.LayoutManager.BlockLayouts[0];
             BlsSelector.SpecialTable = LvlView.SpecialTable = ProjectController.SpecialManager.SpecialTable;
             BlsSelector.SpecialPalette = LvlView.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;
@@ -75,7 +72,6 @@ namespace Daiz.NES.Reuben
             ProjectController.LayoutManager.LayoutAdded += new EventHandler<TEventArgs<BlockLayout>>(LayoutManager_LayoutAdded);
             ProjectController.GraphicsManager.GraphicsUpdated += new EventHandler(GraphicsManager_GraphicsUpdated);
             ProjectController.LayoutManager.LayoutRemoved += new EventHandler<TEventArgs<BlockLayout>>(LayoutManager_LayoutRemoved);
-            LvlView.Zoom = 1;
             PnlVerticalGuide.Guide1Changed += new EventHandler(PnlVerticalGuide_Guide1Changed);
             PnlVerticalGuide.Guide2Changed += new EventHandler(PnlVerticalGuide_Guide2Changed);
             PnlHorizontalGuide.Guide1Changed += new EventHandler(PnlHorizontalGuide_Guide1Changed);
@@ -161,54 +157,58 @@ namespace Daiz.NES.Reuben
         {
             GetLevelInfo(l);
 
-            if (!ProjectController.SettingsManager.HasLevelSettings(l.Guid))
-            {
-                ProjectController.SettingsManager.AddLevelSettings(l.Guid);
-            }
+            TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
+            TsbTileSpecials.Checked = CurrentLevel.Settings.SpecialTiles;
+            TsbSriteSpecials.Checked = CurrentLevel.Settings.SpecialSprites;
+            TsbProperties.Checked = CurrentLevel.Settings.BlockProperties;
+            TsbStartPoint.Checked = CurrentLevel.Settings.ShowStart;
+            TsbZoom.Checked = CurrentLevel.Settings.Zoom;
 
-            TsbGrid.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(l.Guid, "ShowGrid");
-            TsbTileSpecials.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(l.Guid, "SpecialTiles");
-            TsbSriteSpecials.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(l.Guid, "SpecialSprites");
-            TsbProperties.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(l.Guid, "BlockProperties");
-            TsbStartPoint.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(l.Guid, "ShowStart");
-            TsbZoom.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(l.Guid, "Zoom");
-
-            switch (ProjectController.SettingsManager.GetLevelSetting<string>(l.Guid, "Draw"))
+            switch (CurrentLevel.Settings.DrawMode)
             {
-                case "Pencil":
+                case TileDrawMode.Pencil:
                     TsbPencil.Checked = true;
-                    DrawMode = DrawMode.Pencil;
                     break;
 
-                case "Rectangle":
+                case TileDrawMode.Rectangle:
                     TsbRectangle.Checked = true;
-                    DrawMode = DrawMode.Rectangle;
                     break;
 
-                case "Outline":
+                case TileDrawMode.Outline:
                     TsbOutline.Checked = true;
-                    DrawMode = DrawMode.Outline;
                     break;
 
-                case "Line":
+                case TileDrawMode.Line:
                     TsbLine.Checked = true;
-                    DrawMode = DrawMode.Line;
                     break;
 
-                case "Fill":
+                case TileDrawMode.Fill:
                     TsbBucket.Checked = true;
-                    DrawMode = DrawMode.Fill;
                     break;
 
-                case "Scatter":
+                case TileDrawMode.Scatter:
                     TsbScatter.Checked = true;
-                    DrawMode = DrawMode.Scatter;
                     break;
             }
 
-            CmbLayouts.SelectedIndex = ProjectController.SettingsManager.GetLevelSetting<int>(l.Guid, "Layout");
-            PnlHorizontalGuide.GuideColor = ProjectController.SettingsManager.GetLevelSetting<Color>(l.Guid, "HGuideColor");
-            PnlVerticalGuide.GuideColor = ProjectController.SettingsManager.GetLevelSetting<Color>(l.Guid, "VGuideColor");
+            switch(CurrentLevel.Settings.EditMode)
+            {
+                case EditMode.Tiles:
+                    TabEditSelector.SelectedIndex = 0;
+                        break;
+
+                case EditMode.Sprites:
+                    TabEditSelector.SelectedIndex = 1;
+                    break;
+
+                case EditMode.Pointers:
+                    TabEditSelector.SelectedIndex = 2;
+                    break;
+            }
+
+            CmbLayouts.SelectedIndex = CurrentLevel.Settings.Layout;
+            PnlHorizontalGuide.GuideColor = CurrentLevel.Settings.HGuideColor;
+            PnlVerticalGuide.GuideColor = CurrentLevel.Settings.VGuideColor;
 
             this.Text = ProjectController.LevelManager.GetLevelInfo(l.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
@@ -220,6 +220,7 @@ namespace Daiz.NES.Reuben
 
         private void GetLevelInfo(Level l)
         {
+            LvlView.Zoom = 1;
             LvlView.CurrentLevel = l;
             CurrentLevel = l;
             NumTime.Value = l.Time;
@@ -245,8 +246,10 @@ namespace Daiz.NES.Reuben
             CurrentLevel.TilesModified += new EventHandler<TEventArgs<TileInformation>>(CurrentLevel_TilesModified);
             GetCoinTotals();
             UpdateCoinTotalText();
-            NumSpecials.Value = (decimal) ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransSpecials");
-            NumProperties.Value = (decimal) ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransProps");
+            NumSpecials.Value = (decimal)CurrentLevel.Settings.ItemTransparency;
+            NumProperties.Value = (decimal)CurrentLevel.Settings.PropertyTransparency;
+            LvlView.DelayDrawing = false;
+            LvlView.FullUpdate();
         }
 
         #region guide events
@@ -563,7 +566,7 @@ namespace Daiz.NES.Reuben
         private bool useTransparentTile;
         private int StartX, StartY, FromX, FromY, ToX, ToY;
         private bool ContinueDragging;
-        private DrawMode PreviousMode;
+        private TileDrawMode PreviousMode;
 
         private void LvlView_MouseDown(object sender, MouseEventArgs e)
         {
@@ -599,44 +602,44 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     LvlView.ClearSelection();
-                    if (DrawMode == DrawMode.Selection)
+                    if (TileDrawMode == TileDrawMode.Selection)
                     {
-                        DrawMode = PreviousMode;
+                        TileDrawMode = PreviousMode;
                     }
 
                     if (e.Button == MouseButtons.Right && MouseMode == MouseMode.RightClickSelection)
                     {
-                        PreviousMode = DrawMode;
-                        DrawMode = DrawMode.Selection;
+                        PreviousMode = TileDrawMode;
+                        TileDrawMode = TileDrawMode.Selection;
                     }
 
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Pencil:
+                        case TileDrawMode.Pencil:
                             CurrentMultiTile = new MultiTileAction();
                             CurrentMultiTile.AddTileChange(x, y, CurrentLevel.LevelData[x, y]);
                             CurrentLevel.SetTile(x, y, (byte)(DrawingTile));
                             ContinueDrawing = true;    
                             break;
 
-                        case DrawMode.Outline:
-                        case DrawMode.Rectangle:
-                        case DrawMode.Scatter:
-                        case DrawMode.Selection:
+                        case TileDrawMode.Outline:
+                        case TileDrawMode.Rectangle:
+                        case TileDrawMode.Scatter:
+                        case TileDrawMode.Selection:
                             StartX = x;
                             StartY = y;
                             ContinueDrawing = true;
                             LvlView.SelectionRectangle = new Rectangle(StartX, StartY, 1, 1);
                             break;
 
-                        case DrawMode.Line:
+                        case TileDrawMode.Line:
                             StartX = x;
                             StartY = y;
                             ContinueDrawing = true;
                             LvlView.SelectionLine = new Line(StartX, StartY, StartX, StartY);
                             break;
 
-                        case DrawMode.Fill:
+                        case TileDrawMode.Fill:
                             Point start = new Point(x, y);
                             Stack<Point> stack = new Stack<Point>();
                             stack.Push(start);
@@ -777,17 +780,17 @@ namespace Daiz.NES.Reuben
                 LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Pencil:
+                        case TileDrawMode.Pencil:
                             CurrentMultiTile.AddTileChange(x, y, CurrentLevel.LevelData[x, y]);
                             CurrentLevel.SetTile(x, y, (byte)DrawingTile);
                             break;
 
-                        case DrawMode.Outline:
-                        case DrawMode.Rectangle:
-                        case DrawMode.Selection:
-                        case DrawMode.Scatter:
+                        case TileDrawMode.Outline:
+                        case TileDrawMode.Rectangle:
+                        case TileDrawMode.Selection:
+                        case TileDrawMode.Scatter:
                             if (StartX == x && StartY == y) return;
                             if (x > StartX)
                             {
@@ -815,7 +818,7 @@ namespace Daiz.NES.Reuben
                             LvlView.SelectionRectangle = new Rectangle(FromX, FromY, (ToX - FromX) + 1, (ToY - FromY) + 1);
                             break;
 
-                        case DrawMode.Line:
+                        case TileDrawMode.Line:
                             if (y > StartY)
                             {
                                 if (x > StartX)
@@ -916,7 +919,7 @@ namespace Daiz.NES.Reuben
             {
                 _DrawTile = (int)NumBackground.Value;
             }
-            else if (DrawMode != DrawMode.Selection)
+            else if (TileDrawMode != TileDrawMode.Selection)
             {
                 if (e.Button == MouseButtons.Left)
                 {
@@ -934,15 +937,15 @@ namespace Daiz.NES.Reuben
             
             if (EditMode == EditMode.Tiles)
             {
-                if (DrawMode == DrawMode.Pencil)
+                if (TileDrawMode == TileDrawMode.Pencil)
                 {
                     UndoBuffer.Add(CurrentMultiTile);
                 }
                 else if ((LvlView.HasSelection || LvlView.HasSelectionLine))
                 {
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Rectangle:
+                        case TileDrawMode.Rectangle:
                             sX = LvlView.SelectionRectangle.X;
                             sY = LvlView.SelectionRectangle.Y;
 
@@ -960,7 +963,7 @@ namespace Daiz.NES.Reuben
                             LvlView.UpdateArea();
                             break;
 
-                        case DrawMode.Outline:
+                        case TileDrawMode.Outline:
                             sX = LvlView.SelectionRectangle.X;
                             sY = LvlView.SelectionRectangle.Y;
 
@@ -982,7 +985,7 @@ namespace Daiz.NES.Reuben
                             LvlView.UpdateArea();
                             break;
 
-                        case DrawMode.Line:
+                        case TileDrawMode.Line:
 
                             LvlView.DelayDrawing = true;
                             CurrentMultiTile = new MultiTileAction();
@@ -1043,11 +1046,11 @@ namespace Daiz.NES.Reuben
                             LvlView.ClearLine();
                             break;
 
-                        case DrawMode.Selection:
+                        case TileDrawMode.Selection:
                             useTransparentTile = e.Button == MouseButtons.Right;
                             break;
 
-                        case DrawMode.Scatter:
+                        case TileDrawMode.Scatter:
                             LvlView.DelayDrawing = true;
                             CurrentMultiTile = new MultiTileAction();
                             break;
@@ -1100,11 +1103,11 @@ namespace Daiz.NES.Reuben
         #endregion
 
         #region drawing modes
-        private DrawMode DrawMode = DrawMode.Pencil;
+        private TileDrawMode TileDrawMode = TileDrawMode.Pencil;
 
         private void TsbPencil_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Pencil;
+            TileDrawMode = TileDrawMode.Pencil;
             TsbPencil.Checked = true;
             TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
             SetMiscText(0);
@@ -1112,7 +1115,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbRectangle_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Rectangle;
+            TileDrawMode = TileDrawMode.Rectangle;
             TsbRectangle.Checked = true;
             TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
             SetMiscText(4);
@@ -1120,7 +1123,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbOutline_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Outline;
+            TileDrawMode = TileDrawMode.Outline;
             TsbOutline.Checked = true;
             TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
             SetMiscText(5);
@@ -1128,7 +1131,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbBucket_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Fill;
+            TileDrawMode = TileDrawMode.Fill;
             TsbBucket.Checked = true;
             TsbScatter.Checked = TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
             SetMiscText(6);
@@ -1136,7 +1139,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbLine_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Line;
+            TileDrawMode = TileDrawMode.Line;
             TsbLine.Checked = true;
             TsbScatter.Checked = TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
             SetMiscText(4);
@@ -1145,7 +1148,7 @@ namespace Daiz.NES.Reuben
         
         private void TsbScatter_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Scatter;
+            TileDrawMode = TileDrawMode.Scatter;
             TsbScatter.Checked = true;
             TsbLine.Checked = TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
             SetMiscText(4);        
@@ -1379,25 +1382,25 @@ namespace Daiz.NES.Reuben
             {
                 case 0:
                     EditMode = EditMode.Tiles;
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Pencil:
+                        case TileDrawMode.Pencil:
                             SetMiscText(0);
                             break;
 
-                        case DrawMode.Rectangle:
+                        case TileDrawMode.Rectangle:
                             SetMiscText(4);
                             break;
 
-                        case DrawMode.Outline:
+                        case TileDrawMode.Outline:
                             SetMiscText(5);
                             break;
 
-                        case DrawMode.Fill:
+                        case TileDrawMode.Fill:
                             SetMiscText(6);
                             break;
 
-                        case DrawMode.Scatter:
+                        case TileDrawMode.Scatter:
                             SetMiscText(6);
                             break;
                     }
@@ -1494,7 +1497,7 @@ namespace Daiz.NES.Reuben
                             LvlView.UpdateSprites();
                             CurrentSprite = null;
                         }
-                        else if (EditMode == EditMode.Tiles && DrawMode == DrawMode.Selection)
+                        else if (EditMode == EditMode.Tiles && TileDrawMode == TileDrawMode.Selection)
                         {
                             DeleteTiles();
                         }
@@ -1508,8 +1511,8 @@ namespace Daiz.NES.Reuben
                         ContinueDrawing = false;
                         LvlView.ClearSelection();
                         LvlView.ClearLine();
-                        if (DrawMode == DrawMode.Selection)
-                            DrawMode = PreviousMode;
+                        if (TileDrawMode == TileDrawMode.Selection)
+                            TileDrawMode = PreviousMode;
                         break;
                 }
             }
@@ -1647,6 +1650,13 @@ namespace Daiz.NES.Reuben
 
         private void Save()
         {
+            CurrentLevel.Settings.DrawMode = TileDrawMode;
+            CurrentLevel.Settings.ShowGrid = TsbGrid.Checked;
+            CurrentLevel.Settings.ShowStart = TsbStartPoint.Checked;
+            CurrentLevel.Settings.EditMode = EditMode;
+            CurrentLevel.Settings.BlockProperties = TsbProperties.Checked;
+            CurrentLevel.Settings.SpecialSprites = TsbSriteSpecials.Checked;
+
             CurrentLevel.StartAction = CmbActions.SelectedIndex;
             CurrentLevel.ClearValue = (int)NumBackground.Value;
             CurrentLevel.GraphicsBank = CmbGraphics.SelectedIndex;
@@ -1728,7 +1738,7 @@ namespace Daiz.NES.Reuben
                 if (MouseButtons == MouseButtons.Middle)
                     return (int)NumBackground.Value;
 
-                if(DrawMode != DrawMode.Selection)
+                if(TileDrawMode != TileDrawMode.Selection)
                 {
                     if (MouseButtons == MouseButtons.Left)
                         return LeftMouseTile;
@@ -1770,14 +1780,6 @@ namespace Daiz.NES.Reuben
 
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "ShowGrid", TsbGrid.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "SpecialTiles", TsbTileSpecials.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "SpecialSprites", TsbSriteSpecials.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "BlockProperties", TsbProperties.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "ShowStart", TsbStartPoint.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "Zoom", TsbZoom.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "Draw", DrawMode.ToString());
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "Layout", CmbLayouts.SelectedIndex);
             ProjectController.Save();
         }
 
@@ -1840,59 +1842,33 @@ namespace Daiz.NES.Reuben
         private void changeGuideColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog cDialog = new ColorDialog();
-            cDialog.Color = ProjectController.SettingsManager.GetLevelSetting<Color>(CurrentLevel.Guid, "VGuideColor");
+            cDialog.Color = CurrentLevel.Settings.VGuideColor;
             if (cDialog.ShowDialog() == DialogResult.OK)
             {
-                ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "VGuideColor", cDialog.Color);
-                PnlVerticalGuide.GuideColor = cDialog.Color;
+                CurrentLevel.Settings.VGuideColor = PnlVerticalGuide.GuideColor = cDialog.Color;
             }
         }
 
         private void changeGuideColorToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ColorDialog cDialog = new ColorDialog();
-            cDialog.Color = ProjectController.SettingsManager.GetLevelSetting<Color>(CurrentLevel.Guid, "HGuideColor");
+            cDialog.Color = CurrentLevel.Settings.HGuideColor;
             if (cDialog.ShowDialog() == DialogResult.OK)
             {
-                ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "HGuideColor", cDialog.Color);
-                PnlHorizontalGuide.GuideColor = cDialog.Color;
+                CurrentLevel.Settings.HGuideColor = PnlHorizontalGuide.GuideColor = cDialog.Color;
             }
         }
 
         private void NumSpecials_ValueChanged(object sender, EventArgs e)
         {
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "TransSpecials", (double) NumSpecials.Value);
+            CurrentLevel.Settings.ItemTransparency = (double) NumSpecials.Value;
             LvlView.FullUpdate();
         }
 
         private void NumProperties_ValueChanged(object sender, EventArgs e)
         {
-            ProjectController.SettingsManager.SetLevelSetting(CurrentLevel.Guid, "TransProps", (double) NumProperties.Value);
+            CurrentLevel.Settings.PropertyTransparency = (double)NumProperties.Value;
             LvlView.FullUpdate();
         }
-    }
-
-    public enum DrawMode
-    {
-        Pencil,
-        Line,
-        Fill,
-        Rectangle,
-        Outline,
-        Scatter,
-        Selection
-    }
-
-    public enum EditMode
-    {
-        Tiles,
-        Sprites,
-        Pointers
-    }
-
-    public enum MouseMode
-    {
-        RightClickSelection,
-        RightClickTile
     }
 }

@@ -41,7 +41,7 @@ namespace Daiz.NES.Reuben
 
         private void projectToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ReubenController.OpenProject();
+            MnuDebug.Enabled = MnuEditor.Enabled = MnuExport.Enabled = MnuImport.Enabled = MnuNewLevel.Enabled = MnuProject.Enabled = MnuReload.Enabled = MnuTools.Enabled = MnuWindows.Enabled = ReubenController.OpenProject();
         }
 
         private void paletteManagerToolStripMenuItem_Click(object sender, EventArgs e)

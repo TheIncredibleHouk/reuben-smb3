@@ -36,13 +36,39 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
-            LevelGuid = e.Attribute("levelguid").Value.ToGuid();
-            ExitType = e.Attribute("exittype").Value.ToInt();
-            XEnter = e.Attribute("xenter").Value.ToInt();
-            YEnter = e.Attribute("yenter").Value.ToInt();
-            XExit = e.Attribute("xexit").Value.ToInt();
-            YExit = e.Attribute("yexit").Value.ToInt();
-            ExitsLevel = e.Attribute("exitslevel").Value.ToBoolean();
+            foreach (var a in e.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "levelguid":
+                        LevelGuid = a.Value.ToGuid();
+                        break;
+
+                    case "exittype":
+                        ExitType = a.Value.ToInt();
+                        break;
+
+                    case "xenter":
+                        XEnter = a.Value.ToInt();
+                        break;
+
+                    case "yenter":
+                        YEnter = a.Value.ToInt();
+                        break;
+
+                    case "xexit":
+                        XExit = a.Value.ToInt();
+                        break;
+
+                    case "yexit":
+                        YExit = a.Value.ToInt();
+                        break;
+
+                    case "exitslevel":
+                        ExitsLevel = a.Value.ToBoolean();
+                        break;
+                }
+            }
             return true;
         }
 

@@ -34,7 +34,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 SignRom(ProjectController.ProjectManager.CurrentProject.Guid);
             }
 
-            if (!VerifyRomGuid(ProjectController.ProjectManager.CurrentProject.Guid)) return false;
+            //if (!VerifyRomGuid(ProjectController.ProjectManager.CurrentProject.Guid)) return false;
             
             WritePalette(ProjectController.PaletteManager.Palettes);
 
@@ -204,7 +204,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             foreach (var p in l.Pointers)
             {
-                yStart = p.YExit;
+                switch (p.ExitType)
+                {
+                    case 0:
+                        yStart = p.YExit;
+                        break;
+
+                    case 1:
+                    case 2:
+                    case 3:
+                        yStart = p.YExit - 1;
+                        break;
+                }
                 Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
                 Rom[levelAddress++] = (byte)p.XEnter;
                 Rom[levelAddress++] = (byte)p.YEnter;

@@ -49,6 +49,7 @@ namespace Daiz.NES.Reuben
             CmbPalettes.SelectedIndex = 0;
             CmbDefinitions.SelectedIndex = 0;
             BlsBlocks.SelectionChanged += new EventHandler<TEventArgs<MouseButtons>>(BlsBlocks_SelectionChanged);
+            BlsBlocks.SelectedIndex = 0;
         }
 
         void BlsBlocks_SelectionChanged(object sender, TEventArgs<MouseButtons> e)

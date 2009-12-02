@@ -34,12 +34,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public List<WorldPointer> Pointers { get; private set; }
         public byte[,] LevelData { get; private set; }
         public List<Sprite> SpriteData { get; private set; }
+        public LevelSettings Settings { get; private set; }
+
+        private byte[] CompressedData;
+        private bool ValidCompression;
 
         public World()
         {
             Pointers = new List<WorldPointer>();
             SpriteData = new List<Sprite>();
             LevelData = new byte[0x40, 0x1B];
+            Settings = new LevelSettings();
         }
 
         public void New(WorldInfo wi)
@@ -111,6 +116,28 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
             root.SetAttributeValue("worlddata", sb);
+
+
+            sb.Length = 0;
+            first = true;
+            if (ValidCompression)
+            {
+                for (int i = 0; i < CompressedData.Length; i++)
+                {
+                    if (first)
+                    {
+                        sb.Append(CompressedData[i]);
+                        first = false;
+                    }
+                    else
+                    {
+                        sb.Append("," + CompressedData[i]);
+                    }
+                }
+
+                root.SetAttributeValue("compresseddata", sb);
+            }
+
             XElement s = new XElement("spritedata");
 
             foreach (var spr in SpriteData)
@@ -126,10 +153,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             root.Add(p);
             root.Add(s);
+            root.Add(Settings.CreateElement());
             string fileName = ProjectController.WorldDirectory + @"\" + Guid + ".map";
             xDoc.Add(root);
             xDoc.Save(fileName);
 
+            ProjectController.WorldManager.GetWorldInfo(Guid).LastModified = DateTime.Now;
             return true;
         }
 
@@ -145,6 +174,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         
         public bool Load(string filename)
         {
+            string[] compressData = null;
+            string[] levelData = null;
+
             XDocument xDoc;
             try
             {
@@ -156,17 +188,60 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             XElement world = xDoc.Element("world");
-            Guid = world.Attribute("guid").Value.ToGuid();
-            GraphicsBank = world.Attribute("graphicsbank").Value.ToInt();
-            Music = world.Attribute("music").Value.ToInt();
-            Length = world.Attribute("length").Value.ToInt();
-            XStart = world.Attribute("xstart").Value.ToInt();
-            YStart = world.Attribute("ystart").Value.ToInt();
-            Unused1 = (byte) world.Attribute("unused1").Value.ToInt();
-            Palette = world.Attribute("palette").Value.ToInt();
-            AnimationBank = world.Attribute("animationbank").Value.ToInt();
 
-            string[] levelData = world.Attribute("worlddata").Value.Split(',');
+            foreach (var a in world.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "guid":
+                        Guid = a.Value.ToGuid();
+                        break;
+
+                    case "graphicsbank":
+                        GraphicsBank = a.Value.ToInt();
+                        break;
+
+                    case "music":
+                        Music = a.Value.ToInt();
+                        break;
+
+                    case "length":
+                        Length = a.Value.ToInt();
+                        break;
+
+                    case "xstart":
+                        XStart = a.Value.ToInt();
+                        break;
+
+                    case "ystart":
+                        YStart = a.Value.ToInt();
+                        break;
+
+                    case "unused1":
+                        Unused1 = (byte)a.Value.ToInt();
+                        break;
+
+                    case "palette":
+                        Palette = a.Value.ToInt();
+                        break;
+
+                    case "animationbank":
+                        AnimationBank = a.Value.ToInt();
+                        break;
+
+                    case "compresseddata":
+                        compressData = a.Value.Split(',');
+                        break;
+
+                    case "validcompression":
+                        ValidCompression = a.Value.ToBoolean();
+                        break;
+
+                    case "worlddata":
+                        levelData = a.Value.Split(',');
+                        break;
+                }
+            }
 
             int xPointer = 0, yPointer = 0;
             foreach(var c in levelData)
@@ -182,18 +257,43 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
-            foreach (var spr in world.Element("spritedata").Elements("sprite"))
+            if (compressData != null)
             {
-                Sprite s = new Sprite();
-                s.LoadFromElement(spr);
-                SpriteData.Add(s);
+                int index = 0;
+                CompressedData = new byte[compressData.Length];
+                foreach (var c in compressData)
+                {
+                    CompressedData[index++] = (byte)c.ToInt();
+                }
             }
 
-            foreach(var ptr in world.Element("pointers").Elements("pointer"))
+            foreach (var x in world.Elements())
             {
-                WorldPointer p = new WorldPointer();
-                p.LoadFromElement(ptr);
-                Pointers.Add(p);
+                switch (x.Name.LocalName)
+                {
+                    case "spritedata":
+                        foreach (var spr in x.Elements("sprite"))
+                        {
+                            Sprite s = new Sprite();
+                            s.LoadFromElement(spr);
+                            SpriteData.Add(s);
+                        }
+                        break;
+
+                    case "pointers":
+
+                        foreach (var ptr in x.Elements("pointer"))
+                        {
+                            WorldPointer p = new WorldPointer();
+                            p.LoadFromElement(ptr);
+                            Pointers.Add(p);
+                        }
+                        break;
+
+                    case "settings":
+                        Settings.LoadFromElement(x);
+                        break;
+                }
             }
 
             return true;
@@ -244,6 +344,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelData[x, y] = value;
             if (TileChanged != null) TileChanged(this, new TEventArgs<Point>(new Point(x, y)));
             if (TilesModified != null) TilesModified(this, new TEventArgs<TileInformation>(new TileInformation(previous, value)));
+            ValidCompression = false;
         }
 
         public byte[,] GetData(int X, int Y, int Width, int Height)
@@ -262,6 +363,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public byte[] GetCompressedData()
         {
+            if (ValidCompression) return CompressedData;
+
             int dataPointer = 0;
             byte[] outputData = new byte[5000];
             List<byte> nextChunk = new List<byte>();
@@ -411,6 +514,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             k += 0x10;
                             j--;
                         }
+
+                        if (j < 0)
+                        {
+                            j += 27;
+                            i--;
+                        }
+
                         previousValue = currentByte;
                     }
                 }
@@ -436,14 +546,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     break;
             }
 
-            byte[] returnData = new byte[dataPointer];
+            CompressedData = new byte[dataPointer];
 
             for (int i = 0; i < dataPointer; i++)
             {
-                returnData[i] = outputData[i];
+                CompressedData[i] = outputData[i];
             }
 
-            return returnData;
+            ProjectController.WorldManager.GetWorldInfo(Guid).LastCompressionSize = CompressedData.Length + (SpriteData.Count * 4) + (Pointers.Count * 3) + 5;
+            return CompressedData;
         }
     }
 }

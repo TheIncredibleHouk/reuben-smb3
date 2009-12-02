@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\EditorEnums.cs" />
     <Compile Include="Layout\LayoutManager.cs" />
     <Compile Include="Enums\Music.cs" />
     <Compile Include="Blocks\Block.cs" />
@@ -67,8 +68,7 @@
     <Compile Include="Patch\PatchBlock.cs" />
     <Compile Include="Patch\PatchManager.cs" />
     <Compile Include="ROM\RomManager.cs" />
-    <Compile Include="Settings\Setting.cs" />
-    <Compile Include="Settings\SettingsManager.cs" />
+    <Compile Include="Settings\LevelSettings.cs" />
     <Compile Include="Special\SpecialBlock.cs" />
     <Compile Include="Graphics\Tile.cs" />
     <Compile Include="Level\LevelType.cs" />
