@@ -17,9 +17,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public event EventHandler<TEventArgs<Sprite>> SpriteRemoved;
         public event EventHandler<TEventArgs<Point>> TileChanged;
         public event EventHandler<TEventArgs<TileInformation>> TilesModified;
-        public event EventHandler<TEventArgs<WorldPointer>> PointerAdded;
-        public event EventHandler<TEventArgs<WorldPointer>> PointerRemoved;
-
         public Guid Guid { get; set; }
         public int Type { get { return 0; } }
         public int ClearValue { get { return 0x02; } }
@@ -322,19 +319,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             Pointers.Add(p);
 
-            if (PointerAdded != null)
-            {
-                PointerAdded(this, new TEventArgs<WorldPointer>(p));
-            }
         }
 
         public void RemovePointer(WorldPointer p)
         {
             Pointers.Remove(p);
-            if (PointerRemoved != null)
-            {
-                PointerRemoved(this, new TEventArgs<WorldPointer>(p));
-            }
+ 
         }
 
         public void SetTile(int x, int y, byte value)

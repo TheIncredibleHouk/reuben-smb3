@@ -450,6 +450,9 @@ namespace Daiz.NES.Reuben
             else if (_PlacingPointer)
             {
                 _PlacingPointer = false;
+                CurrentWorld.AddPointer();
+                PntEditor.CurrentPointer = CurrentWorld.Pointers[CurrentWorld.Pointers.Count - 1];
+                CurrentPointer = PntEditor.CurrentPointer;
                 CurrentPointer.X = x;
                 CurrentPointer.Y = y;
                 PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
@@ -1399,12 +1402,9 @@ namespace Daiz.NES.Reuben
         #region pointers
         private void BtnAddPointer_Click(object sender, EventArgs e)
         {
-            CurrentWorld.AddPointer();
-            PntEditor.CurrentPointer = CurrentWorld.Pointers[CurrentWorld.Pointers.Count - 1];
             _PlacingPointer = true;
             if (!TsbPointers.Checked) TsbPointers.Checked = true;
             TabLevelInfo.Enabled = PnlDrawing.Enabled = false;
-            CurrentPointer = PntEditor.CurrentPointer;
         }
 
         private void BtnDeletePointer_Click(object sender, EventArgs e)
