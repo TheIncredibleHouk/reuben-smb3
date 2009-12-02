@@ -22,7 +22,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public static LevelManager LevelManager { get; private set; }
         public static WorldManager WorldManager { get; private set; }
         public static LayoutManager LayoutManager { get; private set; }
-        public static SettingsManager SettingsManager { get; private set; }
         public static string ProjectName;
 
         static ProjectController()
@@ -37,7 +36,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             PaletteManager = new PaletteManager();
             SpecialManager = new SpecialManager();
             LayoutManager = new LayoutManager();
-            SettingsManager = new SettingsManager();
             ReubenDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Reuben";
             if (!Directory.Exists(ReubenDirectory))
             {
@@ -47,27 +45,27 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public static bool CreateNewProject(string filename, string name)
         {
-            RootDirectory = filename.Substring(0, filename.LastIndexOf('\\'));
+            RootDirectory = filename.Substring(0, filename.LastIndexOf(Path.DirectorySeparatorChar));
             if (!Directory.Exists(RootDirectory))
             {
                 Directory.CreateDirectory(RootDirectory);
             }
-            LevelDirectory = RootDirectory + @"\Levels";
-            WorldDirectory = RootDirectory + @"\Worlds";
+            LevelDirectory = string.Format("{0}{1}Levels", RootDirectory, Path.DirectorySeparatorChar);
+            WorldDirectory = string.Format("{0}{1}Worlds" + RootDirectory, Path.DirectorySeparatorChar);
             Directory.CreateDirectory(LevelDirectory);
             Directory.CreateDirectory(WorldDirectory);
             ProjectName = name;
 
             // Load defaults
             SpriteManager.LoadDefaultSprites();
-            SpriteManager.Save(RootDirectory + @"\sprites.xml");
+            SpriteManager.Save(string.Format("{0}{1}sprites.xml", RootDirectory, Path.DirectorySeparatorChar));
 
             BlockManager.LoadDefault();
-            BlockManager.SaveDefinitions(RootDirectory + @"\" + ProjectName + ".tsa");
+            BlockManager.SaveDefinitions(string.Format("{0}{1}{2}.tsa", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
 
 
             GraphicsManager.LoadDefault();
-            GraphicsManager.SaveGraphics(RootDirectory + @"\" + ProjectName + ".chr");
+            GraphicsManager.SaveGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
 
             LevelManager.Default();
             WorldManager.Default();
@@ -77,33 +75,37 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             SpecialManager.LoadDefaultSpecialGraphics();
             SpecialManager.LoadDefaultSpecials();
-            SpecialManager.SaveGraphics(RootDirectory + @"\" + "special.chr");
-            SpecialManager.SaveSepcials(RootDirectory + @"\" + "special.xml");
+            SpecialManager.SaveGraphics(string.Format("{0}{1}special.chr", RootDirectory, Path.DirectorySeparatorChar));
+            SpecialManager.SaveSepcials(string.Format("{0}{1}special.xml", RootDirectory, Path.DirectorySeparatorChar));
 
             LayoutManager.LoadDefault();
             ProjectManager.New(name);
-            ProjectManager.Save(RootDirectory + @"\" + ProjectName + ".rbn");
+            ProjectManager.Save(string.Format("{0}{1}{2}.rbn", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
             return true;
         }
 
         public static bool LoadProject(string name)
         {
-            ProjectManager.Load(name);
+            if (!ProjectManager.Load(name)) return false;
             ProjectName = ProjectManager.CurrentProject.Name;
-            RootDirectory = name.Substring(0, name.LastIndexOf('\\')); ;
-            LevelDirectory = RootDirectory + @"\Levels";
-            WorldDirectory = RootDirectory + @"\Worlds";
+            RootDirectory = name.Substring(0, name.LastIndexOf(Path.DirectorySeparatorChar)); ;
+            LevelDirectory = string.Format("{0}{1}{2}", RootDirectory, Path.DirectorySeparatorChar, "Levels");
+            WorldDirectory = string.Format("{0}{1}{2}", RootDirectory, Path.DirectorySeparatorChar, "Worlds");
 
             // load from file
-            if (!SpriteManager.LoadSpritesFromFile(RootDirectory + @"\sprites.xml"))
+            if (!SpriteManager.LoadSpritesFromFile(string.Format("{0}{1}sprites.xml", RootDirectory, Path.DirectorySeparatorChar)))
                 SpriteManager.LoadDefaultSprites();
-            if (!BlockManager.LoadDefinitions(RootDirectory + @"\" + ProjectName + ".tsa"))
+
+            if (!BlockManager.LoadDefinitions(string.Format("{0}{1}{2}.tsa", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
                 BlockManager.LoadDefault();
-            if (!GraphicsManager.LoadGraphics(RootDirectory + @"\" + ProjectName + ".chr"))
+
+            if (!GraphicsManager.LoadGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
                 GraphicsManager.LoadDefault();
-            if (!SpecialManager.LoadSpecialGraphics(RootDirectory + @"\" + "special.chr"))
+
+            if (!SpecialManager.LoadSpecialGraphics(string.Format("{0}{1}special.chr", RootDirectory, Path.DirectorySeparatorChar)))
                 SpecialManager.LoadDefaultSpecialGraphics();
-            if (!SpecialManager.LoadSpecialDefinitions(RootDirectory + @"\" + "special.xml"))
+
+            if (!SpecialManager.LoadSpecialDefinitions(string.Format("{0}{1}special.xml", RootDirectory, Path.DirectorySeparatorChar)))
                 SpecialManager.LoadDefaultSpecials();
 
             return true;
@@ -111,7 +113,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public static bool Save()
         {
-            ProjectManager.Save(RootDirectory + @"\" + ProjectName + ".rbn");
+            ProjectManager.Save(string.Format("{0}{1}{2}.rbn", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
             return true;
         }
     }

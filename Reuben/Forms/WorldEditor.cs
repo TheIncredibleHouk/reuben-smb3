@@ -154,45 +154,50 @@ namespace Daiz.NES.Reuben
         {
             GetWorldInfo(w);
 
-            if (!ProjectController.SettingsManager.HasLevelSettings(w.Guid))
-            {
-                ProjectController.SettingsManager.AddLevelSettings(w.Guid);
-            }
+            TsbGrid.Checked = CurrentWorld.Settings.ShowGrid;
 
-            TsbGrid.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(w.Guid, "ShowGrid");
-            TsbZoom.Checked = ProjectController.SettingsManager.GetLevelSetting<bool>(w.Guid, "Zoom");
-
-            switch (ProjectController.SettingsManager.GetLevelSetting<string>(w.Guid, "Draw"))
+            switch (CurrentWorld.Settings.DrawMode)
             {
-                case "Pencil":
+                case TileDrawMode.Pencil:
                     TsbPencil.Checked = true;
-                    DrawMode = DrawMode.Pencil;
                     break;
 
-                case "Rectangle":
+                case TileDrawMode.Rectangle:
                     TsbRectangle.Checked = true;
-                    DrawMode = DrawMode.Rectangle;
                     break;
 
-                case "Outline":
+                case TileDrawMode.Outline:
                     TsbOutline.Checked = true;
-                    DrawMode = DrawMode.Outline;
                     break;
 
-                case "Line":
+                case TileDrawMode.Line:
                     TsbLine.Checked = true;
-                    DrawMode = DrawMode.Line;
                     break;
 
-                case "Fill":
+                case TileDrawMode.Fill:
                     TsbBucket.Checked = true;
-                    DrawMode = DrawMode.Fill;
                     break;
             }
 
-            CmbLayouts.SelectedIndex = ProjectController.SettingsManager.GetLevelSetting<int>(w.Guid, "Layout");
-            PnlHorizontalGuide.GuideColor = ProjectController.SettingsManager.GetLevelSetting<Color>(w.Guid, "HGuideColor");
-            PnlVerticalGuide.GuideColor = ProjectController.SettingsManager.GetLevelSetting<Color>(w.Guid, "VGuideColor");
+            switch(CurrentWorld.Settings.EditMode)
+            {
+                case EditMode.Tiles:
+                    TabEditSelector.SelectedIndex = 0;
+                        break;
+
+                case EditMode.Sprites:
+                    TabEditSelector.SelectedIndex = 1;
+                    break;
+
+                case EditMode.Pointers:
+                    TabEditSelector.SelectedIndex = 2;
+                    break;
+            }
+
+            CmbLayouts.SelectedIndex = CurrentWorld.Settings.Layout;
+            PnlHorizontalGuide.GuideColor = CurrentWorld.Settings.HGuideColor;
+            PnlVerticalGuide.GuideColor = CurrentWorld.Settings.VGuideColor;
+            TsbStartPoint.Checked = CurrentWorld.Settings.ShowStart;
 
             this.Text = ProjectController.WorldManager.GetWorldInfo(w.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
@@ -213,6 +218,7 @@ namespace Daiz.NES.Reuben
             CmbLength.SelectedItem = w.Length;
             PntEditor.CurrentPointer = null;
             BtnDeletePointer.Enabled = false;
+            TsbPointers.Checked = CurrentWorld.Settings.ShowPointers;
             LblStartPoint.Text = "X:" + w.XStart.ToHexString() + " Y: " + (w.YStart - 0x0F).ToHexString();
             WldView.DelayDrawing = false;
             WldView.FullUpdate();
@@ -415,7 +421,7 @@ namespace Daiz.NES.Reuben
         private bool useTransparentTile;
         private int StartX, StartY, FromX, FromY, ToX, ToY;
         private bool ContinueDragging;
-        private DrawMode PreviousMode;
+        private TileDrawMode PreviousMode;
 
         private void LvlView_MouseDown(object sender, MouseEventArgs e)
         {
@@ -441,6 +447,16 @@ namespace Daiz.NES.Reuben
                 SetMiscText(PreviousTextIndex);
                 LblStartPoint.Text = "X:" + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
             }
+            else if (_PlacingPointer)
+            {
+                _PlacingPointer = false;
+                CurrentPointer.X = x;
+                CurrentPointer.Y = y;
+                PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
+                WldView.SelectionRectangle = new Rectangle(x, y, 1, 1);
+                WldView.UpdatePoint(x, y);
+                PntEditor.UpdatePosition();
+            }
 
             else if (EditMode == EditMode.Tiles)
             {
@@ -452,43 +468,43 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     WldView.ClearSelection();
-                    if (DrawMode == DrawMode.Selection)
+                    if (TileDrawMode == TileDrawMode.Selection)
                     {
-                        DrawMode = PreviousMode;
+                        TileDrawMode = PreviousMode;
                     }
 
                     if (e.Button == MouseButtons.Right && MouseMode == MouseMode.RightClickSelection)
                     {
-                        PreviousMode = DrawMode;
-                        DrawMode = DrawMode.Selection;
+                        PreviousMode = TileDrawMode;
+                        TileDrawMode = TileDrawMode.Selection;
                     }
 
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Pencil:
+                        case TileDrawMode.Pencil:
                             CurrentMultiTile = new MultiTileAction();
                             CurrentMultiTile.AddTileChange(x, y, CurrentWorld.LevelData[x, y]);
                             CurrentWorld.SetTile(x, y, (byte)(DrawingTile));
-                            ContinueDrawing = true;    
+                            ContinueDrawing = true;
                             break;
 
-                        case DrawMode.Outline:
-                        case DrawMode.Rectangle:
-                        case DrawMode.Selection:
+                        case TileDrawMode.Outline:
+                        case TileDrawMode.Rectangle:
+                        case TileDrawMode.Selection:
                             StartX = x;
                             StartY = y;
                             ContinueDrawing = true;
                             WldView.SelectionRectangle = new Rectangle(StartX, StartY, 1, 1);
                             break;
 
-                        case DrawMode.Line:
+                        case TileDrawMode.Line:
                             StartX = x;
                             StartY = y;
                             ContinueDrawing = true;
                             WldView.SelectionLine = new Line(StartX, StartY, StartX, StartY);
                             break;
 
-                        case DrawMode.Fill:
+                        case TileDrawMode.Fill:
                             Point start = new Point(x, y);
                             Stack<Point> stack = new Stack<Point>();
                             stack.Push(start);
@@ -564,7 +580,7 @@ namespace Daiz.NES.Reuben
                 }
                 else if (CurrentSelectorSprite != null && MouseButtons == MouseButtons.Right)
                 {
-                    Sprite newSprite = new Sprite() {IsMapSprite = true,  X = x, Y = y, InGameID = CurrentSelectorSprite.InGameID };
+                    Sprite newSprite = new Sprite() { IsMapSprite = true, X = x, Y = y, InGameID = CurrentSelectorSprite.InGameID };
                     CurrentWorld.AddSprite(newSprite);
                     CurrentSprite = newSprite;
                     WldView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
@@ -620,16 +636,16 @@ namespace Daiz.NES.Reuben
                 LevelToolTip.SetToolTip(WldView, ProjectController.BlockManager.GetBlockString(CurrentWorld.Type, CurrentWorld.LevelData[x, y]) + "\n(" + CurrentWorld.LevelData[x, y].ToHexString() + ")");
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Pencil:
+                        case TileDrawMode.Pencil:
                             CurrentMultiTile.AddTileChange(x, y, CurrentWorld.LevelData[x, y]);
                             CurrentWorld.SetTile(x, y, (byte)DrawingTile);
                             break;
 
-                        case DrawMode.Outline:
-                        case DrawMode.Rectangle:
-                        case DrawMode.Selection:
+                        case TileDrawMode.Outline:
+                        case TileDrawMode.Rectangle:
+                        case TileDrawMode.Selection:
                             if (StartX == x && StartY == y) return;
                             if (x > StartX)
                             {
@@ -657,7 +673,7 @@ namespace Daiz.NES.Reuben
                             WldView.SelectionRectangle = new Rectangle(FromX, FromY, (ToX - FromX) + 1, (ToY - FromY) + 1);
                             break;
 
-                        case DrawMode.Line:
+                        case TileDrawMode.Line:
                             if (y > StartY)
                             {
                                 if (x > StartX)
@@ -731,9 +747,7 @@ namespace Daiz.NES.Reuben
                     CurrentPointer.X = x;
                     CurrentPointer.Y = y;
                     WldView.UpdatePoint(oldX, oldY);
-                    WldView.UpdatePoint(oldX, oldY + 1);
                     WldView.UpdatePoint(x, y);
-                    WldView.UpdatePoint(x, y + 1);
                     WldView.DelayDrawing = false;
                     WldView.SelectionRectangle = new Rectangle(CurrentPointer.X, CurrentPointer.Y, 1, 1);
                     PntEditor.UpdatePosition();
@@ -755,7 +769,7 @@ namespace Daiz.NES.Reuben
             {
                 _DrawTile = 0;
             }
-            else if (DrawMode != DrawMode.Selection)
+            else if (TileDrawMode != TileDrawMode.Selection)
             {
                 if (e.Button == MouseButtons.Left)
                 {
@@ -773,15 +787,15 @@ namespace Daiz.NES.Reuben
             
             if (EditMode == EditMode.Tiles)
             {
-                if (DrawMode == DrawMode.Pencil)
+                if (TileDrawMode == TileDrawMode.Pencil)
                 {
                     UndoBuffer.Add(CurrentMultiTile);
                 }
                 else if ((WldView.HasSelection || WldView.HasSelectionLine))
                 {
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Rectangle:
+                        case TileDrawMode.Rectangle:
                             sX = WldView.SelectionRectangle.X;
                             sY = WldView.SelectionRectangle.Y;
 
@@ -799,7 +813,7 @@ namespace Daiz.NES.Reuben
                             WldView.UpdateArea();
                             break;
 
-                        case DrawMode.Outline:
+                        case TileDrawMode.Outline:
                             sX = WldView.SelectionRectangle.X;
                             sY = WldView.SelectionRectangle.Y;
 
@@ -821,7 +835,7 @@ namespace Daiz.NES.Reuben
                             WldView.UpdateArea();
                             break;
 
-                        case DrawMode.Line:
+                        case TileDrawMode.Line:
 
                             WldView.DelayDrawing = true;
                             CurrentMultiTile = new MultiTileAction();
@@ -882,7 +896,7 @@ namespace Daiz.NES.Reuben
                             WldView.ClearLine();
                             break;
 
-                        case DrawMode.Selection:
+                        case TileDrawMode.Selection:
                             useTransparentTile = e.Button == MouseButtons.Right;
                             break;
                     }
@@ -905,28 +919,14 @@ namespace Daiz.NES.Reuben
         {
             WldView.DisplayStartingPosition = TsbStartPoint.Checked;
         }
-
-        private void TsbZoom_CheckedChanged(object sender, EventArgs e)
-        {
-            if (TsbZoom.Checked)
-            {
-                WldView.Zoom = 2;
-                PnlLengthControl.Size = new Size(PnlLengthControl.Size.Width * 2, PnlLengthControl.Size.Height * 2);
-            }
-            else
-            {
-                WldView.Zoom = 1;
-                PnlLengthControl.Size = new Size(PnlLengthControl.Size.Width / 2, PnlLengthControl.Size.Height / 2);
-            }
-        }
         #endregion
 
         #region drawing modes
-        private DrawMode DrawMode = DrawMode.Pencil;
+        private TileDrawMode TileDrawMode = TileDrawMode.Pencil;
 
         private void TsbPencil_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Pencil;
+            TileDrawMode = TileDrawMode.Pencil;
             TsbPencil.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
             SetMiscText(0);
@@ -934,7 +934,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbRectangle_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Rectangle;
+            TileDrawMode = TileDrawMode.Rectangle;
             TsbRectangle.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
             SetMiscText(4);
@@ -942,7 +942,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbOutline_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Outline;
+            TileDrawMode = TileDrawMode.Outline;
             TsbOutline.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
             SetMiscText(5);
@@ -950,7 +950,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbBucket_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Fill;
+            TileDrawMode = TileDrawMode.Fill;
             TsbBucket.Checked = true;
             TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
             SetMiscText(6);
@@ -958,7 +958,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbLine_Click(object sender, EventArgs e)
         {
-            DrawMode = DrawMode.Line;
+            TileDrawMode = TileDrawMode.Line;
             TsbLine.Checked = true;
             TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
             SetMiscText(4);
@@ -1016,20 +1016,13 @@ namespace Daiz.NES.Reuben
             BlsSelector.Redraw();
         }
 
-        private void BtnCompress_Click(object sender, EventArgs e)
-        {
-            //if (ReubenController.SaveTestLevel(CurrentWorld))
-            //{
-            //    MessageBox.Show("Rom successfully saved!");
-            //}
-        }
-
         private bool _SelectingStartPositionMode;
+        private bool _PlacingPointer;
+
         private void BtnStartPoint_Click(object sender, EventArgs e)
         {
             _SelectingStartPositionMode = true;
-            TabLevelInfo.Enabled = false;
-            PnlDrawing.Enabled = false;
+            TabLevelInfo.Enabled = PnlDrawing.Enabled = false;
             SetMiscText(3);
         }
 
@@ -1145,21 +1138,21 @@ namespace Daiz.NES.Reuben
             {
                 case 0:
                     EditMode = EditMode.Tiles;
-                    switch (DrawMode)
+                    switch (TileDrawMode)
                     {
-                        case DrawMode.Pencil:
+                        case TileDrawMode.Pencil:
                             SetMiscText(0);
                             break;
 
-                        case DrawMode.Rectangle:
+                        case TileDrawMode.Rectangle:
                             SetMiscText(4);
                             break;
 
-                        case DrawMode.Outline:
+                        case TileDrawMode.Outline:
                             SetMiscText(5);
                             break;
 
-                        case DrawMode.Fill:
+                        case TileDrawMode.Fill:
                             SetMiscText(6);
                             break;
                     }
@@ -1185,15 +1178,6 @@ namespace Daiz.NES.Reuben
             {
                 switch (e.KeyCode)
                 {
-                    case Keys.Add:
-                        if (!TsbZoom.Checked)
-                            TsbZoom.Checked = true;
-                        break;
-
-                    case Keys.Subtract:
-                        if (TsbZoom.Checked)
-                            TsbZoom.Checked = false;
-                        break;
 
                     case Keys.S:
                         Save();
@@ -1249,7 +1233,7 @@ namespace Daiz.NES.Reuben
                             WldView.UpdateSprites();
                             CurrentSprite = null;
                         }
-                        else if (EditMode == EditMode.Tiles && DrawMode == DrawMode.Selection)
+                        else if (EditMode == EditMode.Tiles && TileDrawMode == TileDrawMode.Selection)
                         {
                             DeleteTiles();
                         }
@@ -1263,8 +1247,8 @@ namespace Daiz.NES.Reuben
                         ContinueDrawing = false;
                         WldView.ClearSelection();
                         WldView.ClearLine();
-                        if (DrawMode == DrawMode.Selection)
-                            DrawMode = PreviousMode;
+                        if (TileDrawMode == TileDrawMode.Selection)
+                            TileDrawMode = PreviousMode;
                         break;
                 }
             }
@@ -1381,7 +1365,7 @@ namespace Daiz.NES.Reuben
         private void BtnLevelSize_Click(object sender, EventArgs e)
         {
             LblSpriteSize.Text = "Sprite Data Size: " + (((CurrentWorld.SpriteData.Count) * 3) + 1).ToString() + " bytes";
-            LblLevelSize.Text = "Level Data Size: " + (CurrentWorld.GetCompressedData().Length + 12 + (CurrentWorld.Pointers.Count * 9)).ToString() + " bytes";
+            LblLevelSize.Text = "Level Data Size: " + (CurrentWorld.GetCompressedData().Length + 5 + (CurrentWorld.Pointers.Count * 3)).ToString() + " bytes";
         }
 
         public Bitmap GetLevelBitmap()
@@ -1394,11 +1378,16 @@ namespace Daiz.NES.Reuben
         private void TsbSave_Click(object sender, EventArgs e)
         {
             Save();
-            //ReubenController.SaveTestLevel(CurrentWorld);
+            ProjectController.Save();
         }
 
         private void Save()
         {
+            CurrentWorld.Settings.DrawMode = TileDrawMode;
+            CurrentWorld.Settings.ShowGrid = TsbGrid.Checked;
+            CurrentWorld.Settings.ShowStart = TsbStartPoint.Checked;
+            CurrentWorld.Settings.EditMode = EditMode;
+
             CurrentWorld.GraphicsBank = CmbGraphics.SelectedIndex;
             CurrentWorld.Palette = CmbPalettes.SelectedIndex;
             CurrentWorld.Music = CmbMusic.SelectedIndex;
@@ -1412,10 +1401,9 @@ namespace Daiz.NES.Reuben
         {
             CurrentWorld.AddPointer();
             PntEditor.CurrentPointer = CurrentWorld.Pointers[CurrentWorld.Pointers.Count - 1];
-            WldView.DelayDrawing = true;
-            WldView.UpdatePoint(8, 0x16);
-            WldView.DelayDrawing = false;
-            WldView.SelectionRectangle = new Rectangle(0, 0, 1, 1);
+            _PlacingPointer = true;
+            if (!TsbPointers.Checked) TsbPointers.Checked = true;
+            TabLevelInfo.Enabled = PnlDrawing.Enabled = false;
             CurrentPointer = PntEditor.CurrentPointer;
         }
 
@@ -1467,7 +1455,7 @@ namespace Daiz.NES.Reuben
                 if (MouseButtons == MouseButtons.Middle)
                     return (int)0;
 
-                if(DrawMode != DrawMode.Selection)
+                if(TileDrawMode != TileDrawMode.Selection)
                 {
                     if (MouseButtons == MouseButtons.Left)
                         return LeftMouseTile;
@@ -1504,11 +1492,6 @@ namespace Daiz.NES.Reuben
 
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "ShowGrid", TsbGrid.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "ShowStart", TsbStartPoint.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "Zoom", TsbZoom.Checked);
-            ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "Draw", DrawMode.ToString());
-            ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "Layout", CmbLayouts.SelectedIndex);
             ProjectController.Save();
         }
 
@@ -1571,23 +1554,26 @@ namespace Daiz.NES.Reuben
         private void changeGuideColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog cDialog = new ColorDialog();
-            cDialog.Color = ProjectController.SettingsManager.GetLevelSetting<Color>(CurrentWorld.Guid, "VGuideColor");
+            cDialog.Color = CurrentWorld.Settings.VGuideColor;
             if (cDialog.ShowDialog() == DialogResult.OK)
             {
-                ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "VGuideColor", cDialog.Color);
-                PnlVerticalGuide.GuideColor = cDialog.Color;
+                CurrentWorld.Settings.VGuideColor = PnlVerticalGuide.GuideColor = cDialog.Color;
             }
         }
 
         private void changeGuideColorToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ColorDialog cDialog = new ColorDialog();
-            cDialog.Color = ProjectController.SettingsManager.GetLevelSetting<Color>(CurrentWorld.Guid, "HGuideColor");
+            cDialog.Color = CurrentWorld.Settings.HGuideColor;
             if (cDialog.ShowDialog() == DialogResult.OK)
             {
-                ProjectController.SettingsManager.SetLevelSetting(CurrentWorld.Guid, "HGuideColor", cDialog.Color);
-                PnlHorizontalGuide.GuideColor = cDialog.Color;
+                CurrentWorld.Settings.HGuideColor = PnlHorizontalGuide.GuideColor = cDialog.Color;
             }
+        }
+
+        private void TsbPointers_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentWorld.Settings.ShowPointers = WldView.ShowPointers = TsbPointers.Checked;
         }
     }
 }

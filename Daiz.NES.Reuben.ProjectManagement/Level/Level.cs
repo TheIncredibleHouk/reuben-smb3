@@ -38,6 +38,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public byte[,] LevelData { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
+        public byte[] CompressedData { get; private set; }
+        public LevelSettings Settings { get; private set; }
+        private bool ValidCompression;
 
         public List<Sprite> SpriteData { get; private set; }
         private LevelLayout _LevelLayout;
@@ -46,6 +49,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             Pointers = new List<LevelPointer>();
             SpriteData = new List<Sprite>();
+            ValidCompression = false;
+            Settings = new LevelSettings();
         }
 
         public LevelLayout LevelLayout
@@ -93,6 +98,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("startaction", StartAction);
             root.SetAttributeValue("scrolltype", ScrollType);
             root.SetAttributeValue("layout", LevelLayout);
+            root.SetAttributeValue("validcompression", ValidCompression);
 
             StringBuilder sb = new StringBuilder();
             
@@ -113,6 +119,26 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
             root.SetAttributeValue("leveldata", sb);
+
+            sb.Length = 0;
+            first = true;
+            if (ValidCompression)
+            {
+                for (int i = 0; i < CompressedData.Length; i++)
+                {
+                    if (first)
+                    {
+                        sb.Append(CompressedData[i]);
+                        first = false;
+                    }
+                    else
+                    {
+                        sb.Append("," + CompressedData[i]);
+                    }
+                }
+                root.SetAttributeValue("compresseddata", sb);
+            }
+
             XElement s = new XElement("spritedata");
 
             foreach (var spr in SpriteData)
@@ -128,6 +154,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             root.Add(p);
             root.Add(s);
+            root.Add(Settings.CreateElement());
             string fileName = ProjectController.LevelDirectory + @"\" + Guid + ".lvl";
             xDoc.Add(root);
             xDoc.Save(fileName);
@@ -143,6 +170,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public bool Load(string filename)
         {
             XDocument xDoc;
+            string[] levelData = null;
+            string[] compressData = null;
             SpriteData.Clear();
             
             try
@@ -155,25 +184,92 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             XElement level = xDoc.Element("level");
-            LevelLayout = (LevelLayout) Enum.Parse(typeof(LevelLayout), level.Attribute("layout").Value, true);
-            Guid = level.Attribute("guid").Value.ToGuid();
-            Type = level.Attribute("type").Value.ToInt();
-            ClearValue = level.Attribute("clearvalue").Value.ToInt();
-            GraphicsBank = level.Attribute("graphicsbank").Value.ToInt();
-            Music = level.Attribute("music").Value.ToInt();
-            Length = level.Attribute("length").Value.ToInt();
-            Time = level.Attribute("time").Value.ToInt();
-            XStart = level.Attribute("xstart").Value.ToInt();
-            YStart = level.Attribute("ystart").Value.ToInt();
-            Unused1 = (byte) level.Attribute("unused1").Value.ToInt();
-            Unused2 = (byte) level.Attribute("unused2").Value.ToInt();
-            Unused3 =(byte) level.Attribute("unused3").Value.ToInt();
-            Palette = level.Attribute("palette").Value.ToInt();
-            ScrollType = level.Attribute("scrolltype").Value.ToInt();
-            AnimationBank = level.Attribute("animationbank").Value.ToInt();
-            StartAction = level.Attribute("startaction").Value.ToInt();
 
-            string[] levelData = level.Attribute("leveldata").Value.Split(',');
+            foreach (var a in level.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "layout":
+                        LevelLayout = (LevelLayout)Enum.Parse(typeof(LevelLayout), a.Value, true);
+                        break;
+
+                    case "guid":
+                        Guid = a.Value.ToGuid();
+                        break;
+
+                    case "type":
+                        Type = a.Value.ToInt();
+                        break;
+
+                    case "clearvalue":
+                        ClearValue = a.Value.ToInt();
+                        break;
+
+                    case "graphicsbank":
+                        GraphicsBank = a.Value.ToInt();
+                        break;
+
+                    case "music":
+                        Music = a.Value.ToInt();
+                        break;
+
+                    case "length":
+                        Length = a.Value.ToInt();
+                        break;
+
+                    case "time":
+                        Time = a.Value.ToInt();
+                        break;
+
+                    case "xstart":
+                        XStart = a.Value.ToInt();
+                        break;
+
+                    case "ystart":
+                        YStart = a.Value.ToInt();
+                        break;
+
+                    case "unused1":
+                        Unused1 = (byte)a.Value.ToInt();
+                        break;
+
+                    case "unused2":
+                        Unused2 = (byte)a.Value.ToInt();
+                        break;
+
+                    case "unused3":
+                        Unused3 = (byte)a.Value.ToInt();
+                        break;
+
+                    case "palette":
+                        Palette = a.Value.ToInt();
+                        break;
+
+                    case "scrolltype":
+                        ScrollType = a.Value.ToInt();
+                        break;
+
+                    case "animationbank":
+                        AnimationBank = a.Value.ToInt();
+                        break;
+
+                    case "startaction":
+                        StartAction = a.Value.ToInt();
+                        break;
+
+                    case "leveldata":
+                        levelData = a.Value.Split(',');
+                        break;
+
+                    case "compresseddata":
+                        compressData = a.Value.Split(',');
+                        break;
+
+                    case "validcompression":
+                        ValidCompression = a.Value.ToBoolean();
+                        break;
+                }
+            }
 
             int xPointer = 0, yPointer = 0;
             foreach(var c in levelData)
@@ -189,18 +285,43 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
-            foreach (var spr in level.Element("spritedata").Elements("sprite"))
+            if (compressData != null)
             {
-                Sprite s = new Sprite();
-                s.LoadFromElement(spr);
-                SpriteData.Add(s);
+                int index = 0;
+                CompressedData = new byte[compressData.Length];
+                foreach (var c in compressData)
+                {
+                    CompressedData[index++] = (byte) c.ToInt();
+                }
             }
 
-            foreach(var ptr in level.Element("pointers").Elements("pointer"))
+            foreach (var x in level.Elements())
             {
-                LevelPointer p = new LevelPointer();
-                p.LoadFromElement(ptr);
-                Pointers.Add(p);
+                switch (x.Name.LocalName)
+                {
+
+                    case "spritedata":
+                        foreach (var spr in x.Elements("sprite"))
+                        {
+                            Sprite s = new Sprite();
+                            s.LoadFromElement(spr);
+                            SpriteData.Add(s);
+                        }
+                        break;
+
+                    case "pointers":
+                        foreach (var ptr in x.Elements("pointer"))
+                        {
+                            LevelPointer p = new LevelPointer();
+                            p.LoadFromElement(ptr);
+                            Pointers.Add(p);
+                        }
+                        break;
+
+                    case "settings":
+                        Settings.LoadFromElement(x);
+                        break;
+                }
             }
 
             return true;
@@ -254,6 +375,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelData[x, y] = value;
             if (TileChanged != null) TileChanged(this, new TEventArgs<Point>(new Point(x, y)));
             if (TilesModified != null) TilesModified(this, new TEventArgs<TileInformation>(new TileInformation(previous, value)));
+            ValidCompression = false;
         }
 
         public byte[,] GetData(int X, int Y, int Width, int Height)
@@ -272,16 +394,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public byte[] GetCompressedData()
         {
+            if (ValidCompression) return CompressedData;
             switch (LevelLayout)
             {
                 case LevelLayout.Horizontal:
-                    return GetCompressedDataHorizontal();
+                    CompressedData = GetCompressedDataHorizontal();
+                    break;
 
                 case LevelLayout.Vertical:
-                    return GetCompressedDataVertical();
+                    CompressedData = GetCompressedDataVertical();
+                    break;
             }
 
-            return null;
+            ValidCompression = true;
+            return CompressedData;
         }
 
         public byte[] GetCompressedDataHorizontal()
@@ -373,9 +499,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         repeatCount = 0;
                                     }
                                 }
-                                else if (currentByte == ClearValue || parameter == 0x40)
+                                else if (currentByte == ClearValue || parameter == 0x3F)
                                 {
-                                    if (clearCount == 1 || parameter == 0x40)
+                                    if (clearCount == 1 || parameter == 0x3F)
                                     {
                                         if (clearCount == 1)
                                         {
@@ -435,6 +561,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         {
                             k += 0x10;
                             j--;
+                        }
+
+                        if (j < 0)
+                        {
+                            j += 27;
+                            i--;
                         }
 
                         previousValue = currentByte;
@@ -560,9 +692,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         repeatCount = 0;
                                     }
                                 }
-                                else if (currentByte == ClearValue || parameter == 0x40)
+                                else if (currentByte == ClearValue || parameter == 0x3F)
                                 {
-                                    if (clearCount == 1 || parameter == 0x40)
+                                    if (clearCount == 1 || parameter == 0x3F)
                                     {
                                         if (clearCount == 1)
                                         {
@@ -622,6 +754,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             k += 0x10;
                             j--;
                         }
+
+                        if (j < 0)
+                        {
+                            j += 27;
+                            i--;
+                        }
+
+
                         previousValue = currentByte;
                     }
                 }

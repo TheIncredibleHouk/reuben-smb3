@@ -114,21 +114,25 @@ namespace Daiz.NES.Reuben
                 TxtName.Text = SelectedWorld.Name;
                 TrvProjectView.ContextMenuStrip = CtxWorlds;
                 LblType.Text = "World Map";
+                LblGuid.Text = SelectedWorld.WorldGuid.ToString();
+                LblLayout.Text = "Map";
+                LblModified.Text = SelectedWorld.LastModified.ToString();
+                LblSize.Text = SelectedWorld.LastCompressionSize + " bytes";
+                LblType.Text = "World Map";
             }
             else if (NodesToLevels.ContainsKey(node))
             {
                 SelectedLevel = NodesToLevels[node];
                 SelectedWorld = ProjectController.WorldManager.GetWorldInfo(SelectedLevel.WorldGuid);
                 TxtName.Text = SelectedLevel.Name;
-                TrvProjectView.ContextMenuStrip = CtxLevels;
                 LblType.Text = ProjectController.LevelManager.GetLevelType(SelectedLevel.LevelType).Name;
                 TrvProjectView.ContextMenuStrip = CtxLevels;
             }
             else
             {
                 TxtName.Text = (e.Node.Tag as Project).Name;
-                TrvProjectView.ContextMenuStrip = CtxWorlds;
                 LblType.Text = "Project";
+                TrvProjectView.ContextMenuStrip = null;
             }
         }
 

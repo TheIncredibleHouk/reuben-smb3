@@ -13,6 +13,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public string Name { get; set; }
         public int Ordinal { get; set; }
         public Guid WorldGuid { get; set; }
+        public int LastCompressionSize { get; set; }
+        public DateTime LastModified { get; set; }
 
         #region IXmlIO Members
 
@@ -22,14 +24,39 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("name", Name);
             x.SetAttributeValue("ordinal", Ordinal);
             x.SetAttributeValue("worldguid", WorldGuid);
+            x.SetAttributeValue("lastmodified", LastModified);
+            x.SetAttributeValue("lastcompressedsize", LastCompressionSize);
             return x;
         }
 
         public bool LoadFromElement(XElement e)
         {
-            Name = e.Attribute("name").Value;
-            Ordinal = e.Attribute("ordinal").Value.ToInt();
-            WorldGuid = e.Attribute("worldguid").Value.ToGuid();
+            foreach (var a in e.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "name":
+                        Name = a.Value;
+                        break;
+
+                    case "ordinal":
+                        Ordinal = a.Value.ToInt();
+                        break;
+
+                    case "worldguid":
+                        WorldGuid = a.Value.ToGuid();
+                        break;
+
+                    case "lastmodified":
+                        LastModified = a.Value.ToDateTime();
+                        break;
+
+                    case "lastcompressedsize":
+                        LastCompressionSize = a.Value.ToInt();
+                        break;
+                }
+            }
+
             return true;
         }
 

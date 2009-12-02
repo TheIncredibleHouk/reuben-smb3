@@ -23,6 +23,7 @@ namespace Daiz.NES.Reuben
             CurrentDefiniton = null;
             Redraw();
             HasSelection = false;
+            Zoom = 1;
         }
 
         public Bitmap BackBuffer { get; private set; }
@@ -219,8 +220,8 @@ namespace Daiz.NES.Reuben
 
             BitmapData data = BackBuffer.LockBits(new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-            double transSpecial = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransSpecials");
-            double transProperties = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransProps");
+            double transSpecial = CurrentLevel.Settings.ItemTransparency;
+            double transProperties = CurrentLevel.Settings.PropertyTransparency;
 
             for (int i = 0; i < _CurrentLevel.Height; i++)
             {
@@ -516,8 +517,8 @@ namespace Daiz.NES.Reuben
             RenderTile(_CurrentTable[b[1, 0]], 8, 0, PaletteIndex, data);
             RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
 
-            double transSpecial = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransSpecials");
-            double transProperties = ProjectController.SettingsManager.GetLevelSetting<double>(CurrentLevel.Guid, "TransProps");
+            double transSpecial = CurrentLevel.Settings.ItemTransparency;
+            double transProperties = CurrentLevel.Settings.PropertyTransparency;
 
             if (_ShowBlockProperties)
             {

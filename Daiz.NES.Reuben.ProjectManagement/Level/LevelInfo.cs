@@ -13,13 +13,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public string Name { get; set; }
         public Guid WorldGuid { get; set; }
         public Guid LevelGuid { get; set; }
-        public byte[] CompressionCache { get; private set; }
+        public int LastCompressionSize { get; set; }
         public int LevelType { get; set; }
-
-        public void SetCompressedDataCache(byte[] data)
-        {
-            CompressionCache = data;
-        }
+        public DateTime LastModified { get; set; }
+        public LevelLayout Layout { get; set; }
 
         #region IXmlIO Members
 
@@ -30,17 +27,42 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("worldguid", WorldGuid);
             x.SetAttributeValue("levelguid", LevelGuid);
             x.SetAttributeValue("leveltype", LevelType);
-            
+            x.SetAttributeValue("lastcompressionsize", LastCompressionSize);
+            x.SetAttributeValue("lastmodified", LastModified);
+            x.SetAttributeValue("layout", Layout);
 
             return x;
         }
 
         public bool LoadFromElement(XElement e)
         {
-            Name = e.Attribute("name").Value;
-            WorldGuid = e.Attribute("worldguid").Value.ToGuid();
-            LevelGuid = e.Attribute("levelguid").Value.ToGuid();
-            LevelType = e.Attribute("leveltype").Value.ToInt();
+            foreach (var a in e.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "name": Name = a.Value;
+                        break;
+
+                    case "worldguid":
+                        WorldGuid = a.Value.ToGuid();
+                        break;
+
+                    case "levelguid": LevelGuid = a.Value.ToGuid();
+                        break;
+
+                    case "leveltype": LevelType = a.Value.ToInt();
+                        break;
+
+                    case "lastcompressionsize": LastCompressionSize = a.Value.ToInt();
+                        break;
+
+                    case "lastmodified": LastModified = a.Value.ToDateTime();
+                        break;
+
+                    case "layout": Layout = (LevelLayout)Enum.Parse(typeof(LevelLayout), a.Value, true);
+                        break;
+                }
+            }
 
             return true;
         }

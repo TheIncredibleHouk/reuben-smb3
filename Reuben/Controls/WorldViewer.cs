@@ -23,6 +23,7 @@ namespace Daiz.NES.Reuben
             CurrentDefiniton = null;
             Redraw();
             HasSelection = false;
+            Zoom = 1;
         }
 
         public Bitmap BackBuffer { get; private set; }
@@ -218,13 +219,16 @@ namespace Daiz.NES.Reuben
                     RenderTile(_CurrentTable[b[1, 0]], j * 16 + 8, i * 16, PaletteIndex, data);
                     RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
 
-                    WorldPointer p = CurrentWorld.Pointers.Find(pt => (pt.X == j && pt.Y == i));
-                    if(p != null)
+                    if (_ShowPointers)
                     {
-                        RenderSpecialTileAlpha(_SpecialTable[0xA2], j * 16, i * 16, 5, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB2], j * 16, i * 16 + 8, 5, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xA3], j * 16 + 8, i * 16, 5, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB3], j * 16 + 8, i * 16 + 8, 5, data, 1.0);
+                        WorldPointer p = CurrentWorld.Pointers.Find(pt => (pt.X == j && pt.Y == i));
+                        if (p != null)
+                        {
+                            RenderSpecialTileAlpha(_SpecialTable[0xA2], j * 16, i * 16, 5, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xB2], j * 16, i * 16 + 8, 5, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xA3], j * 16 + 8, i * 16, 5, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xB3], j * 16 + 8, i * 16 + 8, 5, data, 1.0);
+                        }
                     }
 
                     if (_DisplayStartingPosition && j == CurrentWorld.XStart && i == CurrentWorld.YStart)
@@ -842,6 +846,18 @@ namespace Daiz.NES.Reuben
                 this.Width = _CurrentWorld.Width * 16 * Zoom;
                 this.Height = _CurrentWorld.Height * 16 * Zoom;
                 Redraw(new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height));
+            }
+        }
+
+        private bool _ShowPointers;
+        public bool ShowPointers
+        {
+            get { return _ShowPointers; }
+            set
+            {
+                _ShowPointers = value;
+                FullRender();
+                Redraw();
             }
         }
 

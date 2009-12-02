@@ -62,10 +62,28 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
-            X = e.Attribute("x").Value.ToInt();
-            Y = e.Attribute("y").Value.ToInt();
-            InGameID = e.Attribute("value").Value.ToInt();
-            Item = e.Attribute("item").Value.ToInt();
+            foreach (var a in e.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "x":
+                        X = a.Value.ToInt();
+                        break;
+
+                    case "y":
+                        Y = a.Value.ToInt();
+                        break;
+
+                    case "value":
+                        InGameID = a.Value.ToInt();
+                        break;
+
+                    case "item":
+                        Item = a.Value.ToInt();
+                        break;
+                }
+            }
+
             return true;
         }
 

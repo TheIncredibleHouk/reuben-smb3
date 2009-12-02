@@ -12,8 +12,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public event EventHandler<TEventArgs<BlockLayout>> LayoutAdded;
         public event EventHandler<TEventArgs<BlockLayout>> LayoutRemoved;
-
         public List<BlockLayout> BlockLayouts { get; set; }
+
         #region IXmlIO Members
 
         public LayoutManager()

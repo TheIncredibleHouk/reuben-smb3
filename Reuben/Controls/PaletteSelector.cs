@@ -41,7 +41,6 @@ namespace Daiz.NES.Reuben
                 {
                     if (_CurrentPalette != null)
                     {
-                        _CurrentPalette.BackgroundChanged -= _CurrentPalette_BackgroundChanged;
                         _CurrentPalette.PaletteChanged -= _CurrentPalette_PaletteChanged;
                     }
 
@@ -49,7 +48,6 @@ namespace Daiz.NES.Reuben
 
                     if (value != null)
                     {
-                        _CurrentPalette.BackgroundChanged += new EventHandler(_CurrentPalette_BackgroundChanged);
                         _CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(_CurrentPalette_PaletteChanged);
                     }
                 }
@@ -66,11 +64,6 @@ namespace Daiz.NES.Reuben
                 g.Dispose();
                 Invalidate();
             }
-        }
-
-        void _CurrentPalette_BackgroundChanged(object sender, EventArgs e)
-        {
-            RenderFull();
         }
 
         private bool DelayedRender = false;

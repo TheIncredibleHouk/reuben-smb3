@@ -36,8 +36,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
-            Bank = e.Attribute("bank").Value.ToInt();
-            Name = e.Attribute("name").Value;
+            foreach (var a in e.Attributes())
+            {
+                switch (a.Name.LocalName)
+                {
+                    case "bank":
+                        Bank = a.Value.ToInt();
+                        break;
+
+                    case "name":
+                        Name = a.Value;
+                        break;
+                }
+            }
+
             return true;
         }
 
