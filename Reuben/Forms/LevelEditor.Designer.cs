@@ -70,9 +70,6 @@
             this.LblMultiCoins = new System.Windows.Forms.Label();
             this.LblCoins = new System.Windows.Forms.Label();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.LblSpriteSize = new System.Windows.Forms.Label();
-            this.BtnLevelSize = new System.Windows.Forms.Button();
-            this.LblLevelSize = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.LblMisc = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -80,10 +77,7 @@
             this.PnlDrawing = new System.Windows.Forms.Panel();
             this.TabEditSelector = new Dotnetrix.Controls.TabControlEX();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
@@ -122,9 +116,6 @@
             this.TsbStartPoint = new System.Windows.Forms.ToolStripButton();
             this.TsbZoom = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.NumSpecials = new System.Windows.Forms.NumericUpDown();
-            this.NumProperties = new System.Windows.Forms.NumericUpDown();
             this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -155,7 +146,17 @@
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
+            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
+            this.LblSpriteSize = new System.Windows.Forms.Label();
+            this.BtnLevelSize = new System.Windows.Forms.Button();
+            this.LblLevelSize = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.NumSpecials = new System.Windows.Forms.NumericUpDown();
+            this.NumProperties = new System.Windows.Forms.NumericUpDown();
+            this.TsbPointers = new System.Windows.Forms.ToolStripButton();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -165,24 +166,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumTime)).BeginInit();
             this.TabCoins.SuspendLayout();
-            this.tabPage8.SuspendLayout();
             this.panel1.SuspendLayout();
             this.PnlDrawing.SuspendLayout();
             this.TabEditSelector.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.TlsDrawing.SuspendLayout();
             this.panel4.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).BeginInit();
             this.CtxVerticalGuide.SuspendLayout();
             this.CtxHorizontalGuide.SuspendLayout();
             this.PnlView.SuspendLayout();
             this.PnlLengthControl.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlInfo
@@ -207,7 +208,7 @@
             this.TabLevelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabLevelInfo.Location = new System.Drawing.Point(23, 23);
             this.TabLevelInfo.Name = "TabLevelInfo";
-            this.TabLevelInfo.SelectedIndex = 0;
+            this.TabLevelInfo.SelectedIndex = 1;
             this.TabLevelInfo.Size = new System.Drawing.Size(753, 137);
             this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabLevelInfo.TabIndex = 20;
@@ -625,6 +626,9 @@
             // 
             // TabCoins
             // 
+            this.TabCoins.Controls.Add(this.LblSpriteSize);
+            this.TabCoins.Controls.Add(this.BtnLevelSize);
+            this.TabCoins.Controls.Add(this.LblLevelSize);
             this.TabCoins.Controls.Add(this.LblInvisibleCoins);
             this.TabCoins.Controls.Add(this.LblTotalCoins);
             this.TabCoins.Controls.Add(this.LblPSwitchCoins);
@@ -636,7 +640,7 @@
             this.TabCoins.Padding = new System.Windows.Forms.Padding(3);
             this.TabCoins.Size = new System.Drawing.Size(745, 108);
             this.TabCoins.TabIndex = 2;
-            this.TabCoins.Text = "Coin Information";
+            this.TabCoins.Text = "Level Information";
             this.TabCoins.UseVisualStyleBackColor = true;
             this.TabCoins.Paint += new System.Windows.Forms.PaintEventHandler(this.TabCoins_Paint);
             // 
@@ -710,9 +714,6 @@
             // 
             // tabPage8
             // 
-            this.tabPage8.Controls.Add(this.LblSpriteSize);
-            this.tabPage8.Controls.Add(this.BtnLevelSize);
-            this.tabPage8.Controls.Add(this.LblLevelSize);
             this.tabPage8.Location = new System.Drawing.Point(4, 4);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
@@ -720,36 +721,6 @@
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Rom Info";
             this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // LblSpriteSize
-            // 
-            this.LblSpriteSize.AutoSize = true;
-            this.LblSpriteSize.Location = new System.Drawing.Point(6, 32);
-            this.LblSpriteSize.Margin = new System.Windows.Forms.Padding(3);
-            this.LblSpriteSize.Name = "LblSpriteSize";
-            this.LblSpriteSize.Size = new System.Drawing.Size(135, 13);
-            this.LblSpriteSize.TabIndex = 2;
-            this.LblSpriteSize.Text = "Sprite Data Size: Unknown";
-            // 
-            // BtnLevelSize
-            // 
-            this.BtnLevelSize.Location = new System.Drawing.Point(9, 76);
-            this.BtnLevelSize.Name = "BtnLevelSize";
-            this.BtnLevelSize.Size = new System.Drawing.Size(105, 23);
-            this.BtnLevelSize.TabIndex = 1;
-            this.BtnLevelSize.Text = "Update Level Size";
-            this.BtnLevelSize.UseVisualStyleBackColor = true;
-            this.BtnLevelSize.Click += new System.EventHandler(this.BtnLevelSize_Click);
-            // 
-            // LblLevelSize
-            // 
-            this.LblLevelSize.AutoSize = true;
-            this.LblLevelSize.Location = new System.Drawing.Point(6, 6);
-            this.LblLevelSize.Margin = new System.Windows.Forms.Padding(3);
-            this.LblLevelSize.Name = "LblLevelSize";
-            this.LblLevelSize.Size = new System.Drawing.Size(134, 13);
-            this.LblLevelSize.TabIndex = 0;
-            this.LblLevelSize.Text = "Level Data Size: Unknown";
             // 
             // tabPage7
             // 
@@ -833,15 +804,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
             // 
-            // BlvRight
-            // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
-            // 
             // LblSelectorHover
             // 
             this.LblSelectorHover.AutoSize = true;
@@ -850,35 +812,6 @@
             this.LblSelectorHover.Size = new System.Drawing.Size(37, 13);
             this.LblSelectorHover.TabIndex = 20;
             this.LblSelectorHover.Text = "Block:";
-            // 
-            // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
-            // 
-            // BlsSelector
-            // 
-            this.BlsSelector.BlockLayout = null;
-            this.BlsSelector.CurrentDefiniton = null;
-            this.BlsSelector.HaltRendering = false;
-            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
-            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.BlsSelector.Name = "BlsSelector";
-            this.BlsSelector.SelectedIndex = 0;
-            this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockProperties = false;
-            this.BlsSelector.ShowSpecialBlocks = false;
-            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
-            this.BlsSelector.SpecialDefnitions = null;
-            this.BlsSelector.SpecialTable = null;
-            this.BlsSelector.TabIndex = 0;
-            this.BlsSelector.Text = "blockSelector1";
-            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
-            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
             // 
             // CmbLayouts
             // 
@@ -980,14 +913,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(PntEditor);
+            this.groupBox1.Controls.Add(this.PntEditor);
             this.groupBox1.Location = new System.Drawing.Point(8, 16);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(251, 205);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
-            
             // 
             // TlsDrawing
             // 
@@ -1001,7 +933,7 @@
             this.TsbBucket,
             this.TsbScatter});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TlsDrawing.Location = new System.Drawing.Point(170, 0);
+            this.TlsDrawing.Location = new System.Drawing.Point(193, 0);
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -1083,9 +1015,10 @@
             // panel4
             // 
             this.panel4.Controls.Add(this.LblSprite);
-            this.panel4.Controls.Add(this.LblPositition);
-            this.panel4.Controls.Add(this.LblSelected);
+            this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.LblRightClickMode);
+            this.panel4.Controls.Add(this.LblSelected);
+            this.panel4.Controls.Add(this.LblPositition);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 363);
             this.panel4.Name = "panel4";
@@ -1098,7 +1031,7 @@
             this.LblSprite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblSprite.Location = new System.Drawing.Point(413, 0);
             this.LblSprite.Name = "LblSprite";
-            this.LblSprite.Size = new System.Drawing.Size(363, 29);
+            this.LblSprite.Size = new System.Drawing.Size(228, 29);
             this.LblSprite.TabIndex = 21;
             this.LblSprite.Text = "Sprite";
             this.LblSprite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1107,7 +1040,7 @@
             // 
             this.LblPositition.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LblPositition.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LblPositition.Location = new System.Drawing.Point(344, 0);
+            this.LblPositition.Location = new System.Drawing.Point(0, 0);
             this.LblPositition.Margin = new System.Windows.Forms.Padding(3);
             this.LblPositition.Name = "LblPositition";
             this.LblPositition.Size = new System.Drawing.Size(69, 29);
@@ -1119,7 +1052,7 @@
             // 
             this.LblSelected.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LblSelected.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LblSelected.Location = new System.Drawing.Point(206, 0);
+            this.LblSelected.Location = new System.Drawing.Point(69, 0);
             this.LblSelected.Margin = new System.Windows.Forms.Padding(3);
             this.LblSelected.Name = "LblSelected";
             this.LblSelected.Size = new System.Drawing.Size(138, 29);
@@ -1131,7 +1064,7 @@
             // 
             this.LblRightClickMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LblRightClickMode.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LblRightClickMode.Location = new System.Drawing.Point(0, 0);
+            this.LblRightClickMode.Location = new System.Drawing.Point(207, 0);
             this.LblRightClickMode.Margin = new System.Windows.Forms.Padding(3);
             this.LblRightClickMode.Name = "LblRightClickMode";
             this.LblRightClickMode.Size = new System.Drawing.Size(206, 29);
@@ -1211,13 +1144,14 @@
             this.TsbTileSpecials,
             this.TsbSriteSpecials,
             this.TsbProperties,
+            this.TsbPointers,
             this.TsbStartPoint,
             this.TsbZoom});
             this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(170, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(193, 25);
             this.toolStrip2.TabIndex = 22;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1275,7 +1209,7 @@
             // 
             this.TsbProperties.CheckOnClick = true;
             this.TsbProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbProperties.Image = ((System.Drawing.Image)(resources.GetObject("TsbProperties.Image")));
+            this.TsbProperties.Image = global::Daiz.NES.Reuben.Properties.Resources.blockprops;
             this.TsbProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbProperties.Name = "TsbProperties";
             this.TsbProperties.Size = new System.Drawing.Size(23, 22);
@@ -1307,7 +1241,6 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.TlsDrawing);
             this.panel2.Controls.Add(this.toolStrip2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1315,58 +1248,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(495, 27);
             this.panel2.TabIndex = 23;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.NumSpecials);
-            this.panel3.Controls.Add(this.NumProperties);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(358, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(135, 25);
-            this.panel3.TabIndex = 23;
-            // 
-            // NumSpecials
-            // 
-            this.NumSpecials.DecimalPlaces = 2;
-            this.NumSpecials.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NumSpecials.Location = new System.Drawing.Point(6, 3);
-            this.NumSpecials.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
-            this.NumSpecials.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSpecials.Name = "NumSpecials";
-            this.NumSpecials.Size = new System.Drawing.Size(58, 20);
-            this.NumSpecials.TabIndex = 26;
-            this.LevelToolTip.SetToolTip(this.NumSpecials, "Special Icon Transparency");
-            this.NumSpecials.ValueChanged += new System.EventHandler(this.NumSpecials_ValueChanged);
-            // 
-            // NumProperties
-            // 
-            this.NumProperties.DecimalPlaces = 2;
-            this.NumProperties.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NumProperties.Location = new System.Drawing.Point(70, 3);
-            this.NumProperties.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
-            this.NumProperties.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumProperties.Name = "NumProperties";
-            this.NumProperties.Size = new System.Drawing.Size(57, 20);
-            this.NumProperties.TabIndex = 25;
-            this.LevelToolTip.SetToolTip(this.NumProperties, "Block Property Transparency");
-            this.NumProperties.ValueChanged += new System.EventHandler(this.NumProperties_ValueChanged);
             // 
             // CtxVerticalGuide
             // 
@@ -1627,6 +1508,44 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 332);
             this.PnlVerticalGuide.TabIndex = 29;
             // 
+            // BlvRight
+            // 
+            this.BlvRight.CurrentBlock = null;
+            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Name = "BlvRight";
+            this.BlvRight.Size = new System.Drawing.Size(32, 32);
+            this.BlvRight.TabIndex = 21;
+            this.BlvRight.Text = "blockViewer1";
+            // 
+            // BlvLeft
+            // 
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 19;
+            this.BlvLeft.Text = "blockViewer1";
+            // 
+            // BlsSelector
+            // 
+            this.BlsSelector.BlockLayout = null;
+            this.BlsSelector.CurrentDefiniton = null;
+            this.BlsSelector.HaltRendering = false;
+            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
+            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.BlsSelector.Name = "BlsSelector";
+            this.BlsSelector.SelectedIndex = 0;
+            this.BlsSelector.SelectedTileIndex = 0;
+            this.BlsSelector.ShowBlockProperties = false;
+            this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
+            this.BlsSelector.SpecialDefnitions = null;
+            this.BlsSelector.SpecialTable = null;
+            this.BlsSelector.TabIndex = 0;
+            this.BlsSelector.Text = "blockSelector1";
+            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
+            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
+            // 
             // PntEditor
             // 
             this.PntEditor.CurrentPointer = null;
@@ -1635,6 +1554,98 @@
             this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
             this.PntEditor.Size = new System.Drawing.Size(239, 193);
             this.PntEditor.TabIndex = 0;
+            // 
+            // LblSpriteSize
+            // 
+            this.LblSpriteSize.AutoSize = true;
+            this.LblSpriteSize.Location = new System.Drawing.Point(305, 34);
+            this.LblSpriteSize.Margin = new System.Windows.Forms.Padding(3);
+            this.LblSpriteSize.Name = "LblSpriteSize";
+            this.LblSpriteSize.Size = new System.Drawing.Size(135, 13);
+            this.LblSpriteSize.TabIndex = 10;
+            this.LblSpriteSize.Text = "Sprite Data Size: Unknown";
+            // 
+            // BtnLevelSize
+            // 
+            this.BtnLevelSize.Location = new System.Drawing.Point(308, 78);
+            this.BtnLevelSize.Name = "BtnLevelSize";
+            this.BtnLevelSize.Size = new System.Drawing.Size(105, 23);
+            this.BtnLevelSize.TabIndex = 9;
+            this.BtnLevelSize.Text = "Update Level Size";
+            this.BtnLevelSize.UseVisualStyleBackColor = true;
+            // 
+            // LblLevelSize
+            // 
+            this.LblLevelSize.AutoSize = true;
+            this.LblLevelSize.Location = new System.Drawing.Point(305, 8);
+            this.LblLevelSize.Margin = new System.Windows.Forms.Padding(3);
+            this.LblLevelSize.Name = "LblLevelSize";
+            this.LblLevelSize.Size = new System.Drawing.Size(134, 13);
+            this.LblLevelSize.TabIndex = 8;
+            this.LblLevelSize.Text = "Level Data Size: Unknown";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.NumSpecials);
+            this.panel3.Controls.Add(this.NumProperties);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(641, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(135, 29);
+            this.panel3.TabIndex = 26;
+            // 
+            // NumSpecials
+            // 
+            this.NumSpecials.DecimalPlaces = 2;
+            this.NumSpecials.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.NumSpecials.Location = new System.Drawing.Point(7, 4);
+            this.NumSpecials.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.NumSpecials.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSpecials.Name = "NumSpecials";
+            this.NumSpecials.Size = new System.Drawing.Size(58, 20);
+            this.NumSpecials.TabIndex = 26;
+            this.LevelToolTip.SetToolTip(this.NumSpecials, "Special Icon Transparency");
+            this.NumSpecials.ValueChanged += new System.EventHandler(this.NumSpecials_ValueChanged);
+            // 
+            // NumProperties
+            // 
+            this.NumProperties.DecimalPlaces = 2;
+            this.NumProperties.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.NumProperties.Location = new System.Drawing.Point(71, 4);
+            this.NumProperties.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.NumProperties.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumProperties.Name = "NumProperties";
+            this.NumProperties.Size = new System.Drawing.Size(57, 20);
+            this.NumProperties.TabIndex = 25;
+            this.LevelToolTip.SetToolTip(this.NumProperties, "Block Property Transparency");
+            this.NumProperties.ValueChanged += new System.EventHandler(this.NumProperties_ValueChanged);
+            // 
+            // TsbPointers
+            // 
+            this.TsbPointers.CheckOnClick = true;
+            this.TsbPointers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbPointers.Image = global::Daiz.NES.Reuben.Properties.Resources.pointers;
+            this.TsbPointers.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbPointers.Name = "TsbPointers";
+            this.TsbPointers.Size = new System.Drawing.Size(23, 22);
+            this.TsbPointers.Text = "Toggle Pointers";
+            this.TsbPointers.Click += new System.EventHandler(this.TsbPointers_Click);
             // 
             // LevelEditor
             // 
@@ -1663,8 +1674,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumTime)).EndInit();
             this.TabCoins.ResumeLayout(false);
             this.TabCoins.PerformLayout();
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.PnlDrawing.ResumeLayout(false);
             this.TabEditSelector.ResumeLayout(false);
@@ -1672,6 +1681,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.TlsDrawing.ResumeLayout(false);
             this.TlsDrawing.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1679,13 +1689,13 @@
             this.toolStrip2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).EndInit();
             this.CtxVerticalGuide.ResumeLayout(false);
             this.CtxHorizontalGuide.ResumeLayout(false);
             this.PnlView.ResumeLayout(false);
             this.PnlLengthControl.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1746,9 +1756,6 @@
         private System.Windows.Forms.Label LblCoins;
         private System.Windows.Forms.Label LblInvisibleCoins;
         private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.Label LblSpriteSize;
-        private System.Windows.Forms.Button BtnLevelSize;
-        private System.Windows.Forms.Label LblLevelSize;
         private System.Windows.Forms.Panel PnlDrawing;
         private Dotnetrix.Controls.TabControlEX TabEditSelector;
         private System.Windows.Forms.TabPage tabPage1;
@@ -1813,10 +1820,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem changeGuideColorToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton TsbScatter;
+        private System.Windows.Forms.Label LblPositition;
+        private System.Windows.Forms.Label LblSpriteSize;
+        private System.Windows.Forms.Button BtnLevelSize;
+        private System.Windows.Forms.Label LblLevelSize;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.NumericUpDown NumSpecials;
         private System.Windows.Forms.NumericUpDown NumProperties;
-        private System.Windows.Forms.ToolStripButton TsbScatter;
-        private System.Windows.Forms.Label LblPositition;
+        private System.Windows.Forms.ToolStripButton TsbPointers;
     }
 }

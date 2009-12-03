@@ -15,8 +15,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public event EventHandler<TEventArgs<Sprite>> SpriteRemoved;
         public event EventHandler<TEventArgs<Point>> TileChanged;
         public event EventHandler<TEventArgs<TileInformation>> TilesModified;
-        public event EventHandler<TEventArgs<LevelPointer>> PointerAdded;
-        public event EventHandler<TEventArgs<LevelPointer>> PointerRemoved;
 
         public Guid Guid { get; set; }
         public int Type { get;set; }
@@ -352,20 +350,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 };
 
             Pointers.Add(p);
-
-            if (PointerAdded != null)
-            {
-                PointerAdded(this, new TEventArgs<LevelPointer>(p));
-            }
         }
 
         public void RemovePointer(LevelPointer p)
         {
             Pointers.Remove(p);
-            if (PointerRemoved != null)
-            {
-                PointerRemoved(this, new TEventArgs<LevelPointer>(p));
-            }
         }
 
         public void SetTile(int x, int y, byte value)

@@ -276,6 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\bucket.png" />
+    <Content Include="Images\blockprops.png" />
     <Content Include="Images\down.png" />
     <Content Include="Images\erase.png" />
     <None Include="Images\mario.png" />

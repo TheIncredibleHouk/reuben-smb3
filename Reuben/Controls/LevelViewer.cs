@@ -273,13 +273,16 @@ namespace Daiz.NES.Reuben
                         }
                     }
 
-                    LevelPointer p = CurrentLevel.Pointers.Find(pt => (pt.XEnter == j || pt.XEnter + 1 == j) && (pt.YEnter == i || pt.YEnter + 1 == i));
-                    if(p != null)
+                    if (_ShowPointers)
                     {
-                        RenderSpecialTileAlpha(_SpecialTable[0xA2], j * 16, i * 16, 5, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB2], j * 16, i * 16 + 8, 5, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xA3], j * 16 + 8, i * 16, 5, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB3], j * 16 + 8, i * 16 + 8, 5, data, 1.0);
+                        LevelPointer p = CurrentLevel.Pointers.Find(pt => (pt.XEnter == j || pt.XEnter + 1 == j) && (pt.YEnter == i || pt.YEnter + 1 == i));
+                        if (p != null)
+                        {
+                            RenderSpecialTileAlpha(_SpecialTable[0xA2], j * 16, i * 16, 5, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xB2], j * 16, i * 16 + 8, 5, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xA3], j * 16 + 8, i * 16, 5, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xB3], j * 16 + 8, i * 16 + 8, 5, data, 1.0);
+                        }
                     }
 
                     if (_DisplayStartingPosition && j == CurrentLevel.XStart && i == CurrentLevel.YStart)
@@ -978,6 +981,18 @@ namespace Daiz.NES.Reuben
             {
                 FullRender();
                 FullSpriteRender();
+                Redraw();
+            }
+        }
+
+        private bool _ShowPointers;
+        public bool ShowPointers
+        {
+            get { return _ShowPointers; }
+            set
+            {
+                _ShowPointers = value;
+                FullRender();
                 Redraw();
             }
         }

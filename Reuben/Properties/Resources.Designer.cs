@@ -60,6 +60,13 @@ namespace Daiz.NES.Reuben.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap blockprops {
+            get {
+                object obj = ResourceManager.GetObject("blockprops", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap bucket {
             get {
                 object obj = ResourceManager.GetObject("bucket", resourceCulture);
