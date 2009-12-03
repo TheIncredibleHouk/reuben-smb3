@@ -287,6 +287,10 @@
     <Content Include="Images\pointers.png" />
     <Content Include="Images\selection.png" />
     <Content Include="Images\up.png" />
+    <Content Include="Resources\CopyHS.png" />
+    <Content Include="Resources\CutHS.png" />
+    <Content Include="Resources\DeleteHS.png" />
+    <Content Include="Resources\PasteHS.png" />
     <Content Include="Resources\reuben.ico" />
     <Content Include="reuben.ico" />
     <None Include="Resources\saveHS.png" />

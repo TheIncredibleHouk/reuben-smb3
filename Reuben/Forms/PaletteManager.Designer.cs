@@ -40,10 +40,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.BtnRename = new System.Windows.Forms.Button();
-            this.FpsFull = new Daiz.NES.Reuben.FullPaletteSelector();
-            this.PslCurrent = new Daiz.NES.Reuben.PaletteSelector();
             this.BtnClose = new System.Windows.Forms.Button();
             this.LblTransparent = new System.Windows.Forms.Label();
+            this.LblPaletteHover = new System.Windows.Forms.Label();
+            this.LblHover2 = new System.Windows.Forms.Label();
+            this.FpsFull = new Daiz.NES.Reuben.FullPaletteSelector();
+            this.PslCurrent = new Daiz.NES.Reuben.PaletteSelector();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,9 +128,9 @@
             this.LblSelected.Margin = new System.Windows.Forms.Padding(3);
             this.LblSelected.Name = "LblSelected";
             this.LblSelected.Padding = new System.Windows.Forms.Padding(3);
-            this.LblSelected.Size = new System.Drawing.Size(58, 19);
+            this.LblSelected.Size = new System.Drawing.Size(73, 19);
             this.LblSelected.TabIndex = 13;
-            this.LblSelected.Text = "Selected:";
+            this.LblSelected.Text = "Selected: 00";
             // 
             // label5
             // 
@@ -141,7 +143,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(27, 335);
+            this.groupBox1.Location = new System.Drawing.Point(27, 348);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(256, 53);
             this.groupBox1.TabIndex = 15;
@@ -168,29 +170,9 @@
             this.BtnRename.UseVisualStyleBackColor = true;
             this.BtnRename.Click += new System.EventHandler(this.BtnRename_Click);
             // 
-            // FpsFull
-            // 
-            this.FpsFull.Location = new System.Drawing.Point(27, 240);
-            this.FpsFull.Name = "FpsFull";
-            this.FpsFull.SelectedColor = 0;
-            this.FpsFull.Size = new System.Drawing.Size(256, 64);
-            this.FpsFull.TabIndex = 7;
-            this.FpsFull.Text = "fullPaletteSelector1";
-            // 
-            // PslCurrent
-            // 
-            this.PslCurrent.CurrentPalette = null;
-            this.PslCurrent.Location = new System.Drawing.Point(27, 158);
-            this.PslCurrent.Name = "PslCurrent";
-            this.PslCurrent.SelectablePaletteMode = false;
-            this.PslCurrent.Size = new System.Drawing.Size(256, 32);
-            this.PslCurrent.TabIndex = 4;
-            this.PslCurrent.Text = "paletteSelector1";
-            this.PslCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PslCurrent_MouseDown);
-            // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(189, 399);
+            this.BtnClose.Location = new System.Drawing.Point(189, 310);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(94, 23);
             this.BtnClose.TabIndex = 17;
@@ -207,11 +189,59 @@
             this.LblTransparent.TabIndex = 18;
             this.LblTransparent.Text = "Right click to set a color to transparent";
             // 
+            // LblPaletteHover
+            // 
+            this.LblPaletteHover.AutoSize = true;
+            this.LblPaletteHover.Location = new System.Drawing.Point(225, 133);
+            this.LblPaletteHover.Margin = new System.Windows.Forms.Padding(3);
+            this.LblPaletteHover.Name = "LblPaletteHover";
+            this.LblPaletteHover.Padding = new System.Windows.Forms.Padding(3);
+            this.LblPaletteHover.Size = new System.Drawing.Size(55, 19);
+            this.LblPaletteHover.TabIndex = 19;
+            this.LblPaletteHover.Text = "Color: 00";
+            this.LblPaletteHover.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LblHover2
+            // 
+            this.LblHover2.AutoSize = true;
+            this.LblHover2.Location = new System.Drawing.Point(225, 215);
+            this.LblHover2.Margin = new System.Windows.Forms.Padding(3);
+            this.LblHover2.Name = "LblHover2";
+            this.LblHover2.Padding = new System.Windows.Forms.Padding(3);
+            this.LblHover2.Size = new System.Drawing.Size(55, 19);
+            this.LblHover2.TabIndex = 20;
+            this.LblHover2.Text = "Color: 00";
+            this.LblHover2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // FpsFull
+            // 
+            this.FpsFull.Location = new System.Drawing.Point(27, 240);
+            this.FpsFull.Name = "FpsFull";
+            this.FpsFull.SelectedColor = 0;
+            this.FpsFull.Size = new System.Drawing.Size(256, 64);
+            this.FpsFull.TabIndex = 7;
+            this.FpsFull.Text = "fullPaletteSelector1";
+            this.FpsFull.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FpsFull_MouseMove);
+            // 
+            // PslCurrent
+            // 
+            this.PslCurrent.CurrentPalette = null;
+            this.PslCurrent.Location = new System.Drawing.Point(27, 158);
+            this.PslCurrent.Name = "PslCurrent";
+            this.PslCurrent.SelectablePaletteMode = false;
+            this.PslCurrent.Size = new System.Drawing.Size(256, 32);
+            this.PslCurrent.TabIndex = 4;
+            this.PslCurrent.Text = "paletteSelector1";
+            this.PslCurrent.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PslCurrent_MouseMove);
+            this.PslCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PslCurrent_MouseDown);
+            // 
             // PaletteManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(305, 434);
+            this.Controls.Add(this.LblHover2);
+            this.Controls.Add(this.LblPaletteHover);
             this.Controls.Add(this.LblTransparent);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnRename);
@@ -255,5 +285,7 @@
         private System.Windows.Forms.Button BtnRename;
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.Label LblTransparent;
+        private System.Windows.Forms.Label LblPaletteHover;
+        private System.Windows.Forms.Label LblHover2;
     }
 }
