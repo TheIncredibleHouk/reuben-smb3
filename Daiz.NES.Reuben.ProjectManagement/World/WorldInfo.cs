@@ -15,6 +15,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public Guid WorldGuid { get; set; }
         public int LastCompressionSize { get; set; }
         public DateTime LastModified { get; set; }
+        public bool IsNoWorld { get; set; }
 
         #region IXmlIO Members
 
@@ -26,6 +27,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("worldguid", WorldGuid);
             x.SetAttributeValue("lastmodified", LastModified);
             x.SetAttributeValue("lastcompressedsize", LastCompressionSize);
+            x.SetAttributeValue("isnoworld", IsNoWorld);
             return x;
         }
 
@@ -53,6 +55,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "lastcompressedsize":
                         LastCompressionSize = a.Value.ToInt();
+                        break;
+
+                    case "isnoworld":
+                        IsNoWorld = a.Value.ToBoolean();
                         break;
                 }
             }

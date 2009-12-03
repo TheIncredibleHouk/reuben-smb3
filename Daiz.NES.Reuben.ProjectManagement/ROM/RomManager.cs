@@ -98,16 +98,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
                     address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
 
-                    Rom[0x18BD0 + ((wi.Ordinal - 1) * 4)] = (byte)bank;
-                    Rom[0x18BD1 + ((wi.Ordinal - 1) * 4)] = (byte)((address & 0xFF00) >> 8);
-                    Rom[0x18BD2 + ((wi.Ordinal - 1) * 4)] = (byte)(address & 0x00FF);
+                    Rom[0x18BD0 + ((wi.Ordinal) * 4)] = (byte)bank;
+                    Rom[0x18BD1 + ((wi.Ordinal) * 4)] = (byte)((address & 0xFF00) >> 8);
+                    Rom[0x18BD2 + ((wi.Ordinal) * 4)] = (byte)(address & 0x00FF);
 
                     levelDataPointer = WriteWorld(w, levelDataPointer);
-                    Rom[0x15610 + wi.Ordinal - 1] = (byte) (w.Length << 4);
-                    Rom[0x17CD0 + wi.Ordinal - 1] = (byte)((w.YStart - 0x0F) << 4);
+                    Rom[0x15610 + wi.Ordinal] = (byte) (w.Length << 4);
+                    Rom[0x17CD0 + wi.Ordinal] = (byte)((w.YStart - 0x0F) << 4);
                     
-                    Rom[0x17CE0 + wi.Ordinal - 1] = (byte)((w.XStart & 0x0F) << 4);
-                    Rom[0x17CF0 + wi.Ordinal - 1] = (byte)(w.XStart & 0xF0);
+                    Rom[0x17CE0 + wi.Ordinal] = (byte)((w.XStart & 0x0F) << 4);
+                    Rom[0x17CF0 + wi.Ordinal] = (byte)(w.XStart & 0xF0);
 
                     if (levelDataPointer >= 0xFC000)
                         return false;

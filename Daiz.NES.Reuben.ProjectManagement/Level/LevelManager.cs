@@ -12,7 +12,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
     public class LevelManager : IXmlIO
     {
         public event EventHandler<TEventArgs<LevelInfo>> LevelAdded;
-        public event EventHandler<TEventArgs<LevelInfo>> LevelRemoved;
 
         public Level CurrentLevel { get; private set; }
         public List<LevelType> LevelTypes { get; private set; }
@@ -208,14 +207,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Levels.Remove(li);
             levelLookup.Remove(li.LevelGuid);
 
-            if (File.Exists(ProjectController.LevelDirectory + @"\" + li.LevelGuid + ".lvl"))
+            if (File.Exists(string.Format("{0}{1}{2}.lvl", ProjectController.LevelDirectory, Path.DirectorySeparatorChar, li.LevelGuid)))
             {
-                File.Delete(ProjectController.LevelDirectory + @"\" + li.LevelGuid + ".lvl");
-            }
-
-            if(LevelRemoved != null)
-            {
-                LevelRemoved(this, new TEventArgs<LevelInfo>(li));
+                File.Delete(string.Format("{0}{1}{2}.lvl", ProjectController.LevelDirectory, Path.DirectorySeparatorChar, li.LevelGuid));
             }
         }
 
