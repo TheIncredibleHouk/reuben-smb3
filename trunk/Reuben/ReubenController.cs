@@ -49,6 +49,19 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        public static void CreateNewWorld()
+        {
+            InputForm iForm = new InputForm();
+            string name = iForm.GetInput("Please enter a world name.");
+            if (name != null)
+            {
+                WorldInfo wi = new WorldInfo();
+                wi.WorldGuid = Guid.NewGuid();
+                wi.Name = name;
+                ProjectController.WorldManager.AddWorld(wi);
+            }
+        }
+
         public static bool OpenProject()
         {
             OpenFileDialog OFD = new OpenFileDialog();
@@ -202,14 +215,6 @@ namespace Daiz.NES.Reuben
         private static void le_Activated(object sender, EventArgs e)
         {
             ActiveEditor = (Form)sender;
-        }
-
-        public static void CloseLevel(Guid guid)
-        {
-            if (editorTable.ContainsKey(guid))
-            {
-                editorTable[guid].Close();
-            }
         }
 
         public static void OpenLayoutManager()
@@ -413,6 +418,21 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        public static void CloseLevelEditor(LevelInfo li)
+        {
+            if (editorTable.ContainsKey(li.LevelGuid))
+            {
+                editorTable[li.LevelGuid].Close();
+            }
+        }
+
+        public static void CloseWorldEditor(WorldInfo wi)
+        {
+            if (editorTable.ContainsKey(wi.WorldGuid))
+            {
+                editorTable[wi.WorldGuid].Close();
+            }
+        }
         private static Form ActiveEditor;
         public static Main MainWindow { get; set; }
     }

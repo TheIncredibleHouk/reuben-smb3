@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class WorldManager : IXmlIO
     {
+        public event EventHandler<TEventArgs<WorldInfo>> WorldAdded;
         private Dictionary<Guid, WorldInfo> worldLookup;
         public List<WorldInfo> Worlds { get; private set; }
 
@@ -21,15 +23,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public void Default()
         {
             Worlds = new List<WorldInfo>();
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Grass Land", Ordinal = 1, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Desert Land", Ordinal = 2, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Water Land", Ordinal = 3, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Giant Land", Ordinal = 4, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Sky Land", Ordinal = 5, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Winter Land", Ordinal = 6, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Pipe Land", Ordinal = 7, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "Dark Land", Ordinal = 8, WorldGuid = Guid.NewGuid() });
-            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "No World", Ordinal = -1, WorldGuid = Guid.NewGuid() });
+            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "First World", Ordinal = 0, WorldGuid = Guid.NewGuid() });
+            Worlds.Add(new WorldInfo() { LastModified = DateTime.Now, Name = "No World", Ordinal = 25, WorldGuid = Guid.NewGuid(), IsNoWorld = true });
 
             worldLookup = new Dictionary<Guid, WorldInfo>();
             foreach (var w in Worlds)
@@ -46,6 +41,45 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             return null;
+        }
+
+        public WorldInfo GetNoWorld()
+        {
+            return Worlds.Last();
+        }
+
+        public bool AddWorld(WorldInfo wi)
+        {
+            if (worldLookup.ContainsKey(wi.WorldGuid)) return false;
+
+            wi.Ordinal = Worlds.Count - 1;
+            Worlds.Insert(Worlds.Count - 1, wi);
+            worldLookup.Add(wi.WorldGuid, wi);
+            if (WorldAdded != null)
+            {
+                WorldAdded(this, new TEventArgs<WorldInfo>(wi));
+            }
+            return true;
+        }
+
+        public void RemoveWorld(WorldInfo wi)
+        {
+            Worlds.Remove(wi);
+            worldLookup.Remove(wi.WorldGuid);
+
+            if (File.Exists(string.Format("{0}{1}{2}.map", ProjectController.WorldDirectory, Path.DirectorySeparatorChar, wi.WorldGuid)))
+            {
+                File.Delete(string.Format("{0}{1}{2}.map", ProjectController.WorldDirectory, Path.DirectorySeparatorChar, wi.WorldGuid));
+            }
+
+            int worldIndex = 0;
+            foreach (var w in Worlds)
+            {
+                if (!w.IsNoWorld)
+                {
+                    w.Ordinal = worldIndex++;
+                }
+            }
         }
 
         #region IXmlIO Members
@@ -71,6 +105,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 WorldInfo wi = new WorldInfo();
                 wi.LoadFromElement(w);
+                if (!wi.IsNoWorld)
+                {
+                    wi.Ordinal = Worlds.Count;
+                }
+                
                 Worlds.Add(wi);
                 worldLookup.Add(wi.WorldGuid, wi);
             }
