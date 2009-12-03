@@ -13,7 +13,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public event EventHandler<TEventArgs<LevelInfo>> LevelAdded;
 
-        public Level CurrentLevel { get; private set; }
         public List<LevelType> LevelTypes { get; private set; }
         private Dictionary<int, LevelType> _typeTable;
         public List<LevelInfo> Levels { get; private set; }
@@ -54,8 +53,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 if(l.InGameID != 0)
                     _typeTable.Add(l.InGameID, l);
             }
-
-            CurrentLevel = null;
         }
         public bool CreateNewLevel(string name, LevelType levelType, LevelLayout layout, WorldInfo worldinfo)
         {
@@ -168,20 +165,21 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     l.LevelData[i, j] = (byte) l.ClearValue;
                 }
             }
+
+            LevelInfo li = new LevelInfo()
+            {
+                Name = name,
+                LevelGuid = l.Guid,
+                WorldGuid = worldinfo.WorldGuid,
+                LevelType = l.Type,
+                Layout = l.LevelLayout
+            };
+
+            Levels.Add(li);
+            levelLookup.Add(l.Guid, li);
+
             if (l.Save())
             {
-                CurrentLevel = l;
-
-                LevelInfo li = new LevelInfo()
-                {
-                    Name = name,
-                    LevelGuid = l.Guid,
-                    WorldGuid = worldinfo.WorldGuid,
-                    LevelType = l.Type
-                };
-
-                Levels.Add(li);
-                levelLookup.Add(l.Guid, li);
 
                 if (LevelAdded != null) LevelAdded(this, new TEventArgs<LevelInfo>(li));
             }

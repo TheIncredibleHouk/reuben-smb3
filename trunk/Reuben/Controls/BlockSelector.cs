@@ -425,7 +425,7 @@ namespace Daiz.NES.Reuben
 
         private void PatternTableViewer_MouseDown(object sender, MouseEventArgs e)
         {
-            if (BlockLayout == null)
+            if (BlockLayout == null || CurrentDefiniton == null)
             {
                 MessageBox.Show("There is no selected layout to edit. Click add to add a new layout before editing");
                 return;

@@ -124,6 +124,18 @@
   <data name="bucket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\bucket.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BucketModeHelper" xml:space="preserve">
+    <value>Click an enclosed area of tiles to fill the area with the selected tile.</value>
+  </data>
+  <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\copyhs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\cuths.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\deletehs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -139,17 +151,41 @@
   <data name="line" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\line.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LineModeHelper" xml:space="preserve">
+    <value>Click and drag the mouse to draw a diagonal line. Let go of the mouse to place tiles.</value>
+  </data>
   <data name="mario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\mario.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\outline.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="OutlineModeHelper" xml:space="preserve">
+    <value>Click and drag the mouse to create an outline of tiles.</value>
+  </data>
+  <data name="paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\pastehs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PencilModeHelper" xml:space="preserve">
+    <value>Click and hold the mouse to place tiles on the level.</value>
+  </data>
+  <data name="PointerHelper" xml:space="preserve">
+    <value>Click Add to add a new pointer to the level. Click a pointer and drag to change it's X/Y entrance range.</value>
+  </data>
   <data name="pointers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\pointers.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\rectangle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RectangleModeHelper" xml:space="preserve">
+    <value>Click and drag the mouse to create an area to fill with tiles.</value>
+  </data>
+  <data name="RightClickSelectHelper" xml:space="preserve">
+    <value>Use the right mouse button to create a selectable area on the level area.</value>
+  </data>
+  <data name="RightClickTileHelper" xml:space="preserve">
+    <value>Use the both the left and right mouse buttons to place tiles on the level.</value>
   </data>
   <data name="saveHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\saveHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -162,6 +198,15 @@
   </data>
   <data name="specialtile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\specialtile.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SpriteLevelHelper" xml:space="preserve">
+    <value>Click a sprite to select. Drag the sprite to change X/Y position. Right click to place a sprite from the sprite selector on the level.</value>
+  </data>
+  <data name="SpriteModeHelper" xml:space="preserve">
+    <value>Click a sprite to select it.</value>
+  </data>
+  <data name="TileModeHelper" xml:space="preserve">
+    <value>Click a tile to select it for drawing. Double click it to edit its block definition.</value>
   </data>
   <data name="up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

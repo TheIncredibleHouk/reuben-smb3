@@ -157,6 +157,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             xDoc.Add(root);
             xDoc.Save(fileName);
 
+            ProjectController.LevelManager.GetLevelInfo(Guid).LastModified = DateTime.Now;
             return true;
         }
 

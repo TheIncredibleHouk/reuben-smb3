@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using Daiz.Library;
 using Daiz.NES.Reuben.ProjectManagement;
 
 namespace Daiz.NES.Reuben
@@ -186,6 +187,24 @@ namespace Daiz.NES.Reuben
         {
             CmbPalettes.SelectedIndex = palette + 1;
             this.ShowDialog();
+        }
+
+        private void FpsFull_MouseMove(object sender, MouseEventArgs e)
+        {
+            int x = e.X / 16;
+            int y = e.Y / 16;
+            if (x < 0 || y < 0 || x > 0x0F || y > 0x03) return;
+
+            LblHover2.Text = "Color: " + ((y * 16) + x).ToHexString();
+        }
+
+        private void PslCurrent_MouseMove(object sender, MouseEventArgs e)
+        {
+            int x = e.X / 16;
+            int y = e.Y / 16;
+            if (x < 0 || y < 0 || x > 0x0F || y > 0x01) return;
+
+            LblPaletteHover.Text = "Color: " + PslCurrent.CurrentPalette[(y * 4) + (x / 4), x % 4].ToHexString();
         }
     }
 }

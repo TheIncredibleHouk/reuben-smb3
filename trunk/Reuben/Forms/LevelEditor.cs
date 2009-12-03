@@ -185,10 +185,6 @@ namespace Daiz.NES.Reuben
                 case TileDrawMode.Fill:
                     TsbBucket.Checked = true;
                     break;
-
-                case TileDrawMode.Scatter:
-                    TsbScatter.Checked = true;
-                    break;
             }
 
             switch(CurrentLevel.Settings.EditMode)
@@ -214,7 +210,6 @@ namespace Daiz.NES.Reuben
             this.Text = ProjectController.LevelManager.GetLevelInfo(l.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
             this.Show();
-            SetMiscText(0);
             BtnShowHideInfo_Click(null, null);
             LvlView.FullUpdate();
         }
@@ -590,7 +585,6 @@ namespace Daiz.NES.Reuben
                 }
                 _SelectingStartPositionMode = false;
                 PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
-                SetMiscText(PreviousTextIndex);
             }
 
             else if (_PlacingPointer)
@@ -1128,49 +1122,35 @@ namespace Daiz.NES.Reuben
         {
             TileDrawMode = TileDrawMode.Pencil;
             TsbPencil.Checked = true;
-            TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
-            SetMiscText(0);
+            TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
         }
 
         private void TsbRectangle_Click(object sender, EventArgs e)
         {
             TileDrawMode = TileDrawMode.Rectangle;
             TsbRectangle.Checked = true;
-            TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
-            SetMiscText(4);
+            TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
         }
 
         private void TsbOutline_Click(object sender, EventArgs e)
         {
             TileDrawMode = TileDrawMode.Outline;
             TsbOutline.Checked = true;
-            TsbScatter.Checked = TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
-            SetMiscText(5);
+            TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
         }
 
         private void TsbBucket_Click(object sender, EventArgs e)
         {
             TileDrawMode = TileDrawMode.Fill;
             TsbBucket.Checked = true;
-            TsbScatter.Checked = TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
-            SetMiscText(6);
+            TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
         }
 
         private void TsbLine_Click(object sender, EventArgs e)
         {
             TileDrawMode = TileDrawMode.Line;
             TsbLine.Checked = true;
-            TsbScatter.Checked = TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
-            SetMiscText(4);
-        }
-
-        
-        private void TsbScatter_Click(object sender, EventArgs e)
-        {
-            TileDrawMode = TileDrawMode.Scatter;
-            TsbScatter.Checked = true;
-            TsbLine.Checked = TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
-            SetMiscText(4);        
+            TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
         }
         #endregion
 
@@ -1266,7 +1246,6 @@ namespace Daiz.NES.Reuben
             _SelectingStartPositionMode = true;
             TabLevelInfo.Enabled = false;
             PnlDrawing.Enabled = false;
-            SetMiscText(3);
         }
 
         #endregion
@@ -1401,40 +1380,16 @@ namespace Daiz.NES.Reuben
             {
                 case 0:
                     EditMode = EditMode.Tiles;
-                    switch (TileDrawMode)
-                    {
-                        case TileDrawMode.Pencil:
-                            SetMiscText(0);
-                            break;
-
-                        case TileDrawMode.Rectangle:
-                            SetMiscText(4);
-                            break;
-
-                        case TileDrawMode.Outline:
-                            SetMiscText(5);
-                            break;
-
-                        case TileDrawMode.Fill:
-                            SetMiscText(6);
-                            break;
-
-                        case TileDrawMode.Scatter:
-                            SetMiscText(6);
-                            break;
-                    }
                     TlsDrawing.Visible = true;
                     break;
                 case 1:
                     EditMode = EditMode.Sprites;
-                    SetMiscText(1);
                     TlsDrawing.Visible = false;
                     break;
 
                 case 2:
                     EditMode = EditMode.Pointers;
                     TlsDrawing.Visible = false;
-                    SetMiscText(2);
                     break;
             }
         }
@@ -1608,44 +1563,6 @@ namespace Daiz.NES.Reuben
         }
 
         public EditMode EditMode { get; set; }
-        private int PreviousTextIndex = 0;
-        private int CurrentTextIndex = 0;
-        public void SetMiscText(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    LblMisc.Text = "Left Mouse Button: Place tile; Right Mouse Button: Erase tile; Shift + Left Mouse: Set tile on level as currently selected tile";
-                    break;
-
-                case 1:
-                    LblMisc.Text = "Left Mouse Button: Select sprite; Right Mouse Button: Add or replace sprite. Delete will remove the sprite.";
-                    break;
-
-                case 2:
-                    LblMisc.Text = "Left Mouse Button: Select pointer. To change entry point, click and drag pointer";
-                    break;
-
-                case 3:
-                    LblMisc.Text = "Click on the level screen to set starting position";
-                    break;
-
-                case 4:
-                    LblMisc.Text = "Click and drag to create a area to fill. Use the right mouse button to erase instead.";
-                    break;
-
-                case 5:
-                    LblMisc.Text = "Click and drag to select an area to outline. Use the right mouse button to erase instead.";
-                    break;
-
-                case 6:
-                    LblMisc.Text = "Click on any area to fill an enclosed area. Use the right mouse button to erase instead.";
-                    break;
-            }
-
-            PreviousTextIndex = CurrentTextIndex;
-            CurrentTextIndex = index;
-        }
 
 
         private void BtnLevelSize_Click(object sender, EventArgs e)
@@ -1886,6 +1803,51 @@ namespace Daiz.NES.Reuben
         private void TsbPointers_Click(object sender, EventArgs e)
         {
             LvlView.ShowPointers = TsbPointers.Checked;
+        }
+
+        private void TsbCut_Click(object sender, EventArgs e)
+        {
+            Cut();
+        }
+
+        private void TsbCopy_Click(object sender, EventArgs e)
+        {
+            Copy();
+        }
+
+        private void TsbPaste_Click(object sender, EventArgs e)
+        {
+            Paste(true);
+        }
+
+        private void TsbDelete_Click(object sender, EventArgs e)
+        {
+            DeleteTiles();
+        }
+
+        private string PreviousHelperText;
+        private string CurrentHelperText;
+
+        private void SetHelpText(string text)
+        {
+            PreviousHelperText = CurrentHelperText;
+            CurrentHelperText = text;
+            LblHelpText.Text = CurrentHelperText;
+        }
+
+        private void tabPage1_MouseMove(object sender, MouseEventArgs e)
+        {
+            SetHelpText(Reuben.Properties.Resources.TileModeHelper);
+        }
+
+        private void tabPage3_MouseMove(object sender, MouseEventArgs e)
+        {
+            SetHelpText(Reuben.Properties.Resources.PointerHelper);
+        }
+
+        private void tabPage2_MouseMove(object sender, MouseEventArgs e)
+        {
+            SetHelpText(Reuben.Properties.Resources.SpriteModeHelper);
         }
     }
 }

@@ -51,6 +51,9 @@
             this.BtnApplyGlobally = new System.Windows.Forms.Button();
             this.TSAToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ChkBlockProperties = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -60,7 +63,7 @@
             // 
             this.CmbGraphics1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbGraphics1.FormattingEnabled = true;
-            this.CmbGraphics1.Location = new System.Drawing.Point(26, 12);
+            this.CmbGraphics1.Location = new System.Drawing.Point(26, 32);
             this.CmbGraphics1.Name = "CmbGraphics1";
             this.CmbGraphics1.Size = new System.Drawing.Size(195, 21);
             this.CmbGraphics1.TabIndex = 1;
@@ -70,7 +73,7 @@
             // 
             this.CmbGraphics2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbGraphics2.FormattingEnabled = true;
-            this.CmbGraphics2.Location = new System.Drawing.Point(26, 306);
+            this.CmbGraphics2.Location = new System.Drawing.Point(26, 326);
             this.CmbGraphics2.Name = "CmbGraphics2";
             this.CmbGraphics2.Size = new System.Drawing.Size(195, 21);
             this.CmbGraphics2.TabIndex = 2;
@@ -90,7 +93,7 @@
             // 
             this.CmbDefinitions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbDefinitions.FormattingEnabled = true;
-            this.CmbDefinitions.Location = new System.Drawing.Point(358, 12);
+            this.CmbDefinitions.Location = new System.Drawing.Point(358, 32);
             this.CmbDefinitions.Name = "CmbDefinitions";
             this.CmbDefinitions.Size = new System.Drawing.Size(256, 21);
             this.CmbDefinitions.TabIndex = 6;
@@ -99,7 +102,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.BlvCurrent);
-            this.groupBox1.Location = new System.Drawing.Point(288, 138);
+            this.groupBox1.Location = new System.Drawing.Point(288, 158);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(64, 64);
             this.groupBox1.TabIndex = 8;
@@ -121,13 +124,14 @@
             this.BlsBlocks.BlockLayout = null;
             this.BlsBlocks.CurrentDefiniton = null;
             this.BlsBlocks.HaltRendering = false;
-            this.BlsBlocks.Location = new System.Drawing.Point(358, 43);
+            this.BlsBlocks.Location = new System.Drawing.Point(358, 63);
             this.BlsBlocks.Name = "BlsBlocks";
             this.BlsBlocks.SelectedIndex = 0;
             this.BlsBlocks.SelectedTileIndex = 0;
             this.BlsBlocks.ShowBlockProperties = false;
             this.BlsBlocks.ShowSpecialBlocks = false;
             this.BlsBlocks.Size = new System.Drawing.Size(256, 256);
+            this.BlsBlocks.SpecialDefnitions = null;
             this.BlsBlocks.SpecialTable = null;
             this.BlsBlocks.TabIndex = 5;
             this.BlsBlocks.Text = "blockSelector1";
@@ -147,7 +151,7 @@
             // 
             // PtvTable
             // 
-            this.PtvTable.Location = new System.Drawing.Point(26, 43);
+            this.PtvTable.Location = new System.Drawing.Point(26, 63);
             this.PtvTable.Name = "PtvTable";
             this.PtvTable.ShowGrid = false;
             this.PtvTable.Size = new System.Drawing.Size(256, 256);
@@ -160,9 +164,9 @@
             // 
             this.groupBox2.Controls.Add(this.RdoMap16);
             this.groupBox2.Controls.Add(this.RdoNormal);
-            this.groupBox2.Location = new System.Drawing.Point(26, 333);
+            this.groupBox2.Location = new System.Drawing.Point(26, 365);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(273, 97);
+            this.groupBox2.Size = new System.Drawing.Size(273, 82);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tile Arrangement";
@@ -195,7 +199,7 @@
             // 
             this.groupBox3.Controls.Add(this.CmbPalettes);
             this.groupBox3.Controls.Add(this.PlsView);
-            this.groupBox3.Location = new System.Drawing.Point(335, 333);
+            this.groupBox3.Location = new System.Drawing.Point(335, 353);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(279, 97);
             this.groupBox3.TabIndex = 10;
@@ -204,7 +208,7 @@
             // 
             // BtnSaveClose
             // 
-            this.BtnSaveClose.Location = new System.Drawing.Point(366, 436);
+            this.BtnSaveClose.Location = new System.Drawing.Point(367, 456);
             this.BtnSaveClose.Name = "BtnSaveClose";
             this.BtnSaveClose.Size = new System.Drawing.Size(121, 23);
             this.BtnSaveClose.TabIndex = 11;
@@ -215,7 +219,7 @@
             // LblHexGraphics1
             // 
             this.LblHexGraphics1.AutoSize = true;
-            this.LblHexGraphics1.Location = new System.Drawing.Point(227, 15);
+            this.LblHexGraphics1.Location = new System.Drawing.Point(227, 35);
             this.LblHexGraphics1.Name = "LblHexGraphics1";
             this.LblHexGraphics1.Size = new System.Drawing.Size(35, 13);
             this.LblHexGraphics1.TabIndex = 12;
@@ -224,7 +228,7 @@
             // LblHexGraphics2
             // 
             this.LblHexGraphics2.AutoSize = true;
-            this.LblHexGraphics2.Location = new System.Drawing.Point(227, 309);
+            this.LblHexGraphics2.Location = new System.Drawing.Point(227, 329);
             this.LblHexGraphics2.Name = "LblHexGraphics2";
             this.LblHexGraphics2.Size = new System.Drawing.Size(35, 13);
             this.LblHexGraphics2.TabIndex = 13;
@@ -233,7 +237,7 @@
             // ChkShowSpecials
             // 
             this.ChkShowSpecials.AutoSize = true;
-            this.ChkShowSpecials.Location = new System.Drawing.Point(358, 308);
+            this.ChkShowSpecials.Location = new System.Drawing.Point(358, 328);
             this.ChkShowSpecials.Name = "ChkShowSpecials";
             this.ChkShowSpecials.Size = new System.Drawing.Size(120, 17);
             this.ChkShowSpecials.TabIndex = 14;
@@ -243,7 +247,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(493, 436);
+            this.button1.Location = new System.Drawing.Point(494, 456);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 23);
             this.button1.TabIndex = 15;
@@ -254,7 +258,7 @@
             // LblBlockSelected
             // 
             this.LblBlockSelected.AutoSize = true;
-            this.LblBlockSelected.Location = new System.Drawing.Point(288, 205);
+            this.LblBlockSelected.Location = new System.Drawing.Point(288, 225);
             this.LblBlockSelected.Name = "LblBlockSelected";
             this.LblBlockSelected.Size = new System.Drawing.Size(67, 13);
             this.LblBlockSelected.TabIndex = 17;
@@ -262,7 +266,7 @@
             // 
             // BtnApplyGlobally
             // 
-            this.BtnApplyGlobally.Location = new System.Drawing.Point(288, 75);
+            this.BtnApplyGlobally.Location = new System.Drawing.Point(288, 95);
             this.BtnApplyGlobally.Name = "BtnApplyGlobally";
             this.BtnApplyGlobally.Size = new System.Drawing.Size(67, 57);
             this.BtnApplyGlobally.TabIndex = 18;
@@ -273,7 +277,7 @@
             // ChkBlockProperties
             // 
             this.ChkBlockProperties.AutoSize = true;
-            this.ChkBlockProperties.Location = new System.Drawing.Point(482, 308);
+            this.ChkBlockProperties.Location = new System.Drawing.Point(482, 328);
             this.ChkBlockProperties.Name = "ChkBlockProperties";
             this.ChkBlockProperties.Size = new System.Drawing.Size(133, 17);
             this.ChkBlockProperties.TabIndex = 19;
@@ -281,11 +285,41 @@
             this.ChkBlockProperties.UseVisualStyleBackColor = true;
             this.ChkBlockProperties.CheckedChanged += new System.EventHandler(this.ChkBlockProperties_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Pattern Table 1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(355, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Object Set";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 350);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Pattern Table 2";
+            // 
             // Map16Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 471);
+            this.ClientSize = new System.Drawing.Size(640, 489);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ChkBlockProperties);
             this.Controls.Add(this.BtnApplyGlobally);
             this.Controls.Add(this.LblBlockSelected);
@@ -338,5 +372,8 @@
         private System.Windows.Forms.Button BtnApplyGlobally;
         private System.Windows.Forms.ToolTip TSAToolTip;
         private System.Windows.Forms.CheckBox ChkBlockProperties;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -101,8 +101,8 @@ namespace Daiz.NES.Reuben
         private void CmbDefinitions_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CmbLayouts.SelectedIndex == -1) return;
-            BlsFrom.CurrentDefiniton = BlsTo.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex + 1);
-            BlsTo.SpecialDefnitions = BlsFrom.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CmbDefinitions.SelectedIndex + 1);
+            BlsFrom.CurrentDefiniton = BlsTo.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
+            BlsTo.SpecialDefnitions = BlsFrom.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CmbDefinitions.SelectedIndex);
         }
 
         private void BtnSaveClose_Click(object sender, EventArgs e)
@@ -121,8 +121,9 @@ namespace Daiz.NES.Reuben
 
             if (CmbLayouts.SelectedItem != null)
             {
-                CurrentLayout = CmbLayouts.SelectedItem as BlockLayout;
-                BlsTo.BlockLayout = CmbLayouts.SelectedItem as BlockLayout;
+                BlsFrom.CurrentDefiniton = BlsTo.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
+                BlsTo.SpecialDefnitions = BlsFrom.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CmbDefinitions.SelectedIndex);
+                CurrentLayout = BlsTo.BlockLayout = (BlockLayout) CmbLayouts.SelectedItem;
                 BtnDelete.Enabled = BtnRename.Enabled = true;
             }
             else
@@ -242,7 +243,7 @@ namespace Daiz.NES.Reuben
                 int tile = BlsTo.BlockLayout.Layout[index];
                 if (tile != -1)
                 {
-                    LayoutToolTip.SetToolTip(BlsTo, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, tile) + "\n(" + index.ToHexString() + ")");
+                    LayoutToolTip.SetToolTip(BlsTo, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, tile) + "\n(" + index.ToHexString() + ")\n" + ProjectController.SpecialManager.GetProperty(CmbDefinitions.SelectedIndex, index));
                 }
             }
         }
@@ -250,6 +251,22 @@ namespace Daiz.NES.Reuben
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             BlsFrom.ShowBlockProperties = BlsTo.ShowBlockProperties = ChkBlockProperties.Checked;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (GrpHelp.Visible)
+            {
+                GrpHelp.Visible = false;
+                PnlHelp.Height = 30;
+                BtnHelp.Text = "Show Help";
+            }
+            else
+            {
+                GrpHelp.Visible = true;
+                PnlHelp.Height = 110;
+                BtnHelp.Text = "Hide Help";
+            }
         }
 
     }
