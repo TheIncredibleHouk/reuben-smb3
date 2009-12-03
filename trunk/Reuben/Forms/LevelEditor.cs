@@ -209,6 +209,7 @@ namespace Daiz.NES.Reuben
             CmbLayouts.SelectedIndex = CurrentLevel.Settings.Layout;
             PnlHorizontalGuide.GuideColor = CurrentLevel.Settings.HGuideColor;
             PnlVerticalGuide.GuideColor = CurrentLevel.Settings.VGuideColor;
+            TsbPointers.Checked = CurrentLevel.Settings.ShowPointers;
 
             this.Text = ProjectController.LevelManager.GetLevelInfo(l.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
@@ -592,6 +593,24 @@ namespace Daiz.NES.Reuben
                 SetMiscText(PreviousTextIndex);
             }
 
+            else if (_PlacingPointer)
+            {
+                _PlacingPointer = false;
+                CurrentLevel.AddPointer();
+                CurrentPointer = PntEditor.CurrentPointer = CurrentLevel.Pointers[CurrentLevel.Pointers.Count - 1];
+                CurrentPointer.XEnter = x;
+                CurrentPointer.YEnter = y;
+                LvlView.DelayDrawing = true;
+                LvlView.UpdatePoint(x, y);
+                LvlView.UpdatePoint(x + 1, y);
+                LvlView.UpdatePoint(x, y + 1);
+                LvlView.UpdatePoint(x + 1, y + 1);
+                LvlView.DelayDrawing = false;
+                LvlView.SelectionRectangle = new Rectangle(x, y, 2, 2);
+                BtnAddPointer.Enabled = CurrentLevel.Pointers.Count < 4;
+                TabEditSelector.Enabled = PnlInfo.Enabled = true;
+            }
+
             else if (EditMode == EditMode.Tiles)
             {
                 if (ModifierKeys == Keys.Shift)
@@ -619,7 +638,7 @@ namespace Daiz.NES.Reuben
                             CurrentMultiTile = new MultiTileAction();
                             CurrentMultiTile.AddTileChange(x, y, CurrentLevel.LevelData[x, y]);
                             CurrentLevel.SetTile(x, y, (byte)(DrawingTile));
-                            ContinueDrawing = true;    
+                            ContinueDrawing = true;
                             break;
 
                         case TileDrawMode.Outline:
@@ -1656,6 +1675,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Settings.EditMode = EditMode;
             CurrentLevel.Settings.BlockProperties = TsbProperties.Checked;
             CurrentLevel.Settings.SpecialSprites = TsbSriteSpecials.Checked;
+            CurrentLevel.Settings.ShowPointers = TsbPointers.Checked;
 
             CurrentLevel.StartAction = CmbActions.SelectedIndex;
             CurrentLevel.ClearValue = (int)NumBackground.Value;
@@ -1672,19 +1692,11 @@ namespace Daiz.NES.Reuben
         #endregion
 
         #region pointers
+        private bool _PlacingPointer;
         private void BtnAddPointer_Click(object sender, EventArgs e)
         {
-            CurrentLevel.AddPointer();
-            PntEditor.CurrentPointer = CurrentLevel.Pointers[CurrentLevel.Pointers.Count - 1];
-            LvlView.DelayDrawing = true;
-            LvlView.UpdatePoint(0, 0);
-            LvlView.UpdatePoint(1, 0);
-            LvlView.UpdatePoint(0, 1);
-            LvlView.UpdatePoint(1, 1);
-            LvlView.DelayDrawing = false;
-            LvlView.SelectionRectangle = new Rectangle(0, 0, 2, 2);
-            CurrentPointer = PntEditor.CurrentPointer;
-            BtnAddPointer.Enabled = CurrentLevel.Pointers.Count < 4;
+            TabEditSelector.Enabled = PnlInfo.Enabled = false;
+            _PlacingPointer = true;
         }
 
         private void BtnDeletePointer_Click(object sender, EventArgs e)
@@ -1869,6 +1881,11 @@ namespace Daiz.NES.Reuben
         {
             CurrentLevel.Settings.PropertyTransparency = (double)NumProperties.Value;
             LvlView.FullUpdate();
+        }
+
+        private void TsbPointers_Click(object sender, EventArgs e)
+        {
+            LvlView.ShowPointers = TsbPointers.Checked;
         }
     }
 }
