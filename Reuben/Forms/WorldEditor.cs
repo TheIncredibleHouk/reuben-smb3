@@ -70,17 +70,11 @@ namespace Daiz.NES.Reuben
             ProjectController.GraphicsManager.GraphicsUpdated += new EventHandler(GraphicsManager_GraphicsUpdated);
             ProjectController.LayoutManager.LayoutRemoved += new EventHandler<TEventArgs<BlockLayout>>(LayoutManager_LayoutRemoved);
             WldView.Zoom = 1;
-            PnlVerticalGuide.Guide1Changed += new EventHandler(PnlVerticalGuide_Guide1Changed);
-            PnlVerticalGuide.Guide2Changed += new EventHandler(PnlVerticalGuide_Guide2Changed);
-            PnlHorizontalGuide.Guide1Changed += new EventHandler(PnlHorizontalGuide_Guide1Changed);
-            PnlHorizontalGuide.Guide2Changed += new EventHandler(PnlHorizontalGuide_Guide2Changed);
+
             ReubenController.GraphicsReloaded += new EventHandler(ReubenController_GraphicsReloaded);
             ReubenController.WorldReloaded += new EventHandler<TEventArgs<World>>(ReubenController_WorldReloaded);
             LoadSpriteSelector();
-            WldView.HorizontalGuide1 = PnlHorizontalGuide.Guide1;
-            WldView.HorizontalGuide2 = PnlHorizontalGuide.Guide2;
-            WldView.VerticalGuide1 = PnlVerticalGuide.Guide1;
-            WldView.VerticalGuide2 = PnlVerticalGuide.Guide2;
+
             BlsSelector.CurrentDefiniton = WldView.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(0);
         }
 
@@ -88,7 +82,6 @@ namespace Daiz.NES.Reuben
         {
             if (MouseMode == MouseMode.RightClickSelection)
             {
-                LblSelected.Text = "Drawing With: " + LeftMouseTile.ToHexString();
                 LeftMouseTile = BlsSelector.SelectedTileIndex;
                 BlvLeft.PaletteIndex = (LeftMouseTile & 0xC0) >> 6;
                 BlvLeft.CurrentBlock = BlsSelector.SelectedBlock;
@@ -110,8 +103,6 @@ namespace Daiz.NES.Reuben
                         BlvRight.CurrentBlock = BlsSelector.SelectedBlock;
                     }
                 }
-
-                LblSelected.Text = "Left: " + LeftMouseTile + " - Right: " + RightMouseTile;
             }
         }
 
@@ -195,15 +186,11 @@ namespace Daiz.NES.Reuben
             }
 
             CmbLayouts.SelectedIndex = CurrentWorld.Settings.Layout;
-            PnlHorizontalGuide.GuideColor = CurrentWorld.Settings.HGuideColor;
-            PnlVerticalGuide.GuideColor = CurrentWorld.Settings.VGuideColor;
             TsbStartPoint.Checked = CurrentWorld.Settings.ShowStart;
 
             this.Text = ProjectController.WorldManager.GetWorldInfo(w.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
             this.Show();
-            SetMiscText(0);
-            BtnShowHideInfo_Click(null, null);
         }
 
         private void GetWorldInfo(World w)
@@ -223,158 +210,6 @@ namespace Daiz.NES.Reuben
             WldView.DelayDrawing = false;
             WldView.FullUpdate();
         }
-
-        #region guide events
-        private void PnlHorizontalGuide_Guide2Changed(object sender, EventArgs e)
-        {
-            WldView.UpdateGuide(Orientation.Horizontal, 2);
-        }
-
-        private void PnlHorizontalGuide_Guide1Changed(object sender, EventArgs e)
-        {
-            WldView.UpdateGuide(Orientation.Horizontal, 1);
-        }
-
-        private void PnlVerticalGuide_Guide2Changed(object sender, EventArgs e)
-        {
-            WldView.UpdateGuide(Orientation.Vertical, 2);
-        }
-
-        private void PnlVerticalGuide_Guide1Changed(object sender, EventArgs e)
-        {
-            WldView.UpdateGuide(Orientation.Vertical, 1);
-        }
-
-        private void freeGuideToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.Free;
-            freeGuideToolStripMenuItem.Checked = true;
-            snapToEnemyBounceHeightToolStripMenuItem.Checked =
-            showScreenHeightToolStripMenuItem.Checked =
-            snapToJumpHeightToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToFullPMeterJumpHeightToolStripMenuItem.Checked = false;
-        }
-
-        private void snapToJumpHeightToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight1;
-            snapToJumpHeightToolStripMenuItem.Checked = true;
-            snapToEnemyBounceHeightToolStripMenuItem.Checked =
-            showScreenHeightToolStripMenuItem.Checked =
-            freeGuideToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToFullPMeterJumpHeightToolStripMenuItem.Checked = false;
-        }
-
-        private void showScreenHeightToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.Screen;
-            showScreenHeightToolStripMenuItem.Checked = true;
-            snapToEnemyBounceHeightToolStripMenuItem.Checked =
-            snapToJumpHeightToolStripMenuItem.Checked =
-            freeGuideToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToFullPMeterJumpHeightToolStripMenuItem.Checked = false;
-
-        }
-
-        private void snapToRunningJumpHeightToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight2;
-            snapToRunningJumpHeightToolStripMenuItem.Checked = true;
-            snapToEnemyBounceHeightToolStripMenuItem.Checked =
-            showScreenHeightToolStripMenuItem.Checked =
-            snapToJumpHeightToolStripMenuItem.Checked =
-            freeGuideToolStripMenuItem.Checked =
-            snapToFullPMeterJumpHeightToolStripMenuItem.Checked = false;
-        }
-
-        private void snapToFullPMeterJumpHeightToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight3;
-            snapToFullPMeterJumpHeightToolStripMenuItem.Checked = true;
-            snapToEnemyBounceHeightToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            showScreenHeightToolStripMenuItem.Checked =
-            snapToJumpHeightToolStripMenuItem.Checked =
-            freeGuideToolStripMenuItem.Checked = false;
-        }
-
-
-        private void snapToEnemyBounceHeightToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight4;
-            snapToEnemyBounceHeightToolStripMenuItem.Checked = true;
-            snapToFullPMeterJumpHeightToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            showScreenHeightToolStripMenuItem.Checked =
-            snapToJumpHeightToolStripMenuItem.Checked =
-            freeGuideToolStripMenuItem.Checked = false;
-        }
-
-        private void hideGuidesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlVerticalGuide.Guide1.Visible = PnlVerticalGuide.Guide2.Visible = false;
-            WldView.UpdateGuide(Orientation.Vertical, 1);
-            WldView.UpdateGuide(Orientation.Vertical, 2);
-        }
-
-        private void snapToJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength1;
-            snapToScreenLengthToolStripMenuItem.Checked =
-            snapToJumpLengthToolStripMenuItem.Checked = true;
-            freeGuide2.Checked =
-            snapToWalkingJumpLengthToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToFullMeterJumpLengthToolStripMenuItem.Checked = false;
-        }
-
-        private void snapToWalkingJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength2;
-            snapToWalkingJumpLengthToolStripMenuItem.Checked = true;
-            snapToScreenLengthToolStripMenuItem.Checked =
-            freeGuide2.Checked =
-            snapToJumpLengthToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToFullMeterJumpLengthToolStripMenuItem.Checked = false;
-        }
-
-        private void snapToRunningJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength3;
-            snapToRunningJumpLengthToolStripMenuItem.Checked = true;
-            snapToScreenLengthToolStripMenuItem.Checked =
-            snapToWalkingJumpLengthToolStripMenuItem.Checked =
-            freeGuide2.Checked =
-            snapToJumpLengthToolStripMenuItem.Checked =
-            snapToFullMeterJumpLengthToolStripMenuItem.Checked = false;
-        }
-
-        private void snapToFullMeterJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength4;
-            snapToFullMeterJumpLengthToolStripMenuItem.Checked = true;
-            snapToScreenLengthToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToWalkingJumpLengthToolStripMenuItem.Checked =
-            freeGuide2.Checked =
-            snapToJumpLengthToolStripMenuItem.Checked = false;
-        }
-
-        private void snapToScreenLengthToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.Screen;
-            snapToScreenLengthToolStripMenuItem.Checked = true;
-            snapToFullMeterJumpLengthToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToWalkingJumpLengthToolStripMenuItem.Checked =
-            freeGuide2.Checked =
-            snapToJumpLengthToolStripMenuItem.Checked = false;
-        }
-        #endregion
 
         #region palette functions
         void PaletteManager_PaletteAdded(object sender, TEventArgs<PaletteInfo> e)
@@ -423,7 +258,7 @@ namespace Daiz.NES.Reuben
         private bool ContinueDragging;
         private TileDrawMode PreviousMode;
 
-        private void LvlView_MouseDown(object sender, MouseEventArgs e)
+        private void WldView_MouseDown(object sender, MouseEventArgs e)
         {
             int x = (e.X / 16) / WldView.Zoom;
             int y = (e.Y / 16) / WldView.Zoom;
@@ -444,7 +279,6 @@ namespace Daiz.NES.Reuben
                 }
                 _SelectingStartPositionMode = false;
                 PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
-                SetMiscText(PreviousTextIndex);
                 LblStartPoint.Text = "X:" + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
             }
             else if (_PlacingPointer)
@@ -618,7 +452,7 @@ namespace Daiz.NES.Reuben
         }
 
         private int PreviousMouseX, PreviousMouseY;
-        private void LvlView_MouseMove(object sender, MouseEventArgs e)
+        private void WldView_MouseMove(object sender, MouseEventArgs e)
         {
             int x = (e.X / (16 * WldView.Zoom));
             int y = (e.Y / (16 * WldView.Zoom));
@@ -632,7 +466,8 @@ namespace Daiz.NES.Reuben
             int XDiff = x - StartX;
             int YDiff = y - StartY;
 
-            LblCoordinates.Text = "X: " + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
+
+            LblPositition.Text = "X: " + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
 
             if (EditMode == EditMode.Tiles)
             {
@@ -762,7 +597,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private void LvlView_MouseUp(object sender, MouseEventArgs e)
+        private void WldView_MouseUp(object sender, MouseEventArgs e)
         {
             if (!ContinueDrawing) return;
             int _DrawTile = 0;
@@ -932,7 +767,6 @@ namespace Daiz.NES.Reuben
             TileDrawMode = TileDrawMode.Pencil;
             TsbPencil.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
-            SetMiscText(0);
         }
 
         private void TsbRectangle_Click(object sender, EventArgs e)
@@ -940,7 +774,6 @@ namespace Daiz.NES.Reuben
             TileDrawMode = TileDrawMode.Rectangle;
             TsbRectangle.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
-            SetMiscText(4);
         }
 
         private void TsbOutline_Click(object sender, EventArgs e)
@@ -948,7 +781,6 @@ namespace Daiz.NES.Reuben
             TileDrawMode = TileDrawMode.Outline;
             TsbOutline.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
-            SetMiscText(5);
         }
 
         private void TsbBucket_Click(object sender, EventArgs e)
@@ -956,7 +788,6 @@ namespace Daiz.NES.Reuben
             TileDrawMode = TileDrawMode.Fill;
             TsbBucket.Checked = true;
             TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
-            SetMiscText(6);
         }
 
         private void TsbLine_Click(object sender, EventArgs e)
@@ -964,7 +795,6 @@ namespace Daiz.NES.Reuben
             TileDrawMode = TileDrawMode.Line;
             TsbLine.Checked = true;
             TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
-            SetMiscText(4);
         }
 
         #endregion
@@ -1026,7 +856,6 @@ namespace Daiz.NES.Reuben
         {
             _SelectingStartPositionMode = true;
             TabLevelInfo.Enabled = PnlDrawing.Enabled = false;
-            SetMiscText(3);
         }
 
         #endregion
@@ -1112,23 +941,6 @@ namespace Daiz.NES.Reuben
         }
         #endregion
 
-        #region form gui
-        private void BtnShowHideInfo_Click(object sender, EventArgs e)
-        {
-            if (TabLevelInfo.Visible)
-            {
-                PnlInfo.Height = 30;
-                TabLevelInfo.Visible = false;
-                BtnShowHideInfo.Image = Properties.Resources.up;
-            }
-            else
-            {
-                PnlInfo.Height = 160;
-                TabLevelInfo.Visible = true;
-                BtnShowHideInfo.Image = Properties.Resources.down;
-            }
-        }
-
         private void CmbLayouts_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentLayout = CmbLayouts.SelectedItem as BlockLayout;
@@ -1141,41 +953,21 @@ namespace Daiz.NES.Reuben
             {
                 case 0:
                     EditMode = EditMode.Tiles;
-                    switch (TileDrawMode)
-                    {
-                        case TileDrawMode.Pencil:
-                            SetMiscText(0);
-                            break;
-
-                        case TileDrawMode.Rectangle:
-                            SetMiscText(4);
-                            break;
-
-                        case TileDrawMode.Outline:
-                            SetMiscText(5);
-                            break;
-
-                        case TileDrawMode.Fill:
-                            SetMiscText(6);
-                            break;
-                    }
                     TlsDrawing.Visible = true;
                     break;
                 case 1:
                     EditMode = EditMode.Sprites;
-                    SetMiscText(1);
                     TlsDrawing.Visible = false;
                     break;
 
                 case 2:
                     EditMode = EditMode.Pointers;
                     TlsDrawing.Visible = false;
-                    SetMiscText(2);
                     break;
             }
         }
 
-        private void LvlView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void WldView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.Modifiers == Keys.Control)
             {
@@ -1260,6 +1052,19 @@ namespace Daiz.NES.Reuben
         private void ToggleRightClickMode()
         {
             MouseMode = MouseMode == MouseMode.RightClickSelection ? MouseMode.RightClickTile : MouseMode.RightClickSelection;
+            switch (MouseMode)
+            {
+                case MouseMode.RightClickSelection:
+                    TlsTileCommands.Visible = true;
+                    SetHelpText(Reuben.Properties.Resources.RightClickSelectHelper);
+                    break;
+
+                case MouseMode.RightClickTile:
+                    TlsTileCommands.Visible = false;
+                    SetHelpText(Reuben.Properties.Resources.RightClickTileHelper);
+                    break;
+            }
+
             LblRightClickMode.Text = "Right Click Mode: " + (MouseMode == MouseMode.RightClickSelection ? "Selector" : "Tile Placement");
         }
 
@@ -1326,44 +1131,6 @@ namespace Daiz.NES.Reuben
         }
 
         public EditMode EditMode { get; set; }
-        private int PreviousTextIndex = 0;
-        private int CurrentTextIndex = 0;
-        public void SetMiscText(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    LblMisc.Text = "Left Mouse Button: Place tile; Right Mouse Button: Erase tile; Shift + Left Mouse: Set tile on level as currently selected tile";
-                    break;
-
-                case 1:
-                    LblMisc.Text = "Left Mouse Button: Select sprite; Right Mouse Button: Add or replace sprite. Delete will remove the sprite.";
-                    break;
-
-                case 2:
-                    LblMisc.Text = "Left Mouse Button: Select pointer. To change entry point, click and drag pointer";
-                    break;
-
-                case 3:
-                    LblMisc.Text = "Click on the level screen to set starting position";
-                    break;
-
-                case 4:
-                    LblMisc.Text = "Click and drag to create a area to fill. Use the right mouse button to erase instead.";
-                    break;
-
-                case 5:
-                    LblMisc.Text = "Click and drag to select an area to outline. Use the right mouse button to erase instead.";
-                    break;
-
-                case 6:
-                    LblMisc.Text = "Click on any area to fill an enclosed area. Use the right mouse button to erase instead.";
-                    break;
-            }
-
-            PreviousTextIndex = CurrentTextIndex;
-            CurrentTextIndex = index;
-        }
 
         private void BtnLevelSize_Click(object sender, EventArgs e)
         {
@@ -1397,7 +1164,6 @@ namespace Daiz.NES.Reuben
             CurrentWorld.Save();
             MessageBox.Show("World succesfully saved.");
         }
-        #endregion
 
         #region pointers
         private void BtnAddPointer_Click(object sender, EventArgs e)
@@ -1472,24 +1238,6 @@ namespace Daiz.NES.Reuben
             ToggleRightClickMode();
         }
 
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            PnlHorizontalGuide.Guide1.Visible = PnlHorizontalGuide.Guide2.Visible = false;
-            WldView.UpdateGuide(Orientation.Horizontal, 1);
-            WldView.UpdateGuide(Orientation.Horizontal, 2);
-        }
-
-        private void freeGuide2_Click(object sender, EventArgs e)
-        {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.Free;
-            freeGuide2.Checked = true;
-            snapToScreenLengthToolStripMenuItem.Checked =
-            snapToFullMeterJumpLengthToolStripMenuItem.Checked =
-            snapToRunningJumpHeightToolStripMenuItem.Checked =
-            snapToWalkingJumpLengthToolStripMenuItem.Checked =
-            snapToJumpLengthToolStripMenuItem.Checked = false;
-        }
-
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             ProjectController.Save();
@@ -1551,29 +1299,34 @@ namespace Daiz.NES.Reuben
             WldView.UpdateArea(action.InvalidArea);
         }
 
-        private void changeGuideColorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ColorDialog cDialog = new ColorDialog();
-            cDialog.Color = CurrentWorld.Settings.VGuideColor;
-            if (cDialog.ShowDialog() == DialogResult.OK)
-            {
-                CurrentWorld.Settings.VGuideColor = PnlVerticalGuide.GuideColor = cDialog.Color;
-            }
-        }
-
-        private void changeGuideColorToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ColorDialog cDialog = new ColorDialog();
-            cDialog.Color = CurrentWorld.Settings.HGuideColor;
-            if (cDialog.ShowDialog() == DialogResult.OK)
-            {
-                CurrentWorld.Settings.HGuideColor = PnlHorizontalGuide.GuideColor = cDialog.Color;
-            }
-        }
-
         private void TsbPointers_CheckedChanged(object sender, EventArgs e)
         {
             CurrentWorld.Settings.ShowPointers = WldView.ShowPointers = TsbPointers.Checked;
+        }
+
+        private void tabPage1_MouseMove(object sender, MouseEventArgs e)
+        {
+            SetHelpText(Reuben.Properties.Resources.TileModeHelper);
+        }
+
+        private void tabPage3_MouseMove(object sender, MouseEventArgs e)
+        {
+            SetHelpText(Reuben.Properties.Resources.PointerHelper);
+        }
+
+        private void tabPage2_MouseMove(object sender, MouseEventArgs e)
+        {
+            SetHelpText(Reuben.Properties.Resources.SpriteModeHelper);
+        }
+
+        private string PreviousHelperText;
+        private string CurrentHelperText;
+        private void SetHelpText(string text)
+        {
+            if (text == CurrentHelperText) return;
+            PreviousHelperText = CurrentHelperText;
+            CurrentHelperText = text;
+            LblHelpText.Text = CurrentHelperText;
         }
     }
 }

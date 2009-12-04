@@ -546,62 +546,6 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public Guide VerticalGuide1 { get; set; }
-        public Guide VerticalGuide2 { get; set; }
-        public Guide HorizontalGuide1 { get; set; }
-        public Guide HorizontalGuide2 { get; set; }
-
-        int vG1, vG2, hG1, hG2;
-
-        public void UpdateGuide(Orientation orientation, int guideNumber)
-        {
-            Rectangle rect = new Rectangle();
-            switch (orientation)
-            {
-                case Orientation.Horizontal:
-                    if (guideNumber == 1)
-                    {
-                        rect.X = HorizontalGuide1.Position < hG1 ? HorizontalGuide1.Position : hG1;
-                        rect.Y = 0;
-                        rect.Width = Math.Abs(HorizontalGuide1.Position - hG1) + 1;
-                        rect.Height = BackBuffer.Height;
-                        hG1 = HorizontalGuide1.Position;
-                    }
-                    if (guideNumber == 2)
-                    {
-                        rect.X = HorizontalGuide2.Position < hG2? HorizontalGuide2.Position : hG2;
-                        rect.Y = 0;
-                        rect.Width = Math.Abs(HorizontalGuide2.Position - hG2) + 1;
-                        rect.Height = BackBuffer.Height;
-                        hG2 = HorizontalGuide2.Position;
-                    }
-
-                    break;
-
-                case Orientation.Vertical:
-                    if (guideNumber == 1)
-                    {
-                        rect.X = 0;
-                        rect.Y = VerticalGuide1.Position < vG1 ? VerticalGuide1.Position : vG1;
-                        rect.Width = BackBuffer.Width;
-                        rect.Height = Math.Abs(VerticalGuide1.Position - vG1) + 1;
-                        vG1 = VerticalGuide1.Position;
-                    }
-                    if (guideNumber == 2)
-                    {
-                        rect.X = 0;
-                        rect.Y = VerticalGuide2.Position < vG2 ? VerticalGuide2.Position : vG2;
-                        rect.Width = BackBuffer.Width;
-                        rect.Height = Math.Abs(VerticalGuide2.Position - vG2) + 1;
-                        vG2  = VerticalGuide2.Position;
-                    }
-                    
-                    break;
-            }
-
-            Invalidate(rect);
-        }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             if(DelayDrawing) return;
@@ -631,33 +575,9 @@ namespace Daiz.NES.Reuben
                 g.DrawLine(Pens.Black, _SelectionLine.Start.X * 16 + 9, _SelectionLine.Start.Y * 16 + 9, _SelectionLine.End.X * 16 + 9, _SelectionLine.End.Y * 16 + 9);
             }
 
-            Pen hPen = new Pen(HorizontalGuide1.Color);
-            Pen vPen = new Pen(VerticalGuide1.Color);
-
-            if (VerticalGuide1.Visible)
-            {
-                g.DrawLine(vPen, 0, VerticalGuide1.Position, BackBuffer.Width, VerticalGuide1.Position);
-            }
-
-            if (VerticalGuide2.Visible)
-            {
-                g.DrawLine(vPen, 0, VerticalGuide2.Position, BackBuffer.Width, VerticalGuide2.Position);
-            }
-
-            if (HorizontalGuide1.Visible)
-            {
-                g.DrawLine(hPen, HorizontalGuide1.Position, 0, HorizontalGuide1.Position, BackBuffer.Height);
-            }
-
-            if (HorizontalGuide2.Visible)
-            {
-                g.DrawLine(hPen, HorizontalGuide2.Position, 0, HorizontalGuide2.Position, BackBuffer.Height);
-            }
 
             e.Graphics.DrawImage(CompositeBuffer, destRect, sourceRect, GraphicsUnit.Pixel);
             g.Dispose();
-            hPen.Dispose();
-            vPen.Dispose();
         }
 
         protected override void OnPaintBackground(PaintEventArgs pevent)

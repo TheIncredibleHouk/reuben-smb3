@@ -91,7 +91,6 @@ namespace Daiz.NES.Reuben
         {
             if (MouseMode == MouseMode.RightClickSelection)
             {
-                LblSelected.Text = "Drawing With: " + LeftMouseTile.ToHexString();
                 LeftMouseTile = BlsSelector.SelectedTileIndex;
                 BlvLeft.PaletteIndex = (LeftMouseTile & 0xC0) >> 6;
                 BlvLeft.CurrentBlock = BlsSelector.SelectedBlock;
@@ -113,8 +112,6 @@ namespace Daiz.NES.Reuben
                         BlvRight.CurrentBlock = BlsSelector.SelectedBlock;
                     }
                 }
-
-                LblSelected.Text = "Left: " + LeftMouseTile + " - Right: " + RightMouseTile;
             }
         }
 
@@ -210,7 +207,6 @@ namespace Daiz.NES.Reuben
             this.Text = ProjectController.LevelManager.GetLevelInfo(l.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
             this.Show();
-            BtnShowHideInfo_Click(null, null);
             LvlView.FullUpdate();
         }
 
@@ -1371,23 +1367,6 @@ namespace Daiz.NES.Reuben
         }
         #endregion
 
-        #region form gui
-        private void BtnShowHideInfo_Click(object sender, EventArgs e)
-        {
-            if (TabLevelInfo.Visible)
-            {
-                PnlInfo.Height = 30;
-                TabLevelInfo.Visible = false;
-                BtnShowHideInfo.Image = Properties.Resources.up;
-            }
-            else
-            {
-                PnlInfo.Height = 90;
-                TabLevelInfo.Visible = true;
-                BtnShowHideInfo.Image = Properties.Resources.down;
-            }
-        }
-
         private void CmbLayouts_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentLayout = CmbLayouts.SelectedItem as BlockLayout;
@@ -1639,7 +1618,6 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Save();
             MessageBox.Show("Level succesfully saved.");
         }
-        #endregion
 
         #region pointers
         private bool _PlacingPointer;
@@ -1691,7 +1669,7 @@ namespace Daiz.NES.Reuben
             PreviousSelectorY = y;
             int tile = BlsSelector.BlockLayout.Layout[index];
             LblSelectorHover.Text = "Block: " + tile.ToHexString();
-            LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile));
+            LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, tile) + "\n" + "(" + tile.ToHexString() + ")");
         }
 
         public int DrawingTile
