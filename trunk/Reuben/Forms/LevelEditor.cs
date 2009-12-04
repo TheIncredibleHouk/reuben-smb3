@@ -585,6 +585,7 @@ namespace Daiz.NES.Reuben
                 }
                 _SelectingStartPositionMode = false;
                 PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
+                SetHelpText(PreviousHelperText);
             }
 
             else if (_PlacingPointer)
@@ -603,6 +604,7 @@ namespace Daiz.NES.Reuben
                 LvlView.SelectionRectangle = new Rectangle(x, y, 2, 2);
                 BtnAddPointer.Enabled = CurrentLevel.Pointers.Count < 4;
                 TabEditSelector.Enabled = PnlInfo.Enabled = true;
+                SetHelpText(Reuben.Properties.Resources.PointerHelper);
             }
 
             else if (EditMode == EditMode.Tiles)
@@ -788,9 +790,19 @@ namespace Daiz.NES.Reuben
 
             LblPositition.Text = "X: " + x.ToHexString() + " Y: " + y.ToHexString();
 
-            if (EditMode == EditMode.Tiles)
+            if (_PlacingPointer)
             {
+                SetHelpText(Reuben.Properties.Resources.PointerPlacementHelper);
+            }
+            else if (_SelectingStartPositionMode)
+            {
+                SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
+            }
+            else if (EditMode == EditMode.Tiles)
+            {
+                SetTileModeText();   
                 LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
+
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
                     switch (TileDrawMode)
@@ -803,7 +815,6 @@ namespace Daiz.NES.Reuben
                         case TileDrawMode.Outline:
                         case TileDrawMode.Rectangle:
                         case TileDrawMode.Selection:
-                        case TileDrawMode.Scatter:
                             if (StartX == x && StartY == y) return;
                             if (x > StartX)
                             {
@@ -832,6 +843,7 @@ namespace Daiz.NES.Reuben
                             break;
 
                         case TileDrawMode.Line:
+                            SetHelpText(Reuben.Properties.Resources.LineModeHelper);
                             if (y > StartY)
                             {
                                 if (x > StartX)
@@ -860,6 +872,7 @@ namespace Daiz.NES.Reuben
             }
             else if (EditMode == EditMode.Sprites)
             {
+                SetHelpText(Reuben.Properties.Resources.SpriteLevelHelper);
                 Sprite s = SelectSprite(x, y);
 
                 if (s != null)
@@ -894,6 +907,7 @@ namespace Daiz.NES.Reuben
             }
             else if (ContinueDragging && EditMode == EditMode.Pointers && CurrentPointer != null && MouseButtons == MouseButtons.Left)
             {
+                SetHelpText(Reuben.Properties.Resources.PointerHelper);
                 if (CurrentPointer != null)
                 {
                     if (x == CurrentLevel.Width - 1 || y == CurrentLevel.Height - 1) return;
@@ -1120,6 +1134,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbPencil_Click(object sender, EventArgs e)
         {
+            SetHelpText(Reuben.Properties.Resources.TileModeHelper);
             TileDrawMode = TileDrawMode.Pencil;
             TsbPencil.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
@@ -1127,6 +1142,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbRectangle_Click(object sender, EventArgs e)
         {
+            SetHelpText(Reuben.Properties.Resources.RectangleModeHelper);
             TileDrawMode = TileDrawMode.Rectangle;
             TsbRectangle.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
@@ -1134,6 +1150,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbOutline_Click(object sender, EventArgs e)
         {
+            SetHelpText(Reuben.Properties.Resources.OutlineModeHelper);
             TileDrawMode = TileDrawMode.Outline;
             TsbOutline.Checked = true;
             TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
@@ -1141,6 +1158,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbBucket_Click(object sender, EventArgs e)
         {
+            SetHelpText(Reuben.Properties.Resources.BucketModeHelper);
             TileDrawMode = TileDrawMode.Fill;
             TsbBucket.Checked = true;
             TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
@@ -1148,6 +1166,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbLine_Click(object sender, EventArgs e)
         {
+            SetHelpText(Reuben.Properties.Resources.LineModeHelper);
             TileDrawMode = TileDrawMode.Line;
             TsbLine.Checked = true;
             TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
@@ -1243,9 +1262,10 @@ namespace Daiz.NES.Reuben
         private bool _SelectingStartPositionMode;
         private void BtnStartPoint_Click(object sender, EventArgs e)
         {
+            SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
             _SelectingStartPositionMode = true;
             TabLevelInfo.Enabled = false;
-            PnlDrawing.Enabled = false;
+            TabEditSelector.Enabled = false;
         }
 
         #endregion
@@ -1362,7 +1382,7 @@ namespace Daiz.NES.Reuben
             }
             else
             {
-                PnlInfo.Height = 160;
+                PnlInfo.Height = 90;
                 TabLevelInfo.Visible = true;
                 BtnShowHideInfo.Image = Properties.Resources.down;
             }
@@ -1381,15 +1401,18 @@ namespace Daiz.NES.Reuben
                 case 0:
                     EditMode = EditMode.Tiles;
                     TlsDrawing.Visible = true;
+                    TlsTileCommands.Visible = MouseMode == MouseMode.RightClickSelection;
                     break;
                 case 1:
                     EditMode = EditMode.Sprites;
                     TlsDrawing.Visible = false;
+                    TlsTileCommands.Visible = false;
                     break;
 
                 case 2:
                     EditMode = EditMode.Pointers;
                     TlsDrawing.Visible = false;
+                    TlsTileCommands.Visible = false;
                     break;
             }
         }
@@ -1414,9 +1437,6 @@ namespace Daiz.NES.Reuben
                         Save();
                         break;
 
-                    case Keys.G:
-                        TsbGrid.Checked = !TsbGrid.Checked;
-                        break;
 
                     case Keys.X:
                         Cut();
@@ -1430,25 +1450,25 @@ namespace Daiz.NES.Reuben
                         Paste(useTransparentTile);
                         break;
 
-                    case Keys.W:
+                    case Keys.G:
+                        TsbGrid.Checked = !TsbGrid.Checked;
+                        break;
+
+                    case Keys.H:
                         TsbTileSpecials.Checked = !TsbTileSpecials.Checked;
                         break;
 
-                    case Keys.E:
+                    case Keys.J:
                         TsbSriteSpecials.Checked = !TsbSriteSpecials.Checked;
                         break;
 
-                    case Keys.R:
+                    case Keys.F:
                         TsbStartPoint.Checked = !TsbStartPoint.Checked;
                         break;
 
-                    case Keys.F:
+                    case Keys.R:
                         TsbStartPoint.Checked = true;
                         BtnStartPoint_Click(null, null);
-                        break;
-
-                    case Keys.D:
-                        ToggleRightClickMode();
                         break;
 
                     case Keys.Z:
@@ -1495,6 +1515,19 @@ namespace Daiz.NES.Reuben
         private void ToggleRightClickMode()
         {
             MouseMode = MouseMode == MouseMode.RightClickSelection ? MouseMode.RightClickTile : MouseMode.RightClickSelection;
+            switch (MouseMode)
+            {
+                case MouseMode.RightClickSelection:
+                    TlsTileCommands.Visible = true;
+                    SetHelpText(Reuben.Properties.Resources.RightClickSelectHelper);
+                    break;
+
+                case MouseMode.RightClickTile:
+                    TlsTileCommands.Visible = false;
+                    SetHelpText(Reuben.Properties.Resources.RightClickTileHelper);
+                    break;
+            }
+
             LblRightClickMode.Text = "Right Click Mode: " + (MouseMode == MouseMode.RightClickSelection ? "Selector" : "Tile Placement");
         }
 
@@ -1612,6 +1645,7 @@ namespace Daiz.NES.Reuben
         private bool _PlacingPointer;
         private void BtnAddPointer_Click(object sender, EventArgs e)
         {
+            SetHelpText(Reuben.Properties.Resources.PointerPlacementHelper);
             TabEditSelector.Enabled = PnlInfo.Enabled = false;
             _PlacingPointer = true;
         }
@@ -1830,6 +1864,7 @@ namespace Daiz.NES.Reuben
 
         private void SetHelpText(string text)
         {
+            if (text == CurrentHelperText) return;
             PreviousHelperText = CurrentHelperText;
             CurrentHelperText = text;
             LblHelpText.Text = CurrentHelperText;
@@ -1848,6 +1883,36 @@ namespace Daiz.NES.Reuben
         private void tabPage2_MouseMove(object sender, MouseEventArgs e)
         {
             SetHelpText(Reuben.Properties.Resources.SpriteModeHelper);
+        }
+
+        private void SetTileModeText()
+        {
+            switch (TileDrawMode)
+            {
+                case TileDrawMode.Fill:
+                    SetHelpText(Reuben.Properties.Resources.BucketModeHelper);
+                    break;
+
+                case TileDrawMode.Line:
+                    SetHelpText(Reuben.Properties.Resources.LineModeHelper);
+                    break;
+
+                case TileDrawMode.Outline:
+                    SetHelpText(Reuben.Properties.Resources.OutlineModeHelper);
+                    break;
+
+                case TileDrawMode.Pencil:
+                    SetHelpText(Reuben.Properties.Resources.PencilModeHelper);
+                    break;
+
+                case TileDrawMode.Rectangle:
+                    SetHelpText(Reuben.Properties.Resources.RectangleModeHelper);
+                    break;
+
+                case TileDrawMode.Selection:
+                    SetHelpText(Reuben.Properties.Resources.RightClickSelectHelper);
+                    break;
+            }
         }
     }
 }
