@@ -125,7 +125,7 @@
     <value>..\Images\bucket.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BucketModeHelper" xml:space="preserve">
-    <value>Click an enclosed area of tiles to fill the area with the selected tile.</value>
+    <value>Click an enclosed area of tiles to fill the area with the selected tile. Use Shift +Click to pick a tile instead of drawing it.</value>
   </data>
   <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\copyhs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -152,7 +152,7 @@
     <value>..\Images\line.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LineModeHelper" xml:space="preserve">
-    <value>Click and drag the mouse to draw a diagonal line. Let go of the mouse to place tiles.</value>
+    <value>Click and drag the mouse to draw a diagonal line. Let go of the mouse to place tiles. 	BucketModeHelper	Click an enclosed area of tiles to fill the area with the selected tile. Use Shift +Click to pick a tile instead of drawing it.</value>
   </data>
   <data name="mario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\mario.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -161,13 +161,13 @@
     <value>..\Images\outline.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OutlineModeHelper" xml:space="preserve">
-    <value>Click and drag the mouse to create an outline of tiles.</value>
+    <value>Click and drag the mouse to create an outline of tiles. 	BucketModeHelper	Click an enclosed area of tiles to fill the area with the selected tile. Use Shift +Click to pick a tile instead of drawing it.</value>
   </data>
   <data name="paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\pastehs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PencilModeHelper" xml:space="preserve">
-    <value>Click and hold the mouse to place tiles on the level.</value>
+    <value>Click and hold the mouse to place tiles on the level. 	BucketModeHelper	Click an enclosed area of tiles to fill the area with the selected tile. Use Shift +Click to pick a tile instead of drawing it.</value>
   </data>
   <data name="PointerHelper" xml:space="preserve">
     <value>Click Add to add a new pointer to the level. Click a pointer and drag to change it's X/Y entrance range.</value>
@@ -179,10 +179,10 @@
     <value>..\Images\rectangle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RectangleModeHelper" xml:space="preserve">
-    <value>Click and drag the mouse to create an area to fill with tiles.</value>
+    <value>Click and drag the mouse to create an area to fill with tiles. 	BucketModeHelper	Click an enclosed area of tiles to fill the area with the selected tile. Use Shift +Click to pick a tile instead of drawing it.</value>
   </data>
   <data name="RightClickSelectHelper" xml:space="preserve">
-    <value>Use the right mouse button to create a selectable area on the level area.</value>
+    <value>Use the right mouse button to create a selectable area on the level area. With a selected region you can cut, copy paste and delete the selected tiles.</value>
   </data>
   <data name="RightClickTileHelper" xml:space="preserve">
     <value>Use the both the left and right mouse buttons to place tiles on the level.</value>
@@ -213,5 +213,11 @@
   </data>
   <data name="zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\zoom.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PointerPlacementHelper" xml:space="preserve">
+    <value>Click the level area to place your pointer.</value>
+  </data>
+  <data name="StartPlacementHelper" xml:space="preserve">
+    <value>Click the level area to place the starting position.</value>
   </data>
 </root>
