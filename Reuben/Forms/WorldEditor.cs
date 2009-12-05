@@ -469,8 +469,17 @@ namespace Daiz.NES.Reuben
 
             LblPositition.Text = "X: " + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
 
-            if (EditMode == EditMode.Tiles)
+            if (_PlacingPointer)
             {
+                SetHelpText(Reuben.Properties.Resources.PointerPlacementHelper);
+            }
+            else if (_SelectingStartPositionMode)
+            {
+                SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
+            }
+            else if (EditMode == EditMode.Tiles)
+            {
+                SetTileModeText();
                 LevelToolTip.SetToolTip(WldView, ProjectController.BlockManager.GetBlockString(CurrentWorld.Type, CurrentWorld.LevelData[x, y]) + "\n(" + CurrentWorld.LevelData[x, y].ToHexString() + ")");
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
@@ -954,15 +963,18 @@ namespace Daiz.NES.Reuben
                 case 0:
                     EditMode = EditMode.Tiles;
                     TlsDrawing.Visible = true;
+                    TlsTileCommands.Visible = MouseMode == MouseMode.RightClickSelection;
                     break;
                 case 1:
                     EditMode = EditMode.Sprites;
                     TlsDrawing.Visible = false;
+                    TlsTileCommands.Visible = false;
                     break;
 
                 case 2:
                     EditMode = EditMode.Pointers;
                     TlsDrawing.Visible = false;
+                    TlsTileCommands.Visible = false;
                     break;
             }
         }
@@ -1327,6 +1339,56 @@ namespace Daiz.NES.Reuben
             PreviousHelperText = CurrentHelperText;
             CurrentHelperText = text;
             LblHelpText.Text = CurrentHelperText;
+        }
+
+        private void SetTileModeText()
+        {
+            switch (TileDrawMode)
+            {
+                case TileDrawMode.Fill:
+                    SetHelpText(Reuben.Properties.Resources.BucketModeHelper);
+                    break;
+
+                case TileDrawMode.Line:
+                    SetHelpText(Reuben.Properties.Resources.LineModeHelper);
+                    break;
+
+                case TileDrawMode.Outline:
+                    SetHelpText(Reuben.Properties.Resources.OutlineModeHelper);
+                    break;
+
+                case TileDrawMode.Pencil:
+                    SetHelpText(Reuben.Properties.Resources.PencilModeHelper);
+                    break;
+
+                case TileDrawMode.Rectangle:
+                    SetHelpText(Reuben.Properties.Resources.RectangleModeHelper);
+                    break;
+
+                case TileDrawMode.Selection:
+                    SetHelpText(Reuben.Properties.Resources.RightClickSelectHelper);
+                    break;
+            }
+        }
+
+        private void TsbCut_Click(object sender, EventArgs e)
+        {
+            Cut();
+        }
+
+        private void TsbCopy_Click(object sender, EventArgs e)
+        {
+            Copy();
+        }
+
+        private void TsbPaste_Click(object sender, EventArgs e)
+        {
+            Paste(true);
+        }
+
+        private void TsbDelete_Click(object sender, EventArgs e)
+        {
+            DeleteTiles();
         }
     }
 }
