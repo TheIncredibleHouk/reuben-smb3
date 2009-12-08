@@ -85,7 +85,7 @@ namespace Daiz.NES.Reuben
         public static void ImportGraphics()
         {
             OpenFileDialog OFD = new OpenFileDialog();
-            OFD.Filter = "NES Graphics File|*.chr";
+            OFD.Filter = "NES Graphics File|*.chr|NES ROM File|*.nes";
             OFD.InitialDirectory = ProjectController.RootDirectory;
             DialogResult result = OFD.ShowDialog();
             if (result == DialogResult.OK)

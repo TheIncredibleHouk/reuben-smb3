@@ -101,14 +101,24 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public bool ImportGraphics(string filename)
         {
             if (!File.Exists(filename)) return false;
+            bool IsChr = Path.GetExtension(filename) == "chr";
             FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            byte[] header = new byte[16];
             byte[] graphicsData = new byte[0x40000];
-            
-            fs.Read(header, 0, 16);
+            int length, offset;
 
-            int length = header[5] * 8192;
-            int offset = header[4] * 16384 + 16;
+            if (!IsChr)
+            {
+                byte[] header = new byte[16];
+                fs.Read(header, 0, 16);
+
+                length = header[5] * 8192;
+                offset = header[4] * 16384 + 16;
+            }
+            else
+            {
+                length = (int) fs.Length;
+                offset = 0;
+            }
 
             fs.Seek(offset, SeekOrigin.Begin);
             fs.Read(graphicsData, 0, length);
