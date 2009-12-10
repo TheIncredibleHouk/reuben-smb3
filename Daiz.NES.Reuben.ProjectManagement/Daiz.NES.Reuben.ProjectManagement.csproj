@@ -67,6 +67,7 @@
     <Compile Include="Patch\Patch.cs" />
     <Compile Include="Patch\PatchBlock.cs" />
     <Compile Include="Patch\PatchManager.cs" />
+    <Compile Include="ROM\Rom.cs" />
     <Compile Include="ROM\RomManager.cs" />
     <Compile Include="Settings\LevelSettings.cs" />
     <Compile Include="Special\SpecialBlock.cs" />

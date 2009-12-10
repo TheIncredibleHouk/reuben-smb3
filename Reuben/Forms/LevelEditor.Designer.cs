@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelEditor));
             this.PnlInfo = new System.Windows.Forms.Panel();
-            this.TabLevelInfo = new Dotnetrix.Controls.TabControlEX();
+            this.TabLevelInfo = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.CmbMusic = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,7 +43,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.CmbLength = new System.Windows.Forms.ComboBox();
-            this.tabPageEX1 = new Dotnetrix.Controls.TabPageEX();
+            this.tabPageEX1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.CmbGraphics = new System.Windows.Forms.ComboBox();
             this.NumBackground = new System.Windows.Forms.NumericUpDown();
@@ -52,13 +52,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.BtnClear = new System.Windows.Forms.Button();
             this.LblHexGraphics = new System.Windows.Forms.Label();
-            this.tabPageEX2 = new Dotnetrix.Controls.TabPageEX();
+            this.tabPageEX2 = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
             this.LblStartPoint = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.CmbActions = new System.Windows.Forms.ComboBox();
-            this.tabPageEX3 = new Dotnetrix.Controls.TabPageEX();
+            this.tabPageEX3 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -83,11 +83,10 @@
             this.LblRightClickMode = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.NumSpecials = new System.Windows.Forms.NumericUpDown();
-            this.NumProperties = new System.Windows.Forms.NumericUpDown();
             this.panel5 = new System.Windows.Forms.Panel();
             this.LblHelpText = new System.Windows.Forms.Label();
             this.PnlDrawing = new System.Windows.Forms.Panel();
-            this.TabEditSelector = new Dotnetrix.Controls.TabControlEX();
+            this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
@@ -178,7 +177,6 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).BeginInit();
             this.panel5.SuspendLayout();
             this.PnlDrawing.SuspendLayout();
             this.TabEditSelector.SuspendLayout();
@@ -211,7 +209,6 @@
             // TabLevelInfo
             // 
             this.TabLevelInfo.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.TabLevelInfo.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TabLevelInfo.Controls.Add(this.tabPage4);
             this.TabLevelInfo.Controls.Add(this.tabPageEX1);
             this.TabLevelInfo.Controls.Add(this.tabPageEX2);
@@ -223,13 +220,13 @@
             this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
             this.TabLevelInfo.Name = "TabLevelInfo";
             this.TabLevelInfo.SelectedIndex = 0;
-            this.TabLevelInfo.SelectedTabFontStyle = System.Drawing.FontStyle.Bold;
             this.TabLevelInfo.Size = new System.Drawing.Size(569, 93);
             this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabLevelInfo.TabIndex = 20;
             // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage4.Controls.Add(this.CmbMusic);
             this.tabPage4.Controls.Add(this.label3);
             this.tabPage4.Controls.Add(this.label4);
@@ -243,9 +240,10 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(561, 64);
+            this.tabPage4.Size = new System.Drawing.Size(561, 67);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Level";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // CmbMusic
             // 
@@ -409,9 +407,10 @@
             this.tabPageEX1.Controls.Add(this.LblHexGraphics);
             this.tabPageEX1.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX1.Name = "tabPageEX1";
-            this.tabPageEX1.Size = new System.Drawing.Size(561, 64);
+            this.tabPageEX1.Size = new System.Drawing.Size(561, 67);
             this.tabPageEX1.TabIndex = 4;
             this.tabPageEX1.Text = "Graphics";
+            this.tabPageEX1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -503,6 +502,7 @@
             // 
             // tabPageEX2
             // 
+            this.tabPageEX2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPageEX2.Controls.Add(this.label13);
             this.tabPageEX2.Controls.Add(this.LblStartPoint);
             this.tabPageEX2.Controls.Add(this.button1);
@@ -510,9 +510,10 @@
             this.tabPageEX2.Controls.Add(this.CmbActions);
             this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX2.Name = "tabPageEX2";
-            this.tabPageEX2.Size = new System.Drawing.Size(561, 64);
+            this.tabPageEX2.Size = new System.Drawing.Size(561, 67);
             this.tabPageEX2.TabIndex = 5;
             this.tabPageEX2.Text = "Position";
+            this.tabPageEX2.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
@@ -576,6 +577,7 @@
             // 
             // tabPageEX3
             // 
+            this.tabPageEX3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPageEX3.Controls.Add(this.label10);
             this.tabPageEX3.Controls.Add(this.numericUpDown3);
             this.tabPageEX3.Controls.Add(this.label9);
@@ -584,9 +586,10 @@
             this.tabPageEX3.Controls.Add(this.numericUpDown1);
             this.tabPageEX3.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX3.Name = "tabPageEX3";
-            this.tabPageEX3.Size = new System.Drawing.Size(561, 64);
+            this.tabPageEX3.Size = new System.Drawing.Size(561, 67);
             this.tabPageEX3.TabIndex = 6;
             this.tabPageEX3.Text = "Unused";
+            this.tabPageEX3.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -665,24 +668,28 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage7.Location = new System.Drawing.Point(4, 4);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(561, 64);
+            this.tabPage7.Size = new System.Drawing.Size(561, 67);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Special Options";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // tabPage8
             // 
+            this.tabPage8.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage8.Controls.Add(this.LblSpriteSize);
             this.tabPage8.Controls.Add(this.BtnLevelSize);
             this.tabPage8.Controls.Add(this.LblLevelSize);
             this.tabPage8.Location = new System.Drawing.Point(4, 4);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(561, 64);
+            this.tabPage8.Size = new System.Drawing.Size(561, 67);
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Rom Info";
+            this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // LblSpriteSize
             // 
@@ -716,6 +723,7 @@
             // 
             // TabCoins
             // 
+            this.TabCoins.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TabCoins.Controls.Add(this.LblInvisibleCoins);
             this.TabCoins.Controls.Add(this.LblTotalCoins);
             this.TabCoins.Controls.Add(this.LblPSwitchCoins);
@@ -725,9 +733,10 @@
             this.TabCoins.Location = new System.Drawing.Point(4, 4);
             this.TabCoins.Name = "TabCoins";
             this.TabCoins.Padding = new System.Windows.Forms.Padding(3);
-            this.TabCoins.Size = new System.Drawing.Size(561, 64);
+            this.TabCoins.Size = new System.Drawing.Size(561, 67);
             this.TabCoins.TabIndex = 2;
             this.TabCoins.Text = "Tile Info";
+            this.TabCoins.UseVisualStyleBackColor = true;
             // 
             // LblInvisibleCoins
             // 
@@ -815,7 +824,7 @@
             this.LblSprite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblSprite.Location = new System.Drawing.Point(217, 0);
             this.LblSprite.Name = "LblSprite";
-            this.LblSprite.Size = new System.Drawing.Size(219, 29);
+            this.LblSprite.Size = new System.Drawing.Size(286, 29);
             this.LblSprite.TabIndex = 21;
             this.LblSprite.Text = "Sprite";
             this.LblSprite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -851,12 +860,11 @@
             this.panel3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.NumSpecials);
-            this.panel3.Controls.Add(this.NumProperties);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(436, 0);
+            this.panel3.Location = new System.Drawing.Point(503, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(133, 29);
+            this.panel3.Size = new System.Drawing.Size(66, 29);
             this.panel3.TabIndex = 26;
             // 
             // NumSpecials
@@ -879,27 +887,6 @@
             this.NumSpecials.TabIndex = 26;
             this.LevelToolTip.SetToolTip(this.NumSpecials, "Special Icon Transparency");
             this.NumSpecials.ValueChanged += new System.EventHandler(this.NumSpecials_ValueChanged);
-            // 
-            // NumProperties
-            // 
-            this.NumProperties.DecimalPlaces = 2;
-            this.NumProperties.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NumProperties.Location = new System.Drawing.Point(66, 3);
-            this.NumProperties.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
-            this.NumProperties.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumProperties.Name = "NumProperties";
-            this.NumProperties.Size = new System.Drawing.Size(57, 20);
-            this.NumProperties.TabIndex = 25;
-            this.LevelToolTip.SetToolTip(this.NumProperties, "Block Property Transparency");
-            this.NumProperties.ValueChanged += new System.EventHandler(this.NumProperties_ValueChanged);
             // 
             // panel5
             // 
@@ -949,7 +936,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage1.Controls.Add(this.BlvRight);
             this.tabPage1.Controls.Add(this.LblSelectorHover);
             this.tabPage1.Controls.Add(this.BlvLeft);
@@ -957,9 +944,10 @@
             this.tabPage1.Controls.Add(this.CmbLayouts);
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(269, 332);
+            this.tabPage1.Size = new System.Drawing.Size(269, 335);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
+            this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
             // BlvRight
@@ -1021,15 +1009,17 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage2.Controls.Add(this.LblSpriteSelected);
             this.tabPage2.Controls.Add(this.TabClass3);
             this.tabPage2.Controls.Add(this.TabClass2);
             this.tabPage2.Controls.Add(this.TabClass1);
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(269, 332);
+            this.tabPage2.Size = new System.Drawing.Size(269, 335);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sprites";
+            this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage2_MouseMove);
             // 
             // LblSpriteSelected
@@ -1079,14 +1069,16 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage3.Controls.Add(this.BtnDeletePointer);
             this.tabPage3.Controls.Add(this.BtnAddPointer);
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(269, 332);
+            this.tabPage3.Size = new System.Drawing.Size(269, 335);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pointers";
+            this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage3_MouseMove);
             // 
             // BtnDeletePointer
@@ -1474,76 +1466,76 @@
             this.toolStripSeparator6,
             this.hideGuidesToolStripMenuItem});
             this.CtxVerticalGuide.Name = "CtxVerticalGuide";
-            this.CtxVerticalGuide.Size = new System.Drawing.Size(256, 198);
+            this.CtxVerticalGuide.Size = new System.Drawing.Size(266, 198);
             // 
             // freeGuideToolStripMenuItem
             // 
             this.freeGuideToolStripMenuItem.Name = "freeGuideToolStripMenuItem";
-            this.freeGuideToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.freeGuideToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.freeGuideToolStripMenuItem.Text = "Free Guide";
             this.freeGuideToolStripMenuItem.Click += new System.EventHandler(this.freeGuideToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(262, 6);
             // 
             // showScreenHeightToolStripMenuItem
             // 
             this.showScreenHeightToolStripMenuItem.Name = "showScreenHeightToolStripMenuItem";
-            this.showScreenHeightToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.showScreenHeightToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.showScreenHeightToolStripMenuItem.Text = "Snap to Screen Height";
             this.showScreenHeightToolStripMenuItem.Click += new System.EventHandler(this.showScreenHeightToolStripMenuItem_Click);
             // 
             // snapToJumpHeightToolStripMenuItem
             // 
             this.snapToJumpHeightToolStripMenuItem.Name = "snapToJumpHeightToolStripMenuItem";
-            this.snapToJumpHeightToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.snapToJumpHeightToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.snapToJumpHeightToolStripMenuItem.Text = "Snap to Jump Height";
             this.snapToJumpHeightToolStripMenuItem.Click += new System.EventHandler(this.snapToJumpHeightToolStripMenuItem_Click);
             // 
             // snapToRunningJumpHeightToolStripMenuItem
             // 
             this.snapToRunningJumpHeightToolStripMenuItem.Name = "snapToRunningJumpHeightToolStripMenuItem";
-            this.snapToRunningJumpHeightToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.snapToRunningJumpHeightToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.snapToRunningJumpHeightToolStripMenuItem.Text = "Snap to Running Jump Height";
             this.snapToRunningJumpHeightToolStripMenuItem.Click += new System.EventHandler(this.snapToRunningJumpHeightToolStripMenuItem_Click);
             // 
             // snapToFullPMeterJumpHeightToolStripMenuItem
             // 
             this.snapToFullPMeterJumpHeightToolStripMenuItem.Name = "snapToFullPMeterJumpHeightToolStripMenuItem";
-            this.snapToFullPMeterJumpHeightToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.snapToFullPMeterJumpHeightToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.snapToFullPMeterJumpHeightToolStripMenuItem.Text = "Snap to Full P-Meter Jump Height";
             this.snapToFullPMeterJumpHeightToolStripMenuItem.Click += new System.EventHandler(this.snapToFullPMeterJumpHeightToolStripMenuItem_Click);
             // 
             // snapToEnemyBounceHeightToolStripMenuItem
             // 
             this.snapToEnemyBounceHeightToolStripMenuItem.Name = "snapToEnemyBounceHeightToolStripMenuItem";
-            this.snapToEnemyBounceHeightToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.snapToEnemyBounceHeightToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.snapToEnemyBounceHeightToolStripMenuItem.Text = "Snap to Enemy Stomp Recoil Height";
             this.snapToEnemyBounceHeightToolStripMenuItem.Click += new System.EventHandler(this.snapToEnemyBounceHeightToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(252, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(262, 6);
             // 
             // changeGuideColorToolStripMenuItem
             // 
             this.changeGuideColorToolStripMenuItem.Name = "changeGuideColorToolStripMenuItem";
-            this.changeGuideColorToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.changeGuideColorToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.changeGuideColorToolStripMenuItem.Text = "Change Guide Color";
             this.changeGuideColorToolStripMenuItem.Click += new System.EventHandler(this.changeGuideColorToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(252, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(262, 6);
             // 
             // hideGuidesToolStripMenuItem
             // 
             this.hideGuidesToolStripMenuItem.Name = "hideGuidesToolStripMenuItem";
-            this.hideGuidesToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.hideGuidesToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.hideGuidesToolStripMenuItem.Text = "Hide Guides";
             this.hideGuidesToolStripMenuItem.Click += new System.EventHandler(this.hideGuidesToolStripMenuItem_Click);
             // 
@@ -1562,76 +1554,76 @@
             this.toolStripSeparator7,
             this.toolStripMenuItem6});
             this.CtxHorizontalGuide.Name = "CtxVerticalGuide";
-            this.CtxHorizontalGuide.Size = new System.Drawing.Size(237, 198);
+            this.CtxHorizontalGuide.Size = new System.Drawing.Size(243, 198);
             // 
             // freeGuide2
             // 
             this.freeGuide2.Name = "freeGuide2";
-            this.freeGuide2.Size = new System.Drawing.Size(236, 22);
+            this.freeGuide2.Size = new System.Drawing.Size(242, 22);
             this.freeGuide2.Text = "Free Guide";
             this.freeGuide2.Click += new System.EventHandler(this.freeGuide2_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(233, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(239, 6);
             // 
             // snapToScreenLengthToolStripMenuItem
             // 
             this.snapToScreenLengthToolStripMenuItem.Name = "snapToScreenLengthToolStripMenuItem";
-            this.snapToScreenLengthToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.snapToScreenLengthToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.snapToScreenLengthToolStripMenuItem.Text = "Snap to Screen Length";
             this.snapToScreenLengthToolStripMenuItem.Click += new System.EventHandler(this.snapToScreenLengthToolStripMenuItem_Click);
             // 
             // snapToJumpLengthToolStripMenuItem
             // 
             this.snapToJumpLengthToolStripMenuItem.Name = "snapToJumpLengthToolStripMenuItem";
-            this.snapToJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.snapToJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.snapToJumpLengthToolStripMenuItem.Text = "Snap to Jump Length";
             this.snapToJumpLengthToolStripMenuItem.Click += new System.EventHandler(this.snapToJumpLengthToolStripMenuItem_Click);
             // 
             // snapToWalkingJumpLengthToolStripMenuItem
             // 
             this.snapToWalkingJumpLengthToolStripMenuItem.Name = "snapToWalkingJumpLengthToolStripMenuItem";
-            this.snapToWalkingJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.snapToWalkingJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.snapToWalkingJumpLengthToolStripMenuItem.Text = "Snap to Walking Jump Length";
             this.snapToWalkingJumpLengthToolStripMenuItem.Click += new System.EventHandler(this.snapToWalkingJumpLengthToolStripMenuItem_Click);
             // 
             // snapToRunningJumpLengthToolStripMenuItem
             // 
             this.snapToRunningJumpLengthToolStripMenuItem.Name = "snapToRunningJumpLengthToolStripMenuItem";
-            this.snapToRunningJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.snapToRunningJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.snapToRunningJumpLengthToolStripMenuItem.Text = "Snap to Running Jump Length";
             this.snapToRunningJumpLengthToolStripMenuItem.Click += new System.EventHandler(this.snapToRunningJumpLengthToolStripMenuItem_Click);
             // 
             // snapToFullMeterJumpLengthToolStripMenuItem
             // 
             this.snapToFullMeterJumpLengthToolStripMenuItem.Name = "snapToFullMeterJumpLengthToolStripMenuItem";
-            this.snapToFullMeterJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.snapToFullMeterJumpLengthToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.snapToFullMeterJumpLengthToolStripMenuItem.Text = "Snap to Full Meter Jump Length";
             this.snapToFullMeterJumpLengthToolStripMenuItem.Click += new System.EventHandler(this.snapToFullMeterJumpLengthToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(233, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(239, 6);
             // 
             // changeGuideColorToolStripMenuItem1
             // 
             this.changeGuideColorToolStripMenuItem1.Name = "changeGuideColorToolStripMenuItem1";
-            this.changeGuideColorToolStripMenuItem1.Size = new System.Drawing.Size(236, 22);
+            this.changeGuideColorToolStripMenuItem1.Size = new System.Drawing.Size(242, 22);
             this.changeGuideColorToolStripMenuItem1.Text = "Change Guide Color";
             this.changeGuideColorToolStripMenuItem1.Click += new System.EventHandler(this.changeGuideColorToolStripMenuItem1_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(233, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(239, 6);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(236, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(242, 22);
             this.toolStripMenuItem6.Text = "Hide Guides";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
@@ -1756,7 +1748,6 @@
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).EndInit();
             this.panel5.ResumeLayout(false);
             this.PnlDrawing.ResumeLayout(false);
             this.TabEditSelector.ResumeLayout(false);
@@ -1803,7 +1794,7 @@
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox CmbScroll;
-        private Dotnetrix.Controls.TabControlEX TabLevelInfo;
+        private System.Windows.Forms.TabControl TabLevelInfo;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TabPage TabCoins;
@@ -1815,7 +1806,7 @@
         private System.Windows.Forms.Label LblInvisibleCoins;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.Panel PnlDrawing;
-        private Dotnetrix.Controls.TabControlEX TabEditSelector;
+        private System.Windows.Forms.TabControl TabEditSelector;
         private System.Windows.Forms.TabPage tabPage1;
         private BlockSelector BlsSelector;
         private System.Windows.Forms.ComboBox CmbLayouts;
@@ -1881,7 +1872,7 @@
         private System.Windows.Forms.ToolStripButton TsbCopy;
         private System.Windows.Forms.ToolStripButton TsbPaste;
         private System.Windows.Forms.ToolStripButton TsbDelete;
-        private Dotnetrix.Controls.TabPageEX tabPageEX1;
+        private System.Windows.Forms.TabPage tabPageEX1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CmbGraphics;
         private System.Windows.Forms.NumericUpDown NumBackground;
@@ -1893,13 +1884,13 @@
         private System.Windows.Forms.Label LblSpriteSize;
         private System.Windows.Forms.Button BtnLevelSize;
         private System.Windows.Forms.Label LblLevelSize;
-        private Dotnetrix.Controls.TabPageEX tabPageEX2;
+        private System.Windows.Forms.TabPage tabPageEX2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label LblStartPoint;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox CmbActions;
-        private Dotnetrix.Controls.TabPageEX tabPageEX3;
+        private System.Windows.Forms.TabPage tabPageEX3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Label label9;
@@ -1914,6 +1905,5 @@
         private System.Windows.Forms.Label LblRightClickMode;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.NumericUpDown NumSpecials;
-        private System.Windows.Forms.NumericUpDown NumProperties;
     }
 }

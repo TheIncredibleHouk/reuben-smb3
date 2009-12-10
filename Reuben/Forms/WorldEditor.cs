@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using Daiz.Library;
 using Daiz.NES.Reuben.ProjectManagement;
-using Dotnetrix.Controls;
 
 namespace Daiz.NES.Reuben
 {
@@ -33,6 +32,8 @@ namespace Daiz.NES.Reuben
             {
                 CmbGraphics.Items.Add(g);
             }
+
+            CmbGraphics.Items.RemoveAt(254);
 
             foreach (var p in ProjectController.PaletteManager.Palettes)
             {

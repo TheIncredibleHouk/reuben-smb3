@@ -47,10 +47,10 @@
         <block value="2B" property="TopSolid" />
         <block value="2C" property="TopSolid" />
         <block value="2D" property="Solid" />
-        <block value="2E" property="Background" />
-        <block value="2F" property="Background" />
-        <block value="30" property="Background" />
-        <block value="31" property="Background" />
+        <block value="2E" property="Solid" />
+        <block value="2F" property="Solid" />
+        <block value="30" property="Solid" />
+        <block value="31" property="Solid" />
         <block value="32" property="Solid" />
         <block value="33" property="Solid" />
         <block value="34" property="Solid" />
@@ -103,7 +103,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -225,8 +225,8 @@
         <block value="DD" property="Water" />
         <block value="DE" property="Water" />
         <block value="DF" property="Water" />
-        <block value="E0" property="Water" />
-        <block value="E1" property="Water" />
+        <block value="E0" property="WaterFall" />
+        <block value="E1" property="WaterFall" />
         <block value="E2" property="TopSolid" />
         <block value="E3" property="TopSolid" />
         <block value="E4" property="TopSolid" />
@@ -256,7 +256,7 @@
         <block value="FC" property="Solid" />
         <block value="FD" property="Solid" />
         <block value="FE" property="Solid" />
-        <block value="FF" property="Background" />
+        <block value="FF" property="Solid" />
     </set>
     <set leveltype="2">
         <block value="00" property="Background" />
@@ -276,16 +276,16 @@
         <block value="0E" property="Background" />
         <block value="0F" property="Background" />
         <block value="10" property="Background" />
-        <block value="11" property="Background" />
-        <block value="12" property="Background" />
-        <block value="13" property="Background" />
-        <block value="14" property="Harmful" />
-        <block value="15" property="Background" />
-        <block value="16" property="Background" />
-        <block value="17" property="Background" />
-        <block value="18" property="Background" />
-        <block value="19" property="Background" />
-        <block value="1A" property="Background" />
+        <block value="11" property="Solid" />
+        <block value="12" property="Solid" />
+        <block value="13" property="Solid" />
+        <block value="14" property="Solid" />
+        <block value="15" property="Solid" />
+        <block value="16" property="Solid" />
+        <block value="17" property="Solid" />
+        <block value="18" property="Solid" />
+        <block value="19" property="Solid" />
+        <block value="1A" property="Solid" />
         <block value="1B" property="Solid" />
         <block value="1C" property="Solid" />
         <block value="1D" property="Solid" />
@@ -350,18 +350,18 @@
         <block value="58" property="Background" />
         <block value="59" property="Background" />
         <block value="5A" property="Background" />
-        <block value="5B" property="Water" />
-        <block value="5C" property="Water" />
-        <block value="5D" property="Water" />
-        <block value="5E" property="Water" />
-        <block value="5F" property="Water" />
-        <block value="60" property="WaterFall" />
-        <block value="61" property="WaterFall" />
+        <block value="5B" property="Solid" />
+        <block value="5C" property="Solid" />
+        <block value="5D" property="Solid" />
+        <block value="5E" property="Solid" />
+        <block value="5F" property="Solid" />
+        <block value="60" property="Solid" />
+        <block value="61" property="Solid" />
         <block value="62" property="Solid" />
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -404,16 +404,16 @@
         <block value="8E" property="Background" />
         <block value="8F" property="Background" />
         <block value="90" property="Background" />
-        <block value="91" property="Solid" />
-        <block value="92" property="Solid" />
-        <block value="93" property="Solid" />
-        <block value="94" property="Solid" />
-        <block value="95" property="Solid" />
-        <block value="96" property="Solid" />
-        <block value="97" property="Solid" />
-        <block value="98" property="Solid" />
-        <block value="99" property="Solid" />
-        <block value="9A" property="Solid" />
+        <block value="91" property="Background" />
+        <block value="92" property="Background" />
+        <block value="93" property="Background" />
+        <block value="94" property="Harmful" />
+        <block value="95" property="Background" />
+        <block value="96" property="Background" />
+        <block value="97" property="Background" />
+        <block value="98" property="Background" />
+        <block value="99" property="Background" />
+        <block value="9A" property="Background" />
         <block value="9B" property="Solid" />
         <block value="9C" property="Solid" />
         <block value="9D" property="Solid" />
@@ -483,10 +483,10 @@
         <block value="DD" property="Solid" />
         <block value="DE" property="Solid" />
         <block value="DF" property="Solid" />
-        <block value="E0" property="Solid" />
-        <block value="E1" property="Solid" />
-        <block value="E2" property="Solid" />
-        <block value="E3" property="Solid" />
+        <block value="E0" property="Waterfall" />
+        <block value="E1" property="Waterfall" />
+        <block value="E2" property="Harmful" />
+        <block value="E3" property="Harmful" />
         <block value="E4" property="Solid" />
         <block value="E5" property="Solid" />
         <block value="E6" property="Solid" />
@@ -539,13 +539,13 @@
         <block value="13" property="Background" />
         <block value="14" property="Background" />
         <block value="15" property="Slope" />
-        <block value="16" property="SlopeFillerSolidTop" />
+        <block value="16" property="Background" />
         <block value="17" property="Slope" />
         <block value="18" property="Slope" />
         <block value="19" property="Slope" />
         <block value="1A" property="Slope" />
         <block value="1B" property="Slope" />
-        <block value="1C" property="SlopeFillerSolidTop" />
+        <block value="1C" property="Background" />
         <block value="1D" property="Solid" />
         <block value="1E" property="Solid" />
         <block value="1F" property="Solid" />
@@ -555,7 +555,7 @@
         <block value="23" property="Background" />
         <block value="24" property="Background" />
         <block value="25" property="Slope" />
-        <block value="26" property="SlopeFillerSolidTop" />
+        <block value="26" property="Background" />
         <block value="27" property="Slope" />
         <block value="28" property="Slope" />
         <block value="29" property="Slope" />
@@ -569,18 +569,18 @@
         <block value="31" property="Solid" />
         <block value="32" property="Solid" />
         <block value="33" property="Solid" />
-        <block value="34" property="SlopeFillerSolidTop" />
+        <block value="34" property="Background" />
         <block value="35" property="SlopeFiller" />
-        <block value="36" property="SlopeFillerSolidTop" />
+        <block value="36" property="Background" />
         <block value="37" property="SlopeFiller" />
         <block value="38" property="SlopeFiller" />
         <block value="39" property="Solid" />
         <block value="3A" property="Solid" />
         <block value="3B" property="Solid" />
         <block value="3C" property="Solid" />
-        <block value="3D" property="SlopeFillerSolidTop" />
+        <block value="3D" property="Background" />
         <block value="3E" property="SlopeFiller" />
-        <block value="3F" property="SlopeFillerSolidTop" />
+        <block value="3F" property="Background" />
         <block value="40" property="Background" />
         <block value="41" property="Background" />
         <block value="42" property="Background" />
@@ -619,7 +619,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -642,7 +642,7 @@
         <block value="7A" property="Solid" />
         <block value="7B" property="Solid" />
         <block value="7C" property="Slope" />
-        <block value="7D" property="SlopeFillerSolidTop" />
+        <block value="7D" property="Background" />
         <block value="7E" property="Slope" />
         <block value="7F" property="Slope" />
         <block value="80" property="Background" />
@@ -671,7 +671,7 @@
         <block value="97" property="Background" />
         <block value="98" property="Background" />
         <block value="99" property="Slope" />
-        <block value="9A" property="SlopeFillerSolidTop" />
+        <block value="9A" property="Background" />
         <block value="9B" property="Slope" />
         <block value="9C" property="Slope" />
         <block value="9D" property="Slope" />
@@ -683,13 +683,13 @@
         <block value="A3" property="Slope" />
         <block value="A4" property="Slope" />
         <block value="A5" property="Slope" />
-        <block value="A6" property="SlopeFillerSolidBottom" />
-        <block value="A7" property="SlopeFillerSolidTop" />
+        <block value="A6" property="Background" />
+        <block value="A7" property="Background" />
         <block value="A8" property="SlopeFiller" />
-        <block value="A9" property="SlopeFillerSolidTop" />
+        <block value="A9" property="Background" />
         <block value="AA" property="SlopeFiller" />
         <block value="AB" property="SlopeFiller" />
-        <block value="AC" property="SlopeFillerSolidBottom" />
+        <block value="AC" property="Background" />
         <block value="AD" property="Solid" />
         <block value="AE" property="Solid" />
         <block value="AF" property="Solid" />
@@ -745,7 +745,7 @@
         <block value="E1" property="WaterFall" />
         <block value="E2" property="WaterFall" />
         <block value="E3" property="Slope" />
-        <block value="E4" property="SlopeFillerSolidTop" />
+        <block value="E4" property="Background" />
         <block value="E5" property="Slope" />
         <block value="E6" property="Slope" />
         <block value="E7" property="Slope" />
@@ -756,19 +756,19 @@
         <block value="EC" property="Slope" />
         <block value="ED" property="Slope" />
         <block value="EE" property="Slope" />
-        <block value="EF" property="SlopeFillerSolidTop" />
+        <block value="EF" property="Background" />
         <block value="F0" property="Solid" />
         <block value="F1" property="Solid" />
         <block value="F2" property="Solid" />
         <block value="F3" property="Solid" />
-        <block value="F4" property="SlopeFillerSolidBottom" />
-        <block value="F5" property="SlopeFillerSolidTop" />
+        <block value="F4" property="Background" />
+        <block value="F5" property="Background" />
         <block value="F6" property="SlopeFiller" />
-        <block value="F7" property="SlopeFillerSolidTop" />
+        <block value="F7" property="Background" />
         <block value="F8" property="SlopeFiller" />
         <block value="F9" property="SlopeFiller" />
-        <block value="FA" property="SlopeFillerSolidBottom" />
-        <block value="FB" property="SlopeFillerSolidTop" />
+        <block value="FA" property="Background" />
+        <block value="FB" property="Background" />
         <block value="FC" property="SlopeFiller" />
         <block value="FD" property="Solid" />
         <block value="FE" property="Solid" />
@@ -877,7 +877,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -1135,7 +1135,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -1393,7 +1393,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -1651,7 +1651,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -1909,7 +1909,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -2167,7 +2167,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -2425,7 +2425,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -2683,7 +2683,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -2941,7 +2941,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -3199,7 +3199,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -3377,13 +3377,13 @@
         <block value="13" property="Background" />
         <block value="14" property="Background" />
         <block value="15" property="Slope" />
-        <block value="16" property="SlopeFillerSolidTop" />
+        <block value="16" property="Background" />
         <block value="17" property="Slope" />
         <block value="18" property="Slope" />
         <block value="19" property="Slope" />
         <block value="1A" property="Slope" />
         <block value="1B" property="Slope" />
-        <block value="1C" property="SlopeFillerSolidTop" />
+        <block value="1C" property="Background" />
         <block value="1D" property="Solid" />
         <block value="1E" property="Solid" />
         <block value="1F" property="Solid" />
@@ -3393,7 +3393,7 @@
         <block value="23" property="Background" />
         <block value="24" property="Background" />
         <block value="25" property="Slope" />
-        <block value="26" property="SlopeFillerSolidTop" />
+        <block value="26" property="Background" />
         <block value="27" property="Slope" />
         <block value="28" property="Slope" />
         <block value="29" property="Slope" />
@@ -3407,18 +3407,18 @@
         <block value="31" property="Solid" />
         <block value="32" property="Solid" />
         <block value="33" property="Solid" />
-        <block value="34" property="SlopeFillerSolidTop" />
+        <block value="34" property="Background" />
         <block value="35" property="SlopeFiller" />
-        <block value="36" property="SlopeFillerSolidTop" />
+        <block value="36" property="Background" />
         <block value="37" property="SlopeFiller" />
         <block value="38" property="SlopeFiller" />
         <block value="39" property="Solid" />
         <block value="3A" property="Solid" />
         <block value="3B" property="Solid" />
         <block value="3C" property="Solid" />
-        <block value="3D" property="SlopeFillerSolidTop" />
+        <block value="3D" property="Background" />
         <block value="3E" property="SlopeFiller" />
-        <block value="3F" property="SlopeFillerSolidTop" />
+        <block value="3F" property="Background" />
         <block value="40" property="Background" />
         <block value="41" property="Background" />
         <block value="42" property="Background" />
@@ -3457,7 +3457,7 @@
         <block value="63" property="Solid" />
         <block value="64" property="Solid" />
         <block value="65" property="Solid" />
-        <block value="66" property="Solid" />
+        <block value="66" property="Harmful" />
         <block value="67" property="Solid" />
         <block value="68" property="Solid" />
         <block value="69" property="Solid" />
@@ -3480,7 +3480,7 @@
         <block value="7A" property="Solid" />
         <block value="7B" property="Solid" />
         <block value="7C" property="Slope" />
-        <block value="7D" property="SlopeFillerSolidTop" />
+        <block value="7D" property="Background" />
         <block value="7E" property="Slope" />
         <block value="7F" property="Slope" />
         <block value="80" property="Background" />
@@ -3509,7 +3509,7 @@
         <block value="97" property="Background" />
         <block value="98" property="Background" />
         <block value="99" property="Slope" />
-        <block value="9A" property="SlopeFillerSolidTop" />
+        <block value="9A" property="Background" />
         <block value="9B" property="Slope" />
         <block value="9C" property="Slope" />
         <block value="9D" property="Slope" />
@@ -3521,13 +3521,13 @@
         <block value="A3" property="Slope" />
         <block value="A4" property="Slope" />
         <block value="A5" property="Slope" />
-        <block value="A6" property="SlopeFillerSolidBottom" />
-        <block value="A7" property="SlopeFillerSolidTop" />
+        <block value="A6" property="Background" />
+        <block value="A7" property="Background" />
         <block value="A8" property="SlopeFiller" />
-        <block value="A9" property="SlopeFillerSolidTop" />
+        <block value="A9" property="Background" />
         <block value="AA" property="SlopeFiller" />
         <block value="AB" property="SlopeFiller" />
-        <block value="AC" property="SlopeFillerSolidBottom" />
+        <block value="AC" property="Background" />
         <block value="AD" property="Solid" />
         <block value="AE" property="Solid" />
         <block value="AF" property="Solid" />
@@ -3583,7 +3583,7 @@
         <block value="E1" property="WaterFall" />
         <block value="E2" property="WaterFall" />
         <block value="E3" property="Slope" />
-        <block value="E4" property="SlopeFillerSolidTop" />
+        <block value="E4" property="Background" />
         <block value="E5" property="Slope" />
         <block value="E6" property="Slope" />
         <block value="E7" property="Slope" />
@@ -3594,19 +3594,19 @@
         <block value="EC" property="Slope" />
         <block value="ED" property="Slope" />
         <block value="EE" property="Slope" />
-        <block value="EF" property="SlopeFillerSolidTop" />
+        <block value="EF" property="Background" />
         <block value="F0" property="Solid" />
         <block value="F1" property="Solid" />
         <block value="F2" property="Solid" />
         <block value="F3" property="Solid" />
-        <block value="F4" property="SlopeFillerSolidBottom" />
-        <block value="F5" property="SlopeFillerSolidTop" />
+        <block value="F4" property="Background" />
+        <block value="F5" property="Background" />
         <block value="F6" property="SlopeFiller" />
-        <block value="F7" property="SlopeFillerSolidTop" />
+        <block value="F7" property="Background" />
         <block value="F8" property="SlopeFiller" />
         <block value="F9" property="SlopeFiller" />
-        <block value="FA" property="SlopeFillerSolidBottom" />
-        <block value="FB" property="SlopeFillerSolidTop" />
+        <block value="FA" property="Background" />
+        <block value="FB" property="Background" />
         <block value="FC" property="SlopeFiller" />
         <block value="FD" property="Solid" />
         <block value="FE" property="Solid" />

@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using Daiz.Library;
 using Daiz.NES.Reuben.ProjectManagement;
-using Dotnetrix.Controls;
 
 namespace Daiz.NES.Reuben
 {
@@ -34,6 +33,8 @@ namespace Daiz.NES.Reuben
             {
                 CmbGraphics.Items.Add(g);
             }
+
+            CmbGraphics.Items.RemoveAt(254);
 
             foreach (var p in ProjectController.PaletteManager.Palettes)
             {
@@ -239,7 +240,6 @@ namespace Daiz.NES.Reuben
             GetCoinTotals();
             UpdateCoinTotalText();
             NumSpecials.Value = (decimal)CurrentLevel.Settings.ItemTransparency;
-            NumProperties.Value = (decimal)CurrentLevel.Settings.PropertyTransparency;
             LvlView.DelayDrawing = false;
             LvlView.FullUpdate();
         }
@@ -1803,12 +1803,6 @@ namespace Daiz.NES.Reuben
         private void NumSpecials_ValueChanged(object sender, EventArgs e)
         {
             CurrentLevel.Settings.ItemTransparency = (double) NumSpecials.Value;
-            LvlView.FullUpdate();
-        }
-
-        private void NumProperties_ValueChanged(object sender, EventArgs e)
-        {
-            CurrentLevel.Settings.PropertyTransparency = (double)NumProperties.Value;
             LvlView.FullUpdate();
         }
 
