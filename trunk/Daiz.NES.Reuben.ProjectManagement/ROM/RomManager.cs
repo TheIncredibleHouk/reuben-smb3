@@ -14,7 +14,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Dictionary<byte, int> levelTypeTable;
 
         private string Filename;
-        public byte[] Rom;
+        public Rom Rom;
         private int levelDataPointer;
 
         public ROMManager()
@@ -27,9 +27,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool CompileRom(string fileName, bool includeGfx)
         {
-            if (!LoadRom(fileName)) return false;
-            if(!IsPatchedRom()) return false;
-            if (IsCleanRom())
+            Rom = new Rom();
+            if (!Rom.Load(fileName)) return false;
+            if(!Rom.IsPatchedRom) return false;
+            if (Rom.IsClean)
             {
                 SignRom(ProjectController.ProjectManager.CurrentProject.Guid);
             }
@@ -38,7 +39,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             
             WritePalette(ProjectController.PaletteManager.Palettes);
 
-            levelDataPointer = 0x42010;
+            levelDataPointer = 0x40010;
             byte levelIndex = 0;
             foreach (LevelInfo li in ProjectController.LevelManager.Levels)
             {
@@ -118,32 +119,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return true;
         }
 
-        public bool LoadRom(string filename)
-        {
-            if(!File.Exists(filename)) return false;
-            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            Rom = new byte[fs.Length];
-            fs.Read(Rom, 0, (int) fs.Length);
-            fs.Close();
-            Filename = filename;
-            return true;
-        }
-
-        public bool IsCleanRom()
-        {
-            byte[] guid = new byte[16];
-            for (int i = 0; i < 16; i++)
-            {
-                guid[i] = Rom[0xFC000 + i];
-            }
-
-            return new Guid(guid) == Guid.Empty;
-        }
-
-        public bool IsPatchedRom()
-        {
-            return true;
-        }
 
         public bool VerifyRomGuid(Guid projectGuid)
         {
@@ -157,14 +132,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return compareGuid == projectGuid;
         }
 
-        public void SignRom(Guid projectGuid)
-        {
-            byte[] guidArray = projectGuid.ToByteArray();
-            for (int i = 0; i < 16; i++)
-            {
-                Rom[0xFC000 + i] = guidArray[i];
-            };
-        }
+
 
         public int WriteLevel(Level l, int levelAddress)
         {

@@ -31,23 +31,23 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorldEditor));
             this.PnlInfo = new System.Windows.Forms.Panel();
-            this.TabLevelInfo = new Dotnetrix.Controls.TabControlEX();
+            this.TabLevelInfo = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.CmbMusic = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.CmbLength = new System.Windows.Forms.ComboBox();
-            this.tabPageEX1 = new Dotnetrix.Controls.TabPageEX();
+            this.tabPageEX1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.CmbGraphics = new System.Windows.Forms.ComboBox();
             this.CmbPalettes = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.LblHexGraphics = new System.Windows.Forms.Label();
-            this.tabPageEX2 = new Dotnetrix.Controls.TabPageEX();
+            this.tabPageEX2 = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
             this.LblStartPoint = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.tabPageEX3 = new Dotnetrix.Controls.TabPageEX();
+            this.tabPageEX3 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage8 = new System.Windows.Forms.TabPage();
@@ -55,38 +55,29 @@
             this.BtnLevelSize = new System.Windows.Forms.Button();
             this.LblLevelSize = new System.Windows.Forms.Label();
             this.TabCoins = new System.Windows.Forms.TabPage();
-            this.LblInvisibleCoins = new System.Windows.Forms.Label();
-            this.LblTotalCoins = new System.Windows.Forms.Label();
-            this.LblPSwitchCoins = new System.Windows.Forms.Label();
-            this.LblCoinBlocks = new System.Windows.Forms.Label();
-            this.LblMultiCoins = new System.Windows.Forms.Label();
-            this.LblCoins = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblSprite = new System.Windows.Forms.Label();
             this.LblPositition = new System.Windows.Forms.Label();
             this.LblRightClickMode = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.NumSpecials = new System.Windows.Forms.NumericUpDown();
-            this.NumProperties = new System.Windows.Forms.NumericUpDown();
             this.panel5 = new System.Windows.Forms.Panel();
             this.LblHelpText = new System.Windows.Forms.Label();
             this.PnlDrawing = new System.Windows.Forms.Panel();
-            this.TabEditSelector = new Dotnetrix.Controls.TabControlEX();
+            this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
             this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
             this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.LblSpriteSelected = new System.Windows.Forms.Label();
-            this.TabClass1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.BtnDeletePointer = new System.Windows.Forms.Button();
             this.BtnAddPointer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PntEditor = new Daiz.NES.Reuben.WorldPointerEditor();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.LblSpriteSelected = new System.Windows.Forms.Label();
+            this.TabClass1 = new System.Windows.Forms.TabControl();
             this.TlsDrawing = new System.Windows.Forms.ToolStrip();
             this.TsbPencil = new System.Windows.Forms.ToolStripButton();
             this.TsbLine = new System.Windows.Forms.ToolStripButton();
@@ -123,18 +114,14 @@
             this.tabPageEX3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage8.SuspendLayout();
-            this.TabCoins.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).BeginInit();
             this.panel5.SuspendLayout();
             this.PnlDrawing.SuspendLayout();
             this.TabEditSelector.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.TlsDrawing.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -158,7 +145,6 @@
             // TabLevelInfo
             // 
             this.TabLevelInfo.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.TabLevelInfo.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TabLevelInfo.Controls.Add(this.tabPage4);
             this.TabLevelInfo.Controls.Add(this.tabPageEX1);
             this.TabLevelInfo.Controls.Add(this.tabPageEX2);
@@ -170,13 +156,13 @@
             this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
             this.TabLevelInfo.Name = "TabLevelInfo";
             this.TabLevelInfo.SelectedIndex = 1;
-            this.TabLevelInfo.SelectedTabFontStyle = System.Drawing.FontStyle.Bold;
             this.TabLevelInfo.Size = new System.Drawing.Size(569, 93);
             this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabLevelInfo.TabIndex = 20;
             // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage4.Controls.Add(this.CmbMusic);
             this.tabPage4.Controls.Add(this.label3);
             this.tabPage4.Controls.Add(this.label8);
@@ -184,9 +170,10 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(561, 64);
+            this.tabPage4.Size = new System.Drawing.Size(561, 67);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Level";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // CmbMusic
             // 
@@ -221,7 +208,7 @@
             "Hilly",
             "P-Switch",
             "Bowser Fight"});
-            this.CmbMusic.Location = new System.Drawing.Point(10, 31);
+            this.CmbMusic.Location = new System.Drawing.Point(6, 22);
             this.CmbMusic.Name = "CmbMusic";
             this.CmbMusic.Size = new System.Drawing.Size(129, 21);
             this.CmbMusic.TabIndex = 7;
@@ -229,7 +216,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 12);
+            this.label3.Location = new System.Drawing.Point(8, 3);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
@@ -240,7 +227,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(157, 12);
+            this.label8.Location = new System.Drawing.Point(141, 3);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
@@ -252,7 +239,7 @@
             // 
             this.CmbLength.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbLength.FormattingEnabled = true;
-            this.CmbLength.Location = new System.Drawing.Point(157, 31);
+            this.CmbLength.Location = new System.Drawing.Point(141, 22);
             this.CmbLength.Name = "CmbLength";
             this.CmbLength.Size = new System.Drawing.Size(58, 21);
             this.CmbLength.TabIndex = 21;
@@ -268,14 +255,15 @@
             this.tabPageEX1.Controls.Add(this.LblHexGraphics);
             this.tabPageEX1.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX1.Name = "tabPageEX1";
-            this.tabPageEX1.Size = new System.Drawing.Size(561, 64);
+            this.tabPageEX1.Size = new System.Drawing.Size(561, 67);
             this.tabPageEX1.TabIndex = 4;
             this.tabPageEX1.Text = "Graphics";
+            this.tabPageEX1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 12);
+            this.label1.Location = new System.Drawing.Point(8, 3);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
@@ -288,7 +276,7 @@
             this.CmbGraphics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbGraphics.DropDownWidth = 200;
             this.CmbGraphics.FormattingEnabled = true;
-            this.CmbGraphics.Location = new System.Drawing.Point(10, 31);
+            this.CmbGraphics.Location = new System.Drawing.Point(11, 19);
             this.CmbGraphics.Name = "CmbGraphics";
             this.CmbGraphics.Size = new System.Drawing.Size(129, 21);
             this.CmbGraphics.TabIndex = 24;
@@ -298,7 +286,7 @@
             // 
             this.CmbPalettes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbPalettes.FormattingEnabled = true;
-            this.CmbPalettes.Location = new System.Drawing.Point(156, 31);
+            this.CmbPalettes.Location = new System.Drawing.Point(149, 19);
             this.CmbPalettes.Name = "CmbPalettes";
             this.CmbPalettes.Size = new System.Drawing.Size(129, 21);
             this.CmbPalettes.TabIndex = 28;
@@ -307,7 +295,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(153, 12);
+            this.label5.Location = new System.Drawing.Point(146, 3);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
@@ -318,7 +306,7 @@
             // LblHexGraphics
             // 
             this.LblHexGraphics.AutoSize = true;
-            this.LblHexGraphics.Location = new System.Drawing.Point(98, 12);
+            this.LblHexGraphics.Location = new System.Drawing.Point(99, 3);
             this.LblHexGraphics.Name = "LblHexGraphics";
             this.LblHexGraphics.Size = new System.Drawing.Size(41, 13);
             this.LblHexGraphics.TabIndex = 31;
@@ -327,19 +315,21 @@
             // 
             // tabPageEX2
             // 
+            this.tabPageEX2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPageEX2.Controls.Add(this.label13);
             this.tabPageEX2.Controls.Add(this.LblStartPoint);
             this.tabPageEX2.Controls.Add(this.button1);
             this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX2.Name = "tabPageEX2";
-            this.tabPageEX2.Size = new System.Drawing.Size(561, 64);
+            this.tabPageEX2.Size = new System.Drawing.Size(561, 67);
             this.tabPageEX2.TabIndex = 5;
             this.tabPageEX2.Text = "Position";
+            this.tabPageEX2.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(10, 10);
+            this.label13.Location = new System.Drawing.Point(8, 3);
             this.label13.Margin = new System.Windows.Forms.Padding(3);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 13);
@@ -350,7 +340,7 @@
             // LblStartPoint
             // 
             this.LblStartPoint.AutoSize = true;
-            this.LblStartPoint.Location = new System.Drawing.Point(71, 10);
+            this.LblStartPoint.Location = new System.Drawing.Point(69, 3);
             this.LblStartPoint.Margin = new System.Windows.Forms.Padding(3);
             this.LblStartPoint.Name = "LblStartPoint";
             this.LblStartPoint.Size = new System.Drawing.Size(48, 13);
@@ -360,7 +350,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(11, 30);
+            this.button1.Location = new System.Drawing.Point(8, 22);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 23);
             this.button1.TabIndex = 39;
@@ -370,18 +360,20 @@
             // 
             // tabPageEX3
             // 
+            this.tabPageEX3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPageEX3.Controls.Add(this.label7);
             this.tabPageEX3.Controls.Add(this.numericUpDown1);
             this.tabPageEX3.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX3.Name = "tabPageEX3";
-            this.tabPageEX3.Size = new System.Drawing.Size(561, 64);
+            this.tabPageEX3.Size = new System.Drawing.Size(561, 67);
             this.tabPageEX3.TabIndex = 6;
             this.tabPageEX3.Text = "Unused";
+            this.tabPageEX3.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 12);
+            this.label7.Location = new System.Drawing.Point(8, 3);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 13);
@@ -392,7 +384,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Hexadecimal = true;
-            this.numericUpDown1.Location = new System.Drawing.Point(70, 8);
+            this.numericUpDown1.Location = new System.Drawing.Point(11, 22);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             255,
             0,
@@ -405,20 +397,22 @@
             // 
             // tabPage8
             // 
+            this.tabPage8.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage8.Controls.Add(this.LblSpriteSize);
             this.tabPage8.Controls.Add(this.BtnLevelSize);
             this.tabPage8.Controls.Add(this.LblLevelSize);
             this.tabPage8.Location = new System.Drawing.Point(4, 4);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(561, 64);
+            this.tabPage8.Size = new System.Drawing.Size(561, 67);
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Rom Info";
+            this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // LblSpriteSize
             // 
             this.LblSpriteSize.AutoSize = true;
-            this.LblSpriteSize.Location = new System.Drawing.Point(10, 32);
+            this.LblSpriteSize.Location = new System.Drawing.Point(158, 8);
             this.LblSpriteSize.Margin = new System.Windows.Forms.Padding(3);
             this.LblSpriteSize.Name = "LblSpriteSize";
             this.LblSpriteSize.Size = new System.Drawing.Size(135, 13);
@@ -427,7 +421,7 @@
             // 
             // BtnLevelSize
             // 
-            this.BtnLevelSize.Location = new System.Drawing.Point(177, 10);
+            this.BtnLevelSize.Location = new System.Drawing.Point(8, 25);
             this.BtnLevelSize.Name = "BtnLevelSize";
             this.BtnLevelSize.Size = new System.Drawing.Size(105, 23);
             this.BtnLevelSize.TabIndex = 12;
@@ -438,7 +432,7 @@
             // LblLevelSize
             // 
             this.LblLevelSize.AutoSize = true;
-            this.LblLevelSize.Location = new System.Drawing.Point(10, 10);
+            this.LblLevelSize.Location = new System.Drawing.Point(5, 6);
             this.LblLevelSize.Margin = new System.Windows.Forms.Padding(3);
             this.LblLevelSize.Name = "LblLevelSize";
             this.LblLevelSize.Size = new System.Drawing.Size(134, 13);
@@ -447,102 +441,31 @@
             // 
             // TabCoins
             // 
-            this.TabCoins.Controls.Add(this.LblInvisibleCoins);
-            this.TabCoins.Controls.Add(this.LblTotalCoins);
-            this.TabCoins.Controls.Add(this.LblPSwitchCoins);
-            this.TabCoins.Controls.Add(this.LblCoinBlocks);
-            this.TabCoins.Controls.Add(this.LblMultiCoins);
-            this.TabCoins.Controls.Add(this.LblCoins);
+            this.TabCoins.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TabCoins.Location = new System.Drawing.Point(4, 4);
             this.TabCoins.Name = "TabCoins";
             this.TabCoins.Padding = new System.Windows.Forms.Padding(3);
-            this.TabCoins.Size = new System.Drawing.Size(561, 64);
+            this.TabCoins.Size = new System.Drawing.Size(561, 67);
             this.TabCoins.TabIndex = 2;
             this.TabCoins.Text = "Tile Info";
-            // 
-            // LblInvisibleCoins
-            // 
-            this.LblInvisibleCoins.AutoSize = true;
-            this.LblInvisibleCoins.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LblInvisibleCoins.Location = new System.Drawing.Point(149, 25);
-            this.LblInvisibleCoins.Margin = new System.Windows.Forms.Padding(3);
-            this.LblInvisibleCoins.Name = "LblInvisibleCoins";
-            this.LblInvisibleCoins.Size = new System.Drawing.Size(125, 13);
-            this.LblInvisibleCoins.TabIndex = 7;
-            this.LblInvisibleCoins.Text = "Invisible Coin Blocks 999";
-            this.LblInvisibleCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblTotalCoins
-            // 
-            this.LblTotalCoins.AutoSize = true;
-            this.LblTotalCoins.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LblTotalCoins.Location = new System.Drawing.Point(151, 43);
-            this.LblTotalCoins.Margin = new System.Windows.Forms.Padding(3);
-            this.LblTotalCoins.Name = "LblTotalCoins";
-            this.LblTotalCoins.Size = new System.Drawing.Size(123, 13);
-            this.LblTotalCoins.TabIndex = 4;
-            this.LblTotalCoins.Text = "Total Possible Coins 999";
-            this.LblTotalCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblPSwitchCoins
-            // 
-            this.LblPSwitchCoins.AutoSize = true;
-            this.LblPSwitchCoins.Location = new System.Drawing.Point(175, 6);
-            this.LblPSwitchCoins.Margin = new System.Windows.Forms.Padding(3);
-            this.LblPSwitchCoins.Name = "LblPSwitchCoins";
-            this.LblPSwitchCoins.Size = new System.Drawing.Size(99, 13);
-            this.LblPSwitchCoins.TabIndex = 3;
-            this.LblPSwitchCoins.Text = "P-Switch Coins 999";
-            this.LblPSwitchCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblCoinBlocks
-            // 
-            this.LblCoinBlocks.AutoSize = true;
-            this.LblCoinBlocks.Location = new System.Drawing.Point(47, 44);
-            this.LblCoinBlocks.Margin = new System.Windows.Forms.Padding(3);
-            this.LblCoinBlocks.Name = "LblCoinBlocks";
-            this.LblCoinBlocks.Size = new System.Drawing.Size(84, 13);
-            this.LblCoinBlocks.TabIndex = 2;
-            this.LblCoinBlocks.Text = "Coin Blocks 999";
-            this.LblCoinBlocks.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblMultiCoins
-            // 
-            this.LblMultiCoins.AutoSize = true;
-            this.LblMultiCoins.Location = new System.Drawing.Point(22, 25);
-            this.LblMultiCoins.Margin = new System.Windows.Forms.Padding(3);
-            this.LblMultiCoins.Name = "LblMultiCoins";
-            this.LblMultiCoins.Size = new System.Drawing.Size(109, 13);
-            this.LblMultiCoins.TabIndex = 1;
-            this.LblMultiCoins.Text = "Multi Coin Blocks 999";
-            this.LblMultiCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblCoins
-            // 
-            this.LblCoins.AutoSize = true;
-            this.LblCoins.Location = new System.Drawing.Point(77, 6);
-            this.LblCoins.Margin = new System.Windows.Forms.Padding(3);
-            this.LblCoins.Name = "LblCoins";
-            this.LblCoins.Size = new System.Drawing.Size(54, 13);
-            this.LblCoins.TabIndex = 0;
-            this.LblCoins.Text = "Coins 999";
-            this.LblCoins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TabCoins.UseVisualStyleBackColor = true;
             // 
             // tabPage7
             // 
+            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage7.Location = new System.Drawing.Point(4, 4);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(561, 64);
+            this.tabPage7.Size = new System.Drawing.Size(561, 67);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Special Options";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.LblSprite);
             this.panel4.Controls.Add(this.LblPositition);
             this.panel4.Controls.Add(this.LblRightClickMode);
-            this.panel4.Controls.Add(this.panel3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
@@ -555,7 +478,7 @@
             this.LblSprite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblSprite.Location = new System.Drawing.Point(217, 0);
             this.LblSprite.Name = "LblSprite";
-            this.LblSprite.Size = new System.Drawing.Size(219, 29);
+            this.LblSprite.Size = new System.Drawing.Size(352, 29);
             this.LblSprite.TabIndex = 21;
             this.LblSprite.Text = "Sprite";
             this.LblSprite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -585,59 +508,6 @@
             this.LblRightClickMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LevelToolTip.SetToolTip(this.LblRightClickMode, "Click to change modes.");
             this.LblRightClickMode.Click += new System.EventHandler(this.LblRightClickMode_Click);
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.NumSpecials);
-            this.panel3.Controls.Add(this.NumProperties);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(436, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(133, 29);
-            this.panel3.TabIndex = 26;
-            // 
-            // NumSpecials
-            // 
-            this.NumSpecials.DecimalPlaces = 2;
-            this.NumSpecials.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NumSpecials.Location = new System.Drawing.Point(2, 3);
-            this.NumSpecials.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
-            this.NumSpecials.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSpecials.Name = "NumSpecials";
-            this.NumSpecials.Size = new System.Drawing.Size(58, 20);
-            this.NumSpecials.TabIndex = 26;
-            this.LevelToolTip.SetToolTip(this.NumSpecials, "Special Icon Transparency");
-            // 
-            // NumProperties
-            // 
-            this.NumProperties.DecimalPlaces = 2;
-            this.NumProperties.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NumProperties.Location = new System.Drawing.Point(66, 3);
-            this.NumProperties.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
-            this.NumProperties.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumProperties.Name = "NumProperties";
-            this.NumProperties.Size = new System.Drawing.Size(57, 20);
-            this.NumProperties.TabIndex = 25;
-            this.LevelToolTip.SetToolTip(this.NumProperties, "Block Property Transparency");
             // 
             // panel5
             // 
@@ -686,7 +556,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage1.Controls.Add(this.BlvRight);
             this.tabPage1.Controls.Add(this.LblSelectorHover);
             this.tabPage1.Controls.Add(this.BlvLeft);
@@ -694,9 +564,10 @@
             this.tabPage1.Controls.Add(this.CmbLayouts);
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(269, 332);
+            this.tabPage1.Size = new System.Drawing.Size(269, 335);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
+            this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
             // BlvRight
@@ -720,7 +591,7 @@
             // BlvLeft
             // 
             this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
+            this.BlvLeft.Location = new System.Drawing.Point(191, 293);
             this.BlvLeft.Name = "BlvLeft";
             this.BlvLeft.Size = new System.Drawing.Size(32, 32);
             this.BlvLeft.TabIndex = 19;
@@ -756,50 +627,18 @@
             this.CmbLayouts.TabIndex = 16;
             this.CmbLayouts.SelectedIndexChanged += new System.EventHandler(this.CmbLayouts_SelectedIndexChanged);
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.LblSpriteSelected);
-            this.tabPage2.Controls.Add(this.TabClass1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(269, 332);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Sprites";
-            this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage3_MouseMove);
-            // 
-            // LblSpriteSelected
-            // 
-            this.LblSpriteSelected.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LblSpriteSelected.Location = new System.Drawing.Point(3, 308);
-            this.LblSpriteSelected.Margin = new System.Windows.Forms.Padding(0);
-            this.LblSpriteSelected.Name = "LblSpriteSelected";
-            this.LblSpriteSelected.Padding = new System.Windows.Forms.Padding(4);
-            this.LblSpriteSelected.Size = new System.Drawing.Size(262, 22);
-            this.LblSpriteSelected.TabIndex = 3;
-            this.LblSpriteSelected.Text = "None";
-            // 
-            // TabClass1
-            // 
-            this.TabClass1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.TabClass1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabClass1.Location = new System.Drawing.Point(2, 203);
-            this.TabClass1.Margin = new System.Windows.Forms.Padding(0);
-            this.TabClass1.Name = "TabClass1";
-            this.TabClass1.Padding = new System.Drawing.Point(0, 0);
-            this.TabClass1.SelectedIndex = 0;
-            this.TabClass1.Size = new System.Drawing.Size(265, 100);
-            this.TabClass1.TabIndex = 0;
-            // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage3.Controls.Add(this.BtnDeletePointer);
             this.tabPage3.Controls.Add(this.BtnAddPointer);
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(269, 332);
+            this.tabPage3.Size = new System.Drawing.Size(269, 335);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pointers";
+            this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage3_MouseMove);
             // 
             // BtnDeletePointer
@@ -840,6 +679,42 @@
             this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
             this.PntEditor.Size = new System.Drawing.Size(239, 180);
             this.PntEditor.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage2.Controls.Add(this.LblSpriteSelected);
+            this.tabPage2.Controls.Add(this.TabClass1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(269, 335);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Sprites";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage3_MouseMove);
+            // 
+            // LblSpriteSelected
+            // 
+            this.LblSpriteSelected.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblSpriteSelected.Location = new System.Drawing.Point(3, 308);
+            this.LblSpriteSelected.Margin = new System.Windows.Forms.Padding(0);
+            this.LblSpriteSelected.Name = "LblSpriteSelected";
+            this.LblSpriteSelected.Padding = new System.Windows.Forms.Padding(4);
+            this.LblSpriteSelected.Size = new System.Drawing.Size(262, 22);
+            this.LblSpriteSelected.TabIndex = 3;
+            this.LblSpriteSelected.Text = "None";
+            // 
+            // TabClass1
+            // 
+            this.TabClass1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.TabClass1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabClass1.Location = new System.Drawing.Point(2, 203);
+            this.TabClass1.Margin = new System.Windows.Forms.Padding(0);
+            this.TabClass1.Name = "TabClass1";
+            this.TabClass1.Padding = new System.Drawing.Point(0, 0);
+            this.TabClass1.SelectedIndex = 0;
+            this.TabClass1.Size = new System.Drawing.Size(265, 100);
+            this.TabClass1.TabIndex = 0;
             // 
             // TlsDrawing
             // 
@@ -1190,20 +1065,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
-            this.TabCoins.ResumeLayout(false);
-            this.TabCoins.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumProperties)).EndInit();
             this.panel5.ResumeLayout(false);
             this.PnlDrawing.ResumeLayout(false);
             this.TabEditSelector.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.TlsDrawing.ResumeLayout(false);
             this.TlsDrawing.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
@@ -1231,7 +1101,7 @@
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.Panel PnlDrawing;
-        private Dotnetrix.Controls.TabControlEX TabEditSelector;
+        private System.Windows.Forms.TabControl TabEditSelector;
         private System.Windows.Forms.TabPage tabPage1;
         private BlockSelector BlsSelector;
         private System.Windows.Forms.ComboBox CmbLayouts;
@@ -1271,26 +1141,23 @@
         private System.Windows.Forms.Label LblSprite;
         private System.Windows.Forms.Label LblPositition;
         private System.Windows.Forms.Label LblRightClickMode;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.NumericUpDown NumSpecials;
-        private System.Windows.Forms.NumericUpDown NumProperties;
-        private Dotnetrix.Controls.TabControlEX TabLevelInfo;
+        private System.Windows.Forms.TabControl TabLevelInfo;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ComboBox CmbMusic;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox CmbLength;
-        private Dotnetrix.Controls.TabPageEX tabPageEX1;
+        private System.Windows.Forms.TabPage tabPageEX1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CmbGraphics;
         private System.Windows.Forms.ComboBox CmbPalettes;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label LblHexGraphics;
-        private Dotnetrix.Controls.TabPageEX tabPageEX2;
+        private System.Windows.Forms.TabPage tabPageEX2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label LblStartPoint;
         private System.Windows.Forms.Button button1;
-        private Dotnetrix.Controls.TabPageEX tabPageEX3;
+        private System.Windows.Forms.TabPage tabPageEX3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.TabPage tabPage8;
@@ -1298,12 +1165,6 @@
         private System.Windows.Forms.Button BtnLevelSize;
         private System.Windows.Forms.Label LblLevelSize;
         private System.Windows.Forms.TabPage TabCoins;
-        private System.Windows.Forms.Label LblInvisibleCoins;
-        private System.Windows.Forms.Label LblTotalCoins;
-        private System.Windows.Forms.Label LblPSwitchCoins;
-        private System.Windows.Forms.Label LblCoinBlocks;
-        private System.Windows.Forms.Label LblMultiCoins;
-        private System.Windows.Forms.Label LblCoins;
         private System.Windows.Forms.TabPage tabPage7;
     }
 }
