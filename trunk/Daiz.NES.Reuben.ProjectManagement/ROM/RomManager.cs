@@ -32,12 +32,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
             if(!Rom.IsPatchedRom) return false;
             if (Rom.IsClean)
             {
-                SignRom(ProjectController.ProjectManager.CurrentProject.Guid);
+                Rom.Sign(ProjectController.ProjectManager.CurrentProject.Guid);
             }
 
             //if (!VerifyRomGuid(ProjectController.ProjectManager.CurrentProject.Guid)) return false;
-            
-            WritePalette(ProjectController.PaletteManager.Palettes);
+
+
 
             levelDataPointer = 0x40010;
             byte levelIndex = 0;
@@ -55,14 +55,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 SaveGraphics();
             }
 
+            Rom.ProtectionMode = RomWriteProtection.PaletteData;
+            WritePalette(ProjectController.PaletteManager.Palettes);
+
+            Rom.ProtectionMode = RomWriteProtection.TSAData;
             SaveTSA();
-            Save();
+            Rom.Save();
             return true;
         }
 
         private bool CompileLevels()
         {
+            
             Level l = new Level();
+            Rom.ProtectionMode = RomWriteProtection.LevelData;
             foreach (LevelInfo li in ProjectController.LevelManager.Levels)
             {
                 l.Load(li);
@@ -74,6 +80,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             int bank, address;
 
+            Rom.ProtectionMode = RomWriteProtection.LevelPointers;
             foreach (var index in levelAddressTable.Keys)
             {
                 levelDataPointer = levelAddressTable[index];
@@ -99,10 +106,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
                     address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
 
+                    Rom.ProtectionMode = RomWriteProtection.WorldPointers;
                     Rom[0x18BD0 + ((wi.Ordinal) * 4)] = (byte)bank;
                     Rom[0x18BD1 + ((wi.Ordinal) * 4)] = (byte)((address & 0xFF00) >> 8);
                     Rom[0x18BD2 + ((wi.Ordinal) * 4)] = (byte)(address & 0x00FF);
 
+                    Rom.ProtectionMode = RomWriteProtection.LevelData;
                     levelDataPointer = WriteWorld(w, levelDataPointer);
                     Rom[0x15610 + wi.Ordinal] = (byte) (w.Length << 4);
                     Rom[0x17CD0 + wi.Ordinal] = (byte)((w.YStart - 0x0F) << 4);
@@ -308,12 +317,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return true;
         }
 
-        public bool Save()
-        {
-            FileStream fs = new FileStream(Filename, FileMode.Open, FileAccess.Write);
-            fs.Write(Rom, 0, Rom.Length);
-            return true;
-        }
+
 
         private void SaveGraphics()
         {
