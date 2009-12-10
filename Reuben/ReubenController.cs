@@ -253,26 +253,6 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public static bool SaveTestLevel(Level l)
-        {
-            OpenFileDialog OFD = new OpenFileDialog();
-            OFD.DefaultExt = "nes";
-            DialogResult result = OFD.ShowDialog();
-            OFD.Dispose();
-
-            if (result == DialogResult.OK)
-            {
-                ROMManager rom = new ROMManager();
-                rom.LoadRom(OFD.FileName);
-                rom.WriteLevel(l, 0x1FB92);
-                
-                return rom.Save();
-            }
-
-            return false;
-            
-        }
-
         public static void ImportLevel()
         {
             OpenFileDialog OFD = new OpenFileDialog();
