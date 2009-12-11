@@ -17,7 +17,7 @@ namespace Daiz.NES.Reuben
         public static event EventHandler<TEventArgs<Level>> LevelReloaded;
         public static event EventHandler<TEventArgs<World>> WorldReloaded;
         
-        public static void CreateNewProject()
+        public static bool CreateNewProject()
         {
             InputForm iForm = new InputForm();
             string projectName = iForm.GetInput("Please enter the name of your project");
@@ -29,9 +29,11 @@ namespace Daiz.NES.Reuben
                 DialogResult result = SFD.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    ProjectController.CreateNewProject(SFD.FileName, projectName);
+                    return ProjectController.CreateNewProject(SFD.FileName, projectName);
                 }
             }
+
+            return false;
         }
 
         public static void CreateNewLevel()

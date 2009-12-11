@@ -219,15 +219,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
         TopSolid,
         Water,
         WaterFall,
-        Slope,
+        SlopeLeft45,
+        SlopeRight45,
+        SlopeLeftBottom60,
+        SlopeLeftTop60,
+        SlopeRightBottom60,
+        SlopeRightTop60,
         SlopeFiller,
-        SlopeTop,
-        SlopeBottom,
-        SlopeLeft,
-        SlopeRight,
         Harmful,
         ConveyorLeft,
         ConveyorRight,
         Ice,
+        Quicksand
     }
 }
