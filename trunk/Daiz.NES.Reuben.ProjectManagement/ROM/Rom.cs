@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Daiz.NES.Reuben.ProjectManagement
 {
@@ -10,7 +11,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         private string Filename;
         private byte[] data;
-        private string fileName;
         public RomWriteProtection ProtectionMode { get; set; }
 
         public Rom()
@@ -46,12 +46,25 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         canWrite = (index >= 0x18BD0 && index <= 0x18C0F);
                         break;
 
+                    case RomWriteProtection.AnyData:
+                        canWrite = true;
+                        break;
+
+                    case RomWriteProtection.GraphicsData:
+                        canWrite = (index >= 0x100010);
+                        break;
+
                     default:
                         canWrite = true;
                         break;
                 }
 
                 if (!canWrite) throw new ArgumentOutOfRangeException("Cannot write to " + index + " because it is protected with " + ProtectionMode);
+                if (index == 0x40010)
+                {
+                    MessageBox.Show("meep");
+                }
+
                 data[index] = value;
             }
         }
@@ -110,8 +123,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         LevelData,
         TSAData,
+        GraphicsData,
         PaletteData,
         WorldPointers,
-        LevelPointers
+        LevelPointers,
+        AnyData
     }
 }

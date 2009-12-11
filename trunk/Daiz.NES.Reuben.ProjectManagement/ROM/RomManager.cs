@@ -13,7 +13,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Dictionary<byte, int> levelAddressTable;
         Dictionary<byte, int> levelTypeTable;
 
-        private string Filename;
         public Rom Rom;
         private int levelDataPointer;
 
@@ -39,7 +38,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
 
 
-            levelDataPointer = 0x40010;
+            levelDataPointer = 0x42010;
             byte levelIndex = 0;
             foreach (LevelInfo li in ProjectController.LevelManager.Levels)
             {
@@ -52,6 +51,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             if (includeGfx)
             {
+                Rom.ProtectionMode = RomWriteProtection.GraphicsData;
                 SaveGraphics();
             }
 
@@ -60,6 +60,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             Rom.ProtectionMode = RomWriteProtection.TSAData;
             SaveTSA();
+
             Rom.Save();
             return true;
         }
@@ -113,6 +114,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     Rom.ProtectionMode = RomWriteProtection.LevelData;
                     levelDataPointer = WriteWorld(w, levelDataPointer);
+
+                    Rom.ProtectionMode = RomWriteProtection.AnyData;
                     Rom[0x15610 + wi.Ordinal] = (byte) (w.Length << 4);
                     Rom[0x17CD0 + wi.Ordinal] = (byte)((w.YStart - 0x0F) << 4);
                     

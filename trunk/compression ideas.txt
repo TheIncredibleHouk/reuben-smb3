@@ -136,6 +136,5 @@ Reuben ROM Map:
 3C010-3E00F : Palettes
 3E010-41C0F : TSA data
 18C10-1800F : Level index table
-40010-4400F : Map/Sprite data
-44010-FD00F : Level/Sprite data
+42010-FD00F : Map/Sprite data
 FD010-FE00F : Project use
