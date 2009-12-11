@@ -65,16 +65,12 @@
             this.PnlDrawing = new System.Windows.Forms.Panel();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.BtnDeletePointer = new System.Windows.Forms.Button();
             this.BtnAddPointer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.PntEditor = new Daiz.NES.Reuben.WorldPointerEditor();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
             this.TabClass1 = new System.Windows.Forms.TabControl();
@@ -106,6 +102,10 @@
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.WldView = new Daiz.NES.Reuben.WorldViewer();
+            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
+            this.PntEditor = new Daiz.NES.Reuben.WorldPointerEditor();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -570,15 +570,6 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
-            // BlvRight
-            // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
-            // 
             // LblSelectorHover
             // 
             this.LblSelectorHover.AutoSize = true;
@@ -587,35 +578,6 @@
             this.LblSelectorHover.Size = new System.Drawing.Size(37, 13);
             this.LblSelectorHover.TabIndex = 20;
             this.LblSelectorHover.Text = "Block:";
-            // 
-            // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(191, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
-            // 
-            // BlsSelector
-            // 
-            this.BlsSelector.BlockLayout = null;
-            this.BlsSelector.CurrentDefiniton = null;
-            this.BlsSelector.HaltRendering = false;
-            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
-            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.BlsSelector.Name = "BlsSelector";
-            this.BlsSelector.SelectedIndex = 0;
-            this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockProperties = false;
-            this.BlsSelector.ShowSpecialBlocks = false;
-            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
-            this.BlsSelector.SpecialDefnitions = null;
-            this.BlsSelector.SpecialTable = null;
-            this.BlsSelector.TabIndex = 0;
-            this.BlsSelector.Text = "blockSelector1";
-            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
-            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
             // 
             // CmbLayouts
             // 
@@ -670,15 +632,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
-            // 
-            // PntEditor
-            // 
-            this.PntEditor.CurrentPointer = null;
-            this.PntEditor.Location = new System.Drawing.Point(6, 19);
-            this.PntEditor.Name = "PntEditor";
-            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
-            this.PntEditor.Size = new System.Drawing.Size(239, 180);
-            this.PntEditor.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -1023,7 +976,7 @@
             this.WldView.CurrentWorld = null;
             this.WldView.DelayDrawing = false;
             this.WldView.DisplayStartingPosition = false;
-            this.WldView.Location = new System.Drawing.Point(0, 0);
+            this.WldView.Location = new System.Drawing.Point(0, -272);
             this.WldView.Name = "WldView";
             this.WldView.SelectionLine = null;
             this.WldView.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1037,6 +990,53 @@
             this.WldView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WldView_MouseMove);
             this.WldView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WldView_MouseDown);
             this.WldView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WldView_MouseUp);
+            // 
+            // BlvRight
+            // 
+            this.BlvRight.CurrentBlock = null;
+            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Name = "BlvRight";
+            this.BlvRight.Size = new System.Drawing.Size(32, 32);
+            this.BlvRight.TabIndex = 21;
+            this.BlvRight.Text = "blockViewer1";
+            // 
+            // BlvLeft
+            // 
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(191, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 19;
+            this.BlvLeft.Text = "blockViewer1";
+            // 
+            // BlsSelector
+            // 
+            this.BlsSelector.BlockLayout = null;
+            this.BlsSelector.CurrentDefiniton = null;
+            this.BlsSelector.HaltRendering = false;
+            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
+            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.BlsSelector.Name = "BlsSelector";
+            this.BlsSelector.SelectedIndex = 0;
+            this.BlsSelector.SelectedTileIndex = 0;
+            this.BlsSelector.ShowBlockProperties = false;
+            this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
+            this.BlsSelector.SpecialDefnitions = null;
+            this.BlsSelector.SpecialTable = null;
+            this.BlsSelector.TabIndex = 0;
+            this.BlsSelector.Text = "blockSelector1";
+            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
+            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
+            // 
+            // PntEditor
+            // 
+            this.PntEditor.CurrentPointer = null;
+            this.PntEditor.Location = new System.Drawing.Point(6, 19);
+            this.PntEditor.Name = "PntEditor";
+            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
+            this.PntEditor.Size = new System.Drawing.Size(239, 180);
+            this.PntEditor.TabIndex = 0;
             // 
             // WorldEditor
             // 

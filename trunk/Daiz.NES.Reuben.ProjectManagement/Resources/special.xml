@@ -77,9 +77,6 @@
         <block upperleft="FF" upperright="FF" lowerleft="4A" lowerright="4A" appliesto="34" palette="0" />
         <block upperleft="FF" upperright="FF" lowerleft="5A" lowerright="5A" appliesto="35" palette="0" />
         <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="5B" palette="0" />
-        <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="94" palette="4" />
-        <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="E2" palette="4" />
-        <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="E3" palette="4" />
     </specialblocks>
     <specialblocks leveltype="3">
         <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
