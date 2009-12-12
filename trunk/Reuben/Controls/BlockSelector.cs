@@ -272,6 +272,33 @@ namespace Daiz.NES.Reuben
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, 1);
                                 break;
 
+                            case BlockProperty.SlopeLeft45Ceiling:
+                                RenderSpecialTileAlpha(_SpecialTable[0x54], j * 16, i * 16, 0, data, 1);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, 1);
+                                RenderSpecialTileAlpha(_SpecialTable[0x54], j * 16 + 8, i * 16 + 8, 0, data, 1);
+                                break;
+
+                            case BlockProperty.SlopeLeftBottom60Ceiling:
+                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, 1);
+                                RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16, i * 16 + 8, 0, data, 1);
+                                RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16 + 8, i * 16, 0, data, 1);
+                                break;
+
+                            case BlockProperty.SlopeLeftTop60Ceiling:
+                                break;
+                                
+                            case BlockProperty.SlopeRight45Ceiling:
+                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, 1);
+                                RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16, i * 16 + 8, 0, data, 1);
+                                RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16 + 8, i * 16, 0, data, 1);
+                                break;
+
+                            case BlockProperty.SlopeRightBottom60Ceiling:
+                                break;
+
+                            case BlockProperty.SlopeRightTop60Ceiling:
+                                break;
+
 
                             case BlockProperty.Solid:
                                 RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, 1);
