@@ -677,12 +677,12 @@
         <block value="9D" property="SlopeLeftTop60" />
         <block value="9E" property="SlopeRightTop60" />
         <block value="9F" property="SlopeRightBottom60" />
-        <block value="A0" property="Background" />
-        <block value="A1" property="Background" />
-        <block value="A2" property="Background" />
-        <block value="A3" property="Background" />
-        <block value="A4" property="Background" />
-        <block value="A5" property="Background" />
+        <block value="A0" property="SlopeRight45Ceiling" />
+        <block value="A1" property="SlopeLeft45Ceiling" />
+        <block value="A2" property="SlopeRightTop60Ceiling" />
+        <block value="A3" property="SlopeRightBottom60Ceiling" />
+        <block value="A4" property="SlopeLeftTop60Ceiling" />
+        <block value="A5" property="SlopeLeftBottom60Ceiling" />
         <block value="A6" property="Solid" />
         <block value="A7" property="Solid" />
         <block value="A8" property="Solid" />
@@ -750,12 +750,12 @@
         <block value="E6" property="SlopeLeftTop60" />
         <block value="E7" property="SlopeRightTop60" />
         <block value="E8" property="SlopeRightBottom60" />
-        <block value="E9" property="Background" />
-        <block value="EA" property="Background" />
-        <block value="EB" property="Background" />
-        <block value="EC" property="Background" />
-        <block value="ED" property="Background" />
-        <block value="EE" property="Background" />
+        <block value="E9" property="SlopeRight45Ceiling" />
+        <block value="EA" property="SlopeLeft45Ceiling" />
+        <block value="EB" property="SlopeRightTop60Ceiling" />
+        <block value="EC" property="SlopeRightBottom60Ceiling" />
+        <block value="ED" property="SlopeLeftTop60Ceiling" />
+        <block value="EE" property="SlopeLeftBottom60Ceiling" />
         <block value="EF" property="Solid" />
         <block value="F0" property="Solid" />
         <block value="F1" property="Solid" />
