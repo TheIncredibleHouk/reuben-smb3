@@ -2190,8 +2190,8 @@
         <block value="7A" property="Solid" />
         <block value="7B" property="Solid" />
         <block value="7C" property="Solid" />
-        <block value="7D" property="Solid" />
-        <block value="7E" property="Solid" />
+        <block value="7D" property="Harmful" />
+        <block value="7E" property="Harmful" />
         <block value="7F" property="Solid" />
         <block value="80" property="Background" />
         <block value="81" property="Background" />
@@ -2652,7 +2652,7 @@
         <block value="44" property="Background" />
         <block value="45" property="Background" />
         <block value="46" property="Background" />
-        <block value="47" property="Background" />
+        <block value="47" property="Solid" />
         <block value="48" property="Solid" />
         <block value="49" property="Solid" />
         <block value="4A" property="Solid" />
@@ -2874,9 +2874,9 @@
         <block value="20" property="TopSolid" />
         <block value="21" property="TopSolid" />
         <block value="22" property="TopSolid" />
-        <block value="23" property="Ice" />
-        <block value="24" property="Ice" />
-        <block value="25" property="Ice" />
+        <block value="23" property="TopSolid" />
+        <block value="24" property="TopSolid" />
+        <block value="25" property="TopSolid" />
         <block value="26" property="TopSolid" />
         <block value="27" property="TopSolid" />
         <block value="28" property="TopSolid" />
@@ -2891,18 +2891,18 @@
         <block value="31" property="Solid" />
         <block value="32" property="Solid" />
         <block value="33" property="Solid" />
-        <block value="34" property="Solid" />
-        <block value="35" property="Solid" />
-        <block value="36" property="Solid" />
-        <block value="37" property="Solid" />
+        <block value="34" property="ConveyorLeft" />
+        <block value="35" property="ConveyorRight" />
+        <block value="36" property="Ice" />
+        <block value="37" property="Ice" />
         <block value="38" property="Ice" />
         <block value="39" property="Ice" />
-        <block value="3a" property="ICe" />
+        <block value="3a" property="Ice" />
         <block value="3b" property="Ice" />
         <block value="3c" property="Ice" />
-        <block value="3d" property="Solid" />
-        <block value="3e" property="Solid" />
-        <block value="3f" property="Solid" />
+        <block value="3d" property="Ice" />
+        <block value="3e" property="Ice" />
+        <block value="3f" property="Ice" />
         <block value="40" property="Background" />
         <block value="41" property="Background" />
         <block value="42" property="Background" />
@@ -2913,10 +2913,10 @@
         <block value="47" property="Background" />
         <block value="48" property="Background" />
         <block value="49" property="Background" />
-        <block value="4A" property="Background" />
+        <block value="4A" property="Ice" />
         <block value="4B" property="Ice" />
         <block value="4C" property="Ice" />
-        <block value="4D" property="Ice" />
+        <block value="4D" property="Solid" />
         <block value="4E" property="Solid" />
         <block value="4F" property="Solid" />
         <block value="50" property="Solid" />
@@ -2924,9 +2924,9 @@
         <block value="52" property="Solid" />
         <block value="53" property="Solid" />
         <block value="54" property="Solid" />
-        <block value="55" property="Solid" />
+        <block value="55" property="Ice" />
         <block value="56" property="Ice" />
-        <block value="57" property="Ice" />
+        <block value="57" property="Solid" />
         <block value="58" property="Solid" />
         <block value="59" property="Solid" />
         <block value="5A" property="Solid" />
@@ -2980,38 +2980,38 @@
         <block value="8A" property="TopSolid" />
         <block value="8B" property="TopSolid" />
         <block value="8C" property="TopSolid" />
-        <block value="8D" property="Solid" />
-        <block value="8E" property="Solid" />
-        <block value="8F" property="Solid" />
-        <block value="90" property="Solid" />
-        <block value="91" property="Solid" />
-        <block value="92" property="Solid" />
-        <block value="93" property="Solid" />
-        <block value="94" property="Solid" />
-        <block value="95" property="Solid" />
-        <block value="96" property="Solid" />
-        <block value="97" property="Solid" />
-        <block value="98" property="Solid" />
-        <block value="99" property="Solid" />
-        <block value="9A" property="Solid" />
-        <block value="9B" property="Solid" />
-        <block value="9C" property="Solid" />
-        <block value="9D" property="Solid" />
-        <block value="9E" property="Solid" />
-        <block value="9F" property="Solid" />
-        <block value="A0" property="Solid" />
-        <block value="A1" property="Solid" />
-        <block value="A2" property="Solid" />
-        <block value="A3" property="Solid" />
-        <block value="A4" property="Solid" />
-        <block value="A5" property="Solid" />
-        <block value="A6" property="Solid" />
-        <block value="A7" property="Solid" />
-        <block value="A8" property="Solid" />
-        <block value="A9" property="Solid" />
-        <block value="AA" property="Solid" />
-        <block value="AB" property="Solid" />
-        <block value="AC" property="Solid" />
+        <block value="8D" property="TopSolid" />
+        <block value="8E" property="TopSolid" />
+        <block value="8F" property="TopSolid" />
+        <block value="90" property="TopSolid" />
+        <block value="91" property="TopSolid" />
+        <block value="92" property="TopSolid" />
+        <block value="93" property="TopSolid" />
+        <block value="94" property="TopSolid" />
+        <block value="95" property="TopSolid" />
+        <block value="96" property="TopSolid" />
+        <block value="97" property="TopSolid" />
+        <block value="98" property="TopSolid" />
+        <block value="99" property="TopSolid" />
+        <block value="9A" property="TopSolid" />
+        <block value="9B" property="TopSolid" />
+        <block value="9C" property="TopSolid" />
+        <block value="9D" property="TopSolid" />
+        <block value="9E" property="TopSolid" />
+        <block value="9F" property="TopSolid" />
+        <block value="A0" property="TopSolid" />
+        <block value="A1" property="TopSolid" />
+        <block value="A2" property="TopSolid" />
+        <block value="A3" property="TopSolid" />
+        <block value="A4" property="TopSolid" />
+        <block value="A5" property="TopSolid" />
+        <block value="A6" property="TopSolid" />
+        <block value="A7" property="TopSolid" />
+        <block value="A8" property="TopSolid" />
+        <block value="A9" property="TopSolid" />
+        <block value="AA" property="TopSolid" />
+        <block value="AB" property="TopSolid" />
+        <block value="AC" property="TopSolid" />
         <block value="AD" property="Solid" />
         <block value="AE" property="Solid" />
         <block value="AF" property="Solid" />
