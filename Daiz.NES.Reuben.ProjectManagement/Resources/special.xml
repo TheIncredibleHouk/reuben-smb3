@@ -74,8 +74,6 @@
         <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B3" palette="0" />
         <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B4" palette="0" />
         <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="4A" lowerright="4A" appliesto="34" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="5A" lowerright="5A" appliesto="35" palette="0" />
         <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="5B" palette="0" />
     </specialblocks>
     <specialblocks leveltype="3">
@@ -92,7 +90,6 @@
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
         <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
-        
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />
@@ -115,24 +112,6 @@
         <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
         <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="49" palette="0" />
         <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="4A" palette="0" />
-        <block upperleft="FF" upperright="44" lowerleft="44" lowerright="FE" appliesto="99" palette="0" />
-        <block upperleft="45" upperright="FF" lowerleft="FE" lowerright="45" appliesto="9B" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="46" lowerright="47" appliesto="9C" palette="0" />
-        <block upperleft="46" upperright="47" lowerleft="FE" lowerright="FE" appliesto="9D" palette="0" />
-        <block upperleft="48" upperright="49" lowerleft="FE" lowerright="FE" appliesto="9E" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="48" lowerright="49" appliesto="9F" palette="0" />
-        <block upperleft="54" upperright="FE" lowerleft="FF" lowerright="54" appliesto="A0" palette="0" />
-        <block upperleft="FE" upperright="55" lowerleft="55" lowerright="FF" appliesto="A1" palette="0" />
-        <block upperleft="56" upperright="57" lowerleft="FF" lowerright="FF" appliesto="A2" palette="0" />
-        <block upperleft="FE" upperright="FE" lowerleft="56" lowerright="57" appliesto="A3" palette="0" />
-        <block upperleft="FE" upperright="FE" lowerleft="58" lowerright="59" appliesto="A4" palette="0" />
-        <block upperleft="58" upperright="59" lowerleft="FF" lowerright="FF" appliesto="A5" palette="0" />
-        <block upperleft="FF" upperright="44" lowerleft="44" lowerright="FE" appliesto="E2" palette="0" />
-        <block upperleft="45" upperright="FF" lowerleft="FE" lowerright="45" appliesto="E4" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="46" lowerright="47" appliesto="E5" palette="0" />
-        <block upperleft="46" upperright="47" lowerleft="FE" lowerright="FE" appliesto="E6" palette="0" />
-        <block upperleft="48" upperright="49" lowerleft="FE" lowerright="FE" appliesto="E7" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="48" lowerright="49" appliesto="E8" palette="0" />
     </specialblocks>
     <specialblocks leveltype="4">
         <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
@@ -179,7 +158,6 @@
         <block upperleft="FF" upperright="5C" lowerleft="FF" lowerright="6C" appliesto="CE" palette="0" />
         <block upperleft="5C" upperright="FF" lowerleft="6C" lowerright="FF" appliesto="CF" palette="0" />
         <block upperleft="4E" upperright="4F" lowerleft="5E" lowerright="5F" appliesto="D0" palette="2" />
-        <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="F4" palette="4" />
     </specialblocks>
     <specialblocks leveltype="5">
         <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
@@ -473,66 +451,41 @@
         <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
     </specialblocks>
     <specialblocks leveltype="14">
-        <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
-        <block upperleft="08" upperright="09" lowerleft="18" lowerright="19" appliesto="05" palette="1" />
-        <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="2F" palette="0" />
-        <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="30" palette="3" />
-        <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="31" palette="0" />
-        <block upperleft="6E" upperright="6F" lowerleft="7E" lowerright="7F" appliesto="43" palette="2" />
-        <block upperleft="0A" upperright="0B" lowerleft="1A" lowerright="1B" appliesto="44" palette="2" />
-        <block upperleft="0C" upperright="0D" lowerleft="1C" lowerright="1D" appliesto="45" palette="0" />
-        <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="46" palette="2" />
-        <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
-        <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
-        <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
-        
-        <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
-        <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
-        <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />
-        <block upperleft="08" upperright="09" lowerleft="18" lowerright="19" appliesto="6B" palette="2" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="6C" palette="0" />
-        <block upperleft="20" upperright="21" lowerleft="30" lowerright="31" appliesto="6D" palette="2" />
-        <block upperleft="22" upperright="23" lowerleft="32" lowerright="33" appliesto="6E" palette="0" />
-        <block upperleft="24" upperright="25" lowerleft="34" lowerright="35" appliesto="6F" palette="0" />
-        <block upperleft="26" upperright="27" lowerleft="36" lowerright="37" appliesto="70" palette="3" />
-        <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="72" palette="0" />
-        <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="73" palette="0" />
-        <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="74" palette="3" />
-        <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="75" palette="0" />
-        <block upperleft="2A" upperright="2B" lowerleft="3A" lowerright="3B" appliesto="AD" palette="0" />
-        <block upperleft="2A" upperright="2B" lowerleft="3A" lowerright="3B" appliesto="AE" palette="0" />
-        <block upperleft="2C" upperright="2D" lowerleft="3C" lowerright="3D" appliesto="AF" palette="0" />
-        <block upperleft="2C" upperright="2D" lowerleft="3C" lowerright="3D" appliesto="B0" palette="0" />
-        <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B3" palette="0" />
-        <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B4" palette="0" />
-        <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
-        <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="49" palette="0" />
-        <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="4A" palette="0" />
-        <block upperleft="FF" upperright="44" lowerleft="44" lowerright="FE" appliesto="99" palette="0" />
-        <block upperleft="45" upperright="FF" lowerleft="FE" lowerright="45" appliesto="9B" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="46" lowerright="47" appliesto="9C" palette="0" />
-        <block upperleft="46" upperright="47" lowerleft="FE" lowerright="FE" appliesto="9D" palette="0" />
-        <block upperleft="48" upperright="49" lowerleft="FE" lowerright="FE" appliesto="9E" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="48" lowerright="49" appliesto="9F" palette="0" />
-        <block upperleft="54" upperright="FE" lowerleft="FF" lowerright="54" appliesto="A0" palette="0" />
-        <block upperleft="FE" upperright="55" lowerleft="55" lowerright="FF" appliesto="A1" palette="0" />
-        <block upperleft="56" upperright="57" lowerleft="FF" lowerright="FF" appliesto="A2" palette="0" />
-        <block upperleft="FE" upperright="FE" lowerleft="56" lowerright="57" appliesto="A3" palette="0" />
-        <block upperleft="FE" upperright="FE" lowerleft="58" lowerright="59" appliesto="A4" palette="0" />
-        <block upperleft="58" upperright="59" lowerleft="FF" lowerright="FF" appliesto="A5" palette="0" />
-        <block upperleft="FF" upperright="44" lowerleft="44" lowerright="FE" appliesto="E2" palette="0" />
-        <block upperleft="45" upperright="FF" lowerleft="FE" lowerright="45" appliesto="E4" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="46" lowerright="47" appliesto="E5" palette="0" />
-        <block upperleft="46" upperright="47" lowerleft="FE" lowerright="FE" appliesto="E6" palette="0" />
-        <block upperleft="48" upperright="49" lowerleft="FE" lowerright="FE" appliesto="E7" palette="0" />
-        <block upperleft="FF" upperright="FF" lowerleft="48" lowerright="49" appliesto="E8" palette="0" />
-        <block upperleft="54" upperright="FE" lowerleft="FF" lowerright="54" appliesto="E9" palette="0" />
-        <block upperleft="FE" upperright="55" lowerleft="55" lowerright="FF" appliesto="EA" palette="0" />
-        <block upperleft="56" upperright="57" lowerleft="FF" lowerright="FF" appliesto="EB" palette="0" />
-        <block upperleft="FE" upperright="FE" lowerleft="56" lowerright="57" appliesto="EC" palette="0" />
-        <block upperleft="FE" upperright="FE" lowerleft="58" lowerright="59" appliesto="ED" palette="0" />
-        <block upperleft="58" upperright="59" lowerleft="FF" lowerright="FF" appliesto="EE" palette="0" />
+      <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
+      <block upperleft="08" upperright="09" lowerleft="18" lowerright="19" appliesto="05" palette="1" />
+      <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="2F" palette="0" />
+      <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="30" palette="3" />
+      <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="31" palette="0" />
+      <block upperleft="6E" upperright="6F" lowerleft="7E" lowerright="7F" appliesto="43" palette="2" />
+      <block upperleft="0A" upperright="0B" lowerleft="1A" lowerright="1B" appliesto="44" palette="2" />
+      <block upperleft="0C" upperright="0D" lowerleft="1C" lowerright="1D" appliesto="45" palette="0" />
+      <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="46" palette="2" />
+      <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
+      <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
+      <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
+      <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+      <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
+      <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
+      <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />
+      <block upperleft="08" upperright="09" lowerleft="18" lowerright="19" appliesto="6B" palette="2" />
+      <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="6C" palette="0" />
+      <block upperleft="20" upperright="21" lowerleft="30" lowerright="31" appliesto="6D" palette="2" />
+      <block upperleft="22" upperright="23" lowerleft="32" lowerright="33" appliesto="6E" palette="0" />
+      <block upperleft="24" upperright="25" lowerleft="34" lowerright="35" appliesto="6F" palette="0" />
+      <block upperleft="26" upperright="27" lowerleft="36" lowerright="37" appliesto="70" palette="3" />
+      <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="72" palette="0" />
+      <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="73" palette="0" />
+      <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="74" palette="3" />
+      <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="75" palette="0" />
+      <block upperleft="2A" upperright="2B" lowerleft="3A" lowerright="3B" appliesto="AD" palette="0" />
+      <block upperleft="2A" upperright="2B" lowerleft="3A" lowerright="3B" appliesto="AE" palette="0" />
+      <block upperleft="2C" upperright="2D" lowerleft="3C" lowerright="3D" appliesto="AF" palette="0" />
+      <block upperleft="2C" upperright="2D" lowerleft="3C" lowerright="3D" appliesto="B0" palette="0" />
+      <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B3" palette="0" />
+      <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B4" palette="0" />
+      <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
+      <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="49" palette="0" />
+      <block upperleft="3A" upperright="3B" lowerleft="3A" lowerright="3B" appliesto="4A" palette="0" />
     </specialblocks>
   <palette background="40" data="40,0F,30,1A,40,0F,30,31,40,0F,36,27,40,0F,30,16,40,0F,36,16,40,0F,30,10,07,21,1A,20,00,00,00,00" name="Special Palette" guid="19d59980-ba5c-11de-8a39-0800200c9a66" />
 </specials>

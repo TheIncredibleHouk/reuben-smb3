@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorldEditor));
             this.PnlInfo = new System.Windows.Forms.Panel();
             this.TabLevelInfo = new System.Windows.Forms.TabControl();
@@ -65,15 +64,19 @@
             this.PnlDrawing = new System.Windows.Forms.Panel();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.LblSpriteSelected = new System.Windows.Forms.Label();
+            this.TabClass1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.BtnDeletePointer = new System.Windows.Forms.Button();
             this.BtnAddPointer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.LblSpriteSelected = new System.Windows.Forms.Label();
-            this.TabClass1 = new System.Windows.Forms.TabControl();
+            this.PntEditor = new Daiz.NES.Reuben.WorldPointerEditor();
             this.TlsDrawing = new System.Windows.Forms.ToolStrip();
             this.TsbPencil = new System.Windows.Forms.ToolStripButton();
             this.TsbLine = new System.Windows.Forms.ToolStripButton();
@@ -98,30 +101,25 @@
             this.TsbCopy = new System.Windows.Forms.ToolStripButton();
             this.TsbPaste = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.LevelToolTip = new System.Windows.Forms.ToolTip();
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.WldView = new Daiz.NES.Reuben.WorldViewer();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
-            this.PntEditor = new Daiz.NES.Reuben.WorldPointerEditor();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPageEX1.SuspendLayout();
             this.tabPageEX2.SuspendLayout();
             this.tabPageEX3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage8.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.PnlDrawing.SuspendLayout();
             this.TabEditSelector.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.TlsDrawing.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -544,8 +542,8 @@
             // 
             this.TabEditSelector.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.TabEditSelector.Controls.Add(this.tabPage1);
-            this.TabEditSelector.Controls.Add(this.tabPage3);
             this.TabEditSelector.Controls.Add(this.tabPage2);
+            this.TabEditSelector.Controls.Add(this.tabPage3);
             this.TabEditSelector.Location = new System.Drawing.Point(0, 8);
             this.TabEditSelector.Name = "TabEditSelector";
             this.TabEditSelector.SelectedIndex = 2;
@@ -570,6 +568,15 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
+            // BlvRight
+            // 
+            this.BlvRight.CurrentBlock = null;
+            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Name = "BlvRight";
+            this.BlvRight.Size = new System.Drawing.Size(32, 32);
+            this.BlvRight.TabIndex = 21;
+            this.BlvRight.Text = "blockViewer1";
+            // 
             // LblSelectorHover
             // 
             this.LblSelectorHover.AutoSize = true;
@@ -578,6 +585,35 @@
             this.LblSelectorHover.Size = new System.Drawing.Size(37, 13);
             this.LblSelectorHover.TabIndex = 20;
             this.LblSelectorHover.Text = "Block:";
+            // 
+            // BlvLeft
+            // 
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(191, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 19;
+            this.BlvLeft.Text = "blockViewer1";
+            // 
+            // BlsSelector
+            // 
+            this.BlsSelector.BlockLayout = null;
+            this.BlsSelector.CurrentDefiniton = null;
+            this.BlsSelector.HaltRendering = false;
+            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
+            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.BlsSelector.Name = "BlsSelector";
+            this.BlsSelector.SelectedIndex = 0;
+            this.BlsSelector.SelectedTileIndex = 0;
+            this.BlsSelector.ShowBlockProperties = false;
+            this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
+            this.BlsSelector.SpecialDefnitions = null;
+            this.BlsSelector.SpecialTable = null;
+            this.BlsSelector.TabIndex = 0;
+            this.BlsSelector.Text = "blockSelector1";
+            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
+            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
             // 
             // CmbLayouts
             // 
@@ -588,6 +624,42 @@
             this.CmbLayouts.Size = new System.Drawing.Size(256, 21);
             this.CmbLayouts.TabIndex = 16;
             this.CmbLayouts.SelectedIndexChanged += new System.EventHandler(this.CmbLayouts_SelectedIndexChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage2.Controls.Add(this.LblSpriteSelected);
+            this.tabPage2.Controls.Add(this.TabClass1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(269, 335);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Sprites";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage3_MouseMove);
+            // 
+            // LblSpriteSelected
+            // 
+            this.LblSpriteSelected.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblSpriteSelected.Location = new System.Drawing.Point(3, 308);
+            this.LblSpriteSelected.Margin = new System.Windows.Forms.Padding(0);
+            this.LblSpriteSelected.Name = "LblSpriteSelected";
+            this.LblSpriteSelected.Padding = new System.Windows.Forms.Padding(4);
+            this.LblSpriteSelected.Size = new System.Drawing.Size(262, 22);
+            this.LblSpriteSelected.TabIndex = 3;
+            this.LblSpriteSelected.Text = "None";
+            // 
+            // TabClass1
+            // 
+            this.TabClass1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.TabClass1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabClass1.Location = new System.Drawing.Point(2, 203);
+            this.TabClass1.Margin = new System.Windows.Forms.Padding(0);
+            this.TabClass1.Name = "TabClass1";
+            this.TabClass1.Padding = new System.Drawing.Point(0, 0);
+            this.TabClass1.SelectedIndex = 0;
+            this.TabClass1.Size = new System.Drawing.Size(265, 100);
+            this.TabClass1.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -633,41 +705,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
             // 
-            // tabPage2
+            // PntEditor
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPage2.Controls.Add(this.LblSpriteSelected);
-            this.tabPage2.Controls.Add(this.TabClass1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(269, 335);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Sprites";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage3_MouseMove);
-            // 
-            // LblSpriteSelected
-            // 
-            this.LblSpriteSelected.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LblSpriteSelected.Location = new System.Drawing.Point(3, 308);
-            this.LblSpriteSelected.Margin = new System.Windows.Forms.Padding(0);
-            this.LblSpriteSelected.Name = "LblSpriteSelected";
-            this.LblSpriteSelected.Padding = new System.Windows.Forms.Padding(4);
-            this.LblSpriteSelected.Size = new System.Drawing.Size(262, 22);
-            this.LblSpriteSelected.TabIndex = 3;
-            this.LblSpriteSelected.Text = "None";
-            // 
-            // TabClass1
-            // 
-            this.TabClass1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.TabClass1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabClass1.Location = new System.Drawing.Point(2, 203);
-            this.TabClass1.Margin = new System.Windows.Forms.Padding(0);
-            this.TabClass1.Name = "TabClass1";
-            this.TabClass1.Padding = new System.Drawing.Point(0, 0);
-            this.TabClass1.SelectedIndex = 0;
-            this.TabClass1.Size = new System.Drawing.Size(265, 100);
-            this.TabClass1.TabIndex = 0;
+            this.PntEditor.CurrentPointer = null;
+            this.PntEditor.Location = new System.Drawing.Point(6, 19);
+            this.PntEditor.Name = "PntEditor";
+            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
+            this.PntEditor.Size = new System.Drawing.Size(239, 180);
+            this.PntEditor.TabIndex = 0;
             // 
             // TlsDrawing
             // 
@@ -680,7 +725,7 @@
             this.TsbOutline,
             this.TsbBucket});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TlsDrawing.Location = new System.Drawing.Point(101, 0);
+            this.TlsDrawing.Location = new System.Drawing.Point(132, 0);
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -822,7 +867,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(101, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(132, 25);
             this.toolStrip2.TabIndex = 22;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -877,6 +922,7 @@
             this.TsbPointers.Size = new System.Drawing.Size(23, 22);
             this.TsbPointers.Text = "Toggle Pointers";
             this.TsbPointers.ToolTipText = "Toggle Pointers\r\n(Ctrl + P)";
+            this.TsbPointers.CheckStateChanged += new System.EventHandler(this.TsbPointers_CheckedChanged);
             // 
             // panel2
             // 
@@ -898,9 +944,9 @@
             this.TsbCopy,
             this.TsbPaste,
             this.TsbDelete});
-            this.TlsTileCommands.Location = new System.Drawing.Point(218, 0);
+            this.TlsTileCommands.Location = new System.Drawing.Point(249, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(275, 25);
+            this.TlsTileCommands.Size = new System.Drawing.Size(244, 25);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -987,56 +1033,9 @@
             this.WldView.TabIndex = 0;
             this.WldView.Text = "levelViewer1";
             this.WldView.Zoom = 0;
-            this.WldView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WldView_MouseMove);
             this.WldView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WldView_MouseDown);
+            this.WldView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WldView_MouseMove);
             this.WldView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WldView_MouseUp);
-            // 
-            // BlvRight
-            // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
-            // 
-            // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(191, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
-            // 
-            // BlsSelector
-            // 
-            this.BlsSelector.BlockLayout = null;
-            this.BlsSelector.CurrentDefiniton = null;
-            this.BlsSelector.HaltRendering = false;
-            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
-            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.BlsSelector.Name = "BlsSelector";
-            this.BlsSelector.SelectedIndex = 0;
-            this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockProperties = false;
-            this.BlsSelector.ShowSpecialBlocks = false;
-            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
-            this.BlsSelector.SpecialDefnitions = null;
-            this.BlsSelector.SpecialTable = null;
-            this.BlsSelector.TabIndex = 0;
-            this.BlsSelector.Text = "blockSelector1";
-            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
-            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
-            // 
-            // PntEditor
-            // 
-            this.PntEditor.CurrentPointer = null;
-            this.PntEditor.Location = new System.Drawing.Point(6, 19);
-            this.PntEditor.Name = "PntEditor";
-            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
-            this.PntEditor.Size = new System.Drawing.Size(239, 180);
-            this.PntEditor.TabIndex = 0;
             // 
             // WorldEditor
             // 
@@ -1062,7 +1061,6 @@
             this.tabPageEX2.PerformLayout();
             this.tabPageEX3.ResumeLayout(false);
             this.tabPageEX3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1071,9 +1069,9 @@
             this.TabEditSelector.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.TlsDrawing.ResumeLayout(false);
             this.TlsDrawing.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
