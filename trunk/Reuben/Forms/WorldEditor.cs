@@ -396,7 +396,7 @@ namespace Daiz.NES.Reuben
                 {
                     WldView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
-                    LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
+                    LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name + " - Item: " + CurrentSprite.Item;
                 }
                 else if (CurrentSprite != null && MouseButtons == MouseButtons.Right && CurrentSelectorSprite != null)
                 {

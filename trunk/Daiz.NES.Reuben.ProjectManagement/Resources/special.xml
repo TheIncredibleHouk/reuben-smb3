@@ -234,7 +234,7 @@
         <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
         <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="F4" palette="4" />
     </specialblocks>
-    <specialblocks leveltype="9">
+    <specialblocks leveltype="7">
         <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
         <block upperleft="08" upperright="09" lowerleft="18" lowerright="19" appliesto="05" palette="1" />
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="2F" palette="0" />
@@ -248,7 +248,6 @@
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
         <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
-        
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />
@@ -319,8 +318,6 @@
         <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B3" palette="0" />
         <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B4" palette="0" />
         <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
-        <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="7D" palette="4" />
-        <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="7E" palette="4" />
     </specialblocks>
     <specialblocks leveltype="11">
         <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
@@ -412,7 +409,6 @@
         <block upperleft="FF" upperright="5C" lowerleft="FF" lowerright="6C" appliesto="CE" palette="0" />
         <block upperleft="5C" upperright="FF" lowerleft="6C" lowerright="FF" appliesto="CF" palette="0" />
         <block upperleft="4E" upperright="4F" lowerleft="5E" lowerright="5F" appliesto="D0" palette="2" />
-        <block upperleft="40" upperright="41" lowerleft="50" lowerright="51" appliesto="F4" palette="4" />
     </specialblocks>
     <specialblocks leveltype="13">
         <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
