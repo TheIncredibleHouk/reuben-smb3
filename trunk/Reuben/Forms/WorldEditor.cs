@@ -147,7 +147,7 @@ namespace Daiz.NES.Reuben
             GetWorldInfo(w);
 
             TsbGrid.Checked = CurrentWorld.Settings.ShowGrid;
-
+            TsbPointers.Checked = CurrentWorld.Settings.ShowPointers;
             switch (CurrentWorld.Settings.DrawMode)
             {
                 case TileDrawMode.Pencil:
@@ -1170,6 +1170,7 @@ namespace Daiz.NES.Reuben
             CurrentWorld.Settings.ShowGrid = TsbGrid.Checked;
             CurrentWorld.Settings.ShowStart = TsbStartPoint.Checked;
             CurrentWorld.Settings.EditMode = EditMode;
+            CurrentWorld.Settings.ShowPointers = TsbPointers.Checked;
 
             CurrentWorld.GraphicsBank = CmbGraphics.SelectedIndex;
             CurrentWorld.Palette = CmbPalettes.SelectedIndex;
@@ -1314,7 +1315,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbPointers_CheckedChanged(object sender, EventArgs e)
         {
-            CurrentWorld.Settings.ShowPointers = WldView.ShowPointers = TsbPointers.Checked;
+            WldView.ShowPointers = TsbPointers.Checked;
         }
 
         private void tabPage1_MouseMove(object sender, MouseEventArgs e)

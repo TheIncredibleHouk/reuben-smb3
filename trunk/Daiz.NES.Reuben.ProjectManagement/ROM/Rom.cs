@@ -60,10 +60,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
 
                 if (!canWrite) throw new ArgumentOutOfRangeException("Cannot write to " + index + " because it is protected with " + ProtectionMode);
-                if (index == 0x40010)
-                {
-                    MessageBox.Show("meep");
-                }
 
                 data[index] = value;
             }

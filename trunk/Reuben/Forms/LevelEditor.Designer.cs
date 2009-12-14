@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelEditor));
             this.PnlInfo = new System.Windows.Forms.Panel();
             this.TabLevelInfo = new System.Windows.Forms.TabControl();
@@ -131,7 +130,7 @@
             this.TsbCopy = new System.Windows.Forms.ToolStripButton();
             this.TsbPaste = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip();
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showScreenHeightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,7 +142,7 @@
             this.changeGuideColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.hideGuidesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CtxHorizontalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxHorizontalGuide = new System.Windows.Forms.ContextMenuStrip();
             this.freeGuide2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.snapToScreenLengthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,7 +154,7 @@
             this.changeGuideColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.LevelToolTip = new System.Windows.Forms.ToolTip();
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
@@ -164,19 +163,13 @@
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumTime)).BeginInit();
             this.tabPageEX1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).BeginInit();
             this.tabPageEX2.SuspendLayout();
             this.tabPageEX3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage8.SuspendLayout();
             this.TabCoins.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).BeginInit();
             this.panel5.SuspendLayout();
             this.PnlDrawing.SuspendLayout();
             this.TabEditSelector.SuspendLayout();
@@ -925,7 +918,6 @@
             this.TabEditSelector.Controls.Add(this.tabPage1);
             this.TabEditSelector.Controls.Add(this.tabPage2);
             this.TabEditSelector.Controls.Add(this.tabPage3);
-            this.TabEditSelector.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TabEditSelector.Location = new System.Drawing.Point(0, 8);
             this.TabEditSelector.Name = "TabEditSelector";
             this.TabEditSelector.SelectedIndex = 0;
@@ -1691,8 +1683,8 @@
             this.LvlView.VerticalGuide1 = null;
             this.LvlView.VerticalGuide2 = null;
             this.LvlView.Zoom = 0;
-            this.LvlView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LvlView_MouseMove);
             this.LvlView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LvlView_MouseDown);
+            this.LvlView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LvlView_MouseMove);
             this.LvlView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LvlView_MouseUp);
             // 
             // PnlVerticalGuide
@@ -1730,24 +1722,18 @@
             this.TabLevelInfo.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumTime)).EndInit();
             this.tabPageEX1.ResumeLayout(false);
             this.tabPageEX1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).EndInit();
             this.tabPageEX2.ResumeLayout(false);
             this.tabPageEX2.PerformLayout();
             this.tabPageEX3.ResumeLayout(false);
             this.tabPageEX3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
             this.TabCoins.ResumeLayout(false);
             this.TabCoins.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).EndInit();
             this.panel5.ResumeLayout(false);
             this.PnlDrawing.ResumeLayout(false);
             this.TabEditSelector.ResumeLayout(false);
