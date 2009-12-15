@@ -136,6 +136,28 @@ namespace Daiz.NES.Reuben.ProjectManagement {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;music&gt;
+        ///  &lt;track value=&quot;0&quot; name=&quot;None&quot; /&gt;
+        ///  &lt;track value=&quot;1&quot; name=&quot;Grass Land&quot; /&gt;
+        ///  &lt;track value=&quot;2&quot; name=&quot;Desert Land&quot; /&gt;
+        ///  &lt;track value=&quot;3&quot; name=&quot;Water Land&quot; /&gt;
+        ///  &lt;track value=&quot;4&quot; name=&quot;Giant land&quot; /&gt;
+        ///  &lt;track value=&quot;5&quot; name=&quot;Sky Land&quot; /&gt;
+        ///  &lt;track value=&quot;6&quot; name=&quot;Ice Land&quot; /&gt;
+        ///  &lt;track value=&quot;7&quot; name=&quot;Pipe Land&quot; /&gt;
+        ///  &lt;track value=&quot;8&quot; name=&quot;Dark Land&quot; /&gt;
+        ///  &lt;track value=&quot;9&quot; name=&quot;Clouds&quot; /&gt;
+        ///  &lt;track value=&quot;A&quot; name=&quot;Invinicible&quot; /&gt;
+        ///  &lt;track value=&quot;B&quot; name=&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string music {
+            get {
+                return ResourceManager.GetString("music", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;properties&gt;
         ///    &lt;set leveltype=&quot;1&quot;&gt;
         ///        &lt;block value=&quot;00&quot; property=&quot;Background&quot; /&gt;

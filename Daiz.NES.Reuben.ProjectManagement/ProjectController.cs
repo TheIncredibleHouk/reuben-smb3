@@ -22,6 +22,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public static LevelManager LevelManager { get; private set; }
         public static WorldManager WorldManager { get; private set; }
         public static LayoutManager LayoutManager { get; private set; }
+        public static MusicManager MusicManager { get; private set; }
         public static string ProjectName;
 
         static ProjectController()
@@ -36,6 +37,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             PaletteManager = new PaletteManager();
             SpecialManager = new SpecialManager();
             LayoutManager = new LayoutManager();
+            MusicManager = new MusicManager();
             ReubenDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Reuben";
             if (!Directory.Exists(ReubenDirectory))
             {
@@ -70,6 +72,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelManager.Default();
             WorldManager.Default();
             ColorManager.LoadDefaultColor();
+            MusicManager.LoadDefault();
 
             PaletteManager.Default();
 
@@ -108,12 +111,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
             if (!SpecialManager.LoadSpecialDefinitions(string.Format("{0}{1}special.xml", RootDirectory, Path.DirectorySeparatorChar)))
                 SpecialManager.LoadDefaultSpecials();
 
+            if (!MusicManager.LoadMusic(string.Format("{0}{1}music.xml", RootDirectory, Path.DirectorySeparatorChar)))
+                MusicManager.LoadDefault();
+
             return true;
         }
 
         public static bool Save()
         {
             ProjectManager.Save(string.Format("{0}{1}{2}.rbn", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
+            MusicManager.Save(string.Format("{0}{1}music.xml", RootDirectory, Path.DirectorySeparatorChar));
             return true;
         }
     }

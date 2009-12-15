@@ -84,6 +84,14 @@ namespace Daiz.NES.Reuben
             return success;
         }
 
+        public static void CloseAll()
+        {
+            foreach (var k in editorTable.Keys.ToList())
+            {
+                editorTable[k].Close();
+            }
+        }
+
         public static void ImportGraphics()
         {
             OpenFileDialog OFD = new OpenFileDialog();
@@ -343,13 +351,6 @@ namespace Daiz.NES.Reuben
             }
 
         }
-
-        public static void ReloadDefaults()
-        {
-            ProjectController.SpriteManager.LoadDefaultSprites();
-            ProjectController.Save();
-        }
-
 
         public static void DumpRawLevel()
         {

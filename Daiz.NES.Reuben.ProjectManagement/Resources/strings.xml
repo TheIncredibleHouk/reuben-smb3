@@ -261,6 +261,8 @@
     <block value="E6">Underwater Left 30 Degree Slope Top</block>
     <block value="E7">Underwater Right 30 Degree Slope Top</block>
     <block value="E8">Underwater Right 30 Degree Slope Bottom</block>
+    <block value="BD">Enterable Pipe (Ignores Pointers)</block>
+    <block value="BE">Enterable Pipe (Ignores Pointers)</block>
   </set>
   <set leveltype="4">
     <block value="03">Invisible Note Block</block>
@@ -805,5 +807,7 @@
     <block value="E6">Underwater Left 30 Degree Slope Top</block>
     <block value="E7">Underwater Right 30 Degree Slope Top</block>
     <block value="E8">Underwater Right 30 Degree Slope Bottom</block>
+    <block value="BD">Enterable Pipe (Ignores Pointers)</block>
+    <block value="BE">Enterable Pipe (Ignores Pointers)</block>
   </set>
 </strings>

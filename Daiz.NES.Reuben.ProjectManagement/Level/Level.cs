@@ -36,9 +36,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public byte[,] LevelData { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
-        public byte[] CompressedData { get; private set; }
+
         public LevelSettings Settings { get; private set; }
-        private bool ValidCompression;
 
         public List<Sprite> SpriteData { get; private set; }
         private LevelLayout _LevelLayout;
@@ -47,7 +46,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             Pointers = new List<LevelPointer>();
             SpriteData = new List<Sprite>();
-            ValidCompression = false;
             Settings = new LevelSettings();
         }
 
@@ -96,7 +94,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("startaction", StartAction);
             root.SetAttributeValue("scrolltype", ScrollType);
             root.SetAttributeValue("layout", LevelLayout);
-            root.SetAttributeValue("validcompression", ValidCompression);
 
             StringBuilder sb = new StringBuilder();
             
@@ -120,22 +117,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             sb.Length = 0;
             first = true;
-            if (ValidCompression)
-            {
-                for (int i = 0; i < CompressedData.Length; i++)
-                {
-                    if (first)
-                    {
-                        sb.Append(CompressedData[i]);
-                        first = false;
-                    }
-                    else
-                    {
-                        sb.Append("," + CompressedData[i]);
-                    }
-                }
-                root.SetAttributeValue("compresseddata", sb);
-            }
 
             XElement s = new XElement("spritedata");
 
@@ -263,10 +244,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     case "compresseddata":
                         compressData = a.Value.Split(',');
                         break;
-
-                    case "validcompression":
-                        ValidCompression = a.Value.ToBoolean();
-                        break;
                 }
             }
 
@@ -281,16 +258,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     xPointer = 0;
                     yPointer++;
                     if (yPointer > Height) break;
-                }
-            }
-
-            if (compressData != null)
-            {
-                int index = 0;
-                CompressedData = new byte[compressData.Length];
-                foreach (var c in compressData)
-                {
-                    CompressedData[index++] = (byte) c.ToInt();
                 }
             }
 
@@ -365,7 +332,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelData[x, y] = value;
             if (TileChanged != null) TileChanged(this, new TEventArgs<Point>(new Point(x, y)));
             if (TilesModified != null) TilesModified(this, new TEventArgs<TileInformation>(new TileInformation(previous, value)));
-            ValidCompression = false;
         }
 
         public byte[,] GetData(int X, int Y, int Width, int Height)
@@ -384,20 +350,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public byte[] GetCompressedData()
         {
-            if (ValidCompression) return CompressedData;
             switch (LevelLayout)
             {
                 case LevelLayout.Horizontal:
-                    CompressedData = GetCompressedDataHorizontal();
-                    break;
+                    return GetCompressedDataHorizontal();
 
                 case LevelLayout.Vertical:
-                    CompressedData = GetCompressedDataVertical();
-                    break;
+                    return GetCompressedDataVertical();
             }
 
-            ValidCompression = true;
-            return CompressedData;
+            return null;
         }
 
         public byte[] GetCompressedDataHorizontal()

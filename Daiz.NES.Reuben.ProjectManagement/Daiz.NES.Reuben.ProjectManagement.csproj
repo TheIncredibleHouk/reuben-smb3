@@ -17,6 +17,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +30,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -75,7 +75,6 @@
     <Compile Include="Enums\EditorEnums.cs" />
     <Compile Include="Enums\ItemList.cs" />
     <Compile Include="Layout\LayoutManager.cs" />
-    <Compile Include="Enums\Music.cs" />
     <Compile Include="Blocks\Block.cs" />
     <Compile Include="Blocks\BlockDefinition.cs" />
     <Compile Include="Layout\BlockLayout.cs" />
@@ -85,6 +84,8 @@
     <Compile Include="Graphics\GraphicsManager.cs" />
     <Compile Include="Graphics\PatternTable.cs" />
     <Compile Include="Graphics\RgbPixel.cs" />
+    <Compile Include="Music\Music.cs" />
+    <Compile Include="Music\MusicManager.cs" />
     <Compile Include="Patch\Patch.cs" />
     <Compile Include="Patch\PatchBlock.cs" />
     <Compile Include="Patch\PatchManager.cs" />
@@ -135,13 +136,16 @@
     <None Include="Resources\default.chr" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\music.xml" />
     <Content Include="Resources\sprites.xml" />
     <None Include="Resources\default.tsa" />
     <None Include="Resources\default.xml" />
     <None Include="Resources\special.chr" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\properties.xml" />
+    <Content Include="Resources\properties.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Resources\special.xml" />
     <Content Include="Resources\strings.xml" />
   </ItemGroup>

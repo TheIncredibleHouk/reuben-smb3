@@ -27,7 +27,7 @@ namespace Daiz.NES.Reuben
 
             UndoBuffer = new List<IUndoableAction>();
             RedoBuffer = new List<IUndoableAction>();
-            CmbLayouts.DisplayMember  = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
+            CmbMusic.DisplayMember = CmbLayouts.DisplayMember  = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
             foreach (var g in ProjectController.GraphicsManager.GraphicsInfo)
             {
                 CmbGraphics.Items.Add(g);
@@ -49,6 +49,12 @@ namespace Daiz.NES.Reuben
             {
                 CmbLayouts.Items.Add(l);
             }
+
+            foreach (var m in ProjectController.MusicManager.MusicList)
+            {
+                CmbMusic.Items.Add(m);
+            }
+
 
             CmbLayouts.SelectedIndex = 0;
             CurrentTable = new PatternTable();

@@ -28,7 +28,7 @@ namespace Daiz.NES.Reuben
             LvlView.DelayDrawing = true;
             UndoBuffer = new List<IUndoableAction>();
             RedoBuffer = new List<IUndoableAction>();
-            CmbLayouts.DisplayMember = CmbTypes.DisplayMember = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
+            CmbMusic.DisplayMember = CmbLayouts.DisplayMember = CmbTypes.DisplayMember = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
             foreach (var g in ProjectController.GraphicsManager.GraphicsInfo)
             {
                 CmbGraphics.Items.Add(g);
@@ -50,6 +50,11 @@ namespace Daiz.NES.Reuben
             for (int i = 1; i < 16; i++)
             {
                 CmbLength.Items.Add(i);
+            }
+
+            foreach (var m in ProjectController.MusicManager.MusicList)
+            {
+                CmbMusic.Items.Add(m);
             }
 
             foreach (var l in ProjectController.LayoutManager.BlockLayouts)
