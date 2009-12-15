@@ -13,6 +13,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Dictionary<byte, int> levelAddressTable;
         Dictionary<byte, int> levelTypeTable;
 
+        public string ErrorMessage { get; private set; }
+
         public Rom Rom;
         private int levelDataPointer;
 
@@ -28,7 +30,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             Rom = new Rom();
             if (!Rom.Load(fileName)) return false;
-            if(!Rom.IsPatchedRom) return false;
+            if (!Rom.IsPatchedRom)
+            {
+                ErrorMessage = "Rom has not been patched. Please patch with Reuben.ips";
+                return false;
+            }
+
             if (Rom.IsClean)
             {
                 Rom.Sign(ProjectController.ProjectManager.CurrentProject.Guid);
@@ -85,7 +92,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             foreach (var index in levelAddressTable.Keys)
             {
                 levelDataPointer = levelAddressTable[index];
-                bank = (byte)((levelDataPointer & 0x40FFF) / 0x2000);
+                bank = (byte)(levelDataPointer / 0x2000);
                 address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
                 Rom[0x18C10 + (index * 4)] = (byte)bank;
                 Rom[0x18C11 + (index * 4)] = (byte)((address & 0xFF00) >> 8);
@@ -155,16 +162,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)((l.StartAction << 4) | l.Type);
             Rom[levelAddress++] = (byte)(((l.XStart & 0x0F) << 4) | ((l.XStart & 0xF0) >> 4));
             Rom[levelAddress++] = (byte)(((yStart & 0x0F) << 4) | ((yStart & 0xF0) >> 4));
-
-            if (l.Music < 15)
-            {
-                Rom[levelAddress++] = (byte) l.Music;
-            }
-            else
-            {
-                Rom[levelAddress++] = (byte)((l.Music - 15) << 4);
-            }
-
+            Rom[levelAddress++] = (byte)(ProjectController.MusicManager.MusicList[l.Music].Value);
             Rom[levelAddress++] = (byte)(((l.Time / 100) << 4) | ((l.Time - ((l.Time / 100) * 100)) / 10));
 
             switch (l.LevelLayout)
@@ -196,7 +194,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         yStart = p.YExit - 1;
                         break;
                 }
-                Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
+
+                if (!levelIndexTable.ContainsKey(p.LevelGuid))
+                {
+                    Rom[levelAddress++] = 0;
+                }
+                else
+                {
+                    Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
+                }
+
                 Rom[levelAddress++] = (byte)p.XEnter;
                 Rom[levelAddress++] = (byte)p.YEnter;
                 Rom[levelAddress++] = (byte)(((p.XExit & 0x0F) << 4) | ((p.XExit & 0xF0) >> 4));
@@ -243,16 +250,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             
             Rom[levelAddress++] = (byte)w.GraphicsBank;
             Rom[levelAddress++] = (byte)w.Palette;
-
-            if (w.Music < 15)
-            {
-                Rom[levelAddress++] = (byte)w.Music;
-            }
-            else
-            {
-                Rom[levelAddress++] = (byte)((w.Music - 15) << 4);
-            }
-
+            Rom[levelAddress++] = (byte)(ProjectController.MusicManager.MusicList[w.Music].Value);
             Rom[levelAddress++] = (byte)(w.Unused1);
 
             foreach (var p in w.Pointers)

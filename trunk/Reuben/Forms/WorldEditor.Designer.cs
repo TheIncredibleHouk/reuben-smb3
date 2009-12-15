@@ -178,34 +178,6 @@
             this.CmbMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbMusic.DropDownWidth = 150;
             this.CmbMusic.FormattingEnabled = true;
-            this.CmbMusic.Items.AddRange(new object[] {
-            "None",
-            "Grass Land",
-            "Desert Land",
-            "Water Land",
-            "Giant land",
-            "Sky Land",
-            "Ice Land",
-            "Pipe Land",
-            "Dark Land",
-            "Clouds",
-            "Invinicible",
-            "Warp Whistle",
-            "Music Box",
-            "Falling In the Sky",
-            "Bonus Game",
-            "Princess Saved/End Credits",
-            "Plains",
-            "Underground",
-            "Water",
-            "Fortress",
-            "Boss Battle",
-            "Air Ship",
-            "Hammer Bros.",
-            "P-Switch",
-            "Hilly",
-            "P-Switch",
-            "Bowser Fight"});
             this.CmbMusic.Location = new System.Drawing.Point(6, 22);
             this.CmbMusic.Name = "CmbMusic";
             this.CmbMusic.Size = new System.Drawing.Size(129, 21);
@@ -725,7 +697,7 @@
             this.TsbOutline,
             this.TsbBucket});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TlsDrawing.Location = new System.Drawing.Point(132, 0);
+            this.TlsDrawing.Location = new System.Drawing.Point(101, 0);
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -867,7 +839,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(132, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(101, 25);
             this.toolStrip2.TabIndex = 22;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -944,9 +916,9 @@
             this.TsbCopy,
             this.TsbPaste,
             this.TsbDelete});
-            this.TlsTileCommands.Location = new System.Drawing.Point(249, 0);
+            this.TlsTileCommands.Location = new System.Drawing.Point(218, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(244, 25);
+            this.TlsTileCommands.Size = new System.Drawing.Size(275, 25);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 

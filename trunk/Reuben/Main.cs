@@ -132,7 +132,12 @@ namespace Daiz.NES.Reuben
 
         private void defaultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReubenController.ReloadDefaults();
+            ConfirmForm cForm = new ConfirmForm();
+            if(cForm.Confirm("Resetting the default sprite definitions requires all levels and worlds to be closed."))
+            {
+                ProjectController.SpriteManager.LoadDefaultSprites();
+                ProjectController.Save();
+            }
         }
 
         private void dumpRawLevelToFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,6 +153,49 @@ namespace Daiz.NES.Reuben
         private void rOMWoGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReubenController.CompileRom(false);
+        }
+
+        private void blockPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfirmForm cForm = new ConfirmForm();
+            if(cForm.Confirm("Resetting the default block properties requires all levels and worlds to be closed."))
+            {
+                ProjectController.SpecialManager.LoadDefaultSpecials();
+                ProjectController.Save();
+            }
+        }
+
+        private void specialGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfirmForm cForm = new ConfirmForm();
+            if(cForm.Confirm("Resetting the special graphics requires all levels and worlds to be closed."))
+            {
+                ProjectController.SpecialManager.LoadDefaultSpecialGraphics();
+                ProjectController.Save();
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ConfirmForm cForm = new ConfirmForm();
+            if(cForm.Confirm("Resetting the music list requires all levels and worlds to be closed."))
+            {
+                ProjectController.MusicManager.LoadDefault();
+                ProjectController.Save();
+            }
+        }
+
+        private void allEditorDefinitionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfirmForm cForm = new ConfirmForm();
+            if(cForm.Confirm("Resetting the all editor definitions requires all levels and worlds to be closed."))
+            {
+                ProjectController.SpriteManager.LoadDefaultSprites();
+                ProjectController.MusicManager.LoadDefault();
+                ProjectController.SpecialManager.LoadDefaultSpecialGraphics();
+                ProjectController.SpecialManager.LoadDefaultSpecials();
+                ProjectController.Save();
+            }
         }
 
     }
