@@ -236,14 +236,14 @@ namespace Daiz.NES.Reuben
 
                             case BlockProperty.SlopeFillerBottom:
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 7, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 7, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
                                 break;
 
                             case BlockProperty.SlopeFillerLeft:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 7, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 7, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
@@ -251,14 +251,14 @@ namespace Daiz.NES.Reuben
                             case BlockProperty.SlopeFillerRight:
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 7, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 7, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
                                 break;
                                 
                             case BlockProperty.SlopeFillerTop:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 7, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 7, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
 
@@ -539,14 +539,14 @@ namespace Daiz.NES.Reuben
 
                         case BlockProperty.SlopeFillerBottom:
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
                             break;
 
                         case BlockProperty.SlopeFillerLeft:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 7, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 0, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
                             break;
@@ -554,14 +554,14 @@ namespace Daiz.NES.Reuben
                         case BlockProperty.SlopeFillerRight:
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 7, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
                             break;
 
                         case BlockProperty.SlopeFillerTop:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
                             break;
 
