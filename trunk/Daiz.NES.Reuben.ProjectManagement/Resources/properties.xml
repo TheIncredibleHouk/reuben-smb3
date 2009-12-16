@@ -555,7 +555,7 @@
     <block value="23" property="Background" />
     <block value="24" property="Background" />
     <block value="25" property="SlopeLeft45" />
-    <block value="26" property="Solid" />
+    <block value="26" property="SlopeFillerTop" />
     <block value="27" property="SlopeRight45" />
     <block value="28" property="SlopeLeftBottom60" />
     <block value="29" property="SlopeLeftTop60" />
@@ -569,10 +569,10 @@
     <block value="31" property="Solid" />
     <block value="32" property="Solid" />
     <block value="33" property="Solid" />
-    <block value="34" property="Solid" />
+    <block value="34" property="SlopeFillerLeft" />
     <block value="35" property="Solid" />
-    <block value="36" property="Solid" />
-    <block value="37" property="Solid" />
+    <block value="36" property="SlopeFillerRight" />
+    <block value="37" property="SlopeFiller" />
     <block value="38" property="Solid" />
     <block value="39" property="Solid" />
     <block value="3A" property="Solid" />
@@ -671,7 +671,7 @@
     <block value="97" property="Background" />
     <block value="98" property="Background" />
     <block value="99" property="SlopeLeft45" />
-    <block value="9A" property="Solid" />
+    <block value="9A" property="SlopeFillerTop" />
     <block value="9B" property="SlopeRight45" />
     <block value="9C" property="SlopeLeftBottom60" />
     <block value="9D" property="SlopeLeftTop60" />
@@ -683,12 +683,12 @@
     <block value="A3" property="SlopeRightTop60Ceiling" />
     <block value="A4" property="SlopeLeftTop60Ceiling" />
     <block value="A5" property="SlopeLeftBottom60Ceiling" />
-    <block value="A6" property="Solid" />
+    <block value="A6" property="SlopeFillerBottom" />
     <block value="A7" property="Solid" />
-    <block value="A8" property="Solid" />
+    <block value="A8" property="SlopeFillerLeft" />
     <block value="A9" property="Solid" />
-    <block value="AA" property="SlopeFiller" />
-    <block value="AB" property="Solid" />
+    <block value="AA" property="SlopeFilleRight" />
+    <block value="AB" property="SlopeFiller" />
     <block value="AC" property="Solid" />
     <block value="AD" property="Solid" />
     <block value="AE" property="Solid" />
@@ -744,7 +744,7 @@
     <block value="E0" property="WaterFall" />
     <block value="E1" property="WaterFall" />
     <block value="E2" property="SlopeLeft45" />
-    <block value="E3" property="Solid" />
+    <block value="E3" property="SlopeFillerTop" />
     <block value="E4" property="SlopeRight45" />
     <block value="E5" property="SlopeLeftBottom60" />
     <block value="E6" property="SlopeLeftTop60" />
@@ -761,13 +761,13 @@
     <block value="F1" property="Solid" />
     <block value="F2" property="Solid" />
     <block value="F3" property="Solid" />
-    <block value="F4" property="Solid" />
+    <block value="F4" property="SlopeFillerBottom" />
     <block value="F5" property="Solid" />
-    <block value="F6" property="Solid" />
+    <block value="F6" property="SlopeFillerLeft" />
     <block value="F7" property="Solid" />
-    <block value="F8" property="Solid" />
+    <block value="F8" property="SlopeFillerRight" />
     <block value="F9" property="Solid" />
-    <block value="FA" property="Solid" />
+    <block value="FA" property="SlopeFiller" />
     <block value="FB" property="Solid" />
     <block value="FC" property="Solid" />
     <block value="FD" property="Solid" />
@@ -3393,7 +3393,7 @@
     <block value="23" property="Background" />
     <block value="24" property="Background" />
     <block value="25" property="SlopeLeft45" />
-    <block value="26" property="Solid" />
+    <block value="26" property="SlopeFillerTop" />
     <block value="27" property="SlopeRight45" />
     <block value="28" property="SlopeLeftBottom60" />
     <block value="29" property="SlopeLeftTop60" />
@@ -3407,10 +3407,10 @@
     <block value="31" property="Solid" />
     <block value="32" property="Solid" />
     <block value="33" property="Solid" />
-    <block value="34" property="Solid" />
+    <block value="34" property="SlopeFillerLeft" />
     <block value="35" property="Solid" />
-    <block value="36" property="Solid" />
-    <block value="37" property="Solid" />
+    <block value="36" property="SlopeFillerRight" />
+    <block value="37" property="SlopeFiller" />
     <block value="38" property="Solid" />
     <block value="39" property="Solid" />
     <block value="3A" property="Solid" />
@@ -3509,7 +3509,7 @@
     <block value="97" property="Background" />
     <block value="98" property="Background" />
     <block value="99" property="SlopeLeft45" />
-    <block value="9A" property="Solid" />
+    <block value="9A" property="SlopeFillerTop" />
     <block value="9B" property="SlopeRight45" />
     <block value="9C" property="SlopeLeftBottom60" />
     <block value="9D" property="SlopeLeftTop60" />
@@ -3521,12 +3521,12 @@
     <block value="A3" property="SlopeRightTop60Ceiling" />
     <block value="A4" property="SlopeLeftTop60Ceiling" />
     <block value="A5" property="SlopeLeftBottom60Ceiling" />
-    <block value="A6" property="Solid" />
+    <block value="A6" property="SlopeFillerBottom" />
     <block value="A7" property="Solid" />
-    <block value="A8" property="Solid" />
+    <block value="A8" property="SlopeFillerLeft" />
     <block value="A9" property="Solid" />
-    <block value="AA" property="SlopeFiller" />
-    <block value="AB" property="Solid" />
+    <block value="AA" property="SlopeFilleRight" />
+    <block value="AB" property="SlopeFiller" />
     <block value="AC" property="Solid" />
     <block value="AD" property="Solid" />
     <block value="AE" property="Solid" />
@@ -3582,7 +3582,7 @@
     <block value="E0" property="WaterFall" />
     <block value="E1" property="WaterFall" />
     <block value="E2" property="SlopeLeft45" />
-    <block value="E3" property="Solid" />
+    <block value="E3" property="SlopeFillerTop" />
     <block value="E4" property="SlopeRight45" />
     <block value="E5" property="SlopeLeftBottom60" />
     <block value="E6" property="SlopeLeftTop60" />
@@ -3599,13 +3599,13 @@
     <block value="F1" property="Solid" />
     <block value="F2" property="Solid" />
     <block value="F3" property="Solid" />
-    <block value="F4" property="Solid" />
+    <block value="F4" property="SlopeFillerBottom" />
     <block value="F5" property="Solid" />
-    <block value="F6" property="Solid" />
+    <block value="F6" property="SlopeFillerLeft" />
     <block value="F7" property="Solid" />
-    <block value="F8" property="Solid" />
+    <block value="F8" property="SlopeFillerRight" />
     <block value="F9" property="Solid" />
-    <block value="FA" property="Solid" />
+    <block value="FA" property="SlopeFiller" />
     <block value="FB" property="Solid" />
     <block value="FC" property="Solid" />
     <block value="FD" property="Solid" />
