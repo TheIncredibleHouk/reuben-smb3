@@ -687,7 +687,7 @@
     <block value="A7" property="Solid" />
     <block value="A8" property="SlopeFillerLeft" />
     <block value="A9" property="Solid" />
-    <block value="AA" property="SlopeFilleRight" />
+    <block value="AA" property="SlopeFillerRight" />
     <block value="AB" property="SlopeFiller" />
     <block value="AC" property="Solid" />
     <block value="AD" property="Solid" />
@@ -3525,7 +3525,7 @@
     <block value="A7" property="Solid" />
     <block value="A8" property="SlopeFillerLeft" />
     <block value="A9" property="Solid" />
-    <block value="AA" property="SlopeFilleRight" />
+    <block value="AA" property="SlopeFillerRight" />
     <block value="AB" property="SlopeFiller" />
     <block value="AC" property="Solid" />
     <block value="AD" property="Solid" />
