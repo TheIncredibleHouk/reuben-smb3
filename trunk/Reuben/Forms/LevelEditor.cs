@@ -209,6 +209,8 @@ namespace Daiz.NES.Reuben
             PnlHorizontalGuide.GuideColor = CurrentLevel.Settings.HGuideColor;
             PnlVerticalGuide.GuideColor = CurrentLevel.Settings.VGuideColor;
             TsbPointers.Checked = CurrentLevel.Settings.ShowPointers;
+            ChkWhiteMushroom.Checked = CurrentLevel.WhiteMushroomAppearance;
+            NumWMCoins.Value = CurrentLevel.WhiteMushroomAppearanceCoins;
 
             this.Text = ProjectController.LevelManager.GetLevelInfo(l.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
@@ -1278,7 +1280,8 @@ namespace Daiz.NES.Reuben
         {
             var possibleSprites = (from s in CurrentLevel.SpriteData
                                    where x >= s.X && x <= s.X + (s.Width - 1) &&
-                                         y >= s.Y && y <= s.Y + (s.Height - 1)
+                                         y >= s.Y && y <= s.Y + (s.Height - 1) &&
+                                         s.IsViewable
                                    select s).FirstOrDefault();
             return possibleSprites;
         }
@@ -1890,6 +1893,16 @@ namespace Daiz.NES.Reuben
                     SetHelpText(Reuben.Properties.Resources.RightClickSelectHelper);
                     break;
             }
+        }
+
+        private void ChkWhiteMushroom_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentLevel.WhiteMushroomAppearance = NumWMCoins.Enabled = ChkWhiteMushroom.Checked;
+        }
+
+        private void NumWMCoins_ValueChanged(object sender, EventArgs e)
+        {
+            CurrentLevel.WhiteMushroomAppearanceCoins = (int) NumWMCoins.Value;
         }
     }
 }

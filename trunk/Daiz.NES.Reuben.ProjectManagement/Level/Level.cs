@@ -749,6 +749,52 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             return returnData;
         }
+
+        public bool WhiteMushroomAppearance
+        {
+            get
+            {
+                if(SpriteData.Count > 0)
+                    return SpriteData[0].InGameID == 0xD4;
+
+                return false;
+            }
+
+            set
+            {
+                if (!value)
+                {
+                    if (WhiteMushroomAppearance)
+                        SpriteData.RemoveAt(0);
+                }
+                else
+                {
+                    if (!WhiteMushroomAppearance)
+                        SpriteData.Insert(0, new Sprite() { InGameID = 0xD4, X = 0, Y = 0, IsViewable = false });
+                }
+            }
+        }
+
+        public int WhiteMushroomAppearanceCoins
+        {
+            get
+            {
+                if (WhiteMushroomAppearance)
+                {
+                    return SpriteData[0].Y;
+                }
+
+                return 0;
+            }
+
+            set
+            {
+                if (WhiteMushroomAppearance)
+                {
+                    SpriteData[0].Y = value;
+                }
+            }
+        }
     }
 
     public enum CompressionCommand
