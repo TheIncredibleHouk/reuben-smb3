@@ -15,6 +15,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int InGameID { get; set; }
         public bool IsMapSprite { get; set; }
         public int Item { get; set; }
+        public bool IsViewable { get; internal set; }
+
+        public Sprite()
+        {
+            IsViewable = true;
+        }
 
         public string Name
         {
