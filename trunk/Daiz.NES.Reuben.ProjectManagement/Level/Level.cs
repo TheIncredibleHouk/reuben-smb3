@@ -153,6 +153,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             string[] levelData = null;
             string[] compressData = null;
             SpriteData.Clear();
+            Pointers.Clear();
             
             try
             {
