@@ -1267,8 +1267,7 @@ namespace Daiz.NES.Reuben
         {
             SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
             _SelectingStartPositionMode = true;
-            TabLevelInfo.Enabled = false;
-            TabEditSelector.Enabled = false;
+            PnlDrawing.Enabled = TabLevelInfo.Enabled = false;
         }
 
         #endregion

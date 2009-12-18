@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="Mario Adventure 3" guid="17294af4-6853-4a2f-9a1d-64cdd594e08a">
+  <paletteinfo>
+    <palette background="00" data="0F,0F,30,3C,0F,36,27,37,0F,21,2A,37,0F,30,16,37,0F,00,00,00,0F,17,36,0F,0F,17,36,0F,0F,30,16,0F" name="Map" guid="12691c44-5fe6-45c3-b372-ecfb05ddf58e" />
+    <palette background="00" data="3C,0F,30,3C,3C,0F,36,27,3C,0F,2A,1A,3C,0F,31,21,3C,00,00,00,3C,0F,30,16,3C,0F,30,2A,3C,0F,36,27" name="Plains" guid="7f67ffa4-4f26-49fe-95bb-7d49ed07ddae" />
+    <palette background="00" data="0F,0F,30,3C,0F,07,36,27,0F,06,28,16,0F,00,30,10,0F,00,00,00,0F,06,30,16,0F,0F,30,2C,0F,07,36,27" name="Fortress" guid="a8679dd6-b25a-4945-aa4d-1d7e27959760" />
+    <palette background="00" data="3C,0F,30,3C,3C,0F,36,27,3C,0F,2A,1A,3C,0F,2A,12,3C,00,00,00,3C,0F,30,16,3C,0F,30,2A,3C,0F,36,27" name="Hilly" guid="094da0c4-6f93-45dc-938e-a7972b208209" />
+    <palette background="00" data="3C,0F,30,3C,3C,0F,36,27,3C,0F,2A,1A,3C,0F,30,21,3C,00,00,00,3C,0F,30,16,3C,0F,30,2A,3C,0F,36,27" name="Sky" guid="a6519f30-908f-4775-a135-aa42197e0615" />
+    <palette background="00" data="37,0F,30,3C,37,0F,36,27,37,0F,2A,1A,37,0F,30,12,37,00,00,00,37,0F,30,16,37,0F,30,2A,37,0F,36,27" name="Piranha Plant" guid="f8f935e1-87f5-4cd5-a48a-f3098f5ac23e" />
+    <palette background="00" data="12,0F,30,3C,12,0F,36,27,12,0F,01,2C,12,0F,25,10,12,00,00,00,12,0F,30,16,12,0F,30,2A,12,0F,30,27" name="Water" guid="3eef5d31-f020-426c-9b44-f240f12dab98" />
+    <palette background="00" data="0F,0F,30,3C,0F,3C,30,3B,0F,27,30,17,0F,12,31,21,0F,00,00,00,0F,0F,30,16,0F,0F,30,2A,0F,0F,30,27" name="Mushroom" guid="10c7f39e-2730-4527-aacb-dfa276bb0eda" />
+    <palette background="00" data="0F,0F,30,3C,0F,0F,36,27,0F,0B,3B,1B,0F,0F,0C,0F,0F,00,00,00,0F,0C,30,16,0F,0C,30,2A,0F,0C,36,27" name="Pipe" guid="10c32ecb-0e79-465c-b2ff-82afd99cf370" />
+    <palette background="00" data="37,0F,30,3C,37,0F,36,27,37,0F,27,17,37,0F,31,21,37,00,00,00,37,0F,30,16,37,0F,30,2A,37,0F,36,27" name="Desert" guid="e5fc3f59-fdd7-442a-9aa9-aa04149a6dbe" />
+    <palette background="00" data="3C,0F,30,3C,3C,0F,36,27,3C,0F,30,10,3C,0F,27,17,3C,00,00,00,3C,0F,30,16,3C,0F,30,21,3C,0F,36,27" name="Airship" guid="2293b2b7-2e3f-4bd9-9ccd-7d578264c4a5" />
+    <palette background="00" data="3B,0F,30,3C,3B,0F,36,27,3B,0F,2A,1A,3B,0F,31,21,3B,00,00,00,3B,0F,30,16,3B,0F,30,2A,3B,0F,36,27" name="Giant" guid="712a3bc7-29ba-45d1-90b8-aec037f46860" />
+    <palette background="00" data="31,0F,30,3C,31,0F,30,27,31,0F,30,2A,31,0F,30,12,31,00,00,00,31,0F,30,16,31,0F,30,2A,31,0F,36,27" name="Ice" guid="0bbcb450-1b64-4583-96e6-7d62d3d40a8f" />
+    <palette background="00" data="30,0F,30,3C,30,0F,36,27,30,0F,2A,1A,30,0F,12,21,30,00,00,00,30,0F,30,16,30,0F,30,2A,30,0F,36,27" name="Cloudy" guid="bcee00ba-df22-4194-a182-c4e84cfba20d" />
+    <palette background="00" data="0F,0F,30,3C,0F,06,36,27,0F,1C,2C,2A,0F,1C,31,21,0F,00,00,00,0F,1C,30,16,0F,1C,30,2A,0F,1C,36,27" name="Underground" guid="b1d0adb3-5c07-4014-8440-5335277f213c" />
+  </paletteinfo>
+  <blocklayouts />
+  <worldinfo>
+    <world name="First World" ordinal="0" worldguid="3ded74dc-fab1-41b0-b6a6-705ffef5e95d" lastmodified="2009-12-17T23:26:28.73795-05:00" lastcompressedsize="0" isnoworld="false" />
+    <world name="No World" ordinal="25" worldguid="63bcc041-7c39-44fc-ac92-3595177484ef" lastmodified="2009-12-17T23:26:28.73795-05:00" lastcompressedsize="0" isnoworld="true" />
+  </worldinfo>
+  <levelinfo>
+    <level name="1-1" worldguid="3ded74dc-fab1-41b0-b6a6-705ffef5e95d" levelguid="d800a5b4-6f64-4254-b4f8-c3431e839fd0" leveltype="1" lastcompressionsize="0" lastmodified="2009-12-18T00:10:38.4177-05:00" layout="Horizontal" />
+  </levelinfo>
+</project>
