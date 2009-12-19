@@ -399,8 +399,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         }
 
                                         currentCommand = CompressionCommand.Repeat;
-                                        parameter = 3;
+                                        parameter = 2;
                                         repeatCount = 0;
+                                        k--;
                                     }
                                 }
                                 else if (currentByte == ClearValue || parameter == 0x40)

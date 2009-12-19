@@ -181,14 +181,17 @@ namespace Daiz.NES.Reuben
             {
                 case EditMode.Tiles:
                     TabEditSelector.SelectedIndex = 0;
-                        break;
+                    EditMode = EditMode.Tiles;
+                    break;
 
                 case EditMode.Sprites:
                     TabEditSelector.SelectedIndex = 1;
+                    EditMode = EditMode.Sprites;
                     break;
 
                 case EditMode.Pointers:
                     TabEditSelector.SelectedIndex = 2;
+                    EditMode = EditMode.Pointers;
                     break;
             }
 
@@ -213,7 +216,7 @@ namespace Daiz.NES.Reuben
             PntEditor.CurrentPointer = null;
             BtnDeletePointer.Enabled = false;
             TsbPointers.Checked = CurrentWorld.Settings.ShowPointers;
-            LblStartPoint.Text = "X:" + w.XStart.ToHexString() + " Y: " + (w.YStart - 0x0F).ToHexString();
+            LblStartPoint.Text = "X:" + w.XStart.ToHexString() + " Y: " + (w.YStart - 0x11).ToHexString();
             WldView.DelayDrawing = false;
             WldView.FullUpdate();
         }
@@ -286,7 +289,7 @@ namespace Daiz.NES.Reuben
                 }
                 _SelectingStartPositionMode = false;
                 PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
-                LblStartPoint.Text = "X:" + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
+                LblStartPoint.Text = "X:" + x.ToHexString() + " Y: " + (y - 0x11).ToHexString();
             }
             else if (_PlacingPointer)
             {
@@ -474,7 +477,7 @@ namespace Daiz.NES.Reuben
             int YDiff = y - StartY;
 
 
-            LblPositition.Text = "X: " + x.ToHexString() + " Y: " + (y - 0x0F).ToHexString();
+            LblPositition.Text = "X: " + x.ToHexString() + " Y: " + (y - 0x11).ToHexString();
 
             if (_PlacingPointer)
             {

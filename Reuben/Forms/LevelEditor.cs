@@ -190,18 +190,21 @@ namespace Daiz.NES.Reuben
                     break;
             }
 
-            switch(CurrentLevel.Settings.EditMode)
+            switch (CurrentLevel.Settings.EditMode)
             {
                 case EditMode.Tiles:
                     TabEditSelector.SelectedIndex = 0;
-                        break;
+                    EditMode = EditMode.Tiles;
+                    break;
 
                 case EditMode.Sprites:
                     TabEditSelector.SelectedIndex = 1;
+                    EditMode = EditMode.Sprites;
                     break;
 
                 case EditMode.Pointers:
                     TabEditSelector.SelectedIndex = 2;
+                    EditMode = EditMode.Pointers;
                     break;
             }
 
