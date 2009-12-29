@@ -2,7 +2,7 @@
 <project name="Mario Adventure 3" guid="17294af4-6853-4a2f-9a1d-64cdd594e08a">
   <paletteinfo>
     <palette background="00" data="0F,0F,30,3C,0F,36,27,37,0F,21,2A,37,0F,30,16,37,0F,00,00,00,0F,17,36,0F,0F,17,36,0F,0F,30,16,0F" name="Map" guid="12691c44-5fe6-45c3-b372-ecfb05ddf58e" />
-    <palette background="00" data="3C,0F,30,3C,3C,0F,36,27,3C,0F,2A,1A,3C,0F,31,21,3C,00,00,00,3C,0F,30,16,3C,0F,30,2A,3C,0F,36,27" name="Plains" guid="7f67ffa4-4f26-49fe-95bb-7d49ed07ddae" />
+    <palette background="00" data="3C,0F,30,3C,3C,08,36,27,3C,0B,2A,1A,3C,0C,31,21,3C,00,00,00,3C,0F,30,16,3C,0F,30,2A,3C,0F,36,27" name="Plains" guid="7f67ffa4-4f26-49fe-95bb-7d49ed07ddae" />
     <palette background="00" data="0F,0F,30,3C,0F,07,36,27,0F,06,28,16,0F,00,30,10,0F,00,00,00,0F,06,30,16,0F,0F,30,2C,0F,07,36,27" name="Fortress" guid="a8679dd6-b25a-4945-aa4d-1d7e27959760" />
     <palette background="00" data="3C,0F,30,3C,3C,0F,36,27,3C,0F,2A,1A,3C,0F,2A,12,3C,00,00,00,3C,0F,30,16,3C,0F,30,2A,3C,0F,36,27" name="Hilly" guid="094da0c4-6f93-45dc-938e-a7972b208209" />
     <palette background="00" data="3C,0F,30,3C,3C,0F,36,27,3C,0F,2A,1A,3C,0F,30,21,3C,00,00,00,3C,0F,30,16,3C,0F,30,2A,3C,0F,36,27" name="Sky" guid="a6519f30-908f-4775-a135-aa42197e0615" />
@@ -19,10 +19,10 @@
   </paletteinfo>
   <blocklayouts />
   <worldinfo>
-    <world name="First World" ordinal="0" worldguid="3ded74dc-fab1-41b0-b6a6-705ffef5e95d" lastmodified="2009-12-17T23:26:28.73795-05:00" lastcompressedsize="0" isnoworld="false" />
+    <world name="First World" ordinal="0" worldguid="3ded74dc-fab1-41b0-b6a6-705ffef5e95d" lastmodified="2009-12-20T21:47:56.4688-05:00" lastcompressedsize="0" isnoworld="false" />
     <world name="No World" ordinal="25" worldguid="63bcc041-7c39-44fc-ac92-3595177484ef" lastmodified="2009-12-17T23:26:28.73795-05:00" lastcompressedsize="0" isnoworld="true" />
   </worldinfo>
   <levelinfo>
-    <level name="1-1" worldguid="3ded74dc-fab1-41b0-b6a6-705ffef5e95d" levelguid="d800a5b4-6f64-4254-b4f8-c3431e839fd0" leveltype="1" lastcompressionsize="0" lastmodified="2009-12-18T00:10:38.4177-05:00" layout="Horizontal" />
+    <level name="1-1" worldguid="3ded74dc-fab1-41b0-b6a6-705ffef5e95d" levelguid="d800a5b4-6f64-4254-b4f8-c3431e839fd0" leveltype="1" lastcompressionsize="0" lastmodified="2009-12-20T22:10:11.0858-05:00" layout="Horizontal" />
   </levelinfo>
 </project>

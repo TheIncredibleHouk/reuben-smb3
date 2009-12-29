@@ -227,7 +227,21 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     {
                         Rom[levelAddress++] = (byte)s.InGameID;
                         Rom[levelAddress++] = (byte)s.X;
-                        Rom[levelAddress++] = (byte)s.Y;
+                        switch (s.InGameID)
+                        {
+                            case 0x6C:
+                            case 0x6D:
+                            case 0x6E:
+                            case 0x6F:
+                            case 0x80:
+                                Rom[levelAddress++] = (byte)(s.Y + 1);
+                                break;
+
+                            default:
+                                Rom[levelAddress++] = (byte)s.Y;
+                                break;
+                        }
+                        
                     }
                     break;
 
@@ -236,7 +250,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     {
                         Rom[levelAddress++] = (byte)s.InGameID;
                         Rom[levelAddress++] = (byte)s.X;
-                        Rom[levelAddress++] = (byte)s.Y;
+                        switch (s.InGameID)
+                        {
+                            case 0x6C:
+                            case 0x6D:
+                            case 0x6E:
+                            case 0x6F:
+                            case 0x80:
+                                Rom[levelAddress++] = (byte)(s.Y + 1);
+                                break;
+
+                            default:
+                                Rom[levelAddress++] = (byte)s.Y;
+                                break;
+                        }
                     }
                     break;
             }

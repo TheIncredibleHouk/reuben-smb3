@@ -76,6 +76,9 @@ namespace Daiz.NES.Reuben
         private void BtnChange_Click(object sender, EventArgs e)
         {
             LevelSelect lSelect = new LevelSelect();
+            lSelect.StartPosition = FormStartPosition.CenterParent;
+            lSelect.Owner = ReubenController.MainWindow;
+
             DialogResult dr = lSelect.ShowDialog();
             if (dr == DialogResult.OK)
             {

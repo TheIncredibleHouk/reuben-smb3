@@ -180,6 +180,9 @@ namespace Daiz.NES.Reuben
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             if (cForm.Confirm("Are you sure you want to remove this layout?"))
             {
                 ProjectController.LayoutManager.RemoveLayout(CmbLayouts.SelectedItem as BlockLayout);
@@ -189,6 +192,9 @@ namespace Daiz.NES.Reuben
         private void BtnRename_Click(object sender, EventArgs e)
         {
             InputForm iForm = new InputForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Owner = ReubenController.MainWindow;
+
             string newName = iForm.GetInput("Please enter the name of the layout");
             if (newName != null)
             {

@@ -211,7 +211,7 @@ namespace Daiz.NES.Reuben
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank + 1]);
             CmbGraphics.SelectedIndex = w.GraphicsBank;
             CmbPalettes.SelectedIndex = w.Palette;
-            CmbMusic.SelectedIndex = w.Music;
+            CmbMusic.SelectedIndex = w.Music >= CmbMusic.Items.Count ? 0 : w.Music;
             CmbLength.SelectedItem = w.Length;
             PntEditor.CurrentPointer = null;
             BtnDeletePointer.Enabled = false;
@@ -250,7 +250,6 @@ namespace Daiz.NES.Reuben
 
         private void UpdateGraphics()
         {
-            CurrentTable = new PatternTable();
             CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex]);
             CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank]);

@@ -878,21 +878,24 @@ namespace Daiz.NES.Reuben
                     }
                 }
 
-                LevelPointer p = CurrentLevel.Pointers.Find(pt => (pt.XEnter == x || pt.XEnter + 1 == x) && (pt.YEnter == y || pt.YEnter + 1 == y));
-                if (p != null)
+                if (ShowPointers)
                 {
-                    RenderSpecialTileAlpha(_SpecialTable[0xA2], 0, 0, 5, data, 1.0);
-                    RenderSpecialTileAlpha(_SpecialTable[0xB2], 0, 8, 5, data, 1.0);
-                    RenderSpecialTileAlpha(_SpecialTable[0xA3], 8, 0, 5, data, 1.0);
-                    RenderSpecialTileAlpha(_SpecialTable[0xB3], 8, 8, 5, data, 1.0);
-                }
+                    LevelPointer p = CurrentLevel.Pointers.Find(pt => (pt.XEnter == x || pt.XEnter + 1 == x) && (pt.YEnter == y || pt.YEnter + 1 == y));
+                    if (p != null)
+                    {
+                        RenderSpecialTileAlpha(_SpecialTable[0xA2], 0, 0, 5, data, 1.0);
+                        RenderSpecialTileAlpha(_SpecialTable[0xB2], 0, 8, 5, data, 1.0);
+                        RenderSpecialTileAlpha(_SpecialTable[0xA3], 8, 0, 5, data, 1.0);
+                        RenderSpecialTileAlpha(_SpecialTable[0xB3], 8, 8, 5, data, 1.0);
+                    }
 
-                if (_DisplayStartingPosition && x == CurrentLevel.XStart && y == CurrentLevel.YStart)
-                {
-                    RenderSpecialTileAlpha(_SpecialTable[0xA0], 0, 0, 4, data, 1.0);
-                    RenderSpecialTileAlpha(_SpecialTable[0xB0], 0, 8, 4, data, 1.0);
-                    RenderSpecialTileAlpha(_SpecialTable[0xA1], 8, 0, 4, data, 1.0);
-                    RenderSpecialTileAlpha(_SpecialTable[0xB1], 8, 8, 4, data, 1.0);
+                    if (_DisplayStartingPosition && x == CurrentLevel.XStart && y == CurrentLevel.YStart)
+                    {
+                        RenderSpecialTileAlpha(_SpecialTable[0xA0], 0, 0, 4, data, 1.0);
+                        RenderSpecialTileAlpha(_SpecialTable[0xB0], 0, 8, 4, data, 1.0);
+                        RenderSpecialTileAlpha(_SpecialTable[0xA1], 8, 0, 4, data, 1.0);
+                        RenderSpecialTileAlpha(_SpecialTable[0xB1], 8, 8, 4, data, 1.0);
+                    }
                 }
             }
 

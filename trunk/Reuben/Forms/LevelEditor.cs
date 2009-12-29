@@ -171,21 +171,26 @@ namespace Daiz.NES.Reuben
             {
                 case TileDrawMode.Pencil:
                     TsbPencil.Checked = true;
+                    TileDrawMode = TileDrawMode.Pencil;
                     break;
 
                 case TileDrawMode.Rectangle:
                     TsbRectangle.Checked = true;
+                    TileDrawMode = TileDrawMode.Rectangle;
                     break;
 
                 case TileDrawMode.Outline:
                     TsbOutline.Checked = true;
+                    TileDrawMode = TileDrawMode.Outline;
                     break;
 
                 case TileDrawMode.Line:
                     TsbLine.Checked = true;
+                    TileDrawMode = TileDrawMode.Line;
                     break;
 
                 case TileDrawMode.Fill:
+                    TileDrawMode = TileDrawMode.Fill;
                     TsbBucket.Checked = true;
                     break;
             }
@@ -235,7 +240,7 @@ namespace Daiz.NES.Reuben
             CmbTypes.SelectedIndex = l.Type - 1;
             CmbActions.SelectedIndex = l.StartAction;
             CmbScroll.SelectedIndex = l.ScrollType;
-            CmbMusic.SelectedIndex = l.Music;
+            CmbMusic.SelectedIndex = l.Music >= CmbMusic.Items.Count ? 0 : l.Music;
             if (l.LevelLayout == LevelLayout.Vertical)
             {
                 CmbScroll.SelectedIndex = 1;

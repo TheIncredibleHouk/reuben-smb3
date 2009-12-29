@@ -274,6 +274,9 @@ namespace Daiz.NES.Reuben
         {
             ConfirmForm cForm = new ConfirmForm();
 
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             switch (SelectionType)
             {
                 case SelectionType.Level:
@@ -372,6 +375,9 @@ namespace Daiz.NES.Reuben
         private void TsbRename_Click(object sender, EventArgs e)
         {
             InputForm iForm = new InputForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Owner = ReubenController.MainWindow;
+
             string name = iForm.GetInput("Please enter a new name");
             if (name != null)
             {
