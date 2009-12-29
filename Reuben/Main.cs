@@ -21,12 +21,19 @@ namespace Daiz.NES.Reuben
 
         public void HideProjectview()
         {
-            BtnShowHide_Click(null, null);
+            ProjectViewVisible = false;
         }
 
         private void projectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MnuDebug.Enabled = MnuEditor.Enabled = MnuExport.Enabled = MnuImport.Enabled = MnuNewLevel.Enabled = MnuProject.Enabled = MnuReload.Enabled = MnuTools.Enabled = MnuWindows.Enabled = ReubenController.CreateNewProject();
+            if (!MnuDebug.Enabled)
+            {
+                MnuDebug.Enabled = MnuEditor.Enabled = MnuExport.Enabled = MnuImport.Enabled = MnuNewLevel.Enabled = MnuProject.Enabled = MnuReload.Enabled = MnuTools.Enabled = MnuWindows.Enabled = ReubenController.CreateNewProject();
+            }
+            else
+            {
+                ReubenController.CreateNewProject();
+            }
         }
 
         private void MnuNewLevel_Click(object sender, EventArgs e)
@@ -82,21 +89,30 @@ namespace Daiz.NES.Reuben
             base.OnClosed(e);
         }
 
-        private int previousProjectSize = 0;
+        private int previousProjectSize = 256;
         private void BtnShowHide_Click(object sender, EventArgs e)
         {
-            if (PrvProject.Visible)
+            ProjectViewVisible = !ProjectViewVisible;
+        }
+
+        public bool ProjectViewVisible
+        {
+            get { return PrvProject.Visible;}
+            set
             {
-                previousProjectSize = PnlRightSide.Width;
-                PnlRightSide.Width = 35;
-                PrvProject.Visible = false;
-                BtnShowHide.Text = "<<";
-            }
-            else
-            {
-                PnlRightSide.Width = previousProjectSize;
-                PrvProject.Visible = true;
-                BtnShowHide.Text = ">>";
+                if (value)
+                {
+                    PnlRightSide.Width = previousProjectSize;
+                    PrvProject.Visible = true;
+                    BtnShowHide.Text = ">>";
+                }
+                else
+                {
+                    previousProjectSize = PnlRightSide.Width;
+                    PnlRightSide.Width = 35;
+                    PrvProject.Visible = false;
+                    BtnShowHide.Text = "<<";
+                }
             }
         }
 
@@ -110,10 +126,6 @@ namespace Daiz.NES.Reuben
             ReubenController.ImportLevel();
         }
 
-        private void graphicsToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            ReubenController.ImportGraphics();
-        }
 
         private void levelToPNGToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -133,6 +145,9 @@ namespace Daiz.NES.Reuben
         private void defaultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             if(cForm.Confirm("Resetting the default sprite definitions requires all levels and worlds to be closed."))
             {
                 ProjectController.SpriteManager.LoadDefaultSprites();
@@ -158,6 +173,9 @@ namespace Daiz.NES.Reuben
         private void blockPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             if(cForm.Confirm("Resetting the default block properties requires all levels and worlds to be closed."))
             {
                 ProjectController.SpecialManager.LoadDefaultSpecials();
@@ -168,6 +186,9 @@ namespace Daiz.NES.Reuben
         private void specialGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             if(cForm.Confirm("Resetting the special graphics requires all levels and worlds to be closed."))
             {
                 ProjectController.SpecialManager.LoadDefaultSpecialGraphics();
@@ -178,6 +199,9 @@ namespace Daiz.NES.Reuben
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             if(cForm.Confirm("Resetting the music list requires all levels and worlds to be closed."))
             {
                 ProjectController.MusicManager.LoadDefault();
@@ -188,6 +212,9 @@ namespace Daiz.NES.Reuben
         private void allEditorDefinitionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             if(cForm.Confirm("Resetting the all editor definitions requires all levels and worlds to be closed."))
             {
                 ProjectController.SpriteManager.LoadDefaultSprites();

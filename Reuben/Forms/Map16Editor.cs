@@ -185,6 +185,9 @@ namespace Daiz.NES.Reuben
         private void BtnApplyGlobally_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
             if (cForm.Confirm("Are you sure you want to apply this definiton to block " + BlsBlocks.SelectedTileIndex.ToHexString() + " in every definition set?"))
             {
                 foreach (BlockDefinition bDef in ProjectController.BlockManager.AllDefinitions)

@@ -317,7 +317,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public byte[] GetCompressedData()
         {
             int dataPointer = 0;
-            byte[] outputData = new byte[5000];
+            byte[] outputData = new byte[8000];
             List<byte> nextChunk = new List<byte>();
             CompressionCommand currentCommand = CompressionCommand.None;
             byte parameter = 0;
@@ -399,14 +399,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         }
 
                                         currentCommand = CompressionCommand.Repeat;
-                                        parameter = 2;
+                                        parameter = 3;
                                         repeatCount = 0;
-                                        k--;
                                     }
                                 }
-                                else if (currentByte == ClearValue || parameter == 0x40)
+                                else if (currentByte == ClearValue || parameter == 0x3F)
                                 {
-                                    if (clearCount == 1 || parameter == 0x40)
+                                    if (clearCount == 1 || parameter == 0x3F)
                                     {
                                         if (clearCount == 1)
                                         {
@@ -426,6 +425,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                         }
 
                                         k--;
+
                                         clearCount = 0;
                                     }
                                     else
@@ -490,23 +490,22 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     break;
 
                 case CompressionCommand.Write:
-                    outputData[dataPointer++] = (byte)(64 | parameter);
-                    for (int l = 0; l < parameter; l++)
+                    outputData[dataPointer++] = (byte)(64 | nextChunk.Count);
+                    for (int l = 0; l < nextChunk.Count; l++)
                     {
                         outputData[dataPointer++] = nextChunk[l];
                     }
                     break;
             }
 
-            byte[] CompressedData = new byte[dataPointer];
+            byte[] returnData = new byte[dataPointer];
 
             for (int i = 0; i < dataPointer; i++)
             {
-                CompressedData[i] = outputData[i];
+                returnData[i] = outputData[i];
             }
 
-            ProjectController.WorldManager.GetWorldInfo(Guid).LastCompressionSize = CompressedData.Length + (SpriteData.Count * 4) + (Pointers.Count * 3) + 5;
-            return CompressedData;
+            return returnData;
         }
     }
 }

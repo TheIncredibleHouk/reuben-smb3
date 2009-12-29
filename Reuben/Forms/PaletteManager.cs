@@ -71,6 +71,9 @@ namespace Daiz.NES.Reuben
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             NewPaletteForm iForm = new NewPaletteForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Parent = this;
+
             string name = iForm.GetInput("Enter a name for this palette");
             if (name != null)
             {
@@ -159,8 +162,11 @@ namespace Daiz.NES.Reuben
 
         private void BtnRename_Click(object sender, EventArgs e)
         {
-            InputForm form = new InputForm();
-            string newName = form.GetInput("Enter a name for this palette");
+            InputForm iForm = new InputForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Owner = ReubenController.MainWindow;
+
+            string newName = iForm.GetInput("Enter a name for this palette");
             if (newName != null)
             {
                 (CmbPalettes.SelectedItem as PaletteInfo).Name = newName;
@@ -169,12 +175,15 @@ namespace Daiz.NES.Reuben
 
         private void BtnRemove_Click(object sender, EventArgs e)
         {
-            ConfirmForm cf = new ConfirmForm();
-            if (cf.Confirm("Are you sure you want to remove this palette? Any\nlevel referring to this palette will resort to the first\npalette in your list."))
+            ConfirmForm cForm = new ConfirmForm();
+            cForm.StartPosition = FormStartPosition.CenterParent;
+            cForm.Owner = ReubenController.MainWindow;
+
+            if (cForm.Confirm("Are you sure you want to remove this palette? Any\nlevel referring to this palette will resort to the first\npalette in your list."))
             {
                 ProjectController.PaletteManager.RemovePalette(CmbPalettes.SelectedItem as PaletteInfo);
             }
-            cf.Dispose();
+            cForm.Dispose();
         }
 
         private void BtnClose_Click(object sender, EventArgs e)

@@ -197,12 +197,6 @@
     <Compile Include="Forms\PaletteManager.Designer.cs">
       <DependentUpon>PaletteManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Guide.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="Main.cs">

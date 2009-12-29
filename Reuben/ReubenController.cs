@@ -20,6 +20,9 @@ namespace Daiz.NES.Reuben
         public static bool CreateNewProject()
         {
             InputForm iForm = new InputForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Owner = ReubenController.MainWindow;
+
             string projectName = iForm.GetInput("Please enter the name of your project");
             if (projectName != null)
             {
@@ -44,6 +47,9 @@ namespace Daiz.NES.Reuben
         public static void CreateNewLevel(WorldInfo world)
         {
             NewLevelForm newLevelForm = new NewLevelForm();
+            newLevelForm.StartPosition = FormStartPosition.CenterParent;
+            newLevelForm.Owner = ReubenController.MainWindow;
+
             DialogResult result = newLevelForm.ShowDialog(world);
             if (result == DialogResult.OK)
             {
@@ -54,6 +60,9 @@ namespace Daiz.NES.Reuben
         public static void CreateNewWorld()
         {
             InputForm iForm = new InputForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Owner = ReubenController.MainWindow;
+
             string name = iForm.GetInput("Please enter a world name.");
             if (name != null)
             {
@@ -108,6 +117,9 @@ namespace Daiz.NES.Reuben
         public static void OpenPaletteViewer()
         {
             PaletteManager pm = new PaletteManager();
+            pm.StartPosition = FormStartPosition.CenterParent;
+            pm.Owner = ReubenController.MainWindow;
+
             if (ActiveEditor != null)
             {
                 if (ActiveEditor is LevelEditor)
@@ -129,6 +141,9 @@ namespace Daiz.NES.Reuben
         public static void OpenGraphicsEditor()
         {
             GraphicsEditor ge = new GraphicsEditor();
+            ge.StartPosition = FormStartPosition.CenterParent;
+            ge.Owner = ReubenController.MainWindow;
+
             if (ActiveEditor != null)
             {
                 if (ActiveEditor is LevelEditor)
@@ -151,6 +166,9 @@ namespace Daiz.NES.Reuben
         public  static void OpenBlockEditor()
         {
             Map16Editor me = new Map16Editor();
+            me.StartPosition = FormStartPosition.CenterParent;
+            me.Owner = ReubenController.MainWindow;
+
             if (ActiveEditor != null)
             {
                 if (ActiveEditor is LevelEditor)
@@ -173,6 +191,9 @@ namespace Daiz.NES.Reuben
         public static void OpenBlockEditor(int definitionIndex, int selectedTileIndex, int graphics1, int graphics2, int paletteIndex)
         {
             Map16Editor me = new Map16Editor();
+            me.StartPosition = FormStartPosition.CenterParent;
+            me.Owner = ReubenController.MainWindow;
+
             me.ShowDialog(definitionIndex, selectedTileIndex, graphics1, graphics2, paletteIndex);
         }
 
@@ -230,6 +251,9 @@ namespace Daiz.NES.Reuben
         public static void OpenLayoutManager()
         {
             LayoutEditor lee = new LayoutEditor();
+            lee.StartPosition = FormStartPosition.CenterParent;
+            lee.Owner = ReubenController.MainWindow;
+
             if (ActiveEditor != null)
             {
                 if (ActiveEditor is LevelEditor)
