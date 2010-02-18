@@ -274,7 +274,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public int WriteWorld(World w, int levelAddress)
         {
-            
             Rom[levelAddress++] = (byte)w.GraphicsBank;
             Rom[levelAddress++] = (byte)w.Palette;
             Rom[levelAddress++] = (byte)(ProjectController.MusicManager.MusicList[w.Music].Value);
