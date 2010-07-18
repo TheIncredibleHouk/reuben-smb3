@@ -11,6 +11,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
     public class Project : IXmlIO
     {
         public Guid Guid { get; private set; }
+        private string _paletteFile;
         private string _Name;
         public string Name
         {
@@ -35,6 +36,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             XElement x = new XElement("project");
             x.SetAttributeValue("name", Name);
             x.SetAttributeValue("guid", Guid);
+            x.SetAttributeValue("palettefile", _paletteFile);
             x.Add(ProjectController.PaletteManager.CreateElement());
             x.Add(ProjectController.LayoutManager.CreateElement());
             x.Add(ProjectController.WorldManager.CreateElement());
@@ -58,8 +60,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         break;
 
                     case "palettefile":
-                        ProjectController.ColorManager.LoadColorInfo(a.Value);
-                        customPalette = true;
+                        customPalette = ProjectController.ColorManager.LoadColorInfo(a.Value);
                         break;
                 }
             }
@@ -93,6 +94,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return true;
         }
 
+        public void SetPaletteFile(string fileName)
+        {
+            if (ProjectController.ColorManager.LoadColorInfo(fileName))
+            {
+                _paletteFile = fileName;
+                ProjectController.Save();
+            }
+        }
+
+        public void DefaultPalette()
+        {
+            ProjectController.ColorManager.LoadDefaultColor();
+            ProjectController.Save();
+        }
         #endregion
     }
 }

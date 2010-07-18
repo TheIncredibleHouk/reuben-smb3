@@ -440,6 +440,25 @@ namespace Daiz.NES.Reuben
                 editorTable[wi.WorldGuid].Close();
             }
         }
+
+        public static void GetPaletteFile()
+        {
+            OpenFileDialog OFD = new OpenFileDialog();
+            OFD.DefaultExt = "pal";
+            DialogResult result = OFD.ShowDialog();
+            OFD.Dispose();
+
+            if (result == DialogResult.OK)
+            {
+                ProjectController.ProjectManager.CurrentProject.SetPaletteFile(OFD.FileName);
+            }
+        }
+
+        public static void DefaulPaletteFile()
+        {
+            ProjectController.ProjectManager.CurrentProject.DefaultPalette();
+        }
+
         private static Form ActiveEditor;
         public static Main MainWindow { get; set; }
     }
