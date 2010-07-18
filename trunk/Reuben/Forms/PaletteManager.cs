@@ -72,7 +72,6 @@ namespace Daiz.NES.Reuben
         {
             NewPaletteForm iForm = new NewPaletteForm();
             iForm.StartPosition = FormStartPosition.CenterParent;
-            iForm.Parent = this;
 
             string name = iForm.GetInput("Enter a name for this palette");
             if (name != null)

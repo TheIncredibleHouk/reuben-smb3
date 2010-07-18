@@ -32,19 +32,29 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Colors[0x40] = Color.Empty;
         }
 
-        public void LoadColorInfo(string filename)
+        public bool LoadColorInfo(string filename)
         {
             if (File.Exists(filename))
             {
-                FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[0x03 * 0x40];
-                fStream.Read(data, 0, 0x03 * 0x40);
-                fStream.Close();
-                for (var i = 0; i < 0x040; i++)
+                try
                 {
-                    Colors[i] = Color.FromArgb(data[i * 0x03], data[i * 0x03 + 1], data[i * 0x03 + 2]);
+                    FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                    byte[] data = new byte[0x03 * 0x40];
+                    fStream.Read(data, 0, 0x03 * 0x40);
+                    fStream.Close();
+                    for (var i = 0; i < 0x040; i++)
+                    {
+                        Colors[i] = Color.FromArgb(data[i * 0x03], data[i * 0x03 + 1], data[i * 0x03 + 2]);
+                    }
+                }
+
+                catch
+                {
+                    return false;
                 }
             }
+
+            return false;
         }
     }
 }

@@ -225,5 +225,15 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        private void setPaletteFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReubenController.GetPaletteFile();
+        }
+
+        private void paletteFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReubenController.DefaulPaletteFile();
+        }
+
     }
 }
