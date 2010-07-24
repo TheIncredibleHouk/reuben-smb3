@@ -177,7 +177,6 @@ namespace Daiz.NES.Reuben
                 {
                     int tileValue = _BlockLayout.Layout[i * 16 + j];
                     int PaletteIndex = tileValue / 0x40;
-                    Block b = CurrentDefiniton[tileValue];
                     if (tileValue < 0)
                     {
                         RenderBlank(j * 16, i * 16, data);
@@ -186,6 +185,8 @@ namespace Daiz.NES.Reuben
                         RenderBlank(j * 16 + 8, i * 16 + 8, data);
                         continue;
                     }
+
+                    Block b = CurrentDefiniton[tileValue];
 
                     if (_ShowBlockProperties)
                     {
@@ -745,7 +746,19 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public int SelectedIndex { get; set; }
+        private int _SelectedIndex;
+        public int SelectedIndex
+        {
+            get { return _SelectedIndex; }
+            set
+            {
+                _SelectedIndex = value;
+                if (SelectionChanged != null)
+                {
+                    SelectionChanged(this, null);
+                }
+            }
+        }
         public Block SelectedBlock { get; private set; }
 
         private void PatternTableViewer_MouseDown(object sender, MouseEventArgs e)
