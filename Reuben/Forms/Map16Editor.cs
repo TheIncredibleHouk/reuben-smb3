@@ -125,6 +125,7 @@ namespace Daiz.NES.Reuben
             CmbGraphics2.SelectedIndex = graphics2;
             CmbPalettes.SelectedIndex = paletteIndex;
             BlsBlocks.SelectedTileIndex = selectedTileIndex;
+            BlsBlocks.Focus();
             this.ShowDialog();
         }
 

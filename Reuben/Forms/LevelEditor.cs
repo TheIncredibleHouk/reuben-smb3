@@ -93,10 +93,13 @@ namespace Daiz.NES.Reuben
             LvlView.FullUpdate();
         }
 
+        int previousLeftIndex;
+
         void BlsSelector_SelectionChanged(object sender, TEventArgs<MouseButtons> e)
         {
             if (MouseMode == MouseMode.RightClickSelection)
             {
+                previousLeftIndex = LeftMouseTile;
                 LeftMouseTile = BlsSelector.SelectedTileIndex;
                 BlvLeft.PaletteIndex = (LeftMouseTile & 0xC0) >> 6;
                 BlvLeft.CurrentBlock = BlsSelector.SelectedBlock;
@@ -107,6 +110,7 @@ namespace Daiz.NES.Reuben
                 {
                     if (e.Data == MouseButtons.Left)
                     {
+                        previousLeftIndex = LeftMouseTile;
                         LeftMouseTile = BlsSelector.SelectedTileIndex;
                         BlvLeft.PaletteIndex = (LeftMouseTile & 0xC0) >> 6;
                         BlvLeft.CurrentBlock = BlsSelector.SelectedBlock;
@@ -1252,6 +1256,7 @@ namespace Daiz.NES.Reuben
                 CurrentPalette.PaletteChanged -= CurrentPalette_PaletteChanged;
             }
 
+            CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(CurrentPalette_PaletteChanged);
             LvlView.CurrentPalette = CurrentPalette;
@@ -1669,8 +1674,12 @@ namespace Daiz.NES.Reuben
 
         private void BlsSelector_DoubleClick(object sender, EventArgs e)
         {
-            ReubenController.OpenBlockEditor(CurrentLevel.Type, LeftMouseTile, CmbGraphics.SelectedIndex, CurrentLevel.AnimationBank, CmbPalettes.SelectedIndex);
+            if (previousLeftIndex == LeftMouseTile)
+            {
+                ReubenController.OpenBlockEditor(CurrentLevel.Type, LeftMouseTile, CmbGraphics.SelectedIndex, CurrentLevel.AnimationBank, CmbPalettes.SelectedIndex);
+            }
         }
+
 
         int PreviousSelectorX, PreviousSelectorY;
         private void BlsSelector_MouseMove(object sender, MouseEventArgs e)
