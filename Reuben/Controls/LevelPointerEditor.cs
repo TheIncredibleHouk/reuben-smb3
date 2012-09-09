@@ -17,6 +17,10 @@ namespace Daiz.NES.Reuben
         public LevelPointerEditor()
         {
             InitializeComponent();
+            foreach(WorldInfo wi in from w in ProjectController.WorldManager.Worlds orderby w.Ordinal select w)
+            {
+                CmbWorldExit.Items.Add(wi.Name);
+            }
         }
 
         private LevelPointer _CurrentPointer;
@@ -47,6 +51,7 @@ namespace Daiz.NES.Reuben
                         LblPointsToLevel.Text = "No level set.";
                     }
 
+                    CmbWorldExit.SelectedIndex = value.World;
                     CmbActions.SelectedIndex = value.ExitType;
                     NumXExit.Value = value.XExit;
                     NumYExit.Value = value.YExit;
@@ -94,6 +99,8 @@ namespace Daiz.NES.Reuben
         private void ChkExitsLevel_CheckedChanged(object sender, EventArgs e)
         {
             BtnChange.Enabled = CmbActions.Enabled = !ChkExitsLevel.Checked;
+            CmbActions.Enabled = !ChkExitsLevel.Checked;
+            CmbWorldExit.Enabled = ChkExitsLevel.Checked;
             _CurrentPointer.ExitsLevel = ChkExitsLevel.Checked;
         }
 
@@ -114,6 +121,11 @@ namespace Daiz.NES.Reuben
             {
                 ReubenController.EditLevel(li);
             }
+        }
+
+        private void CmbWorldExit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CurrentPointer.World = CmbWorldExit.SelectedIndex;
         }
     }
 }

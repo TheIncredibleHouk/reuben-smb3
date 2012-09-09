@@ -208,8 +208,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="ReubenController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\LevelPointerEditor.resx">
+      <DependentUpon>LevelPointerEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProjectView.resx">
       <DependentUpon>ProjectView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\WorldPointerEditor.resx">
+      <DependentUpon>WorldPointerEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Confirm.resx">
       <DependentUpon>Confirm.cs</DependentUpon>

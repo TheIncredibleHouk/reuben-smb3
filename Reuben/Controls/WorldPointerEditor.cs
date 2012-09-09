@@ -49,6 +49,7 @@ namespace Daiz.NES.Reuben
 
                     LblXEnter.Text = "X: 0";
                     LblYEnter.Text = "Y: 0";
+                    ChkAltEnter.Checked = CurrentPointer.AltLevelEntrance;
                     UpdatePosition();
                 }
             }
@@ -77,7 +78,7 @@ namespace Daiz.NES.Reuben
         public void UpdatePosition()
         {
             LblXEnter.Text = "X: " + CurrentPointer.X.ToHexString();
-            LblYEnter.Text = "Y: " + CurrentPointer.Y.ToHexString();
+            LblYEnter.Text = "Y: " + (CurrentPointer.Y - 0x11).ToHexString();
         }
 
         private void BtnOpenLevel_Click(object sender, EventArgs e)
@@ -91,6 +92,11 @@ namespace Daiz.NES.Reuben
             {
                 ReubenController.EditLevel(li);
             }
+        }
+
+        private void ChkAltEnter_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentPointer.AltLevelEntrance = ChkAltEnter.Checked;
         }
     }
 }

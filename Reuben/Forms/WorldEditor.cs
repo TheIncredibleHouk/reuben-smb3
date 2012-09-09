@@ -123,8 +123,8 @@ namespace Daiz.NES.Reuben
 
         void ReubenController_GraphicsReloaded(object sender, EventArgs e)
         {
-            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank]);
-            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank + 1]);
+            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank]);
+            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank + 1]);
             UpdateGraphics();
         }
 
@@ -196,7 +196,6 @@ namespace Daiz.NES.Reuben
             }
 
             CmbLayouts.SelectedIndex = CurrentWorld.Settings.Layout;
-            TsbStartPoint.Checked = CurrentWorld.Settings.ShowStart;
 
             this.Text = ProjectController.WorldManager.GetWorldInfo(w.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
@@ -207,8 +206,10 @@ namespace Daiz.NES.Reuben
         {
             WldView.CurrentWorld = w;
             CurrentWorld = w;
-            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank]);
-            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank + 1]);
+            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[0x14]);
+            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[0x14]);
+            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank]);
+            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank + 1]);
             CmbGraphics.SelectedIndex = w.GraphicsBank;
             CmbPalettes.SelectedIndex = w.Palette;
             CmbMusic.SelectedIndex = w.Music >= CmbMusic.Items.Count ? 0 : w.Music;
@@ -216,7 +217,6 @@ namespace Daiz.NES.Reuben
             PntEditor.CurrentPointer = null;
             BtnDeletePointer.Enabled = false;
             TsbPointers.Checked = CurrentWorld.Settings.ShowPointers;
-            LblStartPoint.Text = "X:" + w.XStart.ToHexString() + " Y: " + (w.YStart - 0x11).ToHexString();
             WldView.DelayDrawing = false;
             WldView.FullUpdate();
         }
@@ -250,10 +250,10 @@ namespace Daiz.NES.Reuben
 
         private void UpdateGraphics()
         {
-            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex]);
-            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
-            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank]);
-            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.AnimationBank + 1]);
+            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[0x14]);
+            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[0x15]);
+            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank]);
+            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank + 1]);
             BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = WldView.CurrentPalette = CurrentPalette;
             BlsSelector.CurrentDefiniton = WldView.CurrentDefiniton = WldView.CurrentDefiniton;
             BlvRight.CurrentBlock = BlvRight.CurrentBlock;
@@ -275,22 +275,7 @@ namespace Daiz.NES.Reuben
 
             if (x < 0 || x >= CurrentWorld.Width || y < 0 || y >= CurrentWorld.Height) return;
 
-            if (_SelectingStartPositionMode)
-            {
-                int oldX = CurrentWorld.XStart;
-                int oldY = CurrentWorld.YStart;
-                CurrentWorld.XStart = x;
-                CurrentWorld.YStart = y;
-                if (TsbStartPoint.Checked)
-                {
-                    WldView.UpdatePoint(x, y);
-                    WldView.UpdatePoint(oldX, oldY);
-                }
-                _SelectingStartPositionMode = false;
-                PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
-                LblStartPoint.Text = "X:" + x.ToHexString() + " Y: " + (y - 0x11).ToHexString();
-            }
-            else if (_PlacingPointer)
+            if (_PlacingPointer)
             {
                 _PlacingPointer = false;
                 CurrentWorld.AddPointer();
@@ -771,10 +756,6 @@ namespace Daiz.NES.Reuben
             WldView.ShowGrid = TsbGrid.Checked;
         }
 
-        private void TsbStartPoint_CheckedChanged(object sender, EventArgs e)
-        {
-            WldView.DisplayStartingPosition = TsbStartPoint.Checked;
-        }
         #endregion
 
         #region drawing modes
@@ -837,8 +818,8 @@ namespace Daiz.NES.Reuben
 
         private void CmbGraphics_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex]);
-            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
+            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex]);
+            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
             LblHexGraphics.Text = "x" + CmbGraphics.SelectedIndex.ToHexString();
         }
 
@@ -1015,16 +996,6 @@ namespace Daiz.NES.Reuben
                         Paste(useTransparentTile);
                         break;
 
-
-                    case Keys.R:
-                        TsbStartPoint.Checked = !TsbStartPoint.Checked;
-                        break;
-
-                    case Keys.F:
-                        TsbStartPoint.Checked = true;
-                        BtnStartPoint_Click(null, null);
-                        break;
-
                     case Keys.D:
                         ToggleRightClickMode();
                         break;
@@ -1176,7 +1147,6 @@ namespace Daiz.NES.Reuben
         {
             CurrentWorld.Settings.DrawMode = TileDrawMode;
             CurrentWorld.Settings.ShowGrid = TsbGrid.Checked;
-            CurrentWorld.Settings.ShowStart = TsbStartPoint.Checked;
             CurrentWorld.Settings.EditMode = EditMode;
             CurrentWorld.Settings.ShowPointers = TsbPointers.Checked;
 
@@ -1218,7 +1188,7 @@ namespace Daiz.NES.Reuben
 
         private void BlsSelector_DoubleClick(object sender, EventArgs e)
         {
-            ReubenController.OpenBlockEditor(CurrentWorld.Type, LeftMouseTile, CmbGraphics.SelectedIndex, CurrentWorld.AnimationBank, CmbPalettes.SelectedIndex);
+            ReubenController.OpenBlockEditor(CurrentWorld.Type, LeftMouseTile, 0x14, CurrentWorld.GraphicsBank, CmbPalettes.SelectedIndex);
         }
 
         int PreviousSelectorX, PreviousSelectorY;

@@ -72,6 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression\CompressionCommand.cs" />
+    <Compile Include="Compression\CompressionCommandType.cs" />
+    <Compile Include="Compression\CompressionPoint.cs" />
     <Compile Include="Enums\EditorEnums.cs" />
     <Compile Include="Enums\ItemList.cs" />
     <Compile Include="Layout\LayoutManager.cs" />

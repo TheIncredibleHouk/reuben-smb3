@@ -80,7 +80,7 @@ namespace Daiz.NES.Reuben
                             break;
 
                         case GuideMode.Screen:
-                            Guide2.Position = Guide1.Position + 160;
+                            Guide2.Position = Guide1.Position + 176;
                             if (Guide1Changed != null)
                             {
                                 Guide1Changed(this, null);
@@ -144,7 +144,7 @@ namespace Daiz.NES.Reuben
                             break;
 
                         case GuideMode.Screen:
-                            Guide2.Position = Guide1.Position + 272;
+                            Guide2.Position = Guide1.Position + 256;
                             if (Guide1Changed != null)
                             {
                                 Guide1Changed(this, null);
@@ -230,7 +230,7 @@ namespace Daiz.NES.Reuben
                                         break;
 
                                     case GuideMode.Screen:
-                                        Guide2.Position = Guide1.Position + 272;
+                                        Guide2.Position = Guide1.Position + 256;
                                         break;
 
                                     case GuideMode.JumpLength4:
@@ -271,7 +271,7 @@ namespace Daiz.NES.Reuben
                                         break;
 
                                     case GuideMode.Screen:
-                                        Guide2.Position = Guide1.Position + 160;
+                                        Guide2.Position = Guide1.Position + 176;
                                         break;
 
                                     case GuideMode.JumpHeight4:
@@ -317,7 +317,7 @@ namespace Daiz.NES.Reuben
                                         break;
 
                                     case GuideMode.Screen:
-                                        Guide1.Position = Guide2.Position - 272;
+                                        Guide1.Position = Guide2.Position - 256;
                                         break;
 
                                     case GuideMode.JumpLength4:
@@ -363,7 +363,7 @@ namespace Daiz.NES.Reuben
                                         break;
 
                                     case GuideMode.Screen:
-                                        Guide1.Position = Guide2.Position - 160;
+                                        Guide1.Position = Guide2.Position - 176;
                                         break;
 
                                     case GuideMode.JumpHeight4:

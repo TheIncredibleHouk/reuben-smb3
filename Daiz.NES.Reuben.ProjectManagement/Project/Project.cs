@@ -23,10 +23,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
         }
 
         public string WorkingDirectory { get; set; }
+        public string ROMFile { get; set; }
 
         public Project()
         {
             Guid = Guid.NewGuid();
+            ROMFile = "";
         }
 
         #region IXmlIO Members
@@ -37,10 +39,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("name", Name);
             x.SetAttributeValue("guid", Guid);
             x.SetAttributeValue("palettefile", _paletteFile);
+            x.SetAttributeValue("romfile", ROMFile);
             x.Add(ProjectController.PaletteManager.CreateElement());
             x.Add(ProjectController.LayoutManager.CreateElement());
             x.Add(ProjectController.WorldManager.CreateElement());
             x.Add(ProjectController.LevelManager.CreateElement());
+            
             return x;
         }
 
@@ -52,15 +56,19 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 switch (a.Name.LocalName)
                 {
                     case "name":
-                        Name = e.Attribute("name").Value;
+                        Name = a.Value;
                         break;
 
                     case "guid":
-                        Guid = e.Attribute("guid").Value.ToGuid();
+                        Guid = a.Value.ToGuid();;
                         break;
 
                     case "palettefile":
                         customPalette = ProjectController.ColorManager.LoadColorInfo(a.Value);
+                        break;
+
+                    case "romfile":
+                        ROMFile = a.Value;
                         break;
                 }
             }

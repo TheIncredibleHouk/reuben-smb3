@@ -67,13 +67,13 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.compileROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rOMWithGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rOMWoGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpRawLevelToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PnlRightSide = new System.Windows.Forms.Panel();
+            this.PrvProject = new Daiz.NES.Reuben.ProjectView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnShowHide = new System.Windows.Forms.Button();
-            this.PrvProject = new Daiz.NES.Reuben.ProjectView();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.PnlRightSide.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -193,6 +193,7 @@
             this.graphicsToolStripMenuItem.Name = "graphicsToolStripMenuItem";
             this.graphicsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.graphicsToolStripMenuItem.Text = "Graphics";
+            this.graphicsToolStripMenuItem.Click += new System.EventHandler(this.graphicsToolStripMenuItem_Click);
             // 
             // dToolStripMenuItem
             // 
@@ -371,8 +372,8 @@
             // compileROMToolStripMenuItem
             // 
             this.compileROMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rOMWithGraphicsToolStripMenuItem,
-            this.rOMWoGraphicsToolStripMenuItem});
+            this.toolStripMenuItem2,
+            this.rOMWithGraphicsToolStripMenuItem});
             this.compileROMToolStripMenuItem.Name = "compileROMToolStripMenuItem";
             this.compileROMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.compileROMToolStripMenuItem.Text = "Compile";
@@ -380,16 +381,9 @@
             // rOMWithGraphicsToolStripMenuItem
             // 
             this.rOMWithGraphicsToolStripMenuItem.Name = "rOMWithGraphicsToolStripMenuItem";
-            this.rOMWithGraphicsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.rOMWithGraphicsToolStripMenuItem.Text = "ROM w/ Graphics";
+            this.rOMWithGraphicsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rOMWithGraphicsToolStripMenuItem.Text = "Save As...";
             this.rOMWithGraphicsToolStripMenuItem.Click += new System.EventHandler(this.compileROMToolStripMenuItem_Click);
-            // 
-            // rOMWoGraphicsToolStripMenuItem
-            // 
-            this.rOMWoGraphicsToolStripMenuItem.Name = "rOMWoGraphicsToolStripMenuItem";
-            this.rOMWoGraphicsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.rOMWoGraphicsToolStripMenuItem.Text = "ROM w/o Graphics";
-            this.rOMWoGraphicsToolStripMenuItem.Click += new System.EventHandler(this.rOMWoGraphicsToolStripMenuItem_Click);
             // 
             // MnuDebug
             // 
@@ -417,6 +411,14 @@
             this.PnlRightSide.Size = new System.Drawing.Size(325, 432);
             this.PnlRightSide.TabIndex = 3;
             // 
+            // PrvProject
+            // 
+            this.PrvProject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PrvProject.Location = new System.Drawing.Point(0, 31);
+            this.PrvProject.Name = "PrvProject";
+            this.PrvProject.Size = new System.Drawing.Size(325, 401);
+            this.PrvProject.TabIndex = 3;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.BtnShowHide);
@@ -436,13 +438,12 @@
             this.BtnShowHide.UseVisualStyleBackColor = true;
             this.BtnShowHide.Click += new System.EventHandler(this.BtnShowHide_Click);
             // 
-            // PrvProject
+            // toolStripMenuItem2
             // 
-            this.PrvProject.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PrvProject.Location = new System.Drawing.Point(0, 31);
-            this.PrvProject.Name = "PrvProject";
-            this.PrvProject.Size = new System.Drawing.Size(325, 401);
-            this.PrvProject.TabIndex = 3;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Text = "Save to ROM";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // Main
             // 
@@ -503,7 +504,6 @@
         private System.Windows.Forms.ToolStripMenuItem MnuDebug;
         private System.Windows.Forms.ToolStripMenuItem dumpRawLevelToFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rOMWithGraphicsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rOMWoGraphicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blockPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem specialGraphicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -512,6 +512,7 @@
         private System.Windows.Forms.ToolStripMenuItem setPaletteFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paletteFileToolStripMenuItem;
         private ProjectView PrvProject;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
 
 
     }

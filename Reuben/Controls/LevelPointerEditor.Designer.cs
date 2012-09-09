@@ -41,6 +41,8 @@
             this.ChkExitsLevel = new System.Windows.Forms.CheckBox();
             this.LblPointsToWorld = new System.Windows.Forms.Label();
             this.BtnOpenLevel = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.CmbWorldExit = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.NumXExit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumYExit)).BeginInit();
             this.SuspendLayout();
@@ -165,7 +167,7 @@
             // ChkExitsLevel
             // 
             this.ChkExitsLevel.AutoSize = true;
-            this.ChkExitsLevel.Location = new System.Drawing.Point(151, 156);
+            this.ChkExitsLevel.Location = new System.Drawing.Point(69, 155);
             this.ChkExitsLevel.Name = "ChkExitsLevel";
             this.ChkExitsLevel.Size = new System.Drawing.Size(77, 17);
             this.ChkExitsLevel.TabIndex = 35;
@@ -193,10 +195,31 @@
             this.BtnOpenLevel.UseVisualStyleBackColor = true;
             this.BtnOpenLevel.Click += new System.EventHandler(this.BtnOpenLevel_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(32, 179);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 38;
+            this.label2.Text = "World";
+            // 
+            // CmbWorldExit
+            // 
+            this.CmbWorldExit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbWorldExit.FormattingEnabled = true;
+            this.CmbWorldExit.Location = new System.Drawing.Point(69, 176);
+            this.CmbWorldExit.Name = "CmbWorldExit";
+            this.CmbWorldExit.Size = new System.Drawing.Size(159, 21);
+            this.CmbWorldExit.TabIndex = 39;
+            this.CmbWorldExit.SelectedIndexChanged += new System.EventHandler(this.CmbWorldExit_SelectedIndexChanged);
+            // 
             // LevelPointerEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.CmbWorldExit);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.BtnOpenLevel);
             this.Controls.Add(this.LblPointsToWorld);
             this.Controls.Add(this.ChkExitsLevel);
@@ -212,7 +235,7 @@
             this.Controls.Add(this.CmbActions);
             this.Name = "LevelPointerEditor";
             this.Padding = new System.Windows.Forms.Padding(4);
-            this.Size = new System.Drawing.Size(239, 193);
+            this.Size = new System.Drawing.Size(239, 209);
             ((System.ComponentModel.ISupportInitialize)(this.NumXExit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumYExit)).EndInit();
             this.ResumeLayout(false);
@@ -235,5 +258,7 @@
         private System.Windows.Forms.CheckBox ChkExitsLevel;
         private System.Windows.Forms.Label LblPointsToWorld;
         private System.Windows.Forms.Button BtnOpenLevel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox CmbWorldExit;
     }
 }

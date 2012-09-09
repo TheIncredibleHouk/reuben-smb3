@@ -191,8 +191,14 @@ namespace Daiz.NES.Reuben
 
             if (cForm.Confirm("Are you sure you want to apply this definiton to block " + BlsBlocks.SelectedTileIndex.ToHexString() + " in every definition set?"))
             {
+                bool first = true;
                 foreach (BlockDefinition bDef in ProjectController.BlockManager.AllDefinitions)
                 {
+                    if (first)
+                    {
+                        first = false;
+                        continue;
+                    }
                     bDef[BlsBlocks.SelectedTileIndex][0, 0] = BlvCurrent.CurrentBlock[0, 0];
                     bDef[BlsBlocks.SelectedTileIndex][0, 1] = BlvCurrent.CurrentBlock[0, 1];
                     bDef[BlsBlocks.SelectedTileIndex][1, 0] = BlvCurrent.CurrentBlock[1, 0];
