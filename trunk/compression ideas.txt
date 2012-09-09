@@ -46,19 +46,17 @@ Level Header
 CCCC CCCC = Clear level with value;
 GGGG GGGG = Graphics bank;
 PPPP PPPP = Palette Index;
-SSSS TTTT = StartAction, Length;
+SSSS LLLL = StartAction, Length;
 XXXX XXXX = X Position;
 YYYY YYYY = Y Starting position;
 MMMM MMMM = M - music, L = length (up to 0xE);
-TTTT TTTT = Time (times 10, up to 999);
-VYSS LLLL = V-Scroll, Y Extended Y position, Scroll Type, Level type;
-UUUU UUUU = Unused 1;
-UUUU UUUU = Unused 2;
-UUUU UUUU = Unused 3;
+TTTT TTTT = Time (times 10, up to 990);
+NNNN UUSS = N - Number of pointers, S - Scroll Type
+IWWD SSSS = W - weather type, D - Direction, S = Speed
 
 
 Pointer data...
-IIII IIII
+LLLL LLLL = Level
 XXXX XXXX = X Enter
 YYYY YYYY = Y Enter
 XXXX XXXX = X Exit
@@ -70,12 +68,11 @@ Map Header
 GGGG GGGG - Graphics
 PPPP PPPP - Palette index
 MMMM MMMM - Music
-UUUU UUUU - Unused
 
 Map pointer data
 IIII IIII = Level index
 XXXX XXXX = X Enter
-YYYY YYYY = Y Enter`````````
+SYYY YYYY = s = start type, Y Enter
 
 $A0xx-$DFxx
 %CCPP PPPP = CC = command number, PP PPPP = paramter

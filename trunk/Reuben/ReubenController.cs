@@ -16,7 +16,7 @@ namespace Daiz.NES.Reuben
         public static event EventHandler GraphicsReloaded;
         public static event EventHandler<TEventArgs<Level>> LevelReloaded;
         public static event EventHandler<TEventArgs<World>> WorldReloaded;
-        
+
         public static bool CreateNewProject()
         {
             InputForm iForm = new InputForm();
@@ -133,7 +133,7 @@ namespace Daiz.NES.Reuben
             }
             else
             {
-                
+
                 pm.ShowDialog();
             }
         }
@@ -154,7 +154,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     WorldEditor we = (WorldEditor)ActiveEditor;
-                    ge.ShowDialog(we.CurrentWorld.GraphicsBank, we.CurrentWorld.AnimationBank, we.CurrentWorld.Palette);
+                    ge.ShowDialog(0x14, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette);
                 }
             }
             else
@@ -163,7 +163,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public  static void OpenBlockEditor()
+        public static void OpenBlockEditor()
         {
             Map16Editor me = new Map16Editor();
             me.StartPosition = FormStartPosition.CenterParent;
@@ -179,7 +179,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     WorldEditor we = (WorldEditor)ActiveEditor;
-                    me.ShowDialog(we.CurrentWorld.Type, 0, we.CurrentWorld.GraphicsBank, we.CurrentWorld.AnimationBank, we.CurrentWorld.Palette);
+                    me.ShowDialog(we.CurrentWorld.Type, 0, 0x14, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette);
                 }
             }
             else
@@ -264,7 +264,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     WorldEditor we = (WorldEditor)ActiveEditor;
-                    lee.ShowDialog(we.CurrentWorld.Type, we.CurrentWorld.GraphicsBank, we.CurrentWorld.AnimationBank, we.CurrentWorld.Palette, we.CurrentLayout);
+                    lee.ShowDialog(we.CurrentWorld.Type, 0x14, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette, we.CurrentLayout);
                 }
             }
             else
@@ -328,7 +328,7 @@ namespace Daiz.NES.Reuben
             DialogResult result = sfd.ShowDialog();
             if (result == DialogResult.OK)
             {
-                Bitmap image ;
+                Bitmap image;
                 if (ActiveEditor is LevelEditor)
                 {
                     image = ((LevelEditor)ActiveEditor).GetLevelBitmap();
@@ -413,15 +413,30 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public static void CompileRom(bool withGfx)
+        public static void CompileRom(bool useDefaultROM)
         {
             ROMManager romMan = new ROMManager();
 
             SaveFileDialog SFD = new SaveFileDialog();
             SFD.Filter = "NES ROM Images|*.nes";
-            if (SFD.ShowDialog() == DialogResult.OK)
+            if (useDefaultROM && ProjectController.ProjectManager.CurrentProject.ROMFile.Length > 0)
             {
-                romMan.CompileRom(SFD.FileName, withGfx);
+                romMan.CompileRom(ProjectController.ProjectManager.CurrentProject.ROMFile, true);
+                MessageBox.Show("ROM successfully compiled.");
+            }
+            else if (SFD.ShowDialog() == DialogResult.OK)
+            {
+                if (SFD.FileName != ProjectController.ProjectManager.CurrentProject.ROMFile)
+                {
+                    DialogResult dr = DialogResult.None;
+                    dr = MessageBox.Show("Would you like to set this ROM as your project ROM? All compiles will save to this ROM.", "Default ROM", MessageBoxButtons.YesNo);
+
+                    if (dr == DialogResult.Yes)
+                    {
+                        ProjectController.ProjectManager.CurrentProject.ROMFile = SFD.FileName;
+                    }
+                }
+                romMan.CompileRom(SFD.FileName, true);
             }
         }
 

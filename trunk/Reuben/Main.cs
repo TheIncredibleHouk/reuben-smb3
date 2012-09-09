@@ -73,7 +73,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     World w = ((WorldEditor)ActiveMdiChild).CurrentWorld;
-                    ReubenController.OpenBlockEditor(w.Type, 0, w.GraphicsBank, w.AnimationBank, w.Palette);
+                    ReubenController.OpenBlockEditor(w.Type, 0, 0x14, w.GraphicsBank, w.Palette);
                 }
             }
             else
@@ -97,7 +97,7 @@ namespace Daiz.NES.Reuben
 
         public bool ProjectViewVisible
         {
-            get { return PrvProject.Visible;}
+            get { return PrvProject.Visible; }
             set
             {
                 if (value)
@@ -148,7 +148,7 @@ namespace Daiz.NES.Reuben
             cForm.StartPosition = FormStartPosition.CenterParent;
             cForm.Owner = ReubenController.MainWindow;
 
-            if(cForm.Confirm("Resetting the default sprite definitions requires all levels and worlds to be closed."))
+            if (cForm.Confirm("Resetting the default sprite definitions requires all levels and worlds to be closed."))
             {
                 ProjectController.SpriteManager.LoadDefaultSprites();
                 ProjectController.Save();
@@ -162,12 +162,13 @@ namespace Daiz.NES.Reuben
 
         private void compileROMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReubenController.CompileRom(true);
+            ReubenController.CompileRom(false);
         }
 
-        private void rOMWoGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            ReubenController.CompileRom(false);
+            ReubenController.CompileRom(true);
         }
 
         private void blockPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,7 +177,7 @@ namespace Daiz.NES.Reuben
             cForm.StartPosition = FormStartPosition.CenterParent;
             cForm.Owner = ReubenController.MainWindow;
 
-            if(cForm.Confirm("Resetting the default block properties requires all levels and worlds to be closed."))
+            if (cForm.Confirm("Resetting the default block properties requires all levels and worlds to be closed."))
             {
                 ProjectController.SpecialManager.LoadDefaultSpecials();
                 ProjectController.Save();
@@ -189,7 +190,7 @@ namespace Daiz.NES.Reuben
             cForm.StartPosition = FormStartPosition.CenterParent;
             cForm.Owner = ReubenController.MainWindow;
 
-            if(cForm.Confirm("Resetting the special graphics requires all levels and worlds to be closed."))
+            if (cForm.Confirm("Resetting the special graphics requires all levels and worlds to be closed."))
             {
                 ProjectController.SpecialManager.LoadDefaultSpecialGraphics();
                 ProjectController.Save();
@@ -202,7 +203,7 @@ namespace Daiz.NES.Reuben
             cForm.StartPosition = FormStartPosition.CenterParent;
             cForm.Owner = ReubenController.MainWindow;
 
-            if(cForm.Confirm("Resetting the music list requires all levels and worlds to be closed."))
+            if (cForm.Confirm("Resetting the music list requires all levels and worlds to be closed."))
             {
                 ProjectController.MusicManager.LoadDefault();
                 ProjectController.Save();
@@ -215,7 +216,7 @@ namespace Daiz.NES.Reuben
             cForm.StartPosition = FormStartPosition.CenterParent;
             cForm.Owner = ReubenController.MainWindow;
 
-            if(cForm.Confirm("Resetting the all editor definitions requires all levels and worlds to be closed."))
+            if (cForm.Confirm("Resetting the all editor definitions requires all levels and worlds to be closed."))
             {
                 ProjectController.SpriteManager.LoadDefaultSprites();
                 ProjectController.MusicManager.LoadDefault();
@@ -234,6 +235,18 @@ namespace Daiz.NES.Reuben
         {
             ReubenController.DefaulPaletteFile();
         }
+
+        private void graphicsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                ProjectController.GraphicsManager.ImportGraphics(ofd.FileName);
+            }
+
+        }
+
 
     }
 }

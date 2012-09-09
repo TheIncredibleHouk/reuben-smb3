@@ -27,23 +27,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 switch (ProtectionMode)
                 {
                     case RomWriteProtection.LevelData:
-                        canWrite = (index >= 0x40010 && index <= 0xFD00F);
-                        break;
-
-                    case RomWriteProtection.LevelPointers:
-                        canWrite = (index >= 0x18C10 && index <= 0x1900F);
+                        canWrite = (index >= 0x40450 && index <= 0x7C00F);
                         break;
 
                     case RomWriteProtection.PaletteData:
-                        canWrite = (index >= 0x3C010 && index <= 0x3E00F);
+                        canWrite = (index >= 0x3C010 && index <= 0x3c80F);
                         break;
 
                     case RomWriteProtection.TSAData:
-                        canWrite = (index >= 0x3E010 && index <= 0x41C0F);
-                        break;
-
-                    case RomWriteProtection.WorldPointers:
-                        canWrite = (index >= 0x18BD0 && index <= 0x18C0F);
+                        canWrite = (index >= 0x3C810 && index <= 0x4000F);
                         break;
 
                     case RomWriteProtection.AnyData:
@@ -51,7 +43,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         break;
 
                     case RomWriteProtection.GraphicsData:
-                        canWrite = (index >= 0x100010);
+                        canWrite = (index >= 0x80010);
                         break;
 
                     default:
@@ -59,7 +51,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         break;
                 }
 
-                if (!canWrite) throw new ArgumentOutOfRangeException("Cannot write to " + index + " because it is protected with " + ProtectionMode);
+                //if (!canWrite) throw new ArgumentOutOfRangeException("Cannot write to " + index + " because it is protected with " + ProtectionMode);
 
                 data[index] = value;
             }
@@ -80,39 +72,40 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             FileStream fs = new FileStream(Filename, FileMode.Open, FileAccess.Write);
             fs.Write(data, 0, data.Length);
+            fs.Close();
             return true;
         }
 
-        public bool IsPatchedRom
-        {
-            get
-            {
-                return true;
-            }
-        }
+        //public bool IsPatchedRom
+        //{
+        //    get
+        //    {
+        //        return true;
+        //    }
+        //}
 
-        public bool IsClean
-        {
-            get
-            {
-                byte[] guid = new byte[16];
-                for (int i = 0; i < 16; i++)
-                {
-                    guid[i] = data[0xFC000 + i];
-                }
+        //public bool IsClean
+        //{
+        //    get
+        //    {
+        //        byte[] guid = new byte[16];
+        //        for (int i = 0; i < 16; i++)
+        //        {
+        //            guid[i] = data[0xFC000 + i];
+        //        }
 
-                return new Guid(guid) == Guid.Empty;
-            }
-        }
+        //        return new Guid(guid) == Guid.Empty;
+        //    }
+        //}
 
-        public void Sign(Guid projectGuid)
-        {
-            byte[] guidArray = projectGuid.ToByteArray();
-            for (int i = 0; i < 16; i++)
-            {
-                data[0xFC000 + i] = guidArray[i];
-            };
-        }
+        //public void Sign(Guid projectGuid)
+        //{
+        //    byte[] guidArray = projectGuid.ToByteArray();
+        //    for (int i = 0; i < 16; i++)
+        //    {
+        //        data[0xFC000 + i] = guidArray[i];
+        //    };
+        //}
     }
 
     public enum RomWriteProtection

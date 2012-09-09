@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorldEditor));
             this.PnlInfo = new System.Windows.Forms.Panel();
             this.TabLevelInfo = new System.Windows.Forms.TabControl();
@@ -42,19 +43,10 @@
             this.CmbPalettes = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.LblHexGraphics = new System.Windows.Forms.Label();
-            this.tabPageEX2 = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
-            this.LblStartPoint = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabPageEX3 = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.LblSpriteSize = new System.Windows.Forms.Label();
             this.BtnLevelSize = new System.Windows.Forms.Button();
             this.LblLevelSize = new System.Windows.Forms.Label();
-            this.TabCoins = new System.Windows.Forms.TabPage();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblSprite = new System.Windows.Forms.Label();
             this.LblPositition = new System.Windows.Forms.Label();
@@ -89,19 +81,18 @@
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.TsbSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.TsbStartPoint = new System.Windows.Forms.ToolStripButton();
-            this.TsbGrid = new System.Windows.Forms.ToolStripButton();
-            this.TsbPointers = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TlsTileCommands = new System.Windows.Forms.ToolStrip();
             this.TsbCut = new System.Windows.Forms.ToolStripButton();
             this.TsbCopy = new System.Windows.Forms.ToolStripButton();
             this.TsbPaste = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.LevelToolTip = new System.Windows.Forms.ToolTip();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.TsbSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.TsbGrid = new System.Windows.Forms.ToolStripButton();
+            this.TsbPointers = new System.Windows.Forms.ToolStripButton();
+            this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.WldView = new Daiz.NES.Reuben.WorldViewer();
@@ -109,8 +100,6 @@
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPageEX1.SuspendLayout();
-            this.tabPageEX2.SuspendLayout();
-            this.tabPageEX3.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -121,9 +110,9 @@
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.TlsDrawing.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.TlsTileCommands.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.PnlView.SuspendLayout();
             this.PnlLengthControl.SuspendLayout();
             this.SuspendLayout();
@@ -145,11 +134,7 @@
             this.TabLevelInfo.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.TabLevelInfo.Controls.Add(this.tabPage4);
             this.TabLevelInfo.Controls.Add(this.tabPageEX1);
-            this.TabLevelInfo.Controls.Add(this.tabPageEX2);
-            this.TabLevelInfo.Controls.Add(this.tabPageEX3);
             this.TabLevelInfo.Controls.Add(this.tabPage8);
-            this.TabLevelInfo.Controls.Add(this.TabCoins);
-            this.TabLevelInfo.Controls.Add(this.tabPage7);
             this.TabLevelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
             this.TabLevelInfo.Name = "TabLevelInfo";
@@ -283,88 +268,6 @@
             this.LblHexGraphics.Text = "label10";
             this.LblHexGraphics.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // tabPageEX2
-            // 
-            this.tabPageEX2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX2.Controls.Add(this.label13);
-            this.tabPageEX2.Controls.Add(this.LblStartPoint);
-            this.tabPageEX2.Controls.Add(this.button1);
-            this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
-            this.tabPageEX2.Name = "tabPageEX2";
-            this.tabPageEX2.Size = new System.Drawing.Size(561, 67);
-            this.tabPageEX2.TabIndex = 5;
-            this.tabPageEX2.Text = "Position";
-            this.tabPageEX2.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 3);
-            this.label13.Margin = new System.Windows.Forms.Padding(3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 13);
-            this.label13.TabIndex = 41;
-            this.label13.Text = "Start Point";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblStartPoint
-            // 
-            this.LblStartPoint.AutoSize = true;
-            this.LblStartPoint.Location = new System.Drawing.Point(69, 3);
-            this.LblStartPoint.Margin = new System.Windows.Forms.Padding(3);
-            this.LblStartPoint.Name = "LblStartPoint";
-            this.LblStartPoint.Size = new System.Drawing.Size(48, 13);
-            this.LblStartPoint.TabIndex = 40;
-            this.LblStartPoint.Text = "X: 0 Y: 4";
-            this.LblStartPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(8, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 23);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "Set Starting Position";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.BtnStartPoint_Click);
-            // 
-            // tabPageEX3
-            // 
-            this.tabPageEX3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX3.Controls.Add(this.label7);
-            this.tabPageEX3.Controls.Add(this.numericUpDown1);
-            this.tabPageEX3.Location = new System.Drawing.Point(4, 4);
-            this.tabPageEX3.Name = "tabPageEX3";
-            this.tabPageEX3.Size = new System.Drawing.Size(561, 67);
-            this.tabPageEX3.TabIndex = 6;
-            this.tabPageEX3.Text = "Unused";
-            this.tabPageEX3.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 3);
-            this.label7.Margin = new System.Windows.Forms.Padding(3);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 13);
-            this.label7.TabIndex = 36;
-            this.label7.Text = "Unused 1";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Hexadecimal = true;
-            this.numericUpDown1.Location = new System.Drawing.Point(11, 22);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(48, 20);
-            this.numericUpDown1.TabIndex = 35;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // tabPage8
             // 
             this.tabPage8.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -408,28 +311,6 @@
             this.LblLevelSize.Size = new System.Drawing.Size(134, 13);
             this.LblLevelSize.TabIndex = 11;
             this.LblLevelSize.Text = "Level Data Size: Unknown";
-            // 
-            // TabCoins
-            // 
-            this.TabCoins.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.TabCoins.Location = new System.Drawing.Point(4, 4);
-            this.TabCoins.Name = "TabCoins";
-            this.TabCoins.Padding = new System.Windows.Forms.Padding(3);
-            this.TabCoins.Size = new System.Drawing.Size(561, 67);
-            this.TabCoins.TabIndex = 2;
-            this.TabCoins.Text = "Tile Info";
-            this.TabCoins.UseVisualStyleBackColor = true;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPage7.Location = new System.Drawing.Point(4, 4);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(561, 67);
-            this.tabPage7.TabIndex = 1;
-            this.tabPage7.Text = "Special Options";
-            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -697,7 +578,7 @@
             this.TsbOutline,
             this.TsbBucket});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TlsDrawing.Location = new System.Drawing.Point(101, 0);
+            this.TlsDrawing.Location = new System.Drawing.Point(78, 0);
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -825,77 +706,6 @@
             this.tabPage12.Text = "tabPage8";
             this.tabPage12.UseVisualStyleBackColor = true;
             // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TsbSave,
-            this.toolStripSeparator2,
-            this.TsbStartPoint,
-            this.TsbGrid,
-            this.TsbPointers});
-            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(101, 25);
-            this.toolStrip2.TabIndex = 22;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // TsbSave
-            // 
-            this.TsbSave.AutoSize = false;
-            this.TsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbSave.Image = global::Daiz.NES.Reuben.Properties.Resources.saveHS;
-            this.TsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbSave.Name = "TsbSave";
-            this.TsbSave.Size = new System.Drawing.Size(23, 20);
-            this.TsbSave.Text = "Save Changes";
-            this.TsbSave.ToolTipText = "Save Changes\r\n(Ctrl + S)";
-            this.TsbSave.Click += new System.EventHandler(this.TsbSave_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // TsbStartPoint
-            // 
-            this.TsbStartPoint.CheckOnClick = true;
-            this.TsbStartPoint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbStartPoint.Image = global::Daiz.NES.Reuben.Properties.Resources.mario;
-            this.TsbStartPoint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbStartPoint.Name = "TsbStartPoint";
-            this.TsbStartPoint.Size = new System.Drawing.Size(23, 22);
-            this.TsbStartPoint.Text = "Toggle Start Point Display";
-            this.TsbStartPoint.ToolTipText = "Toggle Start Point Display\r\n(Ctrl + F) (Ctrl + R to set start point)";
-            this.TsbStartPoint.CheckStateChanged += new System.EventHandler(this.TsbStartPoint_CheckedChanged);
-            // 
-            // TsbGrid
-            // 
-            this.TsbGrid.CheckOnClick = true;
-            this.TsbGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbGrid.Image = global::Daiz.NES.Reuben.Properties.Resources.grid;
-            this.TsbGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbGrid.Name = "TsbGrid";
-            this.TsbGrid.Size = new System.Drawing.Size(23, 22);
-            this.TsbGrid.Text = "Toggle Grid";
-            this.TsbGrid.ToolTipText = "Toggle Grid\r\n(Ctrl + G)";
-            this.TsbGrid.CheckStateChanged += new System.EventHandler(this.TsbGrid_CheckedChanged);
-            // 
-            // TsbPointers
-            // 
-            this.TsbPointers.CheckOnClick = true;
-            this.TsbPointers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbPointers.Image = global::Daiz.NES.Reuben.Properties.Resources.pointers;
-            this.TsbPointers.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbPointers.Name = "TsbPointers";
-            this.TsbPointers.Size = new System.Drawing.Size(23, 22);
-            this.TsbPointers.Text = "Toggle Pointers";
-            this.TsbPointers.ToolTipText = "Toggle Pointers\r\n(Ctrl + P)";
-            this.TsbPointers.CheckStateChanged += new System.EventHandler(this.TsbPointers_CheckedChanged);
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -916,9 +726,9 @@
             this.TsbCopy,
             this.TsbPaste,
             this.TsbDelete});
-            this.TlsTileCommands.Location = new System.Drawing.Point(218, 0);
+            this.TlsTileCommands.Location = new System.Drawing.Point(195, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(275, 25);
+            this.TlsTileCommands.Size = new System.Drawing.Size(298, 25);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -966,6 +776,64 @@
             this.TsbDelete.ToolTipText = "Delete\r\n(Delete)";
             this.TsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TsbSave,
+            this.toolStripSeparator2,
+            this.TsbGrid,
+            this.TsbPointers});
+            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip2.Size = new System.Drawing.Size(78, 25);
+            this.toolStrip2.TabIndex = 22;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // TsbSave
+            // 
+            this.TsbSave.AutoSize = false;
+            this.TsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbSave.Image = global::Daiz.NES.Reuben.Properties.Resources.saveHS;
+            this.TsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbSave.Name = "TsbSave";
+            this.TsbSave.Size = new System.Drawing.Size(23, 20);
+            this.TsbSave.Text = "Save Changes";
+            this.TsbSave.ToolTipText = "Save Changes\r\n(Ctrl + S)";
+            this.TsbSave.Click += new System.EventHandler(this.TsbSave_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // TsbGrid
+            // 
+            this.TsbGrid.CheckOnClick = true;
+            this.TsbGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbGrid.Image = global::Daiz.NES.Reuben.Properties.Resources.grid;
+            this.TsbGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbGrid.Name = "TsbGrid";
+            this.TsbGrid.Size = new System.Drawing.Size(23, 22);
+            this.TsbGrid.Text = "Toggle Grid";
+            this.TsbGrid.ToolTipText = "Toggle Grid\r\n(Ctrl + G)";
+            this.TsbGrid.CheckStateChanged += new System.EventHandler(this.TsbGrid_CheckedChanged);
+            // 
+            // TsbPointers
+            // 
+            this.TsbPointers.CheckOnClick = true;
+            this.TsbPointers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbPointers.Image = global::Daiz.NES.Reuben.Properties.Resources.pointers;
+            this.TsbPointers.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbPointers.Name = "TsbPointers";
+            this.TsbPointers.Size = new System.Drawing.Size(23, 22);
+            this.TsbPointers.Text = "Toggle Pointers";
+            this.TsbPointers.ToolTipText = "Toggle Pointers\r\n(Ctrl + P)";
+            this.TsbPointers.CheckStateChanged += new System.EventHandler(this.TsbPointers_CheckedChanged);
+            // 
             // PnlView
             // 
             this.PnlView.AutoScroll = true;
@@ -993,7 +861,6 @@
             this.WldView.CurrentTable = null;
             this.WldView.CurrentWorld = null;
             this.WldView.DelayDrawing = false;
-            this.WldView.DisplayStartingPosition = false;
             this.WldView.Location = new System.Drawing.Point(0, -272);
             this.WldView.Name = "WldView";
             this.WldView.SelectionLine = null;
@@ -1029,10 +896,6 @@
             this.tabPage4.PerformLayout();
             this.tabPageEX1.ResumeLayout(false);
             this.tabPageEX1.PerformLayout();
-            this.tabPageEX2.ResumeLayout(false);
-            this.tabPageEX2.PerformLayout();
-            this.tabPageEX3.ResumeLayout(false);
-            this.tabPageEX3.PerformLayout();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1046,12 +909,12 @@
             this.groupBox1.ResumeLayout(false);
             this.TlsDrawing.ResumeLayout(false);
             this.TlsDrawing.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.TlsTileCommands.ResumeLayout(false);
             this.TlsTileCommands.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.PnlView.ResumeLayout(false);
             this.PnlLengthControl.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1089,17 +952,11 @@
         private System.Windows.Forms.Button BtnAddPointer;
         private System.Windows.Forms.GroupBox groupBox1;
         private WorldPointerEditor PntEditor;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton TsbGrid;
-        private System.Windows.Forms.ToolStripButton TsbStartPoint;
-        private System.Windows.Forms.ToolStripButton TsbSave;
         private System.Windows.Forms.Panel panel2;
         private BlockViewer BlvLeft;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Label LblSelectorHover;
         private BlockViewer BlvRight;
         private System.Windows.Forms.ToolTip LevelToolTip;
-        private System.Windows.Forms.ToolStripButton TsbPointers;
         private System.Windows.Forms.ToolStrip TlsTileCommands;
         private System.Windows.Forms.ToolStripButton TsbCut;
         private System.Windows.Forms.ToolStripButton TsbCopy;
@@ -1123,18 +980,14 @@
         private System.Windows.Forms.ComboBox CmbPalettes;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label LblHexGraphics;
-        private System.Windows.Forms.TabPage tabPageEX2;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label LblStartPoint;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tabPageEX3;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.Label LblSpriteSize;
         private System.Windows.Forms.Button BtnLevelSize;
         private System.Windows.Forms.Label LblLevelSize;
-        private System.Windows.Forms.TabPage TabCoins;
-        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton TsbSave;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton TsbGrid;
+        private System.Windows.Forms.ToolStripButton TsbPointers;
     }
 }

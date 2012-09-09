@@ -13,6 +13,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public Guid LevelGuid { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public bool AltLevelEntrance { get; set; }
 
         #region IXmlIO Members
 
@@ -22,7 +23,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             e.SetAttributeValue("levelguid", LevelGuid);
             e.SetAttributeValue("x", X);
             e.SetAttributeValue("y", Y);
-
+            e.SetAttributeValue("altentrance", AltLevelEntrance);
             return e;
         }
 
@@ -31,6 +32,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelGuid = e.Attribute("levelguid").Value.ToGuid();
             X = e.Attribute("x").Value.ToInt();
             Y = e.Attribute("y").Value.ToInt();
+            AltLevelEntrance = e.Attribute("altentrance").Value.ToBoolean();
             return true;
         }
 

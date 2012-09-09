@@ -13,8 +13,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
-        
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />
@@ -35,9 +34,6 @@
         <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B3" palette="0" />
         <block upperleft="2E" upperright="2F" lowerleft="3E" lowerright="3F" appliesto="B4" palette="0" />
         <block upperleft="28" upperright="29" lowerleft="38" lowerright="39" appliesto="B5" palette="0" />
-        <block upperleft="42" upperright="43" lowerleft="52" lowerright="53" appliesto="25" palette="4" />
-        <block upperleft="42" upperright="43" lowerleft="52" lowerright="53" appliesto="26" palette="4" />
-        <block upperleft="42" upperright="43" lowerleft="52" lowerright="53" appliesto="27" palette="4" />
     </specialblocks>
     <specialblocks leveltype="2">
         <block upperleft="04" upperright="05" lowerleft="14" lowerright="15" appliesto="03" palette="0" />
@@ -52,7 +48,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -89,7 +85,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />
@@ -128,7 +124,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -174,7 +170,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -212,7 +208,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -249,7 +245,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />
@@ -298,7 +294,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -334,7 +330,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -378,7 +374,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -425,7 +421,7 @@
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
         <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-        <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+        <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
         
         <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
         <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
@@ -461,7 +457,7 @@
       <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="60" palette="0" />
       <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="61" palette="3" />
       <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="62" palette="0" />
-      <block upperleft="0E" upperright="0F" lowerleft="1E" lowerright="1F" appliesto="64" palette="0" />
+      <block upperleft="E0" upperright="E1" lowerleft="F0" lowerright="F1" appliesto="64" palette="0" />
       <block upperleft="00" upperright="01" lowerleft="10" lowerright="11" appliesto="68" palette="0" />
       <block upperleft="02" upperright="03" lowerleft="12" lowerright="13" appliesto="69" palette="3" />
       <block upperleft="06" upperright="07" lowerleft="16" lowerright="17" appliesto="6A" palette="0" />

@@ -230,15 +230,6 @@ namespace Daiz.NES.Reuben
                             RenderSpecialTileAlpha(_SpecialTable[0xB3], j * 16 + 8, i * 16 + 8, 5, data, 1.0);
                         }
                     }
-
-                    if (_DisplayStartingPosition && j == CurrentWorld.XStart && i == CurrentWorld.YStart)
-                    {
-                        RenderSpecialTileAlpha(_SpecialTable[0xA0], j * 16, i * 16, 4, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB0], j * 16, i * 16 + 8, 4, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xA1], j * 16 + 8, i * 16, 4, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB1], j * 16 + 8, i * 16 + 8, 4, data, 1.0);
-                    }
-                    
                 }
             }
             BackBuffer.UnlockBits(data);
@@ -475,14 +466,6 @@ namespace Daiz.NES.Reuben
                 RenderSpecialTileAlpha(_SpecialTable[0xB3], 8, 8, 5, data, 1.0);
             }
 
-            if (_DisplayStartingPosition && x == CurrentWorld.XStart && y == CurrentWorld.YStart)
-            {
-                RenderSpecialTileAlpha(_SpecialTable[0xA0], 0, 0, 4, data, 1.0);
-                RenderSpecialTileAlpha(_SpecialTable[0xB0], 0, 8, 4, data, 1.0);
-                RenderSpecialTileAlpha(_SpecialTable[0xA1], 8, 0, 4, data, 1.0);
-                RenderSpecialTileAlpha(_SpecialTable[0xB1], 8, 8, 4, data, 1.0);
-            }
-
             BackBuffer.UnlockBits(data);
 
             if(!DelayDrawing)
@@ -677,19 +660,6 @@ namespace Daiz.NES.Reuben
         {
             FullSpriteRender(r);
             Redraw(r);
-        }
-
-        private bool _DisplayStartingPosition;
-        public bool DisplayStartingPosition
-        {
-            get { return _DisplayStartingPosition; }
-            set
-            {
-                _DisplayStartingPosition = value;
-
-                if(CurrentWorld != null)    
-                    UpdateBlock(CurrentWorld.XStart, CurrentWorld.YStart);
-            }
         }
 
         public void Redraw()

@@ -17,8 +17,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public event EventHandler<TEventArgs<TileInformation>> TilesModified;
 
         public Guid Guid { get; set; }
-        public int Type { get;set; }
+        public int Type { get; set; }
         public int ClearValue { get; set; }
+        public int MostCommonTile { get; private set; }
         public int GraphicsBank { get; set; }
         public int AnimationBank { get; set; }
         public int Music { get; set; }
@@ -26,16 +27,21 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Time { get; set; }
         public int XStart { get; set; }
         public int YStart { get; set; }
+        public int XAltStart { get; set; }
+        public int YAltStart { get; set; }
         public int StartAction { get; set; }
         public int ScrollType { get; set; }
-        public byte Unused1 { get; set; }
-        public byte Unused2 { get; set; }
-        public byte Unused3 { get; set; }
+        public bool InvincibleEnemies { get; set; }
+        public int Weather { get; set; }
+        public int WindDirection { get; set; }
+        public int WindSpeed { get; set; }
         public int Palette { get; set; }
         public List<LevelPointer> Pointers { get; private set; }
         public byte[,] LevelData { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
+        public int ChallengeType { get; set; }
+        public int SpecialLevelType { get; set; }
 
         public LevelSettings Settings { get; private set; }
 
@@ -86,17 +92,22 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("time", Time);
             root.SetAttributeValue("xstart", XStart);
             root.SetAttributeValue("ystart", YStart);
-            root.SetAttributeValue("unused1", Unused1);
-            root.SetAttributeValue("unused2", Unused2);
-            root.SetAttributeValue("unused3", Unused3);
+            root.SetAttributeValue("xaltstart", XAltStart);
+            root.SetAttributeValue("yaltstart", YAltStart);
+            root.SetAttributeValue("invincibleenemies", InvincibleEnemies);
+            root.SetAttributeValue("weather", Weather);
+            root.SetAttributeValue("winddirection", WindDirection);
+            root.SetAttributeValue("windspeed", WindSpeed);
             root.SetAttributeValue("palette", Palette);
             root.SetAttributeValue("animationbank", AnimationBank);
             root.SetAttributeValue("startaction", StartAction);
             root.SetAttributeValue("scrolltype", ScrollType);
             root.SetAttributeValue("layout", LevelLayout);
+            root.SetAttributeValue("challengeleveltype", ChallengeType);
+            root.SetAttributeValue("specialleveltype", SpecialLevelType);
 
             StringBuilder sb = new StringBuilder();
-            
+
             bool first = true;
             for (int i = 0; i < Height; i++)
             {
@@ -146,7 +157,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             return Load(ProjectController.LevelDirectory + @"\" + li.LevelGuid + ".lvl");
         }
-        
+
         public bool Load(string filename)
         {
             XDocument xDoc;
@@ -154,7 +165,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             string[] compressData = null;
             SpriteData.Clear();
             Pointers.Clear();
-            
+
             try
             {
                 xDoc = XDocument.Load(filename);
@@ -210,16 +221,28 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         YStart = a.Value.ToInt();
                         break;
 
-                    case "unused1":
-                        Unused1 = (byte)a.Value.ToInt();
+                    case "xaltstart":
+                        XAltStart = a.Value.ToInt();
                         break;
 
-                    case "unused2":
-                        Unused2 = (byte)a.Value.ToInt();
+                    case "yaltstart":
+                        YAltStart = a.Value.ToInt();
                         break;
 
-                    case "unused3":
-                        Unused3 = (byte)a.Value.ToInt();
+                    case "invincibleenemies":
+                        InvincibleEnemies = a.Value.ToBoolean();
+                        break;
+
+                    case "weather":
+                        Weather = a.Value.ToInt();
+                        break;
+
+                    case "winddirection":
+                        WindDirection = a.Value.ToInt();
+                        break;
+
+                    case "windspeed":
+                        WindSpeed = a.Value.ToInt();
                         break;
 
                     case "palette":
@@ -245,20 +268,39 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     case "compresseddata":
                         compressData = a.Value.Split(',');
                         break;
+
+                    case "challengeleveltype":
+                        ChallengeType = a.Value.ToInt();
+                        break;
+
+                    case "specialleveltype":
+                        SpecialLevelType = a.Value.ToInt();
+                        break;
                 }
             }
 
             int xPointer = 0, yPointer = 0;
-            foreach(var c in levelData)
+            int[] tileCount = new int[256];
+            foreach (var c in levelData)
             {
-                LevelData[xPointer, yPointer] = (byte) c.ToInt();
+                LevelData[xPointer, yPointer] = (byte)c.ToInt();
+                tileCount[c.ToInt()]++;
                 xPointer++;
 
-                if(xPointer >= Width)
+                if (xPointer >= Width)
                 {
                     xPointer = 0;
                     yPointer++;
                     if (yPointer > Height) break;
+                }
+            }
+
+            int highestTileCount = -1;
+            for (int i = 0; i < 256; i++)
+            {
+                if (tileCount[i] > highestTileCount)
+                {
+                    MostCommonTile = i;
                 }
             }
 
@@ -328,19 +370,22 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public void SetTile(int x, int y, byte value)
         {
-            int previous = LevelData[x, y];
-            if (LevelData[x, y] == value) return;
-            LevelData[x, y] = value;
-            if (TileChanged != null) TileChanged(this, new TEventArgs<Point>(new Point(x, y)));
-            if (TilesModified != null) TilesModified(this, new TEventArgs<TileInformation>(new TileInformation(previous, value)));
+            if (x < 240 && y < 27)
+            {
+                int previous = LevelData[x, y];
+                if (LevelData[x, y] == value) return;
+                LevelData[x, y] = value;
+                if (TileChanged != null) TileChanged(this, new TEventArgs<Point>(new Point(x, y)));
+                if (TilesModified != null) TilesModified(this, new TEventArgs<TileInformation>(new TileInformation(previous, value)));
+            }
         }
 
         public byte[,] GetData(int X, int Y, int Width, int Height)
         {
             byte[,] data = new byte[Width, Height];
-            for (int i = 0; i < Height; i++)
+            for (int i = 0; i < Height && (i + Y < 27); i++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int j = 0; j < Width && (j + X < 240); j++)
                 {
                     data[j, i] = LevelData[X + j, Y + i];
                 }
@@ -355,9 +400,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 case LevelLayout.Horizontal:
                     return GetCompressedDataHorizontal();
-
-                case LevelLayout.Vertical:
-                    return GetCompressedDataVertical();
             }
 
             return null;
@@ -365,457 +407,301 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public byte[] GetCompressedDataHorizontal()
         {
-            int dataPointer = 0;
-            byte[] outputData = new byte[8000];
-            List<byte> nextChunk = new List<byte>();
-            CompressionCommand currentCommand = CompressionCommand.None;
-            byte parameter = 0;
-            int previousValue = -1;
+            List<byte> returnBytes = new List<byte>();
+            CompressionPoint restoreToPoint = new CompressionPoint();
+            CompressionCommand currentCommand = null;
+            CompressionCommand attemptCommand = null;
+            CompressionCommand useCommand = null;
+
+            ResetPoint();
+
+            while (!currentPoint.EOD)
+            {
+                // we're assuming writeraw, if we find a better command, we'll stop writeraw and use the better command
+                SavePoint();
+                useCommand = null;
+                attemptCommand = TryPattern();
+                if (attemptCommand != null)
+                {
+                    useCommand = attemptCommand;
+                    restoreToPoint = currentPoint;
+                }
+
+
+                RestorePoint();
+                attemptCommand = TryRepeat();
+                if (attemptCommand != null)
+                {
+                    if (useCommand != null)
+                    {
+                        if (useCommand.GetData().Length > attemptCommand.GetData().Length)
+                        {
+                            useCommand = attemptCommand;
+                            restoreToPoint = currentPoint;
+                        }
+                    }
+                    else
+                    {
+                        useCommand = attemptCommand;
+                        restoreToPoint = currentPoint;
+                    }
+                }
+
+                RestorePoint();
+                attemptCommand = TrySkip();
+                if (attemptCommand != null)
+                {
+                    if (useCommand != null)
+                    {
+                        if (useCommand.GetData().Length > attemptCommand.GetData().Length)
+                        {
+                            useCommand = attemptCommand;
+                            restoreToPoint = currentPoint;
+                        }
+                    }
+                    else
+                    {
+                        useCommand = attemptCommand;
+                        restoreToPoint = currentPoint;
+                    }
+                }
+
+                if (useCommand != null)
+                {
+                    if (currentCommand != null)
+                    {
+                        returnBytes.AddRange(currentCommand.GetData());
+                        currentCommand = null;
+                    }
+
+                    returnBytes.AddRange(useCommand.GetData());
+                    currentPoint = restoreToPoint;
+                    continue;
+                }
+
+                // made it here, we need to write raw
+                RestorePoint();
+                if (currentCommand == null)
+                {
+                    currentCommand = new CompressionCommand();
+                    currentCommand.CommandType = CompressionCommandType.WriteRaw;
+                }
+
+                currentCommand.Data.Add(NextByte());
+                SavePoint();
+
+                if (currentCommand.Data.Count == 0x40)
+                {
+                    returnBytes.AddRange(currentCommand.GetData());
+                    currentCommand = null;
+                    SavePoint();
+                }
+            }
+
+            return returnBytes.ToArray();
+        }
+
+        private CompressionCommand TrySkip()
+        {
+            byte repeatTile;
             int repeatCount = 0;
-            int clearCount = 0;
-            int x;
-            int breakAt = Length - 1;
-            for (int i = 0; i < Length; i++)
+            repeatTile = (byte)MostCommonTile;
+            while (repeatTile == NextByte() && repeatCount < 0x40)
             {
-                for (int j = 0; j < 27; j++)
+                repeatCount++;
+            }
+
+            // no well repeatable tiles, return null
+            if (repeatCount < 2)
+            {
+                return null;
+            }
+
+            CompressionCommand c = new CompressionCommand();
+            c.CommandType = CompressionCommandType.SkipTile;
+            c.RepeatTimes = repeatCount;
+            PreviousByte();
+            return c;
+
+        }
+
+        private CompressionCommand TryRepeat()
+        {
+            byte repeatTile;
+            int repeatCount = 1;
+            repeatTile = NextByte();
+            while (repeatTile == NextByte() && repeatCount < 0x40)
+            {
+                repeatCount++;
+            }
+
+            // no well repeatable tiles, return null
+            if (repeatCount == 1)
+            {
+                return null;
+            }
+
+            CompressionCommand c = new CompressionCommand();
+            c.Data.Add(repeatTile);
+            c.CommandType = CompressionCommandType.RepeatTile;
+            c.RepeatTimes = repeatCount;
+            PreviousByte();
+            return c;
+        }
+
+        // the most complicated of the commands, we test to see if any patterns exist. if no patterns exist within 16 tiles, we return null
+        private CompressionCommand TryPattern()
+        {
+            byte[] patternChunk = null;
+            byte[] smallestChunk = null;
+            bool hasMatch = false;
+            CompressionCommand command = new CompressionCommand();
+            CompressionPoint localPoint = currentPoint;
+            command.CommandType = CompressionCommandType.RepeatPattern;
+
+            // basically, try patterns up to 16 in size. We want the smallest pattern that can be repeated
+            // we breakt at 1 as a pattern of 1 is a RepeatTile command
+            for (int i = 16; !currentPoint.EOD && i > 1; i--)
+            {
+                patternChunk = new byte[i];
+
+                // reset pointer before getting next pattern
+                RestorePoint();
+
+                // get pattern
+                for (int j = 0; !currentPoint.EOD && j < i; j++)
                 {
-                    x = i * 16;
+                    patternChunk[j] = NextByte();
+                }
 
-                    for (int k = 0; k < 16; k++)
+                if (currentPoint.EOD)
+                {
+                    continue;
+                }
+
+                // assume there is a match, if no match, set false and break
+                hasMatch = true;
+                for (int k = 0; !currentPoint.EOD && k < i; k++)
+                {
+                    if (patternChunk[k] != NextByte())
                     {
-                        byte currentByte = LevelData[x + k, j];
-
-                        switch (currentCommand)
-                        {
-                            case CompressionCommand.None:
-                                nextChunk.Clear();
-                                if (currentByte == ClearValue)
-                                {
-                                    currentCommand = CompressionCommand.Skip;
-                                    nextChunk.Add(currentByte);
-                                    parameter = 1;
-                                }
-
-                                else
-                                {
-                                    currentCommand = CompressionCommand.Write;
-                                    nextChunk.Add(currentByte);
-                                    parameter = 1;
-                                    repeatCount = 0;
-                                }
-                                break;
-
-                            case CompressionCommand.Skip:
-                                if (currentByte == ClearValue && parameter < 0x3F)
-                                {
-                                    nextChunk.Add(currentByte);
-                                    parameter++;
-                                }
-                                else
-                                {
-                                    outputData[dataPointer++] = (byte)(0 | parameter);
-                                    currentCommand = CompressionCommand.None;
-                                    k--;
-                                }
-                                break;
-
-                            case CompressionCommand.Write:
-                                if (currentByte == previousValue && currentByte != ClearValue)
-                                {
-                                    repeatCount++;
-                                    clearCount = 0;
-
-                                    if (parameter == 1)
-                                    {
-                                        currentCommand = CompressionCommand.Repeat;
-                                        parameter++;
-                                    }
-
-                                    else if (repeatCount < 2)
-                                    {
-                                        parameter++;
-                                        nextChunk.Add(currentByte);
-                                    }
-                                    else
-                                    {
-                                        nextChunk.RemoveAt(nextChunk.Count - 1);
-                                        nextChunk.RemoveAt(nextChunk.Count - 1);
-
-                                        outputData[dataPointer++] = (byte)(64 | nextChunk.Count);
-                                        for (int l = 0; l < nextChunk.Count; l++)
-                                        {
-                                            outputData[dataPointer++] = nextChunk[l];
-                                        }
-
-                                        currentCommand = CompressionCommand.Repeat;
-                                        parameter = 3;
-                                        repeatCount = 0;
-                                    }
-                                }
-                                else if (currentByte == ClearValue || parameter == 0x3F)
-                                {
-                                    if (clearCount == 1 || parameter == 0x3F)
-                                    {
-                                        if (clearCount == 1)
-                                        {
-                                            nextChunk.RemoveAt(nextChunk.Count - 1);
-                                        }
-
-                                        outputData[dataPointer++] = (byte)(64 | nextChunk.Count);
-                                        for (int l = 0; l < nextChunk.Count; l++)
-                                        {
-                                            outputData[dataPointer++] = nextChunk[l];
-                                        }
-
-                                        currentCommand = CompressionCommand.None;
-                                        if (clearCount == 1)
-                                        {
-                                            k--;
-                                        }
-
-                                        k--;
-
-                                        clearCount = 0;
-                                    }
-                                    else
-                                    {
-                                        clearCount++;
-                                        nextChunk.Add(currentByte);
-                                        parameter++;
-                                        repeatCount = 0;
-                                    }
-
-                                }
-                                else
-                                {
-                                    nextChunk.Add(currentByte);
-                                    parameter++;
-                                    repeatCount = 0;
-                                    clearCount = 0;
-                                }
-                                break;
-
-                            case CompressionCommand.Repeat:
-                                if (currentByte == previousValue && parameter < 0x3F)
-                                {
-                                    parameter++;
-                                }
-                                else
-                                {
-                                    outputData[dataPointer++] = (byte)(128 | parameter);
-                                    outputData[dataPointer++] = (byte)previousValue;
-                                    currentCommand = CompressionCommand.None;
-                                    k--;
-                                }
-                                break;
-                        }
-
-                        if (k < 0)
-                        {
-                            k += 0x10;
-                            j--;
-                        }
-
-                        if (j < 0)
-                        {
-                            j += 27;
-                            i--;
-                        }
-
-                        previousValue = currentByte;
+                        hasMatch = false;
+                        break;
                     }
+                }
+
+                if (hasMatch)
+                {
+                    // we have a match, set as smallest matchableChunk
+                    smallestChunk = patternChunk;
                 }
             }
 
-            switch (currentCommand)
+            // no smallestChunk then there was no discernable pattern
+            if (smallestChunk == null)
             {
-                case CompressionCommand.Skip:
-                    outputData[dataPointer++] = (byte)(0 | parameter);
-                    break;
-
-                case CompressionCommand.Repeat:
-                    outputData[dataPointer++] = (byte)(128 | parameter);
-                    outputData[dataPointer++] = (byte)previousValue;
-                    break;
-
-                case CompressionCommand.Write:
-                    outputData[dataPointer++] = (byte)(64 | nextChunk.Count);
-                    for (int l = 0; l < nextChunk.Count; l++)
-                    {
-                        outputData[dataPointer++] = nextChunk[l];
-                    }
-                    break;
+                return null;
             }
 
-            byte[] returnData = new byte[dataPointer];
-
-            for (int i = 0; i < dataPointer; i++)
-            {
-                returnData[i] = outputData[i];
-            }
-
-            return returnData;
-        }
-
-        public byte[] GetCompressedDataVertical()
-        {
-            int dataPointer = 0;
-            byte[] outputData = new byte[5000];
-            List<byte> nextChunk = new List<byte>();
-            CompressionCommand currentCommand = CompressionCommand.None;
-            byte parameter = 0;
-            int previousValue = -1;
+            // ok so we DO have a smallest chunk, let's get the number of times this repeats
             int repeatCount = 0;
-            int clearCount = 0;
-            int y;
-            for (int i = 0; i < this.Length; i++)
+            RestorePoint();
+
+            // for a pattern repeat to exist we have to repeat at least twice, so 0x00 = 2 repeats, 0x03 = 6 repeats
+            bool noRepeat = false;
+            while (repeatCount < 0x40 && !noRepeat)
             {
-                for (int j = 0; j < 15; j++)
+                localPoint = currentPoint;
+                for (int i = 0; i < smallestChunk.Length; i++)
                 {
-                    y = i * 15;
-
-                    for (int k = 0; k < 16; k++)
+                    if (smallestChunk[i] != NextByte())
                     {
-                        byte currentByte = LevelData[k, y + j];
+                        noRepeat = true;
 
-                        switch (currentCommand)
-                        {
-                            case CompressionCommand.None:
-                                nextChunk.Clear();
-                                if (currentByte == ClearValue)
-                                {
-                                    currentCommand = CompressionCommand.Skip;
-                                    nextChunk.Add(currentByte);
-                                    parameter = 1;
-                                }
+                        break;
+                    }
+                }
 
-                                else
-                                {
-                                    currentCommand = CompressionCommand.Write;
-                                    nextChunk.Add(currentByte);
-                                    parameter = 1;
-                                    repeatCount = 0;
-                                }
-                                break;
+                if (!noRepeat)
+                {
+                    // we made it here, so one pattern was found, yay!
+                    repeatCount++;
+                    localPoint = currentPoint;
+                }
+            }
 
-                            case CompressionCommand.Skip:
-                                if (currentByte == ClearValue && parameter < 0x3F)
-                                {
-                                    nextChunk.Add(currentByte);
-                                    parameter++;
-                                }
-                                else
-                                {
-                                    outputData[dataPointer++] = (byte)(0 | parameter);
-                                    currentCommand = CompressionCommand.None;
-                                    k--;
-                                }
-                                break;
+            // return pointer back to the point that we tried last match
+            currentPoint = localPoint;
+            command.Data.AddRange(smallestChunk);
+            command.RepeatTimes = repeatCount;
+            return command;
+        }
 
-                            case CompressionCommand.Write:
-                                if (currentByte == previousValue && currentByte != ClearValue)
-                                {
-                                    repeatCount++;
-                                    clearCount = 0;
+        private static CompressionPoint currentPoint, savedPoint;
 
-                                    if (parameter == 1)
-                                    {
-                                        currentCommand = CompressionCommand.Repeat;
-                                        parameter++;
-                                    }
+        private void ResetPoint()
+        {
+            currentPoint = new CompressionPoint();
+        }
 
-                                    else if (repeatCount < 2)
-                                    {
-                                        parameter++;
-                                        nextChunk.Add(currentByte);
-                                    }
-                                    else
-                                    {
-                                        nextChunk.RemoveAt(nextChunk.Count - 1);
-                                        nextChunk.RemoveAt(nextChunk.Count - 1);
-
-                                        outputData[dataPointer++] = (byte)(64 | nextChunk.Count);
-                                        for (int l = 0; l < nextChunk.Count; l++)
-                                        {
-                                            outputData[dataPointer++] = nextChunk[l];
-                                        }
-
-                                        currentCommand = CompressionCommand.Repeat;
-                                        parameter = 3;
-                                        repeatCount = 0;
-                                    }
-                                }
-                                else if (currentByte == ClearValue || parameter == 0x3F)
-                                {
-                                    if (clearCount == 1 || parameter == 0x3F)
-                                    {
-                                        if (clearCount == 1)
-                                        {
-                                            nextChunk.RemoveAt(nextChunk.Count - 1);
-                                        }
-
-                                        outputData[dataPointer++] = (byte)(64 | nextChunk.Count);
-                                        for (int l = 0; l < nextChunk.Count; l++)
-                                        {
-                                            outputData[dataPointer++] = nextChunk[l];
-                                        }
-
-                                        currentCommand = CompressionCommand.None;
-                                        if (clearCount == 1)
-                                        {
-                                            k--;
-                                        }
-
-                                        k--;
-                                        clearCount = 0;
-                                    }
-                                    else
-                                    {
-                                        clearCount++;
-                                        nextChunk.Add(currentByte);
-                                        parameter++;
-                                        repeatCount = 0;
-                                    }
-
-                                }
-                                else
-                                {
-                                    nextChunk.Add(currentByte);
-                                    parameter++;
-                                    repeatCount = 0;
-                                    clearCount = 0;
-                                }
-                                break;
-
-                            case CompressionCommand.Repeat:
-                                if (currentByte == previousValue && parameter < 0x3F)
-                                {
-                                    parameter++;
-                                }
-                                else
-                                {
-                                    outputData[dataPointer++] = (byte)(128 | parameter);
-                                    outputData[dataPointer++] = (byte)previousValue;
-                                    currentCommand = CompressionCommand.None;
-                                    k--;
-                                }
-                                break;
-                        }
-
-                        if (k < 0)
-                        {
-                            k += 0x10;
-                            j--;
-                        }
-
-                        if (j < 0)
-                        {
-                            j += 27;
-                            i--;
-                        }
+        private void SavePoint()
+        {
+            savedPoint = currentPoint;
+        }
 
 
-                        previousValue = currentByte;
+        private void RestorePoint()
+        {
+            currentPoint = savedPoint;
+        }
+
+        private byte NextByte()
+        {
+            if (currentPoint.EOD)
+            {
+                return 0xFF;
+            }
+
+            byte data = LevelData[currentPoint.XPointer + (currentPoint.PagePointer * 0x10), currentPoint.YPointer];
+            currentPoint.XPointer++;
+            if (currentPoint.XPointer >= 0x10)
+            {
+                currentPoint.XPointer = 0;
+                currentPoint.YPointer++;
+                if (currentPoint.YPointer >= 27)
+                {
+                    currentPoint.YPointer = 0;
+                    currentPoint.PagePointer++;
+                    if (currentPoint.PagePointer >= Length)
+                    {
+                        currentPoint.EOD = true;
                     }
                 }
             }
 
-            switch (currentCommand)
-            {
-                case CompressionCommand.Skip:
-                    outputData[dataPointer++] = (byte)(0 | parameter);
-                    break;
-
-                case CompressionCommand.Repeat:
-                    outputData[dataPointer++] = (byte)(128 | parameter);
-                    outputData[dataPointer++] = (byte)previousValue;
-                    break;
-
-                case CompressionCommand.Write:
-                    outputData[dataPointer++] = (byte)(64 | parameter);
-                    for (int l = 0; l < parameter; l++)
-                    {
-                        outputData[dataPointer++] = nextChunk[l];
-                    }
-                    break;
-            }
-
-            byte[] returnData = new byte[dataPointer];
-
-            for (int i = 0; i < dataPointer; i++)
-            {
-                returnData[i] = outputData[i];
-            }
-
-            return returnData;
+            return data;
         }
 
-        public bool WhiteMushroomAppearance
+        private void PreviousByte()
         {
-            get
+            currentPoint.XPointer--;
+            if (currentPoint.XPointer < 0)
             {
-                if(SpriteData.Count > 0)
-                    return SpriteData[0].InGameID == 0xD4;
-
-                return false;
-            }
-
-            set
-            {
-                if (!value)
+                currentPoint.XPointer = 0x0F;
+                currentPoint.YPointer--;
+                if (currentPoint.YPointer < 0)
                 {
-                    if (WhiteMushroomAppearance)
-                        SpriteData.RemoveAt(0);
-                }
-                else
-                {
-                    if (!WhiteMushroomAppearance)
-                        SpriteData.Insert(0, new Sprite() { InGameID = 0xD4, X = 0, Y = 0, IsViewable = false });
+                    currentPoint.YPointer = 26;
+                    currentPoint.PagePointer--;
                 }
             }
         }
-
-        public int WhiteMushroomAppearanceCoins
-        {
-            get
-            {
-                if (WhiteMushroomAppearance)
-                {
-                    return SpriteData[0].Y;
-                }
-
-                return 0;
-            }
-
-            set
-            {
-                if (WhiteMushroomAppearance)
-                {
-                    SpriteData[0].Y = value;
-                }
-            }
-        }
-    }
-
-    public enum CompressionCommand
-    {
-        None = 5,
-        Skip = 0,
-        SkipRow = 1,
-        Write = 2,
-        Repeat = 3
     }
 
     public enum LevelLayout
     {
         Horizontal,
         Vertical
-    }
-
-    public enum AddressMode
-    {
-        Relative,
-        Absolute
     }
 
     public struct TileInformation

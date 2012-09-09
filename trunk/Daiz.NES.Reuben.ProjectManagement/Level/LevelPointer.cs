@@ -17,7 +17,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int XExit { get; set; }
         public int YExit { get; set; }
         public bool ExitsLevel { get; set; }
-    
+        public int World { get; set; }
+
         #region IXmlIO Members
 
         public XElement CreateElement()
@@ -30,7 +31,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             e.SetAttributeValue("xenter", XEnter);
             e.SetAttributeValue("yenter", YEnter);
             e.SetAttributeValue("exitslevel", ExitsLevel);
-
+            e.SetAttributeValue("world", World);
             return e;
         }
 
@@ -66,6 +67,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "exitslevel":
                         ExitsLevel = a.Value.ToBoolean();
+                        break;
+
+                    case "world":
+                        World = a.Value.ToInt();
                         break;
                 }
             }

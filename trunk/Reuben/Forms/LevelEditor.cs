@@ -43,7 +43,7 @@ namespace Daiz.NES.Reuben
 
             foreach (var t in ProjectController.LevelManager.LevelTypes)
             {
-                if(t.InGameID != 0)
+                if (t.InGameID != 0)
                     CmbTypes.Items.Add(t);
             }
 
@@ -163,13 +163,19 @@ namespace Daiz.NES.Reuben
         public void EditLevel(Level l)
         {
             GetLevelInfo(l);
-
+            CmbWeather.SelectedIndex = l.Weather;
+            CmbWindSpeed.SelectedIndex = l.WindSpeed;
+            CmbWindDirection.SelectedIndex = l.WindDirection;
+            LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
+            LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
             TsbTileSpecials.Checked = CurrentLevel.Settings.SpecialTiles;
             TsbSriteSpecials.Checked = CurrentLevel.Settings.SpecialSprites;
             TsbProperties.Checked = CurrentLevel.Settings.BlockProperties;
             TsbStartPoint.Checked = CurrentLevel.Settings.ShowStart;
             TsbZoom.Checked = CurrentLevel.Settings.Zoom;
+            CmbChallengeType.SelectedIndex = CurrentLevel.ChallengeType;
+            CmbSpecialType.SelectedIndex = CurrentLevel.SpecialLevelType;
 
             switch (CurrentLevel.Settings.DrawMode)
             {
@@ -221,8 +227,6 @@ namespace Daiz.NES.Reuben
             PnlHorizontalGuide.GuideColor = CurrentLevel.Settings.HGuideColor;
             PnlVerticalGuide.GuideColor = CurrentLevel.Settings.VGuideColor;
             TsbPointers.Checked = CurrentLevel.Settings.ShowPointers;
-            ChkWhiteMushroom.Checked = CurrentLevel.WhiteMushroomAppearance;
-            NumWMCoins.Value = CurrentLevel.WhiteMushroomAppearanceCoins;
 
             this.Text = ProjectController.LevelManager.GetLevelInfo(l.Guid).Name;
             this.WindowState = FormWindowState.Maximized;
@@ -240,6 +244,11 @@ namespace Daiz.NES.Reuben
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank]);
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank + 1]);
             CmbGraphics.SelectedIndex = l.GraphicsBank;
+            if (CmbPalettes.Items.Count < l.Palette)
+            {
+                l.Palette = CmbPalettes.Items.Count - 1;
+            }
+
             CmbPalettes.SelectedIndex = l.Palette;
             CmbTypes.SelectedIndex = l.Type - 1;
             CmbActions.SelectedIndex = l.StartAction;
@@ -601,8 +610,24 @@ namespace Daiz.NES.Reuben
                 _SelectingStartPositionMode = false;
                 PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
                 SetHelpText(PreviousHelperText);
+                LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             }
-
+            else if (_SelectingAltStartPositionMode)
+            {
+                int oldX = CurrentLevel.XAltStart;
+                int oldY = CurrentLevel.YAltStart;
+                CurrentLevel.XAltStart = x;
+                CurrentLevel.YAltStart = y;
+                if (TsbStartPoint.Checked)
+                {
+                    LvlView.UpdatePoint(x, y);
+                    LvlView.UpdatePoint(oldX, oldY);
+                }
+                _SelectingAltStartPositionMode = false;
+                PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
+                SetHelpText(PreviousHelperText);
+                LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
+            }
             else if (_PlacingPointer)
             {
                 _PlacingPointer = false;
@@ -815,7 +840,7 @@ namespace Daiz.NES.Reuben
             }
             else if (EditMode == EditMode.Tiles)
             {
-                SetTileModeText();   
+                SetTileModeText();
                 LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
 
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
@@ -976,7 +1001,7 @@ namespace Daiz.NES.Reuben
             {
                 _DrawTile = LeftMouseTile;
             }
-            
+
             if (EditMode == EditMode.Tiles)
             {
                 if (TileDrawMode == TileDrawMode.Pencil)
@@ -1276,6 +1301,7 @@ namespace Daiz.NES.Reuben
         }
 
         private bool _SelectingStartPositionMode;
+        private bool _SelectingAltStartPositionMode;
         private void BtnStartPoint_Click(object sender, EventArgs e)
         {
             SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
@@ -1635,6 +1661,12 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Music = CmbMusic.SelectedIndex;
             CurrentLevel.StartAction = CmbActions.SelectedIndex;
             CurrentLevel.ScrollType = CmbScroll.SelectedIndex;
+            CurrentLevel.WindDirection = CmbWindDirection.SelectedIndex;
+            CurrentLevel.Weather = CmbWeather.SelectedIndex;
+            CurrentLevel.WindSpeed = CmbWindSpeed.SelectedIndex;
+            CurrentLevel.InvincibleEnemies = ChkInvincibleEnemies.Checked;
+            CurrentLevel.SpecialLevelType = CmbSpecialType.SelectedIndex;
+            CurrentLevel.ChallengeType = CmbChallengeType.SelectedIndex;
             CurrentLevel.Save();
             MessageBox.Show("Level succesfully saved.");
         }
@@ -1686,14 +1718,22 @@ namespace Daiz.NES.Reuben
         {
             int x = e.X / 16;
             int y = e.Y / 16;
-            int index =(e.X / 16) + ((e.Y / 16) * 16);
-            if(index > 255) return;
+            int index = (e.X / 16) + ((e.Y / 16) * 16);
+            if (index > 255) return;
             if (PreviousSelectorX == x && PreviousSelectorY == y) return;
             PreviousSelectorX = x;
             PreviousSelectorY = y;
             int tile = BlsSelector.BlockLayout.Layout[index];
-            LblSelectorHover.Text = "Block: " + tile.ToHexString();
-            LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, tile) + "\n" + "(" + tile.ToHexString() + ")");
+            if (tile > 0)
+            {
+                LblSelectorHover.Text = "Block: " + tile.ToHexString();
+                LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile) + "\n" + ProjectController.SpecialManager.GetProperty(CurrentLevel.Type, tile) + "\n" + "(" + tile.ToHexString() + ")");
+            }
+            else
+            {
+                LblSelectorHover.Text = "Block: None";
+                LevelToolTip.SetToolTip(BlsSelector, "No block.");
+            }
         }
 
         public int DrawingTile
@@ -1703,7 +1743,7 @@ namespace Daiz.NES.Reuben
                 if (MouseButtons == MouseButtons.Middle)
                     return (int)NumBackground.Value;
 
-                if(TileDrawMode != TileDrawMode.Selection)
+                if (TileDrawMode != TileDrawMode.Selection)
                 {
                     if (MouseButtons == MouseButtons.Left)
                         return LeftMouseTile;
@@ -1781,7 +1821,7 @@ namespace Daiz.NES.Reuben
             {
                 for (int i = 0; i < usedRectangle.Width; i++)
                 {
-                    CurrentLevel.SetTile(usedRectangle.X + i, usedRectangle.Y + j, action.Data[i ,j]);
+                    CurrentLevel.SetTile(usedRectangle.X + i, usedRectangle.Y + j, action.Data[i, j]);
                 }
             }
             LvlView.DelayDrawing = false;
@@ -1826,7 +1866,7 @@ namespace Daiz.NES.Reuben
 
         private void NumSpecials_ValueChanged(object sender, EventArgs e)
         {
-            CurrentLevel.Settings.ItemTransparency = (double) NumSpecials.Value;
+            CurrentLevel.Settings.ItemTransparency = (double)NumSpecials.Value;
             LvlView.FullUpdate();
         }
 
@@ -1911,14 +1951,16 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private void ChkWhiteMushroom_CheckedChanged(object sender, EventArgs e)
+        private void BtnSetAltPoint_Click(object sender, EventArgs e)
         {
-            CurrentLevel.WhiteMushroomAppearance = NumWMCoins.Enabled = ChkWhiteMushroom.Checked;
+            SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
+            _SelectingAltStartPositionMode = true;
+            PnlDrawing.Enabled = TabLevelInfo.Enabled = false;
         }
 
-        private void NumWMCoins_ValueChanged(object sender, EventArgs e)
+        private void CmbSpecialType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrentLevel.WhiteMushroomAppearanceCoins = (int) NumWMCoins.Value;
+            
         }
     }
 }

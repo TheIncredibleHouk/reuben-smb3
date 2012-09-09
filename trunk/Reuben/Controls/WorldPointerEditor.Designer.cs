@@ -34,6 +34,7 @@
             this.BtnOpenLevel = new System.Windows.Forms.Button();
             this.LblXEnter = new System.Windows.Forms.Label();
             this.LblYEnter = new System.Windows.Forms.Label();
+            this.ChkAltEnter = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // LblPointsToLevel
@@ -90,17 +91,29 @@
             // LblYEnter
             // 
             this.LblYEnter.AutoSize = true;
-            this.LblYEnter.Location = new System.Drawing.Point(7, 96);
+            this.LblYEnter.Location = new System.Drawing.Point(9, 96);
             this.LblYEnter.Margin = new System.Windows.Forms.Padding(3);
             this.LblYEnter.Name = "LblYEnter";
             this.LblYEnter.Size = new System.Drawing.Size(34, 13);
             this.LblYEnter.TabIndex = 34;
             this.LblYEnter.Text = "Y Exit";
             // 
+            // ChkAltEnter
+            // 
+            this.ChkAltEnter.AutoSize = true;
+            this.ChkAltEnter.Location = new System.Drawing.Point(12, 109);
+            this.ChkAltEnter.Name = "ChkAltEnter";
+            this.ChkAltEnter.Size = new System.Drawing.Size(159, 17);
+            this.ChkAltEnter.TabIndex = 38;
+            this.ChkAltEnter.Text = "Use alternate level entrance";
+            this.ChkAltEnter.UseVisualStyleBackColor = true;
+            this.ChkAltEnter.CheckedChanged += new System.EventHandler(this.ChkAltEnter_CheckedChanged);
+            // 
             // WorldPointerEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ChkAltEnter);
             this.Controls.Add(this.BtnOpenLevel);
             this.Controls.Add(this.LblPointsToWorld);
             this.Controls.Add(this.LblYEnter);
@@ -109,7 +122,7 @@
             this.Controls.Add(this.LblPointsToLevel);
             this.Name = "WorldPointerEditor";
             this.Padding = new System.Windows.Forms.Padding(4);
-            this.Size = new System.Drawing.Size(239, 124);
+            this.Size = new System.Drawing.Size(239, 133);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,5 +136,6 @@
         private System.Windows.Forms.Button BtnOpenLevel;
         private System.Windows.Forms.Label LblXEnter;
         private System.Windows.Forms.Label LblYEnter;
+        private System.Windows.Forms.CheckBox ChkAltEnter;
     }
 }

@@ -447,6 +447,13 @@ namespace Daiz.NES.Reuben
                             RenderSpecialTileAlpha(_SpecialTable[0xA1], j * 16 + 8, i * 16, 4, data, 1.0);
                             RenderSpecialTileAlpha(_SpecialTable[0xB1], j * 16 + 8, i * 16 + 8, 4, data, 1.0);
                         }
+                        else if (_DisplayStartingPosition && j == CurrentLevel.XAltStart && i == CurrentLevel.YAltStart)
+                        {
+                            RenderSpecialTileAlpha(_SpecialTable[0xA0], j * 16, i * 16, 4, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xB0], j * 16, i * 16 + 8, 4, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xA1], j * 16 + 8, i * 16, 4, data, 1.0);
+                            RenderSpecialTileAlpha(_SpecialTable[0xB1], j * 16 + 8, i * 16 + 8, 4, data, 1.0);
+                        }
                     }
                     
                 }
@@ -888,14 +895,22 @@ namespace Daiz.NES.Reuben
                         RenderSpecialTileAlpha(_SpecialTable[0xA3], 8, 0, 5, data, 1.0);
                         RenderSpecialTileAlpha(_SpecialTable[0xB3], 8, 8, 5, data, 1.0);
                     }
+                }
 
-                    if (_DisplayStartingPosition && x == CurrentLevel.XStart && y == CurrentLevel.YStart)
-                    {
-                        RenderSpecialTileAlpha(_SpecialTable[0xA0], 0, 0, 4, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB0], 0, 8, 4, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xA1], 8, 0, 4, data, 1.0);
-                        RenderSpecialTileAlpha(_SpecialTable[0xB1], 8, 8, 4, data, 1.0);
-                    }
+                if (_DisplayStartingPosition && x == CurrentLevel.XStart && y == CurrentLevel.YStart)
+                {
+                    RenderSpecialTileAlpha(_SpecialTable[0xA0], 0, 0, 4, data, 1.0);
+                    RenderSpecialTileAlpha(_SpecialTable[0xB0], 0, 8, 4, data, 1.0);
+                    RenderSpecialTileAlpha(_SpecialTable[0xA1], 8, 0, 4, data, 1.0);
+                    RenderSpecialTileAlpha(_SpecialTable[0xB1], 8, 8, 4, data, 1.0);
+                }
+
+                if (_DisplayStartingPosition && x == CurrentLevel.XAltStart && y == CurrentLevel.YAltStart)
+                {
+                    RenderSpecialTileAlpha(_SpecialTable[0xA0], 0, 0, 4, data, 1.0);
+                    RenderSpecialTileAlpha(_SpecialTable[0xB0], 0, 8, 4, data, 1.0);
+                    RenderSpecialTileAlpha(_SpecialTable[0xA1], 8, 0, 4, data, 1.0);
+                    RenderSpecialTileAlpha(_SpecialTable[0xB1], 8, 8, 4, data, 1.0);
                 }
             }
 
@@ -1211,8 +1226,11 @@ namespace Daiz.NES.Reuben
             set
             {
                 _DisplayStartingPosition = value;
-                if(CurrentLevel != null)    
+                if (CurrentLevel != null)
+                {
                     UpdateBlock(CurrentLevel.XStart, CurrentLevel.YStart);
+                    UpdateBlock(CurrentLevel.XAltStart, CurrentLevel.YAltStart);
+                }
             }
         }
 
