@@ -69,6 +69,10 @@
             this.CmbWeather = new System.Windows.Forms.ComboBox();
             this.Weather = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.CmbSpecialType = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.CmbChallengeType = new System.Windows.Forms.ComboBox();
             this.ChkInvincibleEnemies = new System.Windows.Forms.CheckBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.LblSpriteSize = new System.Windows.Forms.Label();
@@ -113,6 +117,7 @@
             this.TsbRectangle = new System.Windows.Forms.ToolStripButton();
             this.TsbOutline = new System.Windows.Forms.ToolStripButton();
             this.TsbBucket = new System.Windows.Forms.ToolStripButton();
+            this.TsbReplace = new System.Windows.Forms.ToolStripButton();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage9 = new System.Windows.Forms.TabPage();
@@ -165,10 +170,6 @@
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.CmbChallengeType = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.CmbSpecialType = new System.Windows.Forms.ComboBox();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -698,6 +699,51 @@
             this.tabPage7.Text = "Special Options";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // CmbSpecialType
+            // 
+            this.CmbSpecialType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSpecialType.FormattingEnabled = true;
+            this.CmbSpecialType.Items.AddRange(new object[] {
+            "None",
+            "Hammer Bros. Toll",
+            "Item Shop",
+            "Challenge Level"});
+            this.CmbSpecialType.Location = new System.Drawing.Point(230, 3);
+            this.CmbSpecialType.Name = "CmbSpecialType";
+            this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);
+            this.CmbSpecialType.TabIndex = 4;
+            this.CmbSpecialType.SelectedIndexChanged += new System.EventHandler(this.CmbSpecialType_SelectedIndexChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(126, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Special Level Type";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(143, 33);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Challenge Type";
+            // 
+            // CmbChallengeType
+            // 
+            this.CmbChallengeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbChallengeType.FormattingEnabled = true;
+            this.CmbChallengeType.Items.AddRange(new object[] {
+            "None",
+            "AutoMoveRight"});
+            this.CmbChallengeType.Location = new System.Drawing.Point(230, 30);
+            this.CmbChallengeType.Name = "CmbChallengeType";
+            this.CmbChallengeType.Size = new System.Drawing.Size(121, 21);
+            this.CmbChallengeType.TabIndex = 1;
+            // 
             // ChkInvincibleEnemies
             // 
             this.ChkInvincibleEnemies.AutoSize = true;
@@ -1159,7 +1205,8 @@
             this.TsbLine,
             this.TsbRectangle,
             this.TsbOutline,
-            this.TsbBucket});
+            this.TsbBucket,
+            this.TsbReplace});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TlsDrawing.Location = new System.Drawing.Point(193, 0);
             this.TlsDrawing.Name = "TlsDrawing";
@@ -1228,6 +1275,19 @@
             this.TsbBucket.Text = "toolStripButton1";
             this.TsbBucket.ToolTipText = "Flood Fill";
             this.TsbBucket.Click += new System.EventHandler(this.TsbBucket_Click);
+            // 
+            // TsbReplace
+            // 
+            this.TsbReplace.CheckOnClick = true;
+            this.TsbReplace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbReplace.Image = ((System.Drawing.Image)(resources.GetObject("TsbReplace.Image")));
+            this.TsbReplace.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbReplace.Name = "TsbReplace";
+            this.TsbReplace.Size = new System.Drawing.Size(23, 22);
+            this.TsbReplace.Text = "toolStripButton1";
+            this.TsbReplace.ToolTipText = "Replace Tile";
+            this.TsbReplace.Visible = false;
+            this.TsbReplace.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // tabPage5
             // 
@@ -1741,51 +1801,6 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 342);
             this.PnlVerticalGuide.TabIndex = 29;
             // 
-            // CmbChallengeType
-            // 
-            this.CmbChallengeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbChallengeType.FormattingEnabled = true;
-            this.CmbChallengeType.Items.AddRange(new object[] {
-            "None",
-            "AutoMoveRight"});
-            this.CmbChallengeType.Location = new System.Drawing.Point(230, 30);
-            this.CmbChallengeType.Name = "CmbChallengeType";
-            this.CmbChallengeType.Size = new System.Drawing.Size(121, 21);
-            this.CmbChallengeType.TabIndex = 1;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(143, 33);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Challenge Type";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(126, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 13);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "Special Level Type";
-            // 
-            // CmbSpecialType
-            // 
-            this.CmbSpecialType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbSpecialType.FormattingEnabled = true;
-            this.CmbSpecialType.Items.AddRange(new object[] {
-            "None",
-            "Hammer Bros. Toll",
-            "Item Shop",
-            "Challenge Level"});
-            this.CmbSpecialType.Location = new System.Drawing.Point(230, 3);
-            this.CmbSpecialType.Name = "CmbSpecialType";
-            this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);
-            this.CmbSpecialType.TabIndex = 4;
-            this.CmbSpecialType.SelectedIndexChanged += new System.EventHandler(this.CmbSpecialType_SelectedIndexChanged);
-            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1987,5 +2002,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox CmbChallengeType;
+        private System.Windows.Forms.ToolStripButton TsbReplace;
     }
 }
