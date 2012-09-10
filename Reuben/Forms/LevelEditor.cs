@@ -262,7 +262,7 @@ namespace Daiz.NES.Reuben
             }
             CmbLength.SelectedItem = l.Length;
             PntEditor.CurrentPointer = null;
-            BtnAddPointer.Enabled = CurrentLevel.Pointers.Count <= 4;
+            BtnAddPointer.Enabled = CurrentLevel.Pointers.Count <= 10;
             BtnDeletePointer.Enabled = false;
             CurrentLevel.TilesModified += new EventHandler<TEventArgs<TileInformation>>(CurrentLevel_TilesModified);
             GetCoinTotals();
@@ -642,7 +642,7 @@ namespace Daiz.NES.Reuben
                 LvlView.UpdatePoint(x + 1, y + 1);
                 LvlView.DelayDrawing = false;
                 LvlView.SelectionRectangle = new Rectangle(x, y, 2, 2);
-                BtnAddPointer.Enabled = CurrentLevel.Pointers.Count < 4;
+                BtnAddPointer.Enabled = CurrentLevel.Pointers.Count <= 10;
                 TabEditSelector.Enabled = PnlInfo.Enabled = true;
                 SetHelpText(Reuben.Properties.Resources.PointerHelper);
             }
@@ -1177,7 +1177,7 @@ namespace Daiz.NES.Reuben
             SetHelpText(Reuben.Properties.Resources.TileModeHelper);
             TileDrawMode = TileDrawMode.Pencil;
             TsbPencil.Checked = true;
-            TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
+            TsbReplace.Checked = TsbLine.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbRectangle.Checked = false;
         }
 
         private void TsbRectangle_Click(object sender, EventArgs e)
@@ -1193,7 +1193,7 @@ namespace Daiz.NES.Reuben
             SetHelpText(Reuben.Properties.Resources.OutlineModeHelper);
             TileDrawMode = TileDrawMode.Outline;
             TsbOutline.Checked = true;
-            TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
+            TsbReplace.Checked = TsbLine.Checked = TsbBucket.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
         }
 
         private void TsbBucket_Click(object sender, EventArgs e)
@@ -1201,7 +1201,7 @@ namespace Daiz.NES.Reuben
             SetHelpText(Reuben.Properties.Resources.BucketModeHelper);
             TileDrawMode = TileDrawMode.Fill;
             TsbBucket.Checked = true;
-            TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
+            TsbReplace.Checked = TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
         }
 
         private void TsbLine_Click(object sender, EventArgs e)
@@ -1209,7 +1209,7 @@ namespace Daiz.NES.Reuben
             SetHelpText(Reuben.Properties.Resources.LineModeHelper);
             TileDrawMode = TileDrawMode.Line;
             TsbLine.Checked = true;
-            TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
+            TsbReplace.Checked = TsbReplace.Checked = TsbRectangle.Checked = TsbBucket.Checked = TsbOutline.Checked = TsbPencil.Checked = false;
         }
         #endregion
 
@@ -1960,7 +1960,15 @@ namespace Daiz.NES.Reuben
 
         private void CmbSpecialType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            SetHelpText(Reuben.Properties.Resources.ReplaceTileHelper);
+            TileDrawMode = TileDrawMode.Replace;
+            TsbReplace.Checked = true;
+            TsbBucket.Checked = TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
         }
     }
 }

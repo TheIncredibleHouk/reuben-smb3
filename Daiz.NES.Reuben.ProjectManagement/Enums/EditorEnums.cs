@@ -13,7 +13,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Rectangle,
         Outline,
         Scatter,
-        Selection
+        Selection,
+        Replace
     }
 
     public enum EditMode

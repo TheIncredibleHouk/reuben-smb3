@@ -162,10 +162,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     break;
 
                 case 2:
-                    yStart = l.YStart + 1;
-                    ayStart = l.YAltStart + 1;
+                    yStart = l.YStart;
+                    ayStart = l.YAltStart;
                     break;
-
             }
             Rom[levelAddress++] = (byte)l.MostCommonTile;
             Rom[levelAddress++] = (byte)l.GraphicsBank;
@@ -193,6 +192,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
 
                 int yExit = p.YExit - 1;
+                if (!p.ExitsLevel)
+                {
+                    switch (p.ExitType)
+                    {
+                        default:
+                            yExit = p.YExit;
+                            break;
+
+                        case 1:
+                            yExit = p.YExit - 1;
+                            break;
+                    }
+                }
+
                 Rom[levelAddress++] = (byte)p.XEnter;
                 Rom[levelAddress++] = (byte)p.YEnter;
                 Rom[levelAddress++] = (byte)(((p.XExit & 0x0F) << 4) | ((p.XExit & 0xF0) >> 4));
