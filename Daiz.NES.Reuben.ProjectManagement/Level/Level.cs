@@ -498,6 +498,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
+            if (currentCommand != null)
+            {
+                returnBytes.AddRange(currentCommand.GetData());
+            }
             return returnBytes.ToArray();
         }
 
