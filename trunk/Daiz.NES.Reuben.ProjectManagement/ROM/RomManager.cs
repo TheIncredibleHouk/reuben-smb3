@@ -182,13 +182,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             foreach (var p in l.Pointers)
             {
-                if (!levelIndexTable.ContainsKey(p.LevelGuid))
+                if (p.ExitsLevel)
                 {
-                    Rom[levelAddress++] = 0;
+                    Rom[levelAddress++] = (byte)p.World;
                 }
                 else
                 {
-                    Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
+                    if (!levelIndexTable.ContainsKey(p.LevelGuid))
+                    {
+                        Rom[levelAddress++] = 0;
+                    }
+                    else
+                    {
+                        Rom[levelAddress++] = levelIndexTable[p.LevelGuid];
+                    }
                 }
 
                 int yExit = p.YExit - 1;
@@ -251,6 +258,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             case 0x6E:
                             case 0x6F:
                             case 0x80:
+                            case 0xA5:
                             case 0xA7:
                                 Rom[levelAddress++] = (byte)(s.Y + 1);
                                 break;
