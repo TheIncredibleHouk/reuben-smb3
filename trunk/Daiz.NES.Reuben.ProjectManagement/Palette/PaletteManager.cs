@@ -104,15 +104,23 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public XElement CreateElement()
         {
+            return CreateElement(true);
+        }
+
+        public XElement CreateElement(bool notify)
+        {
             XElement palettes = new XElement("paletteinfo");
             foreach (var p in ProjectController.PaletteManager.Palettes)
             {
                 palettes.Add(p.CreateElement());
             }
 
-            if (PalettesSaved != null)
+            if (notify)
             {
-                PalettesSaved(this, null);
+                if (PalettesSaved != null)
+                {
+                    PalettesSaved(this, null);
+                }
             }
 
             return palettes;

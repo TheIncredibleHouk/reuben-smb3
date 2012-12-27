@@ -121,7 +121,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             ProjectManager.Save(string.Format("{0}{1}{2}.rbn", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
             MusicManager.Save(string.Format("{0}{1}music.xml", RootDirectory, Path.DirectorySeparatorChar));
-            GraphicsManager.SaveGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
             return true;
         }
     }

@@ -260,7 +260,14 @@ namespace Daiz.NES.Reuben
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
-            ProjectController.GraphicsManager.SaveGraphics(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".chr");
+            if (!ProjectController.GraphicsManager.SaveGraphics(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".chr"))
+            {
+                if (MessageBox.Show("The graphics file has been modified by an outside program since loading them in Reuben. Are you sure you want to overwrite them?", "Modification Alert", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    ProjectController.GraphicsManager.SaveGraphics(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".chr", true, true);
+                }
+            }
+
             this.Close();
         }
 

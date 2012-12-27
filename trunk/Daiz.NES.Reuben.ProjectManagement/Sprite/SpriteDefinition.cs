@@ -42,15 +42,29 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 SpriteInfo s = new SpriteInfo();
                 s.LoadFromElement(x);
                 Sprites.Add(s);
-                if (s.X + 8 > MaxRightX) MaxRightX = s.X + 8;
+                if (s.X > MaxRightX) MaxRightX = s.X;
                 if (s.X < MaxLeftX) MaxLeftX = s.X;
-                if (s.Y + 16 > MaxBottomY) MaxBottomY = s.Y + 16;
+                if (s.Y > MaxBottomY) MaxBottomY = s.Y;
                 if (s.Y < MaxTopY) MaxTopY = s.Y;
             }
-            if (MaxLeftX % 8 != 0) MaxLeftX -= 8 - (MaxLeftX % 8);
-            if (MaxRightX % 8 != 0) MaxRightX += 8 - (MaxRightX % 8);
-            if (MaxTopY % 8 != 0) MaxTopY -= 8 - 8 - (MaxTopY % 8);
-            if (MaxBottomY % 8 != 0) MaxBottomY += MaxBottomY % 8;
+            if (MaxLeftX < 0 && MaxLeftX % 16 != 0)
+                MaxLeftX -= 16;
+
+            MaxLeftX = (MaxLeftX / 16) * 16;// -(MaxLeftX % 8);
+
+            if (MaxRightX % 16 != 0)
+                MaxRightX += 16;
+
+            MaxRightX = ((MaxRightX / 16) + 1) * 16;// -(MaxRightX % 8);
+
+            if (MaxTopY < 0 && MaxTopY % 16 != 0)
+                MaxTopY -= 16;
+            MaxTopY = (MaxTopY / 16) * 16;// -8 - (MaxTopY % 8);
+
+            if (MaxBottomY % 16 != 0)
+                MaxBottomY += 16;
+
+            MaxBottomY = ((MaxBottomY / 16) + 1) * 16;// MaxBottomY % 8;
 
             return true;
         }
