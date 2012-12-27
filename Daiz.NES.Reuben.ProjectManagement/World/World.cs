@@ -201,6 +201,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
+            SpriteData.Clear();
+            Pointers.Clear();
             foreach (var x in world.Elements())
             {
                 switch (x.Name.LocalName)

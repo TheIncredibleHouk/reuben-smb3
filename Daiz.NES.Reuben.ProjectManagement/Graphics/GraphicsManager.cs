@@ -13,6 +13,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public List<GraphicsInfo> GraphicsInfo { get; private set; }
         public List<GraphicsBank> GraphicsBanks { get; private set; }
+        private DateTime LastModified;
 
         public GraphicsManager()
         {
@@ -77,7 +78,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             byte[] graphicsData = new byte[0x40000];
 
-            fs.Read(graphicsData, 0, (int) fs.Length);
+            fs.Read(graphicsData, 0, (int)fs.Length);
             fs.Close();
             int dataPointer = 0;
 
@@ -95,6 +96,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 GraphicsBanks.Add(nextBank);
             }
 
+            LastModified = File.GetLastWriteTime(filename);
             return true;
         }
 
@@ -116,7 +118,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
             else
             {
-                length = (int) fs.Length;
+                length = (int)fs.Length;
                 offset = 0;
             }
 
@@ -144,12 +146,23 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 GraphicsUpdated(this, null);
             }
 
-            ProjectController.GraphicsManager.SaveGraphics(ProjectController.RootDirectory + @"\" +  ProjectController.ProjectName + ".chr");
+            LastModified = File.GetLastWriteTime(filename);
+            //ProjectController.GraphicsManager.SaveGraphics(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".chr");
             return true;
         }
 
         public bool SaveGraphics(string filename)
         {
+            return SaveGraphics(filename, true, false);
+        }
+
+        public bool SaveGraphics(string filename, bool notify, bool forced)
+        {
+            if (!forced && LastModified < File.GetLastWriteTime(filename))
+            {
+                return false;
+            }
+
             byte[] Data = new byte[GraphicsBanks.Count * 0x400];
 
             int dataPointer = 0;
@@ -165,10 +178,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
             fs.Write(Data, 0, Data.Length);
             fs.Close();
 
-            if (GraphicsUpdated != null)
+            if (notify)
             {
-                GraphicsUpdated(this, null);
+                if (GraphicsUpdated != null)
+                {
+                    GraphicsUpdated(this, null);
+                }
             }
+
+            LastModified = File.GetLastWriteTime(filename);
             return true;
         }
 

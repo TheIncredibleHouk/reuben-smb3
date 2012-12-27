@@ -92,7 +92,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             foreach (var index in levelAddressTable.Keys)
             {
                 levelDataPointer = levelAddressTable[index];
-                bank = (byte)(levelDataPointer / 0x2000);
+                bank = (byte)((levelDataPointer - 0x10) / 0x2000);
                 address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
                 Rom[0x24010 + (index * 4)] = (byte)bank;
                 Rom[0x24011 + (index * 4)] = (byte)(address & 0x00FF);
@@ -160,7 +160,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     yStart = l.YStart - 1;
                     ayStart = l.YAltStart - 1;
                     break;
-
+                
                 case 2:
                     yStart = l.YStart;
                     ayStart = l.YAltStart;
@@ -208,8 +208,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             break;
 
                         case 1:
+                        case 2:
+                        case 3:
                             yExit = p.YExit - 1;
                             break;
+
+                            
                     }
                 }
 
@@ -261,6 +265,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             case 0xA5:
                             case 0xA7:
                                 Rom[levelAddress++] = (byte)(s.Y + 1);
+                                break;
+
+                            case 0xA3:
+                                Rom[levelAddress++] = (byte)(s.Y - 1);
                                 break;
 
                             default:

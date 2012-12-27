@@ -178,7 +178,7 @@ namespace Daiz.NES.Reuben
                 LblName.Text = ((Project)e.Node.Tag).Name;
                 LblType.Text = "Project";
                 LblGuid.Visible = LblLayout.Visible = LblModified.Visible = LblSize.Visible = false;
-                TrvProjectView.ContextMenuStrip = null;
+                TrvProjectView.ContextMenuStrip = CtxWorlds;
                 TlsEdit.Enabled = false;
             }
         }

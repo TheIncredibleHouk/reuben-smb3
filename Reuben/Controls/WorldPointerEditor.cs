@@ -39,8 +39,16 @@ namespace Daiz.NES.Reuben
                     if (value.LevelGuid != Guid.Empty)
                     {
                         LevelInfo li = ProjectController.LevelManager.GetLevelInfo(value.LevelGuid);
-                        LblPointsToWorld.Text = "World: " + ProjectController.WorldManager.GetWorldInfo(li.WorldGuid).Name;
-                        LblPointsToLevel.Text = "Level: " + li.Name;
+                        if (li != null)
+                        {
+                            LblPointsToWorld.Text = "World: " + ProjectController.WorldManager.GetWorldInfo(li.WorldGuid).Name;
+                            LblPointsToLevel.Text = "Level: " + li.Name;
+                        }
+                        else
+                        {
+                            LblPointsToWorld.Text = "";
+                            LblPointsToLevel.Text = "Level not found.";
+                        }
                     }
                     else
                     {

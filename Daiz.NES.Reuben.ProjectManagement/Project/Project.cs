@@ -40,7 +40,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("guid", Guid);
             x.SetAttributeValue("palettefile", _paletteFile);
             x.SetAttributeValue("romfile", ROMFile);
-            x.Add(ProjectController.PaletteManager.CreateElement());
+            x.Add(ProjectController.PaletteManager.CreateElement(false));
             x.Add(ProjectController.LayoutManager.CreateElement());
             x.Add(ProjectController.WorldManager.CreateElement());
             x.Add(ProjectController.LevelManager.CreateElement());
