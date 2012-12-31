@@ -96,10 +96,7 @@
             this.PnlDrawing = new System.Windows.Forms.Panel();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
@@ -110,7 +107,6 @@
             this.BtnDeletePointer = new System.Windows.Forms.Button();
             this.BtnAddPointer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
             this.TlsDrawing = new System.Windows.Forms.ToolStrip();
             this.TsbPencil = new System.Windows.Forms.ToolStripButton();
             this.TsbLine = new System.Windows.Forms.ToolStripButton();
@@ -140,6 +136,8 @@
             this.TsbCopy = new System.Windows.Forms.ToolStripButton();
             this.TsbPaste = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.hMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -166,10 +164,15 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
-            this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
+            this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
+            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
+            this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
+            this.vMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -1026,15 +1029,6 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
-            // BlvRight
-            // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
-            // 
             // LblSelectorHover
             // 
             this.LblSelectorHover.AutoSize = true;
@@ -1043,35 +1037,6 @@
             this.LblSelectorHover.Size = new System.Drawing.Size(37, 13);
             this.LblSelectorHover.TabIndex = 20;
             this.LblSelectorHover.Text = "Block:";
-            // 
-            // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
-            // 
-            // BlsSelector
-            // 
-            this.BlsSelector.BlockLayout = null;
-            this.BlsSelector.CurrentDefiniton = null;
-            this.BlsSelector.HaltRendering = false;
-            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
-            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.BlsSelector.Name = "BlsSelector";
-            this.BlsSelector.SelectedIndex = 0;
-            this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockProperties = false;
-            this.BlsSelector.ShowSpecialBlocks = false;
-            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
-            this.BlsSelector.SpecialDefnitions = null;
-            this.BlsSelector.SpecialTable = null;
-            this.BlsSelector.TabIndex = 0;
-            this.BlsSelector.Text = "blockSelector1";
-            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
-            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
             // 
             // CmbLayouts
             // 
@@ -1186,15 +1151,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
-            // 
-            // PntEditor
-            // 
-            this.PntEditor.CurrentPointer = null;
-            this.PntEditor.Location = new System.Drawing.Point(6, 19);
-            this.PntEditor.Name = "PntEditor";
-            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
-            this.PntEditor.Size = new System.Drawing.Size(239, 205);
-            this.PntEditor.TabIndex = 0;
             // 
             // TlsDrawing
             // 
@@ -1490,7 +1446,10 @@
             this.TsbCut,
             this.TsbCopy,
             this.TsbPaste,
-            this.TsbDelete});
+            this.TsbDelete,
+            this.toolStripSeparator8,
+            this.hMirrorButton,
+            this.vMirrorButton});
             this.TlsTileCommands.Location = new System.Drawing.Point(310, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
             this.TlsTileCommands.Size = new System.Drawing.Size(183, 25);
@@ -1540,6 +1499,22 @@
             this.TsbDelete.Text = "Delete";
             this.TsbDelete.ToolTipText = "Delete\r\n(Delete)";
             this.TsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // hMirrorButton
+            // 
+            this.hMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hMirrorButton.Enabled = false;
+            this.hMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("hMirrorButton.Image")));
+            this.hMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hMirrorButton.Name = "hMirrorButton";
+            this.hMirrorButton.Size = new System.Drawing.Size(23, 22);
+            this.hMirrorButton.Text = "toolStripButton1";
+            this.hMirrorButton.Click += new System.EventHandler(this.hMirrorButton_Click);
             // 
             // CtxVerticalGuide
             // 
@@ -1722,31 +1697,13 @@
             this.PnlView.AutoScroll = true;
             this.PnlView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.PnlView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PnlView.Controls.Add(this.PnlHorizontalGuide);
             this.PnlView.Controls.Add(this.PnlLengthControl);
-            this.PnlView.Controls.Add(this.PnlVerticalGuide);
             this.PnlView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PnlView.Location = new System.Drawing.Point(281, 27);
+            this.PnlView.Location = new System.Drawing.Point(297, 27);
             this.PnlView.Name = "PnlView";
-            this.PnlView.Size = new System.Drawing.Size(495, 346);
+            this.PnlView.Size = new System.Drawing.Size(479, 330);
             this.PnlView.TabIndex = 0;
             this.PnlView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LvlView_PreviewKeyDown);
-            // 
-            // PnlHorizontalGuide
-            // 
-            this.PnlHorizontalGuide.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.PnlHorizontalGuide.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PnlHorizontalGuide.ContextMenuStrip = this.CtxHorizontalGuide;
-            this.PnlHorizontalGuide.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PnlHorizontalGuide.GuideColor = System.Drawing.Color.Empty;
-            this.PnlHorizontalGuide.GuideOrientation = Daiz.NES.Reuben.Orientation.Horizontal;
-            this.PnlHorizontalGuide.GuideSelected = Daiz.NES.Reuben.GuideType.None;
-            this.PnlHorizontalGuide.GuideSnapMode = Daiz.NES.Reuben.GuideMode.Free;
-            this.PnlHorizontalGuide.Location = new System.Drawing.Point(16, 326);
-            this.PnlHorizontalGuide.Margin = new System.Windows.Forms.Padding(0);
-            this.PnlHorizontalGuide.Name = "PnlHorizontalGuide";
-            this.PnlHorizontalGuide.Size = new System.Drawing.Size(475, 16);
-            this.PnlHorizontalGuide.TabIndex = 27;
             // 
             // PnlLengthControl
             // 
@@ -1763,6 +1720,7 @@
             this.LvlView.CurrentTable = null;
             this.LvlView.DelayDrawing = false;
             this.LvlView.DisplayStartingPosition = false;
+            this.LvlView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LvlView.HorizontalGuide1 = null;
             this.LvlView.HorizontalGuide2 = null;
             this.LvlView.Location = new System.Drawing.Point(0, 0);
@@ -1774,7 +1732,7 @@
             this.LvlView.ShowPointers = false;
             this.LvlView.ShowSpecialBlocks = false;
             this.LvlView.ShowSpecialSprites = false;
-            this.LvlView.Size = new System.Drawing.Size(3577, 270);
+            this.LvlView.Size = new System.Drawing.Size(461, 307);
             this.LvlView.SpecialTable = null;
             this.LvlView.TabIndex = 0;
             this.LvlView.Text = "levelViewer1";
@@ -1784,6 +1742,22 @@
             this.LvlView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LvlView_MouseDown);
             this.LvlView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LvlView_MouseMove);
             this.LvlView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LvlView_MouseUp);
+            // 
+            // PnlHorizontalGuide
+            // 
+            this.PnlHorizontalGuide.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.PnlHorizontalGuide.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PnlHorizontalGuide.ContextMenuStrip = this.CtxHorizontalGuide;
+            this.PnlHorizontalGuide.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PnlHorizontalGuide.GuideColor = System.Drawing.Color.Empty;
+            this.PnlHorizontalGuide.GuideOrientation = Daiz.NES.Reuben.Orientation.Horizontal;
+            this.PnlHorizontalGuide.GuideSelected = Daiz.NES.Reuben.GuideType.None;
+            this.PnlHorizontalGuide.GuideSnapMode = Daiz.NES.Reuben.GuideMode.Free;
+            this.PnlHorizontalGuide.Location = new System.Drawing.Point(297, 357);
+            this.PnlHorizontalGuide.Margin = new System.Windows.Forms.Padding(0);
+            this.PnlHorizontalGuide.Name = "PnlHorizontalGuide";
+            this.PnlHorizontalGuide.Size = new System.Drawing.Size(479, 16);
+            this.PnlHorizontalGuide.TabIndex = 30;
             // 
             // PnlVerticalGuide
             // 
@@ -1795,11 +1769,69 @@
             this.PnlVerticalGuide.GuideOrientation = Daiz.NES.Reuben.Orientation.Vertical;
             this.PnlVerticalGuide.GuideSelected = Daiz.NES.Reuben.GuideType.None;
             this.PnlVerticalGuide.GuideSnapMode = Daiz.NES.Reuben.GuideMode.Free;
-            this.PnlVerticalGuide.Location = new System.Drawing.Point(0, 0);
+            this.PnlVerticalGuide.Location = new System.Drawing.Point(281, 27);
             this.PnlVerticalGuide.Margin = new System.Windows.Forms.Padding(0);
             this.PnlVerticalGuide.Name = "PnlVerticalGuide";
-            this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 342);
-            this.PnlVerticalGuide.TabIndex = 29;
+            this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 346);
+            this.PnlVerticalGuide.TabIndex = 31;
+            // 
+            // BlvRight
+            // 
+            this.BlvRight.CurrentBlock = null;
+            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Name = "BlvRight";
+            this.BlvRight.Size = new System.Drawing.Size(32, 32);
+            this.BlvRight.TabIndex = 21;
+            this.BlvRight.Text = "blockViewer1";
+            // 
+            // BlvLeft
+            // 
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 19;
+            this.BlvLeft.Text = "blockViewer1";
+            // 
+            // BlsSelector
+            // 
+            this.BlsSelector.BlockLayout = null;
+            this.BlsSelector.CurrentDefiniton = null;
+            this.BlsSelector.HaltRendering = false;
+            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
+            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.BlsSelector.Name = "BlsSelector";
+            this.BlsSelector.SelectedIndex = 0;
+            this.BlsSelector.SelectedTileIndex = 0;
+            this.BlsSelector.ShowBlockProperties = false;
+            this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
+            this.BlsSelector.SpecialDefnitions = null;
+            this.BlsSelector.SpecialTable = null;
+            this.BlsSelector.TabIndex = 0;
+            this.BlsSelector.Text = "blockSelector1";
+            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
+            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
+            // 
+            // PntEditor
+            // 
+            this.PntEditor.CurrentPointer = null;
+            this.PntEditor.Location = new System.Drawing.Point(6, 19);
+            this.PntEditor.Name = "PntEditor";
+            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
+            this.PntEditor.Size = new System.Drawing.Size(239, 205);
+            this.PntEditor.TabIndex = 0;
+            // 
+            // vMirrorButton
+            // 
+            this.vMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.vMirrorButton.Enabled = false;
+            this.vMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("vMirrorButton.Image")));
+            this.vMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.vMirrorButton.Name = "vMirrorButton";
+            this.vMirrorButton.Size = new System.Drawing.Size(23, 22);
+            this.vMirrorButton.Text = "toolStripButton1";
+            this.vMirrorButton.Click += new System.EventHandler(this.vMirrorButton_Click);
             // 
             // LevelEditor
             // 
@@ -1807,6 +1839,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 495);
             this.Controls.Add(this.PnlView);
+            this.Controls.Add(this.PnlHorizontalGuide);
+            this.Controls.Add(this.PnlVerticalGuide);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.PnlDrawing);
             this.Controls.Add(this.PnlInfo);
@@ -1924,8 +1958,6 @@
         private System.Windows.Forms.ToolStripMenuItem snapToRunningJumpLengthToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snapToFullMeterJumpLengthToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snapToScreenLengthToolStripMenuItem;
-        private GuidePanel PnlVerticalGuide;
-        private GuidePanel PnlHorizontalGuide;
         private System.Windows.Forms.Label LblSelectorHover;
         private BlockViewer BlvRight;
         private System.Windows.Forms.ToolTip LevelToolTip;
@@ -2003,5 +2035,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox CmbChallengeType;
         private System.Windows.Forms.ToolStripButton TsbReplace;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton hMirrorButton;
+        private GuidePanel PnlHorizontalGuide;
+        private GuidePanel PnlVerticalGuide;
+        private System.Windows.Forms.ToolStripButton vMirrorButton;
     }
 }

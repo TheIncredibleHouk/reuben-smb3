@@ -58,6 +58,7 @@ namespace Daiz.NES.Reuben
                     LblXEnter.Text = "X Entrance: None";
                     LblYEnter.Text = "Y Entrance: None";
                     ChkExitsLevel.Checked = value.ExitsLevel;
+                    BtnChange.Enabled = CmbActions.Enabled = !ChkExitsLevel.Checked;
                     UpdatePosition();
                 }
             }

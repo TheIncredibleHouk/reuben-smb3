@@ -594,6 +594,7 @@ namespace Daiz.NES.Reuben
             int y = (e.Y / 16) / LvlView.Zoom;
             PnlView.Focus();
 
+            vMirrorButton.Enabled = hMirrorButton.Enabled = false;
             if (x < 0 || x >= CurrentLevel.Width || y < 0 || y >= CurrentLevel.Height) return;
 
             if (_SelectingStartPositionMode)
@@ -758,6 +759,7 @@ namespace Daiz.NES.Reuben
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
                     LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
+
                 }
                 else if (CurrentSprite != null && MouseButtons == MouseButtons.Right && CurrentSelectorSprite != null)
                 {
@@ -786,7 +788,6 @@ namespace Daiz.NES.Reuben
                     ContinueDragging = true;
                     LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
                 }
-
                 else
                 {
                     LvlView.ClearSelection();
@@ -880,6 +881,7 @@ namespace Daiz.NES.Reuben
 
 
                             LvlView.SelectionRectangle = new Rectangle(FromX, FromY, (ToX - FromX) + 1, (ToY - FromY) + 1);
+                            vMirrorButton.Enabled = hMirrorButton.Enabled = true;
                             break;
 
                         case TileDrawMode.Line:
@@ -1472,7 +1474,7 @@ namespace Daiz.NES.Reuben
                         break;
 
                     case Keys.V:
-                        Paste(useTransparentTile);
+                        Paste();
                         break;
 
                     case Keys.G:
@@ -1587,8 +1589,9 @@ namespace Daiz.NES.Reuben
             TileBuffer = CurrentLevel.GetData(LvlView.SelectionRectangle.X, LvlView.SelectionRectangle.Y, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height);
         }
 
-        private void Paste(bool transparentTile)
+        private void Paste()
         {
+
             LvlView.DelayDrawing = true;
             Rectangle usedRectangle = LvlView.SelectionRectangle;
 
@@ -1606,7 +1609,6 @@ namespace Daiz.NES.Reuben
             {
                 for (int i = 0; i < usedRectangle.Width; i++)
                 {
-                    if (transparentTile && TileBuffer[i % TileBuffer.GetLength(0), j % TileBuffer.GetLength(1)] == NumBackground.Value) continue;
                     CurrentLevel.SetTile(usedRectangle.X + i, usedRectangle.Y + j, TileBuffer[i % TileBuffer.GetLength(0), j % TileBuffer.GetLength(1)]);
                 }
             }
@@ -1887,7 +1889,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbPaste_Click(object sender, EventArgs e)
         {
-            Paste(true);
+            Paste();
         }
 
         private void TsbDelete_Click(object sender, EventArgs e)
@@ -1970,5 +1972,43 @@ namespace Daiz.NES.Reuben
             TsbReplace.Checked = true;
             TsbBucket.Checked = TsbLine.Checked = TsbOutline.Checked = TsbRectangle.Checked = TsbPencil.Checked = false;
         }
+
+        private void hMirrorButton_Click(object sender, EventArgs e)
+        {
+            byte[,] tempBuffer = CurrentLevel.GetData(LvlView.SelectionRectangle.X, LvlView.SelectionRectangle.Y, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height);
+            int x = tempBuffer.GetLength(0), y = tempBuffer.GetLength(1);
+            byte[,] backUpBuffer = TileBuffer;
+            TileBuffer = new byte[x, y];
+
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    TileBuffer[i, j] = tempBuffer[x - i - 1, j];
+                }
+            }
+
+            Paste();
+            TileBuffer = backUpBuffer;
+        }
+
+        private void vMirrorButton_Click(object sender, EventArgs e)
+        {
+            byte[,] tempBuffer = CurrentLevel.GetData(LvlView.SelectionRectangle.X, LvlView.SelectionRectangle.Y, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height);
+            int x = tempBuffer.GetLength(0), y = tempBuffer.GetLength(1);
+            byte[,] backUpBuffer = TileBuffer;
+            TileBuffer = new byte[x, y];
+
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    TileBuffer[i, j] = tempBuffer[i, y - j - 1];
+                }
+            }
+            Paste();
+            TileBuffer = backUpBuffer;
+        }
+
     }
 }
