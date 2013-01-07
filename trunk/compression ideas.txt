@@ -49,10 +49,11 @@ PPPP PPPP = Palette Index;
 SSSS LLLL = StartAction, Length;
 XXXX XXXX = X Position;
 YYYY YYYY = Y Starting position;
-MMMM MMMM = M - music, L = length (up to 0xE);
+MMMM MMMM = M - music
 TTTT TTTT = Time (times 10, up to 990);
 NNNN UUSS = N - Number of pointers, S - Scroll Type
 IWWD SSSS = W - weather type, D - Direction, S = Speed
+MMMM MMMM = Misc
 
 
 Pointer data...

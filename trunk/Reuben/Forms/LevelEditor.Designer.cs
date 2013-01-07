@@ -138,6 +138,7 @@
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.hMirrorButton = new System.Windows.Forms.ToolStripButton();
+            this.vMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -172,7 +173,12 @@
             this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
             this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
-            this.vMirrorButton = new System.Windows.Forms.ToolStripButton();
+            this.txtMisc1 = new System.Windows.Forms.TextBox();
+            this.txtMisc2 = new System.Windows.Forms.TextBox();
+            this.txtMisc3 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -689,6 +695,12 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage7.Controls.Add(this.label18);
+            this.tabPage7.Controls.Add(this.label17);
+            this.tabPage7.Controls.Add(this.label16);
+            this.tabPage7.Controls.Add(this.txtMisc3);
+            this.tabPage7.Controls.Add(this.txtMisc2);
+            this.tabPage7.Controls.Add(this.txtMisc1);
             this.tabPage7.Controls.Add(this.CmbSpecialType);
             this.tabPage7.Controls.Add(this.label15);
             this.tabPage7.Controls.Add(this.label10);
@@ -1516,6 +1528,17 @@
             this.hMirrorButton.Text = "toolStripButton1";
             this.hMirrorButton.Click += new System.EventHandler(this.hMirrorButton_Click);
             // 
+            // vMirrorButton
+            // 
+            this.vMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.vMirrorButton.Enabled = false;
+            this.vMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("vMirrorButton.Image")));
+            this.vMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.vMirrorButton.Name = "vMirrorButton";
+            this.vMirrorButton.Size = new System.Drawing.Size(23, 22);
+            this.vMirrorButton.Text = "toolStripButton1";
+            this.vMirrorButton.Click += new System.EventHandler(this.vMirrorButton_Click);
+            // 
             // CtxVerticalGuide
             // 
             this.CtxVerticalGuide.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1822,16 +1845,53 @@
             this.PntEditor.Size = new System.Drawing.Size(239, 205);
             this.PntEditor.TabIndex = 0;
             // 
-            // vMirrorButton
+            // txtMisc1
             // 
-            this.vMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.vMirrorButton.Enabled = false;
-            this.vMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("vMirrorButton.Image")));
-            this.vMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.vMirrorButton.Name = "vMirrorButton";
-            this.vMirrorButton.Size = new System.Drawing.Size(23, 22);
-            this.vMirrorButton.Text = "toolStripButton1";
-            this.vMirrorButton.Click += new System.EventHandler(this.vMirrorButton_Click);
+            this.txtMisc1.Location = new System.Drawing.Point(418, 6);
+            this.txtMisc1.Name = "txtMisc1";
+            this.txtMisc1.Size = new System.Drawing.Size(35, 20);
+            this.txtMisc1.TabIndex = 5;
+            // 
+            // txtMisc2
+            // 
+            this.txtMisc2.Location = new System.Drawing.Point(418, 33);
+            this.txtMisc2.Name = "txtMisc2";
+            this.txtMisc2.Size = new System.Drawing.Size(35, 20);
+            this.txtMisc2.TabIndex = 6;
+            // 
+            // txtMisc3
+            // 
+            this.txtMisc3.Location = new System.Drawing.Point(499, 6);
+            this.txtMisc3.Name = "txtMisc3";
+            this.txtMisc3.Size = new System.Drawing.Size(35, 20);
+            this.txtMisc3.TabIndex = 7;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(371, 9);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(38, 13);
+            this.label16.TabIndex = 8;
+            this.label16.Text = "Misc 1";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(371, 36);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(38, 13);
+            this.label17.TabIndex = 9;
+            this.label17.Text = "Misc 2";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(459, 9);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(38, 13);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Misc 3";
             // 
             // LevelEditor
             // 
@@ -2040,5 +2100,11 @@
         private GuidePanel PnlHorizontalGuide;
         private GuidePanel PnlVerticalGuide;
         private System.Windows.Forms.ToolStripButton vMirrorButton;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtMisc3;
+        private System.Windows.Forms.TextBox txtMisc2;
+        private System.Windows.Forms.TextBox txtMisc1;
     }
 }

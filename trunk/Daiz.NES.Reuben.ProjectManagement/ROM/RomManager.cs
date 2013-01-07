@@ -160,7 +160,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     yStart = l.YStart - 1;
                     ayStart = l.YAltStart - 1;
                     break;
-                
+
                 case 2:
                     yStart = l.YStart;
                     ayStart = l.YAltStart;
@@ -178,6 +178,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)(((l.Time / 100) << 4) | ((l.Time - ((l.Time / 100) * 100)) / 10));
             Rom[levelAddress++] = (byte)((l.Pointers.Count << 4) | l.ScrollType);
             Rom[levelAddress++] = (byte)((l.InvincibleEnemies ? 0x80 : 0x00) | (l.Weather << 5) | (l.WindDirection << 4) | (l.WindSpeed));
+            Rom[levelAddress++] = (byte)l.MiscByte1;
+            Rom[levelAddress++] = (byte)l.MiscByte2;
+            Rom[levelAddress++] = (byte)l.MiscByte3;
 
 
             foreach (var p in l.Pointers)
@@ -213,7 +216,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             yExit = p.YExit - 1;
                             break;
 
-                            
+
                     }
                 }
 

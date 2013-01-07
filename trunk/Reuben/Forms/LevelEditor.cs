@@ -176,6 +176,9 @@ namespace Daiz.NES.Reuben
             TsbZoom.Checked = CurrentLevel.Settings.Zoom;
             CmbChallengeType.SelectedIndex = CurrentLevel.ChallengeType;
             CmbSpecialType.SelectedIndex = CurrentLevel.SpecialLevelType;
+            txtMisc1.Text = CurrentLevel.MiscByte1.ToHexString();
+            txtMisc2.Text = CurrentLevel.MiscByte2.ToHexString();
+            txtMisc3.Text = CurrentLevel.MiscByte3.ToHexString();
 
             switch (CurrentLevel.Settings.DrawMode)
             {
@@ -1646,6 +1649,9 @@ namespace Daiz.NES.Reuben
 
         private void Save()
         {
+            CurrentLevel.MiscByte1 = txtMisc1.Text.ToIntFromHex();
+            CurrentLevel.MiscByte2 = txtMisc2.Text.ToIntFromHex();
+            CurrentLevel.MiscByte3 = txtMisc3.Text.ToIntFromHex();
             CurrentLevel.Settings.DrawMode = TileDrawMode;
             CurrentLevel.Settings.ShowGrid = TsbGrid.Checked;
             CurrentLevel.Settings.ShowStart = TsbStartPoint.Checked;
