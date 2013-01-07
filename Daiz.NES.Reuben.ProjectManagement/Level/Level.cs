@@ -42,6 +42,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Height { get; private set; }
         public int ChallengeType { get; set; }
         public int SpecialLevelType { get; set; }
+        public int MiscByte1 { get; set; }
+        public int MiscByte2 { get; set; }
+        public int MiscByte3 { get; set; }
 
         public LevelSettings Settings { get; private set; }
 
@@ -53,6 +56,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Pointers = new List<LevelPointer>();
             SpriteData = new List<Sprite>();
             Settings = new LevelSettings();
+            MiscByte1 = MiscByte2 = MiscByte3 = 0;
         }
 
         public LevelLayout LevelLayout
@@ -105,6 +109,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("layout", LevelLayout);
             root.SetAttributeValue("challengeleveltype", ChallengeType);
             root.SetAttributeValue("specialleveltype", SpecialLevelType);
+            root.SetAttributeValue("misc1", MiscByte1);
+            root.SetAttributeValue("misc2", MiscByte2);
+            root.SetAttributeValue("misc3", MiscByte3);
 
             StringBuilder sb = new StringBuilder();
 
@@ -275,6 +282,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "specialleveltype":
                         SpecialLevelType = a.Value.ToInt();
+                        break;
+
+                    case "misc1":
+                        MiscByte1 = a.Value.ToInt();
+                        break;
+
+                    case "misc2":
+                        MiscByte2 = a.Value.ToInt();
+                        break;
+                        
+                    case "misc3":
+                        MiscByte3 = a.Value.ToInt();
                         break;
                 }
             }
