@@ -270,6 +270,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                                 Rom[levelAddress++] = (byte)(s.Y + 1);
                                 break;
 
+                            case 0xA1:
                             case 0xA3:
                                 Rom[levelAddress++] = (byte)(s.Y - 1);
                                 break;
