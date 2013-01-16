@@ -421,8 +421,8 @@ namespace Daiz.NES.Reuben
             SFD.Filter = "NES ROM Images|*.nes";
             if (useDefaultROM && ProjectController.ProjectManager.CurrentProject.ROMFile.Length > 0)
             {
-                romMan.CompileRom(ProjectController.ProjectManager.CurrentProject.ROMFile, true);
-                MessageBox.Show("ROM successfully compiled.");
+                int remaining = romMan.CompileRom(ProjectController.ProjectManager.CurrentProject.ROMFile, true);
+                MessageBox.Show("ROM successfully compiled.\nLevel space remaining: " + remaining + " bytes");
             }
             else if (SFD.ShowDialog() == DialogResult.OK)
             {

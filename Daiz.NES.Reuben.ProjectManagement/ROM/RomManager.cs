@@ -26,10 +26,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
             levelTypeTable = new Dictionary<byte, int>();
         }
 
-        public bool CompileRom(string fileName, bool includeGfx)
+        public int CompileRom(string fileName, bool includeGfx)
         {
             Rom = new Rom();
-            if (!Rom.Load(fileName)) return false;
+            if (!Rom.Load(fileName)) return -1;
             //if (!Rom.IsPatchedRom)
             //{
             //    ErrorMessage = "Rom has not been patched. Please patch with Reuben.ips";
@@ -69,7 +69,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             Rom.Save();
-            return true;
+            return 0x7C00F - levelDataPointer;
         }
 
         private bool CompileLevels()
