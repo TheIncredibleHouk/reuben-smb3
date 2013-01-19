@@ -34,10 +34,6 @@
             this.CmbPalettes = new System.Windows.Forms.ComboBox();
             this.CmbDefinitions = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
-            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
-            this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.RdoMap16 = new System.Windows.Forms.RadioButton();
             this.RdoNormal = new System.Windows.Forms.RadioButton();
@@ -53,10 +49,22 @@
             this.ChkBlockProperties = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.BlockProp1 = new System.Windows.Forms.CheckBox();
+            this.BlockProp2 = new System.Windows.Forms.CheckBox();
+            this.BlockProp5 = new System.Windows.Forms.CheckBox();
+            this.BlockProp3 = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.SpecialList = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
+            this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
+            this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // CmbGraphics1
@@ -109,64 +117,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Block";
             // 
-            // BlvCurrent
-            // 
-            this.BlvCurrent.CurrentBlock = null;
-            this.BlvCurrent.Location = new System.Drawing.Point(16, 20);
-            this.BlvCurrent.Name = "BlvCurrent";
-            this.BlvCurrent.Size = new System.Drawing.Size(32, 32);
-            this.BlvCurrent.TabIndex = 7;
-            this.BlvCurrent.Text = "blockViewer1";
-            this.BlvCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlvCurrent_MouseDown);
-            // 
-            // BlsBlocks
-            // 
-            this.BlsBlocks.BlockLayout = null;
-            this.BlsBlocks.CurrentDefiniton = null;
-            this.BlsBlocks.HaltRendering = false;
-            this.BlsBlocks.Location = new System.Drawing.Point(358, 63);
-            this.BlsBlocks.Name = "BlsBlocks";
-            this.BlsBlocks.SelectedIndex = 0;
-            this.BlsBlocks.SelectedTileIndex = 0;
-            this.BlsBlocks.ShowBlockProperties = false;
-            this.BlsBlocks.ShowSpecialBlocks = false;
-            this.BlsBlocks.Size = new System.Drawing.Size(256, 256);
-            this.BlsBlocks.SpecialDefnitions = null;
-            this.BlsBlocks.SpecialTable = null;
-            this.BlsBlocks.TabIndex = 5;
-            this.BlsBlocks.Text = "blockSelector1";
-            this.BlsBlocks.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.BlsBlocks_PreviewKeyDown);
-            this.BlsBlocks.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseMove);
-            this.BlsBlocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseDown);
-            // 
-            // PlsView
-            // 
-            this.PlsView.CurrentPalette = null;
-            this.PlsView.Location = new System.Drawing.Point(11, 50);
-            this.PlsView.Name = "PlsView";
-            this.PlsView.SelectablePaletteMode = false;
-            this.PlsView.Size = new System.Drawing.Size(256, 32);
-            this.PlsView.TabIndex = 4;
-            this.PlsView.Text = "paletteSelector1";
-            // 
-            // PtvTable
-            // 
-            this.PtvTable.Location = new System.Drawing.Point(26, 63);
-            this.PtvTable.Name = "PtvTable";
-            this.PtvTable.ShowGrid = false;
-            this.PtvTable.Size = new System.Drawing.Size(256, 256);
-            this.PtvTable.TabIndex = 0;
-            this.PtvTable.Text = "patternTableViewer1";
-            this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
-            this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.RdoMap16);
             this.groupBox2.Controls.Add(this.RdoNormal);
-            this.groupBox2.Location = new System.Drawing.Point(26, 365);
+            this.groupBox2.Location = new System.Drawing.Point(26, 378);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(273, 82);
+            this.groupBox2.Size = new System.Drawing.Size(126, 82);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tile Arrangement";
@@ -199,7 +156,7 @@
             // 
             this.groupBox3.Controls.Add(this.CmbPalettes);
             this.groupBox3.Controls.Add(this.PlsView);
-            this.groupBox3.Location = new System.Drawing.Point(335, 353);
+            this.groupBox3.Location = new System.Drawing.Point(26, 466);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(279, 97);
             this.groupBox3.TabIndex = 10;
@@ -208,7 +165,7 @@
             // 
             // BtnSaveClose
             // 
-            this.BtnSaveClose.Location = new System.Drawing.Point(367, 456);
+            this.BtnSaveClose.Location = new System.Drawing.Point(374, 533);
             this.BtnSaveClose.Name = "BtnSaveClose";
             this.BtnSaveClose.Size = new System.Drawing.Size(121, 23);
             this.BtnSaveClose.TabIndex = 11;
@@ -247,7 +204,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(494, 456);
+            this.button1.Location = new System.Drawing.Point(501, 533);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 23);
             this.button1.TabIndex = 15;
@@ -303,20 +260,167 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "Object Set";
             // 
+            // BlockProp1
+            // 
+            this.BlockProp1.AutoSize = true;
+            this.BlockProp1.Location = new System.Drawing.Point(6, 19);
+            this.BlockProp1.Name = "BlockProp1";
+            this.BlockProp1.Size = new System.Drawing.Size(49, 17);
+            this.BlockProp1.TabIndex = 23;
+            this.BlockProp1.Text = "Solid";
+            this.BlockProp1.UseVisualStyleBackColor = true;
+            this.BlockProp1.CheckedChanged += new System.EventHandler(this.BlockProp1_CheckedChanged);
+            // 
+            // BlockProp2
+            // 
+            this.BlockProp2.AutoSize = true;
+            this.BlockProp2.Location = new System.Drawing.Point(6, 42);
+            this.BlockProp2.Name = "BlockProp2";
+            this.BlockProp2.Size = new System.Drawing.Size(95, 17);
+            this.BlockProp2.TabIndex = 24;
+            this.BlockProp2.Text = "Only Top Solid";
+            this.BlockProp2.UseVisualStyleBackColor = true;
+            this.BlockProp2.CheckedChanged += new System.EventHandler(this.BlockProp2_CheckedChanged);
+            // 
+            // BlockProp5
+            // 
+            this.BlockProp5.AutoSize = true;
+            this.BlockProp5.Location = new System.Drawing.Point(127, 42);
+            this.BlockProp5.Name = "BlockProp5";
+            this.BlockProp5.Size = new System.Drawing.Size(80, 17);
+            this.BlockProp5.TabIndex = 25;
+            this.BlockProp5.Text = "Foreground";
+            this.BlockProp5.UseVisualStyleBackColor = true;
+            this.BlockProp5.CheckedChanged += new System.EventHandler(this.BlockProp5_CheckedChanged);
+            // 
+            // BlockProp3
+            // 
+            this.BlockProp3.AutoSize = true;
+            this.BlockProp3.Location = new System.Drawing.Point(127, 19);
+            this.BlockProp3.Name = "BlockProp3";
+            this.BlockProp3.Size = new System.Drawing.Size(55, 17);
+            this.BlockProp3.TabIndex = 29;
+            this.BlockProp3.Text = "Water";
+            this.BlockProp3.UseVisualStyleBackColor = true;
+            this.BlockProp3.CheckedChanged += new System.EventHandler(this.BlockProp3_CheckedChanged);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.SpecialList);
+            this.groupBox4.Controls.Add(this.BlockProp1);
+            this.groupBox4.Controls.Add(this.BlockProp2);
+            this.groupBox4.Controls.Add(this.BlockProp3);
+            this.groupBox4.Controls.Add(this.BlockProp5);
+            this.groupBox4.Location = new System.Drawing.Point(358, 353);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(257, 97);
+            this.groupBox4.TabIndex = 31;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Properties";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 350);
+            this.label3.Location = new System.Drawing.Point(23, 353);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 22;
             this.label3.Text = "Pattern Table 2";
             // 
+            // SpecialList
+            // 
+            this.SpecialList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SpecialList.FormattingEnabled = true;
+            this.SpecialList.Items.AddRange(new object[] {
+            "None",
+            "Harmful",
+            "Slick",
+            "ConveyorLeft",
+            "ConveyorRight",
+            "ConveyorUp",
+            "ConveyorDown",
+            "Unstable",
+            "SlowMoving",
+            "SlopeBottomLeft30",
+            "SlopeTopLeft30",
+            "SlopeBottomRight30",
+            "SlopeTopRight30",
+            "SlopeLeft45",
+            "SlopeRight45",
+            "SlopeFiller "});
+            this.SpecialList.Location = new System.Drawing.Point(81, 65);
+            this.SpecialList.Name = "SpecialList";
+            this.SpecialList.Size = new System.Drawing.Size(170, 21);
+            this.SpecialList.TabIndex = 32;
+            this.SpecialList.SelectedIndexChanged += new System.EventHandler(this.SpecialList_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 68);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "Special Type";
+            // 
+            // PlsView
+            // 
+            this.PlsView.CurrentPalette = null;
+            this.PlsView.Location = new System.Drawing.Point(11, 50);
+            this.PlsView.Name = "PlsView";
+            this.PlsView.SelectablePaletteMode = false;
+            this.PlsView.Size = new System.Drawing.Size(256, 32);
+            this.PlsView.TabIndex = 4;
+            this.PlsView.Text = "paletteSelector1";
+            // 
+            // BlvCurrent
+            // 
+            this.BlvCurrent.CurrentBlock = null;
+            this.BlvCurrent.Location = new System.Drawing.Point(16, 20);
+            this.BlvCurrent.Name = "BlvCurrent";
+            this.BlvCurrent.Size = new System.Drawing.Size(32, 32);
+            this.BlvCurrent.TabIndex = 7;
+            this.BlvCurrent.Text = "blockViewer1";
+            this.BlvCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlvCurrent_MouseDown);
+            // 
+            // BlsBlocks
+            // 
+            this.BlsBlocks.BlockLayout = null;
+            this.BlsBlocks.CurrentDefiniton = null;
+            this.BlsBlocks.HaltRendering = false;
+            this.BlsBlocks.Location = new System.Drawing.Point(358, 63);
+            this.BlsBlocks.Name = "BlsBlocks";
+            this.BlsBlocks.SelectedIndex = 0;
+            this.BlsBlocks.SelectedTileIndex = 0;
+            this.BlsBlocks.ShowBlockProperties = false;
+            this.BlsBlocks.ShowSpecialBlocks = false;
+            this.BlsBlocks.Size = new System.Drawing.Size(256, 256);
+            this.BlsBlocks.SpecialDefnitions = null;
+            this.BlsBlocks.SpecialTable = null;
+            this.BlsBlocks.TabIndex = 5;
+            this.BlsBlocks.Text = "blockSelector1";
+            this.BlsBlocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseDown);
+            this.BlsBlocks.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseMove);
+            this.BlsBlocks.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.BlsBlocks_PreviewKeyDown);
+            // 
+            // PtvTable
+            // 
+            this.PtvTable.Location = new System.Drawing.Point(26, 63);
+            this.PtvTable.Name = "PtvTable";
+            this.PtvTable.ShowGrid = false;
+            this.PtvTable.Size = new System.Drawing.Size(256, 256);
+            this.PtvTable.TabIndex = 0;
+            this.PtvTable.Text = "patternTableViewer1";
+            this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
+            this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
+            // 
             // Map16Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 489);
+            this.ClientSize = new System.Drawing.Size(634, 568);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -343,6 +447,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,6 +480,13 @@
         private System.Windows.Forms.CheckBox ChkBlockProperties;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox BlockProp1;
+        private System.Windows.Forms.CheckBox BlockProp2;
+        private System.Windows.Forms.CheckBox BlockProp5;
+        private System.Windows.Forms.CheckBox BlockProp3;
+        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox SpecialList;
     }
 }

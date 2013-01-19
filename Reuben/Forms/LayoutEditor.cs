@@ -249,7 +249,7 @@ namespace Daiz.NES.Reuben
                 int tile = BlsTo.BlockLayout.Layout[index];
                 if (tile != -1)
                 {
-                    LayoutToolTip.SetToolTip(BlsTo, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, tile) + "\n(" + index.ToHexString() + ")\n" + ProjectController.SpecialManager.GetProperty(CmbDefinitions.SelectedIndex, index));
+                    LayoutToolTip.SetToolTip(BlsTo, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, tile) + "\n(" + index.ToHexString() + ")\n" + ProjectController.BlockManager.AllDefinitions[CmbDefinitions.SelectedIndex][index].BlockProperty);
                 }
             }
         }

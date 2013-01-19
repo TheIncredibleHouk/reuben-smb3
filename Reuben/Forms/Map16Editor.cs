@@ -58,6 +58,14 @@ namespace Daiz.NES.Reuben
             BlvCurrent.CurrentBlock = BlsBlocks.SelectedBlock;
             PtvTable.PaletteIndex = BlsBlocks.SelectedIndex / 0x40;
             LblBlockSelected.Text = "Selected: " + BlsBlocks.SelectedIndex.ToHexString();
+            if (BlvCurrent.CurrentBlock != null)
+            {
+                BlockProp1.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Solid) > 0;
+                BlockProp2.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.SolidTop) > 0;
+                BlockProp3.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
+                BlockProp5.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
+                SpecialList.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
+            }
         }
 
         private void CmbGraphics1_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,9 +100,10 @@ namespace Daiz.NES.Reuben
         {
             int x = e.X / 16;
             int y = e.Y / 16;
-            if(x < 0 || y < 0 || x > 2 || y > 2) return;
-            BlvCurrent.SetTile(x, y, (byte) PtvTable.SelectedIndex);
+            if (x < 0 || y < 0 || x > 2 || y > 2) return;
+            BlvCurrent.SetTile(x, y, (byte)PtvTable.SelectedIndex);
             BlvCurrent.Focus();
+            BlsBlocks.UpdateSelection();
         }
 
         private void RdoNormal_CheckedChanged(object sender, EventArgs e)
@@ -155,7 +164,7 @@ namespace Daiz.NES.Reuben
 
                 else
                 {
-                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index) + "\n(" + (index).ToHexString() + ")\n" + ProjectController.SpecialManager.GetProperty(defIndex, index));
+                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index) + "\n(" + (index).ToHexString() + ")\n" + ProjectController.BlockManager.AllDefinitions[CmbDefinitions.SelectedIndex][index].BlockProperty);
                 }
             }
         }
@@ -221,6 +230,45 @@ namespace Daiz.NES.Reuben
         private void ChkBlockProperties_CheckedChanged(object sender, EventArgs e)
         {
             BlsBlocks.ShowBlockProperties = ChkBlockProperties.Checked;
+        }
+
+        private void BlockProp1_CheckedChanged(object sender, EventArgs e)
+        {
+            SetBlockProperty(BlockProperty.Solid, BlockProp1.Checked);
+        }
+
+        private void SetBlockProperty(BlockProperty b, bool value)
+        {
+            BlockProperty bp = BlsBlocks.SelectedBlock.BlockProperty;
+            bp = bp | b;
+            if (!value)
+            {
+                bp = bp ^ b;
+            }
+
+            BlsBlocks.SelectedBlock.BlockProperty = bp;
+            BlsBlocks.UpdateSelection();
+        }
+
+        private void BlockProp2_CheckedChanged(object sender, EventArgs e)
+        {
+            SetBlockProperty(BlockProperty.SolidTop, BlockProp2.Checked);
+        }
+
+        private void BlockProp3_CheckedChanged(object sender, EventArgs e)
+        {
+            SetBlockProperty(BlockProperty.Water, BlockProp3.Checked);
+        }
+
+        private void BlockProp5_CheckedChanged(object sender, EventArgs e)
+        {
+            SetBlockProperty(BlockProperty.Foreground, BlockProp5.Checked);
+        }
+
+        private void SpecialList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BlsBlocks.SelectedBlock.BlockProperty = (BlockProperty)((int)(BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskHi) | SpecialList.SelectedIndex);
+            BlsBlocks.UpdateSelection();
         }
     }
 }
