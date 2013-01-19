@@ -15,18 +15,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public PatternTable SpecialTable { get; private set; }
         private List<GraphicsBank> SpecialBanks;
         private Dictionary<int, SpecialDefinition> SpecialDefinitions;
-        private Dictionary<int, Dictionary<int, BlockProperty>> BlockProperties;
 
         public SpecialManager()
         {
             SpecialDefinitions = new Dictionary<int, SpecialDefinition>();
             SpecialPalette = new PaletteInfo();
             SpecialBanks = new List<GraphicsBank>();
-            BlockProperties = new Dictionary<int, Dictionary<int, BlockProperty>>();
-            for (int i = 0; i < 15; i++)
-            {
-                BlockProperties.Add(i, new Dictionary<int, BlockProperty>());
-            }
             LoadBlockProperties();
         }
 
@@ -36,18 +30,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             foreach (var x in xDoc.Element("properties").Elements("set"))
             {
                 int set = x.Attribute("leveltype").Value.ToIntFromHex();
-
-                foreach (var e in x.Elements("block"))
-                {
-                    int block = e.Attribute("value").Value.ToIntFromHex();
-                    BlockProperties[set][block] = (BlockProperty)(Enum.Parse(typeof(BlockProperty), e.Attribute("property").Value, true));
-                }
             }
-        }
-
-        public BlockProperty GetProperty(int defIndex, int block)
-        {
-            return BlockProperties[defIndex][block];
         }
 
         public bool LoadSpecialGraphics(string fileName)
@@ -212,34 +195,34 @@ namespace Daiz.NES.Reuben.ProjectManagement
         }
     }
 
-    public enum BlockProperty
-    {
-        Background,
-        Solid,
-        TopSolid,
-        Water,
-        WaterFall,
-        SlopeLeft45,
-        SlopeRight45,
-        SlopeLeftBottom60,
-        SlopeLeftTop60,
-        SlopeRightBottom60,
-        SlopeRightTop60,
-        SlopeLeft45Ceiling,
-        SlopeRight45Ceiling,
-        SlopeLeftBottom60Ceiling,
-        SlopeLeftTop60Ceiling,
-        SlopeRightBottom60Ceiling,
-        SlopeRightTop60Ceiling,
-        SlopeFiller,
-        SlopeFillerTop,
-        SlopeFillerLeft,
-        SlopeFillerRight,
-        SlopeFillerBottom,
-        Harmful,
-        ConveyorLeft,
-        ConveyorRight,
-        Ice,
-        Quicksand
-    }
+    //public enum BlockProperty
+    //{
+    //    Background,
+    //    Solid,
+    //    TopSolid,
+    //    Water,
+    //    WaterFall,
+    //    SlopeLeft45,
+    //    SlopeRight45,
+    //    SlopeLeftBottom60,
+    //    SlopeLeftTop60,
+    //    SlopeRightBottom60,
+    //    SlopeRightTop60,
+    //    SlopeLeft45Ceiling,
+    //    SlopeRight45Ceiling,
+    //    SlopeLeftBottom60Ceiling,
+    //    SlopeLeftTop60Ceiling,
+    //    SlopeRightBottom60Ceiling,
+    //    SlopeRightTop60Ceiling,
+    //    SlopeFiller,
+    //    SlopeFillerTop,
+    //    SlopeFillerLeft,
+    //    SlopeFillerRight,
+    //    SlopeFillerBottom,
+    //    Harmful,
+    //    ConveyorLeft,
+    //    ConveyorRight,
+    //    Ice,
+    //    Quicksand
+    //}
 }

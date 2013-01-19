@@ -61,16 +61,6 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private BlockDefinition _SpecialDefinitions;
-        public BlockDefinition SpecialDefnitions
-        {
-            get { return _SpecialDefinitions; }
-            set
-            {
-                _SpecialDefinitions = value;
-                FullRender();
-            }
-        }
 
         private PatternTable _CurrentTable;
         public PatternTable CurrentTable
@@ -111,6 +101,17 @@ namespace Daiz.NES.Reuben
                 if (_CurrentDefiniton == value) return;
                 _CurrentDefiniton = value;
                 DefinitionIndex = ProjectController.BlockManager.AllDefinitions.IndexOf(value);
+                FullRender();
+            }
+        }
+
+        private BlockDefinition _SpecialDefinitions;
+        public BlockDefinition SpecialDefnitions
+        {
+            get { return _SpecialDefinitions; }
+            set
+            {
+                _SpecialDefinitions = value;
                 FullRender();
             }
         }
@@ -196,8 +197,54 @@ namespace Daiz.NES.Reuben
                         RenderTile(_CurrentTable[b[1, 0]], j * 16 + 8, i * 16, PaletteIndex, data);
                         RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
 
-                        switch (ProjectController.SpecialManager.GetProperty(DefinitionIndex, tileValue))
+                        BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
+
+                        if ((bp & BlockProperty.Solid) > 0)
                         {
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                        }
+                        if ((bp & BlockProperty.SolidTop) > 0)
+                        {
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
+                            RenderTile(_CurrentTable[b[0, 1]], j * 16, i * 16 + 8, PaletteIndex, data);
+                            RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
+                        }
+
+                        if ((bp & BlockProperty.Water) > 0)
+                        {
+                            RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16, i * 16, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16, i * 16 + 8, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16 + 8, i * 16, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                        }
+
+                        if ((bp & BlockProperty.Foreground) > 0)
+                        {
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 7, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 7, data, .75);
+                        }
+
+                        switch (bp & BlockProperty.MaskLow)
+                        {
+                            case BlockProperty.Harmful:
+                                RenderSpecialTileAlpha(_SpecialTable[0x40], j * 16, i * 16, 4, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x50], j * 16, i * 16 + 8, 4, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x41], j * 16 + 8, i * 16, 4, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x51], j * 16 + 8, i * 16 + 8, 4, data, .75);
+                                break;
+
+                            case BlockProperty.Slick:
+                                RenderSpecialTileAlpha(_SpecialTable[0xD2], j * 16, i * 16, 1, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xE2], j * 16, i * 16 + 8, 1, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xD3], j * 16 + 8, i * 16, 1, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xE3], j * 16 + 8, i * 16 + 8, 1, data, .75);
+                                break;
 
                             case BlockProperty.ConveyorLeft:
                                 RenderSpecialTileAlpha(_SpecialTable[0x28], j * 16, i * 16, 1, data, .75);
@@ -213,20 +260,6 @@ namespace Daiz.NES.Reuben
                                 RenderSpecialTileAlpha(_SpecialTable[0x39], j * 16 + 8, i * 16 + 8, 1, data, .75);
                                 break;
 
-                            case BlockProperty.Harmful:
-                                RenderSpecialTileAlpha(_SpecialTable[0x40], j * 16, i * 16, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x50], j * 16, i * 16 + 8, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x41], j * 16 + 8, i * 16, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x51], j * 16 + 8, i * 16 + 8, 4, data, .75);
-                                break;
-
-                            case BlockProperty.Ice:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD2], j * 16, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE2], j * 16, i * 16 + 8, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD3], j * 16 + 8, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE3], j * 16 + 8, i * 16 + 8, 1, data, .75);
-                                break;
-
 
                             case BlockProperty.SlopeFiller:
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
@@ -235,31 +268,27 @@ namespace Daiz.NES.Reuben
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
 
-                            case BlockProperty.SlopeFillerBottom:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                            case BlockProperty.SlopeBottomLeft30:
+                                RenderSpecialTileAlpha(_SpecialTable[0x46], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x47], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
 
-                            case BlockProperty.SlopeFillerLeft:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, .75);
+                            case BlockProperty.SlopeTopLeft30:
+                                RenderSpecialTileAlpha(_SpecialTable[0x46], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x47], j * 16 + 8, i * 16, 0, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
 
-                            case BlockProperty.SlopeFillerRight:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                            case BlockProperty.SlopeBottomRight30:
+                                RenderSpecialTileAlpha(_SpecialTable[0x48], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x49], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
-                                
-                            case BlockProperty.SlopeFillerTop:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
+
+                            case BlockProperty.SlopeTopRight30:
+                                RenderSpecialTileAlpha(_SpecialTable[0x48], j * 16, i * 16, 0, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x49], j * 16 + 8, i * 16, 0, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
 
@@ -269,107 +298,10 @@ namespace Daiz.NES.Reuben
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
                                 break;
 
-                            case BlockProperty.SlopeLeftBottom60:
-                                RenderSpecialTileAlpha(_SpecialTable[0x46], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x47], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-                                
-                            case BlockProperty.SlopeLeftTop60:
-                                RenderSpecialTileAlpha(_SpecialTable[0x46], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x47], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-
                             case BlockProperty.SlopeRight45:
                                 RenderSpecialTileAlpha(_SpecialTable[0x45], j * 16, i * 16, 0, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
                                 RenderSpecialTileAlpha(_SpecialTable[0x45], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-
-                            case BlockProperty.SlopeRightBottom60:
-                                RenderSpecialTileAlpha(_SpecialTable[0x48], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x49], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-
-                            case BlockProperty.SlopeRightTop60:
-                                RenderSpecialTileAlpha(_SpecialTable[0x48], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x49], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-
-                            case BlockProperty.SlopeLeft45Ceiling:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16 + 8, i * 16, 0, data, .75);
-                                break;
-
-                            case BlockProperty.SlopeLeftBottom60Ceiling:
-                                RenderSpecialTileAlpha(_SpecialTable[0x58], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x59], j * 16 + 8, i * 16, 0, data, .75);
-                                break;
-
-                            case BlockProperty.SlopeLeftTop60Ceiling:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x58], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x59], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-                                
-                            case BlockProperty.SlopeRight45Ceiling:
-                                RenderSpecialTileAlpha(_SpecialTable[0x54], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x54], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-
-                            case BlockProperty.SlopeRightBottom60Ceiling:
-                                RenderSpecialTileAlpha(_SpecialTable[0x56], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x57], j * 16 + 8, i * 16, 0, data, .75);
-                                break;
-
-                            case BlockProperty.SlopeRightTop60Ceiling:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x56], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x57], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
-
-
-                            case BlockProperty.Solid:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
-                                break;
-
-                            case BlockProperty.TopSolid:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
-                                RenderTile(_CurrentTable[b[0, 1]], j * 16, i * 16 + 8, PaletteIndex, data);
-                                RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
-                                break;
-
-                            case BlockProperty.Water:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16, i * 16 + 8, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16 + 8, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFC], j * 16 + 8, i * 16 + 8, 6, data, .75);
-                                break;
-
-
-                            case BlockProperty.WaterFall:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16, i * 16 + 8, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16, 6, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD0], j * 16 + 8, i * 16 + 8, 6, data, .75);
-                                break;
-
-                            case BlockProperty.Quicksand:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16, 2, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16, i * 16 + 8, 2, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16, 2, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD1], j * 16 + 8, i * 16 + 8, 2, data, .75);
                                 break;
                         }
                     }
@@ -467,7 +399,7 @@ namespace Daiz.NES.Reuben
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             e.Graphics.DrawImage(BackBuffer, 0, 0);
-            Rectangle rect =  new Rectangle((SelectedIndex % 16) * 16, (SelectedIndex / 16) * 16, 15, 15);
+            Rectangle rect = new Rectangle((SelectedIndex % 16) * 16, (SelectedIndex / 16) * 16, 15, 15);
             e.Graphics.DrawRectangle(Pens.White, rect);
             rect.X += 1;
             rect.Y += 1;
@@ -499,8 +431,55 @@ namespace Daiz.NES.Reuben
                     RenderTile(_CurrentTable[b[1, 0]], 8, 0, PaletteIndex, data);
                     RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
 
-                    switch (ProjectController.SpecialManager.GetProperty(DefinitionIndex, tileValue))
+                    BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
+
+                    if ((bp & BlockProperty.Solid) > 0)
                     {
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
+                    }
+                    if ((bp & BlockProperty.SolidTop) > 0)
+                    {
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
+                        RenderTile(_CurrentTable[b[0, 1]], 0, 8, PaletteIndex, data);
+                        RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
+                    }
+
+                    if ((bp & BlockProperty.Water) > 0)
+                    {
+                        RenderSpecialTileAlpha(_SpecialTable[0xFC], 0, 0, 6, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFC], 0, 8, 6, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFC], 8, 0, 6, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFC], 8, 8, 6, data, .75);
+                    }
+
+                    if ((bp & BlockProperty.Foreground) > 0)
+                    {
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 7, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 7, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 7, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 7, data, .75);
+                    }
+
+                    switch (bp & BlockProperty.MaskLow)
+                    {
+                        case BlockProperty.Harmful:
+                            RenderSpecialTileAlpha(_SpecialTable[0x40], 0, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x50], 0, 8, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x41], 8, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x51], 8, 8, 4, data, .75);
+                            break;
+
+                        case BlockProperty.Slick:
+                            RenderSpecialTileAlpha(_SpecialTable[0xD2], 0, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xE2], 0, 8, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xD3], 8, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xE3], 8, 8, 1, data, .75);
+                            break;
+
                         case BlockProperty.ConveyorLeft:
                             RenderSpecialTileAlpha(_SpecialTable[0x28], 0, 0, 1, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0x38], 0, 8, 1, data, .75);
@@ -515,20 +494,6 @@ namespace Daiz.NES.Reuben
                             RenderSpecialTileAlpha(_SpecialTable[0x39], 8, 8, 1, data, .75);
                             break;
 
-                        case BlockProperty.Harmful:
-                            RenderSpecialTileAlpha(_SpecialTable[0x40], 0, 0, 4, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x50], 0, 8, 4, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x41], 8, 0, 4, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x51], 8, 8, 4, data, .75);
-                            break;
-
-                        case BlockProperty.Ice:
-                            RenderSpecialTileAlpha(_SpecialTable[0xD2], 0, 0, 1, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xE2], 0, 8, 1, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xD3], 8, 0, 1, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xE3], 8, 8, 1, data, .75);
-                            break;
-
 
                         case BlockProperty.SlopeFiller:
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
@@ -537,32 +502,27 @@ namespace Daiz.NES.Reuben
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
                             break;
 
-
-                        case BlockProperty.SlopeFillerBottom:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
+                        case BlockProperty.SlopeBottomLeft30:
+                            RenderSpecialTileAlpha(_SpecialTable[0x46], 0, 8, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x47], 8, 8, 0, data, .75);
                             break;
 
-                        case BlockProperty.SlopeFillerLeft:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 0, data, .75);
+                        case BlockProperty.SlopeTopLeft30:
+                            RenderSpecialTileAlpha(_SpecialTable[0x46], 0, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x47], 8, 0, 0, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
                             break;
 
-                        case BlockProperty.SlopeFillerRight:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
+                        case BlockProperty.SlopeBottomRight30:
+                            RenderSpecialTileAlpha(_SpecialTable[0x48], 0, 8, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x49], 8, 8, 0, data, .75);
                             break;
 
-                        case BlockProperty.SlopeFillerTop:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
+                        case BlockProperty.SlopeTopRight30:
+                            RenderSpecialTileAlpha(_SpecialTable[0x48], 0, 0, 0, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x49], 8, 0, 0, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
                             break;
 
@@ -572,109 +532,13 @@ namespace Daiz.NES.Reuben
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
                             break;
 
-                        case BlockProperty.SlopeLeftBottom60:
-                            RenderSpecialTileAlpha(_SpecialTable[0x46], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x47], 8, 8, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeLeftTop60:
-                            RenderSpecialTileAlpha(_SpecialTable[0x46], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x47], 8, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
-                            break;
-
                         case BlockProperty.SlopeRight45:
                             RenderSpecialTileAlpha(_SpecialTable[0x45], 0, 0, 0, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
                             RenderSpecialTileAlpha(_SpecialTable[0x45], 8, 8, 0, data, .75);
                             break;
-
-                        case BlockProperty.SlopeRightBottom60:
-                            RenderSpecialTileAlpha(_SpecialTable[0x48], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x49], 8, 8, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeRightTop60:
-                            RenderSpecialTileAlpha(_SpecialTable[0x48], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x49], 8, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 8, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeLeft45Ceiling:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x55], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x55], 8, 0, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeLeftBottom60Ceiling:
-                            RenderSpecialTileAlpha(_SpecialTable[0x58], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x59], 8, 0, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeLeftTop60Ceiling:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x58], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x59], 8, 8, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeRight45Ceiling:
-                            RenderSpecialTileAlpha(_SpecialTable[0x54], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x54], 8, 8, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeRightBottom60Ceiling:
-                            RenderSpecialTileAlpha(_SpecialTable[0x56], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x57], 8, 0, 0, data, .75);
-                            break;
-
-                        case BlockProperty.SlopeRightTop60Ceiling:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 0, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], 8, 0, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x56], 0, 8, 0, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x57], 8, 8, 0, data, .75);
-                            break;
-
-
-                        case BlockProperty.Solid:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
-                            break;
-
-                        case BlockProperty.TopSolid:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
-                            RenderTile(_CurrentTable[b[0, 1]], 0, 8, PaletteIndex, data);
-                            RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
-                            break;
-
-                        case BlockProperty.Water:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFC], 0, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFC], 0, 8, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFC], 8, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFC], 8, 8, 6, data, .75);
-                            break;
-
-
-                        case BlockProperty.WaterFall:
-                            RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xD0], 0, 8, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 0, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xD0], 8, 8, 6, data, .75);
-                            break;
-
-                        case BlockProperty.Quicksand:
-                            RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 0, 2, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xD1], 0, 8, 2, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 0, 2, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xD1], 8, 8, 2, data, .75);
-                            break;
                     }
+                    
                 }
                 else
                 {
@@ -729,7 +593,7 @@ namespace Daiz.NES.Reuben
                     }
                 }
 
-                if(!found)
+                if (!found)
                 {
                     BlockLayout = ProjectController.LayoutManager.BlockLayouts[0];
                     SelectedIndex = value;

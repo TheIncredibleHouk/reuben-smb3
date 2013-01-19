@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blocks\BlockProperty.cs" />
     <Compile Include="Compression\CompressionCommand.cs" />
     <Compile Include="Compression\CompressionCommandType.cs" />
     <Compile Include="Compression\CompressionPoint.cs" />

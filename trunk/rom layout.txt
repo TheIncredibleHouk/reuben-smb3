@@ -1,6 +1,7 @@
-0x26010 - Palettes
-0x1E010 - TSA data
+0x1E010 - 22010 TSA data
 0x22010 - World Pointers
-0x22110 - World Data
 0x24010 - Level Pointers
+0x28010 - World Data
+0x2A010- 
+0x2C000- Tile Properties
 0x40010 - Level Data

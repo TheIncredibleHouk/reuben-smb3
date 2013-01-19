@@ -12,6 +12,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public event EventHandler DefinitionChanged;
         private byte[,] Definition;
+        public BlockProperty BlockProperty { get; set; }
         public Block()
         {
             Definition = new byte[2,2];

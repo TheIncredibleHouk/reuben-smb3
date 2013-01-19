@@ -83,7 +83,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             lookupTable.Clear();
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
-            byte[] data = new byte[0x4000];
+            byte[] data = new byte[0x4B00];
 
             fs.Read(data, 0, (int)fs.Length);
             fs.Close();
@@ -101,6 +101,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     bd[j][1, 1] = data[bankOffset + 0x300 + j];
                 }
                 lookupTable[i] = bd;
+            }
+
+            var l = 0x3C00;
+            for (int i = 0; i < 15; i++)
+            {
+                for (int j = 0; j < 256; j++)
+                {
+                    lookupTable[i][j].BlockProperty = (BlockProperty)data[l++];
+                }
             }
 
             return true;
@@ -130,7 +139,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool SaveDefinitions(string filename)
         {
-            byte[] data = new byte[0x3C00];
+            byte[] data = new byte[0x4B00];
             int dataPointer = 0;
 
             for (int i = 0; i < 15; i++)
@@ -139,6 +148,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 for (int j = 0; j < 0x400; j++)
                 {
                     data[dataPointer++] = blockData[j];
+                }
+            }
+
+            for (int i = 0; i < 15; i++)
+            {
+                for (int j = 0; j < 0x100; j++)
+                {
+                    data[dataPointer++] = (byte) lookupTable[i][j].BlockProperty;
                 }
             }
 
