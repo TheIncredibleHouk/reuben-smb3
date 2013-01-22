@@ -54,9 +54,9 @@
             this.BlockProp5 = new System.Windows.Forms.CheckBox();
             this.BlockProp3 = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.SpecialList = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.SpecialList = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
             this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
             this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
@@ -319,14 +319,14 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Properties";
             // 
-            // label3
+            // label4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 353);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Pattern Table 2";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 68);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "Special Type";
             // 
             // SpecialList
             // 
@@ -336,18 +336,18 @@
             "None",
             "Harmful",
             "Slick",
-            "ConveyorLeft",
-            "ConveyorRight",
-            "ConveyorUp",
-            "ConveyorDown",
-            "Unstable",
-            "SlowMoving",
-            "SlopeBottomLeft30",
-            "SlopeTopLeft30",
-            "SlopeBottomRight30",
-            "SlopeTopRight30",
-            "SlopeLeft45",
-            "SlopeRight45",
+            "Conveyor Left",
+            "Conveyor Right",
+            "Vertical Enterable Pipe",
+            "Unstable Block",
+            "Waterfall",
+            "Climbable",
+            "Slope Bottom Left 30 Degrees",
+            "Slope Top Left 30 Degrees",
+            "Slope Bottom Right 30 Degrees",
+            "Slope Top Right 30 Degrees",
+            "Slope Left 45 Degrees",
+            "Slope Right 45 Degrees",
             "SlopeFiller "});
             this.SpecialList.Location = new System.Drawing.Point(81, 65);
             this.SpecialList.Name = "SpecialList";
@@ -355,14 +355,14 @@
             this.SpecialList.TabIndex = 32;
             this.SpecialList.SelectedIndexChanged += new System.EventHandler(this.SpecialList_SelectedIndexChanged);
             // 
-            // label4
+            // label3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 68);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Special Type";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 353);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Pattern Table 2";
             // 
             // PlsView
             // 
