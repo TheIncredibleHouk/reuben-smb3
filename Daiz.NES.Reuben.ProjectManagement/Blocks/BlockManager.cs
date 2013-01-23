@@ -45,7 +45,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             if (File.Exists(fileName))
             {
-                XDocument xDoc = XDocument.Parse(fileName);
+                XDocument xDoc = XDocument.Load(fileName);
                 foreach (XElement x in xDoc.Element("strings").Elements("set"))
                 {
                     int levelType = x.Attribute("leveltype").Value.ToIntFromHex();

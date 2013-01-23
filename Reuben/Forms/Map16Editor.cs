@@ -210,10 +210,17 @@ namespace Daiz.NES.Reuben
                         first = false;
                         continue;
                     }
-                    bDef[BlsBlocks.SelectedTileIndex][0, 0] = BlvCurrent.CurrentBlock[0, 0];
-                    bDef[BlsBlocks.SelectedTileIndex][0, 1] = BlvCurrent.CurrentBlock[0, 1];
-                    bDef[BlsBlocks.SelectedTileIndex][1, 0] = BlvCurrent.CurrentBlock[1, 0];
-                    bDef[BlsBlocks.SelectedTileIndex][1, 1] = BlvCurrent.CurrentBlock[1, 1];
+                    Block b = bDef[BlsBlocks.SelectedTileIndex];
+                    b[0, 0] = BlvCurrent.CurrentBlock[0, 0];
+                    b[0, 1] = BlvCurrent.CurrentBlock[0, 1];
+                    b[1, 0] = BlvCurrent.CurrentBlock[1, 0];
+                    b[1, 1] = BlvCurrent.CurrentBlock[1, 1];
+                    b.Description = BlockDescription.Text;
+                    b.BlockProperty = (BlockProp1.Checked ? BlockProperty.Solid : BlockProperty.Background) |
+                        (BlockProp2.Checked ? BlockProperty.SolidTop : BlockProperty.Background) |
+                        (BlockProp3.Checked ? BlockProperty.Foreground : BlockProperty.Background) |
+                        (BlockProp5.Checked ? BlockProperty.Water : BlockProperty.Background) |
+                        ((BlockProperty)((int)(BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskHi) | SpecialList.SelectedIndex));
                 }
             }
         }

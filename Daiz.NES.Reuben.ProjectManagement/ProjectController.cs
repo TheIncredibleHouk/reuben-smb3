@@ -103,7 +103,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             if (!BlockManager.LoadDefinitions(string.Format("{0}{1}{2}.tsa", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
                 BlockManager.LoadDefault();
 
-            BlockManager.LoadBlockStrings(string.Format("{0}{1}string.xml", RootDirectory, Path.DirectorySeparatorChar));
+            BlockManager.LoadBlockStrings(string.Format("{0}{1}strings.xml", RootDirectory, Path.DirectorySeparatorChar));
 
             if (!GraphicsManager.LoadGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
                 GraphicsManager.LoadDefault();
