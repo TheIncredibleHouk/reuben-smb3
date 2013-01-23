@@ -31,6 +31,55 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelEditor));
             this.PnlInfo = new System.Windows.Forms.Panel();
+            this.TabLevelInfo = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.CmbMusic = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.NumTime = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.CmbScroll = new System.Windows.Forms.ComboBox();
+            this.CmbTypes = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.CmbLength = new System.Windows.Forms.ComboBox();
+            this.tabPageEX1 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CmbGraphics = new System.Windows.Forms.ComboBox();
+            this.NumBackground = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.CmbPalettes = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.BtnClear = new System.Windows.Forms.Button();
+            this.LblHexGraphics = new System.Windows.Forms.Label();
+            this.tabPageEX2 = new System.Windows.Forms.TabPage();
+            this.BtnSetAltPoint = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.LblAltPoint = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.LblStartPoint = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.CmbActions = new System.Windows.Forms.ComboBox();
+            this.tabPageEX3 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.CmbWindDirection = new System.Windows.Forms.ComboBox();
+            this.CmbWindSpeed = new System.Windows.Forms.ComboBox();
+            this.CmbWeather = new System.Windows.Forms.ComboBox();
+            this.Weather = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtMisc3 = new System.Windows.Forms.TextBox();
+            this.txtMisc2 = new System.Windows.Forms.TextBox();
+            this.txtMisc1 = new System.Windows.Forms.TextBox();
+            this.CmbSpecialType = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.CmbChallengeType = new System.Windows.Forms.ComboBox();
+            this.ChkInvincibleEnemies = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblSprite = new System.Windows.Forms.Label();
             this.LblPositition = new System.Windows.Forms.Label();
@@ -119,56 +168,15 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.ChkInvincibleEnemies = new System.Windows.Forms.CheckBox();
-            this.CmbChallengeType = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.CmbSpecialType = new System.Windows.Forms.ComboBox();
-            this.txtMisc1 = new System.Windows.Forms.TextBox();
-            this.txtMisc2 = new System.Windows.Forms.TextBox();
-            this.txtMisc3 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.tabPageEX3 = new System.Windows.Forms.TabPage();
-            this.Weather = new System.Windows.Forms.Label();
-            this.CmbWeather = new System.Windows.Forms.ComboBox();
-            this.CmbWindSpeed = new System.Windows.Forms.ComboBox();
-            this.CmbWindDirection = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tabPageEX2 = new System.Windows.Forms.TabPage();
-            this.CmbActions = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.LblStartPoint = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.LblAltPoint = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.BtnSetAltPoint = new System.Windows.Forms.Button();
-            this.tabPageEX1 = new System.Windows.Forms.TabPage();
-            this.LblHexGraphics = new System.Windows.Forms.Label();
-            this.BtnClear = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.CmbPalettes = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.NumBackground = new System.Windows.Forms.NumericUpDown();
-            this.CmbGraphics = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.CmbLength = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.CmbTypes = new System.Windows.Forms.ComboBox();
-            this.CmbScroll = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.NumTime = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.CmbMusic = new System.Windows.Forms.ComboBox();
-            this.TabLevelInfo = new System.Windows.Forms.TabControl();
             this.PnlInfo.SuspendLayout();
+            this.TabLevelInfo.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTime)).BeginInit();
+            this.tabPageEX1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).BeginInit();
+            this.tabPageEX2.SuspendLayout();
+            this.tabPageEX3.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).BeginInit();
@@ -187,14 +195,6 @@
             this.CtxHorizontalGuide.SuspendLayout();
             this.PnlView.SuspendLayout();
             this.PnlLengthControl.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.tabPageEX3.SuspendLayout();
-            this.tabPageEX2.SuspendLayout();
-            this.tabPageEX1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).BeginInit();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumTime)).BeginInit();
-            this.TabLevelInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlInfo
@@ -208,6 +208,599 @@
             this.PnlInfo.Name = "PnlInfo";
             this.PnlInfo.Size = new System.Drawing.Size(776, 122);
             this.PnlInfo.TabIndex = 1;
+            // 
+            // TabLevelInfo
+            // 
+            this.TabLevelInfo.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.TabLevelInfo.Controls.Add(this.tabPage4);
+            this.TabLevelInfo.Controls.Add(this.tabPageEX1);
+            this.TabLevelInfo.Controls.Add(this.tabPageEX2);
+            this.TabLevelInfo.Controls.Add(this.tabPageEX3);
+            this.TabLevelInfo.Controls.Add(this.tabPage7);
+            this.TabLevelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
+            this.TabLevelInfo.Name = "TabLevelInfo";
+            this.TabLevelInfo.SelectedIndex = 0;
+            this.TabLevelInfo.Size = new System.Drawing.Size(569, 93);
+            this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.TabLevelInfo.TabIndex = 20;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage4.Controls.Add(this.CmbMusic);
+            this.tabPage4.Controls.Add(this.label3);
+            this.tabPage4.Controls.Add(this.label4);
+            this.tabPage4.Controls.Add(this.NumTime);
+            this.tabPage4.Controls.Add(this.label12);
+            this.tabPage4.Controls.Add(this.CmbScroll);
+            this.tabPage4.Controls.Add(this.CmbTypes);
+            this.tabPage4.Controls.Add(this.label6);
+            this.tabPage4.Controls.Add(this.label8);
+            this.tabPage4.Controls.Add(this.CmbLength);
+            this.tabPage4.Location = new System.Drawing.Point(4, 4);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(561, 67);
+            this.tabPage4.TabIndex = 0;
+            this.tabPage4.Text = "Level";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // CmbMusic
+            // 
+            this.CmbMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbMusic.DropDownWidth = 150;
+            this.CmbMusic.FormattingEnabled = true;
+            this.CmbMusic.Location = new System.Drawing.Point(78, 31);
+            this.CmbMusic.Name = "CmbMusic";
+            this.CmbMusic.Size = new System.Drawing.Size(129, 21);
+            this.CmbMusic.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(77, 12);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Music";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 11);
+            this.label4.Margin = new System.Windows.Forms.Padding(3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Time";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // NumTime
+            // 
+            this.NumTime.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NumTime.Location = new System.Drawing.Point(10, 31);
+            this.NumTime.Maximum = new decimal(new int[] {
+            990,
+            0,
+            0,
+            0});
+            this.NumTime.Name = "NumTime";
+            this.NumTime.Size = new System.Drawing.Size(57, 20);
+            this.NumTime.TabIndex = 10;
+            this.NumTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumTime.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(425, 12);
+            this.label12.Margin = new System.Windows.Forms.Padding(3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(60, 13);
+            this.label12.TabIndex = 27;
+            this.label12.Text = "Scroll Type";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CmbScroll
+            // 
+            this.CmbScroll.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbScroll.FormattingEnabled = true;
+            this.CmbScroll.Items.AddRange(new object[] {
+            "Scrolls When Flying",
+            "Free Scrolling",
+            "No Scrolling"});
+            this.CmbScroll.Location = new System.Drawing.Point(427, 31);
+            this.CmbScroll.Name = "CmbScroll";
+            this.CmbScroll.Size = new System.Drawing.Size(129, 21);
+            this.CmbScroll.TabIndex = 27;
+            // 
+            // CmbTypes
+            // 
+            this.CmbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbTypes.FormattingEnabled = true;
+            this.CmbTypes.Location = new System.Drawing.Point(287, 31);
+            this.CmbTypes.Name = "CmbTypes";
+            this.CmbTypes.Size = new System.Drawing.Size(129, 21);
+            this.CmbTypes.TabIndex = 14;
+            this.CmbTypes.SelectedIndexChanged += new System.EventHandler(this.CmbTypes_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(286, 12);
+            this.label6.Margin = new System.Windows.Forms.Padding(3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Level Type";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(218, 12);
+            this.label8.Margin = new System.Windows.Forms.Padding(3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Length";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CmbLength
+            // 
+            this.CmbLength.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbLength.FormattingEnabled = true;
+            this.CmbLength.Location = new System.Drawing.Point(218, 31);
+            this.CmbLength.Name = "CmbLength";
+            this.CmbLength.Size = new System.Drawing.Size(58, 21);
+            this.CmbLength.TabIndex = 21;
+            this.CmbLength.SelectedIndexChanged += new System.EventHandler(this.CmbLength_SelectedIndexChanged);
+            // 
+            // tabPageEX1
+            // 
+            this.tabPageEX1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageEX1.Controls.Add(this.label1);
+            this.tabPageEX1.Controls.Add(this.CmbGraphics);
+            this.tabPageEX1.Controls.Add(this.NumBackground);
+            this.tabPageEX1.Controls.Add(this.label2);
+            this.tabPageEX1.Controls.Add(this.CmbPalettes);
+            this.tabPageEX1.Controls.Add(this.label5);
+            this.tabPageEX1.Controls.Add(this.BtnClear);
+            this.tabPageEX1.Controls.Add(this.LblHexGraphics);
+            this.tabPageEX1.Location = new System.Drawing.Point(4, 4);
+            this.tabPageEX1.Name = "tabPageEX1";
+            this.tabPageEX1.Size = new System.Drawing.Size(561, 67);
+            this.tabPageEX1.TabIndex = 4;
+            this.tabPageEX1.Text = "Graphics";
+            this.tabPageEX1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Graphics";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CmbGraphics
+            // 
+            this.CmbGraphics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbGraphics.DropDownWidth = 200;
+            this.CmbGraphics.FormattingEnabled = true;
+            this.CmbGraphics.Location = new System.Drawing.Point(6, 29);
+            this.CmbGraphics.Name = "CmbGraphics";
+            this.CmbGraphics.Size = new System.Drawing.Size(129, 21);
+            this.CmbGraphics.TabIndex = 24;
+            this.CmbGraphics.SelectedIndexChanged += new System.EventHandler(this.CmbGraphics_SelectedIndexChanged);
+            // 
+            // NumBackground
+            // 
+            this.NumBackground.Hexadecimal = true;
+            this.NumBackground.Location = new System.Drawing.Point(304, 29);
+            this.NumBackground.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumBackground.Name = "NumBackground";
+            this.NumBackground.Size = new System.Drawing.Size(48, 20);
+            this.NumBackground.TabIndex = 26;
+            this.NumBackground.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(301, 10);
+            this.label2.Margin = new System.Windows.Forms.Padding(3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 13);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Background Tile";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CmbPalettes
+            // 
+            this.CmbPalettes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbPalettes.FormattingEnabled = true;
+            this.CmbPalettes.Location = new System.Drawing.Point(160, 29);
+            this.CmbPalettes.Name = "CmbPalettes";
+            this.CmbPalettes.Size = new System.Drawing.Size(129, 21);
+            this.CmbPalettes.TabIndex = 28;
+            this.CmbPalettes.SelectedIndexChanged += new System.EventHandler(this.CmbPalettes_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(157, 10);
+            this.label5.Margin = new System.Windows.Forms.Padding(3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Palette";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // BtnClear
+            // 
+            this.BtnClear.Location = new System.Drawing.Point(358, 26);
+            this.BtnClear.Name = "BtnClear";
+            this.BtnClear.Size = new System.Drawing.Size(55, 23);
+            this.BtnClear.TabIndex = 30;
+            this.BtnClear.Text = "Set";
+            this.BtnClear.UseVisualStyleBackColor = true;
+            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
+            // LblHexGraphics
+            // 
+            this.LblHexGraphics.AutoSize = true;
+            this.LblHexGraphics.Location = new System.Drawing.Point(94, 10);
+            this.LblHexGraphics.Name = "LblHexGraphics";
+            this.LblHexGraphics.Size = new System.Drawing.Size(41, 13);
+            this.LblHexGraphics.TabIndex = 31;
+            this.LblHexGraphics.Text = "label10";
+            this.LblHexGraphics.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // tabPageEX2
+            // 
+            this.tabPageEX2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageEX2.Controls.Add(this.BtnSetAltPoint);
+            this.tabPageEX2.Controls.Add(this.label14);
+            this.tabPageEX2.Controls.Add(this.LblAltPoint);
+            this.tabPageEX2.Controls.Add(this.label13);
+            this.tabPageEX2.Controls.Add(this.LblStartPoint);
+            this.tabPageEX2.Controls.Add(this.button1);
+            this.tabPageEX2.Controls.Add(this.label11);
+            this.tabPageEX2.Controls.Add(this.CmbActions);
+            this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
+            this.tabPageEX2.Name = "tabPageEX2";
+            this.tabPageEX2.Size = new System.Drawing.Size(561, 67);
+            this.tabPageEX2.TabIndex = 5;
+            this.tabPageEX2.Text = "Position";
+            this.tabPageEX2.UseVisualStyleBackColor = true;
+            // 
+            // BtnSetAltPoint
+            // 
+            this.BtnSetAltPoint.Location = new System.Drawing.Point(295, 29);
+            this.BtnSetAltPoint.Name = "BtnSetAltPoint";
+            this.BtnSetAltPoint.Size = new System.Drawing.Size(129, 23);
+            this.BtnSetAltPoint.TabIndex = 44;
+            this.BtnSetAltPoint.Text = "Set Alternate Start";
+            this.BtnSetAltPoint.UseVisualStyleBackColor = true;
+            this.BtnSetAltPoint.Click += new System.EventHandler(this.BtnSetAltPoint_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(292, 10);
+            this.label14.Margin = new System.Windows.Forms.Padding(3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(71, 13);
+            this.label14.TabIndex = 43;
+            this.label14.Text = "Alt Start Point";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblAltPoint
+            // 
+            this.LblAltPoint.AutoSize = true;
+            this.LblAltPoint.Location = new System.Drawing.Point(369, 10);
+            this.LblAltPoint.Margin = new System.Windows.Forms.Padding(3);
+            this.LblAltPoint.Name = "LblAltPoint";
+            this.LblAltPoint.Size = new System.Drawing.Size(48, 13);
+            this.LblAltPoint.TabIndex = 42;
+            this.LblAltPoint.Text = "X: 0 Y: 4";
+            this.LblAltPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(10, 10);
+            this.label13.Margin = new System.Windows.Forms.Padding(3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.TabIndex = 41;
+            this.label13.Text = "Start Point";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblStartPoint
+            // 
+            this.LblStartPoint.AutoSize = true;
+            this.LblStartPoint.Location = new System.Drawing.Point(71, 10);
+            this.LblStartPoint.Margin = new System.Windows.Forms.Padding(3);
+            this.LblStartPoint.Name = "LblStartPoint";
+            this.LblStartPoint.Size = new System.Drawing.Size(48, 13);
+            this.LblStartPoint.TabIndex = 40;
+            this.LblStartPoint.Text = "X: 0 Y: 4";
+            this.LblStartPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(11, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Set Starting Position";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BtnStartPoint_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(150, 10);
+            this.label11.Margin = new System.Windows.Forms.Padding(3);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(76, 13);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Starting Action";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CmbActions
+            // 
+            this.CmbActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbActions.FormattingEnabled = true;
+            this.CmbActions.Items.AddRange(new object[] {
+            "None",
+            "Sliding",
+            "Up Pipe",
+            "Down Pipe",
+            "Right Pipe",
+            "Left Pipe",
+            "Anchor Cut Scene"});
+            this.CmbActions.Location = new System.Drawing.Point(150, 31);
+            this.CmbActions.Name = "CmbActions";
+            this.CmbActions.Size = new System.Drawing.Size(129, 21);
+            this.CmbActions.TabIndex = 37;
+            // 
+            // tabPageEX3
+            // 
+            this.tabPageEX3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageEX3.Controls.Add(this.label9);
+            this.tabPageEX3.Controls.Add(this.label7);
+            this.tabPageEX3.Controls.Add(this.CmbWindDirection);
+            this.tabPageEX3.Controls.Add(this.CmbWindSpeed);
+            this.tabPageEX3.Controls.Add(this.CmbWeather);
+            this.tabPageEX3.Controls.Add(this.Weather);
+            this.tabPageEX3.Location = new System.Drawing.Point(4, 4);
+            this.tabPageEX3.Name = "tabPageEX3";
+            this.tabPageEX3.Size = new System.Drawing.Size(561, 67);
+            this.tabPageEX3.TabIndex = 6;
+            this.tabPageEX3.Text = "Weather";
+            this.tabPageEX3.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(162, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(66, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Wind Speed";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(150, 43);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Wind Direction";
+            // 
+            // CmbWindDirection
+            // 
+            this.CmbWindDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbWindDirection.FormattingEnabled = true;
+            this.CmbWindDirection.Items.AddRange(new object[] {
+            "Left",
+            "Right"});
+            this.CmbWindDirection.Location = new System.Drawing.Point(234, 40);
+            this.CmbWindDirection.Name = "CmbWindDirection";
+            this.CmbWindDirection.Size = new System.Drawing.Size(83, 21);
+            this.CmbWindDirection.TabIndex = 3;
+            // 
+            // CmbWindSpeed
+            // 
+            this.CmbWindSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbWindSpeed.FormattingEnabled = true;
+            this.CmbWindSpeed.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.CmbWindSpeed.Location = new System.Drawing.Point(234, 7);
+            this.CmbWindSpeed.Name = "CmbWindSpeed";
+            this.CmbWindSpeed.Size = new System.Drawing.Size(61, 21);
+            this.CmbWindSpeed.TabIndex = 2;
+            // 
+            // CmbWeather
+            // 
+            this.CmbWeather.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbWeather.FormattingEnabled = true;
+            this.CmbWeather.Items.AddRange(new object[] {
+            "None",
+            "Rain",
+            "Snow"});
+            this.CmbWeather.Location = new System.Drawing.Point(62, 7);
+            this.CmbWeather.Name = "CmbWeather";
+            this.CmbWeather.Size = new System.Drawing.Size(82, 21);
+            this.CmbWeather.TabIndex = 1;
+            // 
+            // Weather
+            // 
+            this.Weather.AutoSize = true;
+            this.Weather.Location = new System.Drawing.Point(8, 10);
+            this.Weather.Name = "Weather";
+            this.Weather.Size = new System.Drawing.Size(48, 13);
+            this.Weather.TabIndex = 0;
+            this.Weather.Text = "Weather";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage7.Controls.Add(this.label18);
+            this.tabPage7.Controls.Add(this.label17);
+            this.tabPage7.Controls.Add(this.label16);
+            this.tabPage7.Controls.Add(this.txtMisc3);
+            this.tabPage7.Controls.Add(this.txtMisc2);
+            this.tabPage7.Controls.Add(this.txtMisc1);
+            this.tabPage7.Controls.Add(this.CmbSpecialType);
+            this.tabPage7.Controls.Add(this.label15);
+            this.tabPage7.Controls.Add(this.label10);
+            this.tabPage7.Controls.Add(this.CmbChallengeType);
+            this.tabPage7.Controls.Add(this.ChkInvincibleEnemies);
+            this.tabPage7.Location = new System.Drawing.Point(4, 4);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(561, 67);
+            this.tabPage7.TabIndex = 1;
+            this.tabPage7.Text = "Special Options";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(459, 9);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(38, 13);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Misc 3";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(371, 36);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(38, 13);
+            this.label17.TabIndex = 9;
+            this.label17.Text = "Misc 2";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(371, 9);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(38, 13);
+            this.label16.TabIndex = 8;
+            this.label16.Text = "Misc 1";
+            // 
+            // txtMisc3
+            // 
+            this.txtMisc3.Location = new System.Drawing.Point(499, 6);
+            this.txtMisc3.Name = "txtMisc3";
+            this.txtMisc3.Size = new System.Drawing.Size(35, 20);
+            this.txtMisc3.TabIndex = 7;
+            // 
+            // txtMisc2
+            // 
+            this.txtMisc2.Location = new System.Drawing.Point(418, 33);
+            this.txtMisc2.Name = "txtMisc2";
+            this.txtMisc2.Size = new System.Drawing.Size(35, 20);
+            this.txtMisc2.TabIndex = 6;
+            // 
+            // txtMisc1
+            // 
+            this.txtMisc1.Location = new System.Drawing.Point(418, 6);
+            this.txtMisc1.Name = "txtMisc1";
+            this.txtMisc1.Size = new System.Drawing.Size(35, 20);
+            this.txtMisc1.TabIndex = 5;
+            // 
+            // CmbSpecialType
+            // 
+            this.CmbSpecialType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSpecialType.FormattingEnabled = true;
+            this.CmbSpecialType.Items.AddRange(new object[] {
+            "None",
+            "Hammer Bros. Toll",
+            "Item Shop",
+            "Challenge Level"});
+            this.CmbSpecialType.Location = new System.Drawing.Point(230, 3);
+            this.CmbSpecialType.Name = "CmbSpecialType";
+            this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);
+            this.CmbSpecialType.TabIndex = 4;
+            this.CmbSpecialType.SelectedIndexChanged += new System.EventHandler(this.CmbSpecialType_SelectedIndexChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(126, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Special Level Type";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(143, 33);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Challenge Type";
+            // 
+            // CmbChallengeType
+            // 
+            this.CmbChallengeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbChallengeType.FormattingEnabled = true;
+            this.CmbChallengeType.Items.AddRange(new object[] {
+            "None",
+            "AutoMoveRight"});
+            this.CmbChallengeType.Location = new System.Drawing.Point(230, 30);
+            this.CmbChallengeType.Name = "CmbChallengeType";
+            this.CmbChallengeType.Size = new System.Drawing.Size(121, 21);
+            this.CmbChallengeType.TabIndex = 1;
+            // 
+            // ChkInvincibleEnemies
+            // 
+            this.ChkInvincibleEnemies.AutoSize = true;
+            this.ChkInvincibleEnemies.Location = new System.Drawing.Point(6, 6);
+            this.ChkInvincibleEnemies.Name = "ChkInvincibleEnemies";
+            this.ChkInvincibleEnemies.Size = new System.Drawing.Size(114, 17);
+            this.ChkInvincibleEnemies.TabIndex = 0;
+            this.ChkInvincibleEnemies.Text = "Invincible Enemies";
+            this.ChkInvincibleEnemies.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -883,7 +1476,7 @@
             this.hMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.hMirrorButton.Name = "hMirrorButton";
             this.hMirrorButton.Size = new System.Drawing.Size(23, 22);
-            this.hMirrorButton.Text = "toolStripButton1";
+            this.hMirrorButton.Text = "Mirror Horizontally";
             this.hMirrorButton.Click += new System.EventHandler(this.hMirrorButton_Click);
             // 
             // vMirrorButton
@@ -894,7 +1487,7 @@
             this.vMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vMirrorButton.Name = "vMirrorButton";
             this.vMirrorButton.Size = new System.Drawing.Size(23, 22);
-            this.vMirrorButton.Text = "toolStripButton1";
+            this.vMirrorButton.Text = "Mirror Vertically";
             this.vMirrorButton.Click += new System.EventHandler(this.vMirrorButton_Click);
             // 
             // CtxVerticalGuide
@@ -1156,599 +1749,6 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 346);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
-            // tabPage7
-            // 
-            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPage7.Controls.Add(this.label18);
-            this.tabPage7.Controls.Add(this.label17);
-            this.tabPage7.Controls.Add(this.label16);
-            this.tabPage7.Controls.Add(this.txtMisc3);
-            this.tabPage7.Controls.Add(this.txtMisc2);
-            this.tabPage7.Controls.Add(this.txtMisc1);
-            this.tabPage7.Controls.Add(this.CmbSpecialType);
-            this.tabPage7.Controls.Add(this.label15);
-            this.tabPage7.Controls.Add(this.label10);
-            this.tabPage7.Controls.Add(this.CmbChallengeType);
-            this.tabPage7.Controls.Add(this.ChkInvincibleEnemies);
-            this.tabPage7.Location = new System.Drawing.Point(4, 4);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(561, 67);
-            this.tabPage7.TabIndex = 1;
-            this.tabPage7.Text = "Special Options";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // ChkInvincibleEnemies
-            // 
-            this.ChkInvincibleEnemies.AutoSize = true;
-            this.ChkInvincibleEnemies.Location = new System.Drawing.Point(6, 6);
-            this.ChkInvincibleEnemies.Name = "ChkInvincibleEnemies";
-            this.ChkInvincibleEnemies.Size = new System.Drawing.Size(114, 17);
-            this.ChkInvincibleEnemies.TabIndex = 0;
-            this.ChkInvincibleEnemies.Text = "Invincible Enemies";
-            this.ChkInvincibleEnemies.UseVisualStyleBackColor = true;
-            // 
-            // CmbChallengeType
-            // 
-            this.CmbChallengeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbChallengeType.FormattingEnabled = true;
-            this.CmbChallengeType.Items.AddRange(new object[] {
-            "None",
-            "AutoMoveRight"});
-            this.CmbChallengeType.Location = new System.Drawing.Point(230, 30);
-            this.CmbChallengeType.Name = "CmbChallengeType";
-            this.CmbChallengeType.Size = new System.Drawing.Size(121, 21);
-            this.CmbChallengeType.TabIndex = 1;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(143, 33);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Challenge Type";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(126, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 13);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "Special Level Type";
-            // 
-            // CmbSpecialType
-            // 
-            this.CmbSpecialType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbSpecialType.FormattingEnabled = true;
-            this.CmbSpecialType.Items.AddRange(new object[] {
-            "None",
-            "Hammer Bros. Toll",
-            "Item Shop",
-            "Challenge Level"});
-            this.CmbSpecialType.Location = new System.Drawing.Point(230, 3);
-            this.CmbSpecialType.Name = "CmbSpecialType";
-            this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);
-            this.CmbSpecialType.TabIndex = 4;
-            this.CmbSpecialType.SelectedIndexChanged += new System.EventHandler(this.CmbSpecialType_SelectedIndexChanged);
-            // 
-            // txtMisc1
-            // 
-            this.txtMisc1.Location = new System.Drawing.Point(418, 6);
-            this.txtMisc1.Name = "txtMisc1";
-            this.txtMisc1.Size = new System.Drawing.Size(35, 20);
-            this.txtMisc1.TabIndex = 5;
-            // 
-            // txtMisc2
-            // 
-            this.txtMisc2.Location = new System.Drawing.Point(418, 33);
-            this.txtMisc2.Name = "txtMisc2";
-            this.txtMisc2.Size = new System.Drawing.Size(35, 20);
-            this.txtMisc2.TabIndex = 6;
-            // 
-            // txtMisc3
-            // 
-            this.txtMisc3.Location = new System.Drawing.Point(499, 6);
-            this.txtMisc3.Name = "txtMisc3";
-            this.txtMisc3.Size = new System.Drawing.Size(35, 20);
-            this.txtMisc3.TabIndex = 7;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(371, 9);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(38, 13);
-            this.label16.TabIndex = 8;
-            this.label16.Text = "Misc 1";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(371, 36);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(38, 13);
-            this.label17.TabIndex = 9;
-            this.label17.Text = "Misc 2";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(459, 9);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(38, 13);
-            this.label18.TabIndex = 9;
-            this.label18.Text = "Misc 3";
-            // 
-            // tabPageEX3
-            // 
-            this.tabPageEX3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX3.Controls.Add(this.label9);
-            this.tabPageEX3.Controls.Add(this.label7);
-            this.tabPageEX3.Controls.Add(this.CmbWindDirection);
-            this.tabPageEX3.Controls.Add(this.CmbWindSpeed);
-            this.tabPageEX3.Controls.Add(this.CmbWeather);
-            this.tabPageEX3.Controls.Add(this.Weather);
-            this.tabPageEX3.Location = new System.Drawing.Point(4, 4);
-            this.tabPageEX3.Name = "tabPageEX3";
-            this.tabPageEX3.Size = new System.Drawing.Size(561, 67);
-            this.tabPageEX3.TabIndex = 6;
-            this.tabPageEX3.Text = "Weather";
-            this.tabPageEX3.UseVisualStyleBackColor = true;
-            // 
-            // Weather
-            // 
-            this.Weather.AutoSize = true;
-            this.Weather.Location = new System.Drawing.Point(8, 10);
-            this.Weather.Name = "Weather";
-            this.Weather.Size = new System.Drawing.Size(48, 13);
-            this.Weather.TabIndex = 0;
-            this.Weather.Text = "Weather";
-            // 
-            // CmbWeather
-            // 
-            this.CmbWeather.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbWeather.FormattingEnabled = true;
-            this.CmbWeather.Items.AddRange(new object[] {
-            "None",
-            "Rain",
-            "Snow"});
-            this.CmbWeather.Location = new System.Drawing.Point(62, 7);
-            this.CmbWeather.Name = "CmbWeather";
-            this.CmbWeather.Size = new System.Drawing.Size(82, 21);
-            this.CmbWeather.TabIndex = 1;
-            // 
-            // CmbWindSpeed
-            // 
-            this.CmbWindSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbWindSpeed.FormattingEnabled = true;
-            this.CmbWindSpeed.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15"});
-            this.CmbWindSpeed.Location = new System.Drawing.Point(234, 7);
-            this.CmbWindSpeed.Name = "CmbWindSpeed";
-            this.CmbWindSpeed.Size = new System.Drawing.Size(61, 21);
-            this.CmbWindSpeed.TabIndex = 2;
-            // 
-            // CmbWindDirection
-            // 
-            this.CmbWindDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbWindDirection.FormattingEnabled = true;
-            this.CmbWindDirection.Items.AddRange(new object[] {
-            "Left",
-            "Right"});
-            this.CmbWindDirection.Location = new System.Drawing.Point(234, 40);
-            this.CmbWindDirection.Name = "CmbWindDirection";
-            this.CmbWindDirection.Size = new System.Drawing.Size(83, 21);
-            this.CmbWindDirection.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(150, 43);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Wind Direction";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(162, 10);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 13);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Wind Speed";
-            // 
-            // tabPageEX2
-            // 
-            this.tabPageEX2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX2.Controls.Add(this.BtnSetAltPoint);
-            this.tabPageEX2.Controls.Add(this.label14);
-            this.tabPageEX2.Controls.Add(this.LblAltPoint);
-            this.tabPageEX2.Controls.Add(this.label13);
-            this.tabPageEX2.Controls.Add(this.LblStartPoint);
-            this.tabPageEX2.Controls.Add(this.button1);
-            this.tabPageEX2.Controls.Add(this.label11);
-            this.tabPageEX2.Controls.Add(this.CmbActions);
-            this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
-            this.tabPageEX2.Name = "tabPageEX2";
-            this.tabPageEX2.Size = new System.Drawing.Size(561, 67);
-            this.tabPageEX2.TabIndex = 5;
-            this.tabPageEX2.Text = "Position";
-            this.tabPageEX2.UseVisualStyleBackColor = true;
-            // 
-            // CmbActions
-            // 
-            this.CmbActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbActions.FormattingEnabled = true;
-            this.CmbActions.Items.AddRange(new object[] {
-            "None",
-            "Sliding",
-            "Up Pipe",
-            "Down Pipe",
-            "Right Pipe",
-            "Left Pipe",
-            "Anchor Cut Scene"});
-            this.CmbActions.Location = new System.Drawing.Point(150, 31);
-            this.CmbActions.Name = "CmbActions";
-            this.CmbActions.Size = new System.Drawing.Size(129, 21);
-            this.CmbActions.TabIndex = 37;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(150, 10);
-            this.label11.Margin = new System.Windows.Forms.Padding(3);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(76, 13);
-            this.label11.TabIndex = 38;
-            this.label11.Text = "Starting Action";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(11, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 23);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "Set Starting Position";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.BtnStartPoint_Click);
-            // 
-            // LblStartPoint
-            // 
-            this.LblStartPoint.AutoSize = true;
-            this.LblStartPoint.Location = new System.Drawing.Point(71, 10);
-            this.LblStartPoint.Margin = new System.Windows.Forms.Padding(3);
-            this.LblStartPoint.Name = "LblStartPoint";
-            this.LblStartPoint.Size = new System.Drawing.Size(48, 13);
-            this.LblStartPoint.TabIndex = 40;
-            this.LblStartPoint.Text = "X: 0 Y: 4";
-            this.LblStartPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(10, 10);
-            this.label13.Margin = new System.Windows.Forms.Padding(3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 13);
-            this.label13.TabIndex = 41;
-            this.label13.Text = "Start Point";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblAltPoint
-            // 
-            this.LblAltPoint.AutoSize = true;
-            this.LblAltPoint.Location = new System.Drawing.Point(369, 10);
-            this.LblAltPoint.Margin = new System.Windows.Forms.Padding(3);
-            this.LblAltPoint.Name = "LblAltPoint";
-            this.LblAltPoint.Size = new System.Drawing.Size(48, 13);
-            this.LblAltPoint.TabIndex = 42;
-            this.LblAltPoint.Text = "X: 0 Y: 4";
-            this.LblAltPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(292, 10);
-            this.label14.Margin = new System.Windows.Forms.Padding(3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(71, 13);
-            this.label14.TabIndex = 43;
-            this.label14.Text = "Alt Start Point";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // BtnSetAltPoint
-            // 
-            this.BtnSetAltPoint.Location = new System.Drawing.Point(295, 29);
-            this.BtnSetAltPoint.Name = "BtnSetAltPoint";
-            this.BtnSetAltPoint.Size = new System.Drawing.Size(129, 23);
-            this.BtnSetAltPoint.TabIndex = 44;
-            this.BtnSetAltPoint.Text = "Set Alternate Start";
-            this.BtnSetAltPoint.UseVisualStyleBackColor = true;
-            this.BtnSetAltPoint.Click += new System.EventHandler(this.BtnSetAltPoint_Click);
-            // 
-            // tabPageEX1
-            // 
-            this.tabPageEX1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX1.Controls.Add(this.label1);
-            this.tabPageEX1.Controls.Add(this.CmbGraphics);
-            this.tabPageEX1.Controls.Add(this.NumBackground);
-            this.tabPageEX1.Controls.Add(this.label2);
-            this.tabPageEX1.Controls.Add(this.CmbPalettes);
-            this.tabPageEX1.Controls.Add(this.label5);
-            this.tabPageEX1.Controls.Add(this.BtnClear);
-            this.tabPageEX1.Controls.Add(this.LblHexGraphics);
-            this.tabPageEX1.Location = new System.Drawing.Point(4, 4);
-            this.tabPageEX1.Name = "tabPageEX1";
-            this.tabPageEX1.Size = new System.Drawing.Size(561, 67);
-            this.tabPageEX1.TabIndex = 4;
-            this.tabPageEX1.Text = "Graphics";
-            this.tabPageEX1.UseVisualStyleBackColor = true;
-            // 
-            // LblHexGraphics
-            // 
-            this.LblHexGraphics.AutoSize = true;
-            this.LblHexGraphics.Location = new System.Drawing.Point(94, 10);
-            this.LblHexGraphics.Name = "LblHexGraphics";
-            this.LblHexGraphics.Size = new System.Drawing.Size(41, 13);
-            this.LblHexGraphics.TabIndex = 31;
-            this.LblHexGraphics.Text = "label10";
-            this.LblHexGraphics.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // BtnClear
-            // 
-            this.BtnClear.Location = new System.Drawing.Point(358, 26);
-            this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(55, 23);
-            this.BtnClear.TabIndex = 30;
-            this.BtnClear.Text = "Set";
-            this.BtnClear.UseVisualStyleBackColor = true;
-            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(157, 10);
-            this.label5.Margin = new System.Windows.Forms.Padding(3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 29;
-            this.label5.Text = "Palette";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CmbPalettes
-            // 
-            this.CmbPalettes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbPalettes.FormattingEnabled = true;
-            this.CmbPalettes.Location = new System.Drawing.Point(160, 29);
-            this.CmbPalettes.Name = "CmbPalettes";
-            this.CmbPalettes.Size = new System.Drawing.Size(129, 21);
-            this.CmbPalettes.TabIndex = 28;
-            this.CmbPalettes.SelectedIndexChanged += new System.EventHandler(this.CmbPalettes_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(301, 10);
-            this.label2.Margin = new System.Windows.Forms.Padding(3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 13);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Background Tile";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // NumBackground
-            // 
-            this.NumBackground.Hexadecimal = true;
-            this.NumBackground.Location = new System.Drawing.Point(304, 29);
-            this.NumBackground.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.NumBackground.Name = "NumBackground";
-            this.NumBackground.Size = new System.Drawing.Size(48, 20);
-            this.NumBackground.TabIndex = 26;
-            this.NumBackground.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // CmbGraphics
-            // 
-            this.CmbGraphics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbGraphics.DropDownWidth = 200;
-            this.CmbGraphics.FormattingEnabled = true;
-            this.CmbGraphics.Location = new System.Drawing.Point(6, 29);
-            this.CmbGraphics.Name = "CmbGraphics";
-            this.CmbGraphics.Size = new System.Drawing.Size(129, 21);
-            this.CmbGraphics.TabIndex = 24;
-            this.CmbGraphics.SelectedIndexChanged += new System.EventHandler(this.CmbGraphics_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 10);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Graphics";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPage4.Controls.Add(this.CmbMusic);
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Controls.Add(this.label4);
-            this.tabPage4.Controls.Add(this.NumTime);
-            this.tabPage4.Controls.Add(this.label12);
-            this.tabPage4.Controls.Add(this.CmbScroll);
-            this.tabPage4.Controls.Add(this.CmbTypes);
-            this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.label8);
-            this.tabPage4.Controls.Add(this.CmbLength);
-            this.tabPage4.Location = new System.Drawing.Point(4, 4);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(561, 67);
-            this.tabPage4.TabIndex = 0;
-            this.tabPage4.Text = "Level";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // CmbLength
-            // 
-            this.CmbLength.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbLength.FormattingEnabled = true;
-            this.CmbLength.Location = new System.Drawing.Point(218, 31);
-            this.CmbLength.Name = "CmbLength";
-            this.CmbLength.Size = new System.Drawing.Size(58, 21);
-            this.CmbLength.TabIndex = 21;
-            this.CmbLength.SelectedIndexChanged += new System.EventHandler(this.CmbLength_SelectedIndexChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(218, 12);
-            this.label8.Margin = new System.Windows.Forms.Padding(3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 13);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Length";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(286, 12);
-            this.label6.Margin = new System.Windows.Forms.Padding(3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Level Type";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CmbTypes
-            // 
-            this.CmbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbTypes.FormattingEnabled = true;
-            this.CmbTypes.Location = new System.Drawing.Point(287, 31);
-            this.CmbTypes.Name = "CmbTypes";
-            this.CmbTypes.Size = new System.Drawing.Size(129, 21);
-            this.CmbTypes.TabIndex = 14;
-            this.CmbTypes.SelectedIndexChanged += new System.EventHandler(this.CmbTypes_SelectedIndexChanged);
-            // 
-            // CmbScroll
-            // 
-            this.CmbScroll.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbScroll.FormattingEnabled = true;
-            this.CmbScroll.Items.AddRange(new object[] {
-            "Scrolls When Flying",
-            "Free Scrolling",
-            "No Scrolling"});
-            this.CmbScroll.Location = new System.Drawing.Point(427, 31);
-            this.CmbScroll.Name = "CmbScroll";
-            this.CmbScroll.Size = new System.Drawing.Size(129, 21);
-            this.CmbScroll.TabIndex = 27;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(425, 12);
-            this.label12.Margin = new System.Windows.Forms.Padding(3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(60, 13);
-            this.label12.TabIndex = 27;
-            this.label12.Text = "Scroll Type";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // NumTime
-            // 
-            this.NumTime.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.NumTime.Location = new System.Drawing.Point(10, 31);
-            this.NumTime.Maximum = new decimal(new int[] {
-            990,
-            0,
-            0,
-            0});
-            this.NumTime.Name = "NumTime";
-            this.NumTime.Size = new System.Drawing.Size(57, 20);
-            this.NumTime.TabIndex = 10;
-            this.NumTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.NumTime.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 11);
-            this.label4.Margin = new System.Windows.Forms.Padding(3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Time";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 12);
-            this.label3.Margin = new System.Windows.Forms.Padding(3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Music";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CmbMusic
-            // 
-            this.CmbMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbMusic.DropDownWidth = 150;
-            this.CmbMusic.FormattingEnabled = true;
-            this.CmbMusic.Location = new System.Drawing.Point(78, 31);
-            this.CmbMusic.Name = "CmbMusic";
-            this.CmbMusic.Size = new System.Drawing.Size(129, 21);
-            this.CmbMusic.TabIndex = 7;
-            // 
-            // TabLevelInfo
-            // 
-            this.TabLevelInfo.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.TabLevelInfo.Controls.Add(this.tabPage4);
-            this.TabLevelInfo.Controls.Add(this.tabPageEX1);
-            this.TabLevelInfo.Controls.Add(this.tabPageEX2);
-            this.TabLevelInfo.Controls.Add(this.tabPageEX3);
-            this.TabLevelInfo.Controls.Add(this.tabPage7);
-            this.TabLevelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
-            this.TabLevelInfo.Name = "TabLevelInfo";
-            this.TabLevelInfo.SelectedIndex = 0;
-            this.TabLevelInfo.Size = new System.Drawing.Size(569, 93);
-            this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.TabLevelInfo.TabIndex = 20;
-            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1767,6 +1767,19 @@
             this.Text = "LevelEditor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LevelEditor_FormClosed);
             this.PnlInfo.ResumeLayout(false);
+            this.TabLevelInfo.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTime)).EndInit();
+            this.tabPageEX1.ResumeLayout(false);
+            this.tabPageEX1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).EndInit();
+            this.tabPageEX2.ResumeLayout(false);
+            this.tabPageEX2.PerformLayout();
+            this.tabPageEX3.ResumeLayout(false);
+            this.tabPageEX3.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).EndInit();
@@ -1790,19 +1803,6 @@
             this.CtxHorizontalGuide.ResumeLayout(false);
             this.PnlView.ResumeLayout(false);
             this.PnlLengthControl.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            this.tabPageEX3.ResumeLayout(false);
-            this.tabPageEX3.PerformLayout();
-            this.tabPageEX2.ResumeLayout(false);
-            this.tabPageEX2.PerformLayout();
-            this.tabPageEX1.ResumeLayout(false);
-            this.tabPageEX1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumTime)).EndInit();
-            this.TabLevelInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
