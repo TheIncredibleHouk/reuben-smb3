@@ -34,10 +34,12 @@
             this.CmbPalettes = new System.Windows.Forms.ComboBox();
             this.CmbDefinitions = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.RdoMap16 = new System.Windows.Forms.RadioButton();
             this.RdoNormal = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
             this.BtnSaveClose = new System.Windows.Forms.Button();
             this.LblHexGraphics1 = new System.Windows.Forms.Label();
             this.LblHexGraphics2 = new System.Windows.Forms.Label();
@@ -57,10 +59,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.SpecialList = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
-            this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
             this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
             this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
+            this.label5 = new System.Windows.Forms.Label();
+            this.BlockDescription = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -117,6 +119,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Block";
             // 
+            // BlvCurrent
+            // 
+            this.BlvCurrent.CurrentBlock = null;
+            this.BlvCurrent.Location = new System.Drawing.Point(16, 20);
+            this.BlvCurrent.Name = "BlvCurrent";
+            this.BlvCurrent.Size = new System.Drawing.Size(32, 32);
+            this.BlvCurrent.TabIndex = 7;
+            this.BlvCurrent.Text = "blockViewer1";
+            this.BlvCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlvCurrent_MouseDown);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.RdoMap16);
@@ -162,6 +174,16 @@
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Palettes";
+            // 
+            // PlsView
+            // 
+            this.PlsView.CurrentPalette = null;
+            this.PlsView.Location = new System.Drawing.Point(11, 50);
+            this.PlsView.Name = "PlsView";
+            this.PlsView.SelectablePaletteMode = false;
+            this.PlsView.Size = new System.Drawing.Size(256, 32);
+            this.PlsView.TabIndex = 4;
+            this.PlsView.Text = "paletteSelector1";
             // 
             // BtnSaveClose
             // 
@@ -364,26 +386,6 @@
             this.label3.TabIndex = 22;
             this.label3.Text = "Pattern Table 2";
             // 
-            // PlsView
-            // 
-            this.PlsView.CurrentPalette = null;
-            this.PlsView.Location = new System.Drawing.Point(11, 50);
-            this.PlsView.Name = "PlsView";
-            this.PlsView.SelectablePaletteMode = false;
-            this.PlsView.Size = new System.Drawing.Size(256, 32);
-            this.PlsView.TabIndex = 4;
-            this.PlsView.Text = "paletteSelector1";
-            // 
-            // BlvCurrent
-            // 
-            this.BlvCurrent.CurrentBlock = null;
-            this.BlvCurrent.Location = new System.Drawing.Point(16, 20);
-            this.BlvCurrent.Name = "BlvCurrent";
-            this.BlvCurrent.Size = new System.Drawing.Size(32, 32);
-            this.BlvCurrent.TabIndex = 7;
-            this.BlvCurrent.Text = "blockViewer1";
-            this.BlvCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlvCurrent_MouseDown);
-            // 
             // BlsBlocks
             // 
             this.BlsBlocks.BlockLayout = null;
@@ -415,11 +417,30 @@
             this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
             this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(355, 466);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Description";
+            // 
+            // BlockDescription
+            // 
+            this.BlockDescription.Location = new System.Drawing.Point(359, 482);
+            this.BlockDescription.Name = "BlockDescription";
+            this.BlockDescription.Size = new System.Drawing.Size(250, 20);
+            this.BlockDescription.TabIndex = 33;
+            this.BlockDescription.TextChanged += new System.EventHandler(this.BlockDescription_TextChanged);
+            // 
             // Map16Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 568);
+            this.Controls.Add(this.BlockDescription);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -488,5 +509,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox SpecialList;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox BlockDescription;
     }
 }

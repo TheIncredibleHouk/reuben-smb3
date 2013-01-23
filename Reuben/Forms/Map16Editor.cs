@@ -65,6 +65,7 @@ namespace Daiz.NES.Reuben
                 BlockProp3.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
                 BlockProp5.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
                 SpecialList.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
+                BlockDescription.Text = BlsBlocks.SelectedBlock.Description;
             }
         }
 
@@ -119,6 +120,7 @@ namespace Daiz.NES.Reuben
         private void BtnSaveClose_Click(object sender, EventArgs e)
         {
             ProjectController.BlockManager.SaveDefinitions(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".tsa");
+            ProjectController.BlockManager.SaveBlockStrings(ProjectController.RootDirectory + @"\strings.xml");
             this.Close();
         }
 
@@ -269,6 +271,11 @@ namespace Daiz.NES.Reuben
         {
             BlsBlocks.SelectedBlock.BlockProperty = (BlockProperty)((int)(BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskHi) | SpecialList.SelectedIndex);
             BlsBlocks.UpdateSelection();
+        }
+
+        private void BlockDescription_TextChanged(object sender, EventArgs e)
+        {
+            BlsBlocks.SelectedBlock.Description = BlockDescription.Text;
         }
     }
 }

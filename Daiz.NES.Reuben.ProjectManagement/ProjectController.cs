@@ -64,6 +64,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             BlockManager.LoadDefault();
             BlockManager.SaveDefinitions(string.Format("{0}{1}{2}.tsa", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
+            BlockManager.SaveBlockStrings(string.Format("{0}{1}strings.xml", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
 
 
             GraphicsManager.LoadDefault();
@@ -79,7 +80,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             SpecialManager.LoadDefaultSpecialGraphics();
             SpecialManager.LoadDefaultSpecials();
             SpecialManager.SaveGraphics(string.Format("{0}{1}special.chr", RootDirectory, Path.DirectorySeparatorChar));
-            SpecialManager.SaveSepcials(string.Format("{0}{1}special.xml", RootDirectory, Path.DirectorySeparatorChar));
+            SpecialManager.SaveSpecials(string.Format("{0}{1}special.xml", RootDirectory, Path.DirectorySeparatorChar));
 
             LayoutManager.LoadDefault();
             ProjectManager.New(name);
@@ -101,6 +102,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             if (!BlockManager.LoadDefinitions(string.Format("{0}{1}{2}.tsa", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
                 BlockManager.LoadDefault();
+
+            BlockManager.LoadBlockStrings(string.Format("{0}{1}string.xml", RootDirectory, Path.DirectorySeparatorChar));
 
             if (!GraphicsManager.LoadGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
                 GraphicsManager.LoadDefault();

@@ -14,23 +14,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public PaletteInfo SpecialPalette { get; private set; }
         public PatternTable SpecialTable { get; private set; }
         private List<GraphicsBank> SpecialBanks;
-        private Dictionary<int, SpecialDefinition> SpecialDefinitions;
+        public Dictionary<int, SpecialDefinition> SpecialDefinitions { get; set; }
 
         public SpecialManager()
         {
             SpecialDefinitions = new Dictionary<int, SpecialDefinition>();
             SpecialPalette = new PaletteInfo();
             SpecialBanks = new List<GraphicsBank>();
-            LoadBlockProperties();
-        }
-
-        private void LoadBlockProperties()
-        {
-            XDocument xDoc = XDocument.Parse(Resource.properties);
-            foreach (var x in xDoc.Element("properties").Elements("set"))
-            {
-                int set = x.Attribute("leveltype").Value.ToIntFromHex();
-            }
         }
 
         public bool LoadSpecialGraphics(string fileName)
@@ -158,7 +148,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return null;
         }
 
-        public void SaveSepcials(string filename1)
+        public void SaveSpecials(string filename1)
         {
             XDocument xDoc = new XDocument();
             XElement root = new XElement("specials");
@@ -194,35 +184,4 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
         }
     }
-
-    //public enum BlockProperty
-    //{
-    //    Background,
-    //    Solid,
-    //    TopSolid,
-    //    Water,
-    //    WaterFall,
-    //    SlopeLeft45,
-    //    SlopeRight45,
-    //    SlopeLeftBottom60,
-    //    SlopeLeftTop60,
-    //    SlopeRightBottom60,
-    //    SlopeRightTop60,
-    //    SlopeLeft45Ceiling,
-    //    SlopeRight45Ceiling,
-    //    SlopeLeftBottom60Ceiling,
-    //    SlopeLeftTop60Ceiling,
-    //    SlopeRightBottom60Ceiling,
-    //    SlopeRightTop60Ceiling,
-    //    SlopeFiller,
-    //    SlopeFillerTop,
-    //    SlopeFillerLeft,
-    //    SlopeFillerRight,
-    //    SlopeFillerBottom,
-    //    Harmful,
-    //    ConveyorLeft,
-    //    ConveyorRight,
-    //    Ice,
-    //    Quicksand
-    //}
 }
