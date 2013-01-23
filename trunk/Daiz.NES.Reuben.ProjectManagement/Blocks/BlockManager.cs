@@ -14,19 +14,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public event EventHandler DefinitionsSaved;
 
         private Dictionary<int, BlockDefinition> lookupTable;
-        private Dictionary<int, Dictionary<int, string>> blockStrings;
 
         public BlockManager()
         {
             lookupTable = new Dictionary<int, BlockDefinition>();
-            blockStrings = new Dictionary<int, Dictionary<int, string>>();
             for (int i = 0; i < 15; i++)
             {
                 lookupTable.Add(i, null);
             }
 
             LoadDefault();
-            LoadBlockStrings();
         }
 
         public List<BlockDefinition> AllDefinitions
@@ -36,25 +33,50 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public string GetBlockString(int defIndex, int block)
         {
-
-            if (blockStrings[defIndex].ContainsKey(block))
-                return blockStrings[defIndex][block];
-
-            return "Tile";
+            return lookupTable[defIndex][block].Description;
         }
 
-        private void LoadBlockStrings()
+        public void SetBlockString(int defIndex, int block, string description)
         {
-            XDocument xDoc = XDocument.Parse(Resource.blockstrings);
-            foreach (XElement x in xDoc.Element("strings").Elements("set"))
+            lookupTable[defIndex][block].Description =  description;
+        }
+
+        public void LoadBlockStrings(string fileName)
+        {
+            if (File.Exists(fileName))
             {
-                int levelType = x.Attribute("leveltype").Value.ToIntFromHex();
-                blockStrings.Add(levelType, new Dictionary<int, string>());
-                foreach (XElement e in x.Elements("block"))
+                XDocument xDoc = XDocument.Parse(fileName);
+                foreach (XElement x in xDoc.Element("strings").Elements("set"))
                 {
-                    blockStrings[levelType].Add(e.Attribute("value").Value.ToIntFromHex(), e.Value);
+                    int levelType = x.Attribute("leveltype").Value.ToIntFromHex();
+                    foreach (XElement e in x.Elements("block"))
+                    {
+                        lookupTable[levelType][e.Attribute("value").Value.ToIntFromHex()].Description = e.Value;
+                    }
                 }
             }
+        }
+
+        public void SaveBlockStrings(string fileName)
+        {
+            XDocument xDoc = new XDocument();
+            XElement root = new XElement("strings");
+            foreach (int k in lookupTable.Keys)
+            {
+                XElement s = new XElement("set");
+                s.SetAttributeValue("leveltype", k.ToHexString());
+                for (int i = 0; i < 256; i++)
+                {
+                    XElement b = new XElement("block");
+                    b.SetAttributeValue("value", i.ToHexString());
+                    b.SetValue(lookupTable[k][i].Description);
+                    s.Add(b);
+                }
+                root.Add(s);
+            }
+
+            xDoc.Add(root);
+            xDoc.Save(fileName);
         }
 
         public void LoadDefault()
@@ -89,7 +111,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             fs.Close();
 
 
-            for (int i =  0; i < 15; i++)
+            for (int i = 0; i < 15; i++)
             {
                 BlockDefinition bd = new BlockDefinition();
                 int bankOffset = i * 0x400;
@@ -121,7 +143,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             byte[] data = Resource.default_tsa;
 
             BlockDefinition bd = new BlockDefinition();
-            int bankOffset = levelType *0x400;
+            int bankOffset = levelType * 0x400;
             for (int j = 0; j < 256; j++)
             {
                 bd[j][0, 0] = data[bankOffset + j];
@@ -155,7 +177,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 for (int j = 0; j < 0x100; j++)
                 {
-                    data[dataPointer++] = (byte) lookupTable[i][j].BlockProperty;
+                    data[dataPointer++] = (byte)lookupTable[i][j].BlockProperty;
                 }
             }
 

@@ -140,9 +140,6 @@
   <data name="music" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\music.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\properties.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="special_definitions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\special.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

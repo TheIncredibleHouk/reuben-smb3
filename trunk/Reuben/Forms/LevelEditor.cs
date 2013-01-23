@@ -267,9 +267,6 @@ namespace Daiz.NES.Reuben
             PntEditor.CurrentPointer = null;
             BtnAddPointer.Enabled = CurrentLevel.Pointers.Count <= 10;
             BtnDeletePointer.Enabled = false;
-            CurrentLevel.TilesModified += new EventHandler<TEventArgs<TileInformation>>(CurrentLevel_TilesModified);
-            GetCoinTotals();
-            UpdateCoinTotalText();
             NumSpecials.Value = (decimal)CurrentLevel.Settings.ItemTransparency;
             LvlView.DelayDrawing = false;
             LvlView.FullUpdate();
@@ -427,122 +424,6 @@ namespace Daiz.NES.Reuben
         }
         #endregion
 
-        #region coin information gathering
-        void CurrentLevel_TilesModified(object sender, TEventArgs<TileInformation> e)
-        {
-            switch (e.Data.Previous)
-            {
-                case 0x05:
-                    pSwitchCoins--;
-                    break;
-
-                case 0x40:
-                    coins--;
-                    break;
-
-                case 0x63:
-                case 0x65:
-                    coinblocks--;
-                    break;
-
-                case 0x67:
-                    pSwitchCoins--;
-                    break;
-
-                case 0x44:
-                    invisibleCoins--;
-                    break;
-
-                case 0x6D:
-                    multicoins--;
-                    break;
-            }
-
-            switch (e.Data.Current)
-            {
-                case 0x05:
-                    pSwitchCoins++;
-                    break;
-
-                case 0x40:
-                    coins++;
-                    break;
-
-                case 0x63:
-                case 0x65:
-                    coinblocks++;
-                    break;
-
-                case 0x67:
-                    pSwitchCoins++;
-                    break;
-
-                case 0x6D:
-                    multicoins++;
-                    break;
-
-                case 0x44:
-                    invisibleCoins++;
-                    break;
-            }
-        }
-
-        //Coin info
-        int coins = 0;
-        int coinblocks = 0;
-        int multicoins = 0;
-        int pSwitchCoins = 0;
-        int invisibleCoins = 0;
-
-        private void GetCoinTotals()
-        {
-            pSwitchCoins = coinblocks = multicoins = coinblocks = invisibleCoins = 0;
-
-            for (int i = 0; i < CurrentLevel.Width; i++)
-            {
-                for (int j = 0; j < CurrentLevel.Height; j++)
-                {
-                    switch (CurrentLevel.LevelData[i, j])
-                    {
-                        case 0x05:
-                            pSwitchCoins++;
-                            break;
-
-                        case 0x40:
-                            coins++;
-                            break;
-
-                        case 0x63:
-                        case 0x65:
-                            coinblocks++;
-                            break;
-
-                        case 0x67:
-                            pSwitchCoins++;
-                            break;
-
-                        case 0x44:
-                            invisibleCoins++;
-                            break;
-
-                        case 0x6D:
-                            multicoins++;
-                            break;
-                    }
-                }
-            }
-        }
-
-        void UpdateCoinTotalText()
-        {
-            LblInvisibleCoins.Text = "Invisible Coin Blocks: " + invisibleCoins;
-            LblCoins.Text = "Coins: " + coins;
-            LblMultiCoins.Text = "Multi Coin Blocks: " + multicoins;
-            LblCoinBlocks.Text = "Coin Blocks: " + coinblocks;
-            LblPSwitchCoins.Text = "P-Switch Coins: " + pSwitchCoins;
-            LblTotalCoins.Text = "Total Possible Coins: " + (coins + coinblocks + pSwitchCoins + invisibleCoins + (multicoins * 10)).ToString();
-        }
-        #endregion
 
         #region palette functions
         void PaletteManager_PaletteAdded(object sender, TEventArgs<PaletteInfo> e)
@@ -1129,8 +1010,6 @@ namespace Daiz.NES.Reuben
                     }
                 }
             }
-
-            UpdateCoinTotalText();
         }
 
         private LevelPointer CurrentPointer;
@@ -1584,7 +1463,6 @@ namespace Daiz.NES.Reuben
         {
             Copy();
             DeleteTiles();
-            UpdateCoinTotalText();
         }
 
         private void Copy()
@@ -1617,22 +1495,10 @@ namespace Daiz.NES.Reuben
             }
             LvlView.DelayDrawing = false;
             LvlView.UpdateArea(usedRectangle);
-            UpdateCoinTotalText();
         }
 
-        private void TabCoins_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawLine(Pens.Black, 25, 65, 270, 65);
-        }
 
         public EditMode EditMode { get; set; }
-
-
-        private void BtnLevelSize_Click(object sender, EventArgs e)
-        {
-            LblSpriteSize.Text = "Sprite Data Size: " + (((CurrentLevel.SpriteData.Count) * 3) + 1).ToString() + " bytes";
-            LblLevelSize.Text = "Level Data Size: " + (CurrentLevel.GetCompressedData().Length + 12 + (CurrentLevel.Pointers.Count * 9)).ToString() + " bytes";
-        }
 
         public Bitmap GetLevelBitmap()
         {
@@ -1834,7 +1700,6 @@ namespace Daiz.NES.Reuben
             }
             LvlView.DelayDrawing = false;
             LvlView.UpdateArea(usedRectangle);
-            UpdateCoinTotalText();
             UndoBuffer.Remove(action);
         }
 

@@ -131,6 +131,7 @@
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -144,14 +145,13 @@
     <Content Include="Resources\sprites.xml" />
     <None Include="Resources\default.tsa" />
     <None Include="Resources\default.xml" />
-    <None Include="Resources\special.chr" />
+    <None Include="Project\special.chr" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\properties.xml">
+    <Content Include="Resources\special.xml" />
+    <Content Include="Resources\strings.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Resources\special.xml" />
-    <Content Include="Resources\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

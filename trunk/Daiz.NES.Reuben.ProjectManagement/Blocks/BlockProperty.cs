@@ -28,6 +28,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         SlopeRight45    	= 0x0E,
         SlopeFiller     	= 0x0F,
         MaskHi              = 0xF0,
-        MaskLow             = 0x0F
+        MaskLow             = 0x0F,
+        Background          = 0x00
     }
 }

@@ -10,7 +10,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class SpecialDefinition : BlockDefinition, IXmlIO
     {
-
         public int LevelType { get; private set; }
 
         public SpecialDefinition()
@@ -37,7 +36,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
-            LevelType = e.Attribute("leveltype").Value.ToInt();
+            foreach (XAttribute a in e.Attributes())
+            {
+                switch (a.Name.LocalName.ToLower())
+                {
+                    case "leveltype":
+                        LevelType = a.Value.ToInt();
+                        break;
+                }
+            }
+
             foreach (var x in e.Elements("block"))
             {
                 SpecialBlock sb = new SpecialBlock();

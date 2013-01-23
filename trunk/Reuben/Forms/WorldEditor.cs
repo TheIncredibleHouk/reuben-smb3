@@ -1117,11 +1117,6 @@ namespace Daiz.NES.Reuben
             WldView.UpdateArea(usedRectangle);
         }
 
-        private void TabCoins_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawLine(Pens.Black, 25, 65, 270, 65);
-        }
-
         public EditMode EditMode { get; set; }
 
         private void BtnLevelSize_Click(object sender, EventArgs e)
