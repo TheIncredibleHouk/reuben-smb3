@@ -141,7 +141,9 @@
     <None Include="Resources\default.chr" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\music.xml" />
+    <Content Include="Resources\music.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Resources\sprites.xml" />
     <None Include="Resources\default.tsa" />
     <None Include="Resources\default.xml" />

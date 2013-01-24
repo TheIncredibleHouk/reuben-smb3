@@ -191,6 +191,13 @@ namespace Daiz.NES.Reuben
                 BlvCurrent.SetTile(1, 0, copyBlock[1, 0]);
                 BlvCurrent.SetTile(0, 1, copyBlock[0, 1]);
                 BlvCurrent.SetTile(1, 1, copyBlock[1, 1]);
+                BlvCurrent.CurrentBlock.BlockProperty = copyBlock.BlockProperty;
+                BlockDescription.Text = BlvCurrent.CurrentBlock.Description = copyBlock.Description;
+                BlockProp1.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Solid) > 0;
+                BlockProp2.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.SolidTop) > 0;
+                BlockProp3.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
+                BlockProp5.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
+                SpecialList.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
             }
         }
 
