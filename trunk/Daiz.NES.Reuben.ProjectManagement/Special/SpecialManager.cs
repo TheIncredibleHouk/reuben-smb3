@@ -102,7 +102,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             if (!File.Exists(filename)) return false;
             SpecialDefinitions.Clear();
-            for (int j = 0; j < 15; j++)
+            for (int j = 0; j < 16; j++)
             {
                 SpecialDefinitions.Add(j, new SpecialDefinition());
             }

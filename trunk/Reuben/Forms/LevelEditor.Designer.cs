@@ -136,7 +136,6 @@
             this.TsbPaste = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.hMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.vMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,6 +167,7 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
+            this.hMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -206,7 +206,7 @@
             this.PnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PnlInfo.Location = new System.Drawing.Point(0, 373);
             this.PnlInfo.Name = "PnlInfo";
-            this.PnlInfo.Size = new System.Drawing.Size(776, 122);
+            this.PnlInfo.Size = new System.Drawing.Size(846, 122);
             this.PnlInfo.TabIndex = 1;
             // 
             // TabLevelInfo
@@ -221,7 +221,7 @@
             this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
             this.TabLevelInfo.Name = "TabLevelInfo";
             this.TabLevelInfo.SelectedIndex = 0;
-            this.TabLevelInfo.Size = new System.Drawing.Size(569, 93);
+            this.TabLevelInfo.Size = new System.Drawing.Size(639, 93);
             this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabLevelInfo.TabIndex = 20;
             // 
@@ -241,7 +241,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(561, 67);
+            this.tabPage4.Size = new System.Drawing.Size(631, 67);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Level";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -811,7 +811,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(569, 29);
+            this.panel4.Size = new System.Drawing.Size(639, 29);
             this.panel4.TabIndex = 23;
             // 
             // LblSprite
@@ -820,7 +820,7 @@
             this.LblSprite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblSprite.Location = new System.Drawing.Point(217, 0);
             this.LblSprite.Name = "LblSprite";
-            this.LblSprite.Size = new System.Drawing.Size(286, 29);
+            this.LblSprite.Size = new System.Drawing.Size(356, 29);
             this.LblSprite.TabIndex = 21;
             this.LblSprite.Text = "Sprite";
             this.LblSprite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -857,7 +857,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.NumSpecials);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(503, 0);
+            this.panel3.Location = new System.Drawing.Point(573, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(66, 29);
@@ -889,7 +889,7 @@
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.LblHelpText);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(569, 0);
+            this.panel5.Location = new System.Drawing.Point(639, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(207, 122);
             this.panel5.TabIndex = 22;
@@ -1131,7 +1131,7 @@
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.TlsDrawing.Size = new System.Drawing.Size(117, 25);
+            this.TlsDrawing.Size = new System.Drawing.Size(171, 25);
             this.TlsDrawing.TabIndex = 15;
             this.TlsDrawing.Text = "toolStrip1";
             // 
@@ -1205,7 +1205,6 @@
             this.TsbReplace.Size = new System.Drawing.Size(23, 22);
             this.TsbReplace.Text = "toolStripButton1";
             this.TsbReplace.ToolTipText = "Replace Tile";
-            this.TsbReplace.Visible = false;
             this.TsbReplace.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // tabPage5
@@ -1399,7 +1398,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(281, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(495, 27);
+            this.panel2.Size = new System.Drawing.Size(565, 27);
             this.panel2.TabIndex = 23;
             // 
             // TlsTileCommands
@@ -1413,9 +1412,9 @@
             this.toolStripSeparator8,
             this.hMirrorButton,
             this.vMirrorButton});
-            this.TlsTileCommands.Location = new System.Drawing.Point(310, 0);
+            this.TlsTileCommands.Location = new System.Drawing.Point(364, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(183, 25);
+            this.TlsTileCommands.Size = new System.Drawing.Size(199, 25);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -1467,17 +1466,6 @@
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
-            // 
-            // hMirrorButton
-            // 
-            this.hMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.hMirrorButton.Enabled = false;
-            this.hMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("hMirrorButton.Image")));
-            this.hMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.hMirrorButton.Name = "hMirrorButton";
-            this.hMirrorButton.Size = new System.Drawing.Size(23, 22);
-            this.hMirrorButton.Text = "Mirror Horizontally";
-            this.hMirrorButton.Click += new System.EventHandler(this.hMirrorButton_Click);
             // 
             // vMirrorButton
             // 
@@ -1675,7 +1663,7 @@
             this.PnlView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlView.Location = new System.Drawing.Point(297, 27);
             this.PnlView.Name = "PnlView";
-            this.PnlView.Size = new System.Drawing.Size(479, 330);
+            this.PnlView.Size = new System.Drawing.Size(549, 330);
             this.PnlView.TabIndex = 0;
             this.PnlView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LvlView_PreviewKeyDown);
             // 
@@ -1730,7 +1718,7 @@
             this.PnlHorizontalGuide.Location = new System.Drawing.Point(297, 357);
             this.PnlHorizontalGuide.Margin = new System.Windows.Forms.Padding(0);
             this.PnlHorizontalGuide.Name = "PnlHorizontalGuide";
-            this.PnlHorizontalGuide.Size = new System.Drawing.Size(479, 16);
+            this.PnlHorizontalGuide.Size = new System.Drawing.Size(549, 16);
             this.PnlHorizontalGuide.TabIndex = 30;
             // 
             // PnlVerticalGuide
@@ -1749,11 +1737,22 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 346);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
+            // hMirrorButton
+            // 
+            this.hMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hMirrorButton.Enabled = false;
+            this.hMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("hMirrorButton.Image")));
+            this.hMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hMirrorButton.Name = "hMirrorButton";
+            this.hMirrorButton.Size = new System.Drawing.Size(23, 22);
+            this.hMirrorButton.Text = "Mirror Horizontally";
+            this.hMirrorButton.Click += new System.EventHandler(this.hMirrorButton_Click);
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 495);
+            this.ClientSize = new System.Drawing.Size(846, 495);
             this.Controls.Add(this.PnlView);
             this.Controls.Add(this.PnlHorizontalGuide);
             this.Controls.Add(this.PnlVerticalGuide);
@@ -1894,7 +1893,6 @@
         private System.Windows.Forms.NumericUpDown NumSpecials;
         private System.Windows.Forms.ToolStripButton TsbReplace;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripButton hMirrorButton;
         private GuidePanel PnlHorizontalGuide;
         private GuidePanel PnlVerticalGuide;
         private System.Windows.Forms.ToolStripButton vMirrorButton;
@@ -1947,5 +1945,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox CmbChallengeType;
         private System.Windows.Forms.CheckBox ChkInvincibleEnemies;
+        private System.Windows.Forms.ToolStripButton hMirrorButton;
     }
 }

@@ -206,6 +206,11 @@ namespace Daiz.NES.Reuben
                     TileDrawMode = TileDrawMode.Fill;
                     TsbBucket.Checked = true;
                     break;
+
+                case TileDrawMode.Replace:
+                    TileDrawMode = TileDrawMode.Replace;
+                    TsbReplace.Checked = true;
+                    break;
             }
 
             switch (CurrentLevel.Settings.EditMode)
@@ -459,7 +464,7 @@ namespace Daiz.NES.Reuben
             CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank]);
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank + 1]);
-            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            LvlView.CurrentPalette = BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             BlsSelector.CurrentDefiniton = LvlView.CurrentDefiniton = LvlView.CurrentDefiniton;
             BlvRight.CurrentBlock = BlvRight.CurrentBlock;
             BlvLeft.CurrentBlock = BlvLeft.CurrentBlock;
@@ -631,6 +636,24 @@ namespace Daiz.NES.Reuben
                                 LvlView.UpdateArea(new Rectangle(lowestX, lowestY, highestX - lowestX + 1, highestY - lowestY + 1));
                             }
 
+                            break;
+
+                        case TileDrawMode.Replace:
+                            LvlView.DelayDrawing = true;
+                            int findTile = CurrentLevel.LevelData[x, y];
+                            for (int i = 0; i < (15 * 16); i++)
+                            {
+                                for (int j = 0; j < 0x1B; j++)
+                                {
+                                    if (CurrentLevel.LevelData[i, j] == findTile)
+                                    {
+                                        CurrentLevel.LevelData[i, j] = (byte)DrawingTile;
+                                    }
+                                }
+                            }
+
+                            LvlView.DelayDrawing = false;;
+                            LvlView.FullUpdate();
                             break;
                     }
                 }
