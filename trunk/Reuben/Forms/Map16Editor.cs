@@ -60,11 +60,17 @@ namespace Daiz.NES.Reuben
             LblBlockSelected.Text = "Selected: " + BlsBlocks.SelectedIndex.ToHexString();
             if (BlvCurrent.CurrentBlock != null)
             {
-                BlockProp1.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Solid) > 0;
-                BlockProp2.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.SolidTop) > 0;
-                BlockProp3.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
-                BlockProp5.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
-                SpecialList.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
+                manualAltSet = true;
+                BlockAlt.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Alternative) > 0;
+                manualAltSet = false;
+                BlockSolid.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Solid) > 0;
+                BlockWater.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
+                BlockForeground.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
+                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow); ;
+                if (b < SpecialList.Items.Count)
+                {
+                    SpecialList.SelectedIndex = b;
+                }
                 BlockDescription.Text = BlsBlocks.SelectedBlock.Description;
             }
         }
@@ -177,6 +183,7 @@ namespace Daiz.NES.Reuben
         }
 
         Block copyBlock = null;
+        bool manualAltSet = false;
         private void BlsBlocks_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
@@ -193,10 +200,12 @@ namespace Daiz.NES.Reuben
                 BlvCurrent.SetTile(1, 1, copyBlock[1, 1]);
                 BlvCurrent.CurrentBlock.BlockProperty = copyBlock.BlockProperty;
                 BlockDescription.Text = BlvCurrent.CurrentBlock.Description = copyBlock.Description;
-                BlockProp1.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Solid) > 0;
-                BlockProp2.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.SolidTop) > 0;
-                BlockProp3.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
-                BlockProp5.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
+                manualAltSet = true;
+                BlockAlt.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Alternative) > 0;
+                manualAltSet = false;
+                BlockSolid.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Solid) > 0;
+                BlockWater.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
+                BlockForeground.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
                 SpecialList.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
             }
         }
@@ -223,11 +232,7 @@ namespace Daiz.NES.Reuben
                     b[1, 0] = BlvCurrent.CurrentBlock[1, 0];
                     b[1, 1] = BlvCurrent.CurrentBlock[1, 1];
                     b.Description = BlockDescription.Text;
-                    b.BlockProperty = (BlockProp1.Checked ? BlockProperty.Solid : BlockProperty.Background) |
-                        (BlockProp2.Checked ? BlockProperty.SolidTop : BlockProperty.Background) |
-                        (BlockProp3.Checked ? BlockProperty.Foreground : BlockProperty.Background) |
-                        (BlockProp5.Checked ? BlockProperty.Water : BlockProperty.Background) |
-                        ((BlockProperty)((int)(BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskHi) | SpecialList.SelectedIndex));
+                    b.BlockProperty = BlvCurrent.CurrentBlock.BlockProperty;
                 }
             }
         }
@@ -248,48 +253,106 @@ namespace Daiz.NES.Reuben
             BlsBlocks.ShowBlockProperties = ChkBlockProperties.Checked;
         }
 
-        private void BlockProp1_CheckedChanged(object sender, EventArgs e)
-        {
-            SetBlockProperty(BlockProperty.Solid, BlockProp1.Checked);
-        }
-
-        private void SetBlockProperty(BlockProperty b, bool value)
-        {
-            BlockProperty bp = BlsBlocks.SelectedBlock.BlockProperty;
-            bp = bp | b;
-            if (!value)
-            {
-                bp = bp ^ b;
-            }
-
-            BlsBlocks.SelectedBlock.BlockProperty = bp;
-            BlsBlocks.UpdateSelection();
-        }
-
-        private void BlockProp2_CheckedChanged(object sender, EventArgs e)
-        {
-            SetBlockProperty(BlockProperty.SolidTop, BlockProp2.Checked);
-        }
-
-        private void BlockProp3_CheckedChanged(object sender, EventArgs e)
-        {
-            SetBlockProperty(BlockProperty.Water, BlockProp3.Checked);
-        }
-
-        private void BlockProp5_CheckedChanged(object sender, EventArgs e)
-        {
-            SetBlockProperty(BlockProperty.Foreground, BlockProp5.Checked);
-        }
-
         private void SpecialList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.SelectedBlock.BlockProperty = (BlockProperty)((int)(BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskHi) | SpecialList.SelectedIndex);
-            BlsBlocks.UpdateSelection();
+            if (!manualAltSet)
+            {
+                BlsBlocks.SelectedBlock.BlockProperty = (BlockProperty)((int)(BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskHi) | SpecialList.SelectedIndex);
+                BlsBlocks.UpdateSelection();
+            }
         }
 
         private void BlockDescription_TextChanged(object sender, EventArgs e)
         {
             BlsBlocks.SelectedBlock.Description = BlockDescription.Text;
+        }
+
+        private void BlockAlt_CheckedChanged(object sender, EventArgs e)
+        {
+            Block b = BlsBlocks.SelectedBlock;
+            b.BlockProperty = b.BlockProperty & BlockProperty.MaskAlternative;
+            if (BlockAlt.Checked)
+            {
+                BlockSolid.Text = "Solid Only Top";
+                b.BlockProperty |= BlockProperty.Alternative;
+                BlockForeground.Enabled = BlockForeground.Checked = BlockWater.Checked = BlockWater.Enabled = false;
+                SpecialList.DataSource = tileSetTwo;
+                SpecialList.SelectedIndex = 0;
+            }
+            else
+            {
+                BlockSolid.Text = "Solid";
+                BlockWater.Enabled = true;
+                BlockForeground.Enabled = true;
+                SpecialList.DataSource = tileSetOne;
+                SpecialList.SelectedIndex = 0;
+            }
+        }
+
+        private static List<string> tileSetOne = new List<string>()
+        {
+            "None",
+            "Harmful",
+            "Slick",
+            "Conveyor Left",
+            "Conveyor Right",
+            "Unstable Block",
+            "Vertical Enterable Pipe Left",
+            "Vertical Enterable Pipe Right",
+            "High Gravity",
+            "Climbable"
+        };
+
+        private static List<string> tileSetTwo = new List<string>()
+        {
+            "None",
+            "Slope Bottom Left 30 Degrees",
+            "Slope Top Left 30 Degrees",
+            "Slope Bottom Right 30 Degrees",
+            "Slope Top Right 30 Degrees",
+            "Slope Left 45 Degrees",
+            "Slope Right 45 Degrees",
+            "Slope Filler",
+            "Slope Top",
+            "Slope Ceiling Bottom Left 30 Degrees",
+            "Slope Ceiling Top Left 30 Degrees",
+            "Slope Ceiling Bottom Right 30 Degrees",
+            "Slope Ceiling Top Right 30 Degrees",
+            "Slope Ceiling Left 45 Degrees",
+            "Slope Ceiling Right 45 Degrees",
+            "Slope Ceiling Degrees"
+        };
+
+        private void BlockSolid_CheckedChanged(object sender, EventArgs e)
+        {
+            Block b = BlsBlocks.SelectedBlock;
+            b.BlockProperty = b.BlockProperty & BlockProperty.MaskSolid;
+            if (BlockSolid.Checked)
+            {
+                b.BlockProperty |= BlockProperty.Solid;
+            }
+        }
+
+        private void BlockForeground_CheckedChanged(object sender, EventArgs e)
+        {
+
+            Block b = BlsBlocks.SelectedBlock;
+            b.BlockProperty = b.BlockProperty & BlockProperty.MaskForeground;
+            if (BlockForeground.Checked)
+            {
+                b.BlockProperty |= BlockProperty.Foreground;
+            }
+        }
+
+        private void BlockWater_CheckedChanged(object sender, EventArgs e)
+        {
+
+            Block b = BlsBlocks.SelectedBlock;
+            b.BlockProperty = b.BlockProperty & BlockProperty.MaskWater;
+            if (BlockWater.Checked)
+            {
+                b.BlockProperty |= BlockProperty.Water;
+            }
         }
     }
 }

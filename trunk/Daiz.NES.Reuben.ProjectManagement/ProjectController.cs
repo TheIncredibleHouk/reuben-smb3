@@ -123,7 +123,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public static bool Save()
         {
             ProjectManager.Save(string.Format("{0}{1}{2}.rbn", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
-            MusicManager.Save(string.Format("{0}{1}music.xml", RootDirectory, Path.DirectorySeparatorChar));
             return true;
         }
     }

@@ -51,10 +51,10 @@
             this.ChkBlockProperties = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.BlockProp1 = new System.Windows.Forms.CheckBox();
-            this.BlockProp2 = new System.Windows.Forms.CheckBox();
-            this.BlockProp5 = new System.Windows.Forms.CheckBox();
-            this.BlockProp3 = new System.Windows.Forms.CheckBox();
+            this.BlockSolid = new System.Windows.Forms.CheckBox();
+            this.BlockAlt = new System.Windows.Forms.CheckBox();
+            this.BlockForeground = new System.Windows.Forms.CheckBox();
+            this.BlockWater = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SpecialList = new System.Windows.Forms.ComboBox();
@@ -282,58 +282,58 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "Object Set";
             // 
-            // BlockProp1
+            // BlockSolid
             // 
-            this.BlockProp1.AutoSize = true;
-            this.BlockProp1.Location = new System.Drawing.Point(6, 19);
-            this.BlockProp1.Name = "BlockProp1";
-            this.BlockProp1.Size = new System.Drawing.Size(49, 17);
-            this.BlockProp1.TabIndex = 23;
-            this.BlockProp1.Text = "Solid";
-            this.BlockProp1.UseVisualStyleBackColor = true;
-            this.BlockProp1.CheckedChanged += new System.EventHandler(this.BlockProp1_CheckedChanged);
+            this.BlockSolid.AutoSize = true;
+            this.BlockSolid.Location = new System.Drawing.Point(6, 19);
+            this.BlockSolid.Name = "BlockSolid";
+            this.BlockSolid.Size = new System.Drawing.Size(49, 17);
+            this.BlockSolid.TabIndex = 23;
+            this.BlockSolid.Text = "Solid";
+            this.BlockSolid.UseVisualStyleBackColor = true;
+            this.BlockSolid.CheckedChanged += new System.EventHandler(this.BlockSolid_CheckedChanged);
             // 
-            // BlockProp2
+            // BlockAlt
             // 
-            this.BlockProp2.AutoSize = true;
-            this.BlockProp2.Location = new System.Drawing.Point(6, 42);
-            this.BlockProp2.Name = "BlockProp2";
-            this.BlockProp2.Size = new System.Drawing.Size(95, 17);
-            this.BlockProp2.TabIndex = 24;
-            this.BlockProp2.Text = "Only Top Solid";
-            this.BlockProp2.UseVisualStyleBackColor = true;
-            this.BlockProp2.CheckedChanged += new System.EventHandler(this.BlockProp2_CheckedChanged);
+            this.BlockAlt.AutoSize = true;
+            this.BlockAlt.Location = new System.Drawing.Point(127, 42);
+            this.BlockAlt.Name = "BlockAlt";
+            this.BlockAlt.Size = new System.Drawing.Size(87, 17);
+            this.BlockAlt.TabIndex = 24;
+            this.BlockAlt.Text = "Alternate Set";
+            this.BlockAlt.UseVisualStyleBackColor = true;
+            this.BlockAlt.CheckedChanged += new System.EventHandler(this.BlockAlt_CheckedChanged);
             // 
-            // BlockProp5
+            // BlockForeground
             // 
-            this.BlockProp5.AutoSize = true;
-            this.BlockProp5.Location = new System.Drawing.Point(127, 42);
-            this.BlockProp5.Name = "BlockProp5";
-            this.BlockProp5.Size = new System.Drawing.Size(80, 17);
-            this.BlockProp5.TabIndex = 25;
-            this.BlockProp5.Text = "Foreground";
-            this.BlockProp5.UseVisualStyleBackColor = true;
-            this.BlockProp5.CheckedChanged += new System.EventHandler(this.BlockProp5_CheckedChanged);
+            this.BlockForeground.AutoSize = true;
+            this.BlockForeground.Location = new System.Drawing.Point(6, 42);
+            this.BlockForeground.Name = "BlockForeground";
+            this.BlockForeground.Size = new System.Drawing.Size(80, 17);
+            this.BlockForeground.TabIndex = 25;
+            this.BlockForeground.Text = "Foreground";
+            this.BlockForeground.UseVisualStyleBackColor = true;
+            this.BlockForeground.CheckedChanged += new System.EventHandler(this.BlockForeground_CheckedChanged);
             // 
-            // BlockProp3
+            // BlockWater
             // 
-            this.BlockProp3.AutoSize = true;
-            this.BlockProp3.Location = new System.Drawing.Point(127, 19);
-            this.BlockProp3.Name = "BlockProp3";
-            this.BlockProp3.Size = new System.Drawing.Size(55, 17);
-            this.BlockProp3.TabIndex = 29;
-            this.BlockProp3.Text = "Water";
-            this.BlockProp3.UseVisualStyleBackColor = true;
-            this.BlockProp3.CheckedChanged += new System.EventHandler(this.BlockProp3_CheckedChanged);
+            this.BlockWater.AutoSize = true;
+            this.BlockWater.Location = new System.Drawing.Point(127, 19);
+            this.BlockWater.Name = "BlockWater";
+            this.BlockWater.Size = new System.Drawing.Size(55, 17);
+            this.BlockWater.TabIndex = 29;
+            this.BlockWater.Text = "Water";
+            this.BlockWater.UseVisualStyleBackColor = true;
+            this.BlockWater.CheckedChanged += new System.EventHandler(this.BlockWater_CheckedChanged);
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.SpecialList);
-            this.groupBox4.Controls.Add(this.BlockProp1);
-            this.groupBox4.Controls.Add(this.BlockProp2);
-            this.groupBox4.Controls.Add(this.BlockProp3);
-            this.groupBox4.Controls.Add(this.BlockProp5);
+            this.groupBox4.Controls.Add(this.BlockSolid);
+            this.groupBox4.Controls.Add(this.BlockAlt);
+            this.groupBox4.Controls.Add(this.BlockWater);
+            this.groupBox4.Controls.Add(this.BlockForeground);
             this.groupBox4.Location = new System.Drawing.Point(358, 353);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(257, 97);
@@ -354,23 +354,6 @@
             // 
             this.SpecialList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SpecialList.FormattingEnabled = true;
-            this.SpecialList.Items.AddRange(new object[] {
-            "None",
-            "Harmful",
-            "Slick",
-            "Conveyor Left",
-            "Conveyor Right",
-            "Vertical Enterable Pipe",
-            "Unstable Block",
-            "Waterfall",
-            "Climbable",
-            "Slope Bottom Left 30 Degrees",
-            "Slope Top Left 30 Degrees",
-            "Slope Bottom Right 30 Degrees",
-            "Slope Top Right 30 Degrees",
-            "Slope Left 45 Degrees",
-            "Slope Right 45 Degrees",
-            "SlopeFiller "});
             this.SpecialList.Location = new System.Drawing.Point(81, 65);
             this.SpecialList.Name = "SpecialList";
             this.SpecialList.Size = new System.Drawing.Size(170, 21);
@@ -501,10 +484,10 @@
         private System.Windows.Forms.CheckBox ChkBlockProperties;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox BlockProp1;
-        private System.Windows.Forms.CheckBox BlockProp2;
-        private System.Windows.Forms.CheckBox BlockProp5;
-        private System.Windows.Forms.CheckBox BlockProp3;
+        private System.Windows.Forms.CheckBox BlockSolid;
+        private System.Windows.Forms.CheckBox BlockAlt;
+        private System.Windows.Forms.CheckBox BlockForeground;
+        private System.Windows.Forms.CheckBox BlockWater;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
