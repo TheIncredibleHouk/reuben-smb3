@@ -749,7 +749,7 @@ namespace Daiz.NES.Reuben
             else if (EditMode == EditMode.Tiles)
             {
                 SetTileModeText();
-                LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.BlockManager.AllDefinitions[CurrentLevel.Type][CurrentLevel.LevelData[x, y]].BlockProperty + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
+                LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.BlockManager.AllDefinitions[CurrentLevel.Type][CurrentLevel.LevelData[x, y]].BlockProperty.GetString() + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
 
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
@@ -1624,7 +1624,7 @@ namespace Daiz.NES.Reuben
             if (tile > 0)
             {
                 LblSelectorHover.Text = "Block: " + tile.ToHexString();
-                LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile) + "\n" + ProjectController.BlockManager.AllDefinitions[CurrentLevel.Type][tile].BlockProperty + "\n" + "(" + tile.ToHexString() + ")");
+                LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile) + "\n" + ProjectController.BlockManager.AllDefinitions[CurrentLevel.Type][tile].BlockProperty.GetString() + "\n" + "(" + tile.ToHexString() + ")");
             }
             else
             {
