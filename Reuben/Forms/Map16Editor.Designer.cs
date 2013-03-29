@@ -51,13 +51,13 @@
             this.ChkBlockProperties = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.BlockSolid = new System.Windows.Forms.CheckBox();
-            this.BlockAlt = new System.Windows.Forms.CheckBox();
-            this.BlockForeground = new System.Windows.Forms.CheckBox();
-            this.BlockWater = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ChkWater = new System.Windows.Forms.CheckBox();
+            this.ChkForeground = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.CmbSolidity = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.SpecialList = new System.Windows.Forms.ComboBox();
+            this.CmdInteraction = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
             this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
@@ -282,83 +282,85 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "Object Set";
             // 
-            // BlockSolid
-            // 
-            this.BlockSolid.AutoSize = true;
-            this.BlockSolid.Location = new System.Drawing.Point(6, 19);
-            this.BlockSolid.Name = "BlockSolid";
-            this.BlockSolid.Size = new System.Drawing.Size(49, 17);
-            this.BlockSolid.TabIndex = 23;
-            this.BlockSolid.Text = "Solid";
-            this.BlockSolid.UseVisualStyleBackColor = true;
-            this.BlockSolid.CheckedChanged += new System.EventHandler(this.BlockSolid_CheckedChanged);
-            // 
-            // BlockAlt
-            // 
-            this.BlockAlt.AutoSize = true;
-            this.BlockAlt.Location = new System.Drawing.Point(127, 42);
-            this.BlockAlt.Name = "BlockAlt";
-            this.BlockAlt.Size = new System.Drawing.Size(87, 17);
-            this.BlockAlt.TabIndex = 24;
-            this.BlockAlt.Text = "Alternate Set";
-            this.BlockAlt.UseVisualStyleBackColor = true;
-            this.BlockAlt.CheckedChanged += new System.EventHandler(this.BlockAlt_CheckedChanged);
-            // 
-            // BlockForeground
-            // 
-            this.BlockForeground.AutoSize = true;
-            this.BlockForeground.Location = new System.Drawing.Point(6, 42);
-            this.BlockForeground.Name = "BlockForeground";
-            this.BlockForeground.Size = new System.Drawing.Size(80, 17);
-            this.BlockForeground.TabIndex = 25;
-            this.BlockForeground.Text = "Foreground";
-            this.BlockForeground.UseVisualStyleBackColor = true;
-            this.BlockForeground.CheckedChanged += new System.EventHandler(this.BlockForeground_CheckedChanged);
-            // 
-            // BlockWater
-            // 
-            this.BlockWater.AutoSize = true;
-            this.BlockWater.Location = new System.Drawing.Point(127, 19);
-            this.BlockWater.Name = "BlockWater";
-            this.BlockWater.Size = new System.Drawing.Size(55, 17);
-            this.BlockWater.TabIndex = 29;
-            this.BlockWater.Text = "Water";
-            this.BlockWater.UseVisualStyleBackColor = true;
-            this.BlockWater.CheckedChanged += new System.EventHandler(this.BlockWater_CheckedChanged);
-            // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.ChkWater);
+            this.groupBox4.Controls.Add(this.ChkForeground);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.CmbSolidity);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.SpecialList);
-            this.groupBox4.Controls.Add(this.BlockSolid);
-            this.groupBox4.Controls.Add(this.BlockAlt);
-            this.groupBox4.Controls.Add(this.BlockWater);
-            this.groupBox4.Controls.Add(this.BlockForeground);
-            this.groupBox4.Location = new System.Drawing.Point(358, 353);
+            this.groupBox4.Controls.Add(this.CmdInteraction);
+            this.groupBox4.Location = new System.Drawing.Point(347, 353);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(257, 97);
+            this.groupBox4.Size = new System.Drawing.Size(268, 110);
             this.groupBox4.TabIndex = 31;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Properties";
             // 
+            // ChkWater
+            // 
+            this.ChkWater.AutoSize = true;
+            this.ChkWater.Location = new System.Drawing.Point(135, 49);
+            this.ChkWater.Name = "ChkWater";
+            this.ChkWater.Size = new System.Drawing.Size(55, 17);
+            this.ChkWater.TabIndex = 37;
+            this.ChkWater.Text = "Water";
+            this.ChkWater.UseVisualStyleBackColor = true;
+            this.ChkWater.CheckedChanged += new System.EventHandler(this.ChkWater_CheckedChanged);
+            // 
+            // ChkForeground
+            // 
+            this.ChkForeground.AutoSize = true;
+            this.ChkForeground.Location = new System.Drawing.Point(11, 49);
+            this.ChkForeground.Name = "ChkForeground";
+            this.ChkForeground.Size = new System.Drawing.Size(80, 17);
+            this.ChkForeground.TabIndex = 36;
+            this.ChkForeground.Text = "Foreground";
+            this.ChkForeground.UseVisualStyleBackColor = true;
+            this.ChkForeground.CheckedChanged += new System.EventHandler(this.ChkForeground_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "Solidity";
+            // 
+            // CmbSolidity
+            // 
+            this.CmbSolidity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSolidity.FormattingEnabled = true;
+            this.CmbSolidity.Items.AddRange(new object[] {
+            "None",
+            "Solid Top",
+            "Solid Bottom",
+            "Solid All"});
+            this.CmbSolidity.Location = new System.Drawing.Point(72, 19);
+            this.CmbSolidity.Name = "CmbSolidity";
+            this.CmbSolidity.Size = new System.Drawing.Size(179, 21);
+            this.CmbSolidity.TabIndex = 34;
+            this.CmbSolidity.SelectedIndexChanged += new System.EventHandler(this.CmbSolidity_SelectedIndexChanged);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 68);
+            this.label4.Location = new System.Drawing.Point(9, 86);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 33;
-            this.label4.Text = "Special Type";
+            this.label4.Text = "Interaction";
             // 
-            // SpecialList
+            // CmdInteraction
             // 
-            this.SpecialList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SpecialList.FormattingEnabled = true;
-            this.SpecialList.Location = new System.Drawing.Point(81, 65);
-            this.SpecialList.Name = "SpecialList";
-            this.SpecialList.Size = new System.Drawing.Size(170, 21);
-            this.SpecialList.TabIndex = 32;
-            this.SpecialList.SelectedIndexChanged += new System.EventHandler(this.SpecialList_SelectedIndexChanged);
+            this.CmdInteraction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmdInteraction.FormattingEnabled = true;
+            this.CmdInteraction.Location = new System.Drawing.Point(72, 83);
+            this.CmdInteraction.Name = "CmdInteraction";
+            this.CmdInteraction.Size = new System.Drawing.Size(179, 21);
+            this.CmdInteraction.TabIndex = 32;
+            this.CmdInteraction.SelectedIndexChanged += new System.EventHandler(this.SpecialList_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -484,15 +486,15 @@
         private System.Windows.Forms.CheckBox ChkBlockProperties;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox BlockSolid;
-        private System.Windows.Forms.CheckBox BlockAlt;
-        private System.Windows.Forms.CheckBox BlockForeground;
-        private System.Windows.Forms.CheckBox BlockWater;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox SpecialList;
+        private System.Windows.Forms.ComboBox CmdInteraction;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox BlockDescription;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox CmbSolidity;
+        private System.Windows.Forms.CheckBox ChkWater;
+        private System.Windows.Forms.CheckBox ChkForeground;
     }
 }
