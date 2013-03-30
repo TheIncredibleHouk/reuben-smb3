@@ -15,6 +15,8 @@ namespace Daiz.NES.Reuben
     public partial class Map16Editor : Form
     {
         PatternTable CurrentTable;
+        private Dictionary<int, BlockProperty> solidityMap = new Dictionary<int, BlockProperty>();
+
         public Map16Editor()
         {
             InitializeComponent();
@@ -50,11 +52,43 @@ namespace Daiz.NES.Reuben
             CmbDefinitions.SelectedIndex = 0;
             BlsBlocks.SelectionChanged += new EventHandler<TEventArgs<MouseButtons>>(BlsBlocks_SelectionChanged);
             BlsBlocks.SelectedIndex = 0;
-            CmdInteraction.Items.Add("None");
-            for (int i = 1; i < 16; i++)
+            solidityMap[0] = BlockProperty.Background;
+            solidityMap[1] = BlockProperty.Foreground;
+            solidityMap[2] = BlockProperty.Water;
+            solidityMap[3] = BlockProperty.Water | BlockProperty.Foreground;
+            solidityMap[4] = BlockProperty.SolidTop;
+            solidityMap[5] = BlockProperty.SolidBottom;
+            solidityMap[6] = BlockProperty.SolidAll;
+            solidityMap[7] = BlockProperty.CoinBlock;
+            for (int i = 0; i < 16; i++)
             {
-                CmdInteraction.Items.Add(((BlockProperty)i).ToString());
+                InteractionTypes.Add(((BlockProperty)i).ToString());
             }
+
+            for (int i = 0; i < 16; i++)
+            {
+                SpecialTypes.Add(((BlockProperty)(0xF0 | i)).ToString());
+            }
+        }
+
+        private List<string> InteractionTypes = new List<string>();
+        private List<string> SpecialTypes = new List<string>();
+
+        private bool updating;
+        private void UpdateInteractionSpecialList()
+        {
+            updating = true;
+            if (CmbSolidity.SelectedIndex == 7)
+            {
+                CmdInteraction.DataSource = SpecialTypes;
+            }
+            else
+            {
+                CmdInteraction.DataSource = InteractionTypes;
+
+            }
+            updating = false;
+            CmdInteraction.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
         }
 
         void BlsBlocks_SelectionChanged(object sender, TEventArgs<MouseButtons> e)
@@ -65,14 +99,14 @@ namespace Daiz.NES.Reuben
             LblBlockSelected.Text = "Selected: " + BlsBlocks.SelectedIndex.ToHexString();
             if (BlvCurrent.CurrentBlock != null)
             {
-                CmbSolidity.SelectedIndex = ((int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Mask78Bits) >> 6);
-                ChkWater.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Water) > 0;
-                ChkForeground.Checked = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Foreground) > 0;
-                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow); ;
-                if (b < CmdInteraction.Items.Count)
+                CmbSolidity.SelectedIndex = solidityMap.Values.ToList().IndexOf(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskHi);
+                if (CmbSolidity.SelectedIndex == -1)
                 {
-                    CmdInteraction.SelectedIndex = b;
+                    CmbSolidity.SelectedIndex = 0;
                 }
+
+                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow); ;
+                CmdInteraction.SelectedIndex = b;
                 BlockDescription.Text = BlsBlocks.SelectedBlock.Description;
             }
         }
@@ -102,7 +136,184 @@ namespace Daiz.NES.Reuben
         private void CmbDefinitions_SelectedIndexChanged(object sender, EventArgs e)
         {
             BlsBlocks.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
-            BlsBlocks.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CmbDefinitions.SelectedIndex);
+            FillBlockForTransitions();
+            LoadBlockTransitions();
+        }
+
+        private void FillBlockForTransitions()
+        {
+
+            fbF1.Items.Clear();
+            fbF2.Items.Clear();
+            fbF3.Items.Clear();
+            fbF4.Items.Clear();
+            fbT1.Items.Clear();
+            fbT2.Items.Clear();
+            fbT3.Items.Clear();
+            fbT4.Items.Clear();
+            ibF1.Items.Clear();
+            ibF2.Items.Clear();
+            ibF3.Items.Clear();
+            ibF4.Items.Clear();
+            ibT1.Items.Clear();
+            ibT2.Items.Clear();
+            ibT3.Items.Clear();
+            ibT4.Items.Clear();
+            shF1.Items.Clear();
+            shF2.Items.Clear();
+            shF3.Items.Clear();
+            shF4.Items.Clear();
+            shT1.Items.Clear();
+            shT2.Items.Clear();
+            shT3.Items.Clear();
+            shT4.Items.Clear();
+            psF1.Items.Clear();
+            psF2.Items.Clear();
+            psF3.Items.Clear();
+            psF4.Items.Clear();
+            psF5.Items.Clear();
+            psF6.Items.Clear();
+            psF7.Items.Clear();
+            psF8.Items.Clear();
+            psT1.Items.Clear();
+            psT2.Items.Clear();
+            psT3.Items.Clear();
+            psT4.Items.Clear();
+            psT5.Items.Clear();
+            psT6.Items.Clear();
+            psT7.Items.Clear();
+            psT8.Items.Clear();
+            for (int i = 0; i < 256; i++)
+            {
+                fbF1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                fbF2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                fbF3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                fbF4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                fbT1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                fbT2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                fbT3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                fbT4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibF1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibF2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibF3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibF4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibT1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibT2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibT3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                ibT4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shF1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shF2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shF3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shF4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shT1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shT2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shT3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                shT4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF5.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF6.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF7.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psF8.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT2.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT3.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT4.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT5.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT6.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT7.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                psT8.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+            }
+        }
+
+        private void LoadBlockTransitions()
+        {
+            fbF1.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue;
+            fbF2.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue;
+            fbF3.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue;
+            fbF4.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue;
+            fbT1.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue;
+            fbT2.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue;
+            fbT3.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue;
+            fbT4.SelectedIndex = BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue;
+            ibF1.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue;
+            ibF2.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue;
+            ibF3.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue;
+            ibF4.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue;
+            ibT1.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue;
+            ibT2.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue;
+            ibT3.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue;
+            ibT4.SelectedIndex = BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue;
+            shF1.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[0].FromValue;
+            shF2.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[1].FromValue;
+            shF3.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[2].FromValue;
+            shF4.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[3].FromValue;
+            shT1.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[0].ToValue;
+            shT2.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[1].ToValue;
+            shT3.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[2].ToValue;
+            shT4.SelectedIndex = BlsBlocks.CurrentDefiniton.HammerTransitions[3].ToValue;
+            psF1.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue;
+            psF2.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue;
+            psF3.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue;
+            psF4.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].FromValue;
+            psF5.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].FromValue;
+            psF6.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].FromValue;
+            psF7.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].FromValue;
+            psF8.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].FromValue;
+            psT1.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].ToValue;
+            psT2.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].ToValue;
+            psT3.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].ToValue;
+            psT4.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].ToValue;
+            psT5.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].ToValue;
+            psT6.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue;
+            psT7.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue;
+            psT8.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue;
+        }
+
+        private void CommitBlockTransitions()
+        {
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue = fbF1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue = fbF2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue = fbF3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue = fbF4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue = fbT1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue = fbT2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue = fbT3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue = fbT4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue = ibF1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue = ibF2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue = ibF3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue = ibF4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue = ibT1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue = ibT2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue = ibT3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue = ibT4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[0].FromValue = shF1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[1].FromValue = shF2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[2].FromValue = shF3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[3].FromValue = shF4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[0].ToValue = shT1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[1].ToValue = shT2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[2].ToValue = shT3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.HammerTransitions[3].ToValue = shT4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue = psF1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue = psF2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue = psF3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].FromValue = psF4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].FromValue = psF5.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].FromValue = psF6.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].FromValue = psF7.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].FromValue = psF8.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].ToValue = psT1.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].ToValue = psT2.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].ToValue = psT3.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].ToValue = psT4.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].ToValue = psT5.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue = psT6.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue = psT7.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue = psT8.SelectedIndex;
         }
 
         private void BlvCurrent_MouseDown(object sender, MouseEventArgs e)
@@ -129,6 +340,7 @@ namespace Daiz.NES.Reuben
         {
             ProjectController.BlockManager.SaveDefinitions(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".tsa");
             ProjectController.BlockManager.SaveBlockStrings(ProjectController.RootDirectory + @"\strings.xml");
+            CommitBlockTransitions();
             this.Close();
         }
 
@@ -169,12 +381,12 @@ namespace Daiz.NES.Reuben
             {
                 if (defIndex == 0)
                 {
-                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index) + "\n(" + (index).ToHexString() + ")");
+                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index));
                 }
 
                 else
                 {
-                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index) + "\n(" + (index).ToHexString() + ")\n" + ProjectController.BlockManager.AllDefinitions[CmbDefinitions.SelectedIndex][index].BlockProperty.GetString());
+                    TSAToolTip.SetToolTip(BlsBlocks, ProjectController.BlockManager.GetBlockString(defIndex, index));
                 }
             }
         }
@@ -254,8 +466,11 @@ namespace Daiz.NES.Reuben
 
         private void SpecialList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.SelectedBlock.BlockProperty = (BlockProperty)((int)(BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskHi) | CmdInteraction.SelectedIndex);
-            BlsBlocks.UpdateSelection();
+            if (!updating)
+            {
+                BlsBlocks.SelectedBlock.BlockProperty = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskHi) | (BlockProperty)CmdInteraction.SelectedIndex;
+                BlsBlocks.UpdateSelection();
+            }
         }
 
         private void BlockDescription_TextChanged(object sender, EventArgs e)
@@ -265,22 +480,14 @@ namespace Daiz.NES.Reuben
 
         private void CmbSolidity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.SelectedBlock.BlockProperty = (BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.Mask123456Bits) | (BlockProperty)(CmbSolidity.SelectedIndex << 6);
+            BlsBlocks.SelectedBlock.BlockProperty = solidityMap[CmbSolidity.SelectedIndex] | (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
+            UpdateInteractionSpecialList();
             BlsBlocks.UpdateSelection();
         }
 
-        private void ChkForeground_CheckedChanged(object sender, EventArgs e)
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.SelectedBlock.BlockProperty = BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskForeground;
-            BlsBlocks.SelectedBlock.BlockProperty |= ChkForeground.Checked ? BlockProperty.Foreground : BlockProperty.Background;
-            BlsBlocks.UpdateSelection();
-        }
-
-        private void ChkWater_CheckedChanged(object sender, EventArgs e)
-        {
-            BlsBlocks.SelectedBlock.BlockProperty = BlsBlocks.SelectedBlock.BlockProperty & BlockProperty.MaskWater;
-            BlsBlocks.SelectedBlock.BlockProperty |= ChkForeground.Checked ? BlockProperty.Water : BlockProperty.Background;
-            BlsBlocks.UpdateSelection();
+            CommitBlockTransitions();
         }
     }
 }

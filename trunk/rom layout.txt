@@ -2,6 +2,7 @@
 0x22010 - World Pointers
 0x24010 - Level Pointers
 0x28010 - World Data
-0x2A010- 
-0x2C000- Tile Properties
+0x2A010 - 
+0x2C000 - Tile Properties
+0x2D000 - Transitions
 0x40010 - Level Data

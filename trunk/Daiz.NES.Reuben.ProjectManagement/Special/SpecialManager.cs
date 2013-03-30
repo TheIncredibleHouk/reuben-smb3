@@ -14,11 +14,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public PaletteInfo SpecialPalette { get; private set; }
         public PatternTable SpecialTable { get; private set; }
         private List<GraphicsBank> SpecialBanks;
-        public Dictionary<int, SpecialDefinition> SpecialDefinitions { get; set; }
 
         public SpecialManager()
         {
-            SpecialDefinitions = new Dictionary<int, SpecialDefinition>();
             SpecialPalette = new PaletteInfo();
             SpecialBanks = new List<GraphicsBank>();
         }
@@ -101,18 +99,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public bool LoadSpecialDefinitions(string filename)
         {
             if (!File.Exists(filename)) return false;
-            SpecialDefinitions.Clear();
-            for (int j = 0; j < 16; j++)
-            {
-                SpecialDefinitions.Add(j, new SpecialDefinition());
-            }
+            
             XDocument xDoc = XDocument.Load(filename);
             XElement e = xDoc.Element("specials");
-            foreach (var s in e.Elements("specialblocks"))
-            {
-                int lvlType = s.Attribute("leveltype").Value.ToInt();
-                SpecialDefinitions[lvlType].LoadFromElement(s);
-            }
 
             SpecialPalette.LoadFromElement(e.Element("palette"));
             SpecialPalette.IsSpecial = true;
@@ -121,42 +110,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public void LoadDefaultSpecials()
         {
-            SpecialDefinitions.Clear();
-            for (int j = 1; j < 15; j++)
-            {
-                SpecialDefinitions.Add(j, new SpecialDefinition());
-            }
             XDocument xDoc = XDocument.Parse(Resource.special_definitions);
             XElement root = xDoc.Element("specials");
-            foreach (var s in root.Elements("specialblocks"))
-            {
-                int lvlType = s.Attribute("leveltype").Value.ToInt();
-                SpecialDefinitions[lvlType].LoadFromElement(s);
-            }
+
             SpecialPalette = new PaletteInfo();
             SpecialPalette.LoadFromElement(root.Element("palette"));
             SpecialPalette.IsSpecial = true;
-        }
-
-        public SpecialDefinition GetSpecialDefinition(int leveltype)
-        {
-            if(SpecialDefinitions.ContainsKey(leveltype))
-            {
-                return SpecialDefinitions[leveltype];
-            }
-
-            return null;
         }
 
         public void SaveSpecials(string filename1)
         {
             XDocument xDoc = new XDocument();
             XElement root = new XElement("specials");
-
-            foreach (var s in SpecialDefinitions.Values)
-            {
-                root.Add(s.CreateElement());
-            }
 
             root.Add(SpecialPalette.CreateElement());
             xDoc.Add(root);

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Daiz.NES.Reuben.ProjectManagement</RootNamespace>
     <AssemblyName>Daiz.NES.Reuben.ProjectManagement</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -32,6 +32,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blocks\BlockProperty.cs" />
+    <Compile Include="Blocks\BlockTransition.cs" />
     <Compile Include="Compression\CompressionCommand.cs" />
     <Compile Include="Compression\CompressionCommandType.cs" />
     <Compile Include="Compression\CompressionPoint.cs" />
@@ -96,7 +98,6 @@
     <Compile Include="ROM\Rom.cs" />
     <Compile Include="ROM\RomManager.cs" />
     <Compile Include="Settings\LevelSettings.cs" />
-    <Compile Include="Special\SpecialBlock.cs" />
     <Compile Include="Graphics\Tile.cs" />
     <Compile Include="Level\LevelType.cs" />
     <Compile Include="Palette\ColorManager.cs" />
@@ -112,7 +113,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Special\SpecialDefinition.cs" />
     <Compile Include="Special\SpecialManager.cs" />
     <Compile Include="Sprite\SpriteInfo.cs" />
     <Compile Include="Sprite\SpriteDefinition.cs" />

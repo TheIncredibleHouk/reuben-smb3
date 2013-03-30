@@ -474,7 +474,7 @@ namespace Daiz.NES.Reuben
             else if (EditMode == EditMode.Tiles)
             {
                 SetTileModeText();
-                LevelToolTip.SetToolTip(WldView, ProjectController.BlockManager.GetBlockString(CurrentWorld.Type, CurrentWorld.LevelData[x, y]) + "\n(" + CurrentWorld.LevelData[x, y].ToHexString() + ")");
+                LevelToolTip.SetToolTip(WldView, ProjectController.BlockManager.GetBlockString(CurrentWorld.Type, CurrentWorld.LevelData[x, y]));
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
                     switch (TileDrawMode)

@@ -9,10 +9,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         MaskLow = 0x0F,
         MaskHi = 0xF0,
-        Mask78Bits = 0xC0,
-        Mask56Bits = 0x30,
-        Mask123456Bits = 0x3F,
-        Mask123478Bits = 0xCF,
+        MaskSpecialTile = 0xF0,
         MaskPowerup = 0x7F,
         MaskForeground = 0xEF,
         MaskWater = 0xDF,
@@ -32,10 +29,26 @@ namespace Daiz.NES.Reuben.ProjectManagement
         VerticalPipeRight = 0x09,
         HorizontalPipeBottom = 0x0A,
         Climbable = 0x0B,
-        Unused1 = 0x0C,
-        Unused2 = 0x0D,
-        Unused3 = 0x0E,
-        Unused4 = 0x0F,
+        Coin = 0x0C,
+        Door = 0x0D,
+        PSwitch = 0x0E,
+        Unused1 = 0x0F,
+        CoinBlock = 0xF0,
+        FireFlower = 0xF1,
+        SuperLeaf = 0xF2,
+        IceFlower = 0xF3,
+        FrogSuit = 0xF4,
+        FireFoxSuit = 0xF5,
+        KoopaSuit = 0xF6,
+        BooSuit = 0xF7,
+        SledgeSuit = 0xF8,
+        NinjaSuit = 0xF9,
+        Starman = 0xFA,
+        Vine = 0xFB,
+        PSwitchBlock = 0xFC,
+        Brick = 0xFD,
+        NoteBlock = 0xFE,
+        Unused2 = 0xFF,
         Background = 0x00
     }
 
@@ -43,55 +56,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public static string GetString(this BlockProperty bp)
         {
-            string s = "";
-            switch (bp & BlockProperty.Mask78Bits)
+            string s = (bp & BlockProperty.MaskHi).ToString();
+
+            if ((bp & BlockProperty.MaskHi) == BlockProperty.MaskHi)
             {
-                case BlockProperty.Background:
-                    s += "Not Solid";
-                    break;
-
-                case BlockProperty.SolidTop:
-                    s += "Solid On Top";
-                    break;
-
-                case BlockProperty.SolidBottom:
-                    s += "Solid On Bottom";
-                    break;
-
-                case BlockProperty.SolidAll:
-                    s += "Completely Solid";
-                    break;
-            }
-
-            switch (bp & BlockProperty.Mask56Bits)
-            {
-                case BlockProperty.Background:
-                    if (s == "Not Solid")
-                    {
-                        s += ", Background";
-                    }
-                    break;
-
-                case BlockProperty.Foreground:
-                    s += ", Foreground";
-                    break;
-
-                case BlockProperty.Water:
-                    s += ", Water";
-                    break;
-
-                case BlockProperty.Water | BlockProperty.Foreground:
-                    s += ", Water Foreground";
-                    break;
-            }
-
-            if ((bp & BlockProperty.MaskLow) > BlockProperty.Background)
-            {
-                s += ", " + (bp & BlockProperty.MaskLow).ToString();
+                s += ", " + bp;
             }
             else
             {
-                s += ", No Interaction";
+                s += ", " + (bp & BlockProperty.MaskLow);
             }
 
             return s;

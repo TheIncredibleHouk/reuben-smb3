@@ -41,12 +41,12 @@ namespace Daiz.NES.Reuben
             ReubenController.CreateNewLevel();
         }
 
-        private void projectToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void projectToolStripMenuToValue_Click(object sender, EventArgs e)
         {
             ProjectController.Save();
         }
 
-        private void projectToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void projectToolStripMenuFromValue_Click(object sender, EventArgs e)
         {
             MnuDebug.Enabled = MnuEditor.Enabled = MnuExport.Enabled = MnuImport.Enabled = MnuNewLevel.Enabled = MnuProject.Enabled = MnuReload.Enabled = MnuTools.Enabled = MnuWindows.Enabled = ReubenController.OpenProject();
         }
@@ -132,7 +132,7 @@ namespace Daiz.NES.Reuben
             ReubenController.SaveCurrentLevelToBitmap();
         }
 
-        private void graphicsToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void graphicsToolStripMenuFromValue_Click(object sender, EventArgs e)
         {
             ReubenController.ReloadGraphics();
         }
@@ -166,7 +166,7 @@ namespace Daiz.NES.Reuben
         }
 
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void toolStripMenuToValue_Click(object sender, EventArgs e)
         {
             ReubenController.CompileRom(true);
         }
@@ -197,7 +197,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void toolStripMenuFromValue_Click(object sender, EventArgs e)
         {
             ConfirmForm cForm = new ConfirmForm();
             cForm.StartPosition = FormStartPosition.CenterParent;
