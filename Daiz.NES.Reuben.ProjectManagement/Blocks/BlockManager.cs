@@ -33,7 +33,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public string GetBlockString(int defIndex, int block)
         {
-            return lookupTable[defIndex][block].Description;
+            return lookupTable[defIndex][block].Description + " (" + block.ToHexString() + ")\n" + lookupTable[defIndex][block].BlockProperty.GetString();
         }
 
         public void SetBlockString(int defIndex, int block, string description)
@@ -105,7 +105,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             lookupTable.Clear();
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
-            byte[] data = new byte[0x4B00];
+            byte[] data = new byte[0x4CE0];
 
             fs.Read(data, 0, (int)fs.Length);
             fs.Close();
@@ -131,6 +131,35 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 for (int j = 0; j < 256; j++)
                 {
                     lookupTable[i][j].BlockProperty = (BlockProperty)data[l++];
+                }
+            }
+
+            
+            for (int i = 0; i < 15; i++)
+            {
+                l = 0x4A00 + (i * 0x20);
+                lookupTable[i].FireBallTransitions.Clear();
+                for (int k = 0; k < 4; k++)
+                {
+                    lookupTable[i].FireBallTransitions.Add(new BlockTransition(data[l++], data[l++]));
+                }
+
+                lookupTable[i].IceBallTransitions.Clear();
+                for (int k = 0; k < 4; k++)
+                {
+                    lookupTable[i].IceBallTransitions.Add(new BlockTransition(data[l++], data[l++]));
+                }
+
+                lookupTable[i].HammerTransitions.Clear();
+                for (int k = 0; k < 4; k++)
+                {
+                    lookupTable[i].HammerTransitions.Add(new BlockTransition(data[l++], data[l++]));
+                }
+
+                lookupTable[i].PSwitchTransitions.Clear();
+                for (int k = 0; k < 8; k++)
+                {
+                    lookupTable[i].PSwitchTransitions.Add(new BlockTransition(data[l++], data[l++]));
                 }
             }
 
@@ -161,7 +190,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool SaveDefinitions(string filename)
         {
-            byte[] data = new byte[0x4B00];
+            byte[] data = new byte[0x4CE0];
             int dataPointer = 0;
 
             for (int i = 0; i < 15; i++)
@@ -178,6 +207,34 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 for (int j = 0; j < 0x100; j++)
                 {
                     data[dataPointer++] = (byte)lookupTable[i][j].BlockProperty;
+                }
+            }
+
+            for (int i = 0; i < 15; i++)
+            {
+                dataPointer = 0x4A00 + (i * 0x20);
+                foreach(var k in lookupTable[i].FireBallTransitions)
+                {
+                    data[dataPointer++] = (byte)k.FromValue;
+                    data[dataPointer++] = (byte)k.ToValue;
+                }
+
+                foreach (var k in lookupTable[i].IceBallTransitions)
+                {
+                    data[dataPointer++] = (byte)k.FromValue;
+                    data[dataPointer++] = (byte)k.ToValue;
+                }
+
+                foreach (var k in lookupTable[i].HammerTransitions)
+                {
+                    data[dataPointer++] = (byte)k.FromValue;
+                    data[dataPointer++] = (byte)k.ToValue;
+                }
+
+                foreach (var k in lookupTable[i].PSwitchTransitions)
+                {
+                    data[dataPointer++] = (byte)k.FromValue;
+                    data[dataPointer++] = (byte)k.ToValue;
                 }
             }
 

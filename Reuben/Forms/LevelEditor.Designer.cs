@@ -158,7 +158,7 @@
             this.snapToRunningJumpLengthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapToFullMeterJumpLengthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.changeGuideColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeGuideColorToolStripMenuFromValue = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -1577,7 +1577,7 @@
             this.snapToRunningJumpLengthToolStripMenuItem,
             this.snapToFullMeterJumpLengthToolStripMenuItem,
             this.toolStripSeparator5,
-            this.changeGuideColorToolStripMenuItem1,
+            this.changeGuideColorToolStripMenuFromValue,
             this.toolStripSeparator7,
             this.toolStripMenuItem6});
             this.CtxHorizontalGuide.Name = "CtxVerticalGuide";
@@ -1635,12 +1635,12 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(239, 6);
             // 
-            // changeGuideColorToolStripMenuItem1
+            // changeGuideColorToolStripMenuFromValue
             // 
-            this.changeGuideColorToolStripMenuItem1.Name = "changeGuideColorToolStripMenuItem1";
-            this.changeGuideColorToolStripMenuItem1.Size = new System.Drawing.Size(242, 22);
-            this.changeGuideColorToolStripMenuItem1.Text = "Change Guide Color";
-            this.changeGuideColorToolStripMenuItem1.Click += new System.EventHandler(this.changeGuideColorToolStripMenuItem1_Click);
+            this.changeGuideColorToolStripMenuFromValue.Name = "changeGuideColorToolStripMenuFromValue";
+            this.changeGuideColorToolStripMenuFromValue.Size = new System.Drawing.Size(242, 22);
+            this.changeGuideColorToolStripMenuFromValue.Text = "Change Guide Color";
+            this.changeGuideColorToolStripMenuFromValue.Click += new System.EventHandler(this.changeGuideColorToolStripMenuFromValue_Click);
             // 
             // toolStripSeparator7
             // 
@@ -1875,7 +1875,7 @@
         private System.Windows.Forms.ToolStripButton TsbProperties;
         private System.Windows.Forms.ToolStripMenuItem changeGuideColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem changeGuideColorToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem changeGuideColorToolStripMenuFromValue;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton TsbPointers;
         private System.Windows.Forms.ToolStrip TlsTileCommands;

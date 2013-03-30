@@ -749,7 +749,7 @@ namespace Daiz.NES.Reuben
             else if (EditMode == EditMode.Tiles)
             {
                 SetTileModeText();
-                LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]) + "\n" + ProjectController.BlockManager.AllDefinitions[CurrentLevel.Type][CurrentLevel.LevelData[x, y]].BlockProperty.GetString() + "\n(" + CurrentLevel.LevelData[x, y].ToHexString() + ")");
+                LevelToolTip.SetToolTip(LvlView, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, CurrentLevel.LevelData[x, y]));
 
                 if (ContinueDrawing && (MouseButtons == MouseButtons.Left || MouseButtons == MouseButtons.Middle || MouseButtons == MouseButtons.Right))
                 {
@@ -1125,8 +1125,6 @@ namespace Daiz.NES.Reuben
         private void CmbTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentLevel.Type = (CmbTypes.SelectedItem as LevelType).InGameID;
-            LvlView.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CurrentLevel.Type);
-            BlsSelector.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CurrentLevel.Type);
             BlsSelector.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CurrentLevel.Type);
             LvlView.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CurrentLevel.Type);
             ProjectController.LevelManager.GetLevelInfo(CurrentLevel.Guid).LevelType = CurrentLevel.Type;
@@ -1624,7 +1622,7 @@ namespace Daiz.NES.Reuben
             if (tile > 0)
             {
                 LblSelectorHover.Text = "Block: " + tile.ToHexString();
-                LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile) + "\n" + ProjectController.BlockManager.AllDefinitions[CurrentLevel.Type][tile].BlockProperty.GetString() + "\n" + "(" + tile.ToHexString() + ")");
+                LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile));
             }
             else
             {
@@ -1750,7 +1748,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private void changeGuideColorToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void changeGuideColorToolStripMenuFromValue_Click(object sender, EventArgs e)
         {
             ColorDialog cDialog = new ColorDialog();
             cDialog.Color = CurrentLevel.Settings.HGuideColor;

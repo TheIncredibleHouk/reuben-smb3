@@ -102,7 +102,6 @@ namespace Daiz.NES.Reuben
         {
             if (CmbLayouts.SelectedIndex == -1) return;
             BlsFrom.CurrentDefiniton = BlsTo.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
-            BlsTo.SpecialDefnitions = BlsFrom.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CmbDefinitions.SelectedIndex);
         }
 
         private void BtnSaveClose_Click(object sender, EventArgs e)
@@ -122,7 +121,6 @@ namespace Daiz.NES.Reuben
             if (CmbLayouts.SelectedItem != null)
             {
                 BlsFrom.CurrentDefiniton = BlsTo.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
-                BlsTo.SpecialDefnitions = BlsFrom.SpecialDefnitions = ProjectController.SpecialManager.GetSpecialDefinition(CmbDefinitions.SelectedIndex);
                 CurrentLayout = BlsTo.BlockLayout = (BlockLayout) CmbLayouts.SelectedItem;
                 BtnDelete.Enabled = BtnRename.Enabled = true;
             }
@@ -232,7 +230,7 @@ namespace Daiz.NES.Reuben
             if (PreviousFromX == x && PreviousFromY == y) return;
             PreviousFromX = x;
             PreviousFromY = y;
-            LayoutToolTip.SetToolTip(BlsFrom, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, ((y * 16) + x)) + "\n(" + ((y * 16) + x).ToHexString() + ")");
+            LayoutToolTip.SetToolTip(BlsFrom, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, ((y * 16) + x)));
         }
 
         int PreviousToX, PreviousToY;
@@ -249,7 +247,7 @@ namespace Daiz.NES.Reuben
                 int tile = BlsTo.BlockLayout.Layout[index];
                 if (tile != -1)
                 {
-                    LayoutToolTip.SetToolTip(BlsTo, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, tile) + "\n(" + index.ToHexString() + ")\n" + ProjectController.BlockManager.AllDefinitions[CmbDefinitions.SelectedIndex][index].BlockProperty.GetString());
+                    LayoutToolTip.SetToolTip(BlsTo, ProjectController.BlockManager.GetBlockString(CmbDefinitions.SelectedIndex + 1, tile));
                 }
             }
         }

@@ -235,134 +235,260 @@ namespace Daiz.NES.Reuben
                     RenderTile(_CurrentTable[b[1, 0]], j * 16 + 8, i * 16, PaletteIndex, data);
                     RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
 
+                    BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
+                    BlockProperty bpHi = bp & BlockProperty.MaskHi;
+                    BlockProperty bpLow = bp & BlockProperty.MaskLow;
                     if (_ShowBlockProperties)
                     {
-                        BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
-                        BlockProperty bp78Bits = bp & BlockProperty.Mask78Bits;
-                        BlockProperty bp56bits = bp & BlockProperty.Mask56Bits;
-                        BlockProperty bpLow = bp & BlockProperty.MaskLow;
-
-
-
-                        if ((bp78Bits & BlockProperty.SolidTop) > 0)
+                        if (bpHi != BlockProperty.MaskHi)
                         {
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
-                        }
+                            switch (bpHi)
+                            {
+                                case BlockProperty.SolidTop:
 
-                        if ((bp78Bits & BlockProperty.SolidBottom) > 0)
-                        {
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
-                        }
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
+                                    break;
 
-                        if ((bp56bits & BlockProperty.Water) > 0)
-                        {
-                            RenderSpecialTileAlpha(_SpecialTable[0x98], j * 16, i * 16, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x99], j * 16, i * 16 + 8, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x98], j * 16 + 8, i * 16, 6, data, .75);
-                            RenderSpecialTileAlpha(_SpecialTable[0x99], j * 16 + 8, i * 16 + 8, 6, data, .75);
-                        }
 
-                        if ((bp56bits & BlockProperty.Foreground) > 0)
-                        {
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 6, data, .5);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 6, data, .5);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 6, data, .5);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 6, data, .5);
-                        }
+                                case BlockProperty.SolidBottom:
 
-                        switch (bpLow)
-                        {
-                            case BlockProperty.Harmful:
-                                RenderSpecialTileAlpha(_SpecialTable[0x40], j * 16, i * 16, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x50], j * 16, i * 16 + 8, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x41], j * 16 + 8, i * 16, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x51], j * 16 + 8, i * 16 + 8, 4, data, .75);
-                                break;
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                                    break;
 
-                            case BlockProperty.Slick:
-                                RenderSpecialTileAlpha(_SpecialTable[0xD2], j * 16, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE2], j * 16, i * 16 + 8, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xD3], j * 16 + 8, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE3], j * 16 + 8, i * 16 + 8, 1, data, .75);
-                                break;
+                                case BlockProperty.SolidAll:
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16, i * 16 + 8, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFF], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                                    break;
 
-                            case BlockProperty.MoveLeft:
-                                RenderSpecialTileAlpha(_SpecialTable[0x28], j * 16, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x38], j * 16, i * 16 + 8, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x28], j * 16 + 8, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x38], j * 16 + 8, i * 16 + 8, 1, data, .75);
-                                break;
+                                case BlockProperty.Water:
 
-                            case BlockProperty.MoveRight:
-                                RenderSpecialTileAlpha(_SpecialTable[0x29], j * 16, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x39], j * 16, i * 16 + 8, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x29], j * 16 + 8, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x39], j * 16 + 8, i * 16 + 8, 1, data, .75);
-                                break;
+                                    RenderSpecialTileAlpha(_SpecialTable[0x98], j * 16, i * 16, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x99], j * 16, i * 16 + 8, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x98], j * 16 + 8, i * 16, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x99], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                                    break;
 
-                            case BlockProperty.MoveUp:
-                                RenderSpecialTileAlpha(_SpecialTable[0x2A], j * 16, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x2A], j * 16, i * 16 + 8, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x2B], j * 16 + 8, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x2B], j * 16 + 8, i * 16 + 8, 1, data, .75);
-                                break;
+                                case BlockProperty.Foreground:
 
-                            case BlockProperty.MoveDown:
-                                RenderSpecialTileAlpha(_SpecialTable[0x3A], j * 16, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x3A], j * 16, i * 16 + 8, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x3B], j * 16 + 8, i * 16, 1, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x3B], j * 16 + 8, i * 16 + 8, 1, data, .75);
-                                break;
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 6, data, .5);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 6, data, .5);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 6, data, .5);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 6, data, .5);
+                                    break;
 
-                            case BlockProperty.VerticalPipeLeft:
-                                RenderSpecialTileAlpha(_SpecialTable[0x44], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x54], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x45], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
+                                case BlockProperty.Water | BlockProperty.Foreground:
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16, 6, data, .5);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16, i * 16 + 8, 6, data, .5);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16, 6, data, .5);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xFD], j * 16 + 8, i * 16 + 8, 6, data, .5);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x98], j * 16, i * 16, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x99], j * 16, i * 16 + 8, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x98], j * 16 + 8, i * 16, 6, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x99], j * 16 + 8, i * 16 + 8, 6, data, .75);
+                                    break;
+                            }
 
-                            case BlockProperty.VerticalPipeRight:
-                                RenderSpecialTileAlpha(_SpecialTable[0x46], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x56], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x47], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x57], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
+                            switch (bpLow)
+                            {
+                                case BlockProperty.Harmful:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x40], j * 16, i * 16, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x50], j * 16, i * 16 + 8, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x41], j * 16 + 8, i * 16, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x51], j * 16 + 8, i * 16 + 8, 4, data, .75);
+                                    break;
 
-                            case BlockProperty.HorizontalPipeBottom:
-                                RenderSpecialTileAlpha(_SpecialTable[0x48], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x58], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x49], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x59], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
+                                case BlockProperty.Slick:
+                                    RenderSpecialTileAlpha(_SpecialTable[0xD2], j * 16, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xE2], j * 16, i * 16 + 8, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xD3], j * 16 + 8, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0xE3], j * 16 + 8, i * 16 + 8, 1, data, .75);
+                                    break;
 
-                            case BlockProperty.Unstable:
-                                RenderSpecialTileAlpha(_SpecialTable[0x60], j * 16, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x70], j * 16, i * 16 + 8, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x61], j * 16 + 8, i * 16, 0, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x71], j * 16 + 8, i * 16 + 8, 0, data, .75);
-                                break;
+                                case BlockProperty.MoveLeft:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x28], j * 16, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x38], j * 16, i * 16 + 8, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x28], j * 16 + 8, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x38], j * 16 + 8, i * 16 + 8, 1, data, .75);
+                                    break;
 
-                            case BlockProperty.Climbable:
-                                RenderSpecialTileAlpha(_SpecialTable[0x2E], j * 16, i * 16, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x3E], j * 16, i * 16 + 8, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x2F], j * 16 + 8, i * 16, 4, data, .75);
-                                RenderSpecialTileAlpha(_SpecialTable[0x3F], j * 16 + 8, i * 16 + 8, 4, data, .75);
-                                break;
+                                case BlockProperty.MoveRight:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x29], j * 16, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x39], j * 16, i * 16 + 8, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x29], j * 16 + 8, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x39], j * 16 + 8, i * 16 + 8, 1, data, .75);
+                                    break;
+
+                                case BlockProperty.MoveUp:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x2A], j * 16, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x2A], j * 16, i * 16 + 8, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x2B], j * 16 + 8, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x2B], j * 16 + 8, i * 16 + 8, 1, data, .75);
+                                    break;
+
+                                case BlockProperty.MoveDown:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x3A], j * 16, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x3A], j * 16, i * 16 + 8, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x3B], j * 16 + 8, i * 16, 1, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x3B], j * 16 + 8, i * 16 + 8, 1, data, .75);
+                                    break;
+
+                                case BlockProperty.VerticalPipeLeft:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x44], j * 16, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x54], j * 16, i * 16 + 8, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x45], j * 16 + 8, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x55], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                    break;
+
+                                case BlockProperty.VerticalPipeRight:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x46], j * 16, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x56], j * 16, i * 16 + 8, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x47], j * 16 + 8, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x57], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                    break;
+
+                                case BlockProperty.HorizontalPipeBottom:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x48], j * 16, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x58], j * 16, i * 16 + 8, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x49], j * 16 + 8, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x59], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                    break;
+
+                                case BlockProperty.Unstable:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x60], j * 16, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x70], j * 16, i * 16 + 8, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x61], j * 16 + 8, i * 16, 0, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x71], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                    break;
+
+                                case BlockProperty.Climbable:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x2E], j * 16, i * 16, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x3E], j * 16, i * 16 + 8, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x2F], j * 16 + 8, i * 16, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x3F], j * 16 + 8, i * 16 + 8, 4, data, .75);
+                                    break;
+
+                                case BlockProperty.PSwitch:
+                                    RenderSpecialTileAlpha(_SpecialTable[0x26], j * 16, i * 16, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x36], j * 16, i * 16 + 8, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x27], j * 16 + 8, i * 16, 4, data, .75);
+                                    RenderSpecialTileAlpha(_SpecialTable[0x37], j * 16 + 8, i * 16 + 8, 4, data, .75);
+                                    break;
+                            }
                         }
                     }
 
                     if (_ShowSpecialBlocks)
                     {
-                        SpecialBlock sb = (SpecialBlock)SpecialDefnitions[tileValue];
-                        if (sb != null)
+                        switch (bpHi | bpLow)
                         {
-                            int SpecialPaletteIndex = sb.Palette;
-                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], j * 16, i * 16, SpecialPaletteIndex, data, transSpecial);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], j * 16, i * 16 + 8, SpecialPaletteIndex, data, transSpecial);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], j * 16 + 8, i * 16, SpecialPaletteIndex, data, transSpecial);
-                            RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], j * 16 + 8, i * 16 + 8, SpecialPaletteIndex, data, transSpecial);
+                            case BlockProperty.FireFlower:
+                                RenderSpecialTileAlpha(_SpecialTable[0x00], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x10], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x01], j * 16 + 8, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x11], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                break;
+
+                            case BlockProperty.IceFlower:
+                                RenderSpecialTileAlpha(_SpecialTable[0xE0], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF0], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xE1], j * 16 + 8, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF1], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                break;
+
+                            case BlockProperty.SuperLeaf:
+                                RenderSpecialTileAlpha(_SpecialTable[0x02], j * 16, i * 16, 3, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x12], j * 16, i * 16 + 8, 3, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x03], j * 16 + 8, i * 16, 3, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x13], j * 16 + 8, i * 16 + 8, 3, data, .75);
+                                break;
+
+                            case BlockProperty.FireFoxSuit:
+                                RenderSpecialTileAlpha(_SpecialTable[0x0E], j * 16, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x1E], j * 16, i * 16 + 8, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x0F], j * 16 + 8, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x1F], j * 16 + 8, i * 16 + 8, 2, data, .75);
+                                break;
+
+                            case BlockProperty.FrogSuit:
+                                RenderSpecialTileAlpha(_SpecialTable[0x20], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x30], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x21], j * 16 + 8, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x31], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                break;
+
+                            case BlockProperty.KoopaSuit:
+                                RenderSpecialTileAlpha(_SpecialTable[0xE4], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF4], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xE5], j * 16 + 8, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF5], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                break;
+
+                            case BlockProperty.BooSuit:
+                                RenderSpecialTileAlpha(_SpecialTable[0xE8], j * 16, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF8], j * 16, i * 16 + 8, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xE9], j * 16 + 8, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF9], j * 16 + 8, i * 16 + 8, 2, data, .75);
+                                break;
+
+                            case BlockProperty.SledgeSuit:
+                                RenderSpecialTileAlpha(_SpecialTable[0xE6], j * 16, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF6], j * 16, i * 16 + 8, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xE7], j * 16 + 8, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF7], j * 16 + 8, i * 16 + 8, 2, data, .75);
+                                break;
+
+                            case BlockProperty.NinjaSuit:
+                                RenderSpecialTileAlpha(_SpecialTable[0xE8], j * 16, i * 16, 3, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF8], j * 16, i * 16 + 8, 3, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xE9], j * 16 + 8, i * 16, 3, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xF9], j * 16 + 8, i * 16 + 8, 3, data, .75);
+                                break;
+
+                            case BlockProperty.Starman:
+                                RenderSpecialTileAlpha(_SpecialTable[0x06], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x16], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x07], j * 16 + 8, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x17], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                break;
+
+                            case BlockProperty.CoinBlock:
+                                RenderSpecialTileAlpha(_SpecialTable[0x0A], j * 16, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x1A], j * 16, i * 16 + 8, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x0B], j * 16 + 8, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x1B], j * 16 + 8, i * 16 + 8, 2, data, .75);
+                                break;
+
+                            case BlockProperty.Vine:
+                                RenderSpecialTileAlpha(_SpecialTable[0x24], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x34], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x25], j * 16 + 8, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x35], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                break;
+
+                            case BlockProperty.PSwitchBlock:
+                                RenderSpecialTileAlpha(_SpecialTable[0x0C], j * 16, i * 16, 1, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x1C], j * 16, i * 16 + 8, 1, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x0D], j * 16 + 8, i * 16, 1, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x1D], j * 16 + 8, i * 16 + 8, 1, data, .75);
+                                break;
+
+                            case BlockProperty.NoteBlock:
+                                RenderSpecialTileAlpha(_SpecialTable[0x04], j * 16, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x14], j * 16, i * 16 + 8, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x05], j * 16 + 8, i * 16, 0, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0x15], j * 16 + 8, i * 16 + 8, 0, data, .75);
+                                break;
+
+                            case BlockProperty.Brick:
+                                RenderSpecialTileAlpha(_SpecialTable[0xDC], j * 16, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xEC], j * 16, i * 16 + 8, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xDD], j * 16 + 8, i * 16, 2, data, .75);
+                                RenderSpecialTileAlpha(_SpecialTable[0xED], j * 16 + 8, i * 16 + 8, 2, data, .75);
+                                break;
                         }
                     }
 
@@ -614,104 +740,250 @@ namespace Daiz.NES.Reuben
             RenderTile(_CurrentTable[b[1, 0]], 8, 0, PaletteIndex, data);
             RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
 
+            BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
+            BlockProperty bpHi = bp & BlockProperty.MaskHi;
+            BlockProperty bpLow = bp & BlockProperty.MaskLow;
+
             if (_ShowBlockProperties)
             {
-                BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
-                BlockProperty bp78bits = bp & BlockProperty.Mask78Bits;
-                BlockProperty bp56bits = bp & BlockProperty.Mask56Bits;
-                BlockProperty bpLow = bp & BlockProperty.MaskLow;
-                if ((bp78bits & BlockProperty.SolidTop) > 0)
+
+                if (bpHi != BlockProperty.MaskHi)
                 {
-                    RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
-                }
+                    switch (bpHi)
+                    {
+                        case BlockProperty.SolidTop:
 
-                if ((bp78bits & BlockProperty.SolidBottom) > 0)
-                {
-                    RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
-                }
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
+                            break;
 
-                if ((bp78bits & BlockProperty.Water) > 0)
-                {
-                    RenderSpecialTileAlpha(_SpecialTable[0x98], 0, 0, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0x98], 0, 8, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0x99], 8, 0, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0x99], 8, 8, 6, data, .75);
-                }
+                        case BlockProperty.SolidBottom:
 
-                if ((bp78bits & BlockProperty.Foreground) > 0)
-                {
-                    RenderSpecialTileAlpha(_SpecialTable[0xFE], 0, 0, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0xFE], 0, 8, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0xFE], 8, 0, 6, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[0xFE], 8, 8, 6, data, .75);
-                }
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
+                            break;
 
-                switch (bpLow)
-                {
-                    case BlockProperty.Harmful:
-                        RenderSpecialTileAlpha(_SpecialTable[0x40], 0, 0, 4, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x50], 0, 8, 4, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x41], 8, 0, 4, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x51], 8, 8, 4, data, .75);
-                        break;
+                        case BlockProperty.SolidAll:
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 0, 8, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFF], 8, 8, 6, data, .75);
+                            break;
 
-                    case BlockProperty.Slick:
-                        RenderSpecialTileAlpha(_SpecialTable[0xD2], 0, 0, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0xE2], 0, 8, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0xD3], 8, 0, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0xE3], 8, 8, 1, data, .75);
-                        break;
+                        case BlockProperty.Water:
 
-                    case BlockProperty.MoveLeft:
-                        RenderSpecialTileAlpha(_SpecialTable[0x28], 0, 0, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x28], 0, 8, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x38], 8, 0, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x38], 8, 8, 1, data, .75);
-                        break;
+                            RenderSpecialTileAlpha(_SpecialTable[0x98], 0, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x98], 0, 8, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x99], 8, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x99], 8, 8, 6, data, .75);
+                            break;
 
-                    case BlockProperty.MoveRight:
-                        RenderSpecialTileAlpha(_SpecialTable[0x29], 0, 0, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x29], 0, 8, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x39], 8, 0, 1, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x39], 8, 8, 1, data, .75);
-                        break;
+                        case BlockProperty.Foreground:
 
+                            RenderSpecialTileAlpha(_SpecialTable[0xFE], 0, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFE], 0, 8, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFE], 8, 0, 6, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFE], 8, 8, 6, data, .75);
+                            break;
+                    }
 
-                    case BlockProperty.VerticalPipeLeft:
-                    case BlockProperty.VerticalPipeRight:
-                        RenderSpecialTileAlpha(_SpecialTable[0x2A], 0, 0, 0, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x3A], 0, 8, 0, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x2B], 8, 0, 0, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x3B], 8, 8, 0, data, .75);
-                        break;
+                    switch (bpHi | bpLow)
+                    {
+                        case BlockProperty.Harmful:
+                            RenderSpecialTileAlpha(_SpecialTable[0x40], 0, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x50], 0, 8, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x41], 8, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x51], 8, 8, 4, data, .75);
+                            break;
 
-                    case BlockProperty.Unstable:
-                        RenderSpecialTileAlpha(_SpecialTable[0x60], 0, 0, 0, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x70], 0, 8, 0, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x61], 8, 0, 0, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x71], 8, 8, 0, data, .75);
-                        break;
+                        case BlockProperty.Slick:
+                            RenderSpecialTileAlpha(_SpecialTable[0xD2], 0, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xE2], 0, 8, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xD3], 8, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0xE3], 8, 8, 1, data, .75);
+                            break;
 
-                    case BlockProperty.MoveDown:
-                        RenderSpecialTileAlpha(_SpecialTable[0x3A], 0, 0, 7, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x3A], 0, 8, 7, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x3B], 8, 0, 7, data, .75);
-                        RenderSpecialTileAlpha(_SpecialTable[0x3B], 8, 8, 7, data, .75);
-                        break;
+                        case BlockProperty.MoveLeft:
+                            RenderSpecialTileAlpha(_SpecialTable[0x28], 0, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x38], 0, 8, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x28], 8, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x38], 8, 8, 1, data, .75);
+                            break;
+
+                        case BlockProperty.MoveRight:
+                            RenderSpecialTileAlpha(_SpecialTable[0x29], 0, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x39], 0, 8, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x29], 8, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x39], 8, 8, 1, data, .75);
+                            break;
+
+                        case BlockProperty.MoveUp:
+                            RenderSpecialTileAlpha(_SpecialTable[0x2A], 0, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x2A], 0, 8, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x2B], 8, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x2B], 8, 8, 1, data, .75);
+                            break;
+
+                        case BlockProperty.MoveDown:
+                            RenderSpecialTileAlpha(_SpecialTable[0x3A], 0, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x3A], 0, 8, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x3B], 8, 0, 1, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x3B], 8, 8, 1, data, .75);
+                            break;
+
+                        case BlockProperty.VerticalPipeLeft:
+                            RenderSpecialTileAlpha(_SpecialTable[0x44], 0, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x54], 0, 8, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x45], 8, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x55], 8, 8, 0, data, .75);
+                            break;
+
+                        case BlockProperty.VerticalPipeRight:
+                            RenderSpecialTileAlpha(_SpecialTable[0x46], 0, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x56], 0, 8, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x47], 8, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x57], 8, 8, 0, data, .75);
+                            break;
+
+                        case BlockProperty.HorizontalPipeBottom:
+                            RenderSpecialTileAlpha(_SpecialTable[0x48], 0, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x58], 0, 8, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x49], 8, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x59], 8, 8, 0, data, .75);
+                            break;
+
+                        case BlockProperty.Unstable:
+                            RenderSpecialTileAlpha(_SpecialTable[0x60], 0, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x70], 0, 8, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x61], 8, 0, 0, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x71], 8, 8, 0, data, .75);
+                            break;
+
+                        case BlockProperty.Climbable:
+                            RenderSpecialTileAlpha(_SpecialTable[0x2E], 0, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x3E], 0, 8, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x2F], 8, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x3F], 8, 8, 4, data, .75);
+                            break;
+
+                        case BlockProperty.PSwitch:
+                            RenderSpecialTileAlpha(_SpecialTable[0x26], 0, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x36], 0, 8, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x27], 8, 0, 4, data, .75);
+                            RenderSpecialTileAlpha(_SpecialTable[0x37], 8, 8, 4, data, .75);
+                            break;
+                    }
                 }
             }
+
             if (_ShowSpecialBlocks)
             {
-                SpecialBlock sb = (SpecialBlock)SpecialDefnitions[tileValue];
-                if (sb != null)
+                switch (bpLow)
                 {
-                    int SpecialPaletteIndex = sb.Palette;
-                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 0]], 0, 0, SpecialPaletteIndex, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[0, 1]], 0, 8, SpecialPaletteIndex, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 0]], 8, 0, SpecialPaletteIndex, data, .75);
-                    RenderSpecialTileAlpha(_SpecialTable[sb[1, 1]], 8, 8, SpecialPaletteIndex, data, .75);
+                    case BlockProperty.FireFlower:
+                        RenderSpecialTileAlpha(_SpecialTable[0x00], 0, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x10], 0, 8, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x01], 8, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x11], 8, 8, 0, data, .75);
+                        break;
+
+                    case BlockProperty.IceFlower:
+                        RenderSpecialTileAlpha(_SpecialTable[0xE0], 0, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF0], 0, 8, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xE1], 8, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF1], 8, 8, 0, data, .75);
+                        break;
+
+                    case BlockProperty.SuperLeaf:
+                        RenderSpecialTileAlpha(_SpecialTable[0x02], 0, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x12], 0, 8, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x03], 8, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x13], 8, 8, 3, data, .75);
+                        break;
+
+                    case BlockProperty.FireFoxSuit:
+                        RenderSpecialTileAlpha(_SpecialTable[0x0E], 0, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x1E], 0, 8, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x0F], 8, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x1F], 8, 8, 2, data, .75);
+                        break;
+
+                    case BlockProperty.FrogSuit:
+                        RenderSpecialTileAlpha(_SpecialTable[0x20], 0, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x30], 0, 8, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x21], 8, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x31], 8, 8, 0, data, .75);
+                        break;
+
+                    case BlockProperty.KoopaSuit:
+                        RenderSpecialTileAlpha(_SpecialTable[0xE4], 0, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF4], 0, 8, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xE5], 8, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF5], 8, 8, 0, data, .75);
+                        break;
+
+                    case BlockProperty.BooSuit:
+                        RenderSpecialTileAlpha(_SpecialTable[0xE8], 0, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF8], 0, 8, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xE9], 8, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF9], 8, 8, 2, data, .75);
+                        break;
+
+                    case BlockProperty.SledgeSuit:
+                        RenderSpecialTileAlpha(_SpecialTable[0xE6], 0, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF6], 0, 8, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xE7], 8, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF7], 8, 8, 3, data, .75);
+                        break;
+
+                    case BlockProperty.NinjaSuit:
+                        RenderSpecialTileAlpha(_SpecialTable[0xE8], 0, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF8], 0, 8, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xE9], 8, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xF9], 8, 8, 3, data, .75);
+                        break;
+
+                    case BlockProperty.Starman:
+                        RenderSpecialTileAlpha(_SpecialTable[0x06], 0, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x16], 0, 8, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x07], 8, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x17], 8, 8, 3, data, .75);
+                        break;
+
+                    case BlockProperty.CoinBlock:
+                        RenderSpecialTileAlpha(_SpecialTable[0x0A], 0, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x1A], 0, 8, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x0B], 8, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x1B], 8, 8, 2, data, .75);
+                        break;
+
+                    case BlockProperty.Vine:
+                        RenderSpecialTileAlpha(_SpecialTable[0x24], 0, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x34], 0, 8, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x25], 8, 0, 0, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x35], 8, 8, 0, data, .75);
+                        break;
+
+                    case BlockProperty.PSwitchBlock:
+                        RenderSpecialTileAlpha(_SpecialTable[0x0C], 0, 0, 1, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x1C], 0, 8, 1, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x0D], 8, 0, 1, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x1D], 8, 8, 1, data, .75);
+                        break;
+
+                    case BlockProperty.NoteBlock:
+                        RenderSpecialTileAlpha(_SpecialTable[0x04], 0, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x14], 0, 8, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x05], 8, 0, 3, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0x15], 8, 8, 3, data, .75);
+                        break;
+
+                    case BlockProperty.Brick:
+                        RenderSpecialTileAlpha(_SpecialTable[0xDC], 0, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xEC], 0, 8, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xDD], 8, 0, 2, data, .75);
+                        RenderSpecialTileAlpha(_SpecialTable[0xED], 8, 8, 2, data, .75);
+                        break;
                 }
             }
 

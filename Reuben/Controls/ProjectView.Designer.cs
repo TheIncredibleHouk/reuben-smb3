@@ -56,7 +56,7 @@
             this.MnuMoveTo = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CtxWorlds = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.newLevelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.newLevelToolStripMenuFromValue = new System.Windows.Forms.ToolStripMenuItem();
             this.editWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -342,16 +342,16 @@
             this.editWorldToolStripMenuItem,
             this.deleteWorldToolStripMenuItem,
             this.toolStripSeparator2,
-            this.newLevelToolStripMenuItem1});
+            this.newLevelToolStripMenuFromValue});
             this.CtxWorlds.Name = "CtxWorlds";
             this.CtxWorlds.Size = new System.Drawing.Size(143, 98);
             // 
-            // newLevelToolStripMenuItem1
+            // newLevelToolStripMenuFromValue
             // 
-            this.newLevelToolStripMenuItem1.Name = "newLevelToolStripMenuItem1";
-            this.newLevelToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
-            this.newLevelToolStripMenuItem1.Text = "New Level";
-            this.newLevelToolStripMenuItem1.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
+            this.newLevelToolStripMenuFromValue.Name = "newLevelToolStripMenuFromValue";
+            this.newLevelToolStripMenuFromValue.Size = new System.Drawing.Size(142, 22);
+            this.newLevelToolStripMenuFromValue.Text = "New Level";
+            this.newLevelToolStripMenuFromValue.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
             // 
             // editWorldToolStripMenuItem
             // 
@@ -413,7 +413,7 @@
         private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MnuMoveTo;
         private System.Windows.Forms.ContextMenuStrip CtxWorlds;
-        private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuFromValue;
         private System.Windows.Forms.ToolStripMenuItem editWorldToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteLevelToolStripMenuItem;
         private System.Windows.Forms.Label LblLayout;
