@@ -7,7 +7,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public enum BlockProperty
     {
-        MaskLow = 0x0F,
         MaskHi = 0xF0,
         MaskSpecialTile = 0xF0,
         MaskPowerup = 0x7F,
@@ -15,6 +14,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         MaskWater = 0xDF,
         Foreground = 0x10,
         Water = 0x20,
+        WaterForeground = 0x30,
         SolidTop = 0x40,
         SolidBottom = 0x80,
         SolidAll = 0xC0,
@@ -32,7 +32,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Coin = 0x0C,
         Door = 0x0D,
         PSwitch = 0x0E,
-        Unused1 = 0x0F,
+        Cherry = 0x0F,
         CoinBlock = 0xF0,
         FireFlower = 0xF1,
         SuperLeaf = 0xF2,
@@ -64,7 +64,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
             else
             {
-                s += ", " + (bp & BlockProperty.MaskLow);
+                s += ", " + (bp & BlockProperty.Cherry);
             }
 
             return s;

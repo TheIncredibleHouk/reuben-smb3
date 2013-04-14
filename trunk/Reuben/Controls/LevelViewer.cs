@@ -237,7 +237,7 @@ namespace Daiz.NES.Reuben
 
                     BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
                     BlockProperty bpHi = bp & BlockProperty.MaskHi;
-                    BlockProperty bpLow = bp & BlockProperty.MaskLow;
+                    BlockProperty bpLow = bp & BlockProperty.Cherry;
                     if (_ShowBlockProperties)
                     {
                         if (bpHi != BlockProperty.MaskHi)
@@ -742,7 +742,7 @@ namespace Daiz.NES.Reuben
 
             BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
             BlockProperty bpHi = bp & BlockProperty.MaskHi;
-            BlockProperty bpLow = bp & BlockProperty.MaskLow;
+            BlockProperty bpLow = bp & BlockProperty.Cherry;
 
             if (_ShowBlockProperties)
             {

@@ -356,7 +356,7 @@
             "Background",
             "Foreground",
             "Water",
-            "Water Forground",
+            "Water Foreground",
             "Solid Top",
             "Solid Bottom",
             "Solid All",
