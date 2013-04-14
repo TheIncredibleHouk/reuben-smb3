@@ -398,20 +398,20 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             dataPointer = 0x2C010;
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 1; i < 15; i++)
             {
                 for (int j = 0; j < 0x100; j++)
                 {
-                    Rom[dataPointer++] = (byte) ProjectController.BlockManager.AllDefinitions[i + 1][j].BlockProperty;
+                    Rom[dataPointer++] = (byte) ProjectController.BlockManager.AllDefinitions[i][j].BlockProperty;
                 }
             }
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 1; i < 15; i++)
             {
                 dataPointer = 0x2E010 + (i * 0x20);
                 for (int j = 0; j < 44; j++)
                 {
-                    BlockDefinition currentDef = ProjectController.BlockManager.AllDefinitions[i + 1];
+                    BlockDefinition currentDef = ProjectController.BlockManager.AllDefinitions[i];
                     foreach (var k in currentDef.FireBallTransitions)
                     {
                         Rom[dataPointer++] = (byte)k.FromValue;

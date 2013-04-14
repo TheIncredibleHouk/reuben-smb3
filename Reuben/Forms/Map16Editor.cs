@@ -88,7 +88,7 @@ namespace Daiz.NES.Reuben
 
             }
             updating = false;
-            CmdInteraction.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
+            CmdInteraction.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry);
         }
 
         void BlsBlocks_SelectionChanged(object sender, TEventArgs<MouseButtons> e)
@@ -105,7 +105,7 @@ namespace Daiz.NES.Reuben
                     CmbSolidity.SelectedIndex = 0;
                 }
 
-                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow); ;
+                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry); ;
                 CmdInteraction.SelectedIndex = b;
                 BlockDescription.Text = BlsBlocks.SelectedBlock.Description;
             }
@@ -480,7 +480,7 @@ namespace Daiz.NES.Reuben
 
         private void CmbSolidity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.SelectedBlock.BlockProperty = solidityMap[CmbSolidity.SelectedIndex] | (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskLow);
+            BlsBlocks.SelectedBlock.BlockProperty = solidityMap[CmbSolidity.SelectedIndex] | (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry);
             UpdateInteractionSpecialList();
             BlsBlocks.UpdateSelection();
         }
