@@ -18,7 +18,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public BlockManager()
         {
             lookupTable = new Dictionary<int, BlockDefinition>();
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
                 lookupTable.Add(i, null);
             }
@@ -84,7 +84,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             lookupTable.Clear();
             byte[] data = Resource.default_tsa;
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
                 BlockDefinition bd = new BlockDefinition();
                 int bankOffset = i * 0x400;
@@ -105,13 +105,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             lookupTable.Clear();
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
-            byte[] data = new byte[0x4CE0];
+            byte[] data = new byte[0x5280];
 
             fs.Read(data, 0, (int)fs.Length);
             fs.Close();
 
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
                 BlockDefinition bd = new BlockDefinition();
                 int bankOffset = i * 0x400;
@@ -125,8 +125,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 lookupTable[i] = bd;
             }
 
-            var l = 0x3C00;
-            for (int i = 0; i < 15; i++)
+            var l = 0x4000;
+            for (int i = 0; i < 16; i++)
             {
                 for (int j = 0; j < 256; j++)
                 {
@@ -135,9 +135,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
-                l = 0x4A00 + (i * 0x20);
                 lookupTable[i].FireBallTransitions.Clear();
                 for (int k = 0; k < 4; k++)
                 {
@@ -190,10 +189,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool SaveDefinitions(string filename)
         {
-            byte[] data = new byte[0x4CE0];
+            byte[] data = new byte[0x5280];
             int dataPointer = 0;
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
                 byte[] blockData = lookupTable[i].GetBlockData();
                 for (int j = 0; j < 0x400; j++)
@@ -202,7 +201,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
                 for (int j = 0; j < 0x100; j++)
                 {
@@ -210,9 +209,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
-                dataPointer = 0x4A00 + (i * 0x20);
                 foreach(var k in lookupTable[i].FireBallTransitions)
                 {
                     data[dataPointer++] = (byte)k.FromValue;
