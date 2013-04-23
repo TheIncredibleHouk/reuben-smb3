@@ -423,11 +423,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     Rom[dataPointer++] = (byte)k.ToValue;
                 }
 
-                foreach (var k in currentDef.HammerTransitions)
-                {
-                    Rom[dataPointer++] = (byte)k.FromValue;
-                    Rom[dataPointer++] = (byte)k.ToValue;
-                }
 
                 foreach (var k in currentDef.PSwitchTransitions)
                 {
