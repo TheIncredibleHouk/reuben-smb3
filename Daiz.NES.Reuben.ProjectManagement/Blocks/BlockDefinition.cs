@@ -9,7 +9,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public List<BlockTransition> FireBallTransitions { get; set; }
         public List<BlockTransition> IceBallTransitions { get; set; }
-        public List<BlockTransition> HammerTransitions { get; set; }
         public List<BlockTransition> PSwitchTransitions { get; set; }
        
         public Block[] BlockList;
@@ -18,7 +17,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             FireBallTransitions = new List<BlockTransition>();
             IceBallTransitions = new List<BlockTransition>();
-            HammerTransitions = new List<BlockTransition>();
             PSwitchTransitions = new List<BlockTransition>();
             BlockList = new Block[256];
             for (int i = 0; i < 256; i++)

@@ -149,12 +149,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     lookupTable[i].IceBallTransitions.Add(new BlockTransition(data[l++], data[l++]));
                 }
 
-                lookupTable[i].HammerTransitions.Clear();
-                for (int k = 0; k < 4; k++)
-                {
-                    lookupTable[i].HammerTransitions.Add(new BlockTransition(data[l++], data[l++]));
-                }
-
                 lookupTable[i].PSwitchTransitions.Clear();
                 for (int k = 0; k < 8; k++)
                 {
@@ -218,12 +212,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
 
                 foreach (var k in lookupTable[i].IceBallTransitions)
-                {
-                    data[dataPointer++] = (byte)k.FromValue;
-                    data[dataPointer++] = (byte)k.ToValue;
-                }
-
-                foreach (var k in lookupTable[i].HammerTransitions)
                 {
                     data[dataPointer++] = (byte)k.FromValue;
                     data[dataPointer++] = (byte)k.ToValue;
