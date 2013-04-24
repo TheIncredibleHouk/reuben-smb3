@@ -406,7 +406,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 1; i < 16; i++)
             {
                 dataPointer = 0x2E010 + (i * 0x100);
 
