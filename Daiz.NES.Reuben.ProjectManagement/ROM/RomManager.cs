@@ -429,6 +429,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     Rom[dataPointer++] = (byte)k.FromValue;
                     Rom[dataPointer++] = (byte)k.ToValue;
                 }
+
+                Rom[dataPointer++] = currentDef.VineTile;
+                Rom[dataPointer++] = currentDef[currentDef.VineTile][0, 0];
+                Rom[dataPointer++] = currentDef[currentDef.VineTile][1, 0];
+                Rom[dataPointer++] = currentDef[currentDef.VineTile][0, 1];
+                Rom[dataPointer++] = currentDef[currentDef.VineTile][1, 1];
+                Rom[dataPointer++] = currentDef.PSwitchTile;
+                Rom[dataPointer++] = currentDef[currentDef.PSwitchTile][0, 0];
+                Rom[dataPointer++] = currentDef[currentDef.PSwitchTile][1, 0];
+                Rom[dataPointer++] = currentDef[currentDef.PSwitchTile][0, 1];
+                Rom[dataPointer++] = currentDef[currentDef.PSwitchTile][1, 1];
             }
         }
     }

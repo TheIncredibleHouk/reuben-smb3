@@ -175,6 +175,8 @@ namespace Daiz.NES.Reuben
             psT6.Items.Clear();
             psT7.Items.Clear();
             psT8.Items.Clear();
+            pSwitchTile.Items.Clear();
+            vineTile.Items.Clear();
             for (int i = 0; i < 256; i++)
             {
                 fbF1.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
@@ -209,6 +211,8 @@ namespace Daiz.NES.Reuben
                 psT6.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
                 psT7.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
                 psT8.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                vineTile.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
+                pSwitchTile.Items.Add(i.ToHexString() + " - " + BlsBlocks.CurrentDefiniton[i].Description);
             }
         }
 
@@ -246,6 +250,8 @@ namespace Daiz.NES.Reuben
             psT6.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue;
             psT7.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue;
             psT8.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue;
+            vineTile.SelectedIndex = BlsBlocks.CurrentDefiniton.VineTile;
+            pSwitchTile.SelectedIndex = BlsBlocks.CurrentDefiniton.PSwitchTile;
         }
 
         private void CommitBlockTransitions()
@@ -282,6 +288,8 @@ namespace Daiz.NES.Reuben
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue = psT6.SelectedIndex;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue = psT7.SelectedIndex;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue = psT8.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.VineTile = (byte)vineTile.SelectedIndex;
+            BlsBlocks.CurrentDefiniton.PSwitchTile = (byte)pSwitchTile.SelectedIndex;
         }
 
         private void BlvCurrent_MouseDown(object sender, MouseEventArgs e)
@@ -306,9 +314,10 @@ namespace Daiz.NES.Reuben
 
         private void BtnSaveClose_Click(object sender, EventArgs e)
         {
+            CommitBlockTransitions();
             ProjectController.BlockManager.SaveDefinitions(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".tsa");
             ProjectController.BlockManager.SaveBlockStrings(ProjectController.RootDirectory + @"\strings.xml");
-            CommitBlockTransitions();
+            
             this.Close();
         }
 

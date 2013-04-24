@@ -105,7 +105,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             lookupTable.Clear();
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
-            byte[] data = new byte[0x5280];
+            byte[] data = new byte[0x6000];
 
             fs.Read(data, 0, (int)fs.Length);
             fs.Close();
@@ -154,6 +154,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 {
                     lookupTable[i].PSwitchTransitions.Add(new BlockTransition(data[l++], data[l++]));
                 }
+
+                lookupTable[i].VineTile = data[l++];
+                lookupTable[i].PSwitchTile = data[l++];
             }
 
             return true;
@@ -183,7 +186,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool SaveDefinitions(string filename)
         {
-            byte[] data = new byte[0x5280];
+            byte[] data = new byte[0x6000];
             int dataPointer = 0;
 
             for (int i = 0; i < 16; i++)
@@ -222,6 +225,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     data[dataPointer++] = (byte)k.FromValue;
                     data[dataPointer++] = (byte)k.ToValue;
                 }
+
+                data[dataPointer++] = lookupTable[i].VineTile;
+                data[dataPointer++] = lookupTable[i].PSwitchTile;
             }
 
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write);
