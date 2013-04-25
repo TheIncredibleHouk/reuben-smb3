@@ -10,22 +10,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class LevelInfo : IXmlIO
     {
-        private string _Name = "";
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (value.Length > 0x22)
-                {
-                    _Name = value.Substring(0, 0x22);
-                }
-            }
-        }
-
+        public string Name { get; set; }
         public Guid WorldGuid { get; set; }
         public Guid LevelGuid { get; set; }
         public int LastCompressionSize { get; set; }
