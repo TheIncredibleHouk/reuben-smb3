@@ -42,6 +42,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Height { get; private set; }
         public int ChallengeType { get; set; }
         public int SpecialLevelType { get; set; }
+        
         public int MiscByte1 { get; set; }
         public int MiscByte2 { get; set; }
         public int MiscByte3 { get; set; }
