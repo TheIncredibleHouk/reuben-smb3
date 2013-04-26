@@ -80,7 +80,7 @@ namespace Daiz.NES.Reuben
                             break;
 
                         case GuideMode.Screen:
-                            Guide2.Position = Guide1.Position + 176;
+                            Guide2.Position = Guide1.Position + 17;
                             if (Guide1Changed != null)
                             {
                                 Guide1Changed(this, null);
