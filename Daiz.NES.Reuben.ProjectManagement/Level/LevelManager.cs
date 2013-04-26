@@ -59,6 +59,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Level l = new Level();
             l.LevelLayout = layout;
             l.Palette = levelType.InGameID;
+            l.AnimationBank = 0x80;
             switch (levelType.InGameID)
             {
                 case 1:
@@ -69,19 +70,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                 case 2:
                     l.GraphicsBank = 0x10;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x02;
                     break;
 
                 case 3:
                     l.GraphicsBank = 0x6C;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x86;
                     break;
 
                 case 4:
                     l.GraphicsBank = 0x0C;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x80;
                     break;
 
@@ -93,58 +91,49 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                 case 6:
                     l.GraphicsBank = 0x58;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x8C;
                     break;
 
                 case 7:
                     l.GraphicsBank = 0x5C;
-                    l.AnimationBank = 60;
                     l.ClearValue = 0x42;
                     break;
 
                 case 8:
                     l.GraphicsBank = 0x58;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x80;
                     break;
 
                 case 9:
                     l.GraphicsBank = 0x30;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x80;
                     break;
 
                 case 10:
                     l.GraphicsBank = 0x34;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x06;
                     break;
 
 
                 case 11:
                     l.GraphicsBank = 0x6E;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x80;
                     break;
 
 
                 case 12:
                     l.GraphicsBank = 0x18;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x80;
                     break;
 
 
                 case 13:
                     l.GraphicsBank = 0x38;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0xCC;
                     break;
 
                 case 14:
                     l.GraphicsBank = 0x1C;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x02;
                     break;
             }

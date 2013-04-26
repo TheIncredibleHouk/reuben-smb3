@@ -81,7 +81,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 l.Load(li);
                 levelAddressTable.Add(levelIndexTable[l.Guid], levelDataPointer);
-                levelDataPointer = WriteLevel(l, levelDataPointer);
+                levelDataPointer = WriteLevel(l, levelDataPointer, li.Name);
                 if (levelDataPointer >= 0xFC000)
                     return false;
             }
@@ -149,8 +149,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
 
 
-        public int WriteLevel(Level l, int levelAddress)
+        public int WriteLevel(Level l, int levelAddress, string name)
         {
+            name = name.ToUpper();
+            if (name.Length > 0x22)
+            {
+                name = name.Substring(0, 0x22);
+            }
+            else
+            {
+                name = name.PadRight(0x22, ' ');
+            }
+
             int yStart = 0;
             int ayStart = 0;
 
@@ -182,6 +192,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)l.MiscByte2;
             Rom[levelAddress++] = (byte)l.MiscByte3;
 
+            for (int i = 0; i < 0x22; i++)
+            {
+                Rom[levelAddress++] = (byte)name[i];
+            }
 
             foreach (var p in l.Pointers)
             {
