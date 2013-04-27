@@ -134,27 +134,6 @@ namespace Daiz.NES.Reuben
                 SelectionType = SelectionType.World;
                 SelectedWorld = NodesToWorlds[node];
 
-                LblGuid.Visible = LblLayout.Visible = LblModified.Visible = LblSize.Visible = !SelectedWorld.IsNoWorld;
-                LblName.Text = SelectedWorld.Name;
-                if (!SelectedWorld.IsNoWorld)
-                {
-                    LblType.Text = "World Map - " + (SelectedWorld.Ordinal + 1);
-                    LblLayout.Text = "Map";
-                    TrvProjectView.ContextMenuStrip = CtxWorlds;
-                    LblGuid.Text = SelectedWorld.WorldGuid.ToString();
-                    LblModified.Text = SelectedWorld.LastModified.ToString();
-                    LblSize.Text = SelectedWorld.LastCompressionSize + " bytes";
-                }
-                else
-                {
-                    LblType.Text = "Grouping";
-                    LblLayout.Text = "";
-                    TrvProjectView.ContextMenuStrip = null;
-                    LblGuid.Text = "";
-                    LblModified.Text = "";
-                    LblSize.Text = "";
-                }
-
                 TlsEdit.Enabled = !SelectedWorld.IsNoWorld;
             }
             else if (NodesToLevels.ContainsKey(node))
@@ -162,22 +141,12 @@ namespace Daiz.NES.Reuben
                 SelectionType = SelectionType.Level;
                 SelectedLevel = NodesToLevels[node];
                 SelectedWorld = ProjectController.WorldManager.GetWorldInfo(SelectedLevel.WorldGuid);
-                LblGuid.Visible = LblLayout.Visible = LblModified.Visible = LblSize.Visible = true;
-                LblName.Text = SelectedLevel.Name;
                 TrvProjectView.ContextMenuStrip = CtxLevels;
-                LblType.Text = ProjectController.LevelManager.LevelTypes[SelectedLevel.LevelType].Name;
-                LblGuid.Text = SelectedLevel.LevelGuid.ToString();
-                LblLayout.Text = SelectedLevel.Layout.ToString();
-                LblModified.Text = SelectedLevel.LastModified.ToString();
-                LblSize.Text = SelectedLevel.LastCompressionSize + " bytes";
                 TlsEdit.Enabled = true;
             }
             else
             {
                 SelectionType = SelectionType.Project;
-                LblName.Text = ((Project)e.Node.Tag).Name;
-                LblType.Text = "Project";
-                LblGuid.Visible = LblLayout.Visible = LblModified.Visible = LblSize.Visible = false;
                 TrvProjectView.ContextMenuStrip = CtxWorlds;
                 TlsEdit.Enabled = false;
             }
@@ -189,19 +158,18 @@ namespace Daiz.NES.Reuben
 
             if (NodesToLevels.ContainsKey(TrvProjectView.SelectedNode))
             {
-                SelectedLevel.Name = LblName.Text;
-                TrvProjectView.SelectedNode.Text = LblName.Text;
+                TrvProjectView.SelectedNode.Text = SelectedLevel.Name;
             }
             else if (NodesToWorlds.ContainsKey(TrvProjectView.SelectedNode))
             {
-                SelectedWorld.Name = LblName.Text;
-                TrvProjectView.SelectedNode.Text = LblName.Text;
+                SelectedWorld.Name = SelectedWorld.Name;
+                TrvProjectView.SelectedNode.Text = SelectedWorld.Name;
             }
             else
             {
-                ProjectController.ProjectManager.CurrentProject.Name = LblName.Text;
-                ProjectController.ProjectName = LblName.Text;
-                TrvProjectView.SelectedNode.Text = LblName.Text + " (Project)";
+                ProjectController.ProjectManager.CurrentProject.Name = ProjectController.ProjectName;
+                ProjectController.ProjectName =  ProjectController.ProjectName;
+                TrvProjectView.SelectedNode.Text =  ProjectController.ProjectName + " (Project)";
             }
         }
 

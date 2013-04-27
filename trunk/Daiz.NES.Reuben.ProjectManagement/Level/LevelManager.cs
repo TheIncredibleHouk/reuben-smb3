@@ -64,7 +64,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 case 1:
                     l.GraphicsBank = 0x08;
-                    l.AnimationBank = 0x60;
                     l.ClearValue = 0x80;
                     break;
 
@@ -85,7 +84,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                 case 5:
                     l.GraphicsBank = 0x58;
-                    l.AnimationBank = 0x60;
+                    l.AnimationBank = 0x80;
                     l.ClearValue = 0x80;
                     break;
 

@@ -401,7 +401,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             List<BlockDefinition> lookupTable = ProjectController.BlockManager.AllDefinitions;
             int dataPointer = 0x1E010;
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 16; i++)
             {
                 byte[] blockData = lookupTable[i].GetBlockData();
                 for (int j = 0; j < 0x400; j++)
