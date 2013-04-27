@@ -54,6 +54,15 @@
             this.MnuEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.layoutManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuWindows = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuDebug = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpRawLevelToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PnlRightSide = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.BtnShowHide = new System.Windows.Forms.Button();
+            this.PrvProject = new Daiz.NES.Reuben.ProjectView();
+            this.compileROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuToValue = new System.Windows.Forms.ToolStripMenuItem();
+            this.rOMWithGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuProject = new System.Windows.Forms.ToolStripMenuItem();
             this.setDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,15 +74,6 @@
             this.allEditorDefinitionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setPaletteFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.compileROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rOMWithGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuDebug = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpRawLevelToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PnlRightSide = new System.Windows.Forms.Panel();
-            this.PrvProject = new Daiz.NES.Reuben.ProjectView();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.BtnShowHide = new System.Windows.Forms.Button();
-            this.toolStripMenuToValue = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.PnlRightSide.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -86,7 +86,6 @@
             this.MnuTools,
             this.MnuEditor,
             this.MnuWindows,
-            this.MnuProject,
             this.MnuDebug});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.MdiWindowListItem = this.MnuWindows;
@@ -101,10 +100,12 @@
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
             this.MnuReload,
+            this.compileROMToolStripMenuItem,
             this.toolStripSeparator1,
             this.MnuImport,
             this.MnuExport,
             this.toolStripSeparator2,
+            this.MnuProject,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -116,7 +117,7 @@
             this.projectToolStripMenuItem,
             this.MnuNewLevel});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // projectToolStripMenuItem
@@ -139,7 +140,7 @@
             this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.projectToolStripMenuFromValue});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // projectToolStripMenuFromValue
@@ -156,7 +157,7 @@
             this.currentLevelToolStripMenuItem});
             this.MnuReload.Enabled = false;
             this.MnuReload.Name = "MnuReload";
-            this.MnuReload.Size = new System.Drawing.Size(110, 22);
+            this.MnuReload.Size = new System.Drawing.Size(152, 22);
             this.MnuReload.Text = "Reload";
             // 
             // graphicsToolStripMenuFromValue
@@ -176,7 +177,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(107, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // MnuImport
             // 
@@ -185,7 +186,7 @@
             this.dToolStripMenuItem});
             this.MnuImport.Enabled = false;
             this.MnuImport.Name = "MnuImport";
-            this.MnuImport.Size = new System.Drawing.Size(110, 22);
+            this.MnuImport.Size = new System.Drawing.Size(152, 22);
             this.MnuImport.Text = "Import";
             // 
             // graphicsToolStripMenuItem
@@ -208,7 +209,7 @@
             this.levelToPNGToolStripMenuItem});
             this.MnuExport.Enabled = false;
             this.MnuExport.Name = "MnuExport";
-            this.MnuExport.Size = new System.Drawing.Size(110, 22);
+            this.MnuExport.Size = new System.Drawing.Size(152, 22);
             this.MnuExport.Text = "Export";
             // 
             // levelToPNGToolStripMenuItem
@@ -221,12 +222,12 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(107, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // MnuTools
@@ -258,7 +259,7 @@
             // 
             this.map16EditorToolStripMenuItem.Name = "map16EditorToolStripMenuItem";
             this.map16EditorToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.map16EditorToolStripMenuItem.Text = "TSA Editor";
+            this.map16EditorToolStripMenuItem.Text = "Block Definitions Editor";
             this.map16EditorToolStripMenuItem.Click += new System.EventHandler(this.map16EditorToolStripMenuItem_Click);
             // 
             // MnuEditor
@@ -283,107 +284,6 @@
             this.MnuWindows.Name = "MnuWindows";
             this.MnuWindows.Size = new System.Drawing.Size(68, 20);
             this.MnuWindows.Text = "Windows";
-            // 
-            // MnuProject
-            // 
-            this.MnuProject.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setDefaultToolStripMenuItem,
-            this.setPaletteFileToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.compileROMToolStripMenuItem});
-            this.MnuProject.Enabled = false;
-            this.MnuProject.Name = "MnuProject";
-            this.MnuProject.Size = new System.Drawing.Size(56, 20);
-            this.MnuProject.Text = "Project";
-            // 
-            // setDefaultToolStripMenuItem
-            // 
-            this.setDefaultToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.defaultsToolStripMenuItem,
-            this.blockPropertiesToolStripMenuItem,
-            this.specialGraphicsToolStripMenuItem,
-            this.toolStripMenuFromValue,
-            this.paletteFileToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.allEditorDefinitionsToolStripMenuItem});
-            this.setDefaultToolStripMenuItem.Name = "setDefaultToolStripMenuItem";
-            this.setDefaultToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.setDefaultToolStripMenuItem.Text = "Set Default";
-            // 
-            // defaultsToolStripMenuItem
-            // 
-            this.defaultsToolStripMenuItem.Name = "defaultsToolStripMenuItem";
-            this.defaultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.defaultsToolStripMenuItem.Text = "Sprite Definitions";
-            this.defaultsToolStripMenuItem.Click += new System.EventHandler(this.defaultsToolStripMenuItem_Click);
-            // 
-            // blockPropertiesToolStripMenuItem
-            // 
-            this.blockPropertiesToolStripMenuItem.Name = "blockPropertiesToolStripMenuItem";
-            this.blockPropertiesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.blockPropertiesToolStripMenuItem.Text = "Block Properties";
-            this.blockPropertiesToolStripMenuItem.Click += new System.EventHandler(this.blockPropertiesToolStripMenuItem_Click);
-            // 
-            // specialGraphicsToolStripMenuItem
-            // 
-            this.specialGraphicsToolStripMenuItem.Name = "specialGraphicsToolStripMenuItem";
-            this.specialGraphicsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.specialGraphicsToolStripMenuItem.Text = "Special Graphics";
-            this.specialGraphicsToolStripMenuItem.Click += new System.EventHandler(this.specialGraphicsToolStripMenuItem_Click);
-            // 
-            // toolStripMenuFromValue
-            // 
-            this.toolStripMenuFromValue.Name = "toolStripMenuFromValue";
-            this.toolStripMenuFromValue.Size = new System.Drawing.Size(182, 22);
-            this.toolStripMenuFromValue.Text = "Music List";
-            this.toolStripMenuFromValue.Click += new System.EventHandler(this.toolStripMenuFromValue_Click);
-            // 
-            // paletteFileToolStripMenuItem
-            // 
-            this.paletteFileToolStripMenuItem.Name = "paletteFileToolStripMenuItem";
-            this.paletteFileToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.paletteFileToolStripMenuItem.Text = "Palette File";
-            this.paletteFileToolStripMenuItem.Click += new System.EventHandler(this.paletteFileToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(179, 6);
-            // 
-            // allEditorDefinitionsToolStripMenuItem
-            // 
-            this.allEditorDefinitionsToolStripMenuItem.Name = "allEditorDefinitionsToolStripMenuItem";
-            this.allEditorDefinitionsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.allEditorDefinitionsToolStripMenuItem.Text = "All Editor Definitions";
-            this.allEditorDefinitionsToolStripMenuItem.Click += new System.EventHandler(this.allEditorDefinitionsToolStripMenuItem_Click);
-            // 
-            // setPaletteFileToolStripMenuItem
-            // 
-            this.setPaletteFileToolStripMenuItem.Name = "setPaletteFileToolStripMenuItem";
-            this.setPaletteFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.setPaletteFileToolStripMenuItem.Text = "Set Palette File";
-            this.setPaletteFileToolStripMenuItem.Click += new System.EventHandler(this.setPaletteFileToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
-            // 
-            // compileROMToolStripMenuItem
-            // 
-            this.compileROMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuToValue,
-            this.rOMWithGraphicsToolStripMenuItem});
-            this.compileROMToolStripMenuItem.Name = "compileROMToolStripMenuItem";
-            this.compileROMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.compileROMToolStripMenuItem.Text = "Compile";
-            // 
-            // rOMWithGraphicsToolStripMenuItem
-            // 
-            this.rOMWithGraphicsToolStripMenuItem.Name = "rOMWithGraphicsToolStripMenuItem";
-            this.rOMWithGraphicsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rOMWithGraphicsToolStripMenuItem.Text = "Save As...";
-            this.rOMWithGraphicsToolStripMenuItem.Click += new System.EventHandler(this.compileROMToolStripMenuItem_Click);
             // 
             // MnuDebug
             // 
@@ -411,14 +311,6 @@
             this.PnlRightSide.Size = new System.Drawing.Size(325, 432);
             this.PnlRightSide.TabIndex = 3;
             // 
-            // PrvProject
-            // 
-            this.PrvProject.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PrvProject.Location = new System.Drawing.Point(0, 31);
-            this.PrvProject.Name = "PrvProject";
-            this.PrvProject.Size = new System.Drawing.Size(325, 401);
-            this.PrvProject.TabIndex = 3;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.BtnShowHide);
@@ -438,12 +330,111 @@
             this.BtnShowHide.UseVisualStyleBackColor = true;
             this.BtnShowHide.Click += new System.EventHandler(this.BtnShowHide_Click);
             // 
+            // PrvProject
+            // 
+            this.PrvProject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PrvProject.Location = new System.Drawing.Point(0, 31);
+            this.PrvProject.Name = "PrvProject";
+            this.PrvProject.Size = new System.Drawing.Size(325, 401);
+            this.PrvProject.TabIndex = 3;
+            // 
+            // compileROMToolStripMenuItem
+            // 
+            this.compileROMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuToValue,
+            this.rOMWithGraphicsToolStripMenuItem});
+            this.compileROMToolStripMenuItem.Name = "compileROMToolStripMenuItem";
+            this.compileROMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.compileROMToolStripMenuItem.Text = "Compile";
+            // 
             // toolStripMenuToValue
             // 
             this.toolStripMenuToValue.Name = "toolStripMenuToValue";
             this.toolStripMenuToValue.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuToValue.Text = "Save to ROM";
-            this.toolStripMenuToValue.Click += new System.EventHandler(this.toolStripMenuToValue_Click);
+            // 
+            // rOMWithGraphicsToolStripMenuItem
+            // 
+            this.rOMWithGraphicsToolStripMenuItem.Name = "rOMWithGraphicsToolStripMenuItem";
+            this.rOMWithGraphicsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rOMWithGraphicsToolStripMenuItem.Text = "Save As...";
+            // 
+            // MnuProject
+            // 
+            this.MnuProject.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setDefaultToolStripMenuItem,
+            this.setPaletteFileToolStripMenuItem,
+            this.toolStripSeparator4});
+            this.MnuProject.Enabled = false;
+            this.MnuProject.Name = "MnuProject";
+            this.MnuProject.Size = new System.Drawing.Size(152, 22);
+            this.MnuProject.Text = "Defaults";
+            // 
+            // setDefaultToolStripMenuItem
+            // 
+            this.setDefaultToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultsToolStripMenuItem,
+            this.blockPropertiesToolStripMenuItem,
+            this.specialGraphicsToolStripMenuItem,
+            this.toolStripMenuFromValue,
+            this.paletteFileToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.allEditorDefinitionsToolStripMenuItem});
+            this.setDefaultToolStripMenuItem.Name = "setDefaultToolStripMenuItem";
+            this.setDefaultToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.setDefaultToolStripMenuItem.Text = "Set Default";
+            // 
+            // defaultsToolStripMenuItem
+            // 
+            this.defaultsToolStripMenuItem.Name = "defaultsToolStripMenuItem";
+            this.defaultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.defaultsToolStripMenuItem.Text = "Sprite Definitions";
+            // 
+            // blockPropertiesToolStripMenuItem
+            // 
+            this.blockPropertiesToolStripMenuItem.Name = "blockPropertiesToolStripMenuItem";
+            this.blockPropertiesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.blockPropertiesToolStripMenuItem.Text = "Block Properties";
+            // 
+            // specialGraphicsToolStripMenuItem
+            // 
+            this.specialGraphicsToolStripMenuItem.Name = "specialGraphicsToolStripMenuItem";
+            this.specialGraphicsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.specialGraphicsToolStripMenuItem.Text = "Special Graphics";
+            // 
+            // toolStripMenuFromValue
+            // 
+            this.toolStripMenuFromValue.Name = "toolStripMenuFromValue";
+            this.toolStripMenuFromValue.Size = new System.Drawing.Size(182, 22);
+            this.toolStripMenuFromValue.Text = "Music List";
+            // 
+            // paletteFileToolStripMenuItem
+            // 
+            this.paletteFileToolStripMenuItem.Name = "paletteFileToolStripMenuItem";
+            this.paletteFileToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.paletteFileToolStripMenuItem.Text = "Palette File";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(179, 6);
+            // 
+            // allEditorDefinitionsToolStripMenuItem
+            // 
+            this.allEditorDefinitionsToolStripMenuItem.Name = "allEditorDefinitionsToolStripMenuItem";
+            this.allEditorDefinitionsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.allEditorDefinitionsToolStripMenuItem.Text = "All Editor Definitions";
+            // 
+            // setPaletteFileToolStripMenuItem
+            // 
+            this.setPaletteFileToolStripMenuItem.Name = "setPaletteFileToolStripMenuItem";
+            this.setPaletteFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.setPaletteFileToolStripMenuItem.Text = "Set Palette File";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // Main
             // 
@@ -495,24 +486,24 @@
         private System.Windows.Forms.ToolStripMenuItem levelToPNGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MnuReload;
         private System.Windows.Forms.ToolStripMenuItem currentLevelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MnuProject;
-        private System.Windows.Forms.ToolStripMenuItem setDefaultToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem defaultsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem compileROMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem graphicsToolStripMenuFromValue;
         private System.Windows.Forms.ToolStripMenuItem MnuDebug;
         private System.Windows.Forms.ToolStripMenuItem dumpRawLevelToFileToolStripMenuItem;
+        private ProjectView PrvProject;
+        private System.Windows.Forms.ToolStripMenuItem compileROMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuToValue;
         private System.Windows.Forms.ToolStripMenuItem rOMWithGraphicsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MnuProject;
+        private System.Windows.Forms.ToolStripMenuItem setDefaultToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem defaultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blockPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem specialGraphicsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuFromValue;
+        private System.Windows.Forms.ToolStripMenuItem paletteFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem allEditorDefinitionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuFromValue;
         private System.Windows.Forms.ToolStripMenuItem setPaletteFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem paletteFileToolStripMenuItem;
-        private ProjectView PrvProject;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuToValue;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 
 
     }

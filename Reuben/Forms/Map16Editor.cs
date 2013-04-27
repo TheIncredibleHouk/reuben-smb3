@@ -60,7 +60,8 @@ namespace Daiz.NES.Reuben
             solidityMap[5] = BlockProperty.SolidBottom;
             solidityMap[6] = BlockProperty.SolidAll;
             solidityMap[7] = BlockProperty.CoinBlock;
-            for (int i = 0; i < 16; i++)
+            InteractionTypes.Add("No Interaction");
+            for (int i = 1; i < 16; i++)
             {
                 InteractionTypes.Add(((BlockProperty)i).ToString());
             }

@@ -64,7 +64,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
             else
             {
-                s += ", " + (bp & BlockProperty.Cherry);
+                if ((bp & BlockProperty.Cherry) != BlockProperty.Background)
+                {
+                    s += ", " + (bp & BlockProperty.Cherry);
+                }
             }
 
             return s;

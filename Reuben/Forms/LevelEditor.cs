@@ -1349,7 +1349,7 @@ namespace Daiz.NES.Reuben
 
         private void LvlView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.Modifiers == Keys.Control)
+            if ((e.Modifiers & Keys.Control) > Keys.None)
             {
                 switch (e.KeyCode)
                 {
@@ -1365,6 +1365,16 @@ namespace Daiz.NES.Reuben
 
                     case Keys.S:
                         Save();
+
+                        if ((e.Modifiers & Keys.Shift) > Keys.None)
+                        {
+                            ReubenController.CompileRom(true);
+                            MessageBox.Show("Level succesfully saved and ROM compiled.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Level succesfully saved.");
+                        }
                         break;
 
 
@@ -1530,6 +1540,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbSave_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Level succesfully saved.");
             Save();
             //ReubenController.SaveTestLevel(CurrentLevel);
         }
@@ -1563,7 +1574,6 @@ namespace Daiz.NES.Reuben
             CurrentLevel.SpecialLevelType = CmbSpecialType.SelectedIndex;
             CurrentLevel.ChallengeType = CmbChallengeType.SelectedIndex;
             CurrentLevel.Save();
-            MessageBox.Show("Level succesfully saved.");
         }
 
         #region pointers
