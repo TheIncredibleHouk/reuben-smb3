@@ -254,7 +254,7 @@ namespace Daiz.NES.Reuben
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            BlsFrom.ShowBlockProperties = BlsTo.ShowBlockProperties = ChkBlockProperties.Checked;
+            BlsFrom.ShowBlockSolidity = BlsTo.ShowBlockSolidity = ChkBlockProperties.Checked;
         }
 
         private void button2_Click(object sender, EventArgs e)

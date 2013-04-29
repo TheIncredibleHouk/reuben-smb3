@@ -458,7 +458,7 @@
             this.BlsSelector.Name = "BlsSelector";
             this.BlsSelector.SelectedIndex = 0;
             this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockProperties = false;
+            this.BlsSelector.ShowBlockSolidity = false;
             this.BlsSelector.ShowSpecialBlocks = false;
             this.BlsSelector.Size = new System.Drawing.Size(256, 256);
             this.BlsSelector.SpecialDefnitions = null;

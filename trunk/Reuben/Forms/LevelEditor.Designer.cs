@@ -83,19 +83,15 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblSprite = new System.Windows.Forms.Label();
             this.LblPositition = new System.Windows.Forms.Label();
-            this.LblRightClickMode = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.NumSpecials = new System.Windows.Forms.NumericUpDown();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.LblHelpText = new System.Windows.Forms.Label();
-            this.PnlDrawing = new System.Windows.Forms.Panel();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
+            this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
             this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
-            this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
             this.TabClass3 = new System.Windows.Forms.TabControl();
@@ -124,9 +120,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbStartPoint = new System.Windows.Forms.ToolStripButton();
             this.TsbGrid = new System.Windows.Forms.ToolStripButton();
-            this.TsbTileSpecials = new System.Windows.Forms.ToolStripButton();
+            this.TsbItems = new System.Windows.Forms.ToolStripButton();
+            this.TsbSolidity = new System.Windows.Forms.ToolStripButton();
+            this.TsbInteractions = new System.Windows.Forms.ToolStripButton();
             this.TsbSriteSpecials = new System.Windows.Forms.ToolStripButton();
-            this.TsbProperties = new System.Windows.Forms.ToolStripButton();
             this.TsbPointers = new System.Windows.Forms.ToolStripButton();
             this.TsbZoom = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -136,6 +133,7 @@
             this.TsbPaste = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.hMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.vMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -167,7 +165,6 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.hMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -180,8 +177,6 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).BeginInit();
-            this.panel5.SuspendLayout();
-            this.PnlDrawing.SuspendLayout();
             this.TabEditSelector.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -202,11 +197,10 @@
             this.PnlInfo.AutoScroll = true;
             this.PnlInfo.Controls.Add(this.TabLevelInfo);
             this.PnlInfo.Controls.Add(this.panel4);
-            this.PnlInfo.Controls.Add(this.panel5);
             this.PnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PnlInfo.Location = new System.Drawing.Point(0, 373);
+            this.PnlInfo.Location = new System.Drawing.Point(277, 373);
             this.PnlInfo.Name = "PnlInfo";
-            this.PnlInfo.Size = new System.Drawing.Size(846, 122);
+            this.PnlInfo.Size = new System.Drawing.Size(558, 122);
             this.PnlInfo.TabIndex = 1;
             // 
             // TabLevelInfo
@@ -221,7 +215,7 @@
             this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
             this.TabLevelInfo.Name = "TabLevelInfo";
             this.TabLevelInfo.SelectedIndex = 0;
-            this.TabLevelInfo.Size = new System.Drawing.Size(639, 93);
+            this.TabLevelInfo.Size = new System.Drawing.Size(558, 93);
             this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabLevelInfo.TabIndex = 20;
             // 
@@ -241,7 +235,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(631, 67);
+            this.tabPage4.Size = new System.Drawing.Size(550, 67);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Level";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -251,7 +245,7 @@
             this.CmbMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbMusic.DropDownWidth = 150;
             this.CmbMusic.FormattingEnabled = true;
-            this.CmbMusic.Location = new System.Drawing.Point(78, 31);
+            this.CmbMusic.Location = new System.Drawing.Point(70, 22);
             this.CmbMusic.Name = "CmbMusic";
             this.CmbMusic.Size = new System.Drawing.Size(129, 21);
             this.CmbMusic.TabIndex = 7;
@@ -259,7 +253,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 12);
+            this.label3.Location = new System.Drawing.Point(69, 3);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
@@ -270,7 +264,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 11);
+            this.label4.Location = new System.Drawing.Point(6, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 13);
@@ -285,7 +279,7 @@
             0,
             0,
             0});
-            this.NumTime.Location = new System.Drawing.Point(10, 31);
+            this.NumTime.Location = new System.Drawing.Point(7, 23);
             this.NumTime.Maximum = new decimal(new int[] {
             990,
             0,
@@ -304,7 +298,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(425, 12);
+            this.label12.Location = new System.Drawing.Point(402, 3);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
@@ -319,8 +313,9 @@
             this.CmbScroll.Items.AddRange(new object[] {
             "Scrolls When Flying",
             "Free Scrolling",
-            "No Scrolling"});
-            this.CmbScroll.Location = new System.Drawing.Point(427, 31);
+            "No Scrolling",
+            "Vertical Transitions"});
+            this.CmbScroll.Location = new System.Drawing.Point(404, 22);
             this.CmbScroll.Name = "CmbScroll";
             this.CmbScroll.Size = new System.Drawing.Size(129, 21);
             this.CmbScroll.TabIndex = 27;
@@ -329,7 +324,7 @@
             // 
             this.CmbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbTypes.FormattingEnabled = true;
-            this.CmbTypes.Location = new System.Drawing.Point(287, 31);
+            this.CmbTypes.Location = new System.Drawing.Point(269, 22);
             this.CmbTypes.Name = "CmbTypes";
             this.CmbTypes.Size = new System.Drawing.Size(129, 21);
             this.CmbTypes.TabIndex = 14;
@@ -338,7 +333,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(286, 12);
+            this.label6.Location = new System.Drawing.Point(268, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 13);
@@ -349,7 +344,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(218, 12);
+            this.label8.Location = new System.Drawing.Point(205, 3);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
@@ -361,7 +356,7 @@
             // 
             this.CmbLength.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbLength.FormattingEnabled = true;
-            this.CmbLength.Location = new System.Drawing.Point(218, 31);
+            this.CmbLength.Location = new System.Drawing.Point(205, 22);
             this.CmbLength.Name = "CmbLength";
             this.CmbLength.Size = new System.Drawing.Size(58, 21);
             this.CmbLength.TabIndex = 21;
@@ -380,7 +375,7 @@
             this.tabPageEX1.Controls.Add(this.LblHexGraphics);
             this.tabPageEX1.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX1.Name = "tabPageEX1";
-            this.tabPageEX1.Size = new System.Drawing.Size(561, 67);
+            this.tabPageEX1.Size = new System.Drawing.Size(550, 67);
             this.tabPageEX1.TabIndex = 4;
             this.tabPageEX1.Text = "Graphics";
             this.tabPageEX1.UseVisualStyleBackColor = true;
@@ -388,7 +383,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
@@ -401,7 +396,7 @@
             this.CmbGraphics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbGraphics.DropDownWidth = 200;
             this.CmbGraphics.FormattingEnabled = true;
-            this.CmbGraphics.Location = new System.Drawing.Point(6, 29);
+            this.CmbGraphics.Location = new System.Drawing.Point(6, 22);
             this.CmbGraphics.Name = "CmbGraphics";
             this.CmbGraphics.Size = new System.Drawing.Size(129, 21);
             this.CmbGraphics.TabIndex = 24;
@@ -410,7 +405,7 @@
             // NumBackground
             // 
             this.NumBackground.Hexadecimal = true;
-            this.NumBackground.Location = new System.Drawing.Point(304, 29);
+            this.NumBackground.Location = new System.Drawing.Point(276, 22);
             this.NumBackground.Maximum = new decimal(new int[] {
             255,
             0,
@@ -424,7 +419,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(301, 10);
+            this.label2.Location = new System.Drawing.Point(273, 3);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 13);
@@ -436,7 +431,7 @@
             // 
             this.CmbPalettes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbPalettes.FormattingEnabled = true;
-            this.CmbPalettes.Location = new System.Drawing.Point(160, 29);
+            this.CmbPalettes.Location = new System.Drawing.Point(141, 22);
             this.CmbPalettes.Name = "CmbPalettes";
             this.CmbPalettes.Size = new System.Drawing.Size(129, 21);
             this.CmbPalettes.TabIndex = 28;
@@ -445,7 +440,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(157, 10);
+            this.label5.Location = new System.Drawing.Point(138, 3);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
@@ -455,7 +450,7 @@
             // 
             // BtnClear
             // 
-            this.BtnClear.Location = new System.Drawing.Point(358, 26);
+            this.BtnClear.Location = new System.Drawing.Point(330, 19);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(55, 23);
             this.BtnClear.TabIndex = 30;
@@ -466,7 +461,7 @@
             // LblHexGraphics
             // 
             this.LblHexGraphics.AutoSize = true;
-            this.LblHexGraphics.Location = new System.Drawing.Point(94, 10);
+            this.LblHexGraphics.Location = new System.Drawing.Point(94, 3);
             this.LblHexGraphics.Name = "LblHexGraphics";
             this.LblHexGraphics.Size = new System.Drawing.Size(41, 13);
             this.LblHexGraphics.TabIndex = 31;
@@ -486,14 +481,14 @@
             this.tabPageEX2.Controls.Add(this.CmbActions);
             this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX2.Name = "tabPageEX2";
-            this.tabPageEX2.Size = new System.Drawing.Size(561, 67);
+            this.tabPageEX2.Size = new System.Drawing.Size(550, 67);
             this.tabPageEX2.TabIndex = 5;
             this.tabPageEX2.Text = "Position";
             this.tabPageEX2.UseVisualStyleBackColor = true;
             // 
             // BtnSetAltPoint
             // 
-            this.BtnSetAltPoint.Location = new System.Drawing.Point(295, 29);
+            this.BtnSetAltPoint.Location = new System.Drawing.Point(274, 21);
             this.BtnSetAltPoint.Name = "BtnSetAltPoint";
             this.BtnSetAltPoint.Size = new System.Drawing.Size(129, 23);
             this.BtnSetAltPoint.TabIndex = 44;
@@ -504,7 +499,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(292, 10);
+            this.label14.Location = new System.Drawing.Point(271, 2);
             this.label14.Margin = new System.Windows.Forms.Padding(3);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(71, 13);
@@ -515,7 +510,7 @@
             // LblAltPoint
             // 
             this.LblAltPoint.AutoSize = true;
-            this.LblAltPoint.Location = new System.Drawing.Point(369, 10);
+            this.LblAltPoint.Location = new System.Drawing.Point(348, 2);
             this.LblAltPoint.Margin = new System.Windows.Forms.Padding(3);
             this.LblAltPoint.Name = "LblAltPoint";
             this.LblAltPoint.Size = new System.Drawing.Size(48, 13);
@@ -526,7 +521,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(10, 10);
+            this.label13.Location = new System.Drawing.Point(3, 3);
             this.label13.Margin = new System.Windows.Forms.Padding(3);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 13);
@@ -537,7 +532,7 @@
             // LblStartPoint
             // 
             this.LblStartPoint.AutoSize = true;
-            this.LblStartPoint.Location = new System.Drawing.Point(71, 10);
+            this.LblStartPoint.Location = new System.Drawing.Point(64, 3);
             this.LblStartPoint.Margin = new System.Windows.Forms.Padding(3);
             this.LblStartPoint.Name = "LblStartPoint";
             this.LblStartPoint.Size = new System.Drawing.Size(48, 13);
@@ -547,7 +542,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(11, 30);
+            this.button1.Location = new System.Drawing.Point(4, 23);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 23);
             this.button1.TabIndex = 39;
@@ -558,7 +553,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(150, 10);
+            this.label11.Location = new System.Drawing.Point(139, 2);
             this.label11.Margin = new System.Windows.Forms.Padding(3);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(76, 13);
@@ -578,7 +573,7 @@
             "Right Pipe",
             "Left Pipe",
             "Anchor Cut Scene"});
-            this.CmbActions.Location = new System.Drawing.Point(150, 31);
+            this.CmbActions.Location = new System.Drawing.Point(139, 23);
             this.CmbActions.Name = "CmbActions";
             this.CmbActions.Size = new System.Drawing.Size(129, 21);
             this.CmbActions.TabIndex = 37;
@@ -594,7 +589,7 @@
             this.tabPageEX3.Controls.Add(this.Weather);
             this.tabPageEX3.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX3.Name = "tabPageEX3";
-            this.tabPageEX3.Size = new System.Drawing.Size(561, 67);
+            this.tabPageEX3.Size = new System.Drawing.Size(550, 67);
             this.tabPageEX3.TabIndex = 6;
             this.tabPageEX3.Text = "Weather";
             this.tabPageEX3.UseVisualStyleBackColor = true;
@@ -694,7 +689,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 4);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(561, 67);
+            this.tabPage7.Size = new System.Drawing.Size(550, 67);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Special Options";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -806,21 +801,20 @@
             // 
             this.panel4.Controls.Add(this.LblSprite);
             this.panel4.Controls.Add(this.LblPositition);
-            this.panel4.Controls.Add(this.LblRightClickMode);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(639, 29);
+            this.panel4.Size = new System.Drawing.Size(558, 29);
             this.panel4.TabIndex = 23;
             // 
             // LblSprite
             // 
             this.LblSprite.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LblSprite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblSprite.Location = new System.Drawing.Point(217, 0);
+            this.LblSprite.Location = new System.Drawing.Point(69, 0);
             this.LblSprite.Name = "LblSprite";
-            this.LblSprite.Size = new System.Drawing.Size(356, 29);
+            this.LblSprite.Size = new System.Drawing.Size(423, 29);
             this.LblSprite.TabIndex = 21;
             this.LblSprite.Text = "Sprite";
             this.LblSprite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -829,7 +823,7 @@
             // 
             this.LblPositition.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LblPositition.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LblPositition.Location = new System.Drawing.Point(148, 0);
+            this.LblPositition.Location = new System.Drawing.Point(0, 0);
             this.LblPositition.Margin = new System.Windows.Forms.Padding(3);
             this.LblPositition.Name = "LblPositition";
             this.LblPositition.Size = new System.Drawing.Size(69, 29);
@@ -837,27 +831,13 @@
             this.LblPositition.Text = "X: 00 Y: 00";
             this.LblPositition.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // LblRightClickMode
-            // 
-            this.LblRightClickMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LblRightClickMode.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LblRightClickMode.Location = new System.Drawing.Point(0, 0);
-            this.LblRightClickMode.Margin = new System.Windows.Forms.Padding(3);
-            this.LblRightClickMode.Name = "LblRightClickMode";
-            this.LblRightClickMode.Size = new System.Drawing.Size(148, 29);
-            this.LblRightClickMode.TabIndex = 23;
-            this.LblRightClickMode.Text = "Right Click Mode: Selector";
-            this.LblRightClickMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LevelToolTip.SetToolTip(this.LblRightClickMode, "Click to change modes.");
-            this.LblRightClickMode.Click += new System.EventHandler(this.LblRightClickMode_Click);
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.NumSpecials);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(573, 0);
+            this.panel3.Location = new System.Drawing.Point(492, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(66, 29);
@@ -884,48 +864,18 @@
             this.LevelToolTip.SetToolTip(this.NumSpecials, "Special Icon Transparency");
             this.NumSpecials.ValueChanged += new System.EventHandler(this.NumSpecials_ValueChanged);
             // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.LblHelpText);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(639, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(207, 122);
-            this.panel5.TabIndex = 22;
-            // 
-            // LblHelpText
-            // 
-            this.LblHelpText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblHelpText.Location = new System.Drawing.Point(0, 0);
-            this.LblHelpText.Name = "LblHelpText";
-            this.LblHelpText.Padding = new System.Windows.Forms.Padding(4);
-            this.LblHelpText.Size = new System.Drawing.Size(203, 118);
-            this.LblHelpText.TabIndex = 0;
-            this.LblHelpText.Text = "Help Text";
-            // 
-            // PnlDrawing
-            // 
-            this.PnlDrawing.AutoScroll = true;
-            this.PnlDrawing.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PnlDrawing.Controls.Add(this.TabEditSelector);
-            this.PnlDrawing.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PnlDrawing.Location = new System.Drawing.Point(0, 0);
-            this.PnlDrawing.Name = "PnlDrawing";
-            this.PnlDrawing.Size = new System.Drawing.Size(281, 373);
-            this.PnlDrawing.TabIndex = 21;
-            // 
             // TabEditSelector
             // 
             this.TabEditSelector.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.TabEditSelector.Controls.Add(this.tabPage1);
             this.TabEditSelector.Controls.Add(this.tabPage2);
             this.TabEditSelector.Controls.Add(this.tabPage3);
-            this.TabEditSelector.Location = new System.Drawing.Point(0, 8);
+            this.TabEditSelector.Dock = System.Windows.Forms.DockStyle.Left;
+            this.TabEditSelector.Location = new System.Drawing.Point(0, 0);
+            this.TabEditSelector.Multiline = true;
             this.TabEditSelector.Name = "TabEditSelector";
             this.TabEditSelector.SelectedIndex = 0;
-            this.TabEditSelector.Size = new System.Drawing.Size(277, 361);
-            this.TabEditSelector.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.TabEditSelector.Size = new System.Drawing.Size(277, 495);
             this.TabEditSelector.TabIndex = 17;
             this.TabEditSelector.SelectedIndexChanged += new System.EventHandler(this.TabEditSelector_SelectedIndexChanged);
             // 
@@ -934,12 +884,12 @@
             this.tabPage1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage1.Controls.Add(this.BlvRight);
             this.tabPage1.Controls.Add(this.LblSelectorHover);
+            this.tabPage1.Controls.Add(this.CmbLayouts);
             this.tabPage1.Controls.Add(this.BlvLeft);
             this.tabPage1.Controls.Add(this.BlsSelector);
-            this.tabPage1.Controls.Add(this.CmbLayouts);
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(269, 335);
+            this.tabPage1.Size = new System.Drawing.Size(269, 469);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -963,6 +913,16 @@
             this.LblSelectorHover.TabIndex = 20;
             this.LblSelectorHover.Text = "Block:";
             // 
+            // CmbLayouts
+            // 
+            this.CmbLayouts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbLayouts.FormattingEnabled = true;
+            this.CmbLayouts.Location = new System.Drawing.Point(6, 5);
+            this.CmbLayouts.Name = "CmbLayouts";
+            this.CmbLayouts.Size = new System.Drawing.Size(256, 21);
+            this.CmbLayouts.TabIndex = 16;
+            this.CmbLayouts.SelectedIndexChanged += new System.EventHandler(this.CmbLayouts_SelectedIndexChanged);
+            // 
             // BlvLeft
             // 
             this.BlvLeft.CurrentBlock = null;
@@ -982,8 +942,9 @@
             this.BlsSelector.Name = "BlsSelector";
             this.BlsSelector.SelectedIndex = 0;
             this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockProperties = false;
+            this.BlsSelector.ShowBlockSolidity = false;
             this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.ShowTileInteractions = false;
             this.BlsSelector.Size = new System.Drawing.Size(256, 256);
             this.BlsSelector.SpecialDefnitions = null;
             this.BlsSelector.SpecialTable = null;
@@ -991,16 +952,6 @@
             this.BlsSelector.Text = "blockSelector1";
             this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
             this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
-            // 
-            // CmbLayouts
-            // 
-            this.CmbLayouts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbLayouts.FormattingEnabled = true;
-            this.CmbLayouts.Location = new System.Drawing.Point(6, 5);
-            this.CmbLayouts.Name = "CmbLayouts";
-            this.CmbLayouts.Size = new System.Drawing.Size(256, 21);
-            this.CmbLayouts.TabIndex = 16;
-            this.CmbLayouts.SelectedIndexChanged += new System.EventHandler(this.CmbLayouts_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -1011,7 +962,7 @@
             this.tabPage2.Controls.Add(this.TabClass1);
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(269, 335);
+            this.tabPage2.Size = new System.Drawing.Size(269, 469);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sprites";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1019,7 +970,6 @@
             // 
             // LblSpriteSelected
             // 
-            this.LblSpriteSelected.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LblSpriteSelected.Location = new System.Drawing.Point(3, 307);
             this.LblSpriteSelected.Margin = new System.Windows.Forms.Padding(0);
             this.LblSpriteSelected.Name = "LblSpriteSelected";
@@ -1070,7 +1020,7 @@
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(269, 335);
+            this.tabPage3.Size = new System.Drawing.Size(269, 469);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pointers";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1127,11 +1077,11 @@
             this.TsbBucket,
             this.TsbReplace});
             this.TlsDrawing.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TlsDrawing.Location = new System.Drawing.Point(193, 0);
+            this.TlsDrawing.Location = new System.Drawing.Point(216, 0);
             this.TlsDrawing.Name = "TlsDrawing";
             this.TlsDrawing.Padding = new System.Windows.Forms.Padding(0);
             this.TlsDrawing.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.TlsDrawing.Size = new System.Drawing.Size(171, 25);
+            this.TlsDrawing.Size = new System.Drawing.Size(140, 24);
             this.TlsDrawing.TabIndex = 15;
             this.TlsDrawing.Text = "toolStrip1";
             // 
@@ -1142,7 +1092,7 @@
             this.TsbPencil.Image = ((System.Drawing.Image)(resources.GetObject("TsbPencil.Image")));
             this.TsbPencil.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPencil.Name = "TsbPencil";
-            this.TsbPencil.Size = new System.Drawing.Size(23, 22);
+            this.TsbPencil.Size = new System.Drawing.Size(23, 21);
             this.TsbPencil.Text = "toolStripButton2";
             this.TsbPencil.ToolTipText = "Pencl";
             this.TsbPencil.Click += new System.EventHandler(this.TsbPencil_Click);
@@ -1154,7 +1104,7 @@
             this.TsbLine.Image = ((System.Drawing.Image)(resources.GetObject("TsbLine.Image")));
             this.TsbLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbLine.Name = "TsbLine";
-            this.TsbLine.Size = new System.Drawing.Size(23, 22);
+            this.TsbLine.Size = new System.Drawing.Size(23, 21);
             this.TsbLine.Text = "toolStripButton1";
             this.TsbLine.ToolTipText = "Diagonal Line";
             this.TsbLine.Click += new System.EventHandler(this.TsbLine_Click);
@@ -1166,7 +1116,7 @@
             this.TsbRectangle.Image = ((System.Drawing.Image)(resources.GetObject("TsbRectangle.Image")));
             this.TsbRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbRectangle.Name = "TsbRectangle";
-            this.TsbRectangle.Size = new System.Drawing.Size(23, 22);
+            this.TsbRectangle.Size = new System.Drawing.Size(23, 21);
             this.TsbRectangle.Text = "toolStripButton1";
             this.TsbRectangle.ToolTipText = "Rectangle Fill";
             this.TsbRectangle.Click += new System.EventHandler(this.TsbRectangle_Click);
@@ -1178,7 +1128,7 @@
             this.TsbOutline.Image = ((System.Drawing.Image)(resources.GetObject("TsbOutline.Image")));
             this.TsbOutline.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbOutline.Name = "TsbOutline";
-            this.TsbOutline.Size = new System.Drawing.Size(23, 22);
+            this.TsbOutline.Size = new System.Drawing.Size(23, 21);
             this.TsbOutline.Text = "toolStripButton1";
             this.TsbOutline.ToolTipText = "Rectangle Outline";
             this.TsbOutline.Click += new System.EventHandler(this.TsbOutline_Click);
@@ -1190,7 +1140,7 @@
             this.TsbBucket.Image = ((System.Drawing.Image)(resources.GetObject("TsbBucket.Image")));
             this.TsbBucket.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbBucket.Name = "TsbBucket";
-            this.TsbBucket.Size = new System.Drawing.Size(23, 22);
+            this.TsbBucket.Size = new System.Drawing.Size(23, 21);
             this.TsbBucket.Text = "toolStripButton1";
             this.TsbBucket.ToolTipText = "Flood Fill";
             this.TsbBucket.Click += new System.EventHandler(this.TsbBucket_Click);
@@ -1202,7 +1152,7 @@
             this.TsbReplace.Image = ((System.Drawing.Image)(resources.GetObject("TsbReplace.Image")));
             this.TsbReplace.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbReplace.Name = "TsbReplace";
-            this.TsbReplace.Size = new System.Drawing.Size(23, 22);
+            this.TsbReplace.Size = new System.Drawing.Size(23, 21);
             this.TsbReplace.Text = "toolStripButton1";
             this.TsbReplace.ToolTipText = "Replace Tile";
             this.TsbReplace.Click += new System.EventHandler(this.toolStripButton1_Click);
@@ -1276,16 +1226,17 @@
             this.toolStripSeparator2,
             this.TsbStartPoint,
             this.TsbGrid,
-            this.TsbTileSpecials,
+            this.TsbItems,
+            this.TsbSolidity,
+            this.TsbInteractions,
             this.TsbSriteSpecials,
-            this.TsbProperties,
             this.TsbPointers,
             this.TsbZoom});
             this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(193, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(216, 24);
             this.toolStrip2.TabIndex = 22;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1304,7 +1255,7 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 24);
             // 
             // TsbStartPoint
             // 
@@ -1313,7 +1264,7 @@
             this.TsbStartPoint.Image = global::Daiz.NES.Reuben.Properties.Resources.mario;
             this.TsbStartPoint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbStartPoint.Name = "TsbStartPoint";
-            this.TsbStartPoint.Size = new System.Drawing.Size(23, 22);
+            this.TsbStartPoint.Size = new System.Drawing.Size(23, 21);
             this.TsbStartPoint.Text = "Toggle Start Point Display";
             this.TsbStartPoint.ToolTipText = "Toggle Start Point Display\r\n(Ctrl + F) (Ctrl + R to set start point)";
             this.TsbStartPoint.CheckStateChanged += new System.EventHandler(this.TsbStartPoint_CheckedChanged);
@@ -1325,21 +1276,45 @@
             this.TsbGrid.Image = global::Daiz.NES.Reuben.Properties.Resources.grid;
             this.TsbGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbGrid.Name = "TsbGrid";
-            this.TsbGrid.Size = new System.Drawing.Size(23, 22);
+            this.TsbGrid.Size = new System.Drawing.Size(23, 21);
             this.TsbGrid.Text = "Toggle Grid";
             this.TsbGrid.ToolTipText = "Toggle Grid\r\n(Ctrl + G)";
             this.TsbGrid.CheckStateChanged += new System.EventHandler(this.TsbGrid_CheckedChanged);
             // 
-            // TsbTileSpecials
+            // TsbItems
             // 
-            this.TsbTileSpecials.CheckOnClick = true;
-            this.TsbTileSpecials.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbTileSpecials.Image = global::Daiz.NES.Reuben.Properties.Resources.specialtile;
-            this.TsbTileSpecials.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbTileSpecials.Name = "TsbTileSpecials";
-            this.TsbTileSpecials.Size = new System.Drawing.Size(23, 22);
-            this.TsbTileSpecials.ToolTipText = "Toggle Block Icons\r\n(Ctrl + H)";
-            this.TsbTileSpecials.CheckStateChanged += new System.EventHandler(this.TsbTileSpecials_CheckedChanged);
+            this.TsbItems.CheckOnClick = true;
+            this.TsbItems.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbItems.Image = global::Daiz.NES.Reuben.Properties.Resources.specialtile;
+            this.TsbItems.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbItems.Name = "TsbItems";
+            this.TsbItems.Size = new System.Drawing.Size(23, 21);
+            this.TsbItems.ToolTipText = "Toggle Block Icons\r\n(Ctrl + H)";
+            this.TsbItems.CheckStateChanged += new System.EventHandler(this.TsbTileSpecials_CheckedChanged);
+            // 
+            // TsbSolidity
+            // 
+            this.TsbSolidity.CheckOnClick = true;
+            this.TsbSolidity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbSolidity.Image = global::Daiz.NES.Reuben.Properties.Resources.blockprops;
+            this.TsbSolidity.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbSolidity.Name = "TsbSolidity";
+            this.TsbSolidity.Size = new System.Drawing.Size(23, 21);
+            this.TsbSolidity.Text = "Toggle Block Properties";
+            this.TsbSolidity.ToolTipText = "Toggle Block Solidity(Ctrl + K)";
+            this.TsbSolidity.CheckStateChanged += new System.EventHandler(this.TsbProperties_CheckStateChanged);
+            // 
+            // TsbInteractions
+            // 
+            this.TsbInteractions.CheckOnClick = true;
+            this.TsbInteractions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbInteractions.Image = ((System.Drawing.Image)(resources.GetObject("TsbInteractions.Image")));
+            this.TsbInteractions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbInteractions.Name = "TsbInteractions";
+            this.TsbInteractions.Size = new System.Drawing.Size(23, 21);
+            this.TsbInteractions.Text = "toolStripButton1";
+            this.TsbInteractions.ToolTipText = "Toggle Block Interactions (Control + L)";
+            this.TsbInteractions.CheckedChanged += new System.EventHandler(this.TsbInteractions_CheckedChanged);
             // 
             // TsbSriteSpecials
             // 
@@ -1348,22 +1323,10 @@
             this.TsbSriteSpecials.Image = global::Daiz.NES.Reuben.Properties.Resources.specialsprite;
             this.TsbSriteSpecials.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbSriteSpecials.Name = "TsbSriteSpecials";
-            this.TsbSriteSpecials.Size = new System.Drawing.Size(23, 22);
+            this.TsbSriteSpecials.Size = new System.Drawing.Size(23, 21);
             this.TsbSriteSpecials.Text = "Toggle Special Sprite Icons";
             this.TsbSriteSpecials.ToolTipText = "Toggle Special Sprite Icons\r\n(Ctrl + J)";
             this.TsbSriteSpecials.CheckStateChanged += new System.EventHandler(this.TsbSriteSpecials_CheckedChanged);
-            // 
-            // TsbProperties
-            // 
-            this.TsbProperties.CheckOnClick = true;
-            this.TsbProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbProperties.Image = global::Daiz.NES.Reuben.Properties.Resources.blockprops;
-            this.TsbProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbProperties.Name = "TsbProperties";
-            this.TsbProperties.Size = new System.Drawing.Size(23, 22);
-            this.TsbProperties.Text = "Toggle Block Properties";
-            this.TsbProperties.ToolTipText = "Toggle Block Properties\r\n(Ctrl + K)";
-            this.TsbProperties.CheckStateChanged += new System.EventHandler(this.TsbProperties_CheckStateChanged);
             // 
             // TsbPointers
             // 
@@ -1372,7 +1335,7 @@
             this.TsbPointers.Image = global::Daiz.NES.Reuben.Properties.Resources.pointers;
             this.TsbPointers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPointers.Name = "TsbPointers";
-            this.TsbPointers.Size = new System.Drawing.Size(23, 22);
+            this.TsbPointers.Size = new System.Drawing.Size(23, 21);
             this.TsbPointers.Text = "Toggle Pointers";
             this.TsbPointers.ToolTipText = "Toggle Pointers\r\n(Ctrl + P)";
             this.TsbPointers.CheckStateChanged += new System.EventHandler(this.TsbPointers_Click);
@@ -1384,7 +1347,7 @@
             this.TsbZoom.Image = global::Daiz.NES.Reuben.Properties.Resources.zoom;
             this.TsbZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbZoom.Name = "TsbZoom";
-            this.TsbZoom.Size = new System.Drawing.Size(23, 22);
+            this.TsbZoom.Size = new System.Drawing.Size(23, 21);
             this.TsbZoom.Text = "Toggle 2x Zoom";
             this.TsbZoom.ToolTipText = "Toggle 2x Zoom\r\n(Ctrl + +/-)";
             this.TsbZoom.CheckStateChanged += new System.EventHandler(this.TsbZoom_CheckedChanged);
@@ -1396,13 +1359,14 @@
             this.panel2.Controls.Add(this.TlsDrawing);
             this.panel2.Controls.Add(this.toolStrip2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(281, 0);
+            this.panel2.Location = new System.Drawing.Point(277, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(565, 27);
+            this.panel2.Size = new System.Drawing.Size(558, 26);
             this.panel2.TabIndex = 23;
             // 
             // TlsTileCommands
             // 
+            this.TlsTileCommands.Dock = System.Windows.Forms.DockStyle.Left;
             this.TlsTileCommands.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.TlsTileCommands.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TsbCut,
@@ -1412,9 +1376,10 @@
             this.toolStripSeparator8,
             this.hMirrorButton,
             this.vMirrorButton});
-            this.TlsTileCommands.Location = new System.Drawing.Point(364, 0);
+            this.TlsTileCommands.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.TlsTileCommands.Location = new System.Drawing.Point(356, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(199, 25);
+            this.TlsTileCommands.Size = new System.Drawing.Size(147, 24);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -1424,7 +1389,7 @@
             this.TsbCut.Image = global::Daiz.NES.Reuben.Properties.Resources.cut;
             this.TsbCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbCut.Name = "TsbCut";
-            this.TsbCut.Size = new System.Drawing.Size(23, 22);
+            this.TsbCut.Size = new System.Drawing.Size(23, 21);
             this.TsbCut.Text = "Cut";
             this.TsbCut.ToolTipText = "Cut\r\n(Ctrl + X)";
             this.TsbCut.Click += new System.EventHandler(this.TsbCut_Click);
@@ -1435,7 +1400,7 @@
             this.TsbCopy.Image = global::Daiz.NES.Reuben.Properties.Resources.copy;
             this.TsbCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbCopy.Name = "TsbCopy";
-            this.TsbCopy.Size = new System.Drawing.Size(23, 22);
+            this.TsbCopy.Size = new System.Drawing.Size(23, 21);
             this.TsbCopy.Text = "Copy";
             this.TsbCopy.ToolTipText = "Copy\r\n(Ctrl + C)";
             this.TsbCopy.Click += new System.EventHandler(this.TsbCopy_Click);
@@ -1446,7 +1411,7 @@
             this.TsbPaste.Image = global::Daiz.NES.Reuben.Properties.Resources.paste;
             this.TsbPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPaste.Name = "TsbPaste";
-            this.TsbPaste.Size = new System.Drawing.Size(23, 22);
+            this.TsbPaste.Size = new System.Drawing.Size(23, 21);
             this.TsbPaste.Text = "Paste";
             this.TsbPaste.ToolTipText = "Paste\r\n(Ctrl + V)";
             this.TsbPaste.Click += new System.EventHandler(this.TsbPaste_Click);
@@ -1457,7 +1422,7 @@
             this.TsbDelete.Image = global::Daiz.NES.Reuben.Properties.Resources.delete;
             this.TsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbDelete.Name = "TsbDelete";
-            this.TsbDelete.Size = new System.Drawing.Size(23, 22);
+            this.TsbDelete.Size = new System.Drawing.Size(23, 21);
             this.TsbDelete.Text = "Delete";
             this.TsbDelete.ToolTipText = "Delete\r\n(Delete)";
             this.TsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
@@ -1465,7 +1430,18 @@
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 24);
+            // 
+            // hMirrorButton
+            // 
+            this.hMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.hMirrorButton.Enabled = false;
+            this.hMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("hMirrorButton.Image")));
+            this.hMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.hMirrorButton.Name = "hMirrorButton";
+            this.hMirrorButton.Size = new System.Drawing.Size(23, 21);
+            this.hMirrorButton.Text = "Mirror Horizontally";
+            this.hMirrorButton.Click += new System.EventHandler(this.hMirrorButton_Click);
             // 
             // vMirrorButton
             // 
@@ -1474,7 +1450,7 @@
             this.vMirrorButton.Image = global::Daiz.NES.Reuben.Properties.Resources.vmirror;
             this.vMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vMirrorButton.Name = "vMirrorButton";
-            this.vMirrorButton.Size = new System.Drawing.Size(23, 22);
+            this.vMirrorButton.Size = new System.Drawing.Size(23, 21);
             this.vMirrorButton.Text = "Mirror Vertically";
             this.vMirrorButton.Click += new System.EventHandler(this.vMirrorButton_Click);
             // 
@@ -1661,18 +1637,18 @@
             this.PnlView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.PnlView.Controls.Add(this.PnlLengthControl);
             this.PnlView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PnlView.Location = new System.Drawing.Point(297, 27);
+            this.PnlView.Location = new System.Drawing.Point(293, 26);
             this.PnlView.Name = "PnlView";
-            this.PnlView.Size = new System.Drawing.Size(549, 330);
+            this.PnlView.Size = new System.Drawing.Size(542, 331);
             this.PnlView.TabIndex = 0;
             this.PnlView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LvlView_PreviewKeyDown);
             // 
             // PnlLengthControl
             // 
             this.PnlLengthControl.Controls.Add(this.LvlView);
-            this.PnlLengthControl.Location = new System.Drawing.Point(16, 0);
+            this.PnlLengthControl.Location = new System.Drawing.Point(0, 0);
             this.PnlLengthControl.Name = "PnlLengthControl";
-            this.PnlLengthControl.Size = new System.Drawing.Size(461, 307);
+            this.PnlLengthControl.Size = new System.Drawing.Size(538, 327);
             this.PnlLengthControl.TabIndex = 0;
             // 
             // LvlView
@@ -1682,20 +1658,21 @@
             this.LvlView.CurrentTable = null;
             this.LvlView.DelayDrawing = false;
             this.LvlView.DisplayStartingPosition = false;
-            this.LvlView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LvlView.HorizontalGuide1 = null;
             this.LvlView.HorizontalGuide2 = null;
             this.LvlView.Location = new System.Drawing.Point(0, 0);
             this.LvlView.Name = "LvlView";
             this.LvlView.SelectionLine = null;
             this.LvlView.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.LvlView.ShowBlockProperties = false;
+            this.LvlView.ShowBlockSolidity = false;
             this.LvlView.ShowGrid = false;
             this.LvlView.ShowPointers = false;
             this.LvlView.ShowSpecialBlocks = false;
             this.LvlView.ShowSpecialSprites = false;
-            this.LvlView.Size = new System.Drawing.Size(461, 307);
+            this.LvlView.ShowTileInteractions = false;
+            this.LvlView.Size = new System.Drawing.Size(538, 327);
             this.LvlView.SpecialTable = null;
+            this.LvlView.SpecialTransparency = 0D;
             this.LvlView.TabIndex = 0;
             this.LvlView.Text = "levelViewer1";
             this.LvlView.VerticalGuide1 = null;
@@ -1715,10 +1692,10 @@
             this.PnlHorizontalGuide.GuideOrientation = Daiz.NES.Reuben.Orientation.Horizontal;
             this.PnlHorizontalGuide.GuideSelected = Daiz.NES.Reuben.GuideType.None;
             this.PnlHorizontalGuide.GuideSnapMode = Daiz.NES.Reuben.GuideMode.Free;
-            this.PnlHorizontalGuide.Location = new System.Drawing.Point(297, 357);
+            this.PnlHorizontalGuide.Location = new System.Drawing.Point(293, 357);
             this.PnlHorizontalGuide.Margin = new System.Windows.Forms.Padding(0);
             this.PnlHorizontalGuide.Name = "PnlHorizontalGuide";
-            this.PnlHorizontalGuide.Size = new System.Drawing.Size(549, 16);
+            this.PnlHorizontalGuide.Size = new System.Drawing.Size(542, 16);
             this.PnlHorizontalGuide.TabIndex = 30;
             // 
             // PnlVerticalGuide
@@ -1731,34 +1708,23 @@
             this.PnlVerticalGuide.GuideOrientation = Daiz.NES.Reuben.Orientation.Vertical;
             this.PnlVerticalGuide.GuideSelected = Daiz.NES.Reuben.GuideType.None;
             this.PnlVerticalGuide.GuideSnapMode = Daiz.NES.Reuben.GuideMode.Free;
-            this.PnlVerticalGuide.Location = new System.Drawing.Point(281, 27);
+            this.PnlVerticalGuide.Location = new System.Drawing.Point(277, 26);
             this.PnlVerticalGuide.Margin = new System.Windows.Forms.Padding(0);
             this.PnlVerticalGuide.Name = "PnlVerticalGuide";
-            this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 346);
+            this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
             this.PnlVerticalGuide.TabIndex = 31;
-            // 
-            // hMirrorButton
-            // 
-            this.hMirrorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.hMirrorButton.Enabled = false;
-            this.hMirrorButton.Image = ((System.Drawing.Image)(resources.GetObject("hMirrorButton.Image")));
-            this.hMirrorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.hMirrorButton.Name = "hMirrorButton";
-            this.hMirrorButton.Size = new System.Drawing.Size(23, 22);
-            this.hMirrorButton.Text = "Mirror Horizontally";
-            this.hMirrorButton.Click += new System.EventHandler(this.hMirrorButton_Click);
             // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(846, 495);
+            this.ClientSize = new System.Drawing.Size(835, 495);
             this.Controls.Add(this.PnlView);
             this.Controls.Add(this.PnlHorizontalGuide);
             this.Controls.Add(this.PnlVerticalGuide);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.PnlDrawing);
             this.Controls.Add(this.PnlInfo);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.TabEditSelector);
             this.Name = "LevelEditor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -1782,8 +1748,6 @@
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumSpecials)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.PnlDrawing.ResumeLayout(false);
             this.TabEditSelector.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1818,7 +1782,6 @@
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.TabPage tabPage12;
-        private System.Windows.Forms.Panel PnlDrawing;
         private System.Windows.Forms.TabControl TabEditSelector;
         private System.Windows.Forms.TabPage tabPage1;
         private BlockSelector BlsSelector;
@@ -1841,7 +1804,7 @@
         private LevelPointerEditor PntEditor;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton TsbGrid;
-        private System.Windows.Forms.ToolStripButton TsbTileSpecials;
+        private System.Windows.Forms.ToolStripButton TsbItems;
         private System.Windows.Forms.ToolStripButton TsbSriteSpecials;
         private System.Windows.Forms.ToolStripButton TsbStartPoint;
         private System.Windows.Forms.ToolStripButton TsbZoom;
@@ -1872,7 +1835,7 @@
         private System.Windows.Forms.Label LblSelectorHover;
         private BlockViewer BlvRight;
         private System.Windows.Forms.ToolTip LevelToolTip;
-        private System.Windows.Forms.ToolStripButton TsbProperties;
+        private System.Windows.Forms.ToolStripButton TsbSolidity;
         private System.Windows.Forms.ToolStripMenuItem changeGuideColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem changeGuideColorToolStripMenuFromValue;
@@ -1883,12 +1846,9 @@
         private System.Windows.Forms.ToolStripButton TsbCopy;
         private System.Windows.Forms.ToolStripButton TsbPaste;
         private System.Windows.Forms.ToolStripButton TsbDelete;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label LblHelpText;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label LblSprite;
         private System.Windows.Forms.Label LblPositition;
-        private System.Windows.Forms.Label LblRightClickMode;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.NumericUpDown NumSpecials;
         private System.Windows.Forms.ToolStripButton TsbReplace;
@@ -1946,5 +1906,6 @@
         private System.Windows.Forms.ComboBox CmbChallengeType;
         private System.Windows.Forms.CheckBox ChkInvincibleEnemies;
         private System.Windows.Forms.ToolStripButton hMirrorButton;
+        private System.Windows.Forms.ToolStripButton TsbInteractions;
     }
 }

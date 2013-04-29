@@ -30,6 +30,8 @@
         {
             this.CmbWorlds = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.CmbLayout = new System.Windows.Forms.ComboBox();
             this.TxtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.CmbType = new System.Windows.Forms.ComboBox();
@@ -37,8 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BtnCreate = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.CmbLayout = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,10 +63,34 @@
             this.groupBox1.Controls.Add(this.CmbWorlds);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(218, 135);
+            this.groupBox1.Size = new System.Drawing.Size(218, 97);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Level Info";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 97);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(4);
+            this.label4.Size = new System.Drawing.Size(47, 21);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Layout";
+            this.label4.Visible = false;
+            // 
+            // CmbLayout
+            // 
+            this.CmbLayout.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbLayout.FormattingEnabled = true;
+            this.CmbLayout.Items.AddRange(new object[] {
+            "Horizontal",
+            "Vertical"});
+            this.CmbLayout.Location = new System.Drawing.Point(55, 97);
+            this.CmbLayout.Name = "CmbLayout";
+            this.CmbLayout.Size = new System.Drawing.Size(145, 21);
+            this.CmbLayout.TabIndex = 8;
+            this.CmbLayout.Visible = false;
             // 
             // TxtName
             // 
@@ -116,7 +140,7 @@
             // 
             // BtnCreate
             // 
-            this.BtnCreate.Location = new System.Drawing.Point(67, 153);
+            this.BtnCreate.Location = new System.Drawing.Point(67, 115);
             this.BtnCreate.Name = "BtnCreate";
             this.BtnCreate.Size = new System.Drawing.Size(75, 23);
             this.BtnCreate.TabIndex = 2;
@@ -126,7 +150,7 @@
             // 
             // BtnCancel
             // 
-            this.BtnCancel.Location = new System.Drawing.Point(155, 153);
+            this.BtnCancel.Location = new System.Drawing.Point(155, 115);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
             this.BtnCancel.TabIndex = 3;
@@ -134,34 +158,12 @@
             this.BtnCancel.UseVisualStyleBackColor = true;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 97);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(4);
-            this.label4.Size = new System.Drawing.Size(47, 21);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Layout";
-            // 
-            // CmbLayout
-            // 
-            this.CmbLayout.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbLayout.FormattingEnabled = true;
-            this.CmbLayout.Items.AddRange(new object[] {
-            "Horizontal",
-            "Vertical"});
-            this.CmbLayout.Location = new System.Drawing.Point(55, 97);
-            this.CmbLayout.Name = "CmbLayout";
-            this.CmbLayout.Size = new System.Drawing.Size(145, 21);
-            this.CmbLayout.TabIndex = 8;
-            // 
             // NewLevelForm
             // 
             this.AcceptButton = this.BtnCreate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(242, 190);
+            this.ClientSize = new System.Drawing.Size(242, 147);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnCreate);
             this.Controls.Add(this.groupBox1);

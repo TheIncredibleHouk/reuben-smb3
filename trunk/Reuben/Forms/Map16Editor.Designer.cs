@@ -851,7 +851,7 @@
             this.BlsBlocks.Name = "BlsBlocks";
             this.BlsBlocks.SelectedIndex = 0;
             this.BlsBlocks.SelectedTileIndex = 0;
-            this.BlsBlocks.ShowBlockProperties = false;
+            this.BlsBlocks.ShowBlockSolidity = false;
             this.BlsBlocks.ShowSpecialBlocks = false;
             this.BlsBlocks.Size = new System.Drawing.Size(256, 256);
             this.BlsBlocks.SpecialDefnitions = null;

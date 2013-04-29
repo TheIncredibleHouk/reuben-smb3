@@ -54,6 +54,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 return ProjectController.SpriteManager.GetDefinition(InGameID).Height;
             }
         }
+
         #region IXmlIO Members
 
         public XElement CreateElement()
