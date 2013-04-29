@@ -15,8 +15,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Width { get; private set; }
         public int Height { get; private set; }
         public string Name { get; private set; }
-        public int Group { get; private set; }
-        public string Class { get; private set; }
+        public int Class { get; private set; }
+        public string Group { get; private set; }
         public int MaxLeftX { get; private set; }
         public int MaxRightX { get; private set; }
         public int MaxTopY { get; private set; }
@@ -34,8 +34,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Width = e.Attribute("width").Value.ToInt();
             Height = e.Attribute("height").Value.ToInt();
             Name = e.Attribute("name").Value;
-            Group = e.Attribute("group").Value.ToInt();
-            Class = e.Attribute("class").Value;
+            Class = e.Attribute("group").Value.ToInt();
+            Group = e.Attribute("class").Value;
 
             foreach (var x in e.Elements("sprite"))
             {
@@ -76,8 +76,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
             e.SetAttributeValue("width", Width.ToHexString());
             e.SetAttributeValue("height", Height.ToHexString());
             e.SetAttributeValue("name", Name);
-            e.SetAttributeValue("group", Group);
-            e.SetAttributeValue("class", Class);
+            e.SetAttributeValue("group", Class);
+            e.SetAttributeValue("class", Group);
 
             foreach (var s in Sprites)
             {

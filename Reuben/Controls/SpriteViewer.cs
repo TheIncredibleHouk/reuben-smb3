@@ -325,6 +325,21 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        public void SetSelectedSprite(Sprite sprite)
+        {
+            _SelectedSprite = SpriteList.Find(s => s.InGameID == sprite.InGameID);
+            if (_SelectedSprite != null)
+            {
+                SelectionionRectangle = new Rectangle(SelectedSprite.X, SelectedSprite.Y, SelectedSprite.Width, SelectedSprite.Height);
+            }
+            else
+            {
+                ClearSelection();
+            }
+
+            FullSpriteRender();
+            Invalidate();
+        }
 
         public bool IsViewingMapSprites { get; set; }
     }

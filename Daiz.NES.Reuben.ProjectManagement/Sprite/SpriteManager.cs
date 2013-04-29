@@ -42,12 +42,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                 SpriteDefinitions.Add(sp.InGameId, sp);
 
-                if (!SpriteGroups[sp.Group].ContainsKey(sp.Class))
+                if (!SpriteGroups[sp.Class].ContainsKey(sp.Group))
                 {
-                    SpriteGroups[sp.Group].Add(sp.Class, new List<SpriteDefinition>());
+                    SpriteGroups[sp.Class].Add(sp.Group, new List<SpriteDefinition>());
                 }
 
-                SpriteGroups[sp.Group][sp.Class].Add(sp);
+                SpriteGroups[sp.Class][sp.Group].Add(sp);
             }
             foreach (var x in root.Element("mapsprites").Elements("spritedefinition"))
             {
@@ -76,12 +76,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                 SpriteDefinitions.Add(sp.InGameId, sp);
 
-                if (!SpriteGroups[sp.Group].ContainsKey(sp.Class))
+                if (!SpriteGroups[sp.Class].ContainsKey(sp.Group))
                 {
-                    SpriteGroups[sp.Group].Add(sp.Class, new List<SpriteDefinition>());
+                    SpriteGroups[sp.Class].Add(sp.Group, new List<SpriteDefinition>());
                 }
 
-                SpriteGroups[sp.Group][sp.Class].Add(sp);
+                SpriteGroups[sp.Class][sp.Group].Add(sp);
             }
             foreach (var x in root.Element("mapsprites").Elements("spritedefinition"))
             {

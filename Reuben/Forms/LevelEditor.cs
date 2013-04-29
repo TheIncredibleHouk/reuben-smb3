@@ -169,9 +169,9 @@ namespace Daiz.NES.Reuben
             LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
-            TsbTileSpecials.Checked = CurrentLevel.Settings.SpecialTiles;
+            TsbItems.Checked = CurrentLevel.Settings.SpecialTiles;
             TsbSriteSpecials.Checked = CurrentLevel.Settings.SpecialSprites;
-            TsbProperties.Checked = CurrentLevel.Settings.BlockProperties;
+            TsbSolidity.Checked = CurrentLevel.Settings.BlockProperties;
             TsbStartPoint.Checked = CurrentLevel.Settings.ShowStart;
             TsbZoom.Checked = CurrentLevel.Settings.Zoom;
             CmbChallengeType.SelectedIndex = CurrentLevel.ChallengeType;
@@ -262,12 +262,6 @@ namespace Daiz.NES.Reuben
             CmbActions.SelectedIndex = l.StartAction;
             CmbScroll.SelectedIndex = l.ScrollType;
             CmbMusic.SelectedIndex = l.Music >= CmbMusic.Items.Count ? 0 : l.Music;
-            if (l.LevelLayout == LevelLayout.Vertical)
-            {
-                CmbScroll.SelectedIndex = 1;
-                CmbScroll.Text = "Vertical Scrolling";
-                CmbScroll.Enabled = false;
-            }
             CmbLength.SelectedItem = l.Length;
             PntEditor.CurrentPointer = null;
             BtnAddPointer.Enabled = CurrentLevel.Pointers.Count <= 10;
@@ -498,7 +492,7 @@ namespace Daiz.NES.Reuben
                     LvlView.UpdatePoint(oldX, oldY);
                 }
                 _SelectingStartPositionMode = false;
-                PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
+                TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = true;
                 SetHelpText(PreviousHelperText);
                 LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             }
@@ -514,7 +508,7 @@ namespace Daiz.NES.Reuben
                     LvlView.UpdatePoint(oldX, oldY);
                 }
                 _SelectingAltStartPositionMode = false;
-                PnlDrawing.Enabled = TabLevelInfo.Enabled = true;
+                TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = true;
                 SetHelpText(PreviousHelperText);
                 LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             }
@@ -666,7 +660,50 @@ namespace Daiz.NES.Reuben
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
                     LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
+                    if (ModifierKeys == Keys.Shift)
+                    {
+                        ((SpriteViewer)TabClass1.SelectedTab.Controls[0]).SelectedSprite = null;
+                        ((SpriteViewer)TabClass2.SelectedTab.Controls[0]).SelectedSprite = null;
+                        ((SpriteViewer)TabClass3.SelectedTab.Controls[0]).SelectedSprite = null;
 
+                        SpriteDefinition sDef = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID);
+                        switch (sDef.Class)
+                        {
+                            case 1:
+                                foreach (TabPage t in TabClass1.TabPages)
+                                {
+                                    if (t.Text == sDef.Group)
+                                    {
+                                        TabClass1.SelectedTab = t;
+                                    }
+                                }
+                                break;
+
+                            case 2:
+                                foreach (TabPage t in TabClass2.TabPages)
+                                {
+                                    if (t.Text == sDef.Group)
+                                    {
+                                        TabClass2.SelectedTab = t;
+                                    }
+                                }
+                                break;
+
+                            case 3:
+                                foreach (TabPage t in TabClass3.TabPages)
+                                {
+                                    if (t.Text == sDef.Group)
+                                    {
+                                        TabClass3.SelectedTab = t;
+                                    }
+                                }
+                                break;
+                        }
+
+                        SpriteViewer sv = SpriteViewers.Find(s => s.SpriteList.Find(c => c.InGameID ==CurrentSprite.InGameID) != null);
+                        sv.SetSelectedSprite(CurrentSprite);
+                        CurrentSelectorSprite = sv.SelectedSprite;
+                    }
                 }
                 else if (CurrentSprite != null && MouseButtons == MouseButtons.Right && CurrentSelectorSprite != null)
                 {
@@ -1048,7 +1085,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbTileSpecials_CheckedChanged(object sender, EventArgs e)
         {
-            BlsSelector.ShowSpecialBlocks = LvlView.ShowSpecialBlocks = TsbTileSpecials.Checked;
+            BlsSelector.ShowSpecialBlocks = LvlView.ShowSpecialBlocks = TsbItems.Checked;
         }
 
         private void TsbStartPoint_CheckedChanged(object sender, EventArgs e)
@@ -1211,7 +1248,7 @@ namespace Daiz.NES.Reuben
         {
             SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
             _SelectingStartPositionMode = true;
-            PnlDrawing.Enabled = TabLevelInfo.Enabled = false;
+            TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = false;
         }
 
         #endregion
@@ -1395,7 +1432,7 @@ namespace Daiz.NES.Reuben
                         break;
 
                     case Keys.H:
-                        TsbTileSpecials.Checked = !TsbTileSpecials.Checked;
+                        TsbItems.Checked = !TsbItems.Checked;
                         break;
 
                     case Keys.J:
@@ -1467,8 +1504,6 @@ namespace Daiz.NES.Reuben
                     SetHelpText(Reuben.Properties.Resources.RightClickTileHelper);
                     break;
             }
-
-            LblRightClickMode.Text = "Right Click Mode: " + (MouseMode == MouseMode.RightClickSelection ? "Selector" : "Tile Placement");
         }
 
         private byte[,] TileBuffer;
@@ -1554,7 +1589,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Settings.ShowGrid = TsbGrid.Checked;
             CurrentLevel.Settings.ShowStart = TsbStartPoint.Checked;
             CurrentLevel.Settings.EditMode = EditMode;
-            CurrentLevel.Settings.BlockProperties = TsbProperties.Checked;
+            CurrentLevel.Settings.BlockProperties = TsbSolidity.Checked;
             CurrentLevel.Settings.SpecialSprites = TsbSriteSpecials.Checked;
             CurrentLevel.Settings.ShowPointers = TsbPointers.Checked;
 
@@ -1685,7 +1720,7 @@ namespace Daiz.NES.Reuben
 
         private void TsbProperties_CheckStateChanged(object sender, EventArgs e)
         {
-            BlsSelector.ShowBlockProperties = LvlView.ShowBlockProperties = TsbProperties.Checked;
+            BlsSelector.ShowBlockSolidity = LvlView.ShowBlockSolidity = TsbSolidity.Checked;
         }
 
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e)
@@ -1770,7 +1805,7 @@ namespace Daiz.NES.Reuben
 
         private void NumSpecials_ValueChanged(object sender, EventArgs e)
         {
-            CurrentLevel.Settings.ItemTransparency = (double)NumSpecials.Value;
+            LvlView.SpecialTransparency = CurrentLevel.Settings.ItemTransparency = (double)NumSpecials.Value;
             LvlView.FullUpdate();
         }
 
@@ -1807,7 +1842,6 @@ namespace Daiz.NES.Reuben
             if (text == CurrentHelperText) return;
             PreviousHelperText = CurrentHelperText;
             CurrentHelperText = text;
-            LblHelpText.Text = CurrentHelperText;
         }
 
         private void tabPage1_MouseMove(object sender, MouseEventArgs e)
@@ -1859,7 +1893,7 @@ namespace Daiz.NES.Reuben
         {
             SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
             _SelectingAltStartPositionMode = true;
-            PnlDrawing.Enabled = TabLevelInfo.Enabled = false;
+            TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = false;
         }
 
         private void CmbSpecialType_SelectedIndexChanged(object sender, EventArgs e)
@@ -1910,6 +1944,11 @@ namespace Daiz.NES.Reuben
             }
             Paste();
             TileBuffer = backUpBuffer;
+        }
+
+        private void TsbInteractions_CheckedChanged(object sender, EventArgs e)
+        {
+            BlsSelector.ShowTileInteractions = LvlView.ShowTileInteractions = TsbInteractions.Checked;
         }
 
     }

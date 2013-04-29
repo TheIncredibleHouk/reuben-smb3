@@ -439,7 +439,7 @@ namespace Daiz.NES.Reuben
 
         private void ChkBlockProperties_CheckedChanged(object sender, EventArgs e)
         {
-            BlsBlocks.ShowBlockProperties = ChkBlockProperties.Checked;
+            BlsBlocks.ShowBlockSolidity = ChkBlockProperties.Checked;
         }
 
         private void SpecialList_SelectedIndexChanged(object sender, EventArgs e)

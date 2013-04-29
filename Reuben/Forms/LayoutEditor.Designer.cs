@@ -354,7 +354,7 @@
             this.BlsFrom.Name = "BlsFrom";
             this.BlsFrom.SelectedIndex = 0;
             this.BlsFrom.SelectedTileIndex = 0;
-            this.BlsFrom.ShowBlockProperties = false;
+            this.BlsFrom.ShowBlockSolidity = false;
             this.BlsFrom.ShowSpecialBlocks = false;
             this.BlsFrom.Size = new System.Drawing.Size(256, 256);
             this.BlsFrom.SpecialDefnitions = null;
@@ -382,7 +382,7 @@
             this.BlsTo.Name = "BlsTo";
             this.BlsTo.SelectedIndex = 0;
             this.BlsTo.SelectedTileIndex = 0;
-            this.BlsTo.ShowBlockProperties = false;
+            this.BlsTo.ShowBlockSolidity = false;
             this.BlsTo.ShowSpecialBlocks = false;
             this.BlsTo.Size = new System.Drawing.Size(256, 256);
             this.BlsTo.SpecialDefnitions = null;
