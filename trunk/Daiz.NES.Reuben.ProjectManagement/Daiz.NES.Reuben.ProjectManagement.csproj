@@ -90,7 +90,6 @@
     <Compile Include="Graphics\GraphicsManager.cs" />
     <Compile Include="Graphics\PatternTable.cs" />
     <Compile Include="Graphics\RgbPixel.cs" />
-    <Compile Include="LevelObject.cs" />
     <Compile Include="Music\Music.cs" />
     <Compile Include="Music\MusicManager.cs" />
     <Compile Include="Patch\Patch.cs" />
