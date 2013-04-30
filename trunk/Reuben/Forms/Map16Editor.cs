@@ -60,19 +60,49 @@ namespace Daiz.NES.Reuben
             solidityMap[5] = BlockProperty.SolidBottom;
             solidityMap[6] = BlockProperty.SolidAll;
             solidityMap[7] = BlockProperty.CoinBlock;
-            InteractionTypes.Add("No Interaction");
-            for (int i = 1; i < 16; i++)
-            {
-                InteractionTypes.Add(((BlockProperty)i).ToString());
-            }
-
             for (int i = 0; i < 16; i++)
             {
                 SpecialTypes.Add(((BlockProperty)(0xF0 | i)).ToString());
             }
         }
 
-        private List<string> InteractionTypes = new List<string>();
+        private List<string> NotSolidInteractionTypes = new List<string>()
+        {
+            "No Interaction",
+            "Harmful",
+            "Deplete Air",
+            "Current Left",
+            "Current Right",
+            "Current Up",
+            "Current Down",
+            "Unused",
+            "Unused",
+            "Unused",
+            "Unused",
+            "Climbable",
+            "Coin",
+            "Door",
+            "Cherry"
+        };
+        private List<string> SolidInteractionTypes = new List<string>()
+        {
+            "No Interaction",
+            "Harmful",
+            "Slick",
+            "Conveyor Left",
+            "Conveyor Right",
+            "Conveyor Up",
+            "Conveyor Down",
+            "Unstable",
+            "Vertical Pipe Left",
+            "Vertical Pipe Right",
+            "Horizontal Pipe Bottom",
+            "Unused",
+            "Unused",
+            "Unused",
+            "PSwitch"
+        };
+
         private List<string> SpecialTypes = new List<string>();
 
         private bool updating;
@@ -85,7 +115,14 @@ namespace Daiz.NES.Reuben
             }
             else
             {
-                CmdInteraction.DataSource = InteractionTypes;
+                if (CmbSolidity.SelectedIndex <= 3)
+                {
+                    CmdInteraction.DataSource = NotSolidInteractionTypes;
+                }
+                else
+                {
+                    CmdInteraction.DataSource = SolidInteractionTypes;
+                }
 
             }
             updating = false;
