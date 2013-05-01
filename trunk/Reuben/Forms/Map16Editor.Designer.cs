@@ -89,21 +89,18 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.BlockDescription = new System.Windows.Forms.TextBox();
-            this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
             this.label5 = new System.Windows.Forms.Label();
             this.CmbGraphics1 = new System.Windows.Forms.ComboBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.GrbBlocks = new System.Windows.Forms.GroupBox();
+            this.LblSolidity = new System.Windows.Forms.Label();
             this.CmbSolidity = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.LblInteraction = new System.Windows.Forms.Label();
             this.CmdInteraction = new System.Windows.Forms.ComboBox();
             this.CmbGraphics2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
             this.label2 = new System.Windows.Forms.Label();
             this.CmbDefinitions = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
             this.ChkBlockProperties = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.RdoMap16 = new System.Windows.Forms.RadioButton();
@@ -111,27 +108,34 @@
             this.BtnApplyGlobally = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.CmbPalettes = new System.Windows.Forms.ComboBox();
-            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
             this.LblBlockSelected = new System.Windows.Forms.Label();
             this.LblHexGraphics1 = new System.Windows.Forms.Label();
             this.LblHexGraphics2 = new System.Windows.Forms.Label();
             this.ChkShowSpecials = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.vineTile = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.pSwitchTile = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.vineTile = new System.Windows.Forms.ComboBox();
+            this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
+            this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
+            this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
+            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
+            this.GrbMapProps = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage5.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.GrbBlocks.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.GrbMapProps.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnSaveClose
@@ -688,12 +692,13 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.GrbMapProps);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.BlockDescription);
             this.tabPage1.Controls.Add(this.PtvTable);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.CmbGraphics1);
-            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.GrbBlocks);
             this.tabPage1.Controls.Add(this.CmbGraphics2);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.BlsBlocks);
@@ -733,17 +738,6 @@
             this.BlockDescription.TabIndex = 33;
             this.BlockDescription.TextChanged += new System.EventHandler(this.BlockDescription_TextChanged);
             // 
-            // PtvTable
-            // 
-            this.PtvTable.Location = new System.Drawing.Point(9, 50);
-            this.PtvTable.Name = "PtvTable";
-            this.PtvTable.ShowGrid = false;
-            this.PtvTable.Size = new System.Drawing.Size(256, 256);
-            this.PtvTable.TabIndex = 0;
-            this.PtvTable.Text = "patternTableViewer1";
-            this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
-            this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -763,27 +757,27 @@
             this.CmbGraphics1.TabIndex = 1;
             this.CmbGraphics1.SelectedIndexChanged += new System.EventHandler(this.CmbGraphics1_SelectedIndexChanged);
             // 
-            // groupBox4
+            // GrbBlocks
             // 
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.CmbSolidity);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.CmdInteraction);
-            this.groupBox4.Location = new System.Drawing.Point(330, 340);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(268, 76);
-            this.groupBox4.TabIndex = 31;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Properties";
+            this.GrbBlocks.Controls.Add(this.LblSolidity);
+            this.GrbBlocks.Controls.Add(this.CmbSolidity);
+            this.GrbBlocks.Controls.Add(this.LblInteraction);
+            this.GrbBlocks.Controls.Add(this.CmdInteraction);
+            this.GrbBlocks.Location = new System.Drawing.Point(330, 340);
+            this.GrbBlocks.Name = "GrbBlocks";
+            this.GrbBlocks.Size = new System.Drawing.Size(268, 76);
+            this.GrbBlocks.TabIndex = 31;
+            this.GrbBlocks.TabStop = false;
+            this.GrbBlocks.Text = "Properties";
             // 
-            // label6
+            // LblSolidity
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 22);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "Solidity";
+            this.LblSolidity.AutoSize = true;
+            this.LblSolidity.Location = new System.Drawing.Point(9, 22);
+            this.LblSolidity.Name = "LblSolidity";
+            this.LblSolidity.Size = new System.Drawing.Size(40, 13);
+            this.LblSolidity.TabIndex = 35;
+            this.LblSolidity.Text = "Solidity";
             // 
             // CmbSolidity
             // 
@@ -804,14 +798,14 @@
             this.CmbSolidity.TabIndex = 34;
             this.CmbSolidity.SelectedIndexChanged += new System.EventHandler(this.CmbSolidity_SelectedIndexChanged);
             // 
-            // label4
+            // LblInteraction
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 47);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 13);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Interaction";
+            this.LblInteraction.AutoSize = true;
+            this.LblInteraction.Location = new System.Drawing.Point(9, 47);
+            this.LblInteraction.Name = "LblInteraction";
+            this.LblInteraction.Size = new System.Drawing.Size(57, 13);
+            this.LblInteraction.TabIndex = 33;
+            this.LblInteraction.Text = "Interaction";
             // 
             // CmdInteraction
             // 
@@ -842,26 +836,6 @@
             this.label3.TabIndex = 22;
             this.label3.Text = "Pattern Table 2";
             // 
-            // BlsBlocks
-            // 
-            this.BlsBlocks.BlockLayout = null;
-            this.BlsBlocks.CurrentDefiniton = null;
-            this.BlsBlocks.HaltRendering = false;
-            this.BlsBlocks.Location = new System.Drawing.Point(341, 50);
-            this.BlsBlocks.Name = "BlsBlocks";
-            this.BlsBlocks.SelectedIndex = 0;
-            this.BlsBlocks.SelectedTileIndex = 0;
-            this.BlsBlocks.ShowBlockSolidity = false;
-            this.BlsBlocks.ShowSpecialBlocks = false;
-            this.BlsBlocks.Size = new System.Drawing.Size(256, 256);
-            this.BlsBlocks.SpecialDefnitions = null;
-            this.BlsBlocks.SpecialTable = null;
-            this.BlsBlocks.TabIndex = 5;
-            this.BlsBlocks.Text = "blockSelector1";
-            this.BlsBlocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseDown);
-            this.BlsBlocks.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseMove);
-            this.BlsBlocks.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.BlsBlocks_PreviewKeyDown);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -890,16 +864,6 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Block";
-            // 
-            // BlvCurrent
-            // 
-            this.BlvCurrent.CurrentBlock = null;
-            this.BlvCurrent.Location = new System.Drawing.Point(16, 20);
-            this.BlvCurrent.Name = "BlvCurrent";
-            this.BlvCurrent.Size = new System.Drawing.Size(32, 32);
-            this.BlvCurrent.TabIndex = 7;
-            this.BlvCurrent.Text = "blockViewer1";
-            this.BlvCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlvCurrent_MouseDown);
             // 
             // ChkBlockProperties
             // 
@@ -978,16 +942,6 @@
             this.CmbPalettes.TabIndex = 3;
             this.CmbPalettes.SelectedIndexChanged += new System.EventHandler(this.CmbPalettes_SelectedIndexChanged);
             // 
-            // PlsView
-            // 
-            this.PlsView.CurrentPalette = null;
-            this.PlsView.Location = new System.Drawing.Point(11, 50);
-            this.PlsView.Name = "PlsView";
-            this.PlsView.SelectablePaletteMode = false;
-            this.PlsView.Size = new System.Drawing.Size(256, 32);
-            this.PlsView.TabIndex = 4;
-            this.PlsView.Text = "paletteSelector1";
-            // 
             // LblBlockSelected
             // 
             this.LblBlockSelected.AutoSize = true;
@@ -1053,23 +1007,14 @@
             this.tabPage4.Text = "Other Interactions";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // vineTile
+            // pSwitchTile
             // 
-            this.vineTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.vineTile.FormattingEnabled = true;
-            this.vineTile.Location = new System.Drawing.Point(172, 15);
-            this.vineTile.Name = "vineTile";
-            this.vineTile.Size = new System.Drawing.Size(169, 21);
-            this.vineTile.TabIndex = 27;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 18);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(153, 13);
-            this.label17.TabIndex = 28;
-            this.label17.Text = "Tile Drawn During Vine Growth";
+            this.pSwitchTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pSwitchTile.FormattingEnabled = true;
+            this.pSwitchTile.Location = new System.Drawing.Point(172, 47);
+            this.pSwitchTile.Name = "pSwitchTile";
+            this.pSwitchTile.Size = new System.Drawing.Size(169, 21);
+            this.pSwitchTile.TabIndex = 30;
             // 
             // label18
             // 
@@ -1080,14 +1025,104 @@
             this.label18.TabIndex = 29;
             this.label18.Text = "Tile Drawn From PSwitch Block";
             // 
-            // pSwitchTile
+            // label17
             // 
-            this.pSwitchTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.pSwitchTile.FormattingEnabled = true;
-            this.pSwitchTile.Location = new System.Drawing.Point(172, 47);
-            this.pSwitchTile.Name = "pSwitchTile";
-            this.pSwitchTile.Size = new System.Drawing.Size(169, 21);
-            this.pSwitchTile.TabIndex = 30;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(13, 18);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(153, 13);
+            this.label17.TabIndex = 28;
+            this.label17.Text = "Tile Drawn During Vine Growth";
+            // 
+            // vineTile
+            // 
+            this.vineTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.vineTile.FormattingEnabled = true;
+            this.vineTile.Location = new System.Drawing.Point(172, 15);
+            this.vineTile.Name = "vineTile";
+            this.vineTile.Size = new System.Drawing.Size(169, 21);
+            this.vineTile.TabIndex = 27;
+            // 
+            // PtvTable
+            // 
+            this.PtvTable.Location = new System.Drawing.Point(9, 50);
+            this.PtvTable.Name = "PtvTable";
+            this.PtvTable.ShowGrid = false;
+            this.PtvTable.Size = new System.Drawing.Size(256, 256);
+            this.PtvTable.TabIndex = 0;
+            this.PtvTable.Text = "patternTableViewer1";
+            this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
+            this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
+            // 
+            // BlsBlocks
+            // 
+            this.BlsBlocks.BlockLayout = null;
+            this.BlsBlocks.CurrentDefiniton = null;
+            this.BlsBlocks.HaltRendering = false;
+            this.BlsBlocks.Location = new System.Drawing.Point(341, 50);
+            this.BlsBlocks.Name = "BlsBlocks";
+            this.BlsBlocks.SelectedIndex = 0;
+            this.BlsBlocks.SelectedTileIndex = 0;
+            this.BlsBlocks.ShowBlockSolidity = false;
+            this.BlsBlocks.ShowSpecialBlocks = false;
+            this.BlsBlocks.ShowTileInteractions = false;
+            this.BlsBlocks.Size = new System.Drawing.Size(256, 256);
+            this.BlsBlocks.SpecialDefnitions = null;
+            this.BlsBlocks.SpecialTable = null;
+            this.BlsBlocks.TabIndex = 5;
+            this.BlsBlocks.Text = "blockSelector1";
+            this.BlsBlocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseDown);
+            this.BlsBlocks.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseMove);
+            this.BlsBlocks.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.BlsBlocks_PreviewKeyDown);
+            // 
+            // BlvCurrent
+            // 
+            this.BlvCurrent.CurrentBlock = null;
+            this.BlvCurrent.Location = new System.Drawing.Point(16, 20);
+            this.BlvCurrent.Name = "BlvCurrent";
+            this.BlvCurrent.Size = new System.Drawing.Size(32, 32);
+            this.BlvCurrent.TabIndex = 7;
+            this.BlvCurrent.Text = "blockViewer1";
+            this.BlvCurrent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlvCurrent_MouseDown);
+            // 
+            // PlsView
+            // 
+            this.PlsView.CurrentPalette = null;
+            this.PlsView.Location = new System.Drawing.Point(11, 50);
+            this.PlsView.Name = "PlsView";
+            this.PlsView.SelectablePaletteMode = false;
+            this.PlsView.Size = new System.Drawing.Size(256, 32);
+            this.PlsView.TabIndex = 4;
+            this.PlsView.Text = "paletteSelector1";
+            // 
+            // GrbMapProps
+            // 
+            this.GrbMapProps.Controls.Add(this.label4);
+            this.GrbMapProps.Controls.Add(this.comboBox1);
+            this.GrbMapProps.Location = new System.Drawing.Point(330, 476);
+            this.GrbMapProps.Name = "GrbMapProps";
+            this.GrbMapProps.Size = new System.Drawing.Size(268, 74);
+            this.GrbMapProps.TabIndex = 34;
+            this.GrbMapProps.TabStop = false;
+            this.GrbMapProps.Text = "groupBox4";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(72, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(179, 21);
+            this.comboBox1.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Property";
             // 
             // Map16Editor
             // 
@@ -1107,8 +1142,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.GrbBlocks.ResumeLayout(false);
+            this.GrbBlocks.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -1116,6 +1151,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.GrbMapProps.ResumeLayout(false);
+            this.GrbMapProps.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1184,10 +1221,10 @@
         private PatternTableViewer PtvTable;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox CmbGraphics1;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox GrbBlocks;
+        private System.Windows.Forms.Label LblSolidity;
         private System.Windows.Forms.ComboBox CmbSolidity;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label LblInteraction;
         private System.Windows.Forms.ComboBox CmdInteraction;
         private System.Windows.Forms.ComboBox CmbGraphics2;
         private System.Windows.Forms.Label label3;
@@ -1214,5 +1251,8 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox vineTile;
+        private System.Windows.Forms.GroupBox GrbMapProps;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
