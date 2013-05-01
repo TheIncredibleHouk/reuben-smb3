@@ -173,9 +173,12 @@ namespace Daiz.NES.Reuben
 
         private void CmbDefinitions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
-            FillBlockForTransitions();
-            LoadBlockTransitions();
+            if (CmbDefinitions.SelectedIndex != 0)
+            {
+                BlsBlocks.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
+                FillBlockForTransitions();
+                LoadBlockTransitions();
+            }
         }
 
         private void FillBlockForTransitions()
