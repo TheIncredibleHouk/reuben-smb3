@@ -63,9 +63,13 @@ namespace Daiz.NES.Reuben
         void FpsFull_SelectedPaletteChanged(object sender, EventArgs e)
         {
             if (FpsFull.SelectedColor >= 0)
+            {
                 LblSelected.Text = string.Format("Selected:  {0:X2}", FpsFull.SelectedColor);
+            }
             else
+            {
                 LblSelected.Text = "Selected: None";
+            }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
