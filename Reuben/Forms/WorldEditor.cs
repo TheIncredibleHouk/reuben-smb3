@@ -1119,12 +1119,6 @@ namespace Daiz.NES.Reuben
 
         public EditMode EditMode { get; set; }
 
-        private void BtnLevelSize_Click(object sender, EventArgs e)
-        {
-            LblSpriteSize.Text = "Sprite Data Size: " + (((CurrentWorld.SpriteData.Count) * 3) + 1).ToString() + " bytes";
-            LblLevelSize.Text = "Level Data Size: " + (CurrentWorld.GetCompressedData().Length + 5 + (CurrentWorld.Pointers.Count * 3)).ToString() + " bytes";
-        }
-
         public Bitmap GetLevelBitmap()
         {
             Bitmap bitmap = new Bitmap(PnlLengthControl.Bounds.Width, PnlLengthControl.Bounds.Height);
@@ -1313,7 +1307,6 @@ namespace Daiz.NES.Reuben
             if (text == CurrentHelperText) return;
             PreviousHelperText = CurrentHelperText;
             CurrentHelperText = text;
-            LblHelpText.Text = CurrentHelperText;
         }
 
         private void SetTileModeText()

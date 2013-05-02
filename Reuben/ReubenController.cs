@@ -415,11 +415,15 @@ namespace Daiz.NES.Reuben
 
         public static void CompileRom(bool useDefaultROM)
         {
-            ROMManager romMan = new ROMManager();
+            foreach(LevelEditor editor in editorTable.Values)
+            {
+                editor.CurrentLevel.Save();
+            }
 
+            ROMManager romMan = new ROMManager();
             SaveFileDialog SFD = new SaveFileDialog();
             SFD.Filter = "NES ROM Images|*.nes";
-            if (useDefaultROM && ProjectController.ProjectManager.CurrentProject.ROMFile.Length > 0)
+            if (useDefaultROM && ProjectController.ProjectManager.CurrentProject.ROMFile.Length > 0 && File.Exists(ProjectController.ProjectManager.CurrentProject.ROMFile))
             {
                 int remaining = romMan.CompileRom(ProjectController.ProjectManager.CurrentProject.ROMFile, true);
                 MessageBox.Show("ROM successfully compiled.\nLevel space remaining: " + remaining + " bytes");

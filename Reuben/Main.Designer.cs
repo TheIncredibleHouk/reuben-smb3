@@ -40,7 +40,7 @@
             this.graphicsToolStripMenuFromValue = new System.Windows.Forms.ToolStripMenuItem();
             this.currentLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuToValue = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToRom = new System.Windows.Forms.ToolStripMenuItem();
             this.rOMWithGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuImport = new System.Windows.Forms.ToolStripMenuItem();
@@ -177,23 +177,26 @@
             // compileROMToolStripMenuItem
             // 
             this.compileROMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuToValue,
+            this.saveToRom,
             this.rOMWithGraphicsToolStripMenuItem});
+            this.compileROMToolStripMenuItem.Enabled = false;
             this.compileROMToolStripMenuItem.Name = "compileROMToolStripMenuItem";
             this.compileROMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.compileROMToolStripMenuItem.Text = "Compile";
+            this.compileROMToolStripMenuItem.Text = "Save to ROM";
             // 
-            // toolStripMenuToValue
+            // saveToRom
             // 
-            this.toolStripMenuToValue.Name = "toolStripMenuToValue";
-            this.toolStripMenuToValue.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuToValue.Text = "Save to ROM";
-            this.toolStripMenuToValue.Click += new System.EventHandler(this.toolStripMenuToValue_Click);
+            this.saveToRom.Name = "saveToRom";
+            this.saveToRom.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveToRom.Size = new System.Drawing.Size(170, 22);
+            this.saveToRom.Text = "Save";
+            this.saveToRom.Click += new System.EventHandler(this.toolStripMenuToValue_Click);
             // 
             // rOMWithGraphicsToolStripMenuItem
             // 
             this.rOMWithGraphicsToolStripMenuItem.Name = "rOMWithGraphicsToolStripMenuItem";
-            this.rOMWithGraphicsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rOMWithGraphicsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.rOMWithGraphicsToolStripMenuItem.Text = "Save As...";
             this.rOMWithGraphicsToolStripMenuItem.Click += new System.EventHandler(this.compileROMToolStripMenuItem_Click);
             // 
@@ -374,7 +377,7 @@
             // layoutManagerToolStripMenuItem
             // 
             this.layoutManagerToolStripMenuItem.Name = "layoutManagerToolStripMenuItem";
-            this.layoutManagerToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.layoutManagerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.layoutManagerToolStripMenuItem.Text = "Layout Editor";
             this.layoutManagerToolStripMenuItem.Click += new System.EventHandler(this.layoutManagerToolStripMenuItem_Click);
             // 
@@ -493,7 +496,7 @@
         private System.Windows.Forms.ToolStripMenuItem dumpRawLevelToFileToolStripMenuItem;
         private ProjectView PrvProject;
         private System.Windows.Forms.ToolStripMenuItem compileROMToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuToValue;
+        private System.Windows.Forms.ToolStripMenuItem saveToRom;
         private System.Windows.Forms.ToolStripMenuItem rOMWithGraphicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MnuProject;
         private System.Windows.Forms.ToolStripMenuItem setDefaultToolStripMenuItem;

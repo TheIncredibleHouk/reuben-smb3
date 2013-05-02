@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -48,7 +49,16 @@ namespace Daiz.NES.Reuben
 
         private void projectToolStripMenuFromValue_Click(object sender, EventArgs e)
         {
-            MnuDebug.Enabled = MnuEditor.Enabled = MnuExport.Enabled = MnuImport.Enabled = MnuNewLevel.Enabled = MnuProject.Enabled = MnuReload.Enabled = MnuTools.Enabled = MnuWindows.Enabled = ReubenController.OpenProject();
+            compileROMToolStripMenuItem.Enabled = MnuDebug.Enabled = MnuEditor.Enabled = MnuExport.Enabled = MnuImport.Enabled = MnuNewLevel.Enabled = MnuProject.Enabled = MnuReload.Enabled = MnuTools.Enabled = MnuWindows.Enabled = ReubenController.OpenProject();
+            if (File.Exists(ProjectController.ProjectManager.CurrentProject.ROMFile))
+            {
+                saveToRom.Text = ProjectController.ProjectManager.CurrentProject.ROMFile;
+                saveToRom.Visible = true;
+            }
+            else
+            {
+                saveToRom.Visible = false;
+            }
         }
 
         private void paletteManagerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,7 +95,9 @@ namespace Daiz.NES.Reuben
         protected override void OnClosed(EventArgs e)
         {
             if (ProjectController.ProjectManager.CurrentProject != null)
+            {
                 ProjectController.Save();
+            }
             base.OnClosed(e);
         }
 
@@ -163,12 +175,24 @@ namespace Daiz.NES.Reuben
         private void compileROMToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReubenController.CompileRom(false);
+            saveToRom.Text = ProjectController.ProjectManager.CurrentProject.ROMFile;
+            saveToRom.Visible = true;
         }
-
 
         private void toolStripMenuToValue_Click(object sender, EventArgs e)
         {
-            ReubenController.CompileRom(true);
+            if (ProjectController.ProjectManager.CurrentProject != null)
+            {
+                if (string.IsNullOrEmpty(ProjectController.ProjectManager.CurrentProject.ROMFile))
+                {
+                    ReubenController.CompileRom(false);
+                }
+                else
+                {
+                    ReubenController.CompileRom(true);
+                }
+            }
+            
         }
 
         private void blockPropertiesToolStripMenuItem_Click(object sender, EventArgs e)

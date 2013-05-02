@@ -892,6 +892,7 @@
             this.tabPage1.Size = new System.Drawing.Size(269, 469);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
+            this.tabPage1.ToolTipText = "Shortcut Q";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
@@ -965,6 +966,7 @@
             this.tabPage2.Size = new System.Drawing.Size(269, 469);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sprites";
+            this.tabPage2.ToolTipText = "Shortcut W";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage2_MouseMove);
             // 
@@ -1023,6 +1025,7 @@
             this.tabPage3.Size = new System.Drawing.Size(269, 469);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pointers";
+            this.tabPage3.ToolTipText = "Shortcut E";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage3_MouseMove);
             // 
@@ -1094,7 +1097,7 @@
             this.TsbPencil.Name = "TsbPencil";
             this.TsbPencil.Size = new System.Drawing.Size(23, 21);
             this.TsbPencil.Text = "toolStripButton2";
-            this.TsbPencil.ToolTipText = "Pencl";
+            this.TsbPencil.ToolTipText = "Pencil (1)";
             this.TsbPencil.Click += new System.EventHandler(this.TsbPencil_Click);
             // 
             // TsbLine
@@ -1106,7 +1109,7 @@
             this.TsbLine.Name = "TsbLine";
             this.TsbLine.Size = new System.Drawing.Size(23, 21);
             this.TsbLine.Text = "toolStripButton1";
-            this.TsbLine.ToolTipText = "Diagonal Line";
+            this.TsbLine.ToolTipText = "Diagonal Line (2)";
             this.TsbLine.Click += new System.EventHandler(this.TsbLine_Click);
             // 
             // TsbRectangle
@@ -1118,7 +1121,7 @@
             this.TsbRectangle.Name = "TsbRectangle";
             this.TsbRectangle.Size = new System.Drawing.Size(23, 21);
             this.TsbRectangle.Text = "toolStripButton1";
-            this.TsbRectangle.ToolTipText = "Rectangle Fill";
+            this.TsbRectangle.ToolTipText = "Rectangle Fill (3)";
             this.TsbRectangle.Click += new System.EventHandler(this.TsbRectangle_Click);
             // 
             // TsbOutline
@@ -1130,7 +1133,7 @@
             this.TsbOutline.Name = "TsbOutline";
             this.TsbOutline.Size = new System.Drawing.Size(23, 21);
             this.TsbOutline.Text = "toolStripButton1";
-            this.TsbOutline.ToolTipText = "Rectangle Outline";
+            this.TsbOutline.ToolTipText = "Rectangle Outline (4)";
             this.TsbOutline.Click += new System.EventHandler(this.TsbOutline_Click);
             // 
             // TsbBucket
@@ -1142,7 +1145,7 @@
             this.TsbBucket.Name = "TsbBucket";
             this.TsbBucket.Size = new System.Drawing.Size(23, 21);
             this.TsbBucket.Text = "toolStripButton1";
-            this.TsbBucket.ToolTipText = "Flood Fill";
+            this.TsbBucket.ToolTipText = "Flood Fill (5)";
             this.TsbBucket.Click += new System.EventHandler(this.TsbBucket_Click);
             // 
             // TsbReplace
@@ -1154,8 +1157,8 @@
             this.TsbReplace.Name = "TsbReplace";
             this.TsbReplace.Size = new System.Drawing.Size(23, 21);
             this.TsbReplace.Text = "toolStripButton1";
-            this.TsbReplace.ToolTipText = "Replace Tile";
-            this.TsbReplace.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.TsbReplace.ToolTipText = "Replace Tile (6)";
+            this.TsbReplace.Click += new System.EventHandler(this.TsbReplace_Click);
             // 
             // tabPage5
             // 
@@ -1266,7 +1269,7 @@
             this.TsbStartPoint.Name = "TsbStartPoint";
             this.TsbStartPoint.Size = new System.Drawing.Size(23, 21);
             this.TsbStartPoint.Text = "Toggle Start Point Display";
-            this.TsbStartPoint.ToolTipText = "Toggle Start Point Display\r\n(Ctrl + F) (Ctrl + R to set start point)";
+            this.TsbStartPoint.ToolTipText = "Toggle Start Point Display\r\n (F2) ";
             this.TsbStartPoint.CheckStateChanged += new System.EventHandler(this.TsbStartPoint_CheckedChanged);
             // 
             // TsbGrid
@@ -1278,7 +1281,7 @@
             this.TsbGrid.Name = "TsbGrid";
             this.TsbGrid.Size = new System.Drawing.Size(23, 21);
             this.TsbGrid.Text = "Toggle Grid";
-            this.TsbGrid.ToolTipText = "Toggle Grid\r\n(Ctrl + G)";
+            this.TsbGrid.ToolTipText = "Toggle Grid\r\n(F3)";
             this.TsbGrid.CheckStateChanged += new System.EventHandler(this.TsbGrid_CheckedChanged);
             // 
             // TsbItems
@@ -1289,7 +1292,7 @@
             this.TsbItems.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbItems.Name = "TsbItems";
             this.TsbItems.Size = new System.Drawing.Size(23, 21);
-            this.TsbItems.ToolTipText = "Toggle Block Icons\r\n(Ctrl + H)";
+            this.TsbItems.ToolTipText = "Toggle Block Icons\r\n(F4)";
             this.TsbItems.CheckStateChanged += new System.EventHandler(this.TsbTileSpecials_CheckedChanged);
             // 
             // TsbSolidity
@@ -1301,7 +1304,7 @@
             this.TsbSolidity.Name = "TsbSolidity";
             this.TsbSolidity.Size = new System.Drawing.Size(23, 21);
             this.TsbSolidity.Text = "Toggle Block Properties";
-            this.TsbSolidity.ToolTipText = "Toggle Block Solidity(Ctrl + K)";
+            this.TsbSolidity.ToolTipText = "Toggle Block Solidity(F5)";
             this.TsbSolidity.CheckStateChanged += new System.EventHandler(this.TsbProperties_CheckStateChanged);
             // 
             // TsbInteractions
@@ -1313,7 +1316,7 @@
             this.TsbInteractions.Name = "TsbInteractions";
             this.TsbInteractions.Size = new System.Drawing.Size(23, 21);
             this.TsbInteractions.Text = "toolStripButton1";
-            this.TsbInteractions.ToolTipText = "Toggle Block Interactions (Control + L)";
+            this.TsbInteractions.ToolTipText = "Toggle Block Interactions (F6)";
             this.TsbInteractions.CheckedChanged += new System.EventHandler(this.TsbInteractions_CheckedChanged);
             // 
             // TsbSriteSpecials
@@ -1325,7 +1328,7 @@
             this.TsbSriteSpecials.Name = "TsbSriteSpecials";
             this.TsbSriteSpecials.Size = new System.Drawing.Size(23, 21);
             this.TsbSriteSpecials.Text = "Toggle Special Sprite Icons";
-            this.TsbSriteSpecials.ToolTipText = "Toggle Special Sprite Icons\r\n(Ctrl + J)";
+            this.TsbSriteSpecials.ToolTipText = "Toggle Special Sprite Icons\r\n(F7)";
             this.TsbSriteSpecials.CheckStateChanged += new System.EventHandler(this.TsbSriteSpecials_CheckedChanged);
             // 
             // TsbPointers
@@ -1337,7 +1340,7 @@
             this.TsbPointers.Name = "TsbPointers";
             this.TsbPointers.Size = new System.Drawing.Size(23, 21);
             this.TsbPointers.Text = "Toggle Pointers";
-            this.TsbPointers.ToolTipText = "Toggle Pointers\r\n(Ctrl + P)";
+            this.TsbPointers.ToolTipText = "Toggle Pointers\r\n(F8)";
             this.TsbPointers.CheckStateChanged += new System.EventHandler(this.TsbPointers_Click);
             // 
             // TsbZoom
@@ -1379,7 +1382,7 @@
             this.TlsTileCommands.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TlsTileCommands.Location = new System.Drawing.Point(356, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(147, 24);
+            this.TlsTileCommands.Size = new System.Drawing.Size(178, 24);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -1641,7 +1644,6 @@
             this.PnlView.Name = "PnlView";
             this.PnlView.Size = new System.Drawing.Size(542, 331);
             this.PnlView.TabIndex = 0;
-            this.PnlView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LvlView_PreviewKeyDown);
             // 
             // PnlLengthControl
             // 
@@ -1725,12 +1727,14 @@
             this.Controls.Add(this.PnlInfo);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.TabEditSelector);
+            this.KeyPreview = true;
             this.Name = "LevelEditor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "LevelEditor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LevelEditor_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LevelEditor_KeyDown);
             this.PnlInfo.ResumeLayout(false);
             this.TabLevelInfo.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);

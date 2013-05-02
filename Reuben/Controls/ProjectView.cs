@@ -168,7 +168,6 @@ namespace Daiz.NES.Reuben
             else
             {
                 ProjectController.ProjectManager.CurrentProject.Name = ProjectController.ProjectName;
-                ProjectController.ProjectName =  ProjectController.ProjectName;
                 TrvProjectView.SelectedNode.Text =  ProjectController.ProjectName + " (Project)";
             }
         }

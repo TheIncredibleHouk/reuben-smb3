@@ -478,7 +478,8 @@ namespace Daiz.NES.Reuben
             PnlView.Focus();
 
             vMirrorButton.Enabled = hMirrorButton.Enabled = false;
-            if (x < 0 || x >= CurrentLevel.Width || y < 0 || y >= CurrentLevel.Height) return;
+            if (x < 0 || x >= CurrentLevel.Width || y < 0 || y >= CurrentLevel.Height)
+                return;
 
             if (_SelectingStartPositionMode)
             {
@@ -583,13 +584,15 @@ namespace Daiz.NES.Reuben
                             Stack<Point> stack = new Stack<Point>();
                             stack.Push(start);
                             int checkValue = CurrentLevel.LevelData[x, y];
-                            if (checkValue == DrawingTile) return;
+                            if (checkValue == DrawingTile)
+                                return;
 
                             CurrentMultiTile = new MultiTileAction();
                             while (stack.Count > 0)
                             {
                                 Point p = stack.Pop();
-                                int lowestX, highestX; ;
+                                int lowestX, highestX;
+                                ;
                                 int lowestY, highestY;
                                 lowestX = highestX = x;
                                 lowestY = highestY = y;
@@ -615,10 +618,14 @@ namespace Daiz.NES.Reuben
                                 {
                                     CurrentMultiTile.AddTileChange(i, j, CurrentLevel.LevelData[i, j]);
                                     CurrentLevel.SetTile(i, j, (byte)DrawingTile);
-                                    if (i < lowestX) lowestX = i;
-                                    if (i > highestX) highestX = i;
-                                    if (j < lowestY) lowestY = j;
-                                    if (j > highestY) highestY = j;
+                                    if (i < lowestX)
+                                        lowestX = i;
+                                    if (i > highestX)
+                                        highestX = i;
+                                    if (j < lowestY)
+                                        lowestY = j;
+                                    if (j > highestY)
+                                        highestY = j;
 
                                     stack.Push(new Point(i + 1, j));
                                     stack.Push(new Point(i - 1, j));
@@ -646,7 +653,8 @@ namespace Daiz.NES.Reuben
                                 }
                             }
 
-                            LvlView.DelayDrawing = false;;
+                            LvlView.DelayDrawing = false;
+                            ;
                             LvlView.FullUpdate();
                             break;
                     }
@@ -700,7 +708,7 @@ namespace Daiz.NES.Reuben
                                 break;
                         }
 
-                        SpriteViewer sv = SpriteViewers.Find(s => s.SpriteList.Find(c => c.InGameID ==CurrentSprite.InGameID) != null);
+                        SpriteViewer sv = SpriteViewers.Find(s => s.SpriteList.Find(c => c.InGameID == CurrentSprite.InGameID) != null);
                         sv.SetSelectedSprite(CurrentSprite);
                         CurrentSelectorSprite = sv.SelectedSprite;
                     }
@@ -764,9 +772,11 @@ namespace Daiz.NES.Reuben
             int x = (e.X / (16 * LvlView.Zoom));
             int y = (e.Y / (16 * LvlView.Zoom));
 
-            if (x < 0 || x >= CurrentLevel.Width || y < 0 || y >= CurrentLevel.Height) return;
+            if (x < 0 || x >= CurrentLevel.Width || y < 0 || y >= CurrentLevel.Height)
+                return;
 
-            if (PreviousMouseX == x && PreviousMouseY == y) return;
+            if (PreviousMouseX == x && PreviousMouseY == y)
+                return;
             PreviousMouseX = x;
             PreviousMouseY = y;
 
@@ -800,7 +810,8 @@ namespace Daiz.NES.Reuben
                         case TileDrawMode.Outline:
                         case TileDrawMode.Rectangle:
                         case TileDrawMode.Selection:
-                            if (StartX == x && StartY == y) return;
+                            if (StartX == x && StartY == y)
+                                return;
                             if (x > StartX)
                             {
                                 FromX = StartX;
@@ -896,8 +907,10 @@ namespace Daiz.NES.Reuben
                 SetHelpText(Reuben.Properties.Resources.PointerHelper);
                 if (CurrentPointer != null)
                 {
-                    if (x == CurrentLevel.Width - 1 || y == CurrentLevel.Height - 1) return;
-                    if (CurrentPointer.XEnter == x && CurrentPointer.YEnter == y) return;
+                    if (x == CurrentLevel.Width - 1 || y == CurrentLevel.Height - 1)
+                        return;
+                    if (CurrentPointer.XEnter == x && CurrentPointer.YEnter == y)
+                        return;
                     int oldX = CurrentPointer.XEnter;
                     int oldY = CurrentPointer.YEnter;
                     LvlView.DelayDrawing = true;
@@ -924,7 +937,8 @@ namespace Daiz.NES.Reuben
 
         private void LvlView_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!ContinueDrawing) return;
+            if (!ContinueDrawing)
+                return;
             int _DrawTile = 0;
             int sX, sY;
 
@@ -1009,7 +1023,8 @@ namespace Daiz.NES.Reuben
                                 {
                                     for (int i = 0; i < breakAt; i++)
                                     {
-                                        if (LvlView.SelectionLine.Start.X + i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y + i >= CurrentLevel.Height) continue;
+                                        if (LvlView.SelectionLine.Start.X + i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y + i >= CurrentLevel.Height)
+                                            continue;
                                         sX = LvlView.SelectionLine.Start.X + i;
                                         sY = LvlView.SelectionLine.Start.Y + i;
                                         CurrentMultiTile.AddTileChange(sX, sY, CurrentLevel.LevelData[sX, sY]);
@@ -1020,7 +1035,8 @@ namespace Daiz.NES.Reuben
                                 {
                                     for (int i = 0; i < breakAt; i++)
                                     {
-                                        if (LvlView.SelectionLine.Start.X + i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y - i >= CurrentLevel.Height) continue;
+                                        if (LvlView.SelectionLine.Start.X + i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y - i >= CurrentLevel.Height)
+                                            continue;
                                         sX = LvlView.SelectionLine.Start.X + i;
                                         sY = LvlView.SelectionLine.Start.Y - i;
                                         CurrentMultiTile.AddTileChange(sX, sY, CurrentLevel.LevelData[sX, sY]);
@@ -1034,7 +1050,8 @@ namespace Daiz.NES.Reuben
                                 {
                                     for (int i = 0; i < breakAt; i++)
                                     {
-                                        if (LvlView.SelectionLine.Start.X - i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y + i >= CurrentLevel.Height) continue;
+                                        if (LvlView.SelectionLine.Start.X - i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y + i >= CurrentLevel.Height)
+                                            continue;
                                         sX = LvlView.SelectionLine.Start.X - i;
                                         sY = LvlView.SelectionLine.Start.Y + i;
                                         CurrentMultiTile.AddTileChange(sX, sY, CurrentLevel.LevelData[sX, sY]);
@@ -1045,7 +1062,8 @@ namespace Daiz.NES.Reuben
                                 {
                                     for (int i = 0; i < breakAt; i++)
                                     {
-                                        if (LvlView.SelectionLine.Start.X - i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y - i >= CurrentLevel.Height) continue;
+                                        if (LvlView.SelectionLine.Start.X - i >= CurrentLevel.Width || LvlView.SelectionLine.Start.Y - i >= CurrentLevel.Height)
+                                            continue;
                                         sX = LvlView.SelectionLine.Start.X - i;
                                         sY = LvlView.SelectionLine.Start.Y - i;
                                         CurrentMultiTile.AddTileChange(sX, sY, CurrentLevel.LevelData[sX, sY]);
@@ -1226,10 +1244,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(CurrentPalette_PaletteChanged);
-            LvlView.CurrentPalette = CurrentPalette;
-            BlsSelector.CurrentPalette = CurrentPalette;
-            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = CurrentPalette;
-
+            BlvRight.CurrentPalette = BlvLeft.CurrentPalette =BlsSelector.CurrentPalette  =LvlView.CurrentPalette = CurrentPalette;
             foreach (var sv in SpriteViewers)
             {
                 sv.CurrentPalette = CurrentPalette;
@@ -1238,6 +1253,7 @@ namespace Daiz.NES.Reuben
 
         private void CurrentPalette_PaletteChanged(object sender, TEventArgs<DoubleValue<int, int>> e)
         {
+            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             LvlView.Redraw();
             BlsSelector.Redraw();
         }
@@ -1275,7 +1291,8 @@ namespace Daiz.NES.Reuben
             {
                 foreach (var k in from l in ProjectController.SpriteManager.SpriteGroups[s].Keys orderby l select l)
                 {
-                    if (k == "Map") continue;
+                    if (k == "Map")
+                        continue;
                     SpriteViewer spViewer = new SpriteViewer(ProjectController.SpriteManager.SpriteGroups[s][k].Count);
                     spViewer.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;
                     CurrentList = new List<Sprite>();
@@ -1384,111 +1401,6 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private void LvlView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if ((e.Modifiers & Keys.Control) > Keys.None)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.Add:
-                        if (!TsbZoom.Checked)
-                            TsbZoom.Checked = true;
-                        break;
-
-                    case Keys.Subtract:
-                        if (TsbZoom.Checked)
-                            TsbZoom.Checked = false;
-                        break;
-
-                    case Keys.S:
-                        Save();
-
-                        if ((e.Modifiers & Keys.Shift) > Keys.None)
-                        {
-                            ReubenController.CompileRom(true);
-                            MessageBox.Show("Level succesfully saved and ROM compiled.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Level succesfully saved.");
-                        }
-                        break;
-
-
-                    case Keys.X:
-                        Cut();
-                        break;
-
-                    case Keys.C:
-                        Copy();
-                        break;
-
-                    case Keys.V:
-                        Paste();
-                        break;
-
-                    case Keys.G:
-                        TsbGrid.Checked = !TsbGrid.Checked;
-                        break;
-
-                    case Keys.H:
-                        TsbItems.Checked = !TsbItems.Checked;
-                        break;
-
-                    case Keys.J:
-                        TsbSriteSpecials.Checked = !TsbSriteSpecials.Checked;
-                        break;
-
-                    case Keys.F:
-                        TsbStartPoint.Checked = !TsbStartPoint.Checked;
-                        break;
-
-                    case Keys.R:
-                        TsbStartPoint.Checked = true;
-                        BtnStartPoint_Click(null, null);
-                        break;
-
-                    case Keys.Z:
-                        Undo();
-                        break;
-                }
-            }
-            else
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.Delete:
-
-                        if (CurrentSprite != null && EditMode == EditMode.Sprites)
-                        {
-                            CurrentLevel.SpriteData.Remove(CurrentSprite);
-                            LvlView.DelayDrawing = true;
-                            LvlView.ClearSelection();
-                            LvlView.DelayDrawing = false;
-                            LvlView.UpdateSprites();
-                            CurrentSprite = null;
-                        }
-                        else if (EditMode == EditMode.Tiles && TileDrawMode == TileDrawMode.Selection)
-                        {
-                            DeleteTiles();
-                        }
-                        else if (EditMode == EditMode.Pointers)
-                        {
-                            DeleteCurrentPointer();
-                        }
-                        break;
-
-                    case Keys.Escape:
-                        ContinueDrawing = false;
-                        LvlView.ClearSelection();
-                        LvlView.ClearLine();
-                        if (TileDrawMode == TileDrawMode.Selection)
-                            TileDrawMode = PreviousMode;
-                        break;
-                }
-            }
-        }
-
         private void ToggleRightClickMode()
         {
             MouseMode = MouseMode == MouseMode.RightClickSelection ? MouseMode.RightClickTile : MouseMode.RightClickSelection;
@@ -1575,9 +1487,8 @@ namespace Daiz.NES.Reuben
 
         private void TsbSave_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Level succesfully saved.");
             Save();
-            //ReubenController.SaveTestLevel(CurrentLevel);
+            MessageBox.Show("Level succesfully saved.");
         }
 
         private void Save()
@@ -1659,8 +1570,10 @@ namespace Daiz.NES.Reuben
             int x = e.X / 16;
             int y = e.Y / 16;
             int index = (e.X / 16) + ((e.Y / 16) * 16);
-            if (index > 255) return;
-            if (PreviousSelectorX == x && PreviousSelectorY == y) return;
+            if (index > 255)
+                return;
+            if (PreviousSelectorX == x && PreviousSelectorY == y)
+                return;
             PreviousSelectorX = x;
             PreviousSelectorY = y;
             int tile = BlsSelector.BlockLayout.Layout[index];
@@ -1734,7 +1647,8 @@ namespace Daiz.NES.Reuben
 
         private void Undo()
         {
-            if (UndoBuffer.Count == 0) return;
+            if (UndoBuffer.Count == 0)
+                return;
             IUndoableAction action = UndoBuffer[UndoBuffer.Count - 1];
             switch (action.Type)
             {
@@ -1839,7 +1753,8 @@ namespace Daiz.NES.Reuben
 
         private void SetHelpText(string text)
         {
-            if (text == CurrentHelperText) return;
+            if (text == CurrentHelperText)
+                return;
             PreviousHelperText = CurrentHelperText;
             CurrentHelperText = text;
         }
@@ -1901,7 +1816,7 @@ namespace Daiz.NES.Reuben
 
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void TsbReplace_Click(object sender, EventArgs e)
         {
             SetHelpText(Reuben.Properties.Resources.ReplaceTileHelper);
             TileDrawMode = TileDrawMode.Replace;
@@ -1951,5 +1866,142 @@ namespace Daiz.NES.Reuben
             BlsSelector.ShowTileInteractions = LvlView.ShowTileInteractions = TsbInteractions.Checked;
         }
 
+        private void LevelEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Modifiers & Keys.Control) > Keys.None)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Add:
+                        if (!TsbZoom.Checked)
+                            TsbZoom.Checked = true;
+                        break;
+
+                    case Keys.Subtract:
+                        if (TsbZoom.Checked)
+                            TsbZoom.Checked = false;
+                        break;
+
+                    case Keys.S:
+                        Save();
+                        MessageBox.Show("Level succesfully saved.");
+                        break;
+
+
+                    case Keys.X:
+                        Cut();
+                        break;
+
+                    case Keys.C:
+                        Copy();
+                        break;
+
+                    case Keys.V:
+                        Paste();
+                        break;
+
+                    case Keys.Z:
+                        Undo();
+                        break;
+                }
+            }
+            else
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Delete:
+
+                        if (CurrentSprite != null && EditMode == EditMode.Sprites)
+                        {
+                            CurrentLevel.SpriteData.Remove(CurrentSprite);
+                            LvlView.DelayDrawing = true;
+                            LvlView.ClearSelection();
+                            LvlView.DelayDrawing = false;
+                            LvlView.UpdateSprites();
+                            CurrentSprite = null;
+                        }
+                        else if (EditMode == EditMode.Tiles && TileDrawMode == TileDrawMode.Selection)
+                        {
+                            DeleteTiles();
+                        }
+                        else if (EditMode == EditMode.Pointers)
+                        {
+                            DeleteCurrentPointer();
+                        }
+                        break;
+
+                    case Keys.Escape:
+                        ContinueDrawing = false;
+                        LvlView.ClearSelection();
+                        LvlView.ClearLine();
+                        if (TileDrawMode == TileDrawMode.Selection)
+                            TileDrawMode = PreviousMode;
+                        break;
+
+                    case Keys.F2:
+                        TsbStartPoint.Checked = !TsbStartPoint.Checked;
+                        break;
+
+                    case Keys.F3:
+                        TsbGrid.Checked = !TsbGrid.Checked;
+                        break;
+
+                    case Keys.F4:
+                        TsbItems.Checked = !TsbItems.Checked;
+                        break;
+
+                    case Keys.F5:
+                        TsbSolidity.Checked = !TsbSolidity.Checked;
+                        break;
+
+                    case Keys.F6:
+                        TsbInteractions.Checked = !TsbInteractions.Checked;
+                        break;
+
+                    case Keys.F7:
+                        TsbSriteSpecials.Checked = !TsbSriteSpecials.Checked;
+                        break;
+
+                    case Keys.F8:
+                        TsbPointers.Checked = !TsbPointers.Checked;
+                        break;
+                    case Keys.D1:
+                        TsbPencil_Click(null, null);
+                        break;
+
+                    case Keys.D2:
+                        TsbLine_Click(null, null);
+                        break;
+
+                    case Keys.D3:
+                        TsbRectangle_Click(null, null);
+                        break;
+
+                    case Keys.D4:
+                        TsbOutline_Click(null, null);
+                        break;
+
+                    case Keys.D5:
+                        TsbBucket_Click(null, null);
+                        break;
+                       
+                    case Keys.D6:
+                        TsbReplace_Click(null, null);
+                        break;
+
+                    case Keys.Q:
+                        TabEditSelector.SelectedIndex = 0;
+                        break;
+
+                    case Keys.W:
+                        TabEditSelector.SelectedIndex = 1;
+                        break;
+
+                    case Keys.E:
+                        TabEditSelector.SelectedIndex = 2;
+                        break;
+                }
+            }
+        }
     }
 }
