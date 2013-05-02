@@ -173,9 +173,10 @@ namespace Daiz.NES.Reuben
 
         private void CmbDefinitions_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            BlsBlocks.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
             if (CmbDefinitions.SelectedIndex != 0)
             {
-                BlsBlocks.CurrentDefiniton = ProjectController.BlockManager.GetDefiniton(CmbDefinitions.SelectedIndex);
                 FillBlockForTransitions();
                 LoadBlockTransitions();
             }
@@ -358,7 +359,7 @@ namespace Daiz.NES.Reuben
             CommitBlockTransitions();
             ProjectController.BlockManager.SaveDefinitions(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".tsa");
             ProjectController.BlockManager.SaveBlockStrings(ProjectController.RootDirectory + @"\strings.xml");
-            
+
             this.Close();
         }
 

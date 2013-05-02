@@ -206,8 +206,8 @@ namespace Daiz.NES.Reuben
         {
             WldView.CurrentWorld = w;
             CurrentWorld = w;
-            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[0x14]);
-            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[0x14]);
+            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[0x70]);
+            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[0x72]);
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank]);
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank + 1]);
             CmbGraphics.SelectedIndex = w.GraphicsBank;
@@ -250,8 +250,8 @@ namespace Daiz.NES.Reuben
 
         private void UpdateGraphics()
         {
-            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[0x14]);
-            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[0x15]);
+            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[0x70]);
+            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[0x70]);
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank]);
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentWorld.GraphicsBank + 1]);
             BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = WldView.CurrentPalette = CurrentPalette;
@@ -1183,7 +1183,7 @@ namespace Daiz.NES.Reuben
 
         private void BlsSelector_DoubleClick(object sender, EventArgs e)
         {
-            ReubenController.OpenBlockEditor(CurrentWorld.Type, LeftMouseTile, 0x14, CurrentWorld.GraphicsBank, CmbPalettes.SelectedIndex);
+            ReubenController.OpenBlockEditor(CurrentWorld.Type, LeftMouseTile, 0x70, CurrentWorld.GraphicsBank, CmbPalettes.SelectedIndex);
         }
 
         int PreviousSelectorX, PreviousSelectorY;

@@ -73,7 +73,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     World w = ((WorldEditor)ActiveMdiChild).CurrentWorld;
-                    ReubenController.OpenBlockEditor(w.Type, 0, 0x14, w.GraphicsBank, w.Palette);
+                    ReubenController.OpenBlockEditor(w.Type, 0, 0x70, w.GraphicsBank, w.Palette);
                 }
             }
             else

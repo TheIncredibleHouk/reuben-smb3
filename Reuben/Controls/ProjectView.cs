@@ -133,7 +133,7 @@ namespace Daiz.NES.Reuben
             {
                 SelectionType = SelectionType.World;
                 SelectedWorld = NodesToWorlds[node];
-
+                TrvProjectView.ContextMenuStrip = CtxWorlds;
                 TlsEdit.Enabled = !SelectedWorld.IsNoWorld;
             }
             else if (NodesToLevels.ContainsKey(node))

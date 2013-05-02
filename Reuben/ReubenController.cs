@@ -154,7 +154,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     WorldEditor we = (WorldEditor)ActiveEditor;
-                    ge.ShowDialog(0x14, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette);
+                    ge.ShowDialog(0x70, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette);
                 }
             }
             else
@@ -179,7 +179,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     WorldEditor we = (WorldEditor)ActiveEditor;
-                    me.ShowDialog(we.CurrentWorld.Type, 0, 0x14, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette);
+                    me.ShowDialog(we.CurrentWorld.Type, 0, 0x70, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette);
                 }
             }
             else
@@ -264,7 +264,7 @@ namespace Daiz.NES.Reuben
                 else
                 {
                     WorldEditor we = (WorldEditor)ActiveEditor;
-                    lee.ShowDialog(we.CurrentWorld.Type, 0x14, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette, we.CurrentLayout);
+                    lee.ShowDialog(we.CurrentWorld.Type, 0x70, we.CurrentWorld.GraphicsBank, we.CurrentWorld.Palette, we.CurrentLayout);
                 }
             }
             else
