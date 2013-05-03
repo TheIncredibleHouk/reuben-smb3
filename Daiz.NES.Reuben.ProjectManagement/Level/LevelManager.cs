@@ -66,76 +66,76 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 case 1:
                     l.GraphicsBank = 0x08;
-                    l.ClearValue = 0x80;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 2:
                     l.GraphicsBank = 0x10;
-                    l.ClearValue = 0x02;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 3:
                     l.GraphicsBank = 0x6C;
-                    l.ClearValue = 0x86;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 4:
                     l.GraphicsBank = 0x0C;
-                    l.ClearValue = 0x80;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 5:
                     l.GraphicsBank = 0x58;
                     l.AnimationBank = 0x80;
-                    l.ClearValue = 0x80;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 6:
                     l.GraphicsBank = 0x58;
-                    l.ClearValue = 0x8C;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 7:
                     l.GraphicsBank = 0x5C;
-                    l.ClearValue = 0x42;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 8:
                     l.GraphicsBank = 0x58;
-                    l.ClearValue = 0x80;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 9:
                     l.GraphicsBank = 0x30;
-                    l.ClearValue = 0x80;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 10:
                     l.GraphicsBank = 0x34;
-                    l.ClearValue = 0x06;
+                    l.ClearValue = 0x90;
                     break;
 
 
                 case 11:
                     l.GraphicsBank = 0x6E;
-                    l.ClearValue = 0x80;
+                    l.ClearValue = 0x90;
                     break;
 
 
                 case 12:
                     l.GraphicsBank = 0x18;
-                    l.ClearValue = 0x80;
+                    l.ClearValue = 0x90;
                     break;
 
 
                 case 13:
                     l.GraphicsBank = 0x38;
-                    l.ClearValue = 0xCC;
+                    l.ClearValue = 0x90;
                     break;
 
                 case 14:
                     l.GraphicsBank = 0x1C;
-                    l.ClearValue = 0x02;
+                    l.ClearValue = 0x90;
                     break;
             }
 

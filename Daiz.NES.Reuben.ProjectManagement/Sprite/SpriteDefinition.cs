@@ -11,6 +11,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
     public class SpriteDefinition : IXmlIO
     {
         public List<SpriteInfo> Sprites { get; private set; }
+        public int ProxyId { get; private set; }
         public int InGameId { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -30,22 +31,53 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
-            InGameId = e.Attribute("id").Value.ToIntFromHex();
-            Width = e.Attribute("width").Value.ToInt();
-            Height = e.Attribute("height").Value.ToInt();
-            Name = e.Attribute("name").Value;
-            Class = e.Attribute("group").Value.ToInt();
-            Group = e.Attribute("class").Value;
+            foreach (XAttribute a in e.Attributes())
+            {
+                switch (a.Name.LocalName.ToLower())
+                {
+                    case "id":
+                        InGameId = a.Value.ToIntFromHex();
+                        break;
+
+                    case "width":
+                        Width = a.Value.ToInt();
+                        break;
+
+                    case "height":
+                        Height = a.Value.ToInt();
+                        break;
+
+                    case "name":
+                        Name = a.Value;
+                        break;
+
+                    case "class":
+                        Class = a.Value.ToInt();
+                        break;
+
+                    case "group":
+                        Group = a.Value;
+                        break;
+
+                    case "proxy":
+                        ProxyId = a.Value.ToInt();
+                        break;
+                }
+            }
 
             foreach (var x in e.Elements("sprite"))
             {
                 SpriteInfo s = new SpriteInfo();
                 s.LoadFromElement(x);
                 Sprites.Add(s);
-                if (s.X > MaxRightX) MaxRightX = s.X;
-                if (s.X < MaxLeftX) MaxLeftX = s.X;
-                if (s.Y > MaxBottomY) MaxBottomY = s.Y;
-                if (s.Y < MaxTopY) MaxTopY = s.Y;
+                if (s.X > MaxRightX)
+                    MaxRightX = s.X;
+                if (s.X < MaxLeftX)
+                    MaxLeftX = s.X;
+                if (s.Y > MaxBottomY)
+                    MaxBottomY = s.Y;
+                if (s.Y < MaxTopY)
+                    MaxTopY = s.Y;
             }
             if (MaxLeftX < 0 && MaxLeftX % 16 != 0)
                 MaxLeftX -= 16;
@@ -78,6 +110,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
             e.SetAttributeValue("name", Name);
             e.SetAttributeValue("group", Class);
             e.SetAttributeValue("class", Group);
+            if (ProxyId > 0)
+            {
+                e.SetAttributeValue("proxy", ProxyId);
+            }
 
             foreach (var s in Sprites)
             {
