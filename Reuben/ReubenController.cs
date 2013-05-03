@@ -415,9 +415,16 @@ namespace Daiz.NES.Reuben
 
         public static void CompileRom(bool useDefaultROM)
         {
-            foreach(LevelEditor editor in editorTable.Values)
+            foreach(Form editor in editorTable.Values)
             {
-                editor.CurrentLevel.Save();
+                if (editor is LevelEditor)
+                {
+                    ((LevelEditor)editor).CurrentLevel.Save();
+                }
+                else if (editor is WorldEditor)
+                {
+                    ((WorldEditor)editor).CurrentWorld.Save();
+                }
             }
 
             ROMManager romMan = new ROMManager();
