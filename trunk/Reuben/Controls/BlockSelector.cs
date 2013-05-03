@@ -446,7 +446,7 @@ namespace Daiz.NES.Reuben
                                     RenderSpecialTileAlpha(_SpecialTable[0x1D], x + 8, y + 8, 1, data);
                                     break;
 
-                                case BlockProperty.NoteBlock:
+                                case BlockProperty.Spinner:
                                     RenderSpecialTileAlpha(_SpecialTable[0x04], x, y, 0, data);
                                     RenderSpecialTileAlpha(_SpecialTable[0x14], x, y + 8, 0, data);
                                     RenderSpecialTileAlpha(_SpecialTable[0x05], x + 8, y, 0, data);
@@ -821,7 +821,7 @@ namespace Daiz.NES.Reuben
                                 RenderSpecialTileAlpha(_SpecialTable[0x1D], x + 8, y + 8, 1, data);
                                 break;
 
-                            case BlockProperty.NoteBlock:
+                            case BlockProperty.Spinner:
                                 RenderSpecialTileAlpha(_SpecialTable[0x04], x, y, 0, data);
                                 RenderSpecialTileAlpha(_SpecialTable[0x14], x, y + 8, 0, data);
                                 RenderSpecialTileAlpha(_SpecialTable[0x05], x + 8, y, 0, data);

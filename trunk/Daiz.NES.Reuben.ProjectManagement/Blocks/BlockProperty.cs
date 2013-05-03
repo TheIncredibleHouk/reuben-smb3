@@ -47,7 +47,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Vine = 0xFB,
         PSwitchBlock = 0xFC,
         Brick = 0xFD,
-        NoteBlock = 0xFE,
+        Spinner = 0xFE,
         Unused2 = 0xFF,
         Background = 0x00
     }
