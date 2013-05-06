@@ -69,6 +69,7 @@
             this.CmbWeather = new System.Windows.Forms.ComboBox();
             this.Weather = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.ChkBlocked = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -675,6 +676,7 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage7.Controls.Add(this.ChkBlocked);
             this.tabPage7.Controls.Add(this.label18);
             this.tabPage7.Controls.Add(this.label17);
             this.tabPage7.Controls.Add(this.label16);
@@ -693,6 +695,16 @@
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Special Options";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // ChkBlocked
+            // 
+            this.ChkBlocked.AutoSize = true;
+            this.ChkBlocked.Location = new System.Drawing.Point(6, 34);
+            this.ChkBlocked.Name = "ChkBlocked";
+            this.ChkBlocked.Size = new System.Drawing.Size(95, 17);
+            this.ChkBlocked.TabIndex = 10;
+            this.ChkBlocked.Text = "Vine Blockage";
+            this.ChkBlocked.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
@@ -1382,7 +1394,7 @@
             this.TlsTileCommands.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TlsTileCommands.Location = new System.Drawing.Point(356, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(178, 24);
+            this.TlsTileCommands.Size = new System.Drawing.Size(147, 24);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -1911,5 +1923,6 @@
         private System.Windows.Forms.CheckBox ChkInvincibleEnemies;
         private System.Windows.Forms.ToolStripButton hMirrorButton;
         private System.Windows.Forms.ToolStripButton TsbInteractions;
+        private System.Windows.Forms.CheckBox ChkBlocked;
     }
 }

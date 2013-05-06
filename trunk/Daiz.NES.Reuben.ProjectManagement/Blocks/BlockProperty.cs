@@ -8,6 +8,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
     public enum BlockProperty
     {
         MaskHi = 0xF0,
+        MaskLo = 0xF,
         MaskSpecialTile = 0xF0,
         MaskPowerup = 0x7F,
         MaskForeground = 0xEF,
@@ -56,21 +57,133 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public static string GetString(this BlockProperty bp)
         {
-            string s = (bp & BlockProperty.MaskHi).ToString();
-
-            if ((bp & BlockProperty.MaskHi) == BlockProperty.MaskHi)
+            string s1 = ((BlockProperty.MaskHi) & bp).ToString();
+            string s2 = "No Interaction";
+            switch (bp & BlockProperty.MaskHi)
             {
-                s += ", " + bp;
-            }
-            else
-            {
-                if ((bp & BlockProperty.Cherry) != BlockProperty.Background)
-                {
-                    s += ", " + (bp & BlockProperty.Cherry);
-                }
+                case BlockProperty.Background:
+                case BlockProperty.Foreground:
+                case BlockProperty.Water:
+                case BlockProperty.WaterForeground:
+                    switch ((int)(bp & BlockProperty.MaskLo))
+                    {
+                        case 1:
+                            s2 = "Harmful";
+                            break;
+
+                        case 2:
+                            s2 = "Deplete Air";
+                            break;
+
+                        case 3:
+                            s2 = "Current Left";
+                            break;
+
+                        case 4:
+                            s2 = "Current Right";
+                            break;
+
+                        case 5:
+                            s2 = "Current Up";
+                            break;
+
+                        case 6:
+                            s2 = "Current Down";
+                            break;
+
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 15:
+                            
+                            break;
+
+                        case 11:
+                            s2 = "Climbable";
+                            
+                            break;
+
+                        case 12:
+                            s2 = "Coin";
+                            
+                            break;
+
+                        case 13:
+                            s2 = "Door";
+                            break;
+
+                        case 14:
+                            s2 = "Cherry";
+                            break;
+                    }
+                    break;
+
+                case BlockProperty.SolidTop:
+                case BlockProperty.SolidBottom:
+                case BlockProperty.SolidAll:
+                    switch ((int)(bp & BlockProperty.MaskLo))
+                    {
+                        case 1:
+                            s2 = "Harmful";
+                            break;
+
+                        case 2:
+                            s2 = "Slick";
+                            break;
+
+                        case 3:
+                            s2 = "Conveyor Left";
+                            break;
+
+                        case 4:
+                            s2 = "Conveyor Right";
+                            break;
+
+                        case 5:
+                            s2 = "Conveyor Up";
+                            break;
+
+                        case 6:
+                            s2 = "Conveyor Down";
+                            break;
+
+                        case 7:
+                            s2 = "Unstable";
+                            break;
+
+                        case 8:
+                            s2 = "Vertical Enterable Pipe Left End";
+                            break;
+
+                        case 9:
+                            s2 = "Vertical Enterable Pipe Right End";
+                            break;
+
+                        case 10:
+                            s2 = "Horizontal Enterable Pipe Bottom";
+                            break;
+
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 15:
+                            s2 = "Unused";
+                            break;
+
+                        case 14:
+                            s2 = "P-Switch";
+                            break;
+
+                    }
+                    break;
+
+                default:
+                    s2 = bp.ToString();
+                    break;
             }
 
-            return s;
+            return s1 + ", " + s2;
 
         }
     }

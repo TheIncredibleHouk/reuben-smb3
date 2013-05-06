@@ -51,6 +51,7 @@ namespace Daiz.NES.Reuben
                         LblPointsToLevel.Text = "No level set.";
                     }
 
+                    CmbWorldExit.Enabled = value.ExitsLevel;
                     CmbWorldExit.SelectedIndex = value.World;
                     CmbActions.SelectedIndex = value.ExitType;
                     NumXExit.Value = value.XExit;

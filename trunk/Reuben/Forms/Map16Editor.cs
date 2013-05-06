@@ -82,7 +82,8 @@ namespace Daiz.NES.Reuben
             "Climbable",
             "Coin",
             "Door",
-            "Cherry"
+            "Cherry",
+            "Unsued"
         };
         private List<string> SolidInteractionTypes = new List<string>()
         {
@@ -99,8 +100,9 @@ namespace Daiz.NES.Reuben
             "Horizontal Pipe Bottom",
             "Unused",
             "Unused",
+            "Stone",
+            "PSwitch",
             "Unused",
-            "PSwitch"
         };
 
         private List<string> SpecialTypes = new List<string>();

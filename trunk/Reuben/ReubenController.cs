@@ -344,6 +344,34 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        public static void SaveCurrentLevelToFile()
+        {
+            if (ActiveEditor == null)
+            {
+                MessageBox.Show("There are no levels current opened!");
+                return;
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.DefaultExt = "lvl";
+            sfd.FileName = ActiveEditor.Text + ".lvl";
+            DialogResult result = sfd.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (ActiveEditor is LevelEditor)
+                {
+                    ((LevelEditor)ActiveEditor).CurrentLevel.Save(sfd.FileName);
+                }
+                else
+                {
+                    ((WorldEditor)ActiveEditor).CurrentWorld.Save(sfd.FileName);
+
+                }
+
+                MessageBox.Show("Level successfully exported!");
+            }
+        }
+
         public static void ReloadGraphics()
         {
             ProjectController.GraphicsManager.LoadGraphics(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".chr");

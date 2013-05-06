@@ -143,6 +143,8 @@ namespace Daiz.NES.Reuben
                 SelectedWorld = ProjectController.WorldManager.GetWorldInfo(SelectedLevel.WorldGuid);
                 TrvProjectView.ContextMenuStrip = CtxLevels;
                 TlsEdit.Enabled = true;
+                mnuMoveUp.Enabled = node.Index > 0;
+                mnuMoveDown.Enabled = node.Index < node.Parent.Nodes.Count - 1;
             }
             else
             {
@@ -366,6 +368,34 @@ namespace Daiz.NES.Reuben
         private void TsbDelete_Click(object sender, EventArgs e)
         {
             Delete();
+        }
+
+        private void mnuMoveUp_Click(object sender, EventArgs e)
+        {
+            TreeNode tr = TrvProjectView.SelectedNode;
+            TreeNode pa = tr.Parent;
+            int index = pa.Nodes.IndexOf(tr);
+            pa.Nodes.Remove(tr);
+            pa.Nodes.Insert(index - 1, tr);
+            TrvProjectView.SelectedNode = tr;
+            LevelInfo li = NodesToLevels[tr];
+            int liIndex = ProjectController.LevelManager.Levels.IndexOf(li);
+            ProjectController.LevelManager.Levels.Remove(li);
+            ProjectController.LevelManager.Levels.Insert(index - 1, li);
+        }
+
+        private void mnuMoveDown_Click(object sender, EventArgs e)
+        {
+            TreeNode tr = TrvProjectView.SelectedNode;
+            TreeNode pa = tr.Parent;
+            int index = pa.Nodes.IndexOf(tr);
+            pa.Nodes.Remove(tr);
+            pa.Nodes.Insert(index + 1, tr);
+            TrvProjectView.SelectedNode = tr;
+            LevelInfo li = NodesToLevels[tr];
+            int liIndex = ProjectController.LevelManager.Levels.IndexOf(li);
+            ProjectController.LevelManager.Levels.Remove(li);
+            ProjectController.LevelManager.Levels.Insert(index + 1, li);
         }
     }
 

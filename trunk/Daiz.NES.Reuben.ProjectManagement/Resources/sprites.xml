@@ -981,17 +981,9 @@
     <sprite x="16" y="16" value="C2" palette="1" horizontalflip="true" verticalflip="true" table="-1" />
     <sprite x="24" y="16" value="C0" palette="1" horizontalflip="true" verticalflip="true" table="-1" />
   </spritedefinition>
-  <spritedefinition id="8F" width="02" height="02" name="Thwomp (Moves Down and Left)" group="2" class="Fortress">
-    <sprite x="4" y="0" value="30" palette="2" horizontalflip="false" verticalflip="false" table="12" />
-    <sprite x="12" y="0" value="32" palette="2" horizontalflip="false" verticalflip="false" table="12" />
-    <sprite x="20" y="0" value="30" palette="2" horizontalflip="true" verticalflip="false" table="12" />
-    <sprite x="4" y="16" value="3A" palette="2" horizontalflip="false" verticalflip="false" table="12" />
-    <sprite x="12" y="16" value="3C" palette="2" horizontalflip="false" verticalflip="false" table="12" />
-    <sprite x="20" y="16" value="3A" palette="2" horizontalflip="true" verticalflip="false" table="12" />
-    <sprite x="-128" y="144" value="C0" palette="1" horizontalflip="false" verticalflip="true" table="-1" />
-    <sprite x="-120" y="144" value="C2" palette="1" horizontalflip="false" verticalflip="true" table="-1" />
-    <sprite x="16" y="0" value="C2" palette="1" horizontalflip="true" verticalflip="false" table="-1" />
-    <sprite x="24" y="0" value="C0" palette="1" horizontalflip="true" verticalflip="false" table="-1" />
+  <spritedefinition id="8F" width="02" height="02" name="Poison Mushroom" group="1" class="Global">
+    <sprite x="0" y="0" value="3C" palette="1" horizontalflip="false" verticalflip="false" table="04" />
+    <sprite x="8" y="0" value="3E" palette="1" horizontalflip="false" verticalflip="false" table="04" />
   </spritedefinition>
   <spritedefinition id="90" width="04" height="01" name="Rotating Platform" group="3" class="Common">
     <sprite x="8" y="0" value="2C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
