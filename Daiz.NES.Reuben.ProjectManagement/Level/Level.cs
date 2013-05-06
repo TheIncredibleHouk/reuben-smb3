@@ -32,6 +32,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int StartAction { get; set; }
         public int ScrollType { get; set; }
         public bool InvincibleEnemies { get; set; }
+        public bool VineBlocked { get; set; }
         public int Weather { get; set; }
         public int WindDirection { get; set; }
         public int WindSpeed { get; set; }
@@ -83,8 +84,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
         }
 
-
+        
         public bool Save()
+        {
+            return Save(ProjectController.LevelDirectory + @"\" + Guid + ".lvl");
+        }
+
+        public bool Save(string fileName)
         {
             XDocument xDoc = new XDocument();
             XElement root = new XElement("level");
@@ -100,6 +106,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("xaltstart", XAltStart);
             root.SetAttributeValue("yaltstart", YAltStart);
             root.SetAttributeValue("invincibleenemies", InvincibleEnemies);
+            root.SetAttributeValue("vineblocked", VineBlocked);
             root.SetAttributeValue("weather", Weather);
             root.SetAttributeValue("winddirection", WindDirection);
             root.SetAttributeValue("windspeed", WindSpeed);
@@ -153,7 +160,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.Add(p);
             root.Add(s);
             root.Add(Settings.CreateElement());
-            string fileName = ProjectController.LevelDirectory + @"\" + Guid + ".lvl";
+           
             xDoc.Add(root);
             xDoc.Save(fileName);
 
@@ -239,6 +246,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "invincibleenemies":
                         InvincibleEnemies = a.Value.ToBoolean();
+                        break;
+                        
+                    case "vineblocked":
+                        VineBlocked = a.Value.ToBoolean();
                         break;
 
                     case "weather":

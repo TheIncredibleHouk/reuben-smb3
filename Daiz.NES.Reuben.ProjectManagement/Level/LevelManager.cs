@@ -148,6 +148,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             l.WindDirection = 0;
             l.Weather = 0;
             l.InvincibleEnemies = false;
+            l.VineBlocked = false;
             l.XStart = 0x00;
             l.YStart = 0x14;
 

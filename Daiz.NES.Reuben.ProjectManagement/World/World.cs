@@ -51,7 +51,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
             }
 
-            for(int i = 0; i < 0x40; i++)
+            for (int i = 0; i < 0x40; i++)
             {
                 LevelData[i, 0x10] = 0x4E;
                 LevelData[i, 0x1A] = 0x4F;
@@ -70,6 +70,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool Save()
         {
+            return Save(ProjectController.WorldDirectory + @"\" + Guid + ".map");
+        }
+
+        public bool Save(string filename)
+        {
             XDocument xDoc = new XDocument();
             XElement root = new XElement("world");
             root.SetAttributeValue("guid", Guid);
@@ -81,7 +86,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("palette", Palette);
 
             StringBuilder sb = new StringBuilder();
-            
+
             bool first = true;
             for (int i = 0; i < Height; i++)
             {
@@ -118,9 +123,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.Add(p);
             root.Add(s);
             root.Add(Settings.CreateElement());
-            string fileName = ProjectController.WorldDirectory + @"\" + Guid + ".map";
+
             xDoc.Add(root);
-            xDoc.Save(fileName);
+            xDoc.Save(filename);
 
             ProjectController.WorldManager.GetWorldInfo(Guid).LastModified = DateTime.Now;
             return true;
@@ -135,7 +140,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             return false;
         }
-        
+
         public bool Load(string filename)
         {
             string[] compressData = null;
@@ -188,12 +193,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             int xPointer = 0, yPointer = 0;
-            foreach(var c in levelData)
+            foreach (var c in levelData)
             {
-                LevelData[xPointer, yPointer] = (byte) c.ToInt();
+                LevelData[xPointer, yPointer] = (byte)c.ToInt();
                 xPointer++;
 
-                if(xPointer >= Width)
+                if (xPointer >= Width)
                 {
                     xPointer = 0;
                     yPointer++;
@@ -263,7 +268,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public void RemovePointer(WorldPointer p)
         {
             Pointers.Remove(p);
- 
+
         }
 
         public void SetTile(int x, int y, byte value)

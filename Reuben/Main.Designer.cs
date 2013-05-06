@@ -74,6 +74,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnShowHide = new System.Windows.Forms.Button();
             this.PrvProject = new Daiz.NES.Reuben.ProjectView();
+            this.levelAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.PnlRightSide.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -218,21 +219,22 @@
             // graphicsToolStripMenuItem
             // 
             this.graphicsToolStripMenuItem.Name = "graphicsToolStripMenuItem";
-            this.graphicsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.graphicsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.graphicsToolStripMenuItem.Text = "Graphics";
             this.graphicsToolStripMenuItem.Click += new System.EventHandler(this.graphicsToolStripMenuItem_Click);
             // 
             // dToolStripMenuItem
             // 
             this.dToolStripMenuItem.Name = "dToolStripMenuItem";
-            this.dToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.dToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dToolStripMenuItem.Text = "Existing Level";
             this.dToolStripMenuItem.Click += new System.EventHandler(this.dToolStripMenuItem_Click);
             // 
             // MnuExport
             // 
             this.MnuExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.levelToPNGToolStripMenuItem});
+            this.levelToPNGToolStripMenuItem,
+            this.levelAsToolStripMenuItem});
             this.MnuExport.Enabled = false;
             this.MnuExport.Name = "MnuExport";
             this.MnuExport.Size = new System.Drawing.Size(152, 22);
@@ -241,7 +243,7 @@
             // levelToPNGToolStripMenuItem
             // 
             this.levelToPNGToolStripMenuItem.Name = "levelToPNGToolStripMenuItem";
-            this.levelToPNGToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.levelToPNGToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.levelToPNGToolStripMenuItem.Text = "Level to PNG";
             this.levelToPNGToolStripMenuItem.Click += new System.EventHandler(this.levelToPNGToolStripMenuItem_Click);
             // 
@@ -377,7 +379,7 @@
             // layoutManagerToolStripMenuItem
             // 
             this.layoutManagerToolStripMenuItem.Name = "layoutManagerToolStripMenuItem";
-            this.layoutManagerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.layoutManagerToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.layoutManagerToolStripMenuItem.Text = "Layout Editor";
             this.layoutManagerToolStripMenuItem.Click += new System.EventHandler(this.layoutManagerToolStripMenuItem_Click);
             // 
@@ -440,6 +442,13 @@
             this.PrvProject.Name = "PrvProject";
             this.PrvProject.Size = new System.Drawing.Size(325, 401);
             this.PrvProject.TabIndex = 3;
+            // 
+            // levelAsToolStripMenuItem
+            // 
+            this.levelAsToolStripMenuItem.Name = "levelAsToolStripMenuItem";
+            this.levelAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.levelAsToolStripMenuItem.Text = "Level As";
+            this.levelAsToolStripMenuItem.Click += new System.EventHandler(this.levelAsToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -509,6 +518,7 @@
         private System.Windows.Forms.ToolStripMenuItem allEditorDefinitionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setPaletteFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem levelAsToolStripMenuItem;
 
 
     }

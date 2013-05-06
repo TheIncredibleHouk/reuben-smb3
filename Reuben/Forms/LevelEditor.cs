@@ -179,6 +179,8 @@ namespace Daiz.NES.Reuben
             txtMisc1.Text = CurrentLevel.MiscByte1.ToHexString();
             txtMisc2.Text = CurrentLevel.MiscByte2.ToHexString();
             txtMisc3.Text = CurrentLevel.MiscByte3.ToHexString();
+            ChkBlocked.Checked = CurrentLevel.VineBlocked;
+            ChkInvincibleEnemies.Checked = CurrentLevel.InvincibleEnemies;
 
             switch (CurrentLevel.Settings.DrawMode)
             {
@@ -642,12 +644,14 @@ namespace Daiz.NES.Reuben
                         case TileDrawMode.Replace:
                             LvlView.DelayDrawing = true;
                             int findTile = CurrentLevel.LevelData[x, y];
+                            MultiTileAction mta = new MultiTileAction();
                             for (int i = 0; i < (15 * 16); i++)
                             {
                                 for (int j = 0; j < 0x1B; j++)
                                 {
                                     if (CurrentLevel.LevelData[i, j] == findTile)
                                     {
+                                        mta.AddTileChange(i, j, CurrentLevel.LevelData[i, j]);
                                         CurrentLevel.LevelData[i, j] = (byte)DrawingTile;
                                     }
                                 }
@@ -1517,6 +1521,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Weather = CmbWeather.SelectedIndex;
             CurrentLevel.WindSpeed = CmbWindSpeed.SelectedIndex;
             CurrentLevel.InvincibleEnemies = ChkInvincibleEnemies.Checked;
+            CurrentLevel.VineBlocked = ChkBlocked.Checked;
             CurrentLevel.SpecialLevelType = CmbSpecialType.SelectedIndex;
             CurrentLevel.ChallengeType = CmbChallengeType.SelectedIndex;
             CurrentLevel.Save();
@@ -1644,7 +1649,6 @@ namespace Daiz.NES.Reuben
         private List<IUndoableAction> UndoBuffer;
         private List<IUndoableAction> RedoBuffer;
         private MultiTileAction CurrentMultiTile;
-
         private void Undo()
         {
             if (UndoBuffer.Count == 0)

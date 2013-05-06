@@ -271,6 +271,9 @@ namespace Daiz.NES.Reuben
 
         }
 
-
+        private void levelAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReubenController.SaveCurrentLevelToFile();            
+        }
     }
 }
