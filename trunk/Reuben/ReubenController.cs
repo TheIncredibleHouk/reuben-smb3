@@ -443,7 +443,7 @@ namespace Daiz.NES.Reuben
 
         public static void CompileRom(bool useDefaultROM)
         {
-            foreach(Form editor in editorTable.Values)
+            foreach (Form editor in editorTable.Values)
             {
                 if (editor is LevelEditor)
                 {

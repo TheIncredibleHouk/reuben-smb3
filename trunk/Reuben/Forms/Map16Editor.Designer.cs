@@ -87,9 +87,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.fbF1 = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.GrbMapProps = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BlockDescription = new System.Windows.Forms.TextBox();
             this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
@@ -129,7 +126,6 @@
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.GrbMapProps.SuspendLayout();
             this.GrbBlocks.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -692,7 +688,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.GrbMapProps);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.BlockDescription);
             this.tabPage1.Controls.Add(this.PtvTable);
@@ -720,39 +715,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Block Definitions";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // GrbMapProps
-            // 
-            this.GrbMapProps.Controls.Add(this.label4);
-            this.GrbMapProps.Controls.Add(this.comboBox1);
-            this.GrbMapProps.Location = new System.Drawing.Point(330, 476);
-            this.GrbMapProps.Name = "GrbMapProps";
-            this.GrbMapProps.Size = new System.Drawing.Size(268, 74);
-            this.GrbMapProps.TabIndex = 34;
-            this.GrbMapProps.TabStop = false;
-            this.GrbMapProps.Text = "groupBox4";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Property";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "None",
-            "Traversible",
-            "Enterable"});
-            this.comboBox1.Location = new System.Drawing.Point(72, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(179, 21);
-            this.comboBox1.TabIndex = 0;
             // 
             // label1
             // 
@@ -1146,8 +1108,6 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.GrbMapProps.ResumeLayout(false);
-            this.GrbMapProps.PerformLayout();
             this.GrbBlocks.ResumeLayout(false);
             this.GrbBlocks.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1255,8 +1215,5 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox vineTile;
-        private System.Windows.Forms.GroupBox GrbMapProps;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

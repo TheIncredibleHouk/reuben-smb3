@@ -105,30 +105,49 @@ namespace Daiz.NES.Reuben
             "Unused",
         };
 
+        private List<string> MapInteractionTypes = new List<string>()
+        {
+            "Boundary",
+            "Traversable",
+            "Enterble and Traversable",
+        };
+
         private List<string> SpecialTypes = new List<string>();
 
         private bool updating;
         private void UpdateInteractionSpecialList()
         {
             updating = true;
-            if (CmbSolidity.SelectedIndex == 7)
+            if (CmbDefinitions.SelectedIndex == 0)
+            {
+                CmdInteraction.DataSource = MapInteractionTypes;
+                LblSolidity.Visible = CmbSolidity.Visible = false;
+            }
+            else if (CmbSolidity.SelectedIndex == 7)
             {
                 CmdInteraction.DataSource = SpecialTypes;
+                LblSolidity.Visible = CmbSolidity.Visible = true;
             }
+            else if (CmbSolidity.SelectedIndex <= 3)
+            {
+                CmdInteraction.DataSource = NotSolidInteractionTypes;
+                LblSolidity.Visible = CmbSolidity.Visible = true;
+            }
+
             else
             {
-                if (CmbSolidity.SelectedIndex <= 3)
-                {
-                    CmdInteraction.DataSource = NotSolidInteractionTypes;
-                }
-                else
-                {
-                    CmdInteraction.DataSource = SolidInteractionTypes;
-                }
-
+                CmdInteraction.DataSource = SolidInteractionTypes;
+                LblSolidity.Visible = CmbSolidity.Visible = true;
             }
+
             updating = false;
-            CmdInteraction.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry);
+            var b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry);
+            if (b >= CmbSolidity.Items.Count)
+            {
+                b = 0;
+            }
+
+            CmdInteraction.SelectedIndex = b;
         }
 
         void BlsBlocks_SelectionChanged(object sender, TEventArgs<MouseButtons> e)
@@ -146,6 +165,10 @@ namespace Daiz.NES.Reuben
                 }
 
                 int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry); ;
+                if (b > CmdInteraction.Items.Count)
+                {
+                    b = 0;
+                }
                 CmdInteraction.SelectedIndex = b;
                 BlockDescription.Text = BlsBlocks.SelectedBlock.Description;
             }

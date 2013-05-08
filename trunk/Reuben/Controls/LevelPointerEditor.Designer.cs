@@ -52,6 +52,7 @@
             this.CmbActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbActions.FormattingEnabled = true;
             this.CmbActions.Items.AddRange(new object[] {
+            "None",
             "Up Pipe",
             "Down Pipe",
             "Right Pipe",
