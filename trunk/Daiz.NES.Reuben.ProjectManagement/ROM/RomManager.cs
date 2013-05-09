@@ -241,6 +241,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 {
                     yExit += 3;
                 }
+                else
+                {
+                    yExit += 1;
+                }
 
                 Rom[levelAddress++] = (byte)(((yExit & 0x0F) << 4) | ((yExit & 0xF0) >> 4));
                 Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x80 : 0x00) | (p.ExitType));
