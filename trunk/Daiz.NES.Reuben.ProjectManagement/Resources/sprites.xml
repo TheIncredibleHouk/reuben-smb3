@@ -1433,19 +1433,19 @@
     <sprite x="16" y="16" value="26" palette="3" horizontalflip="false" verticalflip="true" table="36" />
     <sprite x="32" y="8" value="8C" palette="-3" horizontalflip="true" verticalflip="false" table="-1" />
   </spritedefinition>
-  <spritedefinition id="CE" width="1" height="1" name="Bob-omb Generator (Left)" group="2" class="Doom Ship">
+  <spritedefinition id="CE" width="1" height="1" name="Bob-omb Generator (Down)" group="2" class="Doom Ship">
     <sprite x="0" y="0" value="1C" palette="3" horizontalflip="false" verticalflip="false" table="36" />
     <sprite x="8" y="0" value="3E" palette="3" horizontalflip="false" verticalflip="false" table="36" />
-    <sprite x="-16" y="-16" value="C2" palette="-3" horizontalflip="true" verticalflip="true" table="-1" />
-    <sprite x="-8" y="-16" value="C0" palette="-3" horizontalflip="true" verticalflip="true" table="-1" />
+    <sprite x="0" y="16" value="9A" palette="-3" horizontalflip="true" verticalflip="true" table="-1" />
+    <sprite x="8" y="16" value="9C" palette="-3" horizontalflip="true" verticalflip="true" table="-1" />
     <sprite x="0" y="16" value="A8" palette="-3" horizontalflip="false" verticalflip="false" table="-1" />
     <sprite x="8" y="16" value="AA" palette="-3" horizontalflip="false" verticalflip="false" table="-1" />
   </spritedefinition>
-  <spritedefinition id="CF" width="1" height="1" name="Bob-omb Generator (Right)" group="2" class="Doom Ship">
+  <spritedefinition id="CF" width="1" height="1" name="Bob-omb Generator (Up)" group="2" class="Doom Ship">
     <sprite x="0" y="0" value="3E" palette="3" horizontalflip="true" verticalflip="false" table="36" />
     <sprite x="8" y="0" value="1C" palette="3" horizontalflip="true" verticalflip="false" table="36" />
-    <sprite x="16" y="-16" value="C0" palette="-3" horizontalflip="false" verticalflip="true" table="-1" />
-    <sprite x="24" y="-16" value="C2" palette="-3" horizontalflip="false" verticalflip="true" table="-1" />
+    <sprite x="0" y="-8" value="8E" palette="-3" horizontalflip="false" verticalflip="true" table="-1" />
+    <sprite x="0" y="-8" value="90" palette="-3" horizontalflip="false" verticalflip="true" table="-1" />
     <sprite x="0" y="16" value="A8" palette="-3" horizontalflip="false" verticalflip="false" table="-1" />
     <sprite x="8" y="16" value="AA" palette="-3" horizontalflip="false" verticalflip="false" table="-1" />
   </spritedefinition>
