@@ -92,7 +92,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             break;
 
                         case 7:
+                            s2 = "Treasure";
+                            break;
+
                         case 8:
+                            s2 = "Quick Sand";
+                            break;
+
                         case 9:
                         case 10:
                         case 15:
