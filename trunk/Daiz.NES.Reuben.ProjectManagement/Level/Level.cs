@@ -566,7 +566,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             byte repeatTile;
             int repeatCount = 1;
             repeatTile = NextByte();
-            while (repeatTile == NextByte() && repeatCount < 0x40)
+            while (repeatTile == NextByte() && repeatCount < 0x3F)
             {
                 repeatCount++;
             }
@@ -645,7 +645,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             // for a pattern repeat to exist we have to repeat at least twice, so 0x00 = 2 repeats, 0x03 = 6 repeats
             bool noRepeat = false;
-            while (repeatCount < 0x40 && !noRepeat)
+            while (repeatCount < 0x3F && !noRepeat)
             {
                 localPoint = currentPoint;
                 for (int i = 0; i < smallestChunk.Length; i++)

@@ -64,11 +64,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     }
 
-                    if (RepeatTimes > 0x40)
+                    if (RepeatTimes >= 0x40)
                     {
                         throw new OverflowException("Repeat length too large for pattern.");
                     }
-                     data = new byte[2 + Data.Count];
+                    if (RepeatTimes < 1)
+                    {
+                        throw new ArgumentException("Repeat times too small. Repeat should occur at least twice.");
+                    }
+
+                    data = new byte[2 + Data.Count];
                     data[0] = (byte)((int)CommandType | RepeatTimes);
                     data[1] = (byte)Data.Count;
                     i = 2;
@@ -79,7 +84,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     {
                         throw new OverflowException("Data too long for raw data write.");
                     }
-                     data = new byte[1 + Data.Count];
+                    else if (Data.Count == 0)
+                    {
+                        throw new ArgumentException("Data too small, write raw should never write 0 bytes.");
+                    }
+                    data = new byte[1 + Data.Count];
                     data[0] = (byte)((int)CommandType | Data.Count);
                     break;
             }
