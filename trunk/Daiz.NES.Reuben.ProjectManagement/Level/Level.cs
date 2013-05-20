@@ -331,7 +331,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 if (tileCount[i] > highestTileCount)
                 {
-                    MostCommonTile = i;
+                    highestTileCount = MostCommonTile = i;
+                    
                 }
             }
 
