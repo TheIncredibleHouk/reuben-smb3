@@ -163,9 +163,7 @@ namespace Daiz.NES.Reuben
         public void EditLevel(Level l)
         {
             GetLevelInfo(l);
-            CmbWeather.SelectedIndex = l.Weather;
-            CmbWindSpeed.SelectedIndex = l.WindSpeed;
-            CmbWindDirection.SelectedIndex = l.WindDirection;
+            
             LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
@@ -181,6 +179,7 @@ namespace Daiz.NES.Reuben
             txtMisc3.Text = CurrentLevel.MiscByte3.ToHexString();
             ChkBlocked.Checked = CurrentLevel.VineBlocked;
             ChkInvincibleEnemies.Checked = CurrentLevel.InvincibleEnemies;
+            CmbPaletteEffect.SelectedIndex = CurrentLevel.PaletteEffect;
 
             switch (CurrentLevel.Settings.DrawMode)
             {
@@ -1517,9 +1516,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Music = CmbMusic.SelectedIndex;
             CurrentLevel.StartAction = CmbActions.SelectedIndex;
             CurrentLevel.ScrollType = CmbScroll.SelectedIndex;
-            CurrentLevel.WindDirection = CmbWindDirection.SelectedIndex;
-            CurrentLevel.Weather = CmbWeather.SelectedIndex;
-            CurrentLevel.WindSpeed = CmbWindSpeed.SelectedIndex;
+            CurrentLevel.PaletteEffect = CmbPaletteEffect.SelectedIndex;
             CurrentLevel.InvincibleEnemies = ChkInvincibleEnemies.Checked;
             CurrentLevel.VineBlocked = ChkBlocked.Checked;
             CurrentLevel.SpecialLevelType = CmbSpecialType.SelectedIndex;
