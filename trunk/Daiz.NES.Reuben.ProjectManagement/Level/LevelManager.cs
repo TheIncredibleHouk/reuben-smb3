@@ -144,9 +144,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             l.Type = levelType.InGameID;
             l.Music = 0x00;
             l.Time = 300;
-            l.WindSpeed = 0;
-            l.WindDirection = 0;
-            l.Weather = 0;
+            l.PaletteEffect = 0;
             l.InvincibleEnemies = false;
             l.VineBlocked = false;
             l.XStart = 0x00;

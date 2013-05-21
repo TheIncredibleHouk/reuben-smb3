@@ -33,9 +33,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int ScrollType { get; set; }
         public bool InvincibleEnemies { get; set; }
         public bool VineBlocked { get; set; }
-        public int Weather { get; set; }
-        public int WindDirection { get; set; }
-        public int WindSpeed { get; set; }
+        public int PaletteEffect { get; set; }
         public int Palette { get; set; }
         public List<LevelPointer> Pointers { get; private set; }
         public byte[,] LevelData { get; private set; }
@@ -107,9 +105,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("yaltstart", YAltStart);
             root.SetAttributeValue("invincibleenemies", InvincibleEnemies);
             root.SetAttributeValue("vineblocked", VineBlocked);
-            root.SetAttributeValue("weather", Weather);
-            root.SetAttributeValue("winddirection", WindDirection);
-            root.SetAttributeValue("windspeed", WindSpeed);
+            root.SetAttributeValue("paletteeffect", PaletteEffect);
             root.SetAttributeValue("palette", Palette);
             root.SetAttributeValue("animationbank", AnimationBank);
             root.SetAttributeValue("startaction", StartAction);
@@ -252,16 +248,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         VineBlocked = a.Value.ToBoolean();
                         break;
 
-                    case "weather":
-                        Weather = a.Value.ToInt();
-                        break;
-
-                    case "winddirection":
-                        WindDirection = a.Value.ToInt();
-                        break;
-
-                    case "windspeed":
-                        WindSpeed = a.Value.ToInt();
+                    case "paletteeffect":
+                        PaletteEffect = a.Value.ToInt();
                         break;
 
                     case "palette":

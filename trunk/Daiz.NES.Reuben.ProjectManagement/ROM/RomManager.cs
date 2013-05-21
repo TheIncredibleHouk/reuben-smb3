@@ -187,7 +187,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)(ProjectController.MusicManager.MusicList[l.Music].Value);
             Rom[levelAddress++] = (byte)(((l.Time / 100) << 4) | ((l.Time - ((l.Time / 100) * 100)) / 10));
             Rom[levelAddress++] = (byte)((l.Pointers.Count << 4) | (l.VineBlocked ? 0x08 : 0x00) | l.ScrollType);
-            Rom[levelAddress++] = (byte)((l.InvincibleEnemies ? 0x80 : 0x00) | (l.Weather << 5) | (l.WindDirection << 4) | (l.WindSpeed));
+            Rom[levelAddress++] = (byte)((l.InvincibleEnemies ? 0x80 : 0x00) | (l.PaletteEffect << 4));
             Rom[levelAddress++] = (byte)l.MiscByte1;
             Rom[levelAddress++] = (byte)l.MiscByte2;
             Rom[levelAddress++] = (byte)l.MiscByte3;
@@ -215,7 +215,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     }
                 }
 
-                int yExit = p.YExit - 1;
+                int yExit = p.YExit;
                 if (!p.ExitsLevel)
                 {
                     switch (p.ExitType)
@@ -224,11 +224,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             yExit = p.YExit;
                             break;
 
-                        case 1:
                         case 2:
                         case 3:
-                            yExit = p.YExit - 1;
-                            break;
+                        case 4:
+                           yExit = p.YExit - 1;
+                           break;
 
 
                     }
@@ -239,11 +239,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 Rom[levelAddress++] = (byte)(((p.XExit & 0x0F) << 4) | ((p.XExit & 0xF0) >> 4));
                 if (p.ExitsLevel)
                 {
-                    yExit += 3;
-                }
-                else
-                {
-                    yExit += 1;
+                    yExit += 2;
                 }
 
                 Rom[levelAddress++] = (byte)(((yExit & 0x0F) << 4) | ((yExit & 0xF0) >> 4));
