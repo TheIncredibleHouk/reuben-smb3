@@ -33,19 +33,19 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Levels.Clear();
             LevelTypes.Clear();
             LevelTypes.Add(new LevelType("World Map", 0));
-            LevelTypes.Add(new LevelType("Grass", 1));
-            LevelTypes.Add(new LevelType("Fortress", 2));
-            LevelTypes.Add(new LevelType("Hilly", 3));
-            LevelTypes.Add(new LevelType("Sky", 4));
-            LevelTypes.Add(new LevelType("Piranha Plant", 5));
-            LevelTypes.Add(new LevelType("Water", 6));
-            LevelTypes.Add(new LevelType("Unused 1", 7));
-            LevelTypes.Add(new LevelType("Unused 2", 8));
+            LevelTypes.Add(new LevelType("Grassy/Water", 1));
+            LevelTypes.Add(new LevelType("Dungeon", 2));
+            LevelTypes.Add(new LevelType("Crystal", 3));
+            LevelTypes.Add(new LevelType("Unused", 4));
+            LevelTypes.Add(new LevelType("Unused", 5));
+            LevelTypes.Add(new LevelType("Island/Sea", 6));
+            LevelTypes.Add(new LevelType("Unused", 7));
+            LevelTypes.Add(new LevelType("Unused", 8));
             LevelTypes.Add(new LevelType("Desert", 9));
-            LevelTypes.Add(new LevelType("Ship", 10));
-            LevelTypes.Add(new LevelType("Unused 3", 11));
-            LevelTypes.Add(new LevelType("Ice", 12));
-            LevelTypes.Add(new LevelType("Cloudy", 13));
+            LevelTypes.Add(new LevelType("Pirate Ship", 10));
+            LevelTypes.Add(new LevelType("Unused", 11));
+            LevelTypes.Add(new LevelType("Snow/Forest", 12));
+            LevelTypes.Add(new LevelType("Unused", 13));
             LevelTypes.Add(new LevelType("Underground", 14));
 
             foreach (var l in LevelTypes)
