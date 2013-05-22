@@ -62,6 +62,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.CmbActions = new System.Windows.Forms.ComboBox();
             this.tabPageEX3 = new System.Windows.Forms.TabPage();
+            this.CmbPaletteEffect = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.ChkBlocked = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -82,8 +84,11 @@
             this.NumSpecials = new System.Windows.Forms.NumericUpDown();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
             this.TabClass3 = new System.Windows.Forms.TabControl();
@@ -93,6 +98,7 @@
             this.BtnDeletePointer = new System.Windows.Forms.Button();
             this.BtnAddPointer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
             this.TlsDrawing = new System.Windows.Forms.ToolStrip();
             this.TsbPencil = new System.Windows.Forms.ToolStripButton();
             this.TsbLine = new System.Windows.Forms.ToolStripButton();
@@ -156,12 +162,6 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
-            this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
-            this.label7 = new System.Windows.Forms.Label();
-            this.CmbPaletteEffect = new System.Windows.Forms.ComboBox();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -584,8 +584,31 @@
             this.tabPageEX3.Name = "tabPageEX3";
             this.tabPageEX3.Size = new System.Drawing.Size(550, 67);
             this.tabPageEX3.TabIndex = 6;
-            this.tabPageEX3.Text = "Weather";
+            this.tabPageEX3.Text = "Effects";
             this.tabPageEX3.UseVisualStyleBackColor = true;
+            // 
+            // CmbPaletteEffect
+            // 
+            this.CmbPaletteEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbPaletteEffect.FormattingEnabled = true;
+            this.CmbPaletteEffect.Items.AddRange(new object[] {
+            "None",
+            "Rainbow Movement",
+            "Unused",
+            "Unused"});
+            this.CmbPaletteEffect.Location = new System.Drawing.Point(86, 3);
+            this.CmbPaletteEffect.Name = "CmbPaletteEffect";
+            this.CmbPaletteEffect.Size = new System.Drawing.Size(121, 21);
+            this.CmbPaletteEffect.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 6);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Palette Effect: ";
             // 
             // tabPage7
             // 
@@ -822,6 +845,15 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
+            // BlvRight
+            // 
+            this.BlvRight.CurrentBlock = null;
+            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Name = "BlvRight";
+            this.BlvRight.Size = new System.Drawing.Size(32, 32);
+            this.BlvRight.TabIndex = 21;
+            this.BlvRight.Text = "blockViewer1";
+            // 
             // LblSelectorHover
             // 
             this.LblSelectorHover.AutoSize = true;
@@ -840,6 +872,36 @@
             this.CmbLayouts.Size = new System.Drawing.Size(256, 21);
             this.CmbLayouts.TabIndex = 16;
             this.CmbLayouts.SelectedIndexChanged += new System.EventHandler(this.CmbLayouts_SelectedIndexChanged);
+            // 
+            // BlvLeft
+            // 
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 19;
+            this.BlvLeft.Text = "blockViewer1";
+            // 
+            // BlsSelector
+            // 
+            this.BlsSelector.BlockLayout = null;
+            this.BlsSelector.CurrentDefiniton = null;
+            this.BlsSelector.HaltRendering = false;
+            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
+            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.BlsSelector.Name = "BlsSelector";
+            this.BlsSelector.SelectedIndex = 0;
+            this.BlsSelector.SelectedTileIndex = 0;
+            this.BlsSelector.ShowBlockSolidity = false;
+            this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.ShowTileInteractions = false;
+            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
+            this.BlsSelector.SpecialDefnitions = null;
+            this.BlsSelector.SpecialTable = null;
+            this.BlsSelector.TabIndex = 0;
+            this.BlsSelector.Text = "blockSelector1";
+            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
+            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
             // 
             // tabPage2
             // 
@@ -945,6 +1007,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
+            // 
+            // PntEditor
+            // 
+            this.PntEditor.CurrentPointer = null;
+            this.PntEditor.Location = new System.Drawing.Point(6, 19);
+            this.PntEditor.Name = "PntEditor";
+            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
+            this.PntEditor.Size = new System.Drawing.Size(239, 205);
+            this.PntEditor.TabIndex = 0;
             // 
             // TlsDrawing
             // 
@@ -1593,77 +1664,6 @@
             this.PnlVerticalGuide.Name = "PnlVerticalGuide";
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
             this.PnlVerticalGuide.TabIndex = 31;
-            // 
-            // BlvRight
-            // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
-            // 
-            // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
-            // 
-            // BlsSelector
-            // 
-            this.BlsSelector.BlockLayout = null;
-            this.BlsSelector.CurrentDefiniton = null;
-            this.BlsSelector.HaltRendering = false;
-            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
-            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.BlsSelector.Name = "BlsSelector";
-            this.BlsSelector.SelectedIndex = 0;
-            this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockSolidity = false;
-            this.BlsSelector.ShowSpecialBlocks = false;
-            this.BlsSelector.ShowTileInteractions = false;
-            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
-            this.BlsSelector.SpecialDefnitions = null;
-            this.BlsSelector.SpecialTable = null;
-            this.BlsSelector.TabIndex = 0;
-            this.BlsSelector.Text = "blockSelector1";
-            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
-            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
-            // 
-            // PntEditor
-            // 
-            this.PntEditor.CurrentPointer = null;
-            this.PntEditor.Location = new System.Drawing.Point(6, 19);
-            this.PntEditor.Name = "PntEditor";
-            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
-            this.PntEditor.Size = new System.Drawing.Size(239, 205);
-            this.PntEditor.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 6);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Palette Effect: ";
-            // 
-            // CmbPaletteEffect
-            // 
-            this.CmbPaletteEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbPaletteEffect.FormattingEnabled = true;
-            this.CmbPaletteEffect.Items.AddRange(new object[] {
-            "None",
-            "Rainbow Movement",
-            "Unused",
-            "Unused"});
-            this.CmbPaletteEffect.Location = new System.Drawing.Point(86, 3);
-            this.CmbPaletteEffect.Name = "CmbPaletteEffect";
-            this.CmbPaletteEffect.Size = new System.Drawing.Size(121, 21);
-            this.CmbPaletteEffect.TabIndex = 1;
             // 
             // LevelEditor
             // 
