@@ -223,7 +223,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         default:
                             yExit = p.YExit;
                             break;
-
+                        case 0:
                         case 2:
                         case 3:
                         case 4:
