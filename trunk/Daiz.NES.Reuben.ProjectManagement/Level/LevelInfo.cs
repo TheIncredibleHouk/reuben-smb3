@@ -17,6 +17,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int LevelType { get; set; }
         public DateTime LastModified { get; set; }
         public LevelLayout Layout { get; set; }
+        public Guid BonusAreaFor { get; set; }
 
         #region IXmlIO Members
 
@@ -30,6 +31,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("lastcompressionsize", LastCompressionSize);
             x.SetAttributeValue("lastmodified", LastModified);
             x.SetAttributeValue("layout", Layout);
+            x.SetAttributeValue("bonusfor", BonusAreaFor);
 
             return x;
         }
@@ -61,6 +63,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "layout": Layout = (LevelLayout)Enum.Parse(typeof(LevelLayout), a.Value, true);
                         break;
+                        
+                    case "bonusfor":
+                        BonusAreaFor = a.Value.ToGuid();
+                        break;
                 }
             }
 
@@ -68,5 +74,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

@@ -984,10 +984,10 @@ namespace Daiz.NES.Reuben
                             break;
 
                         case BlockProperty.NinjaSuit:
-                            RenderSpecialTileAlpha(_SpecialTable[0xE8], x, y, 3, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xF8], x, y + 8, 3, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xE9], x + 8, y, 3, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xF9], x + 8, y + 8, 3, data);
+                            RenderSpecialTileAlpha(_SpecialTable[0xEA], x, y, 3, data);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFA], x, y + 8, 3, data);
+                            RenderSpecialTileAlpha(_SpecialTable[0xEB], x + 8, y, 3, data);
+                            RenderSpecialTileAlpha(_SpecialTable[0xFB], x + 8, y + 8, 3, data);
                             break;
 
                         case BlockProperty.Starman:

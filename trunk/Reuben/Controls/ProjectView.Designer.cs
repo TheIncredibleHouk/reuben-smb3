@@ -52,6 +52,8 @@
             this.TsbOpen = new System.Windows.Forms.ToolStripButton();
             this.TsbRename = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
+            this.MnuBonusArea = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.CtxLevels.SuspendLayout();
             this.CtxWorlds.SuspendLayout();
             this.TlsEdit.SuspendLayout();
@@ -76,53 +78,56 @@
             this.toolStripSeparator1,
             this.newLevelToolStripMenuItem,
             this.renameLevelToolStripMenuItem,
-            this.deleteLevelToolStripMenuItem});
+            this.deleteLevelToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.MnuBonusArea});
             this.CtxLevels.Name = "CtxLevels";
-            this.CtxLevels.Size = new System.Drawing.Size(153, 164);
+            this.CtxLevels.Size = new System.Drawing.Size(170, 192);
+            this.CtxLevels.Opening += new System.ComponentModel.CancelEventHandler(this.CtxLevels_Opening);
             // 
             // mnuMoveUp
             // 
             this.mnuMoveUp.Name = "mnuMoveUp";
-            this.mnuMoveUp.Size = new System.Drawing.Size(152, 22);
+            this.mnuMoveUp.Size = new System.Drawing.Size(169, 22);
             this.mnuMoveUp.Text = "Move Up";
             this.mnuMoveUp.Click += new System.EventHandler(this.mnuMoveUp_Click);
             // 
             // mnuMoveDown
             // 
             this.mnuMoveDown.Name = "mnuMoveDown";
-            this.mnuMoveDown.Size = new System.Drawing.Size(152, 22);
+            this.mnuMoveDown.Size = new System.Drawing.Size(169, 22);
             this.mnuMoveDown.Text = "Move Down";
             this.mnuMoveDown.Click += new System.EventHandler(this.mnuMoveDown_Click);
             // 
             // MnuMoveTo
             // 
             this.MnuMoveTo.Name = "MnuMoveTo";
-            this.MnuMoveTo.Size = new System.Drawing.Size(152, 22);
+            this.MnuMoveTo.Size = new System.Drawing.Size(169, 22);
             this.MnuMoveTo.Text = "Move To";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
             // newLevelToolStripMenuItem
             // 
             this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.newLevelToolStripMenuItem.Text = "New Level";
             this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
             // 
             // renameLevelToolStripMenuItem
             // 
             this.renameLevelToolStripMenuItem.Name = "renameLevelToolStripMenuItem";
-            this.renameLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.renameLevelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.renameLevelToolStripMenuItem.Text = "Rename Level";
             this.renameLevelToolStripMenuItem.Click += new System.EventHandler(this.TsbRename_Click);
             // 
             // deleteLevelToolStripMenuItem
             // 
             this.deleteLevelToolStripMenuItem.Name = "deleteLevelToolStripMenuItem";
-            this.deleteLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteLevelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.deleteLevelToolStripMenuItem.Text = "Delete Level";
             this.deleteLevelToolStripMenuItem.Click += new System.EventHandler(this.deleteLevelToolStripMenuItem_Click);
             // 
@@ -243,6 +248,18 @@
             this.TsbDelete.Text = "Delete";
             this.TsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
             // 
+            // MnuBonusArea
+            // 
+            this.MnuBonusArea.Name = "MnuBonusArea";
+            this.MnuBonusArea.Size = new System.Drawing.Size(169, 22);
+            this.MnuBonusArea.Text = "Set As Bonus Area";
+            this.MnuBonusArea.Click += new System.EventHandler(this.MnuBonusArea_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(166, 6);
+            // 
             // ProjectView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -283,5 +300,7 @@
         private System.Windows.Forms.ToolStripButton TsbDelete;
         private System.Windows.Forms.ToolStripMenuItem mnuMoveUp;
         private System.Windows.Forms.ToolStripMenuItem mnuMoveDown;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem MnuBonusArea;
     }
 }
