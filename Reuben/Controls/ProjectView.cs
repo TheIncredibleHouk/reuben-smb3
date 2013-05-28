@@ -13,15 +13,15 @@ namespace Daiz.NES.Reuben
 {
     public partial class ProjectView : UserControl
     {
-        private Dictionary<WorldInfo, TreeNode> WorldToNodes;
-        private Dictionary<LevelInfo, TreeNode> LevelToNodes;
+        private Dictionary<Guid, TreeNode> WorldToNodes;
+        private Dictionary<Guid, TreeNode> LevelToNodes;
         private Dictionary<TreeNode, WorldInfo> NodesToWorlds;
         private Dictionary<TreeNode, LevelInfo> NodesToLevels;
         public ProjectView()
         {
             InitializeComponent();
-            WorldToNodes = new Dictionary<WorldInfo, TreeNode>();
-            LevelToNodes = new Dictionary<LevelInfo, TreeNode>();
+            WorldToNodes = new Dictionary<Guid, TreeNode>();
+            LevelToNodes = new Dictionary<Guid, TreeNode>();
             NodesToWorlds = new Dictionary<TreeNode, WorldInfo>();
             NodesToLevels = new Dictionary<TreeNode, LevelInfo>();
 
@@ -67,12 +67,11 @@ namespace Daiz.NES.Reuben
                 {
                     TreeNode nextNextNode = new TreeNode();
                     nextNextNode.Text = l.Name;
-                    nextNode.Nodes.Add(nextNextNode);
-                    LevelToNodes.Add(l, nextNextNode);
+                    LevelToNodes.Add(l.LevelGuid, nextNextNode);
                     NodesToLevels.Add(nextNextNode, l);
                 }
 
-                WorldToNodes.Add(w, nextNode);
+                WorldToNodes.Add(w.WorldGuid, nextNode);
                 NodesToWorlds.Add(nextNode, w);
                 projectNode.Nodes.Add(nextNode);
                 ToolStripMenuItem nextMenu = new ToolStripMenuItem(w.Name);
@@ -84,14 +83,26 @@ namespace Daiz.NES.Reuben
             TrvProjectView.Nodes.Add(projectNode);
             projectNode.Expand();
             TlsEdit.Enabled = false;
+
+            foreach (var l in ProjectController.LevelManager.Levels)
+            {
+                if (l.BonusAreaFor == Guid.Empty)
+                {
+                    WorldToNodes[l.WorldGuid].Nodes.Add(LevelToNodes[l.LevelGuid]);
+                }
+                else
+                {
+                    LevelToNodes[l.BonusAreaFor].Nodes.Add(LevelToNodes[l.LevelGuid]);
+                }
+            }
         }
 
         private void MoveLevelTo_Clicked(object sender, EventArgs e)
         {
             WorldInfo wi = (sender as ToolStripMenuItem).Tag as WorldInfo;
-            TreeNode oldWorldNode = WorldToNodes[ProjectController.WorldManager.GetWorldInfo(SelectedLevel.WorldGuid)];
-            TreeNode newWorldNode = WorldToNodes[wi];
-            TreeNode lvlNode = LevelToNodes[SelectedLevel];
+            TreeNode oldWorldNode = WorldToNodes[(SelectedLevel.WorldGuid)];
+            TreeNode newWorldNode = WorldToNodes[wi.WorldGuid];
+            TreeNode lvlNode = LevelToNodes[SelectedLevel.LevelGuid];
             SelectedLevel.WorldGuid = wi.WorldGuid;
             oldWorldNode.Nodes.Remove(lvlNode);
             newWorldNode.Nodes.Add(lvlNode);
@@ -100,12 +111,12 @@ namespace Daiz.NES.Reuben
 
         private void AddLevel(LevelInfo info)
         {
-            TreeNode worldNode = WorldToNodes[ProjectController.WorldManager.GetWorldInfo(info.WorldGuid)];
+            TreeNode worldNode = WorldToNodes[info.WorldGuid];
             TreeNode nextLevelNode = new TreeNode();
             nextLevelNode.Tag = info;
             nextLevelNode.Text = info.Name;
             NodesToLevels.Add(nextLevelNode, info);
-            LevelToNodes.Add(info, nextLevelNode);
+            LevelToNodes.Add(info.LevelGuid, nextLevelNode);
             worldNode.Nodes.Add(nextLevelNode);
             worldNode.Expand();
         }
@@ -115,7 +126,7 @@ namespace Daiz.NES.Reuben
             TreeNode nextNode = new TreeNode();
             nextNode.Text = wi.Name;
             nextNode.Tag = wi;
-            WorldToNodes.Add(wi, nextNode);
+            WorldToNodes.Add(wi.WorldGuid, nextNode);
             NodesToWorlds.Add(nextNode, wi);
             projectNode.Nodes.Insert(projectNode.Nodes.Count - 1, nextNode);
             ToolStripMenuItem nextMenu = new ToolStripMenuItem(wi.Name);
@@ -253,8 +264,8 @@ namespace Daiz.NES.Reuben
                     {
                         ReubenController.CloseLevelEditor(SelectedLevel);
                         LevelInfo li = SelectedLevel;
-                        WorldToNodes[SelectedWorld].Nodes.Remove(LevelToNodes[li]);
-                        LevelToNodes.Remove(li);
+                        WorldToNodes[SelectedWorld.WorldGuid].Nodes.Remove(LevelToNodes[li.LevelGuid]);
+                        LevelToNodes.Remove(li.LevelGuid);
                         ProjectController.LevelManager.RemoveLevel(li);
                     }
                     break;
@@ -268,20 +279,20 @@ namespace Daiz.NES.Reuben
                         WorldInfo noWorld = ProjectController.WorldManager.GetNoWorld();
                         WorldInfo thisWorld = SelectedWorld;
 
-                        foreach (TreeNode node in WorldToNodes[SelectedWorld].Nodes)
+                        foreach (TreeNode node in WorldToNodes[SelectedWorld.WorldGuid].Nodes)
                         {
                             LevelInfo li = NodesToLevels[node];
-                            TreeNode oldWorldNode = WorldToNodes[SelectedWorld];
-                            TreeNode newWorldNode = WorldToNodes[noWorld];
-                            TreeNode lvlNode = LevelToNodes[li];
+                            TreeNode oldWorldNode = WorldToNodes[SelectedWorld.WorldGuid];
+                            TreeNode newWorldNode = WorldToNodes[noWorld.WorldGuid];
+                            TreeNode lvlNode = LevelToNodes[li.LevelGuid];
                             li.WorldGuid = noWorld.WorldGuid;
                             oldWorldNode.Nodes.Remove(lvlNode);
                             newWorldNode.Nodes.Add(lvlNode);
                         }
 
-                        projectNode.Nodes.Remove(WorldToNodes[thisWorld]);
-                        NodesToWorlds.Remove(WorldToNodes[thisWorld]);
-                        WorldToNodes.Remove(thisWorld);
+                        projectNode.Nodes.Remove(WorldToNodes[thisWorld.WorldGuid]);
+                        NodesToWorlds.Remove(WorldToNodes[thisWorld.WorldGuid]);
+                        WorldToNodes.Remove(thisWorld.WorldGuid);
                         ToolStripMenuItem removeThis = null;
                         foreach (ToolStripMenuItem menu in MnuMoveTo.DropDownItems)
                         {
@@ -354,12 +365,12 @@ namespace Daiz.NES.Reuben
                 {
                     case SelectionType.Level:
                         SelectedLevel.Name = name;
-                        LevelToNodes[SelectedLevel].Text = name;
+                        LevelToNodes[SelectedLevel.LevelGuid].Text = name;
                         break;
 
                     case SelectionType.World:
                         SelectedWorld.Name = name;
-                        WorldToNodes[SelectedWorld].Text = name;
+                        WorldToNodes[SelectedWorld.WorldGuid].Text = name;
                         break;
                 }
             }
@@ -396,6 +407,31 @@ namespace Daiz.NES.Reuben
             int liIndex = ProjectController.LevelManager.Levels.IndexOf(li);
             ProjectController.LevelManager.Levels.Remove(li);
             ProjectController.LevelManager.Levels.Insert(index + 1, li);
+        }
+
+        private void CtxLevels_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void MnuBonusArea_Click(object sender, EventArgs e)
+        {
+            LevelSelect ls = new LevelSelect();
+            ls.ShowDialog();
+
+            LevelInfo li = SelectedLevel;
+            LevelToNodes[li.LevelGuid].Parent.Nodes.Remove(LevelToNodes[li.LevelGuid]);
+
+            if (ls.DialogResult == DialogResult.Cancel)
+            {
+                li.BonusAreaFor = Guid.Empty;
+                WorldToNodes[li.WorldGuid].Nodes.Add(LevelToNodes[li.LevelGuid]);
+            }
+            else
+            {
+                li.BonusAreaFor = ls.SelectedLevel.LevelGuid;
+                LevelToNodes[li.BonusAreaFor].Nodes.Add(LevelToNodes[li.LevelGuid]);
+            }
         }
     }
 

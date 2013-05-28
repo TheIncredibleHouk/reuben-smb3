@@ -773,7 +773,7 @@
             this.PnlView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlView.Location = new System.Drawing.Point(281, 27);
             this.PnlView.Name = "PnlView";
-            this.PnlView.Size = new System.Drawing.Size(495, 468);
+            this.PnlView.Size = new System.Drawing.Size(495, 346);
             this.PnlView.TabIndex = 0;
             this.PnlView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.WldView_PreviewKeyDown);
             // 
@@ -811,8 +811,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 495);
-            this.Controls.Add(this.PnlInfo);
             this.Controls.Add(this.PnlView);
+            this.Controls.Add(this.PnlInfo);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.PnlDrawing);
             this.Name = "WorldEditor";

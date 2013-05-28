@@ -67,5 +67,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

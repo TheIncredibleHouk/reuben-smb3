@@ -98,7 +98,7 @@ namespace Daiz.NES.Reuben
             "Vertical Pipe Left",
             "Vertical Pipe Right",
             "Horizontal Pipe Bottom",
-            "Unused",
+            "Climbable",
             "Unused",
             "Stone",
             "PSwitch",

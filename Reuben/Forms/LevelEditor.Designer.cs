@@ -699,7 +699,7 @@
             "None",
             "Hammer Bros. Toll",
             "Item Shop",
-            "Challenge Level"});
+            "Bank"});
             this.CmbSpecialType.Location = new System.Drawing.Point(230, 3);
             this.CmbSpecialType.Name = "CmbSpecialType";
             this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);

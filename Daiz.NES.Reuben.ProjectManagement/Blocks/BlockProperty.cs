@@ -171,6 +171,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             break;
 
                         case 11:
+                            s2 = "Climbable";
+                            break;
+
                         case 12:
                         case 13:
                         case 15:
