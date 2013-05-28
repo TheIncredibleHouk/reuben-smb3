@@ -112,18 +112,21 @@ namespace Daiz.NES.Reuben
             get { return PrvProject.Visible; }
             set
             {
-                if (value)
+                if (value != PrvProject.Visible)
                 {
-                    PnlRightSide.Width = previousProjectSize;
-                    PrvProject.Visible = true;
-                    BtnShowHide.Text = ">>";
-                }
-                else
-                {
-                    previousProjectSize = PnlRightSide.Width;
-                    PnlRightSide.Width = 35;
-                    PrvProject.Visible = false;
-                    BtnShowHide.Text = "<<";
+                    if (value)
+                    {
+                        PnlRightSide.Width = previousProjectSize;
+                        PrvProject.Visible = true;
+                        BtnShowHide.Text = ">>";
+                    }
+                    else
+                    {
+                        previousProjectSize = PnlRightSide.Width;
+                        PnlRightSide.Width = 35;
+                        PrvProject.Visible = false;
+                        BtnShowHide.Text = "<<";
+                    }
                 }
             }
         }
