@@ -179,7 +179,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)l.MostCommonTile;
             Rom[levelAddress++] = (byte)l.GraphicsBank;
             Rom[levelAddress++] = (byte)l.Palette;
-            Rom[levelAddress++] = (byte)((l.StartAction << 4) | (l.Length - 1));
+            Rom[levelAddress++] = (byte)((l.AnimationType << 7) | (l.StartAction << 4) | (l.Length - 1));
             Rom[levelAddress++] = (byte)(byte)(((l.XStart & 0x0F) << 4) | ((l.XStart & 0xF0) >> 4)); ;
             Rom[levelAddress++] = (byte)(byte)(((yStart & 0x0F) << 4) | ((yStart & 0xF0) >> 4)); ;
             Rom[levelAddress++] = (byte)(byte)(((l.XAltStart & 0x0F) << 4) | ((l.XAltStart & 0xF0) >> 4)); ;
@@ -227,8 +227,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         case 2:
                         case 3:
                         case 4:
-                           yExit = p.YExit - 1;
-                           break;
+                            yExit = p.YExit - 1;
+                            break;
 
 
                     }

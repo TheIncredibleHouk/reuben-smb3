@@ -49,7 +49,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         PSwitchBlock = 0xFC,
         Brick = 0xFD,
         Spinner = 0xFE,
-        Unused2 = 0xFF,
+        Key = 0xFF,
         Background = 0x00
     }
 
@@ -96,7 +96,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             break;
 
                         case 8:
-                            s2 = "Quick Sand";
+                            s2 = "Locked Door";
                             break;
 
                         case 9:

@@ -61,7 +61,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Level l = new Level();
             l.LevelLayout = layout;
             l.Palette = levelType.InGameID;
-            l.AnimationBank = 0x80;
             switch (levelType.InGameID)
             {
                 case 1:
@@ -86,7 +85,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                 case 5:
                     l.GraphicsBank = 0x58;
-                    l.AnimationBank = 0x80;
                     l.ClearValue = 0x90;
                     break;
 

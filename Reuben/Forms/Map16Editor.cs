@@ -76,7 +76,7 @@ namespace Daiz.NES.Reuben
             "Current Up",
             "Current Down",
             "Treasure",
-            "Quick Sand",
+            "Locked Door",
             "Unused",
             "Unused",
             "Climbable",
@@ -109,7 +109,8 @@ namespace Daiz.NES.Reuben
         {
             "Boundary",
             "Traversable",
-            "Enterble and Traversable",
+            "Enterable and Traversable",
+            "Completable",
         };
 
         private List<string> SpecialTypes = new List<string>();

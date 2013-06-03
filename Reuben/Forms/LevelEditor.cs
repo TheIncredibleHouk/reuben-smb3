@@ -178,6 +178,7 @@ namespace Daiz.NES.Reuben
             txtMisc2.Text = CurrentLevel.MiscByte2.ToHexString();
             txtMisc3.Text = CurrentLevel.MiscByte3.ToHexString();
             ChkBlocked.Checked = CurrentLevel.VineBlocked;
+            CmbAnim.SelectedIndex = CurrentLevel.AnimationType;
             ChkInvincibleEnemies.Checked = CurrentLevel.InvincibleEnemies;
             CmbPaletteEffect.SelectedIndex = CurrentLevel.PaletteEffect;
 
@@ -1506,6 +1507,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Settings.BlockProperties = TsbSolidity.Checked;
             CurrentLevel.Settings.SpecialSprites = TsbSriteSpecials.Checked;
             CurrentLevel.Settings.ShowPointers = TsbPointers.Checked;
+            CurrentLevel.AnimationType = CmbAnim.SelectedIndex;
 
             CurrentLevel.StartAction = CmbActions.SelectedIndex;
             CurrentLevel.ClearValue = (int)NumBackground.Value;
@@ -2003,6 +2005,11 @@ namespace Daiz.NES.Reuben
                         break;
                 }
             }
+        }
+
+        private void CmbAnim_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ReubenController_GraphicsReloaded(null, null);
         }
     }
 }

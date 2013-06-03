@@ -21,7 +21,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int ClearValue { get; set; }
         public int MostCommonTile { get; private set; }
         public int GraphicsBank { get; set; }
-        public int AnimationBank { get; set; }
+        public int AnimationType { get; set; }
+        public int AnimationBank {
+            get
+            {
+                return AnimationType == 0 ? 0x80 : 0xD0;
+            }
+        }
         public int Music { get; set; }
         public int Length { get; set; }
         public int Time { get; set; }
@@ -107,7 +113,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("vineblocked", VineBlocked);
             root.SetAttributeValue("paletteeffect", PaletteEffect);
             root.SetAttributeValue("palette", Palette);
-            root.SetAttributeValue("animationbank", AnimationBank);
+            root.SetAttributeValue("animationtype", AnimationType);
             root.SetAttributeValue("startaction", StartAction);
             root.SetAttributeValue("scrolltype", ScrollType);
             root.SetAttributeValue("layout", LevelLayout);
@@ -260,8 +266,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         ScrollType = a.Value.ToInt();
                         break;
 
-                    case "animationbank":
-                        AnimationBank = a.Value.ToInt();
+                    case "animationtype":
+                        AnimationType = a.Value.ToInt();
                         break;
 
                     case "startaction":
