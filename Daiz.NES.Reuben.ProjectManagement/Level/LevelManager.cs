@@ -36,7 +36,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelTypes.Add(new LevelType("Grassy/Water", 1));
             LevelTypes.Add(new LevelType("Dungeon", 2));
             LevelTypes.Add(new LevelType("Crystal", 3));
-            LevelTypes.Add(new LevelType("Unused", 4));
+            LevelTypes.Add(new LevelType("Sky Castle", 4));
             LevelTypes.Add(new LevelType("Unused", 5));
             LevelTypes.Add(new LevelType("Island/Sea", 6));
             LevelTypes.Add(new LevelType("Unused", 7));
@@ -79,7 +79,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     break;
 
                 case 4:
-                    l.GraphicsBank = 0x0C;
+                    l.GraphicsBank = 0x06;
                     l.ClearValue = 0x90;
                     break;
 

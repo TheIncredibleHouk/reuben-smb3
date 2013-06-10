@@ -75,6 +75,8 @@
             // ChkUseCurrent
             // 
             this.ChkUseCurrent.AutoSize = true;
+            this.ChkUseCurrent.Checked = true;
+            this.ChkUseCurrent.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkUseCurrent.Location = new System.Drawing.Point(12, 65);
             this.ChkUseCurrent.Name = "ChkUseCurrent";
             this.ChkUseCurrent.Size = new System.Drawing.Size(156, 17);
