@@ -92,7 +92,15 @@ namespace Daiz.NES.Reuben
                 }
                 else
                 {
-                    LevelToNodes[l.BonusAreaFor].Nodes.Add(LevelToNodes[l.LevelGuid]);
+                    if (!LevelToNodes.ContainsKey(l.BonusAreaFor))
+                    {
+                        l.BonusAreaFor = Guid.Empty;
+                        WorldToNodes[l.WorldGuid].Nodes.Add(LevelToNodes[l.LevelGuid]);
+                    }
+                    else
+                    {
+                        LevelToNodes[l.BonusAreaFor].Nodes.Add(LevelToNodes[l.LevelGuid]);
+                    }
                 }
             }
         }
