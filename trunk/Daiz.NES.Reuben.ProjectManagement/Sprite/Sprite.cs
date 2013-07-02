@@ -12,6 +12,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public int Visibility { get; set; }
         public int InGameID { get; set; }
         public bool IsMapSprite { get; set; }
         public int Item { get; set; }
@@ -64,6 +65,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("y", Y);
             x.SetAttributeValue("value", InGameID);
             x.SetAttributeValue("item", Item);
+            x.SetAttributeValue("visibility", Visibility);
             return x;
         }
 
@@ -87,6 +89,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "item":
                         Item = a.Value.ToInt();
+                        break;
+
+                    case "visibility":
+                        Visibility = a.Value.ToInt();
                         break;
                 }
             }

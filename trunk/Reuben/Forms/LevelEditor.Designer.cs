@@ -44,6 +44,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.CmbLength = new System.Windows.Forms.ComboBox();
             this.tabPageEX1 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CmbAnim = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CmbGraphics = new System.Windows.Forms.ComboBox();
             this.NumBackground = new System.Windows.Forms.NumericUpDown();
@@ -153,8 +155,8 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.CmbAnim = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.CmbSpriteVis = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
@@ -380,6 +382,28 @@
             this.tabPageEX1.TabIndex = 4;
             this.tabPageEX1.Text = "Graphics";
             this.tabPageEX1.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(276, 3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 13);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Animation";
+            // 
+            // CmbAnim
+            // 
+            this.CmbAnim.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbAnim.FormattingEnabled = true;
+            this.CmbAnim.Items.AddRange(new object[] {
+            "Type 1",
+            "Type 2"});
+            this.CmbAnim.Location = new System.Drawing.Point(276, 21);
+            this.CmbAnim.Name = "CmbAnim";
+            this.CmbAnim.Size = new System.Drawing.Size(63, 21);
+            this.CmbAnim.TabIndex = 32;
+            this.CmbAnim.SelectedIndexChanged += new System.EventHandler(this.CmbAnim_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -871,6 +895,8 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.CmbSpriteVis);
             this.tabPage2.Controls.Add(this.LblSpriteSelected);
             this.tabPage2.Controls.Add(this.TabClass3);
             this.tabPage2.Controls.Add(this.TabClass2);
@@ -1538,27 +1564,29 @@
             this.toolStripMenuItem6.Text = "Hide Guides";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
-            // CmbAnim
+            // CmbSpriteVis
             // 
-            this.CmbAnim.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbAnim.FormattingEnabled = true;
-            this.CmbAnim.Items.AddRange(new object[] {
-            "Type 1",
-            "Type 2"});
-            this.CmbAnim.Location = new System.Drawing.Point(276, 21);
-            this.CmbAnim.Name = "CmbAnim";
-            this.CmbAnim.Size = new System.Drawing.Size(63, 21);
-            this.CmbAnim.TabIndex = 32;
-            this.CmbAnim.SelectedIndexChanged += new System.EventHandler(this.CmbAnim_SelectedIndexChanged);
+            this.CmbSpriteVis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSpriteVis.FormattingEnabled = true;
+            this.CmbSpriteVis.Items.AddRange(new object[] {
+            "Always",
+            "Challenge Only",
+            "Day Only",
+            "Night Only"});
+            this.CmbSpriteVis.Location = new System.Drawing.Point(11, 354);
+            this.CmbSpriteVis.Name = "CmbSpriteVis";
+            this.CmbSpriteVis.Size = new System.Drawing.Size(121, 21);
+            this.CmbSpriteVis.TabIndex = 4;
+            this.CmbSpriteVis.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
             // 
-            // label9
+            // label19
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(276, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 13);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "Animation";
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 338);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(43, 13);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Visibility";
             // 
             // PnlView
             // 
@@ -1731,6 +1759,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.TlsDrawing.ResumeLayout(false);
@@ -1885,5 +1914,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox CmbAnim;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox CmbSpriteVis;
     }
 }
