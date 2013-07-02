@@ -281,16 +281,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             case 0x80:
                             case 0xA5:
                             case 0xA7:
-                                Rom[levelAddress++] = (byte)(s.Y + 1);
+                                Rom[levelAddress++] = (byte)((s.Visibility << 5) | (s.Y + 1));
                                 break;
 
                             case 0xA1:
                             case 0xA3:
-                                Rom[levelAddress++] = (byte)(s.Y - 1);
+                                Rom[levelAddress++] = (byte)((s.Visibility << 5) | (s.Y - 1));
                                 break;
 
                             default:
-                                Rom[levelAddress++] = (byte)s.Y;
+                                Rom[levelAddress++] = (byte)((s.Visibility << 5) | s.Y);
                                 break;
                         }
 

@@ -667,8 +667,20 @@ namespace Daiz.NES.Reuben
             else if (EditMode == EditMode.Sprites)
             {
                 CurrentSprite = SelectSprite(x, y);
+
+                modifySpriteVisiblity = false;
+
+                if (CurrentSprite == null)
+                {
+                    CmbSpriteVis.Enabled = false;
+                    CmbSpriteVis.SelectedIndex = -1;   
+                }
+
                 if (CurrentSprite != null && MouseButtons == MouseButtons.Left)
                 {
+                    CmbSpriteVis.SelectedIndex = CurrentSprite.Visibility;
+                    CmbSpriteVis.Enabled = true;
+
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
                     LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
@@ -750,6 +762,8 @@ namespace Daiz.NES.Reuben
                     ContinueDragging = false;
                     LblSprite.Text = "None";
                 }
+
+                modifySpriteVisiblity = true;
             }
             else if (EditMode == EditMode.Pointers)
             {
@@ -1348,6 +1362,7 @@ namespace Daiz.NES.Reuben
         private void spViewer_SelectionChanged(object sender, TEventArgs<Sprite> e)
         {
             CurrentSelectorSprite = e.Data;
+            
             if (CurrentSelectorSprite != null)
             {
                 foreach (var sp in SpriteViewers)
@@ -2010,6 +2025,15 @@ namespace Daiz.NES.Reuben
         private void CmbAnim_SelectedIndexChanged(object sender, EventArgs e)
         {
             ReubenController_GraphicsReloaded(null, null);
+        }
+
+        private bool modifySpriteVisiblity = false;
+        private void CmbSpriteVis_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (modifySpriteVisiblity)
+            {
+                CurrentSprite.Visibility = CmbSpriteVis.SelectedIndex;
+            }
         }
     }
 }
