@@ -77,7 +77,7 @@ namespace Daiz.NES.Reuben
             "Current Down",
             "Treasure",
             "Locked Door",
-            "Unused",
+            "Enemy Interaction",
             "Unused",
             "Climbable",
             "Coin",
