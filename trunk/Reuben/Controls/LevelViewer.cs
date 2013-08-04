@@ -404,6 +404,9 @@ namespace Daiz.NES.Reuben
                                     break;
                             }
                         }
+                        else
+                        {
+                        }
                     }
                     if (_ShowSpecialBlocks)
                     {
