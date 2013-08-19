@@ -29,6 +29,7 @@ namespace Daiz.NES.Reuben
         public Bitmap BackBuffer { get; private set; }
         private Bitmap CompositeBuffer;
         private Bitmap SpriteBuffer;
+        private Bitmap ScrollBuffer;
 
         private Level _CurrentLevel;
         public Level CurrentLevel
