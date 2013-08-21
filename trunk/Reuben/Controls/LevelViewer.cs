@@ -46,6 +46,7 @@ namespace Daiz.NES.Reuben
                     BackBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
                     SpriteBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
                     CompositeBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
+                    ScrollBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
                     this.Width = _CurrentLevel.Width * 16; ;
                     this.Height = _CurrentLevel.Height * 16;
                     if (!DelayDrawing)
@@ -1350,6 +1351,39 @@ namespace Daiz.NES.Reuben
             Redraw(r);
         }
 
+        public void AutoScrollRender()
+        {
+            AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID)
+            Rectangle rect = new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom);
+            BitmapData data = ScrollBuffer.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+
+            ClearAreaWithTransparentcolor(rect.Width, rect.Height, data);
+            if (set != null)
+            {
+                Graphics g = Graphics.FromImage(CompositeBuffer);
+                AutoScrollPoint previousPoint = null;
+                Point[] points = new Point[4] { new Point(0, 0),
+                                                new Point(0, 0),
+                                                new Point(0, 0),
+                                                new Point(0, 0)};
+                SolidBrush scrollBrush = new SolidBrush(Color.FromArgb(128, Color.LightBlue));
+                foreach (AutoScrollPoint p in set.ScrollPoints)
+                {
+                    if(previousPoint != null){
+                        points[3].X = points[0].X = previousPoint.ScrollToX;
+                        points[0].Y = previousPoint.ScrollToY;
+                        points[2].X = points[1].X = p.ScrollToX;
+                        points[1].Y = p.ScrollToY;
+                        points[2].Y = p.ScrollToY + 184;
+                        points[3].Y = previousPoint.ScrollToY + 184;
+                        g.FillPolygon(scrollBrush, points);
+                    }
+
+                    previousPoint = p;
+                }
+            }
+        }
+
         private bool _ShowSpecial;
         public bool ShowSpecialSprites
         {
@@ -1361,6 +1395,20 @@ namespace Daiz.NES.Reuben
                 {
                     FullSpriteRender();
                     Redraw();
+                }
+            }
+        }
+
+        private bool _ShowAutoScroll;
+        public bool ShowAutoScroll
+        {
+            get { return _ShowAutoScroll; }
+            set
+            {
+                _ShowSpecial = value;
+                if (!DelayDrawing)
+                {
+                    
                 }
             }
         }
