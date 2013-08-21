@@ -37,8 +37,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.NumTime = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
-            this.CmbScroll = new System.Windows.Forms.ComboBox();
             this.CmbTypes = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -86,9 +84,14 @@
             this.NumSpecials = new System.Windows.Forms.NumericUpDown();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
+            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.CmbSpriteVis = new System.Windows.Forms.ComboBox();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
             this.TabClass3 = new System.Windows.Forms.TabControl();
             this.TabClass2 = new System.Windows.Forms.TabControl();
@@ -97,6 +100,7 @@
             this.BtnDeletePointer = new System.Windows.Forms.Button();
             this.BtnAddPointer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
             this.TlsDrawing = new System.Windows.Forms.ToolStrip();
             this.TsbPencil = new System.Windows.Forms.ToolStripButton();
             this.TsbLine = new System.Windows.Forms.ToolStripButton();
@@ -155,17 +159,16 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.CmbSpriteVis = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
-            this.PntEditor = new Daiz.NES.Reuben.LevelPointerEditor();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.CmbScroll = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -191,6 +194,7 @@
             this.CtxHorizontalGuide.SuspendLayout();
             this.PnlView.SuspendLayout();
             this.PnlLengthControl.SuspendLayout();
+            this.tabPage8.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlInfo
@@ -208,6 +212,7 @@
             // 
             this.TabLevelInfo.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.TabLevelInfo.Controls.Add(this.tabPage4);
+            this.TabLevelInfo.Controls.Add(this.tabPage8);
             this.TabLevelInfo.Controls.Add(this.tabPageEX1);
             this.TabLevelInfo.Controls.Add(this.tabPageEX2);
             this.TabLevelInfo.Controls.Add(this.tabPageEX3);
@@ -227,8 +232,6 @@
             this.tabPage4.Controls.Add(this.label3);
             this.tabPage4.Controls.Add(this.label4);
             this.tabPage4.Controls.Add(this.NumTime);
-            this.tabPage4.Controls.Add(this.label12);
-            this.tabPage4.Controls.Add(this.CmbScroll);
             this.tabPage4.Controls.Add(this.CmbTypes);
             this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Controls.Add(this.label8);
@@ -295,31 +298,6 @@
             0,
             0,
             0});
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(402, 3);
-            this.label12.Margin = new System.Windows.Forms.Padding(3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(60, 13);
-            this.label12.TabIndex = 27;
-            this.label12.Text = "Scroll Type";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CmbScroll
-            // 
-            this.CmbScroll.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbScroll.FormattingEnabled = true;
-            this.CmbScroll.Items.AddRange(new object[] {
-            "Scrolls When Flying",
-            "Free Scrolling",
-            "No Scrolling",
-            "Vertical Transitions"});
-            this.CmbScroll.Location = new System.Drawing.Point(404, 22);
-            this.CmbScroll.Name = "CmbScroll";
-            this.CmbScroll.Size = new System.Drawing.Size(129, 21);
-            this.CmbScroll.TabIndex = 27;
             // 
             // CmbTypes
             // 
@@ -873,6 +851,15 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
+            // BlvRight
+            // 
+            this.BlvRight.CurrentBlock = null;
+            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Name = "BlvRight";
+            this.BlvRight.Size = new System.Drawing.Size(32, 32);
+            this.BlvRight.TabIndex = 21;
+            this.BlvRight.Text = "blockViewer1";
+            // 
             // LblSelectorHover
             // 
             this.LblSelectorHover.AutoSize = true;
@@ -892,6 +879,36 @@
             this.CmbLayouts.TabIndex = 16;
             this.CmbLayouts.SelectedIndexChanged += new System.EventHandler(this.CmbLayouts_SelectedIndexChanged);
             // 
+            // BlvLeft
+            // 
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 19;
+            this.BlvLeft.Text = "blockViewer1";
+            // 
+            // BlsSelector
+            // 
+            this.BlsSelector.BlockLayout = null;
+            this.BlsSelector.CurrentDefiniton = null;
+            this.BlsSelector.HaltRendering = false;
+            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
+            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.BlsSelector.Name = "BlsSelector";
+            this.BlsSelector.SelectedIndex = 0;
+            this.BlsSelector.SelectedTileIndex = 0;
+            this.BlsSelector.ShowBlockSolidity = false;
+            this.BlsSelector.ShowSpecialBlocks = false;
+            this.BlsSelector.ShowTileInteractions = false;
+            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
+            this.BlsSelector.SpecialDefnitions = null;
+            this.BlsSelector.SpecialTable = null;
+            this.BlsSelector.TabIndex = 0;
+            this.BlsSelector.Text = "blockSelector1";
+            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
+            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
+            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -909,6 +926,30 @@
             this.tabPage2.ToolTipText = "Shortcut W";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage2_MouseMove);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 338);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(43, 13);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Visibility";
+            // 
+            // CmbSpriteVis
+            // 
+            this.CmbSpriteVis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSpriteVis.FormattingEnabled = true;
+            this.CmbSpriteVis.Items.AddRange(new object[] {
+            "Always",
+            "Challenge Only",
+            "Day Only",
+            "Night Only"});
+            this.CmbSpriteVis.Location = new System.Drawing.Point(11, 354);
+            this.CmbSpriteVis.Name = "CmbSpriteVis";
+            this.CmbSpriteVis.Size = new System.Drawing.Size(121, 21);
+            this.CmbSpriteVis.TabIndex = 4;
+            this.CmbSpriteVis.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
             // 
             // LblSpriteSelected
             // 
@@ -998,6 +1039,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
+            // 
+            // PntEditor
+            // 
+            this.PntEditor.CurrentPointer = null;
+            this.PntEditor.Location = new System.Drawing.Point(6, 19);
+            this.PntEditor.Name = "PntEditor";
+            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
+            this.PntEditor.Size = new System.Drawing.Size(239, 205);
+            this.PntEditor.TabIndex = 0;
             // 
             // TlsDrawing
             // 
@@ -1564,30 +1614,6 @@
             this.toolStripMenuItem6.Text = "Hide Guides";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
-            // CmbSpriteVis
-            // 
-            this.CmbSpriteVis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbSpriteVis.FormattingEnabled = true;
-            this.CmbSpriteVis.Items.AddRange(new object[] {
-            "Always",
-            "Challenge Only",
-            "Day Only",
-            "Night Only"});
-            this.CmbSpriteVis.Location = new System.Drawing.Point(11, 354);
-            this.CmbSpriteVis.Name = "CmbSpriteVis";
-            this.CmbSpriteVis.Size = new System.Drawing.Size(121, 21);
-            this.CmbSpriteVis.TabIndex = 4;
-            this.CmbSpriteVis.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(8, 338);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(43, 13);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "Visibility";
-            // 
             // PnlView
             // 
             this.PnlView.AutoScroll = true;
@@ -1671,53 +1697,62 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
-            // BlvRight
+            // tabPage8
             // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
+            this.tabPage8.Controls.Add(this.comboBox1);
+            this.tabPage8.Controls.Add(this.label20);
+            this.tabPage8.Controls.Add(this.label12);
+            this.tabPage8.Controls.Add(this.CmbScroll);
+            this.tabPage8.Location = new System.Drawing.Point(4, 4);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(550, 67);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = "Scrolling";
+            this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // BlvLeft
+            // label12
             // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 6);
+            this.label12.Margin = new System.Windows.Forms.Padding(3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(60, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Scroll Type";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // BlsSelector
+            // CmbScroll
             // 
-            this.BlsSelector.BlockLayout = null;
-            this.BlsSelector.CurrentDefiniton = null;
-            this.BlsSelector.HaltRendering = false;
-            this.BlsSelector.Location = new System.Drawing.Point(6, 31);
-            this.BlsSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.BlsSelector.Name = "BlsSelector";
-            this.BlsSelector.SelectedIndex = 0;
-            this.BlsSelector.SelectedTileIndex = 0;
-            this.BlsSelector.ShowBlockSolidity = false;
-            this.BlsSelector.ShowSpecialBlocks = false;
-            this.BlsSelector.ShowTileInteractions = false;
-            this.BlsSelector.Size = new System.Drawing.Size(256, 256);
-            this.BlsSelector.SpecialDefnitions = null;
-            this.BlsSelector.SpecialTable = null;
-            this.BlsSelector.TabIndex = 0;
-            this.BlsSelector.Text = "blockSelector1";
-            this.BlsSelector.DoubleClick += new System.EventHandler(this.BlsSelector_DoubleClick);
-            this.BlsSelector.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsSelector_MouseMove);
+            this.CmbScroll.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbScroll.FormattingEnabled = true;
+            this.CmbScroll.Items.AddRange(new object[] {
+            "Scrolls When Flying",
+            "Free Scrolling",
+            "No Scrolling",
+            "Vertical Transitions"});
+            this.CmbScroll.Location = new System.Drawing.Point(8, 25);
+            this.CmbScroll.Name = "CmbScroll";
+            this.CmbScroll.Size = new System.Drawing.Size(129, 21);
+            this.CmbScroll.TabIndex = 29;
             // 
-            // PntEditor
+            // label20
             // 
-            this.PntEditor.CurrentPointer = null;
-            this.PntEditor.Location = new System.Drawing.Point(6, 19);
-            this.PntEditor.Name = "PntEditor";
-            this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
-            this.PntEditor.Size = new System.Drawing.Size(239, 205);
-            this.PntEditor.TabIndex = 0;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(150, 6);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(77, 13);
+            this.label20.TabIndex = 30;
+            this.label20.Text = "Auto Scroll Set";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(153, 25);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(128, 21);
+            this.comboBox1.TabIndex = 31;
             // 
             // LevelEditor
             // 
@@ -1774,6 +1809,8 @@
             this.CtxHorizontalGuide.ResumeLayout(false);
             this.PnlView.ResumeLayout(false);
             this.PnlLengthControl.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1870,8 +1907,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown NumTime;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox CmbScroll;
         private System.Windows.Forms.ComboBox CmbTypes;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
@@ -1916,5 +1951,10 @@
         private System.Windows.Forms.ComboBox CmbAnim;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox CmbSpriteVis;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox CmbScroll;
     }
 }

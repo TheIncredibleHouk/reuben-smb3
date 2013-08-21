@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoScroll\AutoScrollManager.cs" />
     <Compile Include="AutoScroll\AutoScrollPoint.cs" />
     <Compile Include="AutoScroll\AutoScrollSet.cs" />
     <Compile Include="Blocks\BlockProperty.cs" />

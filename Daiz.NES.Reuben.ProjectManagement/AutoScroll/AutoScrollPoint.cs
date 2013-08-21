@@ -10,21 +10,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class AutoScrollPoint : IXmlIO
     {
-        public int HorizontalSpeed { get; set; }
-        public int VerticalSpeed { get; set; }
-        public int HorizontalFracSpeed { get; set; }
-        public int VerticalFracSpeed { get; set; }
-        public int Length { get; set; }
+        public int ScrollToX { get; set; }
+        public int ScrollToY { get; set; }
 
         public XElement CreateElement()
         {
             XElement e = new XElement("point");
 
-            e.SetAttributeValue("hspeed", HorizontalSpeed);
-            e.SetAttributeValue("vspeed", VerticalSpeed);
-            e.SetAttributeValue("hfspeed", HorizontalFracSpeed);
-            e.SetAttributeValue("vfspeed", VerticalFracSpeed);
-            e.SetAttributeValue("length", Length);
+            e.SetAttributeValue("tox", ScrollToX);
+            e.SetAttributeValue("toy", ScrollToY);
+            return e;
         }
 
         public bool LoadFromElement(XElement e)
@@ -34,27 +29,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 switch (a.Name.LocalName.ToLower())
                 {
 
-                    case "vspeed":
-                        VerticalSpeed = e.Value.ToInt();
+                    case "tox":
+                        ScrollToX = e.Value.ToInt();
                         break;
 
-                    case "vfspeed":
-                        VerticalFracSpeed = e.Value.ToInt();
+                    case "toy":
+                        ScrollToY = e.Value.ToInt();
                         break;
 
-                    case "hspeed":
-                        HorizontalSpeed = e.Value.ToInt();
-                        break;
-
-                    case "hfspeed":
-                        HorizontalFracSpeed = e.Value.ToInt();
-                        break;
-
-                    case "length":
-                        Length = e.Value.ToInt();
-                        break;
-                
+                }
             }
+
+            return true;
         }
     }
 }
