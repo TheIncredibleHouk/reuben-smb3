@@ -1218,7 +1218,7 @@ namespace Daiz.NES.Reuben
             Graphics g = Graphics.FromImage(CompositeBuffer);
             g.DrawImage(BackBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
             g.DrawImage(SpriteBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
-            if (_ShowAutoScroll)
+            //if (_ShowAutoScroll)
             {
                 g.DrawImage(ScrollBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
             }
@@ -1365,35 +1365,33 @@ namespace Daiz.NES.Reuben
         {
             AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
             Rectangle rect = new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom);
-            BitmapData data = ScrollBuffer.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-            ClearAreaWithTransparentcolor(rect.Width, rect.Height, data);
+            //ClearAreaWithTransparentcolor(rect.Width, rect.Height, data);
             if (set != null)
             {
-                Graphics g = Graphics.FromImage(CompositeBuffer);
+                Graphics g = Graphics.FromImage(ScrollBuffer);
                 AutoScrollPoint previousPoint = null;
                 Point[] points = new Point[4] { new Point(0, 0),
                                                 new Point(0, 0),
                                                 new Point(0, 0),
                                                 new Point(0, 0)};
-                SolidBrush scrollBrush = new SolidBrush(Color.FromArgb(128, Color.LightBlue));
+                SolidBrush scrollBrush = new SolidBrush(Color.FromArgb(50, Color.LightBlue));
                 foreach (AutoScrollPoint p in set.ScrollPoints)
                 {
-                    if(previousPoint != null){
-                        points[3].X = points[0].X = previousPoint.ScrollToX;
-                        points[0].Y = previousPoint.ScrollToY;
-                        points[2].X = points[1].X = p.ScrollToX;
-                        points[1].Y = p.ScrollToY;
-                        points[2].Y = p.ScrollToY + 184;
-                        points[3].Y = previousPoint.ScrollToY + 184;
+                    if (previousPoint != null)
+                    {
+                        points[3].X = points[0].X = previousPoint.ScrollToX * 16;
+                        points[0].Y = previousPoint.ScrollToY * 16;
+                        points[2].X = points[1].X = (p.ScrollToX * 16) - 1;
+                        points[1].Y = p.ScrollToY * 16;
+                        points[2].Y = p.ScrollToY + 183;
+                        points[3].Y = previousPoint.ScrollToY + 183;
                         g.FillPolygon(scrollBrush, points);
                     }
 
                     previousPoint = p;
                 }
             }
-
-            ScrollBuffer.UnlockBits(data);
         }
 
         private bool _ShowSpecial;
@@ -1420,7 +1418,7 @@ namespace Daiz.NES.Reuben
                 _ShowSpecial = value;
                 if (!DelayDrawing)
                 {
-                    
+
                 }
             }
         }
