@@ -119,7 +119,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             if (!MusicManager.LoadMusic(string.Format("{0}{1}music.xml", RootDirectory, Path.DirectorySeparatorChar)))
                 MusicManager.LoadDefault();
 
-            AutoScrollManager.LoadAutoScrollSets(string.Format("{0}{1}scroll.xml", RootDirectory, Path.DirectorySeparatorChar)));
             return true;
         }
 

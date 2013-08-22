@@ -23,6 +23,7 @@ namespace Daiz.NES.Reuben
             CurrentDefiniton = null;
             Redraw();
             HasSelection = false;
+            ShowAutoScroll = true;
             Zoom = 1;
         }
 
@@ -53,6 +54,7 @@ namespace Daiz.NES.Reuben
                     {
                         FullRender();
                         FullSpriteRender();
+                        AutoScrollRender();
                         Redraw();
                     }
                 }
@@ -1139,6 +1141,10 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        public void RenderScrollPoints()
+        {
+        }
+
         public Guide VerticalGuide1 { get; set; }
         public Guide VerticalGuide2 { get; set; }
         public Guide HorizontalGuide1 { get; set; }
@@ -1212,6 +1218,10 @@ namespace Daiz.NES.Reuben
             Graphics g = Graphics.FromImage(CompositeBuffer);
             g.DrawImage(BackBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
             g.DrawImage(SpriteBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
+            if (_ShowAutoScroll)
+            {
+                g.DrawImage(ScrollBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
+            }
 
             if (HasSelection)
             {
@@ -1353,7 +1363,7 @@ namespace Daiz.NES.Reuben
 
         public void AutoScrollRender()
         {
-            AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID)
+            AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
             Rectangle rect = new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom);
             BitmapData data = ScrollBuffer.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
@@ -1382,6 +1392,8 @@ namespace Daiz.NES.Reuben
                     previousPoint = p;
                 }
             }
+
+            ScrollBuffer.UnlockBits(data);
         }
 
         private bool _ShowSpecial;

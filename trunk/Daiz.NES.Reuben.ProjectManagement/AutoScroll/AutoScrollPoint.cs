@@ -12,6 +12,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public int ScrollToX { get; set; }
         public int ScrollToY { get; set; }
+        public int Speed { get; set; }
+
+        public AutoScrollPoint()
+        {
+        }
+
+        public AutoScrollPoint(int x, int y)
+        {
+            ScrollToX = x;
+            ScrollToY = y;
+        }
 
         public XElement CreateElement()
         {
@@ -19,6 +30,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             e.SetAttributeValue("tox", ScrollToX);
             e.SetAttributeValue("toy", ScrollToY);
+            e.SetAttributeValue("speed", Speed);
             return e;
         }
 
@@ -37,6 +49,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         ScrollToY = e.Value.ToInt();
                         break;
 
+                    case "speed":
+                        Speed = e.Value.ToInt();
+                        break;
                 }
             }
 

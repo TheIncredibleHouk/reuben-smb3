@@ -44,7 +44,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.Add(ProjectController.LayoutManager.CreateElement());
             x.Add(ProjectController.WorldManager.CreateElement());
             x.Add(ProjectController.LevelManager.CreateElement());
-            
+            x.Add(ProjectController.AutoScrollManager.CreateElement());
             return x;
         }
 
@@ -96,6 +96,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "paletteinfo":
                         ProjectController.PaletteManager.LoadFromElement(x);
+                        break;
+
+                    case "autoscrollsets":
+                        ProjectController.AutoScrollManager.LoadFromElement(x);
                         break;
                 }
             }

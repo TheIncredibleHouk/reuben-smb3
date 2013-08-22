@@ -8,43 +8,13 @@ using Daiz.Library;
 
 namespace Daiz.NES.Reuben.ProjectManagement
 {
-    public class AutoScrollManager
+    public class AutoScrollManager : IXmlIO
     {
         private Dictionary<Guid, AutoScrollSet> ScrollSets;
 
         public AutoScrollManager()
         {
             ScrollSets = new Dictionary<Guid, AutoScrollSet>();
-        }
-
-        public bool LoadAutoScrollSets(string fileName)
-        {
-            if (File.Exists(fileName))
-            {
-                XDocument doc = XDocument.Load(fileName);
-                foreach (XElement e in doc.Root.Elements())
-                {
-                    AutoScrollSet s = new AutoScrollSet();
-                    s.LoadFromElement(e);
-                    ScrollSets.Add(s.ID, s);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool SaveAutoScrollSets(string fileName)
-        {
-            XDocument doc = new XDocument("autoscroll");
-            foreach (AutoScrollSet set in ScrollSets.Values)
-            {
-                doc.Root.Add(set.CreateElement());
-            }
-
-            doc.Save(fileName);
-            return true;
         }
 
         public AutoScrollSet GetScrollSet(Guid id)
@@ -55,6 +25,42 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             return null;
+        }
+
+        public AutoScrollSet AddScrollSet(string name)
+        {
+            AutoScrollSet s = new AutoScrollSet();
+            s.Name = name;
+            ScrollSets.Add(s.ID, s);
+            return s;
+        }
+
+        public IEnumerable<AutoScrollSet> AutoScrollSets
+        {
+            get { return ScrollSets.Values; }
+        }
+
+        public XElement CreateElement()
+        {
+            XElement e = new XElement("autoscrollsets");
+            foreach (AutoScrollSet s in AutoScrollSets)
+            {
+                e.Add(s.CreateElement());
+            }
+
+            return e;
+        }
+
+        public bool LoadFromElement(XElement e)
+        {
+            foreach (XElement x in e.Elements())
+            {
+                AutoScrollSet set = new AutoScrollSet();
+                set.LoadFromElement(x);
+                ScrollSets.Add(set.ID, set);
+            }
+
+            return true;
         }
     }
 }
