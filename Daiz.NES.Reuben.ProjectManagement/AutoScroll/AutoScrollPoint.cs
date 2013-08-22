@@ -42,15 +42,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 {
 
                     case "tox":
-                        ScrollToX = e.Value.ToInt();
+                        ScrollToX = a.Value.ToInt();
                         break;
 
                     case "toy":
-                        ScrollToY = e.Value.ToInt();
+                        ScrollToY = a.Value.ToInt();
                         break;
 
                     case "speed":
-                        Speed = e.Value.ToInt();
+                        Speed = a.Value.ToInt();
                         break;
                 }
             }
