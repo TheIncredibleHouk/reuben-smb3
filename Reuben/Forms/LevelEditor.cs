@@ -269,6 +269,7 @@ namespace Daiz.NES.Reuben
             BtnAddPointer.Enabled = CurrentLevel.Pointers.Count <= 10;
             BtnDeletePointer.Enabled = false;
             NumSpecials.Value = (decimal)CurrentLevel.Settings.ItemTransparency;
+            RefreshAutoScrollSets();
             LvlView.DelayDrawing = false;
             LvlView.FullUpdate();
         }
@@ -2034,6 +2035,61 @@ namespace Daiz.NES.Reuben
             {
                 CurrentSprite.Visibility = CmbSpriteVis.SelectedIndex;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            InputForm iForm = new InputForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Owner = ReubenController.MainWindow;
+
+
+
+            string name = iForm.GetInput("Please enter a new name.");
+            if (name != null)
+            {
+                ProjectController.AutoScrollManager.AddScrollSet(name);
+                RefreshAutoScrollSets();
+            }
+        }
+
+        private void RefreshAutoScrollSets()
+        {
+            CmbAutoScrolls.Items.Clear();
+            CmbAutoScrolls.Items.Add("None");
+            foreach (AutoScrollSet set in ProjectController.AutoScrollManager.AutoScrollSets)
+            {
+                CmbAutoScrolls.Items.Add(set);
+            }
+
+            if (CurrentLevel.AutoScrollSetID != Guid.Empty)
+            {
+                CmbAutoScrolls.SelectedItem = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
+                if (CmbAutoScrolls.SelectedItem == null)
+                {
+                    CmbAutoScrolls.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                CmbAutoScrolls.SelectedIndex = 0;
+            }
+        }
+
+        private void CmbAutoScrolls_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CmbAutoScrolls.SelectedIndex > 0)
+            {
+                CurrentLevel.AutoScrollSetID = ((AutoScrollSet)CmbAutoScrolls.SelectedItem).ID;
+
+            }
+            else
+            {
+                CurrentLevel.AutoScrollSetID = Guid.Empty;
+            }
+
+            LvlView.AutoScrollRender();
+            LvlView.Redraw();
         }
     }
 }

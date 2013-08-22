@@ -19,6 +19,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public AutoScrollSet()
         {
             ID = Guid.NewGuid();
+            _ScrollPoints = new List<AutoScrollPoint>();
+            _ScrollPoints.Add(new AutoScrollPoint(0, 0));
+            _ScrollPoints.Add(new AutoScrollPoint(240, 0));
         }
 
         public XElement CreateElement()
@@ -63,6 +66,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public ReadOnlyCollection<AutoScrollPoint> ScrollPoints
         {
             get { return _ScrollPoints.AsReadOnly(); }
+        }
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

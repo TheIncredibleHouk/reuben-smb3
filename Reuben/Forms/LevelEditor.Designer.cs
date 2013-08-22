@@ -41,6 +41,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.CmbLength = new System.Windows.Forms.ComboBox();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.CmbAutoScrolls = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.CmbScroll = new System.Windows.Forms.ComboBox();
             this.tabPageEX1 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.CmbAnim = new System.Windows.Forms.ComboBox();
@@ -164,15 +169,12 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.CmbScroll = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumTime)).BeginInit();
+            this.tabPage8.SuspendLayout();
             this.tabPageEX1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).BeginInit();
             this.tabPageEX2.SuspendLayout();
@@ -194,7 +196,6 @@
             this.CtxHorizontalGuide.SuspendLayout();
             this.PnlView.SuspendLayout();
             this.PnlLengthControl.SuspendLayout();
-            this.tabPage8.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlInfo
@@ -340,6 +341,65 @@
             this.CmbLength.Size = new System.Drawing.Size(58, 21);
             this.CmbLength.TabIndex = 21;
             this.CmbLength.SelectedIndexChanged += new System.EventHandler(this.CmbLength_SelectedIndexChanged);
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.button2);
+            this.tabPage8.Controls.Add(this.CmbAutoScrolls);
+            this.tabPage8.Controls.Add(this.label20);
+            this.tabPage8.Controls.Add(this.label12);
+            this.tabPage8.Controls.Add(this.CmbScroll);
+            this.tabPage8.Location = new System.Drawing.Point(4, 4);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(550, 67);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = "Scrolling";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // CmbAutoScrolls
+            // 
+            this.CmbAutoScrolls.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbAutoScrolls.FormattingEnabled = true;
+            this.CmbAutoScrolls.Location = new System.Drawing.Point(153, 25);
+            this.CmbAutoScrolls.Name = "CmbAutoScrolls";
+            this.CmbAutoScrolls.Size = new System.Drawing.Size(128, 21);
+            this.CmbAutoScrolls.TabIndex = 31;
+            this.CmbAutoScrolls.SelectedIndexChanged += new System.EventHandler(this.CmbAutoScrolls_SelectedIndexChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(150, 6);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(77, 13);
+            this.label20.TabIndex = 30;
+            this.label20.Text = "Auto Scroll Set";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 6);
+            this.label12.Margin = new System.Windows.Forms.Padding(3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(60, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Scroll Type";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CmbScroll
+            // 
+            this.CmbScroll.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbScroll.FormattingEnabled = true;
+            this.CmbScroll.Items.AddRange(new object[] {
+            "Scrolls When Flying",
+            "Free Scrolling",
+            "No Scrolling",
+            "Vertical Transitions"});
+            this.CmbScroll.Location = new System.Drawing.Point(8, 25);
+            this.CmbScroll.Name = "CmbScroll";
+            this.CmbScroll.Size = new System.Drawing.Size(129, 21);
+            this.CmbScroll.TabIndex = 29;
             // 
             // tabPageEX1
             // 
@@ -1647,6 +1707,7 @@
             this.LvlView.Name = "LvlView";
             this.LvlView.SelectionLine = null;
             this.LvlView.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.LvlView.ShowAutoScroll = false;
             this.LvlView.ShowBlockSolidity = false;
             this.LvlView.ShowGrid = false;
             this.LvlView.ShowPointers = false;
@@ -1697,62 +1758,15 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
-            // tabPage8
+            // button2
             // 
-            this.tabPage8.Controls.Add(this.comboBox1);
-            this.tabPage8.Controls.Add(this.label20);
-            this.tabPage8.Controls.Add(this.label12);
-            this.tabPage8.Controls.Add(this.CmbScroll);
-            this.tabPage8.Location = new System.Drawing.Point(4, 4);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(550, 67);
-            this.tabPage8.TabIndex = 7;
-            this.tabPage8.Text = "Scrolling";
-            this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 6);
-            this.label12.Margin = new System.Windows.Forms.Padding(3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(60, 13);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "Scroll Type";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CmbScroll
-            // 
-            this.CmbScroll.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbScroll.FormattingEnabled = true;
-            this.CmbScroll.Items.AddRange(new object[] {
-            "Scrolls When Flying",
-            "Free Scrolling",
-            "No Scrolling",
-            "Vertical Transitions"});
-            this.CmbScroll.Location = new System.Drawing.Point(8, 25);
-            this.CmbScroll.Name = "CmbScroll";
-            this.CmbScroll.Size = new System.Drawing.Size(129, 21);
-            this.CmbScroll.TabIndex = 29;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(150, 6);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(77, 13);
-            this.label20.TabIndex = 30;
-            this.label20.Text = "Auto Scroll Set";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(153, 25);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(128, 21);
-            this.comboBox1.TabIndex = 31;
+            this.button2.Location = new System.Drawing.Point(287, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(66, 21);
+            this.button2.TabIndex = 32;
+            this.button2.Text = "New Set";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // LevelEditor
             // 
@@ -1778,6 +1792,8 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumTime)).EndInit();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
             this.tabPageEX1.ResumeLayout(false);
             this.tabPageEX1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).EndInit();
@@ -1809,8 +1825,6 @@
             this.CtxHorizontalGuide.ResumeLayout(false);
             this.PnlView.ResumeLayout(false);
             this.PnlLengthControl.ResumeLayout(false);
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1952,9 +1966,10 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox CmbSpriteVis;
         private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CmbAutoScrolls;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox CmbScroll;
+        private System.Windows.Forms.Button button2;
     }
 }
