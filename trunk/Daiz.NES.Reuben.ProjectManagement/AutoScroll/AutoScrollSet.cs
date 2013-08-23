@@ -26,7 +26,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public XElement CreateElement()
         {
-            _ScrollPoints.Clear();
             XElement e = new XElement("autoscroll");
             e.SetAttributeValue("name", Name);
             e.SetAttributeValue("id", ID);
@@ -40,6 +39,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
+            _ScrollPoints.Clear();
+
             foreach (XAttribute a in e.Attributes())
             {
                 switch (a.Name.LocalName.ToLower())

@@ -1364,34 +1364,33 @@ namespace Daiz.NES.Reuben
         public void AutoScrollRender()
         {
             AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
-            Rectangle rect = new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom);
+            Rectangle rect = new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height);
 
-            //ClearAreaWithTransparentcolor(rect.Width, rect.Height, data);
+            Graphics g = Graphics.FromImage(ScrollBuffer);
+            g.Clear(Color.Transparent);
+
             if (set != null)
             {
-                Graphics g = Graphics.FromImage(ScrollBuffer);
-                AutoScrollPoint previousPoint = null;
-                Point[] points = new Point[4] { new Point(0, 0),
-                                                new Point(0, 0),
-                                                new Point(0, 0),
-                                                new Point(0, 0)};
-                SolidBrush scrollBrush = new SolidBrush(Color.FromArgb(50, Color.LightBlue));
+                List<Point> points = new List<Point>();
+                SolidBrush scrollBrush = new SolidBrush(Color.FromArgb(100, Color.MediumPurple));
+
                 foreach (AutoScrollPoint p in set.ScrollPoints)
                 {
-                    if (previousPoint != null)
-                    {
-                        points[3].X = points[0].X = previousPoint.ScrollToX * 16;
-                        points[0].Y = previousPoint.ScrollToY * 16;
-                        points[2].X = points[1].X = (p.ScrollToX * 16) - 1;
-                        points[1].Y = p.ScrollToY * 16;
-                        points[2].Y = p.ScrollToY + 183;
-                        points[3].Y = previousPoint.ScrollToY + 183;
-                        g.FillPolygon(scrollBrush, points);
-                    }
-
-                    previousPoint = p;
+                    points.Add(new Point(p.ScrollToX * 16, p.ScrollToY * 16));
                 }
+
+                for (int i = set.ScrollPoints.Count - 1; i >= 0; i--)
+                {
+                    points.Add(new Point(set.ScrollPoints[i].ScrollToX * 16, (set.ScrollPoints[i].ScrollToY * 16) + 183));
+                }
+
+                g.FillPolygon(scrollBrush, points.ToArray());
+
+                scrollBrush.Dispose();
             }
+
+            g.Dispose();
+
         }
 
         private bool _ShowSpecial;
