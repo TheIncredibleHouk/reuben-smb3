@@ -163,7 +163,7 @@ namespace Daiz.NES.Reuben
         public void EditLevel(Level l)
         {
             GetLevelInfo(l);
-            
+
             LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
@@ -674,7 +674,7 @@ namespace Daiz.NES.Reuben
                 if (CurrentSprite == null)
                 {
                     CmbSpriteVis.Enabled = false;
-                    CmbSpriteVis.SelectedIndex = -1;   
+                    CmbSpriteVis.SelectedIndex = -1;
                 }
 
                 if (CurrentSprite != null && MouseButtons == MouseButtons.Left)
@@ -756,6 +756,10 @@ namespace Daiz.NES.Reuben
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
                     LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
+                }
+                else if (EditMode == EditMode.Scrolling)
+                {
+
                 }
                 else
                 {
@@ -1263,7 +1267,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(CurrentPalette_PaletteChanged);
-            BlvRight.CurrentPalette = BlvLeft.CurrentPalette =BlsSelector.CurrentPalette  =LvlView.CurrentPalette = CurrentPalette;
+            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             foreach (var sv in SpriteViewers)
             {
                 sv.CurrentPalette = CurrentPalette;
@@ -1363,7 +1367,7 @@ namespace Daiz.NES.Reuben
         private void spViewer_SelectionChanged(object sender, TEventArgs<Sprite> e)
         {
             CurrentSelectorSprite = e.Data;
-            
+
             if (CurrentSelectorSprite != null)
             {
                 foreach (var sp in SpriteViewers)
@@ -2003,7 +2007,7 @@ namespace Daiz.NES.Reuben
                     case Keys.D5:
                         TsbBucket_Click(null, null);
                         break;
-                       
+
                     case Keys.D6:
                         TsbReplace_Click(null, null);
                         break;
@@ -2090,6 +2094,11 @@ namespace Daiz.NES.Reuben
 
             LvlView.AutoScrollRender();
             LvlView.Redraw();
+        }
+
+        private void TabLevelInfo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabEditSelector.Enabled = TabLevelInfo.SelectedIndex != 1;
         }
     }
 }

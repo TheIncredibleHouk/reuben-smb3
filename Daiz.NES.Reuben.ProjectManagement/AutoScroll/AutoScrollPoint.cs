@@ -8,20 +8,17 @@ using Daiz.Library;
 
 namespace Daiz.NES.Reuben.ProjectManagement
 {
-    public class AutoScrollPoint : IXmlIO
+    public struct AutoScrollPoint : IXmlIO
     {
-        public int ScrollToX { get; set; }
-        public int ScrollToY { get; set; }
-        public int Speed { get; set; }
+        public int ScrollToX;
+        public int ScrollToY;
+        public int Speed;
 
-        public AutoScrollPoint()
-        {
-        }
-
-        public AutoScrollPoint(int x, int y)
+        public AutoScrollPoint(int x, int y, int speed)
         {
             ScrollToX = x;
             ScrollToY = y;
+            Speed = speed;
         }
 
         public XElement CreateElement()

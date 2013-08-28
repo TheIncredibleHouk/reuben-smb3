@@ -1372,21 +1372,35 @@ namespace Daiz.NES.Reuben
             if (set != null)
             {
                 List<Point> points = new List<Point>();
-                SolidBrush scrollBrush = new SolidBrush(Color.FromArgb(100, Color.MediumPurple));
+                //Pen scrollBrush = new Penl(Color.FromArgb(100, Color.MediumPurple));
 
                 foreach (AutoScrollPoint p in set.ScrollPoints)
                 {
-                    points.Add(new Point(p.ScrollToX * 16, p.ScrollToY * 16));
+                    points.Add(new Point(p.ScrollToX * 16, p.ScrollToY * 16 + 92));
+                    g.FillEllipse(Brushes.White, p.ScrollToX * 16 - 4, p.ScrollToY * 16 + 88, 9, 9);
                 }
 
-                for (int i = set.ScrollPoints.Count - 1; i >= 0; i--)
-                {
-                    points.Add(new Point(set.ScrollPoints[i].ScrollToX * 16, (set.ScrollPoints[i].ScrollToY * 16) + 183));
-                }
+                //for (int i = set.ScrollPoints.Count - 1; i >= 0; i--)
+                //{
+                //    points.Add(new Point(set.ScrollPoints[i].ScrollToX * 16, (set.ScrollPoints[i].ScrollToY * 16) + 183));
+                //}
 
-                g.FillPolygon(scrollBrush, points.ToArray());
+                g.DrawLines(Pens.White, points.ToArray());
 
-                scrollBrush.Dispose();
+                //foreach (AutoScrollPoint p in set.ScrollPoints)
+                //{
+                //    if (p.ScrollToX > 0)
+                //    {
+                //        g.DrawLine(Pens.Red, new Point(p.ScrollToX * 16, p.ScrollToY * 16), new Point(p.ScrollToX * 16, p.ScrollToY * 16 + 183));
+                //    }
+
+                //    if (p.ScrollToX < 240)
+                //    {
+                //        g.DrawLine(Pens.Red, new Point(p.ScrollToX * 16 + 1, p.ScrollToY * 16), new Point(p.ScrollToX * 16 + 1, p.ScrollToY * 16 + 183));
+                //    }
+                //}
+
+                //scrollBrush.Dispose();
             }
 
             g.Dispose();
