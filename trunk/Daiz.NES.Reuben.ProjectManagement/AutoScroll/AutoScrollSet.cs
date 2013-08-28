@@ -11,7 +11,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class AutoScrollSet : IXmlIO
     {
-        private List<AutoScrollPoint> _ScrollPoints;
+        public List<AutoScrollPoint> ScrollPoints { get; set; }
 
         public Guid ID { get; set; }
         public string Name { get; set; }
@@ -19,9 +19,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public AutoScrollSet()
         {
             ID = Guid.NewGuid();
-            _ScrollPoints = new List<AutoScrollPoint>();
-            _ScrollPoints.Add(new AutoScrollPoint(0, 0));
-            _ScrollPoints.Add(new AutoScrollPoint(240, 0));
+            ScrollPoints = new List<AutoScrollPoint>();
+            ScrollPoints.Add(new AutoScrollPoint(0, 0, 1));
+            ScrollPoints.Add(new AutoScrollPoint(240, 0, 1));
         }
 
         public XElement CreateElement()
@@ -29,7 +29,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             XElement e = new XElement("autoscroll");
             e.SetAttributeValue("name", Name);
             e.SetAttributeValue("id", ID);
-            foreach (AutoScrollPoint p in _ScrollPoints)
+            foreach (AutoScrollPoint p in ScrollPoints)
             {
                 e.Add(p.CreateElement());
             }
@@ -39,7 +39,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool LoadFromElement(XElement e)
         {
-            _ScrollPoints.Clear();
+            ScrollPoints.Clear();
 
             foreach (XAttribute a in e.Attributes())
             {
@@ -59,16 +59,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 AutoScrollPoint p = new AutoScrollPoint();
                 p.LoadFromElement(x);
-                _ScrollPoints.Add(p);
+                ScrollPoints.Add(p);
             }
 
             return true;
         }
 
-        public ReadOnlyCollection<AutoScrollPoint> ScrollPoints
-        {
-            get { return _ScrollPoints.AsReadOnly(); }
-        }
         public override string ToString()
         {
             return Name;

@@ -21,7 +21,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         Tiles,
         Sprites,
-        Pointers
+        Pointers,
+        Scrolling
     }
 
     public enum MouseMode
