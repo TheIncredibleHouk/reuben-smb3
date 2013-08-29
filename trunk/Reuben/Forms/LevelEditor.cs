@@ -759,7 +759,11 @@ namespace Daiz.NES.Reuben
                 }
                 else if (EditMode == EditMode.Scrolling)
                 {
-
+                    AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
+                    if (set != null)
+                    {
+                        AutoScrollPoint point = set.ScrollPoints.Find(p => x > p.ScrollToX - 4 
+                    }
                 }
                 else
                 {
