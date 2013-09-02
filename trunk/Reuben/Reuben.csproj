@@ -305,7 +305,6 @@
     <Content Include="Images\outline.png" />
     <None Include="Images\specialsprite.png" />
     <None Include="Images\specialtile.png" />
-    <None Include="Images\plus.png" />
     <Content Include="Images\pointers.png" />
     <Content Include="Images\selection.png" />
     <Content Include="Images\up.png" />

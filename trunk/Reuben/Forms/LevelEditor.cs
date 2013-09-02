@@ -163,7 +163,7 @@ namespace Daiz.NES.Reuben
         public void EditLevel(Level l)
         {
             GetLevelInfo(l);
-
+            
             LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
@@ -269,7 +269,6 @@ namespace Daiz.NES.Reuben
             BtnAddPointer.Enabled = CurrentLevel.Pointers.Count <= 10;
             BtnDeletePointer.Enabled = false;
             NumSpecials.Value = (decimal)CurrentLevel.Settings.ItemTransparency;
-            RefreshAutoScrollSets();
             LvlView.DelayDrawing = false;
             LvlView.FullUpdate();
         }
@@ -674,7 +673,7 @@ namespace Daiz.NES.Reuben
                 if (CurrentSprite == null)
                 {
                     CmbSpriteVis.Enabled = false;
-                    CmbSpriteVis.SelectedIndex = -1;
+                    CmbSpriteVis.SelectedIndex = -1;   
                 }
 
                 if (CurrentSprite != null && MouseButtons == MouseButtons.Left)
@@ -756,14 +755,6 @@ namespace Daiz.NES.Reuben
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
                     LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
-                }
-                else if (EditMode == EditMode.Scrolling)
-                {
-                    AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
-                    if (set != null)
-                    {
-                        AutoScrollPoint point = set.ScrollPoints.Find(p => x > p.ScrollToX - 4 
-                    }
                 }
                 else
                 {
@@ -1271,7 +1262,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(CurrentPalette_PaletteChanged);
-            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            BlvRight.CurrentPalette = BlvLeft.CurrentPalette =BlsSelector.CurrentPalette  =LvlView.CurrentPalette = CurrentPalette;
             foreach (var sv in SpriteViewers)
             {
                 sv.CurrentPalette = CurrentPalette;
@@ -1371,7 +1362,7 @@ namespace Daiz.NES.Reuben
         private void spViewer_SelectionChanged(object sender, TEventArgs<Sprite> e)
         {
             CurrentSelectorSprite = e.Data;
-
+            
             if (CurrentSelectorSprite != null)
             {
                 foreach (var sp in SpriteViewers)
@@ -2011,7 +2002,7 @@ namespace Daiz.NES.Reuben
                     case Keys.D5:
                         TsbBucket_Click(null, null);
                         break;
-
+                       
                     case Keys.D6:
                         TsbReplace_Click(null, null);
                         break;
@@ -2043,66 +2034,6 @@ namespace Daiz.NES.Reuben
             {
                 CurrentSprite.Visibility = CmbSpriteVis.SelectedIndex;
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            InputForm iForm = new InputForm();
-            iForm.StartPosition = FormStartPosition.CenterParent;
-            iForm.Owner = ReubenController.MainWindow;
-
-
-
-            string name = iForm.GetInput("Please enter a new name.");
-            if (name != null)
-            {
-                ProjectController.AutoScrollManager.AddScrollSet(name);
-                RefreshAutoScrollSets();
-            }
-        }
-
-        private void RefreshAutoScrollSets()
-        {
-            CmbAutoScrolls.Items.Clear();
-            CmbAutoScrolls.Items.Add("None");
-            foreach (AutoScrollSet set in ProjectController.AutoScrollManager.AutoScrollSets)
-            {
-                CmbAutoScrolls.Items.Add(set);
-            }
-
-            if (CurrentLevel.AutoScrollSetID != Guid.Empty)
-            {
-                CmbAutoScrolls.SelectedItem = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
-                if (CmbAutoScrolls.SelectedItem == null)
-                {
-                    CmbAutoScrolls.SelectedIndex = 0;
-                }
-            }
-            else
-            {
-                CmbAutoScrolls.SelectedIndex = 0;
-            }
-        }
-
-        private void CmbAutoScrolls_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (CmbAutoScrolls.SelectedIndex > 0)
-            {
-                CurrentLevel.AutoScrollSetID = ((AutoScrollSet)CmbAutoScrolls.SelectedItem).ID;
-
-            }
-            else
-            {
-                CurrentLevel.AutoScrollSetID = Guid.Empty;
-            }
-
-            LvlView.AutoScrollRender();
-            LvlView.Redraw();
-        }
-
-        private void TabLevelInfo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TabEditSelector.Enabled = TabLevelInfo.SelectedIndex != 1;
         }
     }
 }

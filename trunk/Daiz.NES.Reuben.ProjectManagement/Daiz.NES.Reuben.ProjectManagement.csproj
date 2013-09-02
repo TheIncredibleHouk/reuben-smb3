@@ -74,9 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoScroll\AutoScrollManager.cs" />
-    <Compile Include="AutoScroll\AutoScrollPoint.cs" />
-    <Compile Include="AutoScroll\AutoScrollSet.cs" />
     <Compile Include="Blocks\BlockProperty.cs" />
     <Compile Include="Blocks\BlockTransition.cs" />
     <Compile Include="Compression\CompressionCommand.cs" />
@@ -181,7 +178,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

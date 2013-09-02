@@ -23,14 +23,12 @@ namespace Daiz.NES.Reuben
             CurrentDefiniton = null;
             Redraw();
             HasSelection = false;
-            ShowAutoScroll = true;
             Zoom = 1;
         }
 
         public Bitmap BackBuffer { get; private set; }
         private Bitmap CompositeBuffer;
         private Bitmap SpriteBuffer;
-        private Bitmap ScrollBuffer;
 
         private Level _CurrentLevel;
         public Level CurrentLevel
@@ -47,14 +45,12 @@ namespace Daiz.NES.Reuben
                     BackBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
                     SpriteBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
                     CompositeBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
-                    ScrollBuffer = new Bitmap(_CurrentLevel.Width * 16, _CurrentLevel.Height * 16, PixelFormat.Format32bppArgb);
                     this.Width = _CurrentLevel.Width * 16; ;
                     this.Height = _CurrentLevel.Height * 16;
                     if (!DelayDrawing)
                     {
                         FullRender();
                         FullSpriteRender();
-                        AutoScrollRender();
                         Redraw();
                     }
                 }
@@ -1141,10 +1137,6 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        public void RenderScrollPoints()
-        {
-        }
-
         public Guide VerticalGuide1 { get; set; }
         public Guide VerticalGuide2 { get; set; }
         public Guide HorizontalGuide1 { get; set; }
@@ -1218,10 +1210,6 @@ namespace Daiz.NES.Reuben
             Graphics g = Graphics.FromImage(CompositeBuffer);
             g.DrawImage(BackBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
             g.DrawImage(SpriteBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
-            //if (_ShowAutoScroll)
-            {
-                g.DrawImage(ScrollBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
-            }
 
             if (HasSelection)
             {
@@ -1361,52 +1349,6 @@ namespace Daiz.NES.Reuben
             Redraw(r);
         }
 
-        public void AutoScrollRender()
-        {
-            AutoScrollSet set = ProjectController.AutoScrollManager.GetScrollSet(CurrentLevel.AutoScrollSetID);
-            Rectangle rect = new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height);
-
-            Graphics g = Graphics.FromImage(ScrollBuffer);
-            g.Clear(Color.Transparent);
-
-            if (set != null)
-            {
-                List<Point> points = new List<Point>();
-                //Pen scrollBrush = new Penl(Color.FromArgb(100, Color.MediumPurple));
-
-                foreach (AutoScrollPoint p in set.ScrollPoints)
-                {
-                    points.Add(new Point(p.ScrollToX * 16, p.ScrollToY * 16 + 92));
-                    g.FillEllipse(Brushes.White, p.ScrollToX * 16 - 4, p.ScrollToY * 16 + 88, 9, 9);
-                }
-
-                //for (int i = set.ScrollPoints.Count - 1; i >= 0; i--)
-                //{
-                //    points.Add(new Point(set.ScrollPoints[i].ScrollToX * 16, (set.ScrollPoints[i].ScrollToY * 16) + 183));
-                //}
-
-                g.DrawLines(Pens.White, points.ToArray());
-
-                //foreach (AutoScrollPoint p in set.ScrollPoints)
-                //{
-                //    if (p.ScrollToX > 0)
-                //    {
-                //        g.DrawLine(Pens.Red, new Point(p.ScrollToX * 16, p.ScrollToY * 16), new Point(p.ScrollToX * 16, p.ScrollToY * 16 + 183));
-                //    }
-
-                //    if (p.ScrollToX < 240)
-                //    {
-                //        g.DrawLine(Pens.Red, new Point(p.ScrollToX * 16 + 1, p.ScrollToY * 16), new Point(p.ScrollToX * 16 + 1, p.ScrollToY * 16 + 183));
-                //    }
-                //}
-
-                //scrollBrush.Dispose();
-            }
-
-            g.Dispose();
-
-        }
-
         private bool _ShowSpecial;
         public bool ShowSpecialSprites
         {
@@ -1418,20 +1360,6 @@ namespace Daiz.NES.Reuben
                 {
                     FullSpriteRender();
                     Redraw();
-                }
-            }
-        }
-
-        private bool _ShowAutoScroll;
-        public bool ShowAutoScroll
-        {
-            get { return _ShowAutoScroll; }
-            set
-            {
-                _ShowSpecial = value;
-                if (!DelayDrawing)
-                {
-
                 }
             }
         }
