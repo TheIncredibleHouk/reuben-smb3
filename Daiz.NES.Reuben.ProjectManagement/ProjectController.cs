@@ -23,7 +23,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public static WorldManager WorldManager { get; private set; }
         public static LayoutManager LayoutManager { get; private set; }
         public static MusicManager MusicManager { get; private set; }
-        public static AutoScrollManager AutoScrollManager { get; private set; }
         public static string ProjectName;
 
         static ProjectController()
@@ -39,7 +38,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             SpecialManager = new SpecialManager();
             LayoutManager = new LayoutManager();
             MusicManager = new MusicManager();
-            AutoScrollManager = new ProjectManagement.AutoScrollManager();
             ReubenDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Reuben";
             if (!Directory.Exists(ReubenDirectory))
             {

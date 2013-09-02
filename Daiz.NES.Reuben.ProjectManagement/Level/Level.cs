@@ -22,8 +22,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int MostCommonTile { get; private set; }
         public int GraphicsBank { get; set; }
         public int AnimationType { get; set; }
-        public int AnimationBank
-        {
+        public int AnimationBank {
             get
             {
                 return AnimationType == 0 ? 0x80 : 0xD0;
@@ -48,8 +47,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Height { get; private set; }
         public int ChallengeType { get; set; }
         public int SpecialLevelType { get; set; }
-        public Guid AutoScrollSetID { get; set; }
-
+        
         public int MiscByte1 { get; set; }
         public int MiscByte2 { get; set; }
         public int MiscByte3 { get; set; }
@@ -65,7 +63,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             SpriteData = new List<Sprite>();
             Settings = new LevelSettings();
             MiscByte1 = MiscByte2 = MiscByte3 = 0;
-            AutoScrollSetID = Guid.Empty;
         }
 
         public LevelLayout LevelLayout
@@ -74,13 +71,24 @@ namespace Daiz.NES.Reuben.ProjectManagement
             set
             {
                 _LevelLayout = value;
-                LevelData = new byte[240, 27];
-                Width = 240;
-                Height = 27;
+                switch (value)
+                {
+                    case LevelLayout.Horizontal:
+                        LevelData = new byte[240, 27];
+                        Width = 240;
+                        Height = 27;
+                        break;
+
+                    case LevelLayout.Vertical:
+                        LevelData = new byte[16, 225];
+                        Width = 16;
+                        Height = 225;
+                        break;
+                }
             }
         }
 
-
+        
         public bool Save()
         {
             return Save(ProjectController.LevelDirectory + @"\" + Guid + ".lvl");
@@ -114,7 +122,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("misc1", MiscByte1);
             root.SetAttributeValue("misc2", MiscByte2);
             root.SetAttributeValue("misc3", MiscByte3);
-            root.SetAttributeValue("autoscroll", AutoScrollSetID);
 
             StringBuilder sb = new StringBuilder();
 
@@ -155,7 +162,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.Add(p);
             root.Add(s);
             root.Add(Settings.CreateElement());
-
+           
             xDoc.Add(root);
             xDoc.Save(fileName);
 
@@ -242,7 +249,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     case "invincibleenemies":
                         InvincibleEnemies = a.Value.ToBoolean();
                         break;
-
+                        
                     case "vineblocked":
                         VineBlocked = a.Value.ToBoolean();
                         break;
@@ -290,13 +297,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     case "misc2":
                         MiscByte2 = a.Value.ToInt();
                         break;
-
+                        
                     case "misc3":
                         MiscByte3 = a.Value.ToInt();
-                        break;
-
-                    case "autoscroll":
-                        AutoScrollSetID = a.Value.ToGuid();
                         break;
                 }
             }
@@ -323,7 +326,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 if (tileCount[i] > highestTileCount)
                 {
                     highestTileCount = MostCommonTile = i;
-
+                    
                 }
             }
 
