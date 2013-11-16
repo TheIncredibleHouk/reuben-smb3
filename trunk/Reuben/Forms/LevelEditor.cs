@@ -1829,11 +1829,6 @@ namespace Daiz.NES.Reuben
             TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = false;
         }
 
-        private void CmbSpecialType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TsbReplace_Click(object sender, EventArgs e)
         {
             SetHelpText(Reuben.Properties.Resources.ReplaceTileHelper);

@@ -89,6 +89,8 @@
             this.LblSelectorHover = new System.Windows.Forms.Label();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.CmbSpriteVis = new System.Windows.Forms.ComboBox();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
             this.TabClass3 = new System.Windows.Forms.TabControl();
             this.TabClass2 = new System.Windows.Forms.TabControl();
@@ -155,8 +157,6 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.CmbSpriteVis = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.PnlView = new Daiz.NES.Reuben.FixedPanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
@@ -732,7 +732,6 @@
             this.CmbSpecialType.Name = "CmbSpecialType";
             this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);
             this.CmbSpecialType.TabIndex = 4;
-            this.CmbSpecialType.SelectedIndexChanged += new System.EventHandler(this.CmbSpecialType_SelectedIndexChanged);
             // 
             // label15
             // 
@@ -909,6 +908,30 @@
             this.tabPage2.ToolTipText = "Shortcut W";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage2_MouseMove);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 338);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(43, 13);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Visibility";
+            // 
+            // CmbSpriteVis
+            // 
+            this.CmbSpriteVis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSpriteVis.FormattingEnabled = true;
+            this.CmbSpriteVis.Items.AddRange(new object[] {
+            "Always",
+            "Challenge Only",
+            "Day Only",
+            "Night Only"});
+            this.CmbSpriteVis.Location = new System.Drawing.Point(11, 354);
+            this.CmbSpriteVis.Name = "CmbSpriteVis";
+            this.CmbSpriteVis.Size = new System.Drawing.Size(121, 21);
+            this.CmbSpriteVis.TabIndex = 4;
+            this.CmbSpriteVis.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
             // 
             // LblSpriteSelected
             // 
@@ -1563,30 +1586,6 @@
             this.toolStripMenuItem6.Size = new System.Drawing.Size(242, 22);
             this.toolStripMenuItem6.Text = "Hide Guides";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
-            // 
-            // CmbSpriteVis
-            // 
-            this.CmbSpriteVis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbSpriteVis.FormattingEnabled = true;
-            this.CmbSpriteVis.Items.AddRange(new object[] {
-            "Always",
-            "Challenge Only",
-            "Day Only",
-            "Night Only"});
-            this.CmbSpriteVis.Location = new System.Drawing.Point(11, 354);
-            this.CmbSpriteVis.Name = "CmbSpriteVis";
-            this.CmbSpriteVis.Size = new System.Drawing.Size(121, 21);
-            this.CmbSpriteVis.TabIndex = 4;
-            this.CmbSpriteVis.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(8, 338);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(43, 13);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "Visibility";
             // 
             // PnlView
             // 
