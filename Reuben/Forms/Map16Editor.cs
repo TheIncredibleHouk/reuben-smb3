@@ -78,7 +78,7 @@ namespace Daiz.NES.Reuben
             "Treasure",
             "Locked Door",
             "Enemy Interaction",
-            "Unused",
+            "Trap Activate",
             "Climbable",
             "Coin",
             "Door",

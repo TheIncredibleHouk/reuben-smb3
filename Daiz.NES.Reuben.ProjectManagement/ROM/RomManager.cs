@@ -60,7 +60,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             CompileWorlds();
 
             levelDataPointer = 0x40010;
-            CompileLevels();
+            levelDataPointer = CompileLevels();
 
             if (includeGfx)
             {
@@ -72,7 +72,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return 0x7C00F - levelDataPointer;
         }
 
-        private bool CompileLevels()
+        private int CompileLevels()
         {
 
             Level l = new Level();
@@ -83,10 +83,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 levelAddressTable.Add(levelIndexTable[l.Guid], levelDataPointer);
                 levelDataPointer = WriteLevel(l, levelDataPointer, li.Name);
                 if (levelDataPointer >= 0xFC000)
-                    return false;
+                    return -1;
             }
 
-            int bank, address;
+            int bank, address, lastLevelPointer = levelDataPointer;
 
             Rom.ProtectionMode = RomWriteProtection.LevelPointers;
             foreach (var index in levelAddressTable.Keys)
@@ -99,7 +99,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 Rom[0x24012 + (index * 4)] = (byte)((address & 0xFF00) >> 8);
                 Rom[0x24013 + (index * 4)] = (byte)levelTypeTable[index];
             }
-            return true;
+            return lastLevelPointer;
         }
 
         private bool CompileWorlds()
@@ -255,7 +255,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)0xFF;
 
 
-            if (l.SpecialLevelType > 0)
+            if (l.SpecialLevelType > 0 && l.SpecialLevelType < 4)
             {
                 l.SpriteData.Add(new Sprite() { InGameID = 0x34, X = l.SpecialLevelType - 1 });
             }

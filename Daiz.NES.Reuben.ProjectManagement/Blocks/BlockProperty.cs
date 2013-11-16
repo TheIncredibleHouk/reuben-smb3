@@ -100,7 +100,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             break;
 
                         case 9:
+                            s2 = "Enemy Activate";
+                            break;
+
                         case 10:
+                            s2 = "Trap Activate";
+                            break;
+
                         case 15:
                             
                             break;
