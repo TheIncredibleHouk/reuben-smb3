@@ -278,5 +278,11 @@ namespace Daiz.NES.Reuben
         {
             ReubenController.SaveCurrentLevelToFile();            
         }
+
+        private void Main_Activated(object sender, EventArgs e)
+        {
+            ProjectController.CheckGraphicsChanges();
+
+        }
     }
 }

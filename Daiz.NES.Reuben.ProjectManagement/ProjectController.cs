@@ -125,5 +125,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
             ProjectManager.Save(string.Format("{0}{1}{2}.rbn", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
             return true;
         }
+
+        public static void CheckGraphicsChanges()
+        {
+            GraphicsManager.CheckGraphicsFileChange(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
+        }
     }
 }

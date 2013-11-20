@@ -135,8 +135,6 @@ namespace Daiz.NES.Reuben
 
         void ReubenController_GraphicsReloaded(object sender, EventArgs e)
         {
-            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank]);
-            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank + 1]);
             UpdateGraphics();
         }
 
@@ -455,7 +453,6 @@ namespace Daiz.NES.Reuben
 
         private void UpdateGraphics()
         {
-            CurrentTable = new PatternTable();
             CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex]);
             CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank]);

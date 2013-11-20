@@ -48,6 +48,7 @@
             this.dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.levelToPNGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuProject = new System.Windows.Forms.ToolStripMenuItem();
             this.setDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +75,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnShowHide = new System.Windows.Forms.Button();
             this.PrvProject = new Daiz.NES.Reuben.ProjectView();
-            this.levelAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.PnlRightSide.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -118,7 +118,7 @@
             this.projectToolStripMenuItem,
             this.MnuNewLevel});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // projectToolStripMenuItem
@@ -141,7 +141,7 @@
             this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.projectToolStripMenuFromValue});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // projectToolStripMenuFromValue
@@ -158,7 +158,7 @@
             this.currentLevelToolStripMenuItem});
             this.MnuReload.Enabled = false;
             this.MnuReload.Name = "MnuReload";
-            this.MnuReload.Size = new System.Drawing.Size(152, 22);
+            this.MnuReload.Size = new System.Drawing.Size(142, 22);
             this.MnuReload.Text = "Reload";
             // 
             // graphicsToolStripMenuFromValue
@@ -182,7 +182,7 @@
             this.rOMWithGraphicsToolStripMenuItem});
             this.compileROMToolStripMenuItem.Enabled = false;
             this.compileROMToolStripMenuItem.Name = "compileROMToolStripMenuItem";
-            this.compileROMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.compileROMToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.compileROMToolStripMenuItem.Text = "Save to ROM";
             // 
             // saveToRom
@@ -204,7 +204,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
             // 
             // MnuImport
             // 
@@ -213,20 +213,20 @@
             this.dToolStripMenuItem});
             this.MnuImport.Enabled = false;
             this.MnuImport.Name = "MnuImport";
-            this.MnuImport.Size = new System.Drawing.Size(152, 22);
+            this.MnuImport.Size = new System.Drawing.Size(142, 22);
             this.MnuImport.Text = "Import";
             // 
             // graphicsToolStripMenuItem
             // 
             this.graphicsToolStripMenuItem.Name = "graphicsToolStripMenuItem";
-            this.graphicsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.graphicsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.graphicsToolStripMenuItem.Text = "Graphics";
             this.graphicsToolStripMenuItem.Click += new System.EventHandler(this.graphicsToolStripMenuItem_Click);
             // 
             // dToolStripMenuItem
             // 
             this.dToolStripMenuItem.Name = "dToolStripMenuItem";
-            this.dToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.dToolStripMenuItem.Text = "Existing Level";
             this.dToolStripMenuItem.Click += new System.EventHandler(this.dToolStripMenuItem_Click);
             // 
@@ -237,20 +237,27 @@
             this.levelAsToolStripMenuItem});
             this.MnuExport.Enabled = false;
             this.MnuExport.Name = "MnuExport";
-            this.MnuExport.Size = new System.Drawing.Size(152, 22);
+            this.MnuExport.Size = new System.Drawing.Size(142, 22);
             this.MnuExport.Text = "Export";
             // 
             // levelToPNGToolStripMenuItem
             // 
             this.levelToPNGToolStripMenuItem.Name = "levelToPNGToolStripMenuItem";
-            this.levelToPNGToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.levelToPNGToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.levelToPNGToolStripMenuItem.Text = "Level to PNG";
             this.levelToPNGToolStripMenuItem.Click += new System.EventHandler(this.levelToPNGToolStripMenuItem_Click);
+            // 
+            // levelAsToolStripMenuItem
+            // 
+            this.levelAsToolStripMenuItem.Name = "levelAsToolStripMenuItem";
+            this.levelAsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.levelAsToolStripMenuItem.Text = "Level As";
+            this.levelAsToolStripMenuItem.Click += new System.EventHandler(this.levelAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(139, 6);
             // 
             // MnuProject
             // 
@@ -260,7 +267,7 @@
             this.toolStripSeparator4});
             this.MnuProject.Enabled = false;
             this.MnuProject.Name = "MnuProject";
-            this.MnuProject.Size = new System.Drawing.Size(152, 22);
+            this.MnuProject.Size = new System.Drawing.Size(142, 22);
             this.MnuProject.Text = "Defaults";
             // 
             // setDefaultToolStripMenuItem
@@ -332,7 +339,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // MnuTools
@@ -443,13 +450,6 @@
             this.PrvProject.Size = new System.Drawing.Size(325, 401);
             this.PrvProject.TabIndex = 3;
             // 
-            // levelAsToolStripMenuItem
-            // 
-            this.levelAsToolStripMenuItem.Name = "levelAsToolStripMenuItem";
-            this.levelAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.levelAsToolStripMenuItem.Text = "Level As";
-            this.levelAsToolStripMenuItem.Click += new System.EventHandler(this.levelAsToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -462,6 +462,7 @@
             this.MainMenuStrip = this.MainMenu;
             this.Name = "Main";
             this.Text = "Main";
+            this.Activated += new System.EventHandler(this.Main_Activated);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             this.PnlRightSide.ResumeLayout(false);

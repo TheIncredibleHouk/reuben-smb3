@@ -50,6 +50,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
         }
 
+        public void CheckGraphicsFileChange(string fileName)
+        {
+            if (LastModified < File.GetLastWriteTime(fileName))
+            {
+                LoadGraphics(fileName);
+                if (GraphicsUpdated != null)
+                {
+                    GraphicsUpdated(null, null);
+                }
+            }
+        }
 
         public PatternTable BuildPatternTable(int index)
         {
