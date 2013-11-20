@@ -534,5 +534,23 @@ namespace Daiz.NES.Reuben
         {
             CommitBlockTransitions();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (Block b in BlsBlocks.CurrentDefiniton.BlockList)
+            {
+                b.BlockProperty = BlockProperty.Background;
+                b.Description = "";
+                b[0, 0] = 0xEE;
+                b[0, 1] = 0xFF;
+                b[1, 0] = 0xFF;
+                b[1, 1] = 0xEE;
+            }
+        }
     }
 }
