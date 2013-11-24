@@ -87,6 +87,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.fbF1 = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BlockDescription = new System.Windows.Forms.TextBox();
             this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
@@ -123,7 +124,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.vineTile = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ChkShowInteractions = new System.Windows.Forms.CheckBox();
             this.tabPage5.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -690,6 +691,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ChkShowInteractions);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.BlockDescription);
@@ -719,6 +721,16 @@
             this.tabPage1.Text = "Block Definitions";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(522, 527);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 34;
+            this.button2.Text = "Clear All";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -730,7 +742,7 @@
             // 
             // BlockDescription
             // 
-            this.BlockDescription.Location = new System.Drawing.Point(340, 450);
+            this.BlockDescription.Location = new System.Drawing.Point(340, 476);
             this.BlockDescription.Name = "BlockDescription";
             this.BlockDescription.Size = new System.Drawing.Size(250, 20);
             this.BlockDescription.TabIndex = 33;
@@ -750,7 +762,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(336, 434);
+            this.label5.Location = new System.Drawing.Point(336, 460);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 13);
             this.label5.TabIndex = 32;
@@ -772,7 +784,7 @@
             this.GrbBlocks.Controls.Add(this.CmbSolidity);
             this.GrbBlocks.Controls.Add(this.LblInteraction);
             this.GrbBlocks.Controls.Add(this.CmdInteraction);
-            this.GrbBlocks.Location = new System.Drawing.Point(330, 340);
+            this.GrbBlocks.Location = new System.Drawing.Point(330, 366);
             this.GrbBlocks.Name = "GrbBlocks";
             this.GrbBlocks.Size = new System.Drawing.Size(268, 76);
             this.GrbBlocks.TabIndex = 31;
@@ -910,9 +922,9 @@
             this.ChkBlockProperties.AutoSize = true;
             this.ChkBlockProperties.Location = new System.Drawing.Point(465, 315);
             this.ChkBlockProperties.Name = "ChkBlockProperties";
-            this.ChkBlockProperties.Size = new System.Drawing.Size(133, 17);
+            this.ChkBlockProperties.Size = new System.Drawing.Size(89, 17);
             this.ChkBlockProperties.TabIndex = 19;
-            this.ChkBlockProperties.Text = "Show Block Properties";
+            this.ChkBlockProperties.Text = "Show Solidity";
             this.ChkBlockProperties.UseVisualStyleBackColor = true;
             this.ChkBlockProperties.CheckedChanged += new System.EventHandler(this.ChkBlockProperties_CheckedChanged);
             // 
@@ -1024,9 +1036,9 @@
             this.ChkShowSpecials.AutoSize = true;
             this.ChkShowSpecials.Location = new System.Drawing.Point(341, 315);
             this.ChkShowSpecials.Name = "ChkShowSpecials";
-            this.ChkShowSpecials.Size = new System.Drawing.Size(120, 17);
+            this.ChkShowSpecials.Size = new System.Drawing.Size(81, 17);
             this.ChkShowSpecials.TabIndex = 14;
-            this.ChkShowSpecials.Text = "Show Special Icons";
+            this.ChkShowSpecials.Text = "Show Items";
             this.ChkShowSpecials.UseVisualStyleBackColor = true;
             this.ChkShowSpecials.CheckedChanged += new System.EventHandler(this.ChkShowSpecials_CheckedChanged);
             // 
@@ -1103,15 +1115,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // button2
+            // ChkShowInteractions
             // 
-            this.button2.Location = new System.Drawing.Point(522, 527);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 34;
-            this.button2.Text = "Clear All";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ChkShowInteractions.AutoSize = true;
+            this.ChkShowInteractions.Location = new System.Drawing.Point(341, 336);
+            this.ChkShowInteractions.Name = "ChkShowInteractions";
+            this.ChkShowInteractions.Size = new System.Drawing.Size(125, 17);
+            this.ChkShowInteractions.TabIndex = 35;
+            this.ChkShowInteractions.Text = "Show Tile Iteractions";
+            this.ChkShowInteractions.UseVisualStyleBackColor = true;
+            this.ChkShowInteractions.CheckedChanged += new System.EventHandler(this.ChkShowInteractions_CheckedChanged);
             // 
             // Map16Editor
             // 
@@ -1241,5 +1254,6 @@
         private System.Windows.Forms.ComboBox vineTile;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox ChkShowInteractions;
     }
 }

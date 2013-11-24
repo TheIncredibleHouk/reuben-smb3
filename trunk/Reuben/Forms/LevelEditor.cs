@@ -179,6 +179,7 @@ namespace Daiz.NES.Reuben
             CmbAnim.SelectedIndex = CurrentLevel.AnimationType;
             ChkInvincibleEnemies.Checked = CurrentLevel.InvincibleEnemies;
             CmbPaletteEffect.SelectedIndex = CurrentLevel.PaletteEffect;
+            ChkProjectileSpins.Checked = CurrentLevel.ProjectileBlocksTemporary;
 
             switch (CurrentLevel.Settings.DrawMode)
             {
@@ -2026,6 +2027,11 @@ namespace Daiz.NES.Reuben
             {
                 CurrentSprite.Visibility = CmbSpriteVis.SelectedIndex;
             }
+        }
+
+        private void ChkProjectileSpins_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentLevel.ProjectileBlocksTemporary = ChkProjectileSpins.Checked;
         }
     }
 }

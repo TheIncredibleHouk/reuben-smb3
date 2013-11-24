@@ -38,6 +38,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int StartAction { get; set; }
         public int ScrollType { get; set; }
         public bool InvincibleEnemies { get; set; }
+        public bool ProjectileBlocksTemporary { get; set; }
         public bool VineBlocked { get; set; }
         public int PaletteEffect { get; set; }
         public int Palette { get; set; }
@@ -122,6 +123,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("misc1", MiscByte1);
             root.SetAttributeValue("misc2", MiscByte2);
             root.SetAttributeValue("misc3", MiscByte3);
+            root.SetAttributeValue("tempprojeffects", ProjectileBlocksTemporary);
 
             StringBuilder sb = new StringBuilder();
 
@@ -300,6 +302,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         
                     case "misc3":
                         MiscByte3 = a.Value.ToInt();
+                        break;
+
+                    case "tempprojeffects":
+                        ProjectileBlocksTemporary = a.Value.ToBoolean();
                         break;
                 }
             }

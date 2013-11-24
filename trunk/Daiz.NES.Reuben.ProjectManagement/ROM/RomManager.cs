@@ -187,7 +187,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)(ProjectController.MusicManager.MusicList[l.Music].Value);
             Rom[levelAddress++] = (byte)(((l.Time / 100) << 4) | ((l.Time - ((l.Time / 100) * 100)) / 10));
             Rom[levelAddress++] = (byte)((l.Pointers.Count << 4) | (l.VineBlocked ? 0x08 : 0x00) | l.ScrollType);
-            Rom[levelAddress++] = (byte)((l.InvincibleEnemies ? 0x80 : 0x00) | (l.PaletteEffect << 4));
+            Rom[levelAddress++] = (byte)((l.InvincibleEnemies ? 0x80 : 0x00) | (l.ProjectileBlocksTemporary ? 0x40 : 0x00) | (l.PaletteEffect << 4));
             Rom[levelAddress++] = (byte)l.MiscByte1;
             Rom[levelAddress++] = (byte)l.MiscByte2;
             Rom[levelAddress++] = (byte)l.MiscByte3;

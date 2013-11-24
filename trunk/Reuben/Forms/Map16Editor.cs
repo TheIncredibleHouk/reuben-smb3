@@ -83,7 +83,7 @@ namespace Daiz.NES.Reuben
             "Coin",
             "Door",
             "Cherry",
-            "Unsued"
+            "Hidden Coin Block"
         };
         private List<string> SolidInteractionTypes = new List<string>()
         {
@@ -142,13 +142,7 @@ namespace Daiz.NES.Reuben
             }
 
             updating = false;
-            var b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry);
-            if (b >= CmbSolidity.Items.Count)
-            {
-                b = 0;
-            }
-
-            CmdInteraction.SelectedIndex = b;
+            CmdInteraction.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
         }
 
         void BlsBlocks_SelectionChanged(object sender, TEventArgs<MouseButtons> e)
@@ -165,7 +159,7 @@ namespace Daiz.NES.Reuben
                     CmbSolidity.SelectedIndex = 0;
                 }
 
-                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry); ;
+                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
                 if (b > CmdInteraction.Items.Count)
                 {
                     b = 0;
@@ -525,7 +519,7 @@ namespace Daiz.NES.Reuben
 
         private void CmbSolidity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.SelectedBlock.BlockProperty = solidityMap[CmbSolidity.SelectedIndex] | (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.Cherry);
+            BlsBlocks.SelectedBlock.BlockProperty = solidityMap[CmbSolidity.SelectedIndex] | (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
             UpdateInteractionSpecialList();
             BlsBlocks.UpdateSelection();
         }
@@ -551,6 +545,11 @@ namespace Daiz.NES.Reuben
                 b[1, 0] = 0xFF;
                 b[1, 1] = 0xEE;
             }
+        }
+
+        private void ChkShowInteractions_CheckedChanged(object sender, EventArgs e)
+        {
+            BlsBlocks.ShowTileInteractions = ChkShowInteractions.Checked;
         }
     }
 }
