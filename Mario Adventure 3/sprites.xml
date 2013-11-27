@@ -275,7 +275,7 @@
     <sprite x="8" y="28" value="98" palette="-1" horizontalflip="false" verticalflip="false" table="-1" />
     <sprite x="16" y="28" value="98" palette="-1" horizontalflip="false" verticalflip="false" table="-1" />
   </spritedefinition>
-  <spritedefinition id="2E" width="02" height="01" name="Platform Moves Up When Touched" group="3" class="Dry Bones">
+  <spritedefinition id="2E" width="02" height="01" name="Platform Moves Up When Touched" group="3" class="Haunted">
     <sprite x="0" y="0" value="20" palette="2" horizontalflip="false" verticalflip="false" table="13" />
     <sprite x="8" y="0" value="22" palette="2" horizontalflip="false" verticalflip="false" table="13" />
     <sprite x="16" y="0" value="20" palette="2" horizontalflip="false" verticalflip="false" table="13" />
@@ -353,7 +353,7 @@
     <sprite x="0" y="-16" value="8C" palette="-3" horizontalflip="false" verticalflip="false" table="-1" />
     <sprite x="8" y="-16" value="8C" palette="-3" horizontalflip="true" verticalflip="false" table="-1" />
   </spritedefinition>
-  <spritedefinition id="3A" width="02" height="01" name="Platform Follows Wire" group="3" class="Dry Bones">
+  <spritedefinition id="3A" width="02" height="01" name="Platform Follows Wire" group="3" class="Haunted">
     <sprite x="0" y="0" value="20" palette="2" horizontalflip="false" verticalflip="false" table="13" />
     <sprite x="8" y="0" value="22" palette="2" horizontalflip="false" verticalflip="false" table="13" />
     <sprite x="16" y="0" value="20" palette="2" horizontalflip="false" verticalflip="false" table="13" />
@@ -395,7 +395,7 @@
     <sprite x="32" y="4" value="98" palette="-1" horizontalflip="false" verticalflip="false" table="-1" />
     <sprite x="40" y="4" value="98" palette="-1" horizontalflip="false" verticalflip="false" table="-1" />
   </spritedefinition>
-  <spritedefinition id="3F" width="01" height="02" name="Dry Bones" group="3" class="Dry Bones">
+  <spritedefinition id="3F" width="01" height="02" name="Dry Bones" group="3" class="Haunted">
     <sprite x="0" y="0" value="00" palette="2" horizontalflip="false" verticalflip="false" table="13" />
     <sprite x="8" y="0" value="02" palette="2" horizontalflip="false" verticalflip="false" table="13" />
     <sprite x="0" y="16" value="04" palette="2" horizontalflip="false" verticalflip="false" table="13" />
@@ -789,12 +789,9 @@
     <sprite x="8" y="0" value="1A" palette="1" horizontalflip="true" verticalflip="false" table="4F" />
     <sprite x="12" y="-8" value="0C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
   </spritedefinition>
-  <spritedefinition id="74" width="01" height="01" name="Para Goomba w/ Micro Goombas" group="3" class="Common">
-    <sprite x="-4" y="-8" value="0C" palette="1" horizontalflip="true" verticalflip="false" table="4F" />
-    <sprite x="0" y="0" value="18" palette="3" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="8" y="0" value="1A" palette="3" horizontalflip="true" verticalflip="false" table="4F" />
-    <sprite x="12" y="-8" value="0C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="4" y="16" value="3E" palette="3" horizontalflip="false" verticalflip="false" table="4F" />
+  <spritedefinition id="74" width="01" height="01" name="Zombie Goomba" group="3" class="Haunted">
+    <sprite x="0" y="0" value="18" palette="2" horizontalflip="false" verticalflip="false" table="13" />
+    <sprite x="8" y="0" value="1A" palette="2" horizontalflip="true" verticalflip="false" table="13" />
   </spritedefinition>
   <spritedefinition id="75" width="01" height="01" name="Bowser Fireball" group="3" class="Bowser">
     <sprite x="0" y="0" value="32" palette="1" horizontalflip="false" verticalflip="false" table="3B" />

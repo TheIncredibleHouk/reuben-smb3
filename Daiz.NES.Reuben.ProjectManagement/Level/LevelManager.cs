@@ -37,9 +37,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelTypes.Add(new LevelType("Dungeon", 2));
             LevelTypes.Add(new LevelType("Crystal", 3));
             LevelTypes.Add(new LevelType("Sky Castle", 4));
-            LevelTypes.Add(new LevelType("Unused", 5));
+            LevelTypes.Add(new LevelType("Inner Castle", 5));
             LevelTypes.Add(new LevelType("Island/Sea", 6));
-            LevelTypes.Add(new LevelType("Unused", 7));
+            LevelTypes.Add(new LevelType("Haunted Desert", 7));
             LevelTypes.Add(new LevelType("Unused", 8));
             LevelTypes.Add(new LevelType("Desert", 9));
             LevelTypes.Add(new LevelType("Pirate Ship", 10));

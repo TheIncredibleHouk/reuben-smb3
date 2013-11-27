@@ -99,10 +99,10 @@ namespace Daiz.NES.Reuben
             "Vertical Pipe Right",
             "Horizontal Pipe Bottom",
             "Climbable",
-            "Unused",
+            "Acid Meltable",
             "Stone",
             "PSwitch",
-            "Unused",
+            "ESwitch",
         };
 
         private List<string> MapInteractionTypes = new List<string>()
