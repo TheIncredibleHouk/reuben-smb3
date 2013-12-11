@@ -622,8 +622,8 @@
             this.CmbPaletteEffect.FormattingEnabled = true;
             this.CmbPaletteEffect.Items.AddRange(new object[] {
             "None",
-            "Rainbow Movement",
-            "Unused",
+            "Rainbow Cycle",
+            "Ignore Day/Night Cycle",
             "Unused"});
             this.CmbPaletteEffect.Location = new System.Drawing.Point(86, 3);
             this.CmbPaletteEffect.Name = "CmbPaletteEffect";
@@ -1046,7 +1046,7 @@
             // 
             // BtnDeletePointer
             // 
-            this.BtnDeletePointer.Location = new System.Drawing.Point(184, 248);
+            this.BtnDeletePointer.Location = new System.Drawing.Point(187, 275);
             this.BtnDeletePointer.Name = "BtnDeletePointer";
             this.BtnDeletePointer.Size = new System.Drawing.Size(75, 23);
             this.BtnDeletePointer.TabIndex = 3;
@@ -1056,7 +1056,7 @@
             // 
             // BtnAddPointer
             // 
-            this.BtnAddPointer.Location = new System.Drawing.Point(103, 248);
+            this.BtnAddPointer.Location = new System.Drawing.Point(106, 275);
             this.BtnAddPointer.Name = "BtnAddPointer";
             this.BtnAddPointer.Size = new System.Drawing.Size(75, 23);
             this.BtnAddPointer.TabIndex = 2;
@@ -1069,18 +1069,19 @@
             this.groupBox1.Controls.Add(this.PntEditor);
             this.groupBox1.Location = new System.Drawing.Point(8, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(251, 226);
+            this.groupBox1.Size = new System.Drawing.Size(251, 253);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
             // 
             // PntEditor
             // 
+            this.PntEditor.CurrentLevel = null;
             this.PntEditor.CurrentPointer = null;
             this.PntEditor.Location = new System.Drawing.Point(6, 19);
             this.PntEditor.Name = "PntEditor";
             this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
-            this.PntEditor.Size = new System.Drawing.Size(239, 205);
+            this.PntEditor.Size = new System.Drawing.Size(239, 234);
             this.PntEditor.TabIndex = 0;
             // 
             // TlsDrawing

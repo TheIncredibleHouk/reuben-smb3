@@ -243,7 +243,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
 
                 Rom[levelAddress++] = (byte)(((yExit & 0x0F) << 4) | ((yExit & 0xF0) >> 4));
-                Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x80 : 0x00) | (p.ExitType));
+                Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x80 : 0x00) | (p.RedrawLevel ? 0x40 : 0x00) | (p.ExitType));
             }
 
             byte[] levelData = l.GetCompressedData();
@@ -323,7 +323,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return levelAddress;
         }
 
-
+        
         public int WriteWorld(World w, int levelAddress)
         {
             Rom[levelAddress++] = (byte)w.GraphicsBank;

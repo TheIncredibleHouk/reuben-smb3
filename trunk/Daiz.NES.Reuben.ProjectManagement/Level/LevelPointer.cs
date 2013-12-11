@@ -12,6 +12,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         public Guid LevelGuid { get; set; }
         public int ExitType { get; set; }
+        public bool RedrawLevel { get; set; }
         public int XEnter { get; set; }
         public int YEnter { get; set; }
         public int XExit { get; set; }
@@ -32,6 +33,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             e.SetAttributeValue("yenter", YEnter);
             e.SetAttributeValue("exitslevel", ExitsLevel);
             e.SetAttributeValue("world", World);
+            e.SetAttributeValue("redraw", RedrawLevel);
             return e;
         }
 
@@ -71,6 +73,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "world":
                         World = a.Value.ToInt();
+                        break;
+
+                    case "redraw":
+                        RedrawLevel = a.Value.ToBoolean();
                         break;
                 }
             }

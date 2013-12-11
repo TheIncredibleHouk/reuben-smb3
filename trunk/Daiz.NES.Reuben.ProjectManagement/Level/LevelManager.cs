@@ -40,7 +40,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelTypes.Add(new LevelType("Inner Castle", 5));
             LevelTypes.Add(new LevelType("Island/Sea", 6));
             LevelTypes.Add(new LevelType("Haunted Desert", 7));
-            LevelTypes.Add(new LevelType("Unused", 8));
+            LevelTypes.Add(new LevelType("Subcon", 8));
             LevelTypes.Add(new LevelType("Desert", 9));
             LevelTypes.Add(new LevelType("Pirate Ship", 10));
             LevelTypes.Add(new LevelType("Unused", 11));
@@ -99,8 +99,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     break;
 
                 case 8:
-                    l.GraphicsBank = 0x58;
-                    l.ClearValue = 0x90;
+                    l.GraphicsBank = 0x3E;
+                    l.ClearValue = 0x80;
                     break;
 
                 case 9:

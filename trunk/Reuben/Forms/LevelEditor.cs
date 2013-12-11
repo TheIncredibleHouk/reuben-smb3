@@ -161,7 +161,7 @@ namespace Daiz.NES.Reuben
         public void EditLevel(Level l)
         {
             GetLevelInfo(l);
-            
+            PntEditor.CurrentLevel = l;
             LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
@@ -1883,6 +1883,10 @@ namespace Daiz.NES.Reuben
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.A:
+                        LvlView.SelectionRectangle = new Rectangle(0, 0, CurrentLevel.Length * 16, 0x1B);
+                        break;
+
                     case Keys.Add:
                         if (!TsbZoom.Checked)
                             TsbZoom.Checked = true;
