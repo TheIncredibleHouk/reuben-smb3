@@ -23,6 +23,8 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        public Level CurrentLevel { get; set; }
+
         private LevelPointer _CurrentPointer;
         public LevelPointer CurrentPointer
         {
@@ -59,6 +61,7 @@ namespace Daiz.NES.Reuben
                     LblXEnter.Text = "X Entrance: None";
                     LblYEnter.Text = "Y Entrance: None";
                     ChkExitsLevel.Checked = value.ExitsLevel;
+                    ChkRedraw.Checked = value.RedrawLevel;
                     BtnChange.Enabled = CmbActions.Enabled = !ChkExitsLevel.Checked;
                     UpdatePosition();
                 }
@@ -92,6 +95,7 @@ namespace Daiz.NES.Reuben
                 if (lSelect.SelectedLevel != null)
                 {
                     _CurrentPointer.LevelGuid = lSelect.SelectedLevel.LevelGuid;
+                    ChkRedraw.Checked = _CurrentPointer.LevelGuid != CurrentLevel.Guid;
                     LblPointsToWorld.Text = "World: " + ProjectController.WorldManager.GetWorldInfo(lSelect.SelectedLevel.WorldGuid).Name;
                     LblPointsToLevel.Text = " Level: " + lSelect.SelectedLevel.Name;
                 }
@@ -100,7 +104,7 @@ namespace Daiz.NES.Reuben
 
         private void ChkExitsLevel_CheckedChanged(object sender, EventArgs e)
         {
-            BtnChange.Enabled = CmbActions.Enabled = !ChkExitsLevel.Checked;
+            BtnChange.Enabled = CmbActions.Enabled = ChkRedraw.Enabled = !ChkExitsLevel.Checked;
             CmbActions.Enabled = !ChkExitsLevel.Checked;
             CmbWorldExit.Enabled = ChkExitsLevel.Checked;
             _CurrentPointer.ExitsLevel = ChkExitsLevel.Checked;
@@ -128,6 +132,11 @@ namespace Daiz.NES.Reuben
         private void CmbWorldExit_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentPointer.World = CmbWorldExit.SelectedIndex;
+        }
+
+        private void ChkRedraw_CheckedChanged(object sender, EventArgs e)
+        {
+            _CurrentPointer.RedrawLevel = ChkRedraw.Checked;
         }
     }
 }
