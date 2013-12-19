@@ -201,5 +201,11 @@ namespace Daiz.NES.Reuben
 
             Invalidate();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            _CurrentPalette.PaletteChanged -= _CurrentPalette_PaletteChanged;
+            base.Dispose(disposing);
+        }
     }
 }

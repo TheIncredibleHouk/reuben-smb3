@@ -374,7 +374,9 @@ namespace Daiz.NES.Reuben
             foreach (var t in SelectedTiles)
             {
                 if (t != null)
+                {
                     t.PixelsChanged += new EventHandler(t_PixelsChanged);
+                }
             }
         }
 
@@ -384,6 +386,12 @@ namespace Daiz.NES.Reuben
         }
 
         public int SelectedIndex { get; private set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
+            base.Dispose(disposing);
+        }
     }
 
     public enum ArrangementMode

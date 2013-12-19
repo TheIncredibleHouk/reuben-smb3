@@ -653,7 +653,7 @@ namespace Daiz.NES.Reuben
                         }
                     }
 
-                    if (_DisplayStartingPosition && ((j == CurrentLevel.XStart && i == CurrentLevel.YStart) || (j == CurrentLevel.XAltStart && i == CurrentLevel.YAltStart)))
+                    if (_DisplayStartingPosition && ((j == CurrentLevel.XStart && i == CurrentLevel.YStart)))
                     {
                         RenderSpecialTileAlpha(_SpecialTable[0xA0], x, y, 4, data);
                         RenderSpecialTileAlpha(_SpecialTable[0xB0], x, y + 8, 4, data);
@@ -1304,7 +1304,7 @@ namespace Daiz.NES.Reuben
                 }
             }
 
-            if (_DisplayStartingPosition && ((xLevel == CurrentLevel.XStart && yLevel == CurrentLevel.YStart) || (xLevel == CurrentLevel.XAltStart && yLevel == CurrentLevel.YAltStart)))
+            if (_DisplayStartingPosition && ((xLevel == CurrentLevel.XStart && yLevel == CurrentLevel.YStart)))
             {
                 RenderSpecialTileAlpha(_SpecialTable[0xA0], 0, 0, 4, data);
                 RenderSpecialTileAlpha(_SpecialTable[0xB0], 0, 8, 4, data);
@@ -1642,7 +1642,6 @@ namespace Daiz.NES.Reuben
                 if (CurrentLevel != null)
                 {
                     UpdateBlock(CurrentLevel.XStart, CurrentLevel.YStart);
-                    UpdateBlock(CurrentLevel.XAltStart, CurrentLevel.YAltStart);
                 }
             }
         }
@@ -1747,6 +1746,15 @@ namespace Daiz.NES.Reuben
                 FullRender();
                 Redraw();
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _CurrentLevel.TileChanged -= _CurrentLevel_TileChanged;
+            _CurrentLevel.SpriteAdded -= _CurrentLevel_SpriteAdded;
+            _CurrentLevel.SpriteRemoved -= _CurrentLevel_SpriteRemoved;
+            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
+            base.Dispose(disposing);
         }
     }
 }

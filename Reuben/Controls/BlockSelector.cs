@@ -17,6 +17,7 @@ namespace Daiz.NES.Reuben
     {
         public event EventHandler<TEventArgs<MouseButtons>> SelectionChanged;
 
+
         public BlockSelector()
         {
             BackBuffer = new Bitmap(256, 256);
@@ -24,7 +25,7 @@ namespace Daiz.NES.Reuben
             SpecialColors = new Color[8, 4];
             CurrentDefiniton = null;
             this.Width = this.Height = 256;
-            this.MouseDown += new MouseEventHandler(PatternTableViewer_MouseDown);
+            this.MouseDown += PatternTableViewer_MouseDown;
             FullRender();
         }
 
@@ -84,6 +85,12 @@ namespace Daiz.NES.Reuben
                     FullRender();
                 }
             }
+        }
+
+        public void CleanUp()
+        {
+            this.MouseDown -= PatternTableViewer_MouseDown;
+            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
         }
 
         void _CurrentTable_GraphicsChanged(object sender, TEventArgs<int> e)
@@ -437,7 +444,7 @@ namespace Daiz.NES.Reuben
                                         RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
                                         RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
                                         break;
-                                        
+
                                     case 12:
                                         RenderSpecialTileAlpha(_SpecialTable[0x08], x, y, 4, data);
                                         RenderSpecialTileAlpha(_SpecialTable[0x18], x, y + 8, 4, data);
@@ -1208,6 +1215,12 @@ namespace Daiz.NES.Reuben
                 _ShowTileInteractions = value;
                 FullRender();
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
+            base.Dispose(disposing);
         }
     }
 }

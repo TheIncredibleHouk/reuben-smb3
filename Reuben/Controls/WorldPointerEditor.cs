@@ -57,7 +57,6 @@ namespace Daiz.NES.Reuben
 
                     LblXEnter.Text = "X: 0";
                     LblYEnter.Text = "Y: 0";
-                    ChkAltEnter.Checked = CurrentPointer.AltLevelEntrance;
                     UpdatePosition();
                 }
             }
@@ -104,7 +103,6 @@ namespace Daiz.NES.Reuben
 
         private void ChkAltEnter_CheckedChanged(object sender, EventArgs e)
         {
-            CurrentPointer.AltLevelEntrance = ChkAltEnter.Checked;
         }
     }
 }
