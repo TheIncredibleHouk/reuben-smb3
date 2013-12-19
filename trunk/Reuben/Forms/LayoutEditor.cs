@@ -107,6 +107,9 @@ namespace Daiz.NES.Reuben
         private void BtnSaveClose_Click(object sender, EventArgs e)
         {
             ProjectController.Save();
+            ProjectController.LayoutManager.LayoutAdded -= LayoutManager_LayoutAdded;
+            ProjectController.LayoutManager.LayoutRemoved -= LayoutManager_LayoutRemoved;
+            CurrentLayout.Renamed -= CurrentLayout_Renamed;
             this.Close();
         }
 
@@ -273,5 +276,6 @@ namespace Daiz.NES.Reuben
             }
         }
 
+        
     }
 }

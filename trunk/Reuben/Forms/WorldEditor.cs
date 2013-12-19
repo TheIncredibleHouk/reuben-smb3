@@ -27,7 +27,7 @@ namespace Daiz.NES.Reuben
 
             UndoBuffer = new List<IUndoableAction>();
             RedoBuffer = new List<IUndoableAction>();
-            CmbMusic.DisplayMember = CmbLayouts.DisplayMember  = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
+            CmbMusic.DisplayMember = CmbLayouts.DisplayMember = CmbPalettes.DisplayMember = CmbGraphics.DisplayMember = "Name";
             foreach (var g in ProjectController.GraphicsManager.GraphicsInfo)
             {
                 CmbGraphics.Items.Add(g);
@@ -177,7 +177,7 @@ namespace Daiz.NES.Reuben
                     break;
             }
 
-            switch(CurrentWorld.Settings.EditMode)
+            switch (CurrentWorld.Settings.EditMode)
             {
                 case EditMode.Tiles:
                     TabEditSelector.SelectedIndex = 0;
@@ -625,7 +625,7 @@ namespace Daiz.NES.Reuben
             {
                 _DrawTile = LeftMouseTile;
             }
-            
+
             if (EditMode == EditMode.Tiles)
             {
                 if (TileDrawMode == TileDrawMode.Pencil)
@@ -1185,8 +1185,8 @@ namespace Daiz.NES.Reuben
         {
             int x = e.X / 16;
             int y = e.Y / 16;
-            int index =(e.X / 16) + ((e.Y / 16) * 16);
-            if(index > 255) return;
+            int index = (e.X / 16) + ((e.Y / 16) * 16);
+            if (index > 255) return;
             if (PreviousSelectorX == x && PreviousSelectorY == y) return;
             PreviousSelectorX = x;
             PreviousSelectorY = y;
@@ -1202,7 +1202,7 @@ namespace Daiz.NES.Reuben
                 if (MouseButtons == MouseButtons.Middle)
                     return (int)0;
 
-                if(TileDrawMode != TileDrawMode.Selection)
+                if (TileDrawMode != TileDrawMode.Selection)
                 {
                     if (MouseButtons == MouseButtons.Left)
                         return LeftMouseTile;
@@ -1222,6 +1222,16 @@ namespace Daiz.NES.Reuben
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             ProjectController.Save();
+            ProjectController.PaletteManager.PaletteAdded -= PaletteManager_PaletteAdded;
+            ProjectController.PaletteManager.PaletteRemoved -= PaletteManager_PaletteRemoved;
+            ProjectController.PaletteManager.PalettesSaved -= PaletteManager_PalettesSaved;
+            ProjectController.BlockManager.DefinitionsSaved -= BlockManager_DefinitionsSaved;
+            ProjectController.LayoutManager.LayoutAdded -= LayoutManager_LayoutAdded;
+            ProjectController.GraphicsManager.GraphicsUpdated -= GraphicsManager_GraphicsUpdated;
+            ProjectController.LayoutManager.LayoutRemoved -= LayoutManager_LayoutRemoved;
+            ReubenController.GraphicsReloaded -= ReubenController_GraphicsReloaded;
+            ReubenController.WorldReloaded -= ReubenController_WorldReloaded;
+            CurrentPalette.PaletteChanged -= CurrentPalette_PaletteChanged;
         }
 
         private List<IUndoableAction> UndoBuffer;
@@ -1257,7 +1267,7 @@ namespace Daiz.NES.Reuben
             {
                 for (int i = 0; i < usedRectangle.Width; i++)
                 {
-                    CurrentWorld.SetTile(usedRectangle.X + i, usedRectangle.Y + j, action.Data[i ,j]);
+                    CurrentWorld.SetTile(usedRectangle.X + i, usedRectangle.Y + j, action.Data[i, j]);
                 }
             }
             WldView.DelayDrawing = false;

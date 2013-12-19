@@ -85,8 +85,6 @@
     <Compile Include="Controls\BlockViewer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Canvas.cs">
-    </Compile>
     <Compile Include="Controls\WorldPointerEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>

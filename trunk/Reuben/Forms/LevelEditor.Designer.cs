@@ -55,20 +55,14 @@
             this.BtnClear = new System.Windows.Forms.Button();
             this.LblHexGraphics = new System.Windows.Forms.Label();
             this.tabPageEX2 = new System.Windows.Forms.TabPage();
-            this.BtnSetAltPoint = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.LblAltPoint = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.LblStartPoint = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.CmbActions = new System.Windows.Forms.ComboBox();
             this.tabPageEX3 = new System.Windows.Forms.TabPage();
             this.CmbPaletteEffect = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.ChkProjectileSpins = new System.Windows.Forms.CheckBox();
-            this.ChkBlocked = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -77,8 +71,6 @@
             this.txtMisc1 = new System.Windows.Forms.TextBox();
             this.CmbSpecialType = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.CmbChallengeType = new System.Windows.Forms.ComboBox();
             this.ChkInvincibleEnemies = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblSprite = new System.Windows.Forms.Label();
@@ -167,6 +159,7 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
+            this.label10 = new System.Windows.Forms.Label();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -399,7 +392,8 @@
             this.CmbAnim.FormattingEnabled = true;
             this.CmbAnim.Items.AddRange(new object[] {
             "Type 1",
-            "Type 2"});
+            "Type 2",
+            "Type 3"});
             this.CmbAnim.Location = new System.Drawing.Point(276, 21);
             this.CmbAnim.Name = "CmbAnim";
             this.CmbAnim.Size = new System.Drawing.Size(63, 21);
@@ -497,52 +491,15 @@
             // tabPageEX2
             // 
             this.tabPageEX2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX2.Controls.Add(this.BtnSetAltPoint);
-            this.tabPageEX2.Controls.Add(this.label14);
-            this.tabPageEX2.Controls.Add(this.LblAltPoint);
             this.tabPageEX2.Controls.Add(this.label13);
             this.tabPageEX2.Controls.Add(this.LblStartPoint);
             this.tabPageEX2.Controls.Add(this.button1);
-            this.tabPageEX2.Controls.Add(this.label11);
-            this.tabPageEX2.Controls.Add(this.CmbActions);
             this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX2.Name = "tabPageEX2";
             this.tabPageEX2.Size = new System.Drawing.Size(550, 67);
             this.tabPageEX2.TabIndex = 5;
             this.tabPageEX2.Text = "Position";
             this.tabPageEX2.UseVisualStyleBackColor = true;
-            // 
-            // BtnSetAltPoint
-            // 
-            this.BtnSetAltPoint.Location = new System.Drawing.Point(274, 21);
-            this.BtnSetAltPoint.Name = "BtnSetAltPoint";
-            this.BtnSetAltPoint.Size = new System.Drawing.Size(129, 23);
-            this.BtnSetAltPoint.TabIndex = 44;
-            this.BtnSetAltPoint.Text = "Set Alternate Start";
-            this.BtnSetAltPoint.UseVisualStyleBackColor = true;
-            this.BtnSetAltPoint.Click += new System.EventHandler(this.BtnSetAltPoint_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(271, 2);
-            this.label14.Margin = new System.Windows.Forms.Padding(3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(71, 13);
-            this.label14.TabIndex = 43;
-            this.label14.Text = "Alt Start Point";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblAltPoint
-            // 
-            this.LblAltPoint.AutoSize = true;
-            this.LblAltPoint.Location = new System.Drawing.Point(348, 2);
-            this.LblAltPoint.Margin = new System.Windows.Forms.Padding(3);
-            this.LblAltPoint.Name = "LblAltPoint";
-            this.LblAltPoint.Size = new System.Drawing.Size(48, 13);
-            this.LblAltPoint.TabIndex = 42;
-            this.LblAltPoint.Text = "X: 0 Y: 4";
-            this.LblAltPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label13
             // 
@@ -576,34 +533,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.BtnStartPoint_Click);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(139, 2);
-            this.label11.Margin = new System.Windows.Forms.Padding(3);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(76, 13);
-            this.label11.TabIndex = 38;
-            this.label11.Text = "Starting Action";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CmbActions
-            // 
-            this.CmbActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbActions.FormattingEnabled = true;
-            this.CmbActions.Items.AddRange(new object[] {
-            "None",
-            "Sliding",
-            "Up Pipe",
-            "Down Pipe",
-            "Right Pipe",
-            "Left Pipe",
-            "Anchor Cut Scene"});
-            this.CmbActions.Location = new System.Drawing.Point(139, 23);
-            this.CmbActions.Name = "CmbActions";
-            this.CmbActions.Size = new System.Drawing.Size(129, 21);
-            this.CmbActions.TabIndex = 37;
-            // 
             // tabPageEX3
             // 
             this.tabPageEX3.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -625,7 +554,7 @@
             "Rainbow Cycle",
             "Ignore Day/Night Cycle",
             "Unused"});
-            this.CmbPaletteEffect.Location = new System.Drawing.Point(86, 3);
+            this.CmbPaletteEffect.Location = new System.Drawing.Point(86, 7);
             this.CmbPaletteEffect.Name = "CmbPaletteEffect";
             this.CmbPaletteEffect.Size = new System.Drawing.Size(121, 21);
             this.CmbPaletteEffect.TabIndex = 1;
@@ -633,7 +562,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 6);
+            this.label7.Location = new System.Drawing.Point(3, 10);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 13);
             this.label7.TabIndex = 0;
@@ -642,8 +571,8 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage7.Controls.Add(this.label10);
             this.tabPage7.Controls.Add(this.ChkProjectileSpins);
-            this.tabPage7.Controls.Add(this.ChkBlocked);
             this.tabPage7.Controls.Add(this.label18);
             this.tabPage7.Controls.Add(this.label17);
             this.tabPage7.Controls.Add(this.label16);
@@ -652,8 +581,6 @@
             this.tabPage7.Controls.Add(this.txtMisc1);
             this.tabPage7.Controls.Add(this.CmbSpecialType);
             this.tabPage7.Controls.Add(this.label15);
-            this.tabPage7.Controls.Add(this.label10);
-            this.tabPage7.Controls.Add(this.CmbChallengeType);
             this.tabPage7.Controls.Add(this.ChkInvincibleEnemies);
             this.tabPage7.Location = new System.Drawing.Point(4, 4);
             this.tabPage7.Name = "tabPage7";
@@ -666,7 +593,7 @@
             // ChkProjectileSpins
             // 
             this.ChkProjectileSpins.AutoSize = true;
-            this.ChkProjectileSpins.Location = new System.Drawing.Point(6, 44);
+            this.ChkProjectileSpins.Location = new System.Drawing.Point(403, 27);
             this.ChkProjectileSpins.Name = "ChkProjectileSpins";
             this.ChkProjectileSpins.Size = new System.Drawing.Size(135, 17);
             this.ChkProjectileSpins.TabIndex = 11;
@@ -674,20 +601,10 @@
             this.ChkProjectileSpins.UseVisualStyleBackColor = true;
             this.ChkProjectileSpins.CheckedChanged += new System.EventHandler(this.ChkProjectileSpins_CheckedChanged);
             // 
-            // ChkBlocked
-            // 
-            this.ChkBlocked.AutoSize = true;
-            this.ChkBlocked.Location = new System.Drawing.Point(6, 25);
-            this.ChkBlocked.Name = "ChkBlocked";
-            this.ChkBlocked.Size = new System.Drawing.Size(95, 17);
-            this.ChkBlocked.TabIndex = 10;
-            this.ChkBlocked.Text = "Vine Blockage";
-            this.ChkBlocked.UseVisualStyleBackColor = true;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(469, 13);
+            this.label18.Location = new System.Drawing.Point(200, 45);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(38, 13);
             this.label18.TabIndex = 9;
@@ -696,7 +613,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(381, 41);
+            this.label17.Location = new System.Drawing.Point(100, 45);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(38, 13);
             this.label17.TabIndex = 9;
@@ -705,7 +622,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(381, 13);
+            this.label16.Location = new System.Drawing.Point(9, 44);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(38, 13);
             this.label16.TabIndex = 8;
@@ -713,21 +630,21 @@
             // 
             // txtMisc3
             // 
-            this.txtMisc3.Location = new System.Drawing.Point(509, 10);
+            this.txtMisc3.Location = new System.Drawing.Point(240, 42);
             this.txtMisc3.Name = "txtMisc3";
             this.txtMisc3.Size = new System.Drawing.Size(35, 20);
             this.txtMisc3.TabIndex = 7;
             // 
             // txtMisc2
             // 
-            this.txtMisc2.Location = new System.Drawing.Point(428, 37);
+            this.txtMisc2.Location = new System.Drawing.Point(147, 41);
             this.txtMisc2.Name = "txtMisc2";
             this.txtMisc2.Size = new System.Drawing.Size(35, 20);
             this.txtMisc2.TabIndex = 6;
             // 
             // txtMisc1
             // 
-            this.txtMisc1.Location = new System.Drawing.Point(428, 10);
+            this.txtMisc1.Location = new System.Drawing.Point(56, 41);
             this.txtMisc1.Name = "txtMisc1";
             this.txtMisc1.Size = new System.Drawing.Size(35, 20);
             this.txtMisc1.TabIndex = 5;
@@ -741,7 +658,7 @@
             "Hammer Bros. Toll",
             "Item Shop",
             "Bank"});
-            this.CmbSpecialType.Location = new System.Drawing.Point(240, 7);
+            this.CmbSpecialType.Location = new System.Drawing.Point(80, 7);
             this.CmbSpecialType.Name = "CmbSpecialType";
             this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);
             this.CmbSpecialType.TabIndex = 4;
@@ -749,37 +666,16 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(136, 10);
+            this.label15.Location = new System.Drawing.Point(6, 12);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 13);
+            this.label15.Size = new System.Drawing.Size(72, 13);
             this.label15.TabIndex = 3;
-            this.label15.Text = "Special Level Type";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(153, 37);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Challenge Type";
-            // 
-            // CmbChallengeType
-            // 
-            this.CmbChallengeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbChallengeType.FormattingEnabled = true;
-            this.CmbChallengeType.Items.AddRange(new object[] {
-            "None",
-            "AutoMoveRight"});
-            this.CmbChallengeType.Location = new System.Drawing.Point(240, 34);
-            this.CmbChallengeType.Name = "CmbChallengeType";
-            this.CmbChallengeType.Size = new System.Drawing.Size(121, 21);
-            this.CmbChallengeType.TabIndex = 1;
+            this.label15.Text = "Special Type:";
             // 
             // ChkInvincibleEnemies
             // 
             this.ChkInvincibleEnemies.AutoSize = true;
-            this.ChkInvincibleEnemies.Location = new System.Drawing.Point(6, 6);
+            this.ChkInvincibleEnemies.Location = new System.Drawing.Point(403, 9);
             this.ChkInvincibleEnemies.Name = "ChkInvincibleEnemies";
             this.ChkInvincibleEnemies.Size = new System.Drawing.Size(114, 17);
             this.ChkInvincibleEnemies.TabIndex = 0;
@@ -1732,6 +1628,15 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(207, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Event Type:";
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1899,14 +1804,9 @@
         private System.Windows.Forms.Button BtnClear;
         private System.Windows.Forms.Label LblHexGraphics;
         private System.Windows.Forms.TabPage tabPageEX2;
-        private System.Windows.Forms.Button BtnSetAltPoint;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label LblAltPoint;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label LblStartPoint;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox CmbActions;
         private System.Windows.Forms.TabPage tabPageEX3;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Label label18;
@@ -1917,12 +1817,9 @@
         private System.Windows.Forms.TextBox txtMisc1;
         private System.Windows.Forms.ComboBox CmbSpecialType;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox CmbChallengeType;
         private System.Windows.Forms.CheckBox ChkInvincibleEnemies;
         private System.Windows.Forms.ToolStripButton hMirrorButton;
         private System.Windows.Forms.ToolStripButton TsbInteractions;
-        private System.Windows.Forms.CheckBox ChkBlocked;
         private System.Windows.Forms.ComboBox CmbPaletteEffect;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
@@ -1930,5 +1827,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox CmbSpriteVis;
         private System.Windows.Forms.CheckBox ChkProjectileSpins;
+        private System.Windows.Forms.Label label10;
     }
 }

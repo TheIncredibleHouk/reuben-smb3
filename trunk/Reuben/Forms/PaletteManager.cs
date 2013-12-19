@@ -192,6 +192,10 @@ namespace Daiz.NES.Reuben
         private void BtnClose_Click(object sender, EventArgs e)
         {
             ProjectController.Save();
+            ProjectController.PaletteManager.PaletteAdded -= PaletteManager_PaletteAdded;
+            ProjectController.PaletteManager.PaletteRemoved -= PaletteManager_PaletteRemoved;
+            FpsFull.SelectedPaletteChanged -= FpsFull_SelectedPaletteChanged;
+            PslCurrent.CurrentPalette.NameChanged -= CurrentPalette_NameChanged;
             this.Close();
         }
 

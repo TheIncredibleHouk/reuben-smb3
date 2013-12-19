@@ -379,7 +379,7 @@ namespace Daiz.NES.Reuben
             CommitBlockTransitions();
             ProjectController.BlockManager.SaveDefinitions(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".tsa");
             ProjectController.BlockManager.SaveBlockStrings(ProjectController.RootDirectory + @"\strings.xml");
-            
+            BlsBlocks.SelectionChanged -= BlsBlocks_SelectionChanged;
             this.Close();
         }
 

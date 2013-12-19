@@ -161,5 +161,11 @@ namespace Daiz.NES.Reuben
             _CurrentBlock[x, y] = value;
             FullRender();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
+            base.Dispose(disposing);
+        }
     }
 }

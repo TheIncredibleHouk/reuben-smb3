@@ -168,22 +168,18 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 default:
                     yStart = l.YStart - 1;
-                    ayStart = l.YAltStart - 1;
                     break;
 
                 case 2:
                     yStart = l.YStart;
-                    ayStart = l.YAltStart;
                     break;
             }
             Rom[levelAddress++] = (byte)l.MostCommonTile;
             Rom[levelAddress++] = (byte)l.GraphicsBank;
             Rom[levelAddress++] = (byte)l.Palette;
-            Rom[levelAddress++] = (byte)((l.AnimationType << 7) | (l.StartAction << 4) | (l.Length - 1));
+            Rom[levelAddress++] = (byte)((l.AnimationType << 6) | (l.Length - 1));
             Rom[levelAddress++] = (byte)(byte)(((l.XStart & 0x0F) << 4) | ((l.XStart & 0xF0) >> 4)); ;
             Rom[levelAddress++] = (byte)(byte)(((yStart & 0x0F) << 4) | ((yStart & 0xF0) >> 4)); ;
-            Rom[levelAddress++] = (byte)(byte)(((l.XAltStart & 0x0F) << 4) | ((l.XAltStart & 0xF0) >> 4)); ;
-            Rom[levelAddress++] = (byte)(byte)(((ayStart & 0x0F) << 4) | ((ayStart & 0xF0) >> 4)); ;
             Rom[levelAddress++] = (byte)(ProjectController.MusicManager.MusicList[l.Music].Value);
             Rom[levelAddress++] = (byte)(((l.Time / 100) << 4) | ((l.Time - ((l.Time / 100) * 100)) / 10));
             Rom[levelAddress++] = (byte)((l.Pointers.Count << 4) | (l.VineBlocked ? 0x08 : 0x00) | l.ScrollType);

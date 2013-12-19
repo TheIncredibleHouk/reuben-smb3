@@ -42,6 +42,7 @@ namespace Daiz.NES.Reuben
                     _CurrentWorld.TileChanged += new EventHandler<TEventArgs<Point>>(_CurrentWorld_TileChanged);
                     _CurrentWorld.SpriteAdded += new EventHandler<TEventArgs<Sprite>>(_CurrentLevel_SpriteAdded);
                     _CurrentWorld.SpriteRemoved += new EventHandler<TEventArgs<Sprite>>(_CurrentWorld_SpriteRemoved);
+
                     BackBuffer = new Bitmap(_CurrentWorld.Width * 16, _CurrentWorld.Height * 16, PixelFormat.Format32bppArgb);
                     SpriteBuffer = new Bitmap(_CurrentWorld.Width * 16, _CurrentWorld.Height * 16, PixelFormat.Format32bppArgb);
                     CompositeBuffer = new Bitmap(_CurrentWorld.Width * 16, _CurrentWorld.Height * 16, PixelFormat.Format32bppArgb);
@@ -763,6 +764,15 @@ namespace Daiz.NES.Reuben
                 FullSpriteRender();
                 Redraw();
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _CurrentWorld.TileChanged -=  _CurrentWorld_TileChanged;
+            _CurrentWorld.SpriteAdded -=  _CurrentLevel_SpriteAdded;
+            _CurrentWorld.SpriteRemoved -=  _CurrentWorld_SpriteRemoved;
+            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
+            base.Dispose(disposing);
         }
     }
 }

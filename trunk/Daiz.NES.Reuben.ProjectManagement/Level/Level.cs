@@ -22,10 +22,21 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int MostCommonTile { get; private set; }
         public int GraphicsBank { get; set; }
         public int AnimationType { get; set; }
-        public int AnimationBank {
+        public int AnimationBank
+        {
             get
             {
-                return AnimationType == 0 ? 0x80 : 0xD0;
+                switch (AnimationType)
+                {
+                    case 1:
+                        return 0xD0;
+
+                    case 2:
+                        return 0xF8;
+
+                    default:
+                        return 0x80;
+                }
             }
         }
         public int Music { get; set; }
@@ -33,8 +44,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Time { get; set; }
         public int XStart { get; set; }
         public int YStart { get; set; }
-        public int XAltStart { get; set; }
-        public int YAltStart { get; set; }
+        public int EventType { get; set; }
         public int StartAction { get; set; }
         public int ScrollType { get; set; }
         public bool InvincibleEnemies { get; set; }
@@ -48,7 +58,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Height { get; private set; }
         public int ChallengeType { get; set; }
         public int SpecialLevelType { get; set; }
-        
+
         public int MiscByte1 { get; set; }
         public int MiscByte2 { get; set; }
         public int MiscByte3 { get; set; }
@@ -89,7 +99,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
         }
 
-        
+
         public bool Save()
         {
             return Save(ProjectController.LevelDirectory + @"\" + Guid + ".lvl");
@@ -108,10 +118,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("time", Time);
             root.SetAttributeValue("xstart", XStart);
             root.SetAttributeValue("ystart", YStart);
-            root.SetAttributeValue("xaltstart", XAltStart);
-            root.SetAttributeValue("yaltstart", YAltStart);
             root.SetAttributeValue("invincibleenemies", InvincibleEnemies);
-            root.SetAttributeValue("vineblocked", VineBlocked);
             root.SetAttributeValue("paletteeffect", PaletteEffect);
             root.SetAttributeValue("palette", Palette);
             root.SetAttributeValue("animationtype", AnimationType);
@@ -164,7 +171,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.Add(p);
             root.Add(s);
             root.Add(Settings.CreateElement());
-           
+
             xDoc.Add(root);
             xDoc.Save(fileName);
 
@@ -240,18 +247,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         YStart = a.Value.ToInt();
                         break;
 
-                    case "xaltstart":
-                        XAltStart = a.Value.ToInt();
-                        break;
-
-                    case "yaltstart":
-                        YAltStart = a.Value.ToInt();
-                        break;
-
                     case "invincibleenemies":
                         InvincibleEnemies = a.Value.ToBoolean();
                         break;
-                        
+
                     case "vineblocked":
                         VineBlocked = a.Value.ToBoolean();
                         break;
@@ -299,7 +298,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     case "misc2":
                         MiscByte2 = a.Value.ToInt();
                         break;
-                        
+
                     case "misc3":
                         MiscByte3 = a.Value.ToInt();
                         break;
@@ -332,7 +331,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 if (tileCount[i] > highestTileCount)
                 {
                     highestTileCount = MostCommonTile = i;
-                    
+
                 }
             }
 

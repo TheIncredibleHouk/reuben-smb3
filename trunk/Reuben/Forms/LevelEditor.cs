@@ -84,6 +84,7 @@ namespace Daiz.NES.Reuben
             PnlHorizontalGuide.Guide2Changed += new EventHandler(PnlHorizontalGuide_Guide2Changed);
             ReubenController.GraphicsReloaded += new EventHandler(ReubenController_GraphicsReloaded);
             ReubenController.LevelReloaded += new EventHandler<TEventArgs<Level>>(ReubenController_LevelReloaded);
+
             LoadSpriteSelector();
             LvlView.HorizontalGuide1 = PnlHorizontalGuide.Guide1;
             LvlView.HorizontalGuide2 = PnlHorizontalGuide.Guide2;
@@ -163,19 +164,16 @@ namespace Daiz.NES.Reuben
             GetLevelInfo(l);
             PntEditor.CurrentLevel = l;
             LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
-            LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
             TsbItems.Checked = CurrentLevel.Settings.SpecialTiles;
             TsbSriteSpecials.Checked = CurrentLevel.Settings.SpecialSprites;
             TsbSolidity.Checked = CurrentLevel.Settings.BlockProperties;
             TsbStartPoint.Checked = CurrentLevel.Settings.ShowStart;
             TsbZoom.Checked = CurrentLevel.Settings.Zoom;
-            CmbChallengeType.SelectedIndex = CurrentLevel.ChallengeType;
             CmbSpecialType.SelectedIndex = CurrentLevel.SpecialLevelType;
             txtMisc1.Text = CurrentLevel.MiscByte1.ToHexString();
             txtMisc2.Text = CurrentLevel.MiscByte2.ToHexString();
             txtMisc3.Text = CurrentLevel.MiscByte3.ToHexString();
-            ChkBlocked.Checked = CurrentLevel.VineBlocked;
             CmbAnim.SelectedIndex = CurrentLevel.AnimationType;
             ChkInvincibleEnemies.Checked = CurrentLevel.InvincibleEnemies;
             CmbPaletteEffect.SelectedIndex = CurrentLevel.PaletteEffect;
@@ -260,7 +258,6 @@ namespace Daiz.NES.Reuben
 
             CmbPalettes.SelectedIndex = l.Palette;
             CmbTypes.SelectedIndex = l.Type - 1;
-            CmbActions.SelectedIndex = l.StartAction;
             CmbScroll.SelectedIndex = l.ScrollType;
             CmbMusic.SelectedIndex = l.Music >= CmbMusic.Items.Count ? 0 : l.Music;
             CmbLength.SelectedItem = l.Length;
@@ -497,22 +494,6 @@ namespace Daiz.NES.Reuben
                 SetHelpText(PreviousHelperText);
                 LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             }
-            else if (_SelectingAltStartPositionMode)
-            {
-                int oldX = CurrentLevel.XAltStart;
-                int oldY = CurrentLevel.YAltStart;
-                CurrentLevel.XAltStart = x;
-                CurrentLevel.YAltStart = y;
-                if (TsbStartPoint.Checked)
-                {
-                    LvlView.UpdatePoint(x, y);
-                    LvlView.UpdatePoint(oldX, oldY);
-                }
-                _SelectingAltStartPositionMode = false;
-                TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = true;
-                SetHelpText(PreviousHelperText);
-                LblAltPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XAltStart.ToHexString(), CurrentLevel.YAltStart.ToHexString());
-            }
             else if (_PlacingPointer)
             {
                 _PlacingPointer = false;
@@ -671,7 +652,7 @@ namespace Daiz.NES.Reuben
                 if (CurrentSprite == null)
                 {
                     CmbSpriteVis.Enabled = false;
-                    CmbSpriteVis.SelectedIndex = -1;   
+                    CmbSpriteVis.SelectedIndex = -1;
                 }
 
                 if (CurrentSprite != null && MouseButtons == MouseButtons.Left)
@@ -1260,7 +1241,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(CurrentPalette_PaletteChanged);
-            BlvRight.CurrentPalette = BlvLeft.CurrentPalette =BlsSelector.CurrentPalette  =LvlView.CurrentPalette = CurrentPalette;
+            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             foreach (var sv in SpriteViewers)
             {
                 sv.CurrentPalette = CurrentPalette;
@@ -1360,7 +1341,7 @@ namespace Daiz.NES.Reuben
         private void spViewer_SelectionChanged(object sender, TEventArgs<Sprite> e)
         {
             CurrentSelectorSprite = e.Data;
-            
+
             if (CurrentSelectorSprite != null)
             {
                 foreach (var sp in SpriteViewers)
@@ -1435,7 +1416,7 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private byte[,] TileBuffer;
+        public static byte[,] TileBuffer;
 
         private void DeleteTiles()
         {
@@ -1522,20 +1503,16 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Settings.ShowPointers = TsbPointers.Checked;
             CurrentLevel.AnimationType = CmbAnim.SelectedIndex;
 
-            CurrentLevel.StartAction = CmbActions.SelectedIndex;
             CurrentLevel.ClearValue = (int)NumBackground.Value;
             CurrentLevel.GraphicsBank = CmbGraphics.SelectedIndex;
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentLevel.Time = (int)NumTime.Value;
             CurrentLevel.Type = CmbTypes.SelectedIndex + 1;
             CurrentLevel.Music = CmbMusic.SelectedIndex;
-            CurrentLevel.StartAction = CmbActions.SelectedIndex;
             CurrentLevel.ScrollType = CmbScroll.SelectedIndex;
             CurrentLevel.PaletteEffect = CmbPaletteEffect.SelectedIndex;
             CurrentLevel.InvincibleEnemies = ChkInvincibleEnemies.Checked;
-            CurrentLevel.VineBlocked = ChkBlocked.Checked;
             CurrentLevel.SpecialLevelType = CmbSpecialType.SelectedIndex;
-            CurrentLevel.ChallengeType = CmbChallengeType.SelectedIndex;
             CurrentLevel.Save();
         }
 
@@ -1656,6 +1633,25 @@ namespace Daiz.NES.Reuben
         private void LevelEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             ProjectController.Save();
+            ProjectController.PaletteManager.PaletteAdded -= PaletteManager_PaletteAdded;
+            ProjectController.PaletteManager.PaletteRemoved -= PaletteManager_PaletteRemoved;
+            ProjectController.PaletteManager.PalettesSaved -= PaletteManager_PalettesSaved;
+            ProjectController.BlockManager.DefinitionsSaved -= BlockManager_DefinitionsSaved;
+            ProjectController.LayoutManager.LayoutAdded -= LayoutManager_LayoutAdded;
+            ProjectController.GraphicsManager.GraphicsUpdated -= GraphicsManager_GraphicsUpdated;
+            ProjectController.LayoutManager.LayoutRemoved -= LayoutManager_LayoutRemoved;
+            PnlVerticalGuide.Guide1Changed -= PnlVerticalGuide_Guide1Changed;
+            PnlVerticalGuide.Guide2Changed -= PnlVerticalGuide_Guide2Changed;
+            PnlHorizontalGuide.Guide1Changed -= PnlHorizontalGuide_Guide1Changed;
+            PnlHorizontalGuide.Guide2Changed -= PnlHorizontalGuide_Guide2Changed;
+            ReubenController.GraphicsReloaded -= ReubenController_GraphicsReloaded;
+            ReubenController.LevelReloaded -= ReubenController_LevelReloaded;
+            BlsSelector.SelectionChanged -= BlsSelector_SelectionChanged;
+            CurrentPalette.PaletteChanged -= CurrentPalette_PaletteChanged;
+            foreach (SpriteViewer sv in SpriteViewers)
+            {
+                sv.SelectionChanged -= spViewer_SelectionChanged;
+            }
         }
 
         private List<IUndoableAction> UndoBuffer;
@@ -1999,7 +1995,7 @@ namespace Daiz.NES.Reuben
                     case Keys.D5:
                         TsbBucket_Click(null, null);
                         break;
-                       
+
                     case Keys.D6:
                         TsbReplace_Click(null, null);
                         break;
