@@ -727,7 +727,7 @@ namespace Daiz.NES.Reuben
                     }
                 }
 
-                switch (s.Visibility)
+                switch (s.Property)
                 {
                     case 1:
                         RenderSprite(SpecialTable[0xEC], s.X * 16, s.Y * 16, -1, data);

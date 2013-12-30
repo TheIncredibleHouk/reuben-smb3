@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -657,7 +658,7 @@ namespace Daiz.NES.Reuben
 
                 if (CurrentSprite != null && MouseButtons == MouseButtons.Left)
                 {
-                    CmbSpriteVis.SelectedIndex = CurrentSprite.Visibility;
+                    CmbSpriteVis.SelectedIndex = CurrentSprite.Property;
                     CmbSpriteVis.Enabled = true;
 
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
@@ -2025,7 +2026,7 @@ namespace Daiz.NES.Reuben
         {
             if (modifySpriteVisiblity)
             {
-                CurrentSprite.Visibility = CmbSpriteVis.SelectedIndex;
+                CurrentSprite.Property = CmbSpriteVis.SelectedIndex;
             }
         }
 

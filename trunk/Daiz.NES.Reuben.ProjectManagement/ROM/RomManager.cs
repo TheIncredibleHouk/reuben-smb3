@@ -162,18 +162,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
             }
 
             int yStart = 0;
-            int ayStart = 0;
+            yStart = l.YStart - 1;
 
-            switch (l.StartAction)
-            {
-                default:
-                    yStart = l.YStart - 1;
-                    break;
-
-                case 2:
-                    yStart = l.YStart;
-                    break;
-            }
             Rom[levelAddress++] = (byte)l.MostCommonTile;
             Rom[levelAddress++] = (byte)l.GraphicsBank;
             Rom[levelAddress++] = (byte)l.Palette;
@@ -277,16 +267,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             case 0x80:
                             case 0xA5:
                             case 0xA7:
-                                Rom[levelAddress++] = (byte)((s.Visibility << 5) | (s.Y + 1));
+                                Rom[levelAddress++] = (byte)((s.Property << 5) | (s.Y + 1));
                                 break;
 
                             case 0xA1:
                             case 0xA3:
-                                Rom[levelAddress++] = (byte)((s.Visibility << 5) | (s.Y - 1));
+                                Rom[levelAddress++] = (byte)((s.Property << 5) | (s.Y - 1));
                                 break;
 
                             default:
-                                Rom[levelAddress++] = (byte)((s.Visibility << 5) | s.Y);
+                                Rom[levelAddress++] = (byte)((s.Property << 5) | s.Y);
                                 break;
                         }
 
@@ -319,7 +309,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return levelAddress;
         }
 
-        
+
         public int WriteWorld(World w, int levelAddress)
         {
             Rom[levelAddress++] = (byte)w.GraphicsBank;

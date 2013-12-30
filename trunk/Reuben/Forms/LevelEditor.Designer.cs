@@ -62,6 +62,7 @@
             this.CmbPaletteEffect = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.ChkProjectileSpins = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -159,7 +160,6 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.label10 = new System.Windows.Forms.Label();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -590,6 +590,15 @@
             this.tabPage7.Text = "Special Options";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(207, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Event Type:";
+            // 
             // ChkProjectileSpins
             // 
             this.ChkProjectileSpins.AutoSize = true;
@@ -784,7 +793,7 @@
             // BlvRight
             // 
             this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(229, 293);
+            this.BlvRight.Location = new System.Drawing.Point(230, 293);
             this.BlvRight.Name = "BlvRight";
             this.BlvRight.Size = new System.Drawing.Size(32, 32);
             this.BlvRight.TabIndex = 21;
@@ -871,10 +880,10 @@
             this.CmbSpriteVis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbSpriteVis.FormattingEnabled = true;
             this.CmbSpriteVis.Items.AddRange(new object[] {
-            "Always",
-            "Challenge Only",
-            "Day Only",
-            "Night Only"});
+            "0",
+            "1",
+            "2",
+            "3"});
             this.CmbSpriteVis.Location = new System.Drawing.Point(11, 354);
             this.CmbSpriteVis.Name = "CmbSpriteVis";
             this.CmbSpriteVis.Size = new System.Drawing.Size(121, 21);
@@ -1628,15 +1637,6 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(207, 12);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 13);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "Event Type:";
-            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1759,7 +1759,6 @@
         private System.Windows.Forms.ToolStripMenuItem snapToFullMeterJumpLengthToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snapToScreenLengthToolStripMenuItem;
         private System.Windows.Forms.Label LblSelectorHover;
-        private BlockViewer BlvRight;
         private System.Windows.Forms.ToolTip LevelToolTip;
         private System.Windows.Forms.ToolStripButton TsbSolidity;
         private System.Windows.Forms.ToolStripMenuItem changeGuideColorToolStripMenuItem;
@@ -1828,5 +1827,6 @@
         private System.Windows.Forms.ComboBox CmbSpriteVis;
         private System.Windows.Forms.CheckBox ChkProjectileSpins;
         private System.Windows.Forms.Label label10;
+        private BlockViewer BlvRight;
     }
 }
