@@ -22,11 +22,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int MaxRightX { get; private set; }
         public int MaxTopY { get; private set; }
         public int MaxBottomY { get; private set; }
+        public List<String> PropertyDescriptions { get; private set; }
 
         public SpriteDefinition()
         {
             Sprites = new List<SpriteInfo>();
             MaxBottomY = MaxLeftX = MaxRightX = MaxTopY = 0;
+            PropertyDescriptions = new List<string>();
         }
 
         public bool LoadFromElement(XElement e)
@@ -79,6 +81,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 if (s.Y < MaxTopY)
                     MaxTopY = s.Y;
             }
+
+            foreach (var p in e.Elements("property"))
+            {
+                PropertyDescriptions.Add(p.Value);
+            }
+
             if (MaxLeftX < 0 && MaxLeftX % 16 != 0)
                 MaxLeftX -= 16;
 

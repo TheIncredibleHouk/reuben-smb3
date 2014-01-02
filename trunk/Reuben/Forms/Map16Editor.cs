@@ -142,7 +142,15 @@ namespace Daiz.NES.Reuben
             }
 
             updating = false;
-            CmdInteraction.SelectedIndex = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
+            int i = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
+            if (i > CmdInteraction.Items.Count)
+            {
+                CmdInteraction.SelectedIndex = 0;
+            }
+            else
+            {
+                CmdInteraction.SelectedIndex = i;
+            }
         }
 
         void BlsBlocks_SelectionChanged(object sender, TEventArgs<MouseButtons> e)
@@ -507,8 +515,16 @@ namespace Daiz.NES.Reuben
         {
             if (!updating)
             {
-                BlsBlocks.SelectedBlock.BlockProperty = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskHi) | (BlockProperty)CmdInteraction.SelectedIndex;
-                BlsBlocks.UpdateSelection();
+                if (CmbDefinitions.SelectedIndex == 0)
+                {
+                    BlsBlocks.SelectedBlock.BlockProperty = (BlockProperty)CmdInteraction.SelectedIndex;
+                    BlsBlocks.UpdateSelection();
+                }
+                else
+                {
+                    BlsBlocks.SelectedBlock.BlockProperty = (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.MaskHi) | (BlockProperty)CmdInteraction.SelectedIndex;
+                    BlsBlocks.UpdateSelection();
+                }
             }
         }
 

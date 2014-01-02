@@ -87,7 +87,7 @@
             this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
-            this.CmbSpriteVis = new System.Windows.Forms.ComboBox();
+            this.CmbSpriteProperty = new System.Windows.Forms.ComboBox();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
             this.TabClass3 = new System.Windows.Forms.TabControl();
             this.TabClass2 = new System.Windows.Forms.TabControl();
@@ -852,7 +852,7 @@
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage2.Controls.Add(this.label19);
-            this.tabPage2.Controls.Add(this.CmbSpriteVis);
+            this.tabPage2.Controls.Add(this.CmbSpriteProperty);
             this.tabPage2.Controls.Add(this.LblSpriteSelected);
             this.tabPage2.Controls.Add(this.TabClass3);
             this.tabPage2.Controls.Add(this.TabClass2);
@@ -871,24 +871,24 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(8, 338);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(43, 13);
+            this.label19.Size = new System.Drawing.Size(46, 13);
             this.label19.TabIndex = 5;
-            this.label19.Text = "Visibility";
+            this.label19.Text = "Property";
             // 
-            // CmbSpriteVis
+            // CmbSpriteProperty
             // 
-            this.CmbSpriteVis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbSpriteVis.FormattingEnabled = true;
-            this.CmbSpriteVis.Items.AddRange(new object[] {
+            this.CmbSpriteProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSpriteProperty.FormattingEnabled = true;
+            this.CmbSpriteProperty.Items.AddRange(new object[] {
             "0",
             "1",
             "2",
             "3"});
-            this.CmbSpriteVis.Location = new System.Drawing.Point(11, 354);
-            this.CmbSpriteVis.Name = "CmbSpriteVis";
-            this.CmbSpriteVis.Size = new System.Drawing.Size(121, 21);
-            this.CmbSpriteVis.TabIndex = 4;
-            this.CmbSpriteVis.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
+            this.CmbSpriteProperty.Location = new System.Drawing.Point(11, 354);
+            this.CmbSpriteProperty.Name = "CmbSpriteProperty";
+            this.CmbSpriteProperty.Size = new System.Drawing.Size(121, 21);
+            this.CmbSpriteProperty.TabIndex = 4;
+            this.CmbSpriteProperty.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
             // 
             // LblSpriteSelected
             // 
@@ -1824,7 +1824,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox CmbAnim;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox CmbSpriteVis;
+        private System.Windows.Forms.ComboBox CmbSpriteProperty;
         private System.Windows.Forms.CheckBox ChkProjectileSpins;
         private System.Windows.Forms.Label label10;
         private BlockViewer BlvRight;

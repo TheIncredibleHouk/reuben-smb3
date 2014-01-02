@@ -652,14 +652,22 @@ namespace Daiz.NES.Reuben
 
                 if (CurrentSprite == null)
                 {
-                    CmbSpriteVis.Enabled = false;
-                    CmbSpriteVis.SelectedIndex = -1;
+                    CmbSpriteProperty.Enabled = false;
+                    CmbSpriteProperty.SelectedIndex = -1;
+                }
+
+                if (CurrentSprite != null)
+                {
+                    CmbSpriteProperty.DataSource = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID).PropertyDescriptions;
                 }
 
                 if (CurrentSprite != null && MouseButtons == MouseButtons.Left)
                 {
-                    CmbSpriteVis.SelectedIndex = CurrentSprite.Property;
-                    CmbSpriteVis.Enabled = true;
+                    if (CmbSpriteProperty.Items.Count > 0)
+                    {
+                        CmbSpriteProperty.SelectedIndex = CurrentSprite.Property;
+                    }
+                    CmbSpriteProperty.Enabled = true;
 
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
@@ -2024,9 +2032,9 @@ namespace Daiz.NES.Reuben
         private bool modifySpriteVisiblity = false;
         private void CmbSpriteVis_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (modifySpriteVisiblity)
+            if (modifySpriteVisiblity && CurrentSprite != null)
             {
-                CurrentSprite.Property = CmbSpriteVis.SelectedIndex;
+                CurrentSprite.Property = CmbSpriteProperty.SelectedIndex;
             }
         }
 
