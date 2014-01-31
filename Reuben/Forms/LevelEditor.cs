@@ -720,6 +720,7 @@ namespace Daiz.NES.Reuben
                 else if (CurrentSprite != null && MouseButtons == MouseButtons.Right && CurrentSelectorSprite != null)
                 {
                     CurrentSprite.InGameID = CurrentSelectorSprite.InGameID;
+                    CurrentSprite.Property = 0;
                     SpriteDefinition sp = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID);
                     int xDiff = x - CurrentSprite.X;
                     int yDiff = y - CurrentSprite.Y;
@@ -1307,6 +1308,7 @@ namespace Daiz.NES.Reuben
                     foreach (var ks in ProjectController.SpriteManager.SpriteGroups[s][k])
                     {
                         Sprite next = new Sprite();
+                        next.Property = 0;
                         next.X = x;
                         next.Y = 0;
                         next.InGameID = ks.InGameId;
@@ -2035,6 +2037,18 @@ namespace Daiz.NES.Reuben
             if (modifySpriteVisiblity && CurrentSprite != null)
             {
                 CurrentSprite.Property = CmbSpriteProperty.SelectedIndex;
+
+                SpriteDefinition sp = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID);
+
+                int rectX = CurrentSprite.X * 16 + sp.MaxLeftX;
+                int rectY = CurrentSprite.Y * 16 + sp.MaxTopY;
+                int width = (rectX + sp.MaxRightX) - rectX;
+                int height = (rectY + sp.MaxBottomY) - rectY;
+                Rectangle r = new Rectangle(rectX, rectY, width, height);
+                LvlView.DelayDrawing = true;
+                LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
+                LvlView.DelayDrawing = false;
+                LvlView.UpdateSprites(r);
             }
         }
 

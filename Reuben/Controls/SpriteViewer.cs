@@ -89,6 +89,8 @@ namespace Daiz.NES.Reuben
                 foreach (var sp in def.Sprites)
                 {
                     if (sp.Table < 0) continue;
+                    if (sp.Property != null && !sp.Property.Contains(s.Property)) continue;
+
                     if (!sp.HorizontalFlip && !sp.VerticalFlip)
                     {
                         RenderSprite(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), s.X * 16 + sp.X, s.Y * 16 + sp.Y, sp.Palette, data);

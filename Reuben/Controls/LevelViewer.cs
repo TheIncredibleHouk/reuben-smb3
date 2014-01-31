@@ -697,6 +697,8 @@ namespace Daiz.NES.Reuben
                 foreach (var sp in def.Sprites)
                 {
                     if (sp.Table < 0 && !_ShowSpecial) continue;
+                    if (sp.Property != null && !sp.Property.Contains(s.Property)) continue;
+
                     definiteX = s.X * 16 + sp.X;
                     definiteY = s.Y * 16 + sp.Y;
 
@@ -725,21 +727,6 @@ namespace Daiz.NES.Reuben
                         RenderSpriteHorizontalVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, definiteY, sp.Palette, data);
                         RenderSpriteHorizontalVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, (definiteY) + 8, sp.Palette, data);
                     }
-                }
-
-                switch (s.Property)
-                {
-                    case 1:
-                        RenderSprite(SpecialTable[0xEC], s.X * 16, s.Y * 16, -1, data);
-                        break;
-
-                    case 2:
-                        RenderSprite(SpecialTable[0xCE], s.X * 16, s.Y * 16, -1, data);
-                        break;
-
-                    case 3:
-                        RenderSprite(SpecialTable[0xCC], s.X * 16, s.Y * 16, -1, data);
-                        break;
                 }
             }
 

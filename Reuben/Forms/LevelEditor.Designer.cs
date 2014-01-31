@@ -886,7 +886,7 @@
             "3"});
             this.CmbSpriteProperty.Location = new System.Drawing.Point(11, 354);
             this.CmbSpriteProperty.Name = "CmbSpriteProperty";
-            this.CmbSpriteProperty.Size = new System.Drawing.Size(121, 21);
+            this.CmbSpriteProperty.Size = new System.Drawing.Size(254, 21);
             this.CmbSpriteProperty.TabIndex = 4;
             this.CmbSpriteProperty.SelectedIndexChanged += new System.EventHandler(this.CmbSpriteVis_SelectedIndexChanged);
             // 
