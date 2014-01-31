@@ -260,6 +260,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
                         Rom[levelAddress++] = (byte)s.X;
                         switch (s.InGameID)
                         {
+                            case 0xA2:
+                                if (s.Property % 2 != 0)
+                                {
+                                    Rom[levelAddress++] = (byte)((s.Property << 5) | (s.Y + 2));
+                                }
+                                else
+                                {
+                                    Rom[levelAddress++] = (byte)((s.Property << 5) | s.Y);
+                                }
+                                break;
+
                             case 0x6C:
                             case 0x6D:
                             case 0x6E:

@@ -18,10 +18,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public bool VerticalFlip { get; set; }
         public int Table { get; private set; }
         public string Name { get; private set; }
+        public List<int> Property { get; private set; }
 
         #region IXmlIO Members
 
-        
+
         public bool LoadFromElement(XElement e)
         {
             X = e.Attribute("x").Value.ToInt();
@@ -32,6 +33,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
             VerticalFlip = e.Attribute("verticalflip").Value.ToBoolean();
             if (e.Attribute("table").Value.Contains('-')) Table = e.Attribute("table").Value.ToInt();
             else Table = e.Attribute("table").Value.ToIntFromHex();
+            if (e.Attribute("property") != null)
+            {
+                Property = e.Attribute("property").Value.Split(',').Select(s => s.ToInt()).ToList();
+            }
+            else
+            {
+                Property = null;
+            }
             return true;
         }
 
