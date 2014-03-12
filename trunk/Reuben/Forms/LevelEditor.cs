@@ -1952,6 +1952,61 @@ namespace Daiz.NES.Reuben
                         }
                         break;
 
+                    case Keys.F11:
+                        if (EditMode == EditMode.Sprites)
+                        {
+                            var ordered = CurrentLevel.SpriteData.OrderBy(p => p.X * 32 + p.Y).ToList();
+                            var index = ordered.IndexOf(CurrentSprite);
+                            if (index > 0)
+                            {
+                                CurrentSprite = ordered[index - 1];
+                                LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
+                                ContinueDragging = true;
+                                LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
+                            }
+
+
+                            if (CurrentSprite != null)
+                            {
+                                if (CurrentSprite.X * 16 < PnlView.HorizontalScroll.Value)
+                                {
+                                    PnlView.HorizontalScroll.Value = CurrentSprite.X * 16 + CurrentSprite.Width - 100;
+                                }
+                                else if (CurrentSprite.X * 16 >= PnlView.HorizontalScroll.Value + PnlView.Width)
+                                {
+                                    PnlView.HorizontalScroll.Value = (CurrentSprite.X * 16 - (PnlView.Width)) + 100;
+                                }
+                            }
+                        }
+                        break;
+
+                    case Keys.F12:
+                        if (EditMode == EditMode.Sprites)
+                        {
+                            var ordered = CurrentLevel.SpriteData.OrderBy(p => p.X * 32 + p.Y).ToList();
+                            var index = ordered.IndexOf(CurrentSprite);
+                            if (index < ordered.Count - 1)
+                            {
+                                CurrentSprite = ordered[index + 1];
+                                LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
+                                ContinueDragging = true;
+                                LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
+                            }
+
+                            if (CurrentSprite != null)
+                            {
+                                if (CurrentSprite.X * 16 < PnlView.HorizontalScroll.Value)
+                                {
+                                    PnlView.HorizontalScroll.Value = CurrentSprite.X * 16 + CurrentSprite.Width - 100;
+                                }
+                                else if (CurrentSprite.X * 16 >= PnlView.HorizontalScroll.Value + PnlView.Width)
+                                {
+                                    PnlView.HorizontalScroll.Value = (CurrentSprite.X * 16 - (PnlView.Width)) + 100;
+                                }
+                            }
+                        }
+                        break;
+
                     case Keys.Escape:
                         ContinueDrawing = false;
                         LvlView.ClearSelection();
