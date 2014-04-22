@@ -70,7 +70,7 @@ namespace Daiz.NES.Reuben
             BlsSelector.SpecialPalette = LvlView.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;
             BlsSelector.SelectionChanged += new EventHandler<TEventArgs<MouseButtons>>(BlsSelector_SelectionChanged);
 
-            BlvRight.CurrentTable = BlvLeft.CurrentTable = CurrentTable;
+            // BlvRight.CurrentTable = BlvLeft.CurrentTable = CurrentTable;
 
             ProjectController.PaletteManager.PaletteAdded += new EventHandler<TEventArgs<PaletteInfo>>(PaletteManager_PaletteAdded);
             ProjectController.PaletteManager.PaletteRemoved += new EventHandler<TEventArgs<PaletteInfo>>(PaletteManager_PaletteRemoved);
@@ -120,8 +120,8 @@ namespace Daiz.NES.Reuben
                     else
                     {
                         RightMouseTile = BlsSelector.SelectedTileIndex;
-                        BlvRight.PaletteIndex = (RightMouseTile & 0xC0) >> 6;
-                        BlvRight.CurrentBlock = BlsSelector.SelectedBlock;
+                        //BlvRight.PaletteIndex = (RightMouseTile & 0xC0) >> 6;
+                        //BlvRight.CurrentBlock = BlsSelector.SelectedBlock;
                     }
                 }
             }
@@ -179,6 +179,7 @@ namespace Daiz.NES.Reuben
             ChkInvincibleEnemies.Checked = CurrentLevel.InvincibleEnemies;
             CmbPaletteEffect.SelectedIndex = CurrentLevel.PaletteEffect;
             ChkProjectileSpins.Checked = CurrentLevel.ProjectileBlocksTemporary;
+            ChkRhythm.Checked = CurrentLevel.RhythmPlatforms;
 
             switch (CurrentLevel.Settings.DrawMode)
             {
@@ -456,9 +457,8 @@ namespace Daiz.NES.Reuben
             CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank]);
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank + 1]);
-            LvlView.CurrentPalette = BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            LvlView.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             BlsSelector.CurrentDefiniton = LvlView.CurrentDefiniton = LvlView.CurrentDefiniton;
-            BlvRight.CurrentBlock = BlvRight.CurrentBlock;
             BlvLeft.CurrentBlock = BlvLeft.CurrentBlock;
         }
         #endregion
@@ -1251,7 +1251,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(CurrentPalette_PaletteChanged);
-            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             foreach (var sv in SpriteViewers)
             {
                 sv.CurrentPalette = CurrentPalette;
@@ -1260,13 +1260,13 @@ namespace Daiz.NES.Reuben
 
         private void CurrentPalette_PaletteChanged(object sender, TEventArgs<DoubleValue<int, int>> e)
         {
-            BlvRight.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             LvlView.Redraw();
             BlsSelector.Redraw();
         }
 
         private bool _SelectingStartPositionMode;
-        private bool _SelectingAltStartPositionMode;
+
         private void BtnStartPoint_Click(object sender, EventArgs e)
         {
             SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
@@ -1830,7 +1830,6 @@ namespace Daiz.NES.Reuben
         private void BtnSetAltPoint_Click(object sender, EventArgs e)
         {
             SetHelpText(Reuben.Properties.Resources.StartPlacementHelper);
-            _SelectingAltStartPositionMode = true;
             TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = false;
         }
 
@@ -2110,6 +2109,11 @@ namespace Daiz.NES.Reuben
         private void ChkProjectileSpins_CheckedChanged(object sender, EventArgs e)
         {
             CurrentLevel.ProjectileBlocksTemporary = ChkProjectileSpins.Checked;
+        }
+
+        private void ChkRhythm_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentLevel.RhythmPlatforms = ChkRhythm.Checked;
         }
     }
 }

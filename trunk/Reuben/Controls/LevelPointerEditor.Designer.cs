@@ -44,6 +44,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.CmbWorldExit = new System.Windows.Forms.ComboBox();
             this.ChkRedraw = new System.Windows.Forms.CheckBox();
+            this.ChkKeepObjects = new System.Windows.Forms.CheckBox();
+            this.ChkDisableWeather = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.NumXExit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumYExit)).BeginInit();
             this.SuspendLayout();
@@ -200,7 +202,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 202);
+            this.label2.Location = new System.Drawing.Point(32, 250);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 38;
@@ -210,7 +212,7 @@
             // 
             this.CmbWorldExit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbWorldExit.FormattingEnabled = true;
-            this.CmbWorldExit.Location = new System.Drawing.Point(69, 199);
+            this.CmbWorldExit.Location = new System.Drawing.Point(69, 247);
             this.CmbWorldExit.Name = "CmbWorldExit";
             this.CmbWorldExit.Size = new System.Drawing.Size(159, 21);
             this.CmbWorldExit.TabIndex = 39;
@@ -219,7 +221,7 @@
             // ChkRedraw
             // 
             this.ChkRedraw.AutoSize = true;
-            this.ChkRedraw.Location = new System.Drawing.Point(69, 175);
+            this.ChkRedraw.Location = new System.Drawing.Point(69, 178);
             this.ChkRedraw.Name = "ChkRedraw";
             this.ChkRedraw.Size = new System.Drawing.Size(92, 17);
             this.ChkRedraw.TabIndex = 40;
@@ -227,10 +229,34 @@
             this.ChkRedraw.UseVisualStyleBackColor = true;
             this.ChkRedraw.CheckedChanged += new System.EventHandler(this.ChkRedraw_CheckedChanged);
             // 
+            // ChkKeepObjects
+            // 
+            this.ChkKeepObjects.AutoSize = true;
+            this.ChkKeepObjects.Location = new System.Drawing.Point(69, 201);
+            this.ChkKeepObjects.Name = "ChkKeepObjects";
+            this.ChkKeepObjects.Size = new System.Drawing.Size(111, 17);
+            this.ChkKeepObjects.TabIndex = 41;
+            this.ChkKeepObjects.Text = "Keep Object Data";
+            this.ChkKeepObjects.UseVisualStyleBackColor = true;
+            this.ChkKeepObjects.CheckedChanged += new System.EventHandler(this.ChkKeepObjects_CheckedChanged);
+            // 
+            // ChkDisableWeather
+            // 
+            this.ChkDisableWeather.AutoSize = true;
+            this.ChkDisableWeather.Location = new System.Drawing.Point(69, 224);
+            this.ChkDisableWeather.Name = "ChkDisableWeather";
+            this.ChkDisableWeather.Size = new System.Drawing.Size(105, 17);
+            this.ChkDisableWeather.TabIndex = 42;
+            this.ChkDisableWeather.Text = "Disable Weather";
+            this.ChkDisableWeather.UseVisualStyleBackColor = true;
+            this.ChkDisableWeather.CheckedChanged += new System.EventHandler(this.ChkDisableWeather_CheckedChanged);
+            // 
             // LevelPointerEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ChkDisableWeather);
+            this.Controls.Add(this.ChkKeepObjects);
             this.Controls.Add(this.ChkRedraw);
             this.Controls.Add(this.CmbWorldExit);
             this.Controls.Add(this.label2);
@@ -249,7 +275,7 @@
             this.Controls.Add(this.CmbActions);
             this.Name = "LevelPointerEditor";
             this.Padding = new System.Windows.Forms.Padding(4);
-            this.Size = new System.Drawing.Size(239, 237);
+            this.Size = new System.Drawing.Size(239, 280);
             ((System.ComponentModel.ISupportInitialize)(this.NumXExit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumYExit)).EndInit();
             this.ResumeLayout(false);
@@ -275,5 +301,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox CmbWorldExit;
         private System.Windows.Forms.CheckBox ChkRedraw;
+        private System.Windows.Forms.CheckBox ChkKeepObjects;
+        private System.Windows.Forms.CheckBox ChkDisableWeather;
     }
 }

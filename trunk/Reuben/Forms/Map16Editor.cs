@@ -124,7 +124,7 @@ namespace Daiz.NES.Reuben
                 CmdInteraction.DataSource = MapInteractionTypes;
                 LblSolidity.Visible = CmbSolidity.Visible = false;
             }
-            else if (CmbSolidity.SelectedIndex == 7)
+            else if (CmbSolidity.SelectedIndex >= 7 || CmbSolidity.SelectedIndex == 5)
             {
                 CmdInteraction.DataSource = SpecialTypes;
                 LblSolidity.Visible = CmbSolidity.Visible = true;

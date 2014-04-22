@@ -527,9 +527,9 @@ namespace Daiz.NES.Reuben
                     }
                     if (_ShowSpecialBlocks)
                     {
-                        if (bpHi == BlockProperty.MaskHi)
+                        if (bpHi == BlockProperty.SolidBottom || bpHi == BlockProperty.MaskSpecialTile)
                         {
-                            switch (bpHi | bpLow)
+                            switch (BlockProperty.MaskHi | bpLow)
                             {
                                 case BlockProperty.FireFlower:
                                     RenderSpecialTileAlpha(_SpecialTable[0x00], x, y, 0, data);

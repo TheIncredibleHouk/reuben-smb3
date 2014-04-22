@@ -62,6 +62,8 @@ namespace Daiz.NES.Reuben
                     LblYEnter.Text = "Y Entrance: None";
                     ChkExitsLevel.Checked = value.ExitsLevel;
                     ChkRedraw.Checked = value.RedrawLevel;
+                    ChkKeepObjects.Checked = value.KeepObjects;
+                    ChkDisableWeather.Checked = value.DisableWeather;
                     BtnChange.Enabled = CmbActions.Enabled = !ChkExitsLevel.Checked;
                     UpdatePosition();
                 }
@@ -137,6 +139,16 @@ namespace Daiz.NES.Reuben
         private void ChkRedraw_CheckedChanged(object sender, EventArgs e)
         {
             _CurrentPointer.RedrawLevel = ChkRedraw.Checked;
+        }
+
+        private void ChkKeepObjects_CheckedChanged(object sender, EventArgs e)
+        {
+            _CurrentPointer.KeepObjects = ChkKeepObjects.Checked;
+        }
+
+        private void ChkDisableWeather_CheckedChanged(object sender, EventArgs e)
+        {
+            _CurrentPointer.DisableWeather = ChkDisableWeather.Checked;
         }
     }
 }
