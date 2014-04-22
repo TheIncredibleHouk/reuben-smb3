@@ -62,6 +62,7 @@
             this.CmbPaletteEffect = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.ChkRhythm = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.ChkProjectileSpins = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -80,10 +81,9 @@
             this.NumSpecials = new System.Windows.Forms.NumericUpDown();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
+            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
             this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
@@ -571,6 +571,7 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage7.Controls.Add(this.ChkRhythm);
             this.tabPage7.Controls.Add(this.label10);
             this.tabPage7.Controls.Add(this.ChkProjectileSpins);
             this.tabPage7.Controls.Add(this.label18);
@@ -589,6 +590,17 @@
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Special Options";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // ChkRhythm
+            // 
+            this.ChkRhythm.AutoSize = true;
+            this.ChkRhythm.Location = new System.Drawing.Point(403, 43);
+            this.ChkRhythm.Name = "ChkRhythm";
+            this.ChkRhythm.Size = new System.Drawing.Size(144, 17);
+            this.ChkRhythm.TabIndex = 13;
+            this.ChkRhythm.Text = "Enable Rhythm Platforms";
+            this.ChkRhythm.UseVisualStyleBackColor = true;
+            this.ChkRhythm.CheckedChanged += new System.EventHandler(this.ChkRhythm_CheckedChanged);
             // 
             // label10
             // 
@@ -776,10 +788,9 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPage1.Controls.Add(this.BlvRight);
+            this.tabPage1.Controls.Add(this.BlvLeft);
             this.tabPage1.Controls.Add(this.LblSelectorHover);
             this.tabPage1.Controls.Add(this.CmbLayouts);
-            this.tabPage1.Controls.Add(this.BlvLeft);
             this.tabPage1.Controls.Add(this.BlsSelector);
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
@@ -790,14 +801,14 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
-            // BlvRight
+            // BlvLeft
             // 
-            this.BlvRight.CurrentBlock = null;
-            this.BlvRight.Location = new System.Drawing.Point(230, 293);
-            this.BlvRight.Name = "BlvRight";
-            this.BlvRight.Size = new System.Drawing.Size(32, 32);
-            this.BlvRight.TabIndex = 21;
-            this.BlvRight.Text = "blockViewer1";
+            this.BlvLeft.CurrentBlock = null;
+            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
+            this.BlvLeft.Name = "BlvLeft";
+            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
+            this.BlvLeft.TabIndex = 21;
+            this.BlvLeft.Text = "blockViewer1";
             // 
             // LblSelectorHover
             // 
@@ -817,15 +828,6 @@
             this.CmbLayouts.Size = new System.Drawing.Size(256, 21);
             this.CmbLayouts.TabIndex = 16;
             this.CmbLayouts.SelectedIndexChanged += new System.EventHandler(this.CmbLayouts_SelectedIndexChanged);
-            // 
-            // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
-            this.BlvLeft.Location = new System.Drawing.Point(186, 293);
-            this.BlvLeft.Name = "BlvLeft";
-            this.BlvLeft.Size = new System.Drawing.Size(32, 32);
-            this.BlvLeft.TabIndex = 19;
-            this.BlvLeft.Text = "blockViewer1";
             // 
             // BlsSelector
             // 
@@ -951,7 +953,7 @@
             // 
             // BtnDeletePointer
             // 
-            this.BtnDeletePointer.Location = new System.Drawing.Point(187, 275);
+            this.BtnDeletePointer.Location = new System.Drawing.Point(184, 328);
             this.BtnDeletePointer.Name = "BtnDeletePointer";
             this.BtnDeletePointer.Size = new System.Drawing.Size(75, 23);
             this.BtnDeletePointer.TabIndex = 3;
@@ -961,7 +963,7 @@
             // 
             // BtnAddPointer
             // 
-            this.BtnAddPointer.Location = new System.Drawing.Point(106, 275);
+            this.BtnAddPointer.Location = new System.Drawing.Point(103, 328);
             this.BtnAddPointer.Name = "BtnAddPointer";
             this.BtnAddPointer.Size = new System.Drawing.Size(75, 23);
             this.BtnAddPointer.TabIndex = 2;
@@ -974,7 +976,7 @@
             this.groupBox1.Controls.Add(this.PntEditor);
             this.groupBox1.Location = new System.Drawing.Point(8, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(251, 253);
+            this.groupBox1.Size = new System.Drawing.Size(251, 306);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pointer Info";
@@ -986,7 +988,7 @@
             this.PntEditor.Location = new System.Drawing.Point(6, 19);
             this.PntEditor.Name = "PntEditor";
             this.PntEditor.Padding = new System.Windows.Forms.Padding(4);
-            this.PntEditor.Size = new System.Drawing.Size(239, 234);
+            this.PntEditor.Size = new System.Drawing.Size(239, 274);
             this.PntEditor.TabIndex = 0;
             // 
             // TlsDrawing
@@ -1736,7 +1738,6 @@
         private System.Windows.Forms.ToolStripButton TsbZoom;
         private System.Windows.Forms.ToolStripButton TsbSave;
         private System.Windows.Forms.Panel panel2;
-        private BlockViewer BlvLeft;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ContextMenuStrip CtxVerticalGuide;
         private System.Windows.Forms.ToolStripMenuItem freeGuideToolStripMenuItem;
@@ -1827,6 +1828,7 @@
         private System.Windows.Forms.ComboBox CmbSpriteProperty;
         private System.Windows.Forms.CheckBox ChkProjectileSpins;
         private System.Windows.Forms.Label label10;
-        private BlockViewer BlvRight;
+        private System.Windows.Forms.CheckBox ChkRhythm;
+        private BlockViewer BlvLeft;
     }
 }

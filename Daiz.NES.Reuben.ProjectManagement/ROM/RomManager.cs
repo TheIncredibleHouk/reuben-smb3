@@ -173,7 +173,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             Rom[levelAddress++] = (byte)(ProjectController.MusicManager.MusicList[l.Music].Value);
             Rom[levelAddress++] = (byte)(((l.Time / 100) << 4) | ((l.Time - ((l.Time / 100) * 100)) / 10));
             Rom[levelAddress++] = (byte)((l.Pointers.Count << 4) | (l.VineBlocked ? 0x08 : 0x00) | l.ScrollType);
-            Rom[levelAddress++] = (byte)((l.InvincibleEnemies ? 0x80 : 0x00) | (l.ProjectileBlocksTemporary ? 0x40 : 0x00) | (l.PaletteEffect << 4));
+            Rom[levelAddress++] = (byte)((l.InvincibleEnemies ? 0x80 : 0x00) | (l.ProjectileBlocksTemporary ? 0x40 : 0x00) | (l.RhythmPlatforms  ? 0x20 : 0x00) | l.PaletteEffect);
             Rom[levelAddress++] = (byte)l.MiscByte1;
             Rom[levelAddress++] = (byte)l.MiscByte2;
             Rom[levelAddress++] = (byte)l.MiscByte3;
@@ -229,7 +229,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 }
 
                 Rom[levelAddress++] = (byte)(((yExit & 0x0F) << 4) | ((yExit & 0xF0) >> 4));
-                Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x80 : 0x00) | (p.RedrawLevel ? 0x40 : 0x00) | (p.ExitType));
+                Rom[levelAddress++] = (byte)((p.ExitsLevel ? 0x80 : 0x00) | (p.RedrawLevel ? 0x40 : 0x00) | (p.KeepObjects ? 0x20 : 0x00) | (p.DisableWeather ? 0x10 : 0x00) | (p.ExitType));
             }
 
             byte[] levelData = l.GetCompressedData();

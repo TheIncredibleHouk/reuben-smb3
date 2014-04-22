@@ -164,7 +164,10 @@ namespace Daiz.NES.Reuben
 
         protected override void Dispose(bool disposing)
         {
-            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
+            if (_CurrentTable != null)
+            {
+                _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
+            }
             base.Dispose(disposing);
         }
     }

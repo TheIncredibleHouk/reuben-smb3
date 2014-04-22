@@ -13,6 +13,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public Guid LevelGuid { get; set; }
         public int ExitType { get; set; }
         public bool RedrawLevel { get; set; }
+        public bool KeepObjects { get; set; }
+        public bool DisableWeather{ get; set; }
         public int XEnter { get; set; }
         public int YEnter { get; set; }
         public int XExit { get; set; }
@@ -34,6 +36,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
             e.SetAttributeValue("exitslevel", ExitsLevel);
             e.SetAttributeValue("world", World);
             e.SetAttributeValue("redraw", RedrawLevel);
+            e.SetAttributeValue("keepobjects", KeepObjects);
+            e.SetAttributeValue("disableweather", DisableWeather);
             return e;
         }
 
@@ -78,6 +82,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     case "redraw":
                         RedrawLevel = a.Value.ToBoolean();
                         break;
+                        
+                    case "keepobjects":
+                        KeepObjects = a.Value.ToBoolean();
+                        break;
+
+                    case "disableweather":
+                        DisableWeather = a.Value.ToBoolean();
+                        break;
                 }
             }
             return true;
@@ -86,3 +98,4 @@ namespace Daiz.NES.Reuben.ProjectManagement
         #endregion
     }
 }
+
