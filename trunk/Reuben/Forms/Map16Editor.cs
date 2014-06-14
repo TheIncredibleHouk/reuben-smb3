@@ -99,7 +99,7 @@ namespace Daiz.NES.Reuben
             "Vertical Pipe Right",
             "Horizontal Pipe Bottom",
             "Climbable",
-            "Acid Meltable",
+            "Enemy Interaction",
             "Stone",
             "PSwitch",
             "ESwitch",

@@ -721,6 +721,7 @@ namespace Daiz.NES.Reuben
                 {
                     CurrentSprite.InGameID = CurrentSelectorSprite.InGameID;
                     CurrentSprite.Property = 0;
+                    CurrentSprite.Property = CurrentSelectorSprite.Property;
                     SpriteDefinition sp = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID);
                     int xDiff = x - CurrentSprite.X;
                     int yDiff = y - CurrentSprite.Y;

@@ -20,6 +20,22 @@ namespace Daiz.NES.Reuben
             ReubenController.MainWindow = this;
         }
 
+        public Main(string fileName)
+        {
+            InitializeComponent();
+            ReubenController.MainWindow = this;
+            compileROMToolStripMenuItem.Enabled = MnuDebug.Enabled = MnuEditor.Enabled = MnuExport.Enabled = MnuImport.Enabled = MnuNewLevel.Enabled = MnuProject.Enabled = MnuReload.Enabled = MnuTools.Enabled = MnuWindows.Enabled = ReubenController.OpenProject(fileName);
+            if (File.Exists(ProjectController.ProjectManager.CurrentProject.ROMFile))
+            {
+                saveToRom.Text = ProjectController.ProjectManager.CurrentProject.ROMFile;
+                saveToRom.Visible = true;
+            }
+            else
+            {
+                saveToRom.Visible = false;
+            }
+        }
+
         public void HideProjectview()
         {
             ProjectViewVisible = false;
