@@ -106,6 +106,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             MaxBottomY = ((MaxBottomY / 16) + 1) * 16;// MaxBottomY % 8;
 
+            Sprites.Add(new SpriteInfo() { X = 0, Y = 0, Value = 0xDC, Table = -1, Palette = 1 });
+            Sprites.Add(new SpriteInfo() { X = 8, Y = 0, Value = 0xDe, Table = -1, Palette = 1 });
             return true;
         }
 

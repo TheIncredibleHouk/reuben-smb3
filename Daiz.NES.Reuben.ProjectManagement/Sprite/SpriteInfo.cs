@@ -16,7 +16,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Palette { get; set; }
         public bool HorizontalFlip { get; set; }
         public bool VerticalFlip { get; set; }
-        public int Table { get; private set; }
+        public int Table { get; set; }
         public string Name { get; private set; }
         public List<int> Property { get; private set; }
 

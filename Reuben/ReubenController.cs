@@ -75,20 +75,32 @@ namespace Daiz.NES.Reuben
 
         public static bool OpenProject()
         {
-            OpenFileDialog OFD = new OpenFileDialog();
-            OFD.Filter = "Reuben Project Files|*.rbn";
-            bool success = false;
-            DialogResult result = OFD.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                foreach (var k in editorTable.Keys.ToList())
-                {
-                    editorTable[k].Close();
-                }
+            return OpenProject(null);
+        }
 
-                success = ProjectController.LoadProject(OFD.FileName);
+        public static bool OpenProject(string fileName)
+        {
+            bool success = false;
+
+            if (fileName == null)
+            {
+                OpenFileDialog OFD = new OpenFileDialog();
+                OFD.Filter = "Reuben Project Files|*.rbn";
+                DialogResult result = OFD.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    fileName = OFD.FileName;
+                }
+                OFD.Dispose();
             }
-            OFD.Dispose();
+
+            foreach (var k in editorTable.Keys.ToList())
+            {
+                editorTable[k].Close();
+            }
+
+            success = ProjectController.LoadProject(fileName);
+
 
             return success;
         }
