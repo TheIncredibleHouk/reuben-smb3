@@ -654,6 +654,7 @@ namespace Daiz.NES.Reuben
                 {
                     CmbSpriteProperty.Enabled = false;
                     CmbSpriteProperty.SelectedIndex = -1;
+                    CmbSpriteProperty.DataSource = null;
                 }
 
                 if (CurrentSprite != null)
@@ -2115,6 +2116,22 @@ namespace Daiz.NES.Reuben
         private void ChkRhythm_CheckedChanged(object sender, EventArgs e)
         {
             CurrentLevel.RhythmPlatforms = ChkRhythm.Checked;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (LevelInfo info in ProjectController.LevelManager.Levels)
+            {
+                Level l = new Level();
+                l.Load(info);
+                if (l.SpriteData.Contains(CurrentSprite))
+                {
+                    builder.AppendLine(info.Name);
+                }
+            }
+
+            MessageBox.Show(builder.ToString());
         }
     }
 }

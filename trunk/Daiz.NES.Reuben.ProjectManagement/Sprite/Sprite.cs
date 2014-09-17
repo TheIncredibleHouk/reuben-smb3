@@ -101,5 +101,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
         }
 
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            return ((Sprite)obj).InGameID == this.InGameID;
+        }
     }
 }

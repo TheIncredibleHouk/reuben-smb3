@@ -160,6 +160,7 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
+            this.button2 = new System.Windows.Forms.Button();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -853,6 +854,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.CmbSpriteProperty);
             this.tabPage2.Controls.Add(this.LblSpriteSelected);
@@ -1639,6 +1641,16 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(11, 398);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Find All Instances";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1830,5 +1842,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox ChkRhythm;
         private BlockViewer BlvLeft;
+        private System.Windows.Forms.Button button2;
     }
 }
