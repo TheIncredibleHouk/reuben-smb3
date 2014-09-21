@@ -1012,16 +1012,11 @@
     <sprite x="8" y="-16" value="C4" palette="1" horizontalflip="false" verticalflip="false" table="-1" />
     <sprite x="56" y="16" value="C4" palette="1" horizontalflip="false" verticalflip="true" table="-1" />
   </spritedefinition>
-  <spritedefinition id="93" width="04" height="01" name="Periodic Rotating Platform (Counter Clockwise)" group="3" class="Common">
-    <sprite x="8" y="0" value="2C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="16" y="0" value="2C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="24" y="0" value="2C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="32" y="0" value="2C" palette="2" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="40" y="0" value="2C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="48" y="0" value="2C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="56" y="0" value="2C" palette="1" horizontalflip="false" verticalflip="false" table="4F" />
-    <sprite x="8" y="16" value="C4" palette="1" horizontalflip="false" verticalflip="true" table="-1" />
-    <sprite x="56" y="-16" value="C4" palette="1" horizontalflip="false" verticalflip="false" table="-1" />
+  <spritedefinition id="93" width="04" height="01" name="Introduction Sequence" group="2" class="One Time Use">
+    <sprite x="8" y="0" value="00" palette="1" horizontalflip="false" verticalflip="false" table="36" />
+    <sprite x="16" y="0" value="02" palette="1" horizontalflip="false" verticalflip="false" table="36" />
+    <sprite x="8" y="16" value="20" palette="1" horizontalflip="false" verticalflip="false" table="36" />
+    <sprite x="16" y="16" value="22" palette="1" horizontalflip="false" verticalflip="false" table="36" />
   </spritedefinition>
   <spritedefinition id="94" width="02" height="02" name="Giant ? Block - 3 1Ups" group="2" class="Giant ? Blocks">
     <sprite x="0" y="0" value="0" palette="3" horizontalflip="false" verticalflip="false" table="4C" />
