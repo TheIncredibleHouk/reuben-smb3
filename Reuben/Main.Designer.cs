@@ -72,9 +72,11 @@
             this.MnuDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpRawLevelToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PnlRightSide = new System.Windows.Forms.Panel();
+            this.PrvProject = new Daiz.NES.Reuben.ProjectView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnShowHide = new System.Windows.Forms.Button();
-            this.PrvProject = new Daiz.NES.Reuben.ProjectView();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.PnlRightSide.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -347,7 +349,9 @@
             this.MnuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.paletteManagerToolStripMenuItem,
             this.graphicsEditorToolStripMenuItem,
-            this.map16EditorToolStripMenuItem});
+            this.map16EditorToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.reportsToolStripMenuItem});
             this.MnuTools.Enabled = false;
             this.MnuTools.Name = "MnuTools";
             this.MnuTools.Size = new System.Drawing.Size(48, 20);
@@ -423,6 +427,14 @@
             this.PnlRightSide.Size = new System.Drawing.Size(325, 432);
             this.PnlRightSide.TabIndex = 3;
             // 
+            // PrvProject
+            // 
+            this.PrvProject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PrvProject.Location = new System.Drawing.Point(0, 31);
+            this.PrvProject.Name = "PrvProject";
+            this.PrvProject.Size = new System.Drawing.Size(325, 401);
+            this.PrvProject.TabIndex = 3;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.BtnShowHide);
@@ -442,13 +454,17 @@
             this.BtnShowHide.UseVisualStyleBackColor = true;
             this.BtnShowHide.Click += new System.EventHandler(this.BtnShowHide_Click);
             // 
-            // PrvProject
+            // toolStripSeparator5
             // 
-            this.PrvProject.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PrvProject.Location = new System.Drawing.Point(0, 31);
-            this.PrvProject.Name = "PrvProject";
-            this.PrvProject.Size = new System.Drawing.Size(325, 401);
-            this.PrvProject.TabIndex = 3;
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(194, 6);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -520,6 +536,8 @@
         private System.Windows.Forms.ToolStripMenuItem setPaletteFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem levelAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
 
 
     }

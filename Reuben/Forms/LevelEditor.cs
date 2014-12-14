@@ -646,6 +646,7 @@ namespace Daiz.NES.Reuben
             }
             else if (EditMode == EditMode.Sprites)
             {
+                previousSprite = CurrentSprite;
                 CurrentSprite = SelectSprite(x, y);
 
                 modifySpriteVisiblity = false;
@@ -659,7 +660,15 @@ namespace Daiz.NES.Reuben
 
                 if (CurrentSprite != null)
                 {
-                    CmbSpriteProperty.DataSource = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID).PropertyDescriptions;
+                    SpriteDefinition def = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID);
+                    if (def != null)
+                    {
+                        CmbSpriteProperty.DataSource = def.PropertyDescriptions;
+                    }
+                    else
+                    {
+                        CmbSpriteProperty.DataSource = null;
+                    }
                 }
 
                 if (CurrentSprite != null && MouseButtons == MouseButtons.Left)
@@ -741,11 +750,23 @@ namespace Daiz.NES.Reuben
                 else if (CurrentSelectorSprite != null && MouseButtons == MouseButtons.Right)
                 {
                     Sprite newSprite = new Sprite() { X = x, Y = y, InGameID = CurrentSelectorSprite.InGameID };
+                    if (previousSprite != null && newSprite.InGameID == previousSprite.InGameID)
+                    {
+                        newSprite.Property = previousSprite.Property;
+                    }
+                    
                     CurrentLevel.AddSprite(newSprite);
                     CurrentSprite = newSprite;
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
                     ContinueDragging = true;
                     LblSprite.Text = "Current Sprite: " + CurrentSprite.InGameID.ToHexString() + " - " + CurrentSprite.Name;
+                    CmbSpriteProperty.DataSource = ProjectController.SpriteManager.GetDefinition(CurrentSprite.InGameID).PropertyDescriptions;
+                    CmbSpriteProperty.Enabled = CmbSpriteProperty.DataSource != null && CmbSpriteProperty.Items.Count > 1;
+
+                    if (CmbSpriteProperty.Enabled)
+                    {
+                        CmbSpriteProperty.SelectedIndex = CurrentSprite.Property;
+                    }
                 }
                 else
                 {
@@ -1280,6 +1301,7 @@ namespace Daiz.NES.Reuben
 
         #region sprites
         private Sprite CurrentSprite = null;
+        private Sprite previousSprite = null;
 
         private Sprite SelectSprite(int x, int y)
         {
@@ -1350,6 +1372,7 @@ namespace Daiz.NES.Reuben
         }
 
         private Sprite CurrentSelectorSprite;
+        private int currentSpriteProperty;
 
         private void spViewer_SelectionChanged(object sender, TEventArgs<Sprite> e)
         {

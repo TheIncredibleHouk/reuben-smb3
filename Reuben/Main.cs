@@ -300,5 +300,11 @@ namespace Daiz.NES.Reuben
             ProjectController.CheckGraphicsChanges();
 
         }
+
+        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reports r = new Reports();
+            r.ShowDialog();
+        }
     }
 }
