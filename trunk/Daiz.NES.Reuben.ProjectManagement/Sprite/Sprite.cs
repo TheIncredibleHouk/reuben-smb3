@@ -30,7 +30,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 if (IsMapSprite)
                     return ProjectController.SpriteManager.GetMapDefinition(InGameID).Name;
 
-                return ProjectController.SpriteManager.GetDefinition(InGameID).Name;
+                SpriteDefinition def = ProjectController.SpriteManager.GetDefinition(InGameID);
+                if (def == null)
+                {
+                    return "Unknown";
+                }
+                return def.Name;
             }
         }
 
@@ -40,8 +45,13 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 if (IsMapSprite)
                     return ProjectController.SpriteManager.GetMapDefinition(InGameID).Width;
+                SpriteDefinition def = ProjectController.SpriteManager.GetDefinition(InGameID);
+                if (def == null)
+                {
+                    return 16;
+                }
 
-                return ProjectController.SpriteManager.GetDefinition(InGameID).Width;
+                return def.Width;
             }
         }
 
@@ -49,10 +59,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             get
             {
-                if(IsMapSprite)
-                return ProjectController.SpriteManager.GetMapDefinition(InGameID).Height;
+                if (IsMapSprite)
+                    return ProjectController.SpriteManager.GetMapDefinition(InGameID).Height;
 
-                return ProjectController.SpriteManager.GetDefinition(InGameID).Height;
+                SpriteDefinition def = ProjectController.SpriteManager.GetDefinition(InGameID);
+                if (def == null)
+                {
+                    return 16;
+                }
+
+                return def.Height;
             }
         }
 
@@ -101,10 +117,5 @@ namespace Daiz.NES.Reuben.ProjectManagement
         }
 
         #endregion
-
-        public override bool Equals(object obj)
-        {
-            return ((Sprite)obj).InGameID == this.InGameID;
-        }
     }
 }

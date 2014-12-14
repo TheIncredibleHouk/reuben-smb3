@@ -142,6 +142,12 @@
     <Compile Include="Forms\NewPaletteForm.Designer.cs">
       <DependentUpon>NewPaletteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reports.Designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WorldEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewPaletteForm.resx">
       <DependentUpon>NewPaletteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\WorldEditor.resx">
       <DependentUpon>WorldEditor.cs</DependentUpon>
