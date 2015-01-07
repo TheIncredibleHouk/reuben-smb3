@@ -34,6 +34,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     case 2:
                         return 0xF8;
 
+                    case 3:
+                        return 0x5E;
+
                     default:
                         return 0x80;
                 }
@@ -50,6 +53,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public bool InvincibleEnemies { get; set; }
         public bool ProjectileBlocksTemporary { get; set; }
         public bool RhythmPlatforms { get; set; }
+        public bool DpadTiles { get; set; }
         public bool VineBlocked { get; set; }
         public int PaletteEffect { get; set; }
         public int Palette { get; set; }
@@ -133,6 +137,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             root.SetAttributeValue("misc3", MiscByte3);
             root.SetAttributeValue("tempprojeffects", ProjectileBlocksTemporary);
             root.SetAttributeValue("rhythm", RhythmPlatforms);
+            root.SetAttributeValue("dpadtiles", DpadTiles);
 
             StringBuilder sb = new StringBuilder();
 
@@ -311,6 +316,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "rhythm":
                         RhythmPlatforms = a.Value.ToBoolean();
+                        break;
+
+                    case "dpadtiles":
+                        DpadTiles = a.Value.ToBoolean();
                         break;
                 }
             }

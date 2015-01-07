@@ -43,9 +43,9 @@ namespace Daiz.NES.Reuben.ProjectManagement
             LevelTypes.Add(new LevelType("Subcon", 8));
             LevelTypes.Add(new LevelType("Desert", 9));
             LevelTypes.Add(new LevelType("Pirate Ship", 10));
-            LevelTypes.Add(new LevelType("Unused", 11));
+            LevelTypes.Add(new LevelType("Basic Structure", 11));
             LevelTypes.Add(new LevelType("Snow/Forest", 12));
-            LevelTypes.Add(new LevelType("Unused", 13));
+            LevelTypes.Add(new LevelType("Item Shops", 13));
             LevelTypes.Add(new LevelType("Underground", 14));
 
             foreach (var l in LevelTypes)

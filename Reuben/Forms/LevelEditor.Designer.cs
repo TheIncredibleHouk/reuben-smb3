@@ -33,6 +33,9 @@
             this.PnlInfo = new System.Windows.Forms.Panel();
             this.TabLevelInfo = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
+            this.LblStartPoint = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.CmbMusic = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,6 +47,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.CmbLength = new System.Windows.Forms.ComboBox();
             this.tabPageEX1 = new System.Windows.Forms.TabPage();
+            this.CmbPaletteEffect = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.CmbAnim = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,16 +59,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.BtnClear = new System.Windows.Forms.Button();
             this.LblHexGraphics = new System.Windows.Forms.Label();
-            this.tabPageEX2 = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
-            this.LblStartPoint = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabPageEX3 = new System.Windows.Forms.TabPage();
-            this.CmbPaletteEffect = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.ChkDpadTiles = new System.Windows.Forms.CheckBox();
             this.ChkRhythm = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.ChkProjectileSpins = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -71,8 +69,6 @@
             this.txtMisc3 = new System.Windows.Forms.TextBox();
             this.txtMisc2 = new System.Windows.Forms.TextBox();
             this.txtMisc1 = new System.Windows.Forms.TextBox();
-            this.CmbSpecialType = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.ChkInvincibleEnemies = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblSprite = new System.Windows.Forms.Label();
@@ -86,6 +82,7 @@
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.CmbSpriteProperty = new System.Windows.Forms.ComboBox();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
@@ -130,6 +127,8 @@
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.hMirrorButton = new System.Windows.Forms.ToolStripButton();
             this.vMirrorButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.CtxVerticalGuide = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.freeGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -160,15 +159,12 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
-            this.button2 = new System.Windows.Forms.Button();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumTime)).BeginInit();
             this.tabPageEX1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).BeginInit();
-            this.tabPageEX2.SuspendLayout();
-            this.tabPageEX3.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -194,9 +190,9 @@
             this.PnlInfo.Controls.Add(this.TabLevelInfo);
             this.PnlInfo.Controls.Add(this.panel4);
             this.PnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PnlInfo.Location = new System.Drawing.Point(277, 373);
+            this.PnlInfo.Location = new System.Drawing.Point(277, 382);
             this.PnlInfo.Name = "PnlInfo";
-            this.PnlInfo.Size = new System.Drawing.Size(558, 122);
+            this.PnlInfo.Size = new System.Drawing.Size(710, 122);
             this.PnlInfo.TabIndex = 1;
             // 
             // TabLevelInfo
@@ -204,20 +200,21 @@
             this.TabLevelInfo.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.TabLevelInfo.Controls.Add(this.tabPage4);
             this.TabLevelInfo.Controls.Add(this.tabPageEX1);
-            this.TabLevelInfo.Controls.Add(this.tabPageEX2);
-            this.TabLevelInfo.Controls.Add(this.tabPageEX3);
             this.TabLevelInfo.Controls.Add(this.tabPage7);
             this.TabLevelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabLevelInfo.Location = new System.Drawing.Point(0, 29);
             this.TabLevelInfo.Name = "TabLevelInfo";
             this.TabLevelInfo.SelectedIndex = 0;
-            this.TabLevelInfo.Size = new System.Drawing.Size(558, 93);
+            this.TabLevelInfo.Size = new System.Drawing.Size(710, 93);
             this.TabLevelInfo.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabLevelInfo.TabIndex = 20;
             // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage4.Controls.Add(this.label13);
+            this.tabPage4.Controls.Add(this.LblStartPoint);
+            this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.CmbMusic);
             this.tabPage4.Controls.Add(this.label3);
             this.tabPage4.Controls.Add(this.label4);
@@ -231,10 +228,42 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(550, 67);
+            this.tabPage4.Size = new System.Drawing.Size(702, 67);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Level";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(541, 2);
+            this.label13.Margin = new System.Windows.Forms.Padding(3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.TabIndex = 44;
+            this.label13.Text = "Start Point";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblStartPoint
+            // 
+            this.LblStartPoint.AutoSize = true;
+            this.LblStartPoint.Location = new System.Drawing.Point(602, 2);
+            this.LblStartPoint.Margin = new System.Windows.Forms.Padding(3);
+            this.LblStartPoint.Name = "LblStartPoint";
+            this.LblStartPoint.Size = new System.Drawing.Size(48, 13);
+            this.LblStartPoint.TabIndex = 43;
+            this.LblStartPoint.Text = "X: 0 Y: 4";
+            this.LblStartPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(539, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Set Starting Position";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BtnStartPoint_Click);
             // 
             // CmbMusic
             // 
@@ -361,6 +390,8 @@
             // tabPageEX1
             // 
             this.tabPageEX1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageEX1.Controls.Add(this.CmbPaletteEffect);
+            this.tabPageEX1.Controls.Add(this.label7);
             this.tabPageEX1.Controls.Add(this.label9);
             this.tabPageEX1.Controls.Add(this.CmbAnim);
             this.tabPageEX1.Controls.Add(this.label1);
@@ -373,10 +404,33 @@
             this.tabPageEX1.Controls.Add(this.LblHexGraphics);
             this.tabPageEX1.Location = new System.Drawing.Point(4, 4);
             this.tabPageEX1.Name = "tabPageEX1";
-            this.tabPageEX1.Size = new System.Drawing.Size(550, 67);
+            this.tabPageEX1.Size = new System.Drawing.Size(702, 67);
             this.tabPageEX1.TabIndex = 4;
             this.tabPageEX1.Text = "Graphics";
             this.tabPageEX1.UseVisualStyleBackColor = true;
+            // 
+            // CmbPaletteEffect
+            // 
+            this.CmbPaletteEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbPaletteEffect.FormattingEnabled = true;
+            this.CmbPaletteEffect.Items.AddRange(new object[] {
+            "None",
+            "Rainbow Cycle",
+            "Ignore Day/Night Cycle",
+            "Unused"});
+            this.CmbPaletteEffect.Location = new System.Drawing.Point(460, 22);
+            this.CmbPaletteEffect.Name = "CmbPaletteEffect";
+            this.CmbPaletteEffect.Size = new System.Drawing.Size(121, 21);
+            this.CmbPaletteEffect.TabIndex = 35;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(457, 3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 13);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Palette Effect: ";
             // 
             // label9
             // 
@@ -394,7 +448,8 @@
             this.CmbAnim.Items.AddRange(new object[] {
             "Type 1",
             "Type 2",
-            "Type 3"});
+            "Type 3 (no P-Switch alt)",
+            "Type 4 (shop)"});
             this.CmbAnim.Location = new System.Drawing.Point(276, 21);
             this.CmbAnim.Name = "CmbAnim";
             this.CmbAnim.Size = new System.Drawing.Size(63, 21);
@@ -489,91 +544,11 @@
             this.LblHexGraphics.Text = "label10";
             this.LblHexGraphics.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // tabPageEX2
-            // 
-            this.tabPageEX2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX2.Controls.Add(this.label13);
-            this.tabPageEX2.Controls.Add(this.LblStartPoint);
-            this.tabPageEX2.Controls.Add(this.button1);
-            this.tabPageEX2.Location = new System.Drawing.Point(4, 4);
-            this.tabPageEX2.Name = "tabPageEX2";
-            this.tabPageEX2.Size = new System.Drawing.Size(550, 67);
-            this.tabPageEX2.TabIndex = 5;
-            this.tabPageEX2.Text = "Position";
-            this.tabPageEX2.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 3);
-            this.label13.Margin = new System.Windows.Forms.Padding(3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 13);
-            this.label13.TabIndex = 41;
-            this.label13.Text = "Start Point";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblStartPoint
-            // 
-            this.LblStartPoint.AutoSize = true;
-            this.LblStartPoint.Location = new System.Drawing.Point(64, 3);
-            this.LblStartPoint.Margin = new System.Windows.Forms.Padding(3);
-            this.LblStartPoint.Name = "LblStartPoint";
-            this.LblStartPoint.Size = new System.Drawing.Size(48, 13);
-            this.LblStartPoint.TabIndex = 40;
-            this.LblStartPoint.Text = "X: 0 Y: 4";
-            this.LblStartPoint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(4, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 23);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "Set Starting Position";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.BtnStartPoint_Click);
-            // 
-            // tabPageEX3
-            // 
-            this.tabPageEX3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageEX3.Controls.Add(this.CmbPaletteEffect);
-            this.tabPageEX3.Controls.Add(this.label7);
-            this.tabPageEX3.Location = new System.Drawing.Point(4, 4);
-            this.tabPageEX3.Name = "tabPageEX3";
-            this.tabPageEX3.Size = new System.Drawing.Size(550, 67);
-            this.tabPageEX3.TabIndex = 6;
-            this.tabPageEX3.Text = "Effects";
-            this.tabPageEX3.UseVisualStyleBackColor = true;
-            // 
-            // CmbPaletteEffect
-            // 
-            this.CmbPaletteEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbPaletteEffect.FormattingEnabled = true;
-            this.CmbPaletteEffect.Items.AddRange(new object[] {
-            "None",
-            "Rainbow Cycle",
-            "Ignore Day/Night Cycle",
-            "Unused"});
-            this.CmbPaletteEffect.Location = new System.Drawing.Point(86, 7);
-            this.CmbPaletteEffect.Name = "CmbPaletteEffect";
-            this.CmbPaletteEffect.Size = new System.Drawing.Size(121, 21);
-            this.CmbPaletteEffect.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Palette Effect: ";
-            // 
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPage7.Controls.Add(this.ChkDpadTiles);
             this.tabPage7.Controls.Add(this.ChkRhythm);
-            this.tabPage7.Controls.Add(this.label10);
             this.tabPage7.Controls.Add(this.ChkProjectileSpins);
             this.tabPage7.Controls.Add(this.label18);
             this.tabPage7.Controls.Add(this.label17);
@@ -581,21 +556,30 @@
             this.tabPage7.Controls.Add(this.txtMisc3);
             this.tabPage7.Controls.Add(this.txtMisc2);
             this.tabPage7.Controls.Add(this.txtMisc1);
-            this.tabPage7.Controls.Add(this.CmbSpecialType);
-            this.tabPage7.Controls.Add(this.label15);
             this.tabPage7.Controls.Add(this.ChkInvincibleEnemies);
             this.tabPage7.Location = new System.Drawing.Point(4, 4);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(550, 67);
+            this.tabPage7.Size = new System.Drawing.Size(702, 67);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Special Options";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // ChkDpadTiles
+            // 
+            this.ChkDpadTiles.AutoSize = true;
+            this.ChkDpadTiles.Location = new System.Drawing.Point(6, 9);
+            this.ChkDpadTiles.Name = "ChkDpadTiles";
+            this.ChkDpadTiles.Size = new System.Drawing.Size(113, 17);
+            this.ChkDpadTiles.TabIndex = 14;
+            this.ChkDpadTiles.Text = "Enable Dpad Tiles";
+            this.ChkDpadTiles.UseVisualStyleBackColor = true;
+            this.ChkDpadTiles.CheckedChanged += new System.EventHandler(this.ChkDpadTiles_CheckedChanged);
+            // 
             // ChkRhythm
             // 
             this.ChkRhythm.AutoSize = true;
-            this.ChkRhythm.Location = new System.Drawing.Point(403, 43);
+            this.ChkRhythm.Location = new System.Drawing.Point(155, 32);
             this.ChkRhythm.Name = "ChkRhythm";
             this.ChkRhythm.Size = new System.Drawing.Size(144, 17);
             this.ChkRhythm.TabIndex = 13;
@@ -603,19 +587,10 @@
             this.ChkRhythm.UseVisualStyleBackColor = true;
             this.ChkRhythm.CheckedChanged += new System.EventHandler(this.ChkRhythm_CheckedChanged);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(207, 12);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 13);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "Event Type:";
-            // 
             // ChkProjectileSpins
             // 
             this.ChkProjectileSpins.AutoSize = true;
-            this.ChkProjectileSpins.Location = new System.Drawing.Point(403, 27);
+            this.ChkProjectileSpins.Location = new System.Drawing.Point(6, 32);
             this.ChkProjectileSpins.Name = "ChkProjectileSpins";
             this.ChkProjectileSpins.Size = new System.Drawing.Size(135, 17);
             this.ChkProjectileSpins.TabIndex = 11;
@@ -626,7 +601,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(200, 45);
+            this.label18.Location = new System.Drawing.Point(512, 13);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(38, 13);
             this.label18.TabIndex = 9;
@@ -635,7 +610,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(100, 45);
+            this.label17.Location = new System.Drawing.Point(412, 13);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(38, 13);
             this.label17.TabIndex = 9;
@@ -644,60 +619,38 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(9, 44);
+            this.label16.Location = new System.Drawing.Point(315, 13);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(38, 13);
             this.label16.TabIndex = 8;
             this.label16.Text = "Misc 1";
+            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // txtMisc3
             // 
-            this.txtMisc3.Location = new System.Drawing.Point(240, 42);
+            this.txtMisc3.Location = new System.Drawing.Point(552, 10);
             this.txtMisc3.Name = "txtMisc3";
             this.txtMisc3.Size = new System.Drawing.Size(35, 20);
             this.txtMisc3.TabIndex = 7;
             // 
             // txtMisc2
             // 
-            this.txtMisc2.Location = new System.Drawing.Point(147, 41);
+            this.txtMisc2.Location = new System.Drawing.Point(459, 9);
             this.txtMisc2.Name = "txtMisc2";
             this.txtMisc2.Size = new System.Drawing.Size(35, 20);
             this.txtMisc2.TabIndex = 6;
             // 
             // txtMisc1
             // 
-            this.txtMisc1.Location = new System.Drawing.Point(56, 41);
+            this.txtMisc1.Location = new System.Drawing.Point(368, 9);
             this.txtMisc1.Name = "txtMisc1";
             this.txtMisc1.Size = new System.Drawing.Size(35, 20);
             this.txtMisc1.TabIndex = 5;
             // 
-            // CmbSpecialType
-            // 
-            this.CmbSpecialType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbSpecialType.FormattingEnabled = true;
-            this.CmbSpecialType.Items.AddRange(new object[] {
-            "None",
-            "Hammer Bros. Toll",
-            "Item Shop",
-            "Bank"});
-            this.CmbSpecialType.Location = new System.Drawing.Point(80, 7);
-            this.CmbSpecialType.Name = "CmbSpecialType";
-            this.CmbSpecialType.Size = new System.Drawing.Size(121, 21);
-            this.CmbSpecialType.TabIndex = 4;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 12);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(72, 13);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "Special Type:";
-            // 
             // ChkInvincibleEnemies
             // 
             this.ChkInvincibleEnemies.AutoSize = true;
-            this.ChkInvincibleEnemies.Location = new System.Drawing.Point(403, 9);
+            this.ChkInvincibleEnemies.Location = new System.Drawing.Point(155, 9);
             this.ChkInvincibleEnemies.Name = "ChkInvincibleEnemies";
             this.ChkInvincibleEnemies.Size = new System.Drawing.Size(114, 17);
             this.ChkInvincibleEnemies.TabIndex = 0;
@@ -712,7 +665,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(558, 29);
+            this.panel4.Size = new System.Drawing.Size(710, 29);
             this.panel4.TabIndex = 23;
             // 
             // LblSprite
@@ -721,7 +674,7 @@
             this.LblSprite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblSprite.Location = new System.Drawing.Point(69, 0);
             this.LblSprite.Name = "LblSprite";
-            this.LblSprite.Size = new System.Drawing.Size(423, 29);
+            this.LblSprite.Size = new System.Drawing.Size(575, 29);
             this.LblSprite.TabIndex = 21;
             this.LblSprite.Text = "Sprite";
             this.LblSprite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -744,7 +697,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.NumSpecials);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(492, 0);
+            this.panel3.Location = new System.Drawing.Point(644, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(66, 29);
@@ -782,7 +735,7 @@
             this.TabEditSelector.Multiline = true;
             this.TabEditSelector.Name = "TabEditSelector";
             this.TabEditSelector.SelectedIndex = 0;
-            this.TabEditSelector.Size = new System.Drawing.Size(277, 495);
+            this.TabEditSelector.Size = new System.Drawing.Size(277, 504);
             this.TabEditSelector.TabIndex = 17;
             this.TabEditSelector.SelectedIndexChanged += new System.EventHandler(this.TabEditSelector_SelectedIndexChanged);
             // 
@@ -795,7 +748,7 @@
             this.tabPage1.Controls.Add(this.BlsSelector);
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(269, 469);
+            this.tabPage1.Size = new System.Drawing.Size(269, 478);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
             this.tabPage1.ToolTipText = "Shortcut Q";
@@ -863,12 +816,22 @@
             this.tabPage2.Controls.Add(this.TabClass1);
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(269, 469);
+            this.tabPage2.Size = new System.Drawing.Size(269, 478);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sprites";
             this.tabPage2.ToolTipText = "Shortcut W";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage2_MouseMove);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(11, 398);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Find All Instances";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label19
             // 
@@ -946,7 +909,7 @@
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(269, 469);
+            this.tabPage3.Size = new System.Drawing.Size(269, 478);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pointers";
             this.tabPage3.ToolTipText = "Shortcut E";
@@ -1289,7 +1252,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(277, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(558, 26);
+            this.panel2.Size = new System.Drawing.Size(710, 26);
             this.panel2.TabIndex = 23;
             // 
             // TlsTileCommands
@@ -1303,11 +1266,13 @@
             this.TsbDelete,
             this.toolStripSeparator8,
             this.hMirrorButton,
-            this.vMirrorButton});
+            this.vMirrorButton,
+            this.toolStripSeparator9,
+            this.toolStripButton1});
             this.TlsTileCommands.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TlsTileCommands.Location = new System.Drawing.Point(356, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(147, 24);
+            this.TlsTileCommands.Size = new System.Drawing.Size(176, 24);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -1381,6 +1346,21 @@
             this.vMirrorButton.Size = new System.Drawing.Size(23, 21);
             this.vMirrorButton.Text = "Mirror Vertically";
             this.vMirrorButton.Click += new System.EventHandler(this.vMirrorButton_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 24);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 21);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // CtxVerticalGuide
             // 
@@ -1567,7 +1547,7 @@
             this.PnlView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlView.Location = new System.Drawing.Point(293, 26);
             this.PnlView.Name = "PnlView";
-            this.PnlView.Size = new System.Drawing.Size(542, 331);
+            this.PnlView.Size = new System.Drawing.Size(694, 340);
             this.PnlView.TabIndex = 0;
             // 
             // PnlLengthControl
@@ -1619,10 +1599,10 @@
             this.PnlHorizontalGuide.GuideOrientation = Daiz.NES.Reuben.Orientation.Horizontal;
             this.PnlHorizontalGuide.GuideSelected = Daiz.NES.Reuben.GuideType.None;
             this.PnlHorizontalGuide.GuideSnapMode = Daiz.NES.Reuben.GuideMode.Free;
-            this.PnlHorizontalGuide.Location = new System.Drawing.Point(293, 357);
+            this.PnlHorizontalGuide.Location = new System.Drawing.Point(293, 366);
             this.PnlHorizontalGuide.Margin = new System.Windows.Forms.Padding(0);
             this.PnlHorizontalGuide.Name = "PnlHorizontalGuide";
-            this.PnlHorizontalGuide.Size = new System.Drawing.Size(542, 16);
+            this.PnlHorizontalGuide.Size = new System.Drawing.Size(694, 16);
             this.PnlHorizontalGuide.TabIndex = 30;
             // 
             // PnlVerticalGuide
@@ -1638,24 +1618,14 @@
             this.PnlVerticalGuide.Location = new System.Drawing.Point(277, 26);
             this.PnlVerticalGuide.Margin = new System.Windows.Forms.Padding(0);
             this.PnlVerticalGuide.Name = "PnlVerticalGuide";
-            this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 347);
+            this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 356);
             this.PnlVerticalGuide.TabIndex = 31;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(11, 398);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Find All Instances";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 495);
+            this.ClientSize = new System.Drawing.Size(987, 504);
             this.Controls.Add(this.PnlView);
             this.Controls.Add(this.PnlHorizontalGuide);
             this.Controls.Add(this.PnlVerticalGuide);
@@ -1678,10 +1648,6 @@
             this.tabPageEX1.ResumeLayout(false);
             this.tabPageEX1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumBackground)).EndInit();
-            this.tabPageEX2.ResumeLayout(false);
-            this.tabPageEX2.PerformLayout();
-            this.tabPageEX3.ResumeLayout(false);
-            this.tabPageEX3.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1794,6 +1760,14 @@
         private GuidePanel PnlHorizontalGuide;
         private GuidePanel PnlVerticalGuide;
         private System.Windows.Forms.ToolStripButton vMirrorButton;
+        private System.Windows.Forms.ToolStripButton hMirrorButton;
+        private System.Windows.Forms.ToolStripButton TsbInteractions;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox CmbSpriteProperty;
+        private BlockViewer BlvLeft;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.TabControl TabLevelInfo;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ComboBox CmbMusic;
@@ -1807,6 +1781,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox CmbLength;
         private System.Windows.Forms.TabPage tabPageEX1;
+        private System.Windows.Forms.ComboBox CmbPaletteEffect;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox CmbAnim;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CmbGraphics;
         private System.Windows.Forms.NumericUpDown NumBackground;
@@ -1815,33 +1793,19 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BtnClear;
         private System.Windows.Forms.Label LblHexGraphics;
-        private System.Windows.Forms.TabPage tabPageEX2;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label LblStartPoint;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tabPageEX3;
         private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.CheckBox ChkDpadTiles;
+        private System.Windows.Forms.CheckBox ChkRhythm;
+        private System.Windows.Forms.CheckBox ChkProjectileSpins;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtMisc3;
         private System.Windows.Forms.TextBox txtMisc2;
         private System.Windows.Forms.TextBox txtMisc1;
-        private System.Windows.Forms.ComboBox CmbSpecialType;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox ChkInvincibleEnemies;
-        private System.Windows.Forms.ToolStripButton hMirrorButton;
-        private System.Windows.Forms.ToolStripButton TsbInteractions;
-        private System.Windows.Forms.ComboBox CmbPaletteEffect;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox CmbAnim;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox CmbSpriteProperty;
-        private System.Windows.Forms.CheckBox ChkProjectileSpins;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox ChkRhythm;
-        private BlockViewer BlvLeft;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label LblStartPoint;
+        private System.Windows.Forms.Button button1;
     }
 }

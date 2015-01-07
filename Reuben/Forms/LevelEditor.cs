@@ -171,7 +171,6 @@ namespace Daiz.NES.Reuben
             TsbSolidity.Checked = CurrentLevel.Settings.BlockProperties;
             TsbStartPoint.Checked = CurrentLevel.Settings.ShowStart;
             TsbZoom.Checked = CurrentLevel.Settings.Zoom;
-            CmbSpecialType.SelectedIndex = CurrentLevel.SpecialLevelType;
             txtMisc1.Text = CurrentLevel.MiscByte1.ToHexString();
             txtMisc2.Text = CurrentLevel.MiscByte2.ToHexString();
             txtMisc3.Text = CurrentLevel.MiscByte3.ToHexString();
@@ -180,6 +179,7 @@ namespace Daiz.NES.Reuben
             CmbPaletteEffect.SelectedIndex = CurrentLevel.PaletteEffect;
             ChkProjectileSpins.Checked = CurrentLevel.ProjectileBlocksTemporary;
             ChkRhythm.Checked = CurrentLevel.RhythmPlatforms;
+            ChkDpadTiles.Checked = CurrentLevel.DpadTiles;
 
             switch (CurrentLevel.Settings.DrawMode)
             {
@@ -1548,7 +1548,6 @@ namespace Daiz.NES.Reuben
             CurrentLevel.ScrollType = CmbScroll.SelectedIndex;
             CurrentLevel.PaletteEffect = CmbPaletteEffect.SelectedIndex;
             CurrentLevel.InvincibleEnemies = ChkInvincibleEnemies.Checked;
-            CurrentLevel.SpecialLevelType = CmbSpecialType.SelectedIndex;
             CurrentLevel.Save();
         }
 
@@ -2155,6 +2154,36 @@ namespace Daiz.NES.Reuben
             }
 
             MessageBox.Show(builder.ToString());
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            int count = 0;
+            byte[,] data = CurrentLevel.GetData(LvlView.SelectionRectangle.X, LvlView.SelectionRectangle.Y, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height);
+            for (int i = 0; i < LvlView.SelectionRectangle.Height; i++)
+            {
+                for (int j = 0; j < LvlView.SelectionRectangle.Width; j++)
+                {
+                    BlockProperty property = BlsSelector.CurrentDefiniton[data[j, i]].BlockProperty;
+                    if (property < (BlockProperty.SolidTop) &&
+                        (property & (BlockProperty.MaskLo)) == BlockProperty.Coin)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            MessageBox.Show(count + " coins in selection.");
+        }
+
+        private void ChkDpadTiles_CheckedChanged(object sender, EventArgs e)
+        {
+            CurrentLevel.DpadTiles = ChkDpadTiles.Checked;
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
