@@ -183,7 +183,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 Rom[levelAddress++] = (byte)name[i];
             }
 
-            foreach (var p in l.Pointers)
+            foreach (var p in l.Pointers.OrderBy(pt => pt.XEnter).ThenBy(pt => pt.YEnter))
             {
                 if (p.ExitsLevel)
                 {
