@@ -33,60 +33,61 @@
             this.BtnSaveClose = new System.Windows.Forms.Button();
             this.TSAToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.psF1 = new System.Windows.Forms.NumericUpDown();
+            this.psT1 = new System.Windows.Forms.NumericUpDown();
+            this.psF2 = new System.Windows.Forms.NumericUpDown();
+            this.psT2 = new System.Windows.Forms.NumericUpDown();
+            this.psF3 = new System.Windows.Forms.NumericUpDown();
+            this.psT3 = new System.Windows.Forms.NumericUpDown();
+            this.psF4 = new System.Windows.Forms.NumericUpDown();
+            this.psT4 = new System.Windows.Forms.NumericUpDown();
+            this.psF5 = new System.Windows.Forms.NumericUpDown();
+            this.psF7 = new System.Windows.Forms.NumericUpDown();
+            this.psF8 = new System.Windows.Forms.NumericUpDown();
+            this.psT8 = new System.Windows.Forms.NumericUpDown();
+            this.psT7 = new System.Windows.Forms.NumericUpDown();
+            this.psT6 = new System.Windows.Forms.NumericUpDown();
+            this.psF6 = new System.Windows.Forms.NumericUpDown();
+            this.psT5 = new System.Windows.Forms.NumericUpDown();
             this.label27 = new System.Windows.Forms.Label();
-            this.psT8 = new System.Windows.Forms.ComboBox();
-            this.psF8 = new System.Windows.Forms.ComboBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.psT7 = new System.Windows.Forms.ComboBox();
-            this.psF7 = new System.Windows.Forms.ComboBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.psT6 = new System.Windows.Forms.ComboBox();
-            this.psF6 = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.psT5 = new System.Windows.Forms.ComboBox();
-            this.psF5 = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.psT4 = new System.Windows.Forms.ComboBox();
-            this.psF4 = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.psT3 = new System.Windows.Forms.ComboBox();
-            this.psF3 = new System.Windows.Forms.ComboBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.psT2 = new System.Windows.Forms.ComboBox();
-            this.psF2 = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.psT1 = new System.Windows.Forms.ComboBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.psF1 = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.ibF1 = new System.Windows.Forms.NumericUpDown();
+            this.ibT1 = new System.Windows.Forms.NumericUpDown();
+            this.ibF2 = new System.Windows.Forms.NumericUpDown();
+            this.ibT2 = new System.Windows.Forms.NumericUpDown();
+            this.ibF3 = new System.Windows.Forms.NumericUpDown();
+            this.ibT3 = new System.Windows.Forms.NumericUpDown();
+            this.ibT4 = new System.Windows.Forms.NumericUpDown();
+            this.ibF4 = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
-            this.ibT4 = new System.Windows.Forms.ComboBox();
-            this.ibF4 = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.ibT3 = new System.Windows.Forms.ComboBox();
-            this.ibF3 = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.ibT2 = new System.Windows.Forms.ComboBox();
-            this.ibF2 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.ibT1 = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.ibF1 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.fbF1 = new System.Windows.Forms.NumericUpDown();
+            this.fbF2 = new System.Windows.Forms.NumericUpDown();
+            this.fbT2 = new System.Windows.Forms.NumericUpDown();
+            this.fbF3 = new System.Windows.Forms.NumericUpDown();
+            this.fbT3 = new System.Windows.Forms.NumericUpDown();
+            this.fbF4 = new System.Windows.Forms.NumericUpDown();
+            this.fbT4 = new System.Windows.Forms.NumericUpDown();
+            this.fbT1 = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
-            this.fbT4 = new System.Windows.Forms.ComboBox();
-            this.fbF4 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.fbT3 = new System.Windows.Forms.ComboBox();
-            this.fbF3 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.fbT2 = new System.Windows.Forms.ComboBox();
-            this.fbF2 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.fbT1 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.fbF1 = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ChkShowInteractions = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BlockDescription = new System.Windows.Forms.TextBox();
@@ -119,15 +120,46 @@
             this.ChkShowSpecials = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.pSwitchTile = new System.Windows.Forms.ComboBox();
+            this.vineTile = new System.Windows.Forms.NumericUpDown();
+            this.pSwitchTile = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.vineTile = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.ChkShowInteractions = new System.Windows.Forms.CheckBox();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.psF1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT5)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF4)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT1)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.GrbBlocks.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -135,6 +167,8 @@
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vineTile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pSwitchTile)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnSaveClose
@@ -149,37 +183,245 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.label27);
-            this.tabPage5.Controls.Add(this.psT8);
-            this.tabPage5.Controls.Add(this.psF8);
-            this.tabPage5.Controls.Add(this.label28);
-            this.tabPage5.Controls.Add(this.psT7);
+            this.tabPage5.Controls.Add(this.psF1);
+            this.tabPage5.Controls.Add(this.psT1);
+            this.tabPage5.Controls.Add(this.psF2);
+            this.tabPage5.Controls.Add(this.psT2);
+            this.tabPage5.Controls.Add(this.psF3);
+            this.tabPage5.Controls.Add(this.psT3);
+            this.tabPage5.Controls.Add(this.psF4);
+            this.tabPage5.Controls.Add(this.psT4);
+            this.tabPage5.Controls.Add(this.psF5);
             this.tabPage5.Controls.Add(this.psF7);
-            this.tabPage5.Controls.Add(this.label29);
+            this.tabPage5.Controls.Add(this.psF8);
+            this.tabPage5.Controls.Add(this.psT8);
+            this.tabPage5.Controls.Add(this.psT7);
             this.tabPage5.Controls.Add(this.psT6);
             this.tabPage5.Controls.Add(this.psF6);
-            this.tabPage5.Controls.Add(this.label30);
             this.tabPage5.Controls.Add(this.psT5);
-            this.tabPage5.Controls.Add(this.psF5);
+            this.tabPage5.Controls.Add(this.label27);
+            this.tabPage5.Controls.Add(this.label28);
+            this.tabPage5.Controls.Add(this.label29);
+            this.tabPage5.Controls.Add(this.label30);
             this.tabPage5.Controls.Add(this.label22);
-            this.tabPage5.Controls.Add(this.psT4);
-            this.tabPage5.Controls.Add(this.psF4);
             this.tabPage5.Controls.Add(this.label23);
-            this.tabPage5.Controls.Add(this.psT3);
-            this.tabPage5.Controls.Add(this.psF3);
             this.tabPage5.Controls.Add(this.label24);
-            this.tabPage5.Controls.Add(this.psT2);
-            this.tabPage5.Controls.Add(this.psF2);
             this.tabPage5.Controls.Add(this.label25);
-            this.tabPage5.Controls.Add(this.psT1);
             this.tabPage5.Controls.Add(this.label26);
-            this.tabPage5.Controls.Add(this.psF1);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(615, 564);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "PSwitch Interactions";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // psF1
+            // 
+            this.psF1.Hexadecimal = true;
+            this.psF1.Location = new System.Drawing.Point(231, 89);
+            this.psF1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF1.Name = "psF1";
+            this.psF1.Size = new System.Drawing.Size(50, 20);
+            this.psF1.TabIndex = 66;
+            // 
+            // psT1
+            // 
+            this.psT1.Hexadecimal = true;
+            this.psT1.Location = new System.Drawing.Point(338, 89);
+            this.psT1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT1.Name = "psT1";
+            this.psT1.Size = new System.Drawing.Size(50, 20);
+            this.psT1.TabIndex = 65;
+            // 
+            // psF2
+            // 
+            this.psF2.Hexadecimal = true;
+            this.psF2.Location = new System.Drawing.Point(231, 132);
+            this.psF2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF2.Name = "psF2";
+            this.psF2.Size = new System.Drawing.Size(50, 20);
+            this.psF2.TabIndex = 64;
+            // 
+            // psT2
+            // 
+            this.psT2.Hexadecimal = true;
+            this.psT2.Location = new System.Drawing.Point(338, 133);
+            this.psT2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT2.Name = "psT2";
+            this.psT2.Size = new System.Drawing.Size(50, 20);
+            this.psT2.TabIndex = 63;
+            // 
+            // psF3
+            // 
+            this.psF3.Hexadecimal = true;
+            this.psF3.Location = new System.Drawing.Point(231, 177);
+            this.psF3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF3.Name = "psF3";
+            this.psF3.Size = new System.Drawing.Size(50, 20);
+            this.psF3.TabIndex = 62;
+            // 
+            // psT3
+            // 
+            this.psT3.Hexadecimal = true;
+            this.psT3.Location = new System.Drawing.Point(338, 177);
+            this.psT3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT3.Name = "psT3";
+            this.psT3.Size = new System.Drawing.Size(50, 20);
+            this.psT3.TabIndex = 61;
+            // 
+            // psF4
+            // 
+            this.psF4.Hexadecimal = true;
+            this.psF4.Location = new System.Drawing.Point(231, 220);
+            this.psF4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF4.Name = "psF4";
+            this.psF4.Size = new System.Drawing.Size(50, 20);
+            this.psF4.TabIndex = 60;
+            // 
+            // psT4
+            // 
+            this.psT4.Hexadecimal = true;
+            this.psT4.Location = new System.Drawing.Point(338, 220);
+            this.psT4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT4.Name = "psT4";
+            this.psT4.Size = new System.Drawing.Size(50, 20);
+            this.psT4.TabIndex = 59;
+            // 
+            // psF5
+            // 
+            this.psF5.Hexadecimal = true;
+            this.psF5.Location = new System.Drawing.Point(231, 263);
+            this.psF5.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF5.Name = "psF5";
+            this.psF5.Size = new System.Drawing.Size(50, 20);
+            this.psF5.TabIndex = 58;
+            // 
+            // psF7
+            // 
+            this.psF7.Hexadecimal = true;
+            this.psF7.Location = new System.Drawing.Point(231, 351);
+            this.psF7.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF7.Name = "psF7";
+            this.psF7.Size = new System.Drawing.Size(50, 20);
+            this.psF7.TabIndex = 57;
+            // 
+            // psF8
+            // 
+            this.psF8.Hexadecimal = true;
+            this.psF8.Location = new System.Drawing.Point(231, 395);
+            this.psF8.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF8.Name = "psF8";
+            this.psF8.Size = new System.Drawing.Size(50, 20);
+            this.psF8.TabIndex = 56;
+            // 
+            // psT8
+            // 
+            this.psT8.Hexadecimal = true;
+            this.psT8.Location = new System.Drawing.Point(338, 395);
+            this.psT8.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT8.Name = "psT8";
+            this.psT8.Size = new System.Drawing.Size(50, 20);
+            this.psT8.TabIndex = 55;
+            // 
+            // psT7
+            // 
+            this.psT7.Hexadecimal = true;
+            this.psT7.Location = new System.Drawing.Point(338, 351);
+            this.psT7.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT7.Name = "psT7";
+            this.psT7.Size = new System.Drawing.Size(50, 20);
+            this.psT7.TabIndex = 54;
+            // 
+            // psT6
+            // 
+            this.psT6.Hexadecimal = true;
+            this.psT6.Location = new System.Drawing.Point(338, 307);
+            this.psT6.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT6.Name = "psT6";
+            this.psT6.Size = new System.Drawing.Size(50, 20);
+            this.psT6.TabIndex = 53;
+            // 
+            // psF6
+            // 
+            this.psF6.Hexadecimal = true;
+            this.psF6.Location = new System.Drawing.Point(231, 307);
+            this.psF6.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psF6.Name = "psF6";
+            this.psF6.Size = new System.Drawing.Size(50, 20);
+            this.psF6.TabIndex = 52;
+            // 
+            // psT5
+            // 
+            this.psT5.Hexadecimal = true;
+            this.psT5.Location = new System.Drawing.Point(338, 263);
+            this.psT5.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.psT5.Name = "psT5";
+            this.psT5.Size = new System.Drawing.Size(50, 20);
+            this.psT5.TabIndex = 51;
             // 
             // label27
             // 
@@ -190,24 +432,6 @@
             this.label27.TabIndex = 50;
             this.label27.Text = "turns into";
             // 
-            // psT8
-            // 
-            this.psT8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT8.FormattingEnabled = true;
-            this.psT8.Location = new System.Drawing.Point(338, 394);
-            this.psT8.Name = "psT8";
-            this.psT8.Size = new System.Drawing.Size(250, 21);
-            this.psT8.TabIndex = 49;
-            // 
-            // psF8
-            // 
-            this.psF8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF8.FormattingEnabled = true;
-            this.psF8.Location = new System.Drawing.Point(31, 394);
-            this.psF8.Name = "psF8";
-            this.psF8.Size = new System.Drawing.Size(250, 21);
-            this.psF8.TabIndex = 48;
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -216,24 +440,6 @@
             this.label28.Size = new System.Drawing.Size(50, 13);
             this.label28.TabIndex = 47;
             this.label28.Text = "turns into";
-            // 
-            // psT7
-            // 
-            this.psT7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT7.FormattingEnabled = true;
-            this.psT7.Location = new System.Drawing.Point(338, 350);
-            this.psT7.Name = "psT7";
-            this.psT7.Size = new System.Drawing.Size(250, 21);
-            this.psT7.TabIndex = 46;
-            // 
-            // psF7
-            // 
-            this.psF7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF7.FormattingEnabled = true;
-            this.psF7.Location = new System.Drawing.Point(31, 350);
-            this.psF7.Name = "psF7";
-            this.psF7.Size = new System.Drawing.Size(250, 21);
-            this.psF7.TabIndex = 45;
             // 
             // label29
             // 
@@ -244,24 +450,6 @@
             this.label29.TabIndex = 44;
             this.label29.Text = "turns into";
             // 
-            // psT6
-            // 
-            this.psT6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT6.FormattingEnabled = true;
-            this.psT6.Location = new System.Drawing.Point(338, 306);
-            this.psT6.Name = "psT6";
-            this.psT6.Size = new System.Drawing.Size(250, 21);
-            this.psT6.TabIndex = 43;
-            // 
-            // psF6
-            // 
-            this.psF6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF6.FormattingEnabled = true;
-            this.psF6.Location = new System.Drawing.Point(31, 306);
-            this.psF6.Name = "psF6";
-            this.psF6.Size = new System.Drawing.Size(250, 21);
-            this.psF6.TabIndex = 42;
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
@@ -270,24 +458,6 @@
             this.label30.Size = new System.Drawing.Size(50, 13);
             this.label30.TabIndex = 41;
             this.label30.Text = "turns into";
-            // 
-            // psT5
-            // 
-            this.psT5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT5.FormattingEnabled = true;
-            this.psT5.Location = new System.Drawing.Point(338, 262);
-            this.psT5.Name = "psT5";
-            this.psT5.Size = new System.Drawing.Size(250, 21);
-            this.psT5.TabIndex = 40;
-            // 
-            // psF5
-            // 
-            this.psF5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF5.FormattingEnabled = true;
-            this.psF5.Location = new System.Drawing.Point(31, 262);
-            this.psF5.Name = "psF5";
-            this.psF5.Size = new System.Drawing.Size(250, 21);
-            this.psF5.TabIndex = 39;
             // 
             // label22
             // 
@@ -298,24 +468,6 @@
             this.label22.TabIndex = 38;
             this.label22.Text = "turns into";
             // 
-            // psT4
-            // 
-            this.psT4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT4.FormattingEnabled = true;
-            this.psT4.Location = new System.Drawing.Point(338, 220);
-            this.psT4.Name = "psT4";
-            this.psT4.Size = new System.Drawing.Size(250, 21);
-            this.psT4.TabIndex = 37;
-            // 
-            // psF4
-            // 
-            this.psF4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF4.FormattingEnabled = true;
-            this.psF4.Location = new System.Drawing.Point(31, 220);
-            this.psF4.Name = "psF4";
-            this.psF4.Size = new System.Drawing.Size(250, 21);
-            this.psF4.TabIndex = 36;
-            // 
             // label23
             // 
             this.label23.AutoSize = true;
@@ -324,24 +476,6 @@
             this.label23.Size = new System.Drawing.Size(50, 13);
             this.label23.TabIndex = 35;
             this.label23.Text = "turns into";
-            // 
-            // psT3
-            // 
-            this.psT3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT3.FormattingEnabled = true;
-            this.psT3.Location = new System.Drawing.Point(338, 176);
-            this.psT3.Name = "psT3";
-            this.psT3.Size = new System.Drawing.Size(250, 21);
-            this.psT3.TabIndex = 34;
-            // 
-            // psF3
-            // 
-            this.psF3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF3.FormattingEnabled = true;
-            this.psF3.Location = new System.Drawing.Point(31, 176);
-            this.psF3.Name = "psF3";
-            this.psF3.Size = new System.Drawing.Size(250, 21);
-            this.psF3.TabIndex = 33;
             // 
             // label24
             // 
@@ -352,24 +486,6 @@
             this.label24.TabIndex = 32;
             this.label24.Text = "turns into";
             // 
-            // psT2
-            // 
-            this.psT2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT2.FormattingEnabled = true;
-            this.psT2.Location = new System.Drawing.Point(338, 132);
-            this.psT2.Name = "psT2";
-            this.psT2.Size = new System.Drawing.Size(250, 21);
-            this.psT2.TabIndex = 31;
-            // 
-            // psF2
-            // 
-            this.psF2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF2.FormattingEnabled = true;
-            this.psF2.Location = new System.Drawing.Point(31, 132);
-            this.psF2.Name = "psF2";
-            this.psF2.Size = new System.Drawing.Size(250, 21);
-            this.psF2.TabIndex = 30;
-            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -378,15 +494,6 @@
             this.label25.Size = new System.Drawing.Size(50, 13);
             this.label25.TabIndex = 29;
             this.label25.Text = "turns into";
-            // 
-            // psT1
-            // 
-            this.psT1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psT1.FormattingEnabled = true;
-            this.psT1.Location = new System.Drawing.Point(338, 88);
-            this.psT1.Name = "psT1";
-            this.psT1.Size = new System.Drawing.Size(250, 21);
-            this.psT1.TabIndex = 28;
             // 
             // label26
             // 
@@ -397,36 +504,131 @@
             this.label26.TabIndex = 27;
             this.label26.Text = resources.GetString("label26.Text");
             // 
-            // psF1
-            // 
-            this.psF1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.psF1.FormattingEnabled = true;
-            this.psF1.Location = new System.Drawing.Point(31, 88);
-            this.psF1.Name = "psF1";
-            this.psF1.Size = new System.Drawing.Size(250, 21);
-            this.psF1.TabIndex = 26;
-            // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.ibF1);
+            this.tabPage3.Controls.Add(this.ibT1);
+            this.tabPage3.Controls.Add(this.ibF2);
+            this.tabPage3.Controls.Add(this.ibT2);
+            this.tabPage3.Controls.Add(this.ibF3);
+            this.tabPage3.Controls.Add(this.ibT3);
             this.tabPage3.Controls.Add(this.ibT4);
             this.tabPage3.Controls.Add(this.ibF4);
+            this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.ibT3);
-            this.tabPage3.Controls.Add(this.ibF3);
             this.tabPage3.Controls.Add(this.label14);
-            this.tabPage3.Controls.Add(this.ibT2);
-            this.tabPage3.Controls.Add(this.ibF2);
             this.tabPage3.Controls.Add(this.label15);
-            this.tabPage3.Controls.Add(this.ibT1);
             this.tabPage3.Controls.Add(this.label16);
-            this.tabPage3.Controls.Add(this.ibF1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(615, 564);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ice Ball Interactions";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // ibF1
+            // 
+            this.ibF1.Hexadecimal = true;
+            this.ibF1.Location = new System.Drawing.Point(231, 88);
+            this.ibF1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibF1.Name = "ibF1";
+            this.ibF1.Size = new System.Drawing.Size(50, 20);
+            this.ibF1.TabIndex = 33;
+            // 
+            // ibT1
+            // 
+            this.ibT1.Hexadecimal = true;
+            this.ibT1.Location = new System.Drawing.Point(338, 89);
+            this.ibT1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibT1.Name = "ibT1";
+            this.ibT1.Size = new System.Drawing.Size(50, 20);
+            this.ibT1.TabIndex = 32;
+            // 
+            // ibF2
+            // 
+            this.ibF2.Hexadecimal = true;
+            this.ibF2.Location = new System.Drawing.Point(231, 132);
+            this.ibF2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibF2.Name = "ibF2";
+            this.ibF2.Size = new System.Drawing.Size(50, 20);
+            this.ibF2.TabIndex = 31;
+            // 
+            // ibT2
+            // 
+            this.ibT2.Hexadecimal = true;
+            this.ibT2.Location = new System.Drawing.Point(338, 132);
+            this.ibT2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibT2.Name = "ibT2";
+            this.ibT2.Size = new System.Drawing.Size(50, 20);
+            this.ibT2.TabIndex = 30;
+            // 
+            // ibF3
+            // 
+            this.ibF3.Hexadecimal = true;
+            this.ibF3.Location = new System.Drawing.Point(231, 177);
+            this.ibF3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibF3.Name = "ibF3";
+            this.ibF3.Size = new System.Drawing.Size(50, 20);
+            this.ibF3.TabIndex = 29;
+            // 
+            // ibT3
+            // 
+            this.ibT3.Hexadecimal = true;
+            this.ibT3.Location = new System.Drawing.Point(338, 177);
+            this.ibT3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibT3.Name = "ibT3";
+            this.ibT3.Size = new System.Drawing.Size(50, 20);
+            this.ibT3.TabIndex = 28;
+            // 
+            // ibT4
+            // 
+            this.ibT4.Hexadecimal = true;
+            this.ibT4.Location = new System.Drawing.Point(338, 221);
+            this.ibT4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibT4.Name = "ibT4";
+            this.ibT4.Size = new System.Drawing.Size(50, 20);
+            this.ibT4.TabIndex = 27;
+            // 
+            // ibF4
+            // 
+            this.ibF4.Hexadecimal = true;
+            this.ibF4.Location = new System.Drawing.Point(231, 221);
+            this.ibF4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.ibF4.Name = "ibF4";
+            this.ibF4.Size = new System.Drawing.Size(50, 20);
+            this.ibF4.TabIndex = 26;
             // 
             // label12
             // 
@@ -437,24 +639,6 @@
             this.label12.TabIndex = 25;
             this.label12.Text = "turns into";
             // 
-            // ibT4
-            // 
-            this.ibT4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibT4.FormattingEnabled = true;
-            this.ibT4.Location = new System.Drawing.Point(338, 220);
-            this.ibT4.Name = "ibT4";
-            this.ibT4.Size = new System.Drawing.Size(250, 21);
-            this.ibT4.TabIndex = 24;
-            // 
-            // ibF4
-            // 
-            this.ibF4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibF4.FormattingEnabled = true;
-            this.ibF4.Location = new System.Drawing.Point(31, 220);
-            this.ibF4.Name = "ibF4";
-            this.ibF4.Size = new System.Drawing.Size(250, 21);
-            this.ibF4.TabIndex = 23;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -463,24 +647,6 @@
             this.label13.Size = new System.Drawing.Size(50, 13);
             this.label13.TabIndex = 22;
             this.label13.Text = "turns into";
-            // 
-            // ibT3
-            // 
-            this.ibT3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibT3.FormattingEnabled = true;
-            this.ibT3.Location = new System.Drawing.Point(338, 176);
-            this.ibT3.Name = "ibT3";
-            this.ibT3.Size = new System.Drawing.Size(250, 21);
-            this.ibT3.TabIndex = 21;
-            // 
-            // ibF3
-            // 
-            this.ibF3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibF3.FormattingEnabled = true;
-            this.ibF3.Location = new System.Drawing.Point(31, 176);
-            this.ibF3.Name = "ibF3";
-            this.ibF3.Size = new System.Drawing.Size(250, 21);
-            this.ibF3.TabIndex = 20;
             // 
             // label14
             // 
@@ -491,24 +657,6 @@
             this.label14.TabIndex = 19;
             this.label14.Text = "turns into";
             // 
-            // ibT2
-            // 
-            this.ibT2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibT2.FormattingEnabled = true;
-            this.ibT2.Location = new System.Drawing.Point(338, 132);
-            this.ibT2.Name = "ibT2";
-            this.ibT2.Size = new System.Drawing.Size(250, 21);
-            this.ibT2.TabIndex = 18;
-            // 
-            // ibF2
-            // 
-            this.ibF2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibF2.FormattingEnabled = true;
-            this.ibF2.Location = new System.Drawing.Point(31, 132);
-            this.ibF2.Name = "ibF2";
-            this.ibF2.Size = new System.Drawing.Size(250, 21);
-            this.ibF2.TabIndex = 17;
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -517,15 +665,6 @@
             this.label15.Size = new System.Drawing.Size(50, 13);
             this.label15.TabIndex = 16;
             this.label15.Text = "turns into";
-            // 
-            // ibT1
-            // 
-            this.ibT1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibT1.FormattingEnabled = true;
-            this.ibT1.Location = new System.Drawing.Point(338, 88);
-            this.ibT1.Name = "ibT1";
-            this.ibT1.Size = new System.Drawing.Size(250, 21);
-            this.ibT1.TabIndex = 15;
             // 
             // label16
             // 
@@ -538,30 +677,21 @@
     " it will turn into the mentioned block.\r\nA value of 00 and transition to 00 mean" +
     "s no interaction.";
             // 
-            // ibF1
-            // 
-            this.ibF1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ibF1.FormattingEnabled = true;
-            this.ibF1.Location = new System.Drawing.Point(31, 88);
-            this.ibF1.Name = "ibF1";
-            this.ibF1.Size = new System.Drawing.Size(250, 21);
-            this.ibF1.TabIndex = 13;
-            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.fbT4);
-            this.tabPage2.Controls.Add(this.fbF4);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.fbT3);
-            this.tabPage2.Controls.Add(this.fbF3);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.fbT2);
-            this.tabPage2.Controls.Add(this.fbF2);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.fbT1);
-            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.fbF1);
+            this.tabPage2.Controls.Add(this.fbF2);
+            this.tabPage2.Controls.Add(this.fbT2);
+            this.tabPage2.Controls.Add(this.fbF3);
+            this.tabPage2.Controls.Add(this.fbT3);
+            this.tabPage2.Controls.Add(this.fbF4);
+            this.tabPage2.Controls.Add(this.fbT4);
+            this.tabPage2.Controls.Add(this.fbT1);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -569,6 +699,110 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Fire Ball Interactions";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // fbF1
+            // 
+            this.fbF1.Hexadecimal = true;
+            this.fbF1.Location = new System.Drawing.Point(231, 89);
+            this.fbF1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbF1.Name = "fbF1";
+            this.fbF1.Size = new System.Drawing.Size(50, 20);
+            this.fbF1.TabIndex = 20;
+            // 
+            // fbF2
+            // 
+            this.fbF2.Hexadecimal = true;
+            this.fbF2.Location = new System.Drawing.Point(231, 132);
+            this.fbF2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbF2.Name = "fbF2";
+            this.fbF2.Size = new System.Drawing.Size(50, 20);
+            this.fbF2.TabIndex = 19;
+            // 
+            // fbT2
+            // 
+            this.fbT2.Hexadecimal = true;
+            this.fbT2.Location = new System.Drawing.Point(338, 133);
+            this.fbT2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbT2.Name = "fbT2";
+            this.fbT2.Size = new System.Drawing.Size(50, 20);
+            this.fbT2.TabIndex = 18;
+            // 
+            // fbF3
+            // 
+            this.fbF3.Hexadecimal = true;
+            this.fbF3.Location = new System.Drawing.Point(231, 176);
+            this.fbF3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbF3.Name = "fbF3";
+            this.fbF3.Size = new System.Drawing.Size(50, 20);
+            this.fbF3.TabIndex = 17;
+            // 
+            // fbT3
+            // 
+            this.fbT3.Hexadecimal = true;
+            this.fbT3.Location = new System.Drawing.Point(338, 176);
+            this.fbT3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbT3.Name = "fbT3";
+            this.fbT3.Size = new System.Drawing.Size(50, 20);
+            this.fbT3.TabIndex = 16;
+            // 
+            // fbF4
+            // 
+            this.fbF4.Hexadecimal = true;
+            this.fbF4.Location = new System.Drawing.Point(231, 221);
+            this.fbF4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbF4.Name = "fbF4";
+            this.fbF4.Size = new System.Drawing.Size(50, 20);
+            this.fbF4.TabIndex = 15;
+            // 
+            // fbT4
+            // 
+            this.fbT4.Hexadecimal = true;
+            this.fbT4.Location = new System.Drawing.Point(338, 221);
+            this.fbT4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbT4.Name = "fbT4";
+            this.fbT4.Size = new System.Drawing.Size(50, 20);
+            this.fbT4.TabIndex = 14;
+            // 
+            // fbT1
+            // 
+            this.fbT1.Hexadecimal = true;
+            this.fbT1.Location = new System.Drawing.Point(338, 89);
+            this.fbT1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.fbT1.Name = "fbT1";
+            this.fbT1.Size = new System.Drawing.Size(50, 20);
+            this.fbT1.TabIndex = 13;
             // 
             // label11
             // 
@@ -579,24 +813,6 @@
             this.label11.TabIndex = 12;
             this.label11.Text = "turns into";
             // 
-            // fbT4
-            // 
-            this.fbT4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbT4.FormattingEnabled = true;
-            this.fbT4.Location = new System.Drawing.Point(338, 220);
-            this.fbT4.Name = "fbT4";
-            this.fbT4.Size = new System.Drawing.Size(250, 21);
-            this.fbT4.TabIndex = 11;
-            // 
-            // fbF4
-            // 
-            this.fbF4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbF4.FormattingEnabled = true;
-            this.fbF4.Location = new System.Drawing.Point(31, 220);
-            this.fbF4.Name = "fbF4";
-            this.fbF4.Size = new System.Drawing.Size(250, 21);
-            this.fbF4.TabIndex = 10;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -605,24 +821,6 @@
             this.label10.Size = new System.Drawing.Size(50, 13);
             this.label10.TabIndex = 9;
             this.label10.Text = "turns into";
-            // 
-            // fbT3
-            // 
-            this.fbT3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbT3.FormattingEnabled = true;
-            this.fbT3.Location = new System.Drawing.Point(338, 176);
-            this.fbT3.Name = "fbT3";
-            this.fbT3.Size = new System.Drawing.Size(250, 21);
-            this.fbT3.TabIndex = 8;
-            // 
-            // fbF3
-            // 
-            this.fbF3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbF3.FormattingEnabled = true;
-            this.fbF3.Location = new System.Drawing.Point(31, 176);
-            this.fbF3.Name = "fbF3";
-            this.fbF3.Size = new System.Drawing.Size(250, 21);
-            this.fbF3.TabIndex = 7;
             // 
             // label9
             // 
@@ -633,24 +831,6 @@
             this.label9.TabIndex = 6;
             this.label9.Text = "turns into";
             // 
-            // fbT2
-            // 
-            this.fbT2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbT2.FormattingEnabled = true;
-            this.fbT2.Location = new System.Drawing.Point(338, 132);
-            this.fbT2.Name = "fbT2";
-            this.fbT2.Size = new System.Drawing.Size(250, 21);
-            this.fbT2.TabIndex = 5;
-            // 
-            // fbF2
-            // 
-            this.fbF2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbF2.FormattingEnabled = true;
-            this.fbF2.Location = new System.Drawing.Point(31, 132);
-            this.fbF2.Name = "fbF2";
-            this.fbF2.Size = new System.Drawing.Size(250, 21);
-            this.fbF2.TabIndex = 4;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -659,15 +839,6 @@
             this.label8.Size = new System.Drawing.Size(50, 13);
             this.label8.TabIndex = 3;
             this.label8.Text = "turns into";
-            // 
-            // fbT1
-            // 
-            this.fbT1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbT1.FormattingEnabled = true;
-            this.fbT1.Location = new System.Drawing.Point(338, 88);
-            this.fbT1.Name = "fbT1";
-            this.fbT1.Size = new System.Drawing.Size(250, 21);
-            this.fbT1.TabIndex = 2;
             // 
             // label7
             // 
@@ -679,15 +850,6 @@
             this.label7.Text = "This defines fire ball interactions. When a  fire ball touches one of these block" +
     "s, it will turn into the mentioned block.\r\nA value of 00 and transition to 00 me" +
     "ans no interaction.";
-            // 
-            // fbF1
-            // 
-            this.fbF1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fbF1.FormattingEnabled = true;
-            this.fbF1.Location = new System.Drawing.Point(31, 88);
-            this.fbF1.Name = "fbF1";
-            this.fbF1.Size = new System.Drawing.Size(250, 21);
-            this.fbF1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -720,6 +882,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Block Definitions";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // ChkShowInteractions
+            // 
+            this.ChkShowInteractions.AutoSize = true;
+            this.ChkShowInteractions.Location = new System.Drawing.Point(341, 336);
+            this.ChkShowInteractions.Name = "ChkShowInteractions";
+            this.ChkShowInteractions.Size = new System.Drawing.Size(125, 17);
+            this.ChkShowInteractions.TabIndex = 35;
+            this.ChkShowInteractions.Text = "Show Tile Iteractions";
+            this.ChkShowInteractions.UseVisualStyleBackColor = true;
+            this.ChkShowInteractions.CheckedChanged += new System.EventHandler(this.ChkShowInteractions_CheckedChanged);
             // 
             // button2
             // 
@@ -1058,10 +1231,10 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.vineTile);
             this.tabPage4.Controls.Add(this.pSwitchTile);
             this.tabPage4.Controls.Add(this.label18);
             this.tabPage4.Controls.Add(this.label17);
-            this.tabPage4.Controls.Add(this.vineTile);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(615, 564);
@@ -1069,14 +1242,31 @@
             this.tabPage4.Text = "Other Interactions";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // vineTile
+            // 
+            this.vineTile.Hexadecimal = true;
+            this.vineTile.Location = new System.Drawing.Point(172, 15);
+            this.vineTile.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.vineTile.Name = "vineTile";
+            this.vineTile.Size = new System.Drawing.Size(50, 20);
+            this.vineTile.TabIndex = 57;
+            // 
             // pSwitchTile
             // 
-            this.pSwitchTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.pSwitchTile.FormattingEnabled = true;
-            this.pSwitchTile.Location = new System.Drawing.Point(172, 47);
+            this.pSwitchTile.Hexadecimal = true;
+            this.pSwitchTile.Location = new System.Drawing.Point(172, 48);
+            this.pSwitchTile.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
             this.pSwitchTile.Name = "pSwitchTile";
-            this.pSwitchTile.Size = new System.Drawing.Size(169, 21);
-            this.pSwitchTile.TabIndex = 30;
+            this.pSwitchTile.Size = new System.Drawing.Size(50, 20);
+            this.pSwitchTile.TabIndex = 56;
             // 
             // label18
             // 
@@ -1096,15 +1286,6 @@
             this.label17.TabIndex = 28;
             this.label17.Text = "Tile Drawn During Vine Growth";
             // 
-            // vineTile
-            // 
-            this.vineTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.vineTile.FormattingEnabled = true;
-            this.vineTile.Location = new System.Drawing.Point(172, 15);
-            this.vineTile.Name = "vineTile";
-            this.vineTile.Size = new System.Drawing.Size(169, 21);
-            this.vineTile.TabIndex = 27;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(556, 608);
@@ -1114,17 +1295,6 @@
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // ChkShowInteractions
-            // 
-            this.ChkShowInteractions.AutoSize = true;
-            this.ChkShowInteractions.Location = new System.Drawing.Point(341, 336);
-            this.ChkShowInteractions.Name = "ChkShowInteractions";
-            this.ChkShowInteractions.Size = new System.Drawing.Size(125, 17);
-            this.ChkShowInteractions.TabIndex = 35;
-            this.ChkShowInteractions.Text = "Show Tile Iteractions";
-            this.ChkShowInteractions.UseVisualStyleBackColor = true;
-            this.ChkShowInteractions.CheckedChanged += new System.EventHandler(this.ChkShowInteractions_CheckedChanged);
             // 
             // Map16Editor
             // 
@@ -1139,10 +1309,42 @@
             this.Text = "Map16Editor";
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.psF1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psF6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.psT5)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibT4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibF4)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbF4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbT1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.GrbBlocks.ResumeLayout(false);
@@ -1154,6 +1356,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vineTile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pSwitchTile)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1164,58 +1368,26 @@
         private System.Windows.Forms.ToolTip TSAToolTip;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.ComboBox psT8;
-        private System.Windows.Forms.ComboBox psF8;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.ComboBox psT7;
-        private System.Windows.Forms.ComboBox psF7;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.ComboBox psT6;
-        private System.Windows.Forms.ComboBox psF6;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.ComboBox psT5;
-        private System.Windows.Forms.ComboBox psF5;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.ComboBox psT4;
-        private System.Windows.Forms.ComboBox psF4;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.ComboBox psT3;
-        private System.Windows.Forms.ComboBox psF3;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.ComboBox psT2;
-        private System.Windows.Forms.ComboBox psF2;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.ComboBox psT1;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.ComboBox psF1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox ibT4;
-        private System.Windows.Forms.ComboBox ibF4;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox ibT3;
-        private System.Windows.Forms.ComboBox ibF3;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox ibT2;
-        private System.Windows.Forms.ComboBox ibF2;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox ibT1;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox ibF1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox fbT4;
-        private System.Windows.Forms.ComboBox fbF4;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox fbT3;
-        private System.Windows.Forms.ComboBox fbF3;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox fbT2;
-        private System.Windows.Forms.ComboBox fbF2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox fbT1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox fbF1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox BlockDescription;
@@ -1248,12 +1420,44 @@
         private System.Windows.Forms.CheckBox ChkShowSpecials;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ComboBox pSwitchTile;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox vineTile;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox ChkShowInteractions;
+        private System.Windows.Forms.NumericUpDown fbF1;
+        private System.Windows.Forms.NumericUpDown fbF2;
+        private System.Windows.Forms.NumericUpDown fbT2;
+        private System.Windows.Forms.NumericUpDown fbF3;
+        private System.Windows.Forms.NumericUpDown fbT3;
+        private System.Windows.Forms.NumericUpDown fbF4;
+        private System.Windows.Forms.NumericUpDown fbT4;
+        private System.Windows.Forms.NumericUpDown fbT1;
+        private System.Windows.Forms.NumericUpDown ibF1;
+        private System.Windows.Forms.NumericUpDown ibT1;
+        private System.Windows.Forms.NumericUpDown ibF2;
+        private System.Windows.Forms.NumericUpDown ibT2;
+        private System.Windows.Forms.NumericUpDown ibF3;
+        private System.Windows.Forms.NumericUpDown ibT3;
+        private System.Windows.Forms.NumericUpDown ibT4;
+        private System.Windows.Forms.NumericUpDown ibF4;
+        private System.Windows.Forms.NumericUpDown psF1;
+        private System.Windows.Forms.NumericUpDown psT1;
+        private System.Windows.Forms.NumericUpDown psF2;
+        private System.Windows.Forms.NumericUpDown psT2;
+        private System.Windows.Forms.NumericUpDown psF3;
+        private System.Windows.Forms.NumericUpDown psT3;
+        private System.Windows.Forms.NumericUpDown psF4;
+        private System.Windows.Forms.NumericUpDown psT4;
+        private System.Windows.Forms.NumericUpDown psF5;
+        private System.Windows.Forms.NumericUpDown psF7;
+        private System.Windows.Forms.NumericUpDown psF8;
+        private System.Windows.Forms.NumericUpDown psT8;
+        private System.Windows.Forms.NumericUpDown psT7;
+        private System.Windows.Forms.NumericUpDown psT6;
+        private System.Windows.Forms.NumericUpDown psF6;
+        private System.Windows.Forms.NumericUpDown psT5;
+        private System.Windows.Forms.NumericUpDown vineTile;
+        private System.Windows.Forms.NumericUpDown pSwitchTile;
     }
 }

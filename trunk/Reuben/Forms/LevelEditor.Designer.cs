@@ -159,6 +159,7 @@
             this.LvlView = new Daiz.NES.Reuben.LevelViewer();
             this.PnlHorizontalGuide = new Daiz.NES.Reuben.GuidePanel();
             this.PnlVerticalGuide = new Daiz.NES.Reuben.GuidePanel();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -1268,11 +1269,12 @@
             this.hMirrorButton,
             this.vMirrorButton,
             this.toolStripSeparator9,
-            this.toolStripButton1});
+            this.toolStripButton1,
+            this.toolStripButton2});
             this.TlsTileCommands.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TlsTileCommands.Location = new System.Drawing.Point(356, 0);
             this.TlsTileCommands.Name = "TlsTileCommands";
-            this.TlsTileCommands.Size = new System.Drawing.Size(176, 24);
+            this.TlsTileCommands.Size = new System.Drawing.Size(230, 24);
             this.TlsTileCommands.TabIndex = 23;
             this.TlsTileCommands.Text = "toolStrip1";
             // 
@@ -1621,6 +1623,16 @@
             this.PnlVerticalGuide.Size = new System.Drawing.Size(16, 356);
             this.PnlVerticalGuide.TabIndex = 31;
             // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 21);
+            this.toolStripButton2.Text = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1807,5 +1819,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label LblStartPoint;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
     }
 }

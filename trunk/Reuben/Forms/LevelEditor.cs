@@ -2185,5 +2185,25 @@ namespace Daiz.NES.Reuben
         {
 
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            int count = 0;
+            byte[,] data = CurrentLevel.GetData(LvlView.SelectionRectangle.X, LvlView.SelectionRectangle.Y, LvlView.SelectionRectangle.Width, LvlView.SelectionRectangle.Height);
+            for (int i = 0; i < LvlView.SelectionRectangle.Height; i++)
+            {
+                for (int j = 0; j < LvlView.SelectionRectangle.Width; j++)
+                {
+                    BlockProperty property = BlsSelector.CurrentDefiniton[data[j, i]].BlockProperty;
+                    if (property < (BlockProperty.SolidTop) &&
+                        (property & (BlockProperty.MaskLo)) == BlockProperty.Cherry)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            MessageBox.Show(count + " cherries in selection.");
+        }
     }
 }
