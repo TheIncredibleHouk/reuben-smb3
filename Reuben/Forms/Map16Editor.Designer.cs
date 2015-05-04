@@ -1,4 +1,4 @@
-﻿namespace Daiz.NES.Reuben
+﻿namespace Reuben.UI
 {
     partial class Map16Editor
     {
@@ -91,7 +91,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BlockDescription = new System.Windows.Forms.TextBox();
-            this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
+            this.PtvTable = new Reuben.UI.PatternTableViewer();
             this.label5 = new System.Windows.Forms.Label();
             this.CmbGraphics1 = new System.Windows.Forms.ComboBox();
             this.GrbBlocks = new System.Windows.Forms.GroupBox();
@@ -101,11 +101,11 @@
             this.CmdInteraction = new System.Windows.Forms.ComboBox();
             this.CmbGraphics2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.BlsBlocks = new Daiz.NES.Reuben.BlockSelector();
+            this.BlsBlocks = new Reuben.UI.BlockSelector();
             this.label2 = new System.Windows.Forms.Label();
             this.CmbDefinitions = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BlvCurrent = new Daiz.NES.Reuben.BlockViewer();
+            this.BlvCurrent = new Reuben.UI.BlockViewer();
             this.ChkBlockProperties = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.RdoMap16 = new System.Windows.Forms.RadioButton();
@@ -113,7 +113,7 @@
             this.BtnApplyGlobally = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.CmbPalettes = new System.Windows.Forms.ComboBox();
-            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
+            this.PlsView = new Reuben.UI.PaletteSelector();
             this.LblBlockSelected = new System.Windows.Forms.Label();
             this.LblHexGraphics1 = new System.Windows.Forms.Label();
             this.LblHexGraphics2 = new System.Windows.Forms.Label();
@@ -929,7 +929,7 @@
             this.PtvTable.Size = new System.Drawing.Size(256, 256);
             this.PtvTable.TabIndex = 0;
             this.PtvTable.Text = "patternTableViewer1";
-            this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
+            this.PtvTable.TileSelectionMode = Reuben.UI.TileSelectionMode.SingleTile;
             this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
             // 
             // label5
@@ -1169,7 +1169,7 @@
             // 
             // PlsView
             // 
-            this.PlsView.CurrentPalette = null;
+            this.PlsView.currentPalette = null;
             this.PlsView.Location = new System.Drawing.Point(11, 50);
             this.PlsView.Name = "PlsView";
             this.PlsView.SelectablePaletteMode = false;

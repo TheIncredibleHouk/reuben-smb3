@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public class GraphicsManager
     {
@@ -19,35 +19,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
         {
             GraphicsBanks = new List<GraphicsBank>();
             GraphicsInfo = new List<GraphicsInfo>();
-            LoadDefault();
-        }
-
-        public void LoadDefault()
-        {
-            byte[] graphicsData = Resource.default_graphics;
-            int dataPointer = 0;
-
-            GraphicsBanks.Clear();
-
-            for (int i = 0; i < 256; i++)
-            {
-                GraphicsBank nextBank = new GraphicsBank();
-                for (int j = 0; j < 64; j++)
-                {
-                    byte[] nextTileChunk = new byte[16];
-                    for (int k = 0; k < 16; k++) nextTileChunk[k] = graphicsData[dataPointer++];
-                    nextBank[j] = new Tile(nextTileChunk);
-                }
-                GraphicsBanks.Add(nextBank);
-            }
-
-            XDocument xDoc = XDocument.Parse(Resource.default_graphics_names);
-            foreach (var e in xDoc.Element("graphicsinfo").Elements("graphics"))
-            {
-                GraphicsInfo gi = new GraphicsInfo();
-                gi.LoadFromElement(e);
-                GraphicsInfo.Add(gi);
-            }
         }
 
         public void CheckGraphicsFileChange(string fileName)
@@ -111,61 +82,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return true;
         }
 
-        public bool ImportGraphics(string filename)
-        {
-            if (!File.Exists(filename)) return false;
-            bool IsChr = Path.GetExtension(filename) == "chr";
-            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            byte[] graphicsData = new byte[0x40000];
-            int length, offset;
-
-            if (!IsChr)
-            {
-                byte[] header = new byte[16];
-                fs.Read(header, 0, 16);
-
-                length = header[5] * 8192;
-                offset = header[4] * 16384 + 16;
-            }
-            else
-            {
-                length = (int)fs.Length;
-                offset = 0;
-            }
-
-            fs.Seek(offset, SeekOrigin.Begin);
-            fs.Read(graphicsData, 0, length);
-            fs.Close();
-            int dataPointer = 0;
-
-            GraphicsBanks.Clear();
-
-            for (int i = 0; i < 256; i++)
-            {
-                GraphicsBank nextBank = new GraphicsBank();
-                for (int j = 0; j < 64; j++)
-                {
-                    byte[] nextTileChunk = new byte[16];
-                    for (int k = 0; k < 16; k++) nextTileChunk[k] = graphicsData[dataPointer++];
-                    nextBank[j] = new Tile(nextTileChunk);
-                }
-                GraphicsBanks.Add(nextBank);
-            }
-
-            if (GraphicsUpdated != null)
-            {
-                GraphicsUpdated(this, null);
-            }
-
-            LastModified = File.GetLastWriteTime(filename);
-            //ProjectController.GraphicsManager.SaveGraphics(ProjectController.RootDirectory + @"\" + ProjectController.ProjectName + ".chr");
-            return true;
-        }
-
-        public bool SaveGraphics(string filename)
-        {
-            return SaveGraphics(filename, true, false);
-        }
+  
 
         public bool SaveGraphics(string filename, bool notify, bool forced)
         {
@@ -201,16 +118,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             return true;
         }
 
-        public Tile QuickTileGrab(int bank, int tile)
-        {
-            if (bank > 0)
-            {
-                return GraphicsBanks[bank][tile % 0xC0];
-            }
-            else
-            {
-                return ProjectController.SpecialManager.SpecialTable[tile];
-            }
-        }
+        
     }
 }

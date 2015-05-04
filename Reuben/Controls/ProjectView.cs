@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
-namespace Daiz.NES.Reuben
+using Reuben.UI.ProjectManagement;
+namespace Reuben.UI
 {
     public partial class ProjectView : UserControl
     {

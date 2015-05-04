@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.UI.ProjectManagement;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class GraphicsEditor : Form
     {
@@ -75,7 +75,7 @@ namespace Daiz.NES.Reuben
         private void CmbPalettes_SelectedIndexChanged(object sender, EventArgs e)
         {
             PtvTileSelector.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
-            PslView.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
+            PslView.currentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             TlvEditTiles.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
         }
 

@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.UI.ProjectManagement;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class LayoutEditor : Form
     {
@@ -95,7 +95,7 @@ namespace Daiz.NES.Reuben
 
         private void CmbPalettes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PlsView.CurrentPalette = BlsTo.CurrentPalette = BlsFrom.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
+            PlsView.currentPalette = BlsTo.CurrentPalette = BlsFrom.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
         }
 
         private void CmbDefinitions_SelectedIndexChanged(object sender, EventArgs e)

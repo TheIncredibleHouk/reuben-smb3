@@ -1,4 +1,4 @@
-﻿namespace Daiz.NES.Reuben
+﻿namespace Reuben.UI
 {
     partial class WorldEditor
     {
@@ -50,10 +50,10 @@
             this.PnlDrawing = new System.Windows.Forms.Panel();
             this.TabEditSelector = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.BlvRight = new Daiz.NES.Reuben.BlockViewer();
+            this.BlvRight = new Reuben.UI.BlockViewer();
             this.LblSelectorHover = new System.Windows.Forms.Label();
-            this.BlvLeft = new Daiz.NES.Reuben.BlockViewer();
-            this.BlsSelector = new Daiz.NES.Reuben.BlockSelector();
+            this.BlvLeft = new Reuben.UI.BlockViewer();
+            this.BlsSelector = new Reuben.UI.BlockSelector();
             this.CmbLayouts = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LblSpriteSelected = new System.Windows.Forms.Label();
@@ -62,7 +62,7 @@
             this.BtnDeletePointer = new System.Windows.Forms.Button();
             this.BtnAddPointer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.PntEditor = new Daiz.NES.Reuben.WorldPointerEditor();
+            this.PntEditor = new Reuben.UI.WorldPointerEditor();
             this.TlsDrawing = new System.Windows.Forms.ToolStrip();
             this.TsbPencil = new System.Windows.Forms.ToolStripButton();
             this.TsbLine = new System.Windows.Forms.ToolStripButton();
@@ -87,9 +87,9 @@
             this.TsbGrid = new System.Windows.Forms.ToolStripButton();
             this.TsbPointers = new System.Windows.Forms.ToolStripButton();
             this.LevelToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.PnlView = new Daiz.NES.Reuben.FixedPanel();
+            this.PnlView = new Reuben.UI.FixedPanel();
             this.PnlLengthControl = new System.Windows.Forms.Panel();
-            this.WldView = new Daiz.NES.Reuben.WorldViewer();
+            this.WldView = new Reuben.UI.WorldViewer();
             this.PnlInfo.SuspendLayout();
             this.TabLevelInfo.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -665,7 +665,7 @@
             // TsbCut
             // 
             this.TsbCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbCut.Image = global::Daiz.NES.Reuben.Properties.Resources.cut;
+            this.TsbCut.Image = global::Reuben.UI.Properties.Resources.cut;
             this.TsbCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbCut.Name = "TsbCut";
             this.TsbCut.Size = new System.Drawing.Size(23, 22);
@@ -676,7 +676,7 @@
             // TsbCopy
             // 
             this.TsbCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbCopy.Image = global::Daiz.NES.Reuben.Properties.Resources.copy;
+            this.TsbCopy.Image = global::Reuben.UI.Properties.Resources.copy;
             this.TsbCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbCopy.Name = "TsbCopy";
             this.TsbCopy.Size = new System.Drawing.Size(23, 22);
@@ -687,7 +687,7 @@
             // TsbPaste
             // 
             this.TsbPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbPaste.Image = global::Daiz.NES.Reuben.Properties.Resources.paste;
+            this.TsbPaste.Image = global::Reuben.UI.Properties.Resources.paste;
             this.TsbPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPaste.Name = "TsbPaste";
             this.TsbPaste.Size = new System.Drawing.Size(23, 22);
@@ -698,7 +698,7 @@
             // TsbDelete
             // 
             this.TsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbDelete.Image = global::Daiz.NES.Reuben.Properties.Resources.delete;
+            this.TsbDelete.Image = global::Reuben.UI.Properties.Resources.delete;
             this.TsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbDelete.Name = "TsbDelete";
             this.TsbDelete.Size = new System.Drawing.Size(23, 22);
@@ -727,7 +727,7 @@
             // 
             this.TsbSave.AutoSize = false;
             this.TsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbSave.Image = global::Daiz.NES.Reuben.Properties.Resources.saveHS;
+            this.TsbSave.Image = global::Reuben.UI.Properties.Resources.saveHS;
             this.TsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbSave.Name = "TsbSave";
             this.TsbSave.Size = new System.Drawing.Size(23, 20);
@@ -744,7 +744,7 @@
             // 
             this.TsbGrid.CheckOnClick = true;
             this.TsbGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbGrid.Image = global::Daiz.NES.Reuben.Properties.Resources.grid;
+            this.TsbGrid.Image = global::Reuben.UI.Properties.Resources.grid;
             this.TsbGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbGrid.Name = "TsbGrid";
             this.TsbGrid.Size = new System.Drawing.Size(23, 22);
@@ -756,7 +756,7 @@
             // 
             this.TsbPointers.CheckOnClick = true;
             this.TsbPointers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbPointers.Image = global::Daiz.NES.Reuben.Properties.Resources.pointers;
+            this.TsbPointers.Image = global::Reuben.UI.Properties.Resources.pointers;
             this.TsbPointers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPointers.Name = "TsbPointers";
             this.TsbPointers.Size = new System.Drawing.Size(23, 22);
@@ -850,7 +850,7 @@
 
         #endregion
 
-        private Daiz.NES.Reuben.FixedPanel PnlView;
+        private Reuben.UI.FixedPanel PnlView;
         private System.Windows.Forms.Panel PnlLengthControl;
         private WorldViewer WldView;
         private System.Windows.Forms.Panel PnlInfo;

@@ -8,41 +8,55 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.Model;
+using Reuben.NESGraphics;
+using Reuben.Controllers;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class Map16Editor : Form
     {
-        PatternTable CurrentTable;
-        private Dictionary<int, BlockProperty> solidityMap = new Dictionary<int, BlockProperty>();
+        private PatternTable currentTable;
+        private ResourceController resources;
+        private GraphicsController graphics;
+        private LevelController levels;
+
+        public void SetResourceController(ResourceController controller)
+        {
+            resources = controller;
+            CmbGraphics1.DataSource = CmbGraphics2.DataSource = resources.GetStringList("graphics");
+        }
+
+        public void SetGraphicsController(GraphicsController controller)
+        {
+            graphics = controller;
+            foreach (var p in graphics.GetPalettes())
+            {
+                CmbPalettes.Items.Add(p);
+            }
+        }
+
+        private int patternTableIndex1 = 0, patternTableIndex2 = 2;
+        private void UpdatePatternTables()
+        {
+            currentTable = PatternTableFactory.MakePatternTable(graphics, new List<int>() { patternTableIndex1, patternTableIndex1 + 1, patternTableIndex2, patternTableIndex2 + 1 });
+            BlvCurrent.CurrentTable = BlsBlocks.CurrentTable = PtvTable.CurrentTable = currentTable;
+        }
+
+        public void SetLevelController(LevelController controller)
+        {
+            levels = controller;
+            CmbDefinitions.DataSource = controller.GetLevelTypeNames();
+        }
 
         public Map16Editor()
         {
             InitializeComponent();
 
-            CmbGraphics1.DisplayMember = CmbGraphics2.DisplayMember = CmbPalettes.DisplayMember = CmbDefinitions.DisplayMember = "Name";
-            foreach (var g in ProjectController.GraphicsManager.GraphicsInfo)
-            {
-                CmbGraphics1.Items.Add(g);
-                CmbGraphics2.Items.Add(g);
-            }
+            CmbPalettes.DisplayMember = CmbDefinitions.DisplayMember = "Name";
 
-            foreach (var p in ProjectController.PaletteManager.Palettes)
-            {
-                CmbPalettes.Items.Add(p);
-            }
-
-            foreach (var l in ProjectController.LevelManager.LevelTypes)
-            {
-                CmbDefinitions.Items.Add(l);
-            }
-
-            CurrentTable = ProjectController.GraphicsManager.BuildPatternTable(0);
-            PtvTable.CurrentTable = CurrentTable;
-            BlsBlocks.CurrentTable = CurrentTable;
+            UpdatePatternTables();
             BlsBlocks.BlockLayout = ProjectController.LayoutManager.BlockLayouts[0];
-            BlvCurrent.CurrentTable = CurrentTable;
             BlsBlocks.SpecialTable = ProjectController.SpecialManager.SpecialTable;
             BlsBlocks.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;
 
@@ -179,15 +193,15 @@ namespace Daiz.NES.Reuben
 
         private void CmbGraphics1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics1.SelectedIndex]);
-            CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics1.SelectedIndex + 1]);
+            currentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics1.SelectedIndex]);
+            currentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics1.SelectedIndex + 1]);
             LblHexGraphics1.Text = "x" + CmbGraphics1.SelectedIndex.ToHexString();
         }
 
         private void CmbGraphics2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics2.SelectedIndex]);
-            CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics2.SelectedIndex + 1]);
+            currentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics2.SelectedIndex]);
+            currentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics2.SelectedIndex + 1]);
             LblHexGraphics2.Text = "x" + CmbGraphics2.SelectedIndex.ToHexString();
         }
 
@@ -195,7 +209,7 @@ namespace Daiz.NES.Reuben
         {
             PtvTable.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             BlsBlocks.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
-            PlsView.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
+            PlsView.currentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             BlvCurrent.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
         }
 
@@ -213,7 +227,7 @@ namespace Daiz.NES.Reuben
         private void FillBlockForTransitions()
         {
 
-            
+
         }
 
         private void LoadBlockTransitions()
@@ -256,38 +270,38 @@ namespace Daiz.NES.Reuben
 
         private void CommitBlockTransitions()
         {
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue = (int) fbF1.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue = (int) fbF2.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue = (int) fbF3.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue = (int) fbF4.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue = (int) fbT1.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue = (int) fbT2.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue = (int) fbT3.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue = (int) fbT4.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue = (int) ibF1.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue = (int) ibF2.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue = (int) ibF3.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue = (int) ibF4.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue = (int) ibT1.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue = (int) ibT2.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue = (int) ibT3.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue = (int) ibT4.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue = (int) psF1.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue = (int) psF2.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue = (int) psF3.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].FromValue = (int) psF4.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].FromValue = (int) psF5.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].FromValue = (int) psF6.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].FromValue = (int) psF7.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].FromValue = (int) psF8.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].ToValue = (int) psT1.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].ToValue = (int) psT2.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].ToValue = (int) psT3.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].ToValue = (int) psT4.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].ToValue = (int) psT5.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue = (int) psT6.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue = (int) psT7.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue = (int) psT8.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue = (int)fbF1.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue = (int)fbF2.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue = (int)fbF3.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue = (int)fbF4.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue = (int)fbT1.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue = (int)fbT2.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue = (int)fbT3.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue = (int)fbT4.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue = (int)ibF1.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue = (int)ibF2.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue = (int)ibF3.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue = (int)ibF4.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue = (int)ibT1.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue = (int)ibT2.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue = (int)ibT3.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue = (int)ibT4.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue = (int)psF1.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue = (int)psF2.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue = (int)psF3.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].FromValue = (int)psF4.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].FromValue = (int)psF5.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].FromValue = (int)psF6.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].FromValue = (int)psF7.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].FromValue = (int)psF8.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].ToValue = (int)psT1.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].ToValue = (int)psT2.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].ToValue = (int)psT3.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].ToValue = (int)psT4.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].ToValue = (int)psT5.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue = (int)psT6.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue = (int)psT7.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue = (int)psT8.Value;
             BlsBlocks.CurrentDefiniton.VineTile = (byte)vineTile.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTile = (byte)pSwitchTile.Value;
         }

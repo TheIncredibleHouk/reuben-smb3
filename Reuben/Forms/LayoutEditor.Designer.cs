@@ -1,4 +1,4 @@
-﻿namespace Daiz.NES.Reuben
+﻿namespace Reuben.UI
 {
     partial class LayoutEditor
     {
@@ -57,9 +57,9 @@
             this.GrpHelp = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.BtnHelp = new System.Windows.Forms.Button();
-            this.BlsFrom = new Daiz.NES.Reuben.BlockSelector();
-            this.PlsView = new Daiz.NES.Reuben.PaletteSelector();
-            this.BlsTo = new Daiz.NES.Reuben.BlockSelector();
+            this.BlsFrom = new Reuben.UI.BlockSelector();
+            this.PlsView = new Reuben.UI.PaletteSelector();
+            this.BlsTo = new Reuben.UI.BlockSelector();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -365,7 +365,7 @@
             // 
             // PlsView
             // 
-            this.PlsView.CurrentPalette = null;
+            this.PlsView.currentPalette = null;
             this.PlsView.Location = new System.Drawing.Point(15, 52);
             this.PlsView.Name = "PlsView";
             this.PlsView.SelectablePaletteMode = false;

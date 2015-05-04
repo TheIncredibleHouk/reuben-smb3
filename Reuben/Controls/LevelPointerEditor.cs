@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.UI.ProjectManagement;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class LevelPointerEditor : UserControl
     {

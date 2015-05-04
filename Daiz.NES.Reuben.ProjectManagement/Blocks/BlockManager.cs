@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 using Daiz.Library;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public class BlockManager
     {
@@ -81,22 +81,22 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public void LoadDefault()
         {
-            lookupTable.Clear();
-            byte[] data = Resource.default_tsa;
+            //lookupTable.Clear();
+            //byte[] data = Resource.default_tsa;
 
-            for (int i = 0; i < 16; i++)
-            {
-                BlockDefinition bd = new BlockDefinition();
-                int bankOffset = i * 0x400;
-                for (int j = 0; j < 256; j++)
-                {
-                    bd[j][0, 0] = data[bankOffset + j];
-                    bd[j][0, 1] = data[bankOffset + 0x100 + j];
-                    bd[j][1, 0] = data[bankOffset + 0x200 + j];
-                    bd[j][1, 1] = data[bankOffset + 0x300 + j];
-                }
-                lookupTable.Add(i, bd);
-            }
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    BlockDefinition bd = new BlockDefinition();
+            //    int bankOffset = i * 0x400;
+            //    for (int j = 0; j < 256; j++)
+            //    {
+            //        bd[j][0, 0] = data[bankOffset + j];
+            //        bd[j][0, 1] = data[bankOffset + 0x100 + j];
+            //        bd[j][1, 0] = data[bankOffset + 0x200 + j];
+            //        bd[j][1, 1] = data[bankOffset + 0x300 + j];
+            //    }
+            //    lookupTable.Add(i, bd);
+            //}
         }
 
         public bool LoadDefinitions(string filename)

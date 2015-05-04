@@ -1,0 +1,16 @@
+F:\ROM Hacking\Reuben\Conversion\obj\Debug\Conversion.csprojResolveAssemblyReference.cache
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Conversion.dll
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Conversion.pdb
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Daiz.Library.dll
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Daiz.NES.Reuben.ProjectManagement.dll
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Controllers.dll
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Model.dll
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Graphics.dll
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Newtonsoft.Json.dll
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Daiz.NES.Reuben.ProjectManagement.pdb
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Controllers.pdb
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Model.pdb
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Graphics.pdb
+F:\ROM Hacking\Reuben\Conversion\bin\Debug\Newtonsoft.Json.xml
+F:\ROM Hacking\Reuben\Conversion\obj\Debug\Conversion.dll
+F:\ROM Hacking\Reuben\Conversion\obj\Debug\Conversion.pdb

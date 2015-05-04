@@ -16,10 +16,6 @@ namespace Reuben.Model
             Data = new byte[0x40, 0x1B];
         }
 
-
-        [DataMember]
-        public Guid ID { get; set; }
-
         [DataMember]
         public string Name { get; set; }
 
@@ -30,7 +26,7 @@ namespace Reuben.Model
         public int MusicID { get; set; }
 
         [DataMember]
-        public int Length { get; set; }
+        public int NumberOfScreens { get; set; }
 
         [DataMember]
         public int PaletteID { get; set; }

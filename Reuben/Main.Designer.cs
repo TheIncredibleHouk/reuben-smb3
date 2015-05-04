@@ -1,4 +1,4 @@
-﻿namespace Daiz.NES.Reuben
+﻿namespace Reuben.UI
 {
     partial class Main
     {
@@ -72,7 +72,7 @@
             this.MnuDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpRawLevelToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PnlRightSide = new System.Windows.Forms.Panel();
-            this.PrvProject = new Daiz.NES.Reuben.ProjectView();
+            this.PrvProject = new Reuben.UI.ProjectView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnShowHide = new System.Windows.Forms.Button();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();

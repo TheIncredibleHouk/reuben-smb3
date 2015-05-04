@@ -7,7 +7,7 @@ using System.Drawing;
 
 using Daiz.Library;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public class GuidePanel : Panel
     {

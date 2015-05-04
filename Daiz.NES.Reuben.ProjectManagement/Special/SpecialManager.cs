@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 using Daiz.Library;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public class SpecialManager
     {
@@ -110,12 +110,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public void LoadDefaultSpecials()
         {
-            XDocument xDoc = XDocument.Parse(Resource.special_definitions);
-            XElement root = xDoc.Element("specials");
+            //XDocument xDoc = XDocument.Parse(Resource.special_definitions);
+            //XElement root = xDoc.Element("specials");
 
-            SpecialPalette = new PaletteInfo();
-            SpecialPalette.LoadFromElement(root.Element("palette"));
-            SpecialPalette.IsSpecial = true;
+            //SpecialPalette = new PaletteInfo();
+            //SpecialPalette.LoadFromElement(root.Element("palette"));
+            //SpecialPalette.IsSpecial = true;
         }
 
         public void SaveSpecials(string filename1)

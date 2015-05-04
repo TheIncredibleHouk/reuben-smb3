@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Daiz.NES.Reuben.ProjectManagement {
+namespace Reuben.UI.ProjectManagement {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Daiz.NES.Reuben.ProjectManagement {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Daiz.NES.Reuben.ProjectManagement.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Reuben.UI.ProjectManagement.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

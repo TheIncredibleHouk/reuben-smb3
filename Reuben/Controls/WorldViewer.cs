@@ -8,469 +8,378 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
 
-using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.Model;
+using Reuben.Controllers;
+using Reuben.NESGraphics;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
-    public unsafe class  WorldViewer : Control
+    public unsafe class WorldViewer : Control
     {
+
+        private Color[,] quickColorLookup;
+        private Block[] blocks;
+        private Palette currentPalette;
+        private GraphicsController graphics;
 
         public WorldViewer()
         {
-            QuickColorLookup = new Color[8, 4];
-            SpecialColors = new Color[8, 4];
-            CurrentDefiniton = null;
+            quickColorLookup = new Color[8, 4];
             Redraw();
             HasSelection = false;
             Zoom = 1;
+            int bufferWidth = 0x40 * 16 * 16, bufferHeight = 0x1B * 16;
+            backBuffer = new Bitmap(bufferWidth, bufferHeight, PixelFormat.Format32bppArgb);
+            spriteBuffer = new Bitmap(bufferWidth, bufferHeight, PixelFormat.Format32bppArgb);
+            compositeBuffer = new Bitmap(bufferWidth, bufferHeight, PixelFormat.Format32bppArgb);
         }
 
-        public Bitmap BackBuffer { get; private set; }
-        private Bitmap CompositeBuffer;
-        private Bitmap SpriteBuffer;
+        private Bitmap backBuffer;
+        private Bitmap compositeBuffer;
+        private Bitmap spriteBuffer;
 
-        private World _CurrentWorld;
-        public World CurrentWorld
+        private World world;
+        public void SetWorld(World currentWorld)
         {
-            get { return _CurrentWorld; }
-            set
-            {
-                _CurrentWorld = value;
-                if (_CurrentWorld != null)
-                {
-                    _CurrentWorld.TileChanged += new EventHandler<TEventArgs<Point>>(_CurrentWorld_TileChanged);
-                    _CurrentWorld.SpriteAdded += new EventHandler<TEventArgs<Sprite>>(_CurrentLevel_SpriteAdded);
-                    _CurrentWorld.SpriteRemoved += new EventHandler<TEventArgs<Sprite>>(_CurrentWorld_SpriteRemoved);
-
-                    BackBuffer = new Bitmap(_CurrentWorld.Width * 16, _CurrentWorld.Height * 16, PixelFormat.Format32bppArgb);
-                    SpriteBuffer = new Bitmap(_CurrentWorld.Width * 16, _CurrentWorld.Height * 16, PixelFormat.Format32bppArgb);
-                    CompositeBuffer = new Bitmap(_CurrentWorld.Width * 16, _CurrentWorld.Height * 16, PixelFormat.Format32bppArgb);
-                    this.Width = _CurrentWorld.Width * 16; ;
-                    this.Height = _CurrentWorld.Height * 16;
-                    if (!DelayDrawing)
-                    {
-                        FullRender();
-                        FullSpriteRender();
-                        Redraw();
-                    }
-                }
-            }
-        }
-
-        private void _CurrentWorld_TileChanged(object sender, TEventArgs<Point> e)
-        {
-            UpdateBlock(e.Data.X, e.Data.Y);
-        }
-
-        private void _CurrentWorld_SpriteRemoved(object sender, TEventArgs<Sprite> e)
-        {
-
+            world = currentWorld;
+            FullBackgroundRender();
             FullSpriteRender();
             Redraw();
         }
 
-        private void _CurrentLevel_SpriteAdded(object sender, TEventArgs<Sprite> e)
+        public void SetGraphicsController(GraphicsController controller)
         {
-            SpriteDefinition sp = ProjectController.SpriteManager.GetMapDefinition(e.Data.InGameID);
-            Rectangle r = new Rectangle(e.Data.X * 16 + sp.MaxLeftX, e.Data.Y * 16 + sp.MaxTopY, sp.MaxRightX - sp.MaxLeftX, sp.MaxBottomY - sp.MaxTopY);
-            FullSpriteRender(r);
+            graphics = controller;
+        }
+
+        public void UpdateScreenSize()
+        {
+            this.Width = world.NumberOfScreens * 16 * 16;
+            this.Height = 0x1B;
+        }
+
+        //private PatternTable _SpecialTable;
+        //public PatternTable SpecialTable
+        //{
+        //    get { return _SpecialTable; }
+        //    set
+        //    {
+        //        _SpecialTable = value;
+
+        //        if (!DelayDrawing)
+        //        {
+        //            FullBackgroundRender();
+        //            Redraw();
+        //        }
+        //    }
+        //}
+
+        private PatternTable currentTable;
+        public void SetPatternTable(PatternTable table)
+        {
+            currentTable = table;
+            FullBackgroundRender();
             Redraw();
-        }
-
-        private PatternTable _SpecialTable;
-        public PatternTable SpecialTable
-        {
-            get { return _SpecialTable; }
-            set
-            {
-                _SpecialTable = value;
-
-                if (!DelayDrawing)
-                {
-                    FullRender();
-                    Redraw();
-                }
-            }
-        }
-
-        private PatternTable _CurrentTable;
-        public PatternTable CurrentTable
-        {
-            get
-            {
-                return _CurrentTable;
-            }
-            set
-            {
-                if (_CurrentTable != null)
-                {
-                    _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
-                }
-
-                _CurrentTable = value;
-
-                if (_CurrentTable != null)
-                {
-                    _CurrentTable.GraphicsChanged += new EventHandler<TEventArgs<int>>(_CurrentTable_GraphicsChanged);
-                }
-
-                if (!DelayDrawing)
-                {
-                    FullRender();
-                    Redraw();
-                }
-            }
-        }
-
-        void _CurrentTable_GraphicsChanged(object sender, TEventArgs<int> e)
-        {
-            if (!DelayDrawing)
-            {
-                FullRender();
-                Redraw();
-            }
-        }
-
-        private BlockDefinition _CurrentDefiniton;
-        public BlockDefinition CurrentDefiniton
-        {
-            get { return _CurrentDefiniton; }
-            set
-            {
-                _CurrentDefiniton = value;
-                if (!DelayDrawing)
-                {
-                    FullRender();
-                    Redraw();
-                }
-            }
-        }
-
-        private PaletteInfo _CurrentPalette;
-        public PaletteInfo CurrentPalette
-        {
-            set
-            {
-                _CurrentPalette = value;
-                UpdateColors();
-                if (!DelayDrawing)
-                {
-                    FullRender();
-                    FullSpriteRender();
-                    Redraw();
-                }
-            }
-        }
-
-        
-
-        private Color[,] QuickColorLookup;
-        private Color[,] SpecialColors;
-
-        public PaletteInfo SpecialPalette
-        {
-            set
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        SpecialColors[j, i] = ProjectController.ColorManager.Colors[value[j, i]];
-                    }
-                }
-            }
         }
 
         private void UpdateColors()
         {
-            if (_CurrentPalette != null)
+            if (currentPalette != null)
             {
                 for (int j = 0; j < 8; j++)
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        QuickColorLookup[j, i] = ProjectController.ColorManager.Colors[_CurrentPalette[j, i]];
+                        quickColorLookup[j, i] = graphics.GetColorReferenceByIndex(currentPalette.GetColorIndex(j, i));
                     }
                 }
             }
         }
 
-        private void FullRender()
+        private void FullBackgroundRender()
         {
-            if (BackBuffer == null) return;
+            if (backBuffer == null) return;
 
-            if (_CurrentTable == null || _CurrentPalette == null || _CurrentDefiniton == null)
+            if (currentPalette == null || currentPalette == null || blocks == null)
             {
-                Graphics.FromImage(BackBuffer).Clear(Color.Black);
+                Graphics.FromImage(backBuffer).Clear(Color.Black);
                 return;
             }
 
-            BitmapData data = BackBuffer.LockBits(new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            BitmapData data = backBuffer.LockBits(new Rectangle(0, 0, backBuffer.Width, backBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-            for (int i = 0; i < _CurrentWorld.Height; i++)
+            for (int i = 0; i < 0x1B; i++)
             {
-                for (int j = 0; j < _CurrentWorld.Width; j++)
+                for (int j = 0; j < 0x40 * 16; j++)
                 {
-                    int tileValue = CurrentWorld.LevelData[j, i];
+                    int tileValue = world.Data[j, i];
                     int PaletteIndex = tileValue / 0x40;
-                    Block b = CurrentDefiniton[tileValue];
-                    RenderTile(_CurrentTable[b[0, 0]], j * 16, i * 16, PaletteIndex, data);
-                    RenderTile(_CurrentTable[b[0, 1]], j * 16, i * 16 + 8, PaletteIndex, data);
-                    RenderTile(_CurrentTable[b[1, 0]], j * 16 + 8, i * 16, PaletteIndex, data);
-                    RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
+                    Block b = blocks[tileValue];
+                    RenderTile(currentTable.GetTileByIndex(b.UpperLeft), j * 16, i * 16, PaletteIndex, data);
+                    RenderTile(currentTable.GetTileByIndex(b.UpperRight), j * 16, i * 16 + 8, PaletteIndex, data);
+                    RenderTile(currentTable.GetTileByIndex(b.LowerLeft), j * 16 + 8, i * 16, PaletteIndex, data);
+                    RenderTile(currentTable.GetTileByIndex(b.LowerRight), j * 16 + 8, i * 16 + 8, PaletteIndex, data);
 
                     if (_ShowPointers)
                     {
-                        WorldPointer p = CurrentWorld.Pointers.Find(pt => (pt.X == j && pt.Y == i));
+                        WorldPointer p = world.Pointers.Find(pt => (pt.X == j && pt.Y == i));
                         if (p != null)
                         {
-                            RenderSpecialTileAlpha(_SpecialTable[0xA2], j * 16, i * 16, 5, data, 1.0);
-                            RenderSpecialTileAlpha(_SpecialTable[0xB2], j * 16, i * 16 + 8, 5, data, 1.0);
-                            RenderSpecialTileAlpha(_SpecialTable[0xA3], j * 16 + 8, i * 16, 5, data, 1.0);
-                            RenderSpecialTileAlpha(_SpecialTable[0xB3], j * 16 + 8, i * 16 + 8, 5, data, 1.0);
+                            //RenderSpecialTileAlpha(_SpecialTable[0xA2], j * 16, i * 16, 5, data, 1.0);
+                            //RenderSpecialTileAlpha(_SpecialTable[0xB2], j * 16, i * 16 + 8, 5, data, 1.0);
+                            //RenderSpecialTileAlpha(_SpecialTable[0xA3], j * 16 + 8, i * 16, 5, data, 1.0);
+                            //RenderSpecialTileAlpha(_SpecialTable[0xB3], j * 16 + 8, i * 16 + 8, 5, data, 1.0);
                         }
                     }
                 }
             }
-            BackBuffer.UnlockBits(data);
+            backBuffer.UnlockBits(data);
         }
 
         private void FullSpriteRender()
         {
-            if (BackBuffer == null) return;
-            FullSpriteRender(new Rectangle(0, 0, SpriteBuffer.Width, SpriteBuffer.Height));
+            if (backBuffer == null) return;
+            FullSpriteRender(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height));
         }
 
         private void FullSpriteRender(Rectangle rect)
         {
-            if (rect.X < 0) rect.X = 0;
-            if (rect.Y < 0) rect.Y = 0;
-            if (rect.X > SpriteBuffer.Width) rect.X = SpriteBuffer.Width;
-            if (rect.Y > SpriteBuffer.Height) rect.Y = SpriteBuffer.Height;
-            if ((rect.X + rect.Width) > SpriteBuffer.Width) rect.Width = SpriteBuffer.Width - rect.X;
-            if ((rect.Y + rect.Height) > SpriteBuffer.Height) rect.Height = SpriteBuffer.Height - rect.Y;
+            throw new NotImplementedException();
 
-            if (_CurrentPalette == null)
-                return;
+            //if (rect.X < 0)
+            //{
+            //    rect.X = 0;
+            //}
+            //if (rect.Y < 0)
+            //{
+            //    rect.Y = 0;
+            //}
+            //if (rect.X > spriteBuffer.Width)
+            //{
+            //    rect.X = spriteBuffer.Width;
+            //}
+            //if (rect.Y > spriteBuffer.Height)
+            //{
+            //    rect.Y = spriteBuffer.Height;
+            //}
+            //if ((rect.X + rect.Width) > spriteBuffer.Width)
+            //{
+            //    rect.Width = spriteBuffer.Width - rect.X;
+            //}
+            //if ((rect.Y + rect.Height) > spriteBuffer.Height)
+            //{
+            //    rect.Height = spriteBuffer.Height - rect.Y;
+            //}
 
-            BitmapData data = SpriteBuffer.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            //if (currentPalette == null)
+            //{
+            //    return;
+            //}
 
-            ClearAreaWithTransparentcolor(rect.Width, rect.Height, data);
+            //BitmapData data = spriteBuffer.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-            int definiteX, definiteY;
+            //ClearAreaWithTransparentcolor(rect.Width, rect.Height, data);
 
-            foreach (var s in CurrentWorld.SpriteData)
-            {
-                SpriteDefinition def = ProjectController.SpriteManager.GetMapDefinition(s.InGameID);
-                if (def == null) continue;
-                foreach (var sp in def.Sprites)
-                {
-                    if (sp.Table < 0) continue;
-                    definiteX = s.X * 16 + sp.X;
-                    definiteY = s.Y * 16 + sp.Y;
+            //int definiteX, definiteY;
 
-                    if ((definiteX + 8) < rect.X || definiteX - 8 > rect.X + rect.Width) continue;
-                    if ((definiteY + 16) < rect.Y || definiteY - 16 > rect.Y + rect.Height) continue;
+            //foreach (var s in world.s)
+            //{
+            //    SpriteDefinition def = ProjectController.SpriteManager.GetMapDefinition(s.InGameID);
+            //    if (def == null) continue;
+            //    foreach (var sp in def.Sprites)
+            //    {
+            //        if (sp.Table < 0) continue;
+            //        definiteX = s.X * 16 + sp.X;
+            //        definiteY = s.Y * 16 + sp.Y;
 
-                    definiteX = definiteX - rect.X;
-                    definiteY = definiteY - rect.Y;
-                    if (!sp.HorizontalFlip && !sp.VerticalFlip)
-                    {
-                        RenderSprite(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, definiteY, sp.Palette, data);
-                        RenderSprite(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, (definiteY) + 8, sp.Palette, data);
-                    }
-                    else if (sp.HorizontalFlip && !sp.VerticalFlip)
-                    {
-                        RenderSpriteHorizontalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, definiteY, sp.Palette, data);
-                        RenderSpriteHorizontalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, (definiteY) + 8, sp.Palette, data);
-                    }
-                    else if (!sp.HorizontalFlip && sp.VerticalFlip)
-                    {
-                        RenderSpriteVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, definiteY, sp.Palette, data);
-                        RenderSpriteVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, (definiteY) + 8, sp.Palette, data);
-                    }
-                    else
-                    {
-                        RenderSpriteHorizontalVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, definiteY, sp.Palette, data);
-                        RenderSpriteHorizontalVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, (definiteY) + 8, sp.Palette, data);
-                    }
-                }
-            }
+            //        if ((definiteX + 8) < rect.X || definiteX - 8 > rect.X + rect.Width) continue;
+            //        if ((definiteY + 16) < rect.Y || definiteY - 16 > rect.Y + rect.Height) continue;
 
-            SpriteBuffer.UnlockBits(data);
+            //        definiteX = definiteX - rect.X;
+            //        definiteY = definiteY - rect.Y;
+            //        if (!sp.HorizontalFlip && !sp.VerticalFlip)
+            //        {
+            //            RenderSprite(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, definiteY, sp.Palette, data);
+            //            RenderSprite(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, (definiteY) + 8, sp.Palette, data);
+            //        }
+            //        else if (sp.HorizontalFlip && !sp.VerticalFlip)
+            //        {
+            //            RenderSpriteHorizontalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, definiteY, sp.Palette, data);
+            //            RenderSpriteHorizontalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, (definiteY) + 8, sp.Palette, data);
+            //        }
+            //        else if (!sp.HorizontalFlip && sp.VerticalFlip)
+            //        {
+            //            RenderSpriteVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, definiteY, sp.Palette, data);
+            //            RenderSpriteVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, (definiteY) + 8, sp.Palette, data);
+            //        }
+            //        else
+            //        {
+            //            RenderSpriteHorizontalVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value + 1), definiteX, definiteY, sp.Palette, data);
+            //            RenderSpriteHorizontalVerticalFlip(ProjectController.GraphicsManager.QuickTileGrab(sp.Table, sp.Value), definiteX, (definiteY) + 8, sp.Palette, data);
+            //        }
+            //    }
+            //}
+
+            //spriteBuffer.UnlockBits(data);
         }
 
         private void RenderSprite(Tile tile, int x, int y, int PaletteIndex, BitmapData data)
         {
-            byte* dataPointer = (byte*)data.Scan0;
+            //throw new NotImplementedException();
+            //byte* dataPointer = (byte*)data.Scan0;
 
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (tile[j, i] == 0) continue;
-                    if (x + j < 0 || x + j >= data.Width) continue;
-                    if (y + i < 0 || y + i >= data.Height) continue;
-                    long offset = (data.Stride * (y + i)) + (x * 4);
-                    long xOffset = (j * 4) + offset;
-                    Color c;
-                    if (PaletteIndex > 0)
-                    {
-                        c = QuickColorLookup[PaletteIndex + 4, tile[j, i]];
-                    }
-                    else
-                    {
-                        c = SpecialColors[PaletteIndex * -1, tile[j, i]];
-                    }
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    for (int j = 0; j < 8; j++)
+            //    {
+            //        if (tile[j, i] == 0) continue;
+            //        if (x + j < 0 || x + j >= data.Width) continue;
+            //        if (y + i < 0 || y + i >= data.Height) continue;
+            //        long offset = (data.Stride * (y + i)) + (x * 4);
+            //        long xOffset = (j * 4) + offset;
+            //        Color c;
+            //        if (PaletteIndex > 0)
+            //        {
+            //            c = quickColorLookup[PaletteIndex + 4, tile[j, i]];
+            //        }
+            //        else
+            //        {
+            //            c = SpecialColors[PaletteIndex * -1, tile[j, i]];
+            //        }
 
-                    *(dataPointer + xOffset) = c.B;
-                    *(dataPointer + xOffset + 1) = c.G;
-                    *(dataPointer + xOffset + 2) = c.R;
-                    *(dataPointer + xOffset + 3) = 255;
-                }
-            }
+            //        *(dataPointer + xOffset) = c.B;
+            //        *(dataPointer + xOffset + 1) = c.G;
+            //        *(dataPointer + xOffset + 2) = c.R;
+            //        *(dataPointer + xOffset + 3) = 255;
+            //    }
+            //}
         }
 
 
         private void RenderSpriteHorizontalFlip(Tile tile, int x, int y, int PaletteIndex, BitmapData data)
         {
-            byte* dataPointer = (byte*)data.Scan0;
+            //throw new NotImplementedException();
+            //byte* dataPointer = (byte*)data.Scan0;
 
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 7; j >= 0; j--)
-                {
-                    if (tile[j, i] == 0) continue;
-                    if (x + (7 - j) < 0 || x + (7 - j) >= data.Width) continue;
-                    if (y + i < 0 || y + i >= data.Height) continue;
-                    long offset = (data.Stride * (y + i)) + (x * 4);
-                    long xOffset = ((7 - j) * 4) + offset;
-                    Color c;
-                    if (PaletteIndex > 0)
-                    {
-                        c = QuickColorLookup[PaletteIndex + 4, tile[j, i]];
-                    }
-                    else
-                    {
-                        c = SpecialColors[PaletteIndex * -1, tile[j, i]];
-                    }
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    for (int j = 7; j >= 0; j--)
+            //    {
+            //        if (tile[j, i] == 0) continue;
+            //        if (x + (7 - j) < 0 || x + (7 - j) >= data.Width) continue;
+            //        if (y + i < 0 || y + i >= data.Height) continue;
+            //        long offset = (data.Stride * (y + i)) + (x * 4);
+            //        long xOffset = ((7 - j) * 4) + offset;
+            //        Color c;
+            //        if (PaletteIndex > 0)
+            //        {
+            //            c = quickColorLookup[PaletteIndex + 4, tile[j, i]];
+            //        }
+            //        else
+            //        {
+            //            c = SpecialColors[PaletteIndex * -1, tile[j, i]];
+            //        }
 
-                    *(dataPointer + xOffset) = c.B;
-                    *(dataPointer + xOffset + 1) = c.G;
-                    *(dataPointer + xOffset + 2) = c.R;
-                    *(dataPointer + xOffset + 3) = 255;
-                }
-            }
+            //        *(dataPointer + xOffset) = c.B;
+            //        *(dataPointer + xOffset + 1) = c.G;
+            //        *(dataPointer + xOffset + 2) = c.R;
+            //        *(dataPointer + xOffset + 3) = 255;
+            //    }
+            //}
         }
 
 
         private void RenderSpriteVerticalFlip(Tile tile, int x, int y, int PaletteIndex, BitmapData data)
         {
-            byte* dataPointer = (byte*)data.Scan0;
+            throw new NotImplementedException();
+            //byte* dataPointer = (byte*)data.Scan0;
 
-            for (int i = 7; i >= 0; i--)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (tile[j, i] == 0) continue;
-                    if (x + j < 0 || x + j >= data.Width) continue;
-                    if (y + (7 - i) < 0 || y + (7 - i) >= data.Height) continue;
-                    long offset = (data.Stride * (y + (7 - i))) + (x * 4);
-                    long xOffset = (j * 4) + offset;
-                    Color c;
-                    if (PaletteIndex > 0)
-                    {
-                        c = QuickColorLookup[PaletteIndex + 4, tile[j, i]];
-                    }
-                    else
-                    {
-                        c = SpecialColors[PaletteIndex * -1, tile[j, i]];
-                    }
+            //for (int i = 7; i >= 0; i--)
+            //{
+            //    for (int j = 0; j < 8; j++)
+            //    {
+            //        if (tile[j, i] == 0) continue;
+            //        if (x + j < 0 || x + j >= data.Width) continue;
+            //        if (y + (7 - i) < 0 || y + (7 - i) >= data.Height) continue;
+            //        long offset = (data.Stride * (y + (7 - i))) + (x * 4);
+            //        long xOffset = (j * 4) + offset;
+            //        Color c;
+            //        if (PaletteIndex > 0)
+            //        {
+            //            c = quickColorLookup[PaletteIndex + 4, tile[j, i]];
+            //        }
+            //        else
+            //        {
+            //            c = SpecialColors[PaletteIndex * -1, tile[j, i]];
+            //        }
 
-                    *(dataPointer + xOffset) = c.B;
-                    *(dataPointer + xOffset + 1) = c.G;
-                    *(dataPointer + xOffset + 2) = c.R;
-                    *(dataPointer + xOffset + 3) = 255;
-                }
-            }
+            //        *(dataPointer + xOffset) = c.B;
+            //        *(dataPointer + xOffset + 1) = c.G;
+            //        *(dataPointer + xOffset + 2) = c.R;
+            //        *(dataPointer + xOffset + 3) = 255;
+            //    }
+            //}
         }
 
 
         private void RenderSpriteHorizontalVerticalFlip(Tile tile, int x, int y, int PaletteIndex, BitmapData data)
         {
-            byte* dataPointer = (byte*)data.Scan0;
+            throw new NotImplementedException();
+        //    byte* dataPointer = (byte*)data.Scan0;
 
-            for (int i = 7; i >= 0; i--)
-            {
-                for (int j = 7; j >= 0; j--)
-                {
-                    if (tile[j, i] == 0) continue;
-                    if (x + (7 - j) < 0 || x + (7 - j) >= data.Width) continue;
-                    if (y + (7 - i) < 0 || y + (7 - i) >= data.Height) continue;
-                    long offset = (data.Stride * (y + (7 - i))) + (x * 4);
-                    long xOffset = ((7 - j) * 4) + offset;
-                    Color c;
-                    if (PaletteIndex > 0)
-                    {
-                        c = QuickColorLookup[PaletteIndex + 4, tile[j, i]];
-                    }
-                    else
-                    {
-                        c = SpecialColors[PaletteIndex * -1, tile[j, i]];
-                    }
+        //    for (int i = 7; i >= 0; i--)
+        //    {
+        //        for (int j = 7; j >= 0; j--)
+        //        {
+        //            if (tile[j, i] == 0) continue;
+        //            if (x + (7 - j) < 0 || x + (7 - j) >= data.Width) continue;
+        //            if (y + (7 - i) < 0 || y + (7 - i) >= data.Height) continue;
+        //            long offset = (data.Stride * (y + (7 - i))) + (x * 4);
+        //            long xOffset = ((7 - j) * 4) + offset;
+        //            Color c;
+        //            if (PaletteIndex > 0)
+        //            {
+        //                c = quickColorLookup[PaletteIndex + 4, tile[j, i]];
+        //            }
+        //            else
+        //            {
+        //                c = SpecialColors[PaletteIndex * -1, tile[j, i]];
+        //            }
 
-                    *(dataPointer + xOffset) = c.B;
-                    *(dataPointer + xOffset + 1) = c.G;
-                    *(dataPointer + xOffset + 2) = c.R;
-                    *(dataPointer + xOffset + 3) = 255;
-                }
-            }
-        }
-
-        private void ClearAreaWithTransparentcolor(int width, int height, BitmapData data)
-        {
-            byte* dataPointer = (byte*)data.Scan0;
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    long offset = data.Stride * i;
-                    long xOffset = (j * 4) + offset;
-
-                    *(dataPointer + xOffset) = 0;
-                    *(dataPointer + xOffset + 1) = 0;
-                    *(dataPointer + xOffset + 2) = 0;
-                    *(dataPointer + xOffset + 3) = 0;
-                }
-            }
+        //            *(dataPointer + xOffset) = c.B;
+        //            *(dataPointer + xOffset + 1) = c.G;
+        //            *(dataPointer + xOffset + 2) = c.R;
+        //            *(dataPointer + xOffset + 3) = 255;
+        //        }
+        //    }
         }
 
         private void UpdateBlock(int x, int y)
         {
-            BitmapData data = BackBuffer.LockBits(new Rectangle(x*16, y*16, 16, 16), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-            int tileValue = CurrentWorld.LevelData[x, y];
+            BitmapData data = backBuffer.LockBits(new Rectangle(x * 16, y * 16, 16, 16), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            int tileValue = world.Data[x, y];
             int PaletteIndex = tileValue / 0x40;
-            Block b = CurrentDefiniton[tileValue];
-            RenderTile(_CurrentTable[b[0, 0]], 0, 0, PaletteIndex, data);
-            RenderTile(_CurrentTable[b[0, 1]], 0, 8, PaletteIndex, data);
-            RenderTile(_CurrentTable[b[1, 0]], 8, 0, PaletteIndex, data);
-            RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
+            Block b = blocks[tileValue];
+            RenderTile(currentTable.GetTileByIndex(b.UpperLeft), 0, 0, PaletteIndex, data);
+            RenderTile(currentTable.GetTileByIndex(b.UpperRight), 0, 8, PaletteIndex, data);
+            RenderTile(currentTable.GetTileByIndex(b.LowerLeft), 8, 0, PaletteIndex, data);
+            RenderTile(currentTable.GetTileByIndex(b.LowerRight), 8, 8, PaletteIndex, data);
 
-            WorldPointer p = CurrentWorld.Pointers.Find(pt => pt.X == x && pt.Y == y);
+            WorldPointer p = world.Pointers.Find(pt => pt.X == x && pt.Y == y);
             if (p != null)
             {
-                RenderSpecialTileAlpha(_SpecialTable[0xA2], 0, 0, 5, data, 1.0);
-                RenderSpecialTileAlpha(_SpecialTable[0xB2], 0, 8, 5, data, 1.0);
-                RenderSpecialTileAlpha(_SpecialTable[0xA3], 8, 0, 5, data, 1.0);
-                RenderSpecialTileAlpha(_SpecialTable[0xB3], 8, 8, 5, data, 1.0);
+                //RenderSpecialTileAlpha(_SpecialTable[0xA2], 0, 0, 5, data, 1.0);
+                //RenderSpecialTileAlpha(_SpecialTable[0xB2], 0, 8, 5, data, 1.0);
+                //RenderSpecialTileAlpha(_SpecialTable[0xA3], 8, 0, 5, data, 1.0);
+                //RenderSpecialTileAlpha(_SpecialTable[0xB3], 8, 8, 5, data, 1.0);
             }
 
-            BackBuffer.UnlockBits(data);
+            backBuffer.UnlockBits(data);
 
-            if(!DelayDrawing)
+            if (!DelayDrawing)
+            { 
                 Redraw(new Rectangle(x * 16, y * 16, 16, 16));
+            }
         }
 
         private void RenderTile(Tile tile, int x, int y, int PaletteIndex, BitmapData data)
@@ -483,7 +392,7 @@ namespace Daiz.NES.Reuben
                 {
                     long offset = (data.Stride * (y + i)) + (x * 4);
                     long xOffset = (j * 4) + offset;
-                    Color c = QuickColorLookup[PaletteIndex, tile[j, i]];
+                    Color c = quickColorLookup[PaletteIndex, tile.Pixels[j, i]];
                     if (_ShowGrid)
                     {
                         if ((j == 0 && x % 16 == 0) || (i == 0 && y % 16 == 0))
@@ -494,7 +403,7 @@ namespace Daiz.NES.Reuben
                                 c = Color.FromArgb(0, 0, 0);
                         }
                     }
-                    
+
                     *(dataPointer + xOffset) = c.B;
                     *(dataPointer + xOffset + 1) = c.G;
                     *(dataPointer + xOffset + 2) = c.R;
@@ -505,35 +414,36 @@ namespace Daiz.NES.Reuben
 
         private void RenderSpecialTileAlpha(Tile tile, int x, int y, int PaletteIndex, BitmapData data, double alpha)
         {
-            byte* dataPointer = (byte*)data.Scan0;
+            throw new NotImplementedException();
+            //byte* dataPointer = (byte*)data.Scan0;
 
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    long offset = (data.Stride * (y + i)) + (x * 4);
-                    long xOffset = (j * 4) + offset;
-                    Color c = SpecialColors[PaletteIndex, tile[j, i]];
-                    if(c == Color.Empty) continue;
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    for (int j = 0; j < 8; j++)
+            //    {
+            //        long offset = (data.Stride * (y + i)) + (x * 4);
+            //        long xOffset = (j * 4) + offset;
+            //        Color c = SpecialColors[PaletteIndex, tile[j, i]];
+            //        if (c == Color.Empty) continue;
 
-                    if (_ShowGrid)
-                    {
-                        if ((j == 0 && x % 16 == 0) || (i == 0 && y % 16 == 0))
-                            c = Color.FromArgb(255, 255, 255);
-                    }
+            //        if (_ShowGrid)
+            //        {
+            //            if ((j == 0 && x % 16 == 0) || (i == 0 && y % 16 == 0))
+            //                c = Color.FromArgb(255, 255, 255);
+            //        }
 
-                    *(dataPointer + xOffset) = (byte) ((1 - alpha) * (*(dataPointer + xOffset)) + (alpha * c.B));
-                    *(dataPointer + xOffset + 1) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 1)) + (alpha * c.G));
-                    *(dataPointer + xOffset + 2) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 2)) + (alpha * c.R));
-                    *(dataPointer + xOffset + 3) = 255;
-                }
-            }
+            //        *(dataPointer + xOffset) = (byte)((1 - alpha) * (*(dataPointer + xOffset)) + (alpha * c.B));
+            //        *(dataPointer + xOffset + 1) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 1)) + (alpha * c.G));
+            //        *(dataPointer + xOffset + 2) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 2)) + (alpha * c.R));
+            //        *(dataPointer + xOffset + 3) = 255;
+            //    }
+            //}
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if(DelayDrawing) return;
-            if (BackBuffer == null) return;
+            if (DelayDrawing) return;
+            if (backBuffer == null) return;
 
             Rectangle destRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
             Rectangle sourceRect = new Rectangle(e.ClipRectangle.X / Zoom, e.ClipRectangle.Y / Zoom, e.ClipRectangle.Width / Zoom, e.ClipRectangle.Height / Zoom);
@@ -544,9 +454,9 @@ namespace Daiz.NES.Reuben
             {
                 e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
             }
-            Graphics g = Graphics.FromImage(CompositeBuffer);
-            g.DrawImage(BackBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
-            g.DrawImage(SpriteBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
+            Graphics g = Graphics.FromImage(compositeBuffer);
+            g.DrawImage(backBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
+            g.DrawImage(spriteBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
 
             if (HasSelection)
             {
@@ -560,7 +470,7 @@ namespace Daiz.NES.Reuben
             }
 
 
-            e.Graphics.DrawImage(CompositeBuffer, destRect, sourceRect, GraphicsUnit.Pixel);
+            e.Graphics.DrawImage(compositeBuffer, destRect, sourceRect, GraphicsUnit.Pixel);
             g.Dispose();
         }
 
@@ -579,7 +489,7 @@ namespace Daiz.NES.Reuben
                 _ShowGrid = value;
                 if (!DelayDrawing)
                 {
-                    FullRender();
+                    FullBackgroundRender();
                     Redraw();
                 }
             }
@@ -590,7 +500,7 @@ namespace Daiz.NES.Reuben
             HasSelection = false;
             UpdateArea(_SelectionRectangle);
             _SelectionRectangle = new Rectangle(0, 0, 0, 0);
-            
+
         }
 
         public void ClearLine()
@@ -647,7 +557,7 @@ namespace Daiz.NES.Reuben
 
         public void UpdateArea(Rectangle rect)
         {
-            
+
             Redraw(new Rectangle(rect.X * 16, rect.Y * 16, rect.Width * 16, rect.Height * 16));
         }
 
@@ -667,8 +577,8 @@ namespace Daiz.NES.Reuben
         {
             if (!DelayDrawing)
             {
-                if (BackBuffer == null) return;
-                Redraw(new Rectangle(0, 0, BackBuffer.Width * Zoom, BackBuffer.Height * Zoom));
+                if (backBuffer == null) return;
+                Redraw(new Rectangle(0, 0, backBuffer.Width * Zoom, backBuffer.Height * Zoom));
             }
         }
 
@@ -676,7 +586,7 @@ namespace Daiz.NES.Reuben
         {
             if (!DelayDrawing)
             {
-                if (BackBuffer == null) return;
+                if (backBuffer == null) return;
                 Invalidate(new Rectangle(rect.X * Zoom, rect.Y * Zoom, rect.Width * Zoom, rect.Height * Zoom));
             }
         }
@@ -726,18 +636,10 @@ namespace Daiz.NES.Reuben
             }
         }
 
-        private int _Zoom;
         public int Zoom
         {
-            get { return _Zoom; }
-            set
-            {
-                _Zoom = value;
-                if (_CurrentWorld == null) return;
-                this.Width = _CurrentWorld.Width * 16 * Zoom;
-                this.Height = _CurrentWorld.Height * 16 * Zoom;
-                Redraw(new Rectangle(0, 0, BackBuffer.Width, BackBuffer.Height));
-            }
+            get;
+            set;
         }
 
         private bool _ShowPointers;
@@ -747,7 +649,7 @@ namespace Daiz.NES.Reuben
             set
             {
                 _ShowPointers = value;
-                FullRender();
+                FullBackgroundRender();
                 Redraw();
             }
         }
@@ -760,19 +662,10 @@ namespace Daiz.NES.Reuben
         {
             if (!DelayDrawing)
             {
-                FullRender();
+                FullBackgroundRender();
                 FullSpriteRender();
                 Redraw();
             }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _CurrentWorld.TileChanged -=  _CurrentWorld_TileChanged;
-            _CurrentWorld.SpriteAdded -=  _CurrentLevel_SpriteAdded;
-            _CurrentWorld.SpriteRemoved -=  _CurrentWorld_SpriteRemoved;
-            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
-            base.Dispose(disposing);
         }
     }
 }

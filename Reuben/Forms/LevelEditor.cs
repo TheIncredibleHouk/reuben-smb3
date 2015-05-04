@@ -9,9 +9,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.UI.ProjectManagement;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class LevelEditor : Form
     {
@@ -64,7 +64,7 @@ namespace Daiz.NES.Reuben
             }
 
             CurrentTable = new PatternTable();
-            LvlView.CurrentTable = BlsSelector.CurrentTable = CurrentTable;
+            LvlView.currentTable = BlsSelector.CurrentTable = CurrentTable;
             BlsSelector.BlockLayout = ProjectController.LayoutManager.BlockLayouts[0];
             BlsSelector.SpecialTable = LvlView.SpecialTable = ProjectController.SpecialManager.SpecialTable;
             BlsSelector.SpecialPalette = LvlView.SpecialPalette = ProjectController.SpecialManager.SpecialPalette;

@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Runtime.Serialization;
+
+namespace Reuben.Model
+{
+    [DataContract]
+    public class PSwitchBlockActor
+    {
+        [DataMember]
+        public int BlockValue { get; set; }
+
+        [DataMember]
+        public int ActsLikeBlockValue { get; set; }
+    }
+}

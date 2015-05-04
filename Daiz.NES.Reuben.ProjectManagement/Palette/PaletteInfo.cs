@@ -5,9 +5,8 @@ using System.Text;
 using System.Xml.Linq;
 
 using Daiz.Library;
-using Daiz.NES;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public class PaletteInfo : IXmlIO
     {

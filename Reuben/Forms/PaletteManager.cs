@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.UI.ProjectManagement;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class PaletteManager : Form
     {
@@ -95,15 +95,15 @@ namespace Daiz.NES.Reuben
         {
             if(CmbPalettes.SelectedItem == null)
             {
-                PslCurrent.CurrentPalette = null;
+                PslCurrent.currentPalette = null;
                 BtnRemove.Enabled = BtnRename.Enabled = false;
             }
             else
             {
                 PaletteInfo pi = CmbPalettes.SelectedItem as PaletteInfo;
                 pi.NameChanged -= CurrentPalette_NameChanged;
-                PslCurrent.CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
-                PslCurrent.CurrentPalette.NameChanged += new EventHandler<TEventArgs<string>>(CurrentPalette_NameChanged);
+                PslCurrent.currentPalette = CmbPalettes.SelectedItem as PaletteInfo;
+                PslCurrent.currentPalette.NameChanged += new EventHandler<TEventArgs<string>>(CurrentPalette_NameChanged);
                 BtnRemove.Enabled = BtnRename.Enabled = CmbPalettes.SelectedIndex != 0;
             }
 
@@ -121,13 +121,13 @@ namespace Daiz.NES.Reuben
 
         private void PslCurrent_MouseDown(object sender, MouseEventArgs e)
         {
-            if (PslCurrent.CurrentPalette == null) return;
+            if (PslCurrent.currentPalette == null) return;
             int offset = (e.X % 64) / 16;
             int index = ((e.Y / 16) * 4) + (e.X / 64);
             if (index == 4 && CmbPalettes.SelectedIndex != 0) return;
             if (offset == 0 && CmbPalettes.SelectedIndex != 0)
             {
-                PslCurrent.CurrentPalette.Background = FpsFull.SelectedColor;
+                PslCurrent.currentPalette.Background = FpsFull.SelectedColor;
             }
             else
             {
@@ -138,26 +138,26 @@ namespace Daiz.NES.Reuben
                     {
                         if (i != 4)
                         {
-                            if (MouseButtons == MouseButtons.Right && PslCurrent.CurrentPalette.IsSpecial)
+                            if (MouseButtons == MouseButtons.Right && PslCurrent.currentPalette.IsSpecial)
                             {
-                                PslCurrent.CurrentPalette[i, offset] = 0x40;
+                                PslCurrent.currentPalette[i, offset] = 0x40;
                             }
                             else
                             {
-                                PslCurrent.CurrentPalette[i, offset] = FpsFull.SelectedColor;
+                                PslCurrent.currentPalette[i, offset] = FpsFull.SelectedColor;
                             }
                         }
                     }
                 }
                 else
                 {
-                    if (MouseButtons == MouseButtons.Right && PslCurrent.CurrentPalette.IsSpecial)
+                    if (MouseButtons == MouseButtons.Right && PslCurrent.currentPalette.IsSpecial)
                     {
-                        PslCurrent.CurrentPalette[index, offset] = 0x40;
+                        PslCurrent.currentPalette[index, offset] = 0x40;
                     }
                     else
                     {
-                        PslCurrent.CurrentPalette[index, offset] = FpsFull.SelectedColor;
+                        PslCurrent.currentPalette[index, offset] = FpsFull.SelectedColor;
                     }
                 }
             }
@@ -195,7 +195,7 @@ namespace Daiz.NES.Reuben
             ProjectController.PaletteManager.PaletteAdded -= PaletteManager_PaletteAdded;
             ProjectController.PaletteManager.PaletteRemoved -= PaletteManager_PaletteRemoved;
             FpsFull.SelectedPaletteChanged -= FpsFull_SelectedPaletteChanged;
-            PslCurrent.CurrentPalette.NameChanged -= CurrentPalette_NameChanged;
+            PslCurrent.currentPalette.NameChanged -= CurrentPalette_NameChanged;
             this.Close();
         }
 
@@ -220,7 +220,7 @@ namespace Daiz.NES.Reuben
             int y = e.Y / 16;
             if (x < 0 || y < 0 || x > 0x0F || y > 0x01) return;
 
-            LblPaletteHover.Text = "Color: " + PslCurrent.CurrentPalette[(y * 4) + (x / 4), x % 4].ToHexString();
+            LblPaletteHover.Text = "Color: " + PslCurrent.currentPalette[(y * 4) + (x / 4), x % 4].ToHexString();
         }
     }
 }

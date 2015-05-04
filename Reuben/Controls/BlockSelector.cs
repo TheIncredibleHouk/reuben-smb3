@@ -8,25 +8,35 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
 
-using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.Controllers;
+using Reuben.NESGraphics;
+using Reuben.Model;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public unsafe class BlockSelector : Control
     {
-        public event EventHandler<TEventArgs<MouseButtons>> SelectionChanged;
-
+        private Block[] blocks;
+        private Bitmap backBuffer;
+        private Color[,] quickColorLookup;
+        private GraphicsController graphicsController;
 
         public BlockSelector()
         {
-            BackBuffer = new Bitmap(256, 256);
-            QuickColorLookup = new Color[4, 4];
-            SpecialColors = new Color[8, 4];
-            CurrentDefiniton = null;
+            backBuffer = new Bitmap(256, 256);
+            quickColorLookup = new Color[4, 4];
             this.Width = this.Height = 256;
             this.MouseDown += PatternTableViewer_MouseDown;
-            FullRender();
+        }
+
+        public void SetBlocks(Block[] blockSet)
+        {
+            blocks = blockSet;
+        }
+
+        public void SetGraphicsController(GraphicsController controller)
+        {
+            graphicsController = controller;
         }
 
         private PatternTable _SpecialTable;
@@ -36,17 +46,6 @@ namespace Daiz.NES.Reuben
             set
             {
                 _SpecialTable = value;
-                FullRender();
-            }
-        }
-
-        private BlockLayout _BlockLayout;
-        public BlockLayout BlockLayout
-        {
-            get { return _BlockLayout; }
-            set
-            {
-                _BlockLayout = value;
                 FullRender();
             }
         }
@@ -63,105 +62,43 @@ namespace Daiz.NES.Reuben
         }
 
 
-        private PatternTable _CurrentTable;
-        public PatternTable CurrentTable
+        private PatternTable patternTable;
+        public void SetPatternTable(PatternTable table)
         {
-            set
-            {
-                if (_CurrentTable != null)
-                {
-                    _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
-                }
-
-                if (_CurrentTable != value)
-                {
-                    _CurrentTable = value;
-
-                    if (_CurrentTable != null)
-                    {
-                        _CurrentTable.GraphicsChanged += new EventHandler<TEventArgs<int>>(_CurrentTable_GraphicsChanged);
-                    }
-
-                    FullRender();
-                }
-            }
-        }
-
-        public void CleanUp()
-        {
-            this.MouseDown -= PatternTableViewer_MouseDown;
-            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
-        }
-
-        void _CurrentTable_GraphicsChanged(object sender, TEventArgs<int> e)
-        {
+            patternTable = table;
             FullRender();
         }
 
-        private int DefinitionIndex;
-        private BlockDefinition _CurrentDefiniton;
-        public BlockDefinition CurrentDefiniton
+        private Palette currentPalette;
+        public void SetCurrentPalette(Palette palette)
         {
-            get { return _CurrentDefiniton; }
-            set
-            {
-                if (_CurrentDefiniton == value) return;
-                _CurrentDefiniton = value;
-                DefinitionIndex = ProjectController.BlockManager.AllDefinitions.IndexOf(value);
-                FullRender();
-            }
+            currentPalette = palette;
+            UpdateColors();
+            FullRender();
         }
-
-        private BlockDefinition _SpecialDefinitions;
-        public BlockDefinition SpecialDefnitions
-        {
-            get { return _SpecialDefinitions; }
-            set
-            {
-                _SpecialDefinitions = value;
-                FullRender();
-            }
-        }
-
-        private PaletteInfo _CurrentPalette;
-        public PaletteInfo CurrentPalette
-        {
-            set
-            {
-                _CurrentPalette = value;
-                UpdateColors();
-                FullRender();
-            }
-        }
-
-        Bitmap BackBuffer;
-
-        private Color[,] QuickColorLookup;
-        private Color[,] SpecialColors;
-
-        public PaletteInfo SpecialPalette
-        {
-            set
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        SpecialColors[j, i] = ProjectController.ColorManager.Colors[value[j, i]];
-                    }
-                }
-            }
-        }
+        //public PaletteInfo SpecialPalette
+        //{
+        //    set
+        //    {
+        //        for (int j = 0; j < 8; j++)
+        //        {
+        //            for (int i = 0; i < 4; i++)
+        //            {
+        //                SpecialColors[j, i] = ProjectController.ColorManager.Colors[value[j, i]];
+        //            }
+        //        }
+        //    }
+        //}
 
         private void UpdateColors()
         {
-            if (_CurrentPalette != null)
+            if (currentPalette != null)
             {
                 for (int j = 0; j < 4; j++)
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        QuickColorLookup[j, i] = ProjectController.ColorManager.Colors[_CurrentPalette[j, i]];
+                        quickColorLookup[j, i] = graphicsController.GetColorReferenceByIndex(currentPalette.GetColorIndex(j, i));
                     }
                 }
             }
@@ -171,428 +108,428 @@ namespace Daiz.NES.Reuben
 
         private void FullRender()
         {
-            if (HaltRendering || _CurrentTable == null || _CurrentPalette == null || _CurrentDefiniton == null || BlockLayout == null)
+            if (HaltRendering || patternTable == null || currentPalette == null || blocks == null)
             {
-                Graphics.FromImage(BackBuffer).Clear(Color.Black);
+                Graphics.FromImage(backBuffer).Clear(Color.Black);
                 return;
             }
 
-            BitmapData data = BackBuffer.LockBits(new Rectangle(0, 0, 256, 256), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            BitmapData bitmapData = backBuffer.LockBits(new Rectangle(0, 0, 256, 256), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
             for (int i = 0; i < 16; i++)
             {
                 for (int j = 0; j < 16; j++)
                 {
                     int x = j * 16, y = i * 16;
-                    int tileValue = _BlockLayout.Layout[i * 16 + j];
+                    int tileValue = i * 16 + j;
                     int PaletteIndex = tileValue / 0x40;
                     if (tileValue < 0)
                     {
-                        RenderBlank(j * 16, i * 16, data);
-                        RenderBlank(j * 16, i * 16 + 8, data);
-                        RenderBlank(j * 16 + 8, i * 16, data);
-                        RenderBlank(j * 16 + 8, i * 16 + 8, data);
+                        RenderBlank(j * 16, i * 16, bitmapData);
+                        RenderBlank(j * 16, i * 16 + 8, bitmapData);
+                        RenderBlank(j * 16 + 8, i * 16, bitmapData);
+                        RenderBlank(j * 16 + 8, i * 16 + 8, bitmapData);
                         continue;
                     }
 
-                    Block b = CurrentDefiniton[tileValue];
+                    Block block = blocks[tileValue];
 
-                    RenderTile(_CurrentTable[b[0, 0]], j * 16, i * 16, PaletteIndex, data);
-                    RenderTile(_CurrentTable[b[0, 1]], j * 16, i * 16 + 8, PaletteIndex, data);
-                    RenderTile(_CurrentTable[b[1, 0]], j * 16 + 8, i * 16, PaletteIndex, data);
-                    RenderTile(_CurrentTable[b[1, 1]], j * 16 + 8, i * 16 + 8, PaletteIndex, data);
-
-
-                    #region draw special overlays
-                    BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
-                    BlockProperty bpHi = bp & BlockProperty.MaskHi;
-                    BlockProperty bpLow = bp & BlockProperty.HiddenCoinBlock;
-                    if (_ShowBlockSolidity)
-                    {
-
-                        switch (bpHi)
-                        {
-                            case BlockProperty.SolidTop:
-
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
-                                break;
+                    RenderTile(patternTable.GetTileByIndex(block.UpperLeft), j * 16, i * 16, PaletteIndex, bitmapData);
+                    RenderTile(patternTable.GetTileByIndex(block.UpperRight), j * 16, i * 16 + 8, PaletteIndex, bitmapData);
+                    RenderTile(patternTable.GetTileByIndex(block.LowerLeft), j * 16 + 8, i * 16, PaletteIndex, bitmapData);
+                    RenderTile(patternTable.GetTileByIndex(block.LowerRight), j * 16 + 8, i * 16 + 8, PaletteIndex, bitmapData);
 
 
-                            case BlockProperty.SolidBottom:
+                    //#region draw special overlays
+                    //BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
+                    //BlockProperty bpHi = bp & BlockProperty.MaskHi;
+                    //BlockProperty bpLow = bp & BlockProperty.HiddenCoinBlock;
+                    //if (_ShowBlockSolidity)
+                    //{
 
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
-                                break;
+                    //    switch (bpHi)
+                    //    {
+                    //        case BlockProperty.SolidTop:
 
-                            case BlockProperty.Water:
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
+                    //            break;
 
-                                RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
-                                break;
 
-                            case BlockProperty.Foreground:
+                    //        case BlockProperty.SolidBottom:
 
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
-                                break;
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
+                    //            break;
 
-                            case BlockProperty.Water | BlockProperty.Foreground:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
-                                break;
+                    //        case BlockProperty.Water:
 
-                            case BlockProperty.Background:
-                                break;
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
+                    //            break;
 
-                            default:
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
-                                break;
-                        }
-                    }
+                    //        case BlockProperty.Foreground:
 
-                    if (_ShowTileInteractions)
-                    {
-                        if (bpHi != BlockProperty.MaskHi)
-                        {
-                            if (bpHi >= BlockProperty.SolidTop)
-                            {
-                                switch ((int)bpLow)
-                                {
-                                    case 1:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
-                                        break;
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
+                    //            break;
 
-                                    case 2:
-                                        RenderSpecialTileAlpha(_SpecialTable[0xD2], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0xE2], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0xD3], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0xE3], x + 8, y + 8, 1, data);
-                                        break;
+                    //        case BlockProperty.Water | BlockProperty.Foreground:
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
+                    //            break;
 
-                                    case 3:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
-                                        break;
+                    //        case BlockProperty.Background:
+                    //            break;
 
-                                    case 4:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
-                                        break;
+                    //        default:
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
+                    //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
+                    //            break;
+                    //    }
+                    //}
 
-                                    case 5:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
-                                        break;
+                    //if (_ShowTileInteractions)
+                    //{
+                    //    if (bpHi != BlockProperty.MaskHi)
+                    //    {
+                    //        if (bpHi >= BlockProperty.SolidTop)
+                    //        {
+                    //            switch ((int)bpLow)
+                    //            {
+                    //                case 1:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                    case 6:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
-                                        break;
+                    //                case 2:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xD2], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xE2], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xD3], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xE3], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 7:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x70], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x61], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 3:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 8:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x44], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x54], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x45], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x55], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 4:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 9:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x46], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x56], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x47], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x57], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 5:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 10:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x48], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x58], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x49], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x59], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 6:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 11:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
-                                        break;
+                    //                case 7:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x70], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x61], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 13:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x4E], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x5E], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x4F], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x5F], x + 8, y + 8, 4, data);
-                                        break;
+                    //                case 8:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x44], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x54], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x45], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x55], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 14:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x26], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x36], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x27], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x37], x + 8, y + 8, 4, data);
-                                        break;
-                                }
-                            }
-                            else
-                            {
-                                switch ((int)bpLow)
-                                {
-                                    case 1:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
-                                        break;
+                    //                case 9:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x46], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x56], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x47], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x57], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 2:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x62], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x72], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x63], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x73], x + 8, y + 8, 1, data);
-                                        break;
+                    //                case 10:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x48], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x58], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x49], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x59], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 3:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
-                                        break;
+                    //                case 11:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                    case 4:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
-                                        break;
+                    //                case 13:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x4E], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x5E], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x4F], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x5F], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                    case 5:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
-                                        break;
+                    //                case 14:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x26], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x36], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x27], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x37], x + 8, y + 8, 4, data);
+                    //                    break;
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            switch ((int)bpLow)
+                    //            {
+                    //                case 1:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                    case 6:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
-                                        break;
+                    //                case 2:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x62], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x72], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x63], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x73], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 7:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x64], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x74], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x65], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x75], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 3:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 8:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x66], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x76], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x67], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x77], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 4:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 9:
-                                        RenderSpecialTileAlpha(_SpecialTable[0xA4], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0xA5], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0xA6], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0xA7], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 5:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 10:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x61], x, y + 8, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x70], x + 8, y, 0, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
-                                        break;
+                    //                case 6:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
+                    //                    break;
 
-                                    case 11:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
-                                        break;
+                    //                case 7:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x64], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x74], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x65], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x75], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 12:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x08], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x18], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x09], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x19], x + 8, y + 8, 4, data);
-                                        break;
+                    //                case 8:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x66], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x76], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x67], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x77], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 13:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x6E], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x7E], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x6F], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x7F], x + 8, y + 8, 4, data);
-                                        break;
+                    //                case 9:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xA4], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xA5], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xA6], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0xA7], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 14:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x4C], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x5C], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x4D], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x5D], x + 8, y + 8, 4, data);
-                                        break;
+                    //                case 10:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x61], x, y + 8, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x70], x + 8, y, 0, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
+                    //                    break;
 
-                                    case 15:
-                                        RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 4, data);
-                                        RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 4, data);
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                    if (_ShowSpecialBlocks)
-                    {
-                        if (bpHi == BlockProperty.SolidBottom || bpHi == BlockProperty.MaskSpecialTile)
-                        {
-                            switch (BlockProperty.MaskHi | bpLow)
-                            {
-                                case BlockProperty.FireFlower:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x00], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x10], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x01], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x11], x + 8, y + 8, 0, data);
-                                    break;
+                    //                case 11:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                case BlockProperty.IceFlower:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE0], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF0], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE1], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF1], x + 8, y + 8, 0, data);
-                                    break;
+                    //                case 12:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x08], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x18], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x09], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x19], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                case BlockProperty.SuperLeaf:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x02], x, y, 3, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x12], x, y + 8, 3, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x03], x + 8, y, 3, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x13], x + 8, y + 8, 3, data);
-                                    break;
+                    //                case 13:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x6E], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x7E], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x6F], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x7F], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                case BlockProperty.FireFoxSuit:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0E], x, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1E], x, y + 8, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0F], x + 8, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1F], x + 8, y + 8, 2, data);
-                                    break;
+                    //                case 14:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x4C], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x5C], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x4D], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x5D], x + 8, y + 8, 4, data);
+                    //                    break;
 
-                                case BlockProperty.FrogSuit:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x20], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x30], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x21], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x31], x + 8, y + 8, 0, data);
-                                    break;
+                    //                case 15:
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 4, data);
+                    //                    RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 4, data);
+                    //                    break;
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //if (_ShowSpecialBlocks)
+                    //{
+                    //    if (bpHi == BlockProperty.SolidBottom || bpHi == BlockProperty.MaskSpecialTile)
+                    //    {
+                    //        switch (BlockProperty.MaskHi | bpLow)
+                    //        {
+                    //            case BlockProperty.FireFlower:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x00], x, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x10], x, y + 8, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x01], x + 8, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x11], x + 8, y + 8, 0, data);
+                    //                break;
 
-                                case BlockProperty.KoopaSuit:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE4], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF4], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE5], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF5], x + 8, y + 8, 0, data);
-                                    break;
+                    //            case BlockProperty.IceFlower:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE0], x, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF0], x, y + 8, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE1], x + 8, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF1], x + 8, y + 8, 0, data);
+                    //                break;
 
-                                case BlockProperty.BooSuit:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE8], x, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF8], x, y + 8, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE9], x + 8, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF9], x + 8, y + 8, 2, data);
-                                    break;
+                    //            case BlockProperty.SuperLeaf:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x02], x, y, 3, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x12], x, y + 8, 3, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x03], x + 8, y, 3, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x13], x + 8, y + 8, 3, data);
+                    //                break;
 
-                                case BlockProperty.SledgeSuit:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE6], x, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF6], x, y + 8, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE7], x + 8, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xF7], x + 8, y + 8, 2, data);
-                                    break;
+                    //            case BlockProperty.FireFoxSuit:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x0E], x, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x1E], x, y + 8, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x0F], x + 8, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x1F], x + 8, y + 8, 2, data);
+                    //                break;
 
-                                case BlockProperty.NinjaSuit:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xEA], x, y, 3, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xFA], x, y + 8, 3, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xEB], x + 8, y, 3, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xFB], x + 8, y + 8, 3, data);
-                                    break;
+                    //            case BlockProperty.FrogSuit:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x20], x, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x30], x, y + 8, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x21], x + 8, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x31], x + 8, y + 8, 0, data);
+                    //                break;
 
-                                case BlockProperty.Starman:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x06], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x16], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x07], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x17], x + 8, y + 8, 0, data);
-                                    break;
+                    //            case BlockProperty.KoopaSuit:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE4], x, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF4], x, y + 8, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE5], x + 8, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF5], x + 8, y + 8, 0, data);
+                    //                break;
 
-                                case BlockProperty.CoinBlock:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 2, data);
-                                    break;
+                    //            case BlockProperty.BooSuit:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE8], x, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF8], x, y + 8, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE9], x + 8, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF9], x + 8, y + 8, 2, data);
+                    //                break;
 
-                                case BlockProperty.Vine:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x24], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x34], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x25], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x35], x + 8, y + 8, 0, data);
-                                    break;
+                    //            case BlockProperty.SledgeSuit:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE6], x, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF6], x, y + 8, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xE7], x + 8, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xF7], x + 8, y + 8, 2, data);
+                    //                break;
 
-                                case BlockProperty.PSwitchBlock:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0C], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1C], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0D], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1D], x + 8, y + 8, 1, data);
-                                    break;
+                    //            case BlockProperty.NinjaSuit:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xEA], x, y, 3, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xFA], x, y + 8, 3, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xEB], x + 8, y, 3, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xFB], x + 8, y + 8, 3, data);
+                    //                break;
 
-                                case BlockProperty.Spinner:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x04], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x14], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x05], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x15], x + 8, y + 8, 0, data);
-                                    break;
+                    //            case BlockProperty.Starman:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x06], x, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x16], x, y + 8, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x07], x + 8, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x17], x + 8, y + 8, 0, data);
+                    //                break;
 
-                                case BlockProperty.Brick:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xDC], x, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xEC], x, y + 8, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xDD], x + 8, y, 2, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xED], x + 8, y + 8, 2, data);
-                                    break;
-                            }
-                        }
-                    }
-                    #endregion
+                    //            case BlockProperty.CoinBlock:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 2, data);
+                    //                break;
+
+                    //            case BlockProperty.Vine:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x24], x, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x34], x, y + 8, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x25], x + 8, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x35], x + 8, y + 8, 0, data);
+                    //                break;
+
+                    //            case BlockProperty.PSwitchBlock:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x0C], x, y, 1, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x1C], x, y + 8, 1, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x0D], x + 8, y, 1, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x1D], x + 8, y + 8, 1, data);
+                    //                break;
+
+                    //            case BlockProperty.Spinner:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x04], x, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x14], x, y + 8, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x05], x + 8, y, 0, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0x15], x + 8, y + 8, 0, data);
+                    //                break;
+
+                    //            case BlockProperty.Brick:
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xDC], x, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xEC], x, y + 8, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xDD], x + 8, y, 2, data);
+                    //                RenderSpecialTileAlpha(_SpecialTable[0xED], x + 8, y + 8, 2, data);
+                    //                break;
+                    //        }
+                    //    }
+                    //}
+                    //#endregion
                 }
             }
-            BackBuffer.UnlockBits(data);
+            backBuffer.UnlockBits(bitmapData);
             Invalidate();
         }
 
@@ -606,7 +543,7 @@ namespace Daiz.NES.Reuben
                 {
                     long offset = (data.Stride * (y + i)) + (x * 3);
                     long xOffset = (j * 3) + offset;
-                    Color c = QuickColorLookup[PaletteIndex, tile[j, i]];
+                    Color c = quickColorLookup[PaletteIndex, tile.Pixels[j, i]];
                     *(dataPointer + xOffset) = c.B;
                     *(dataPointer + xOffset + 1) = c.G;
                     *(dataPointer + xOffset + 2) = c.R;
@@ -643,29 +580,29 @@ namespace Daiz.NES.Reuben
 
         private void RenderSpecialTileAlpha(Tile tile, int x, int y, int PaletteIndex, BitmapData data)
         {
-            byte* dataPointer = (byte*)data.Scan0;
-            double alpha = .5;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    long offset = (data.Stride * (y + i)) + (x * 3);
-                    long xOffset = (j * 3) + offset;
-                    Color c = SpecialColors[PaletteIndex, tile[j, i]];
-                    if (c == Color.Empty) continue;
+            //byte* dataPointer = (byte*)data.Scan0;
+            //double alpha = .5;
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    for (int j = 0; j < 8; j++)
+            //    {
+            //        long offset = (data.Stride * (y + i)) + (x * 3);
+            //        long xOffset = (j * 3) + offset;
+            //        Color c = SpecialColors[PaletteIndex, tile.Pixels[j, i]];
+            //        if (c == Color.Empty) continue;
 
-                    *(dataPointer + xOffset) = (byte)((1 - alpha) * (*(dataPointer + xOffset)) + (alpha * c.B));
-                    *(dataPointer + xOffset + 1) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 1)) + (alpha * c.G));
-                    *(dataPointer + xOffset + 2) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 2)) + (alpha * c.R));
-                }
-            }
+            //        *(dataPointer + xOffset) = (byte)((1 - alpha) * (*(dataPointer + xOffset)) + (alpha * c.B));
+            //        *(dataPointer + xOffset + 1) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 1)) + (alpha * c.G));
+            //        *(dataPointer + xOffset + 2) = (byte)((1 - alpha) * (*(dataPointer + xOffset + 2)) + (alpha * c.R));
+            //    }
+            //}
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            e.Graphics.DrawImage(BackBuffer, 0, 0);
+            e.Graphics.DrawImage(backBuffer, 0, 0);
             Rectangle rect = new Rectangle((SelectedIndex % 16) * 16, (SelectedIndex / 16) * 16, 15, 15);
             e.Graphics.DrawRectangle(Pens.White, rect);
             rect.X += 1;
@@ -683,408 +620,408 @@ namespace Daiz.NES.Reuben
         public void UpdateSelection()
         {
             Rectangle rect = new Rectangle((SelectedIndex % 16) * 16, (SelectedIndex / 16) * 16, 16, 16);
-            BitmapData data = BackBuffer.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            BitmapData data = backBuffer.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
             int x = 0, y = 0;
-            int tileValue = BlockLayout.Layout[SelectedIndex];
+            int tileValue = SelectedIndex;
             if (tileValue >= 0)
             {
                 int PaletteIndex = tileValue / 0x40;
-                Block b = CurrentDefiniton[tileValue];
+                Block b = blocks[tileValue];
 
 
-                RenderTile(_CurrentTable[b[0, 0]], 0, 0, PaletteIndex, data);
-                RenderTile(_CurrentTable[b[0, 1]], 0, 8, PaletteIndex, data);
-                RenderTile(_CurrentTable[b[1, 0]], 8, 0, PaletteIndex, data);
-                RenderTile(_CurrentTable[b[1, 1]], 8, 8, PaletteIndex, data);
+                RenderTile(patternTable.GetTileByIndex(b.UpperLeft), 0, 0, PaletteIndex, data);
+                RenderTile(patternTable.GetTileByIndex(b.UpperRight), 0, 8, PaletteIndex, data);
+                RenderTile(patternTable.GetTileByIndex(b.LowerLeft), 8, 0, PaletteIndex, data);
+                RenderTile(patternTable.GetTileByIndex(b.LowerRight), 8, 8, PaletteIndex, data);
 
-                #region draw special overlays
-                BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
-                BlockProperty bpHi = bp & BlockProperty.MaskHi;
-                BlockProperty bpLow = bp & BlockProperty.HiddenCoinBlock;
-                if (_ShowBlockSolidity)
-                {
+                //#region draw special overlays
+                //BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
+                //BlockProperty bpHi = bp & BlockProperty.MaskHi;
+                //BlockProperty bpLow = bp & BlockProperty.HiddenCoinBlock;
+                //if (_ShowBlockSolidity)
+                //{
 
-                    switch (bpHi)
-                    {
-                        case BlockProperty.SolidTop:
+                //    switch (bpHi)
+                //    {
+                //        case BlockProperty.SolidTop:
 
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
-                            break;
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
+                //            break;
 
 
-                        case BlockProperty.SolidBottom:
+                //        case BlockProperty.SolidBottom:
 
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
-                            break;
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
+                //            break;
 
-                        case BlockProperty.Water:
+                //        case BlockProperty.Water:
 
-                            RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
-                            break;
+                //            RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
+                //            break;
 
-                        case BlockProperty.Foreground:
+                //        case BlockProperty.Foreground:
 
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
-                            break;
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
+                //            break;
 
-                        case BlockProperty.Water | BlockProperty.Foreground:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
-                            break;
+                //        case BlockProperty.Water | BlockProperty.Foreground:
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x, y + 8, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFD], x + 8, y + 8, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0x98], x, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0x99], x, y + 8, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0x98], x + 8, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0x99], x + 8, y + 8, 6, data);
+                //            break;
 
-                        case BlockProperty.Background:
-                            break;
+                //        case BlockProperty.Background:
+                //            break;
 
-                        default:
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
-                            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
-                            break;
-                    }
-                }
+                //        default:
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x, y + 8, 6, data);
+                //            RenderSpecialTileAlpha(_SpecialTable[0xFF], x + 8, y + 8, 6, data);
+                //            break;
+                //    }
+                //}
 
-                if (_ShowTileInteractions)
-                {
-                    if (bpHi != BlockProperty.MaskHi)
-                    {
-                        if (bpHi >= BlockProperty.SolidTop)
-                        {
-                            switch ((int)bpLow)
-                            {
-                                case 1:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
-                                    break;
+                //if (_ShowTileInteractions)
+                //{
+                //    if (bpHi != BlockProperty.MaskHi)
+                //    {
+                //        if (bpHi >= BlockProperty.SolidTop)
+                //        {
+                //            switch ((int)bpLow)
+                //            {
+                //                case 1:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 2:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xD2], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE2], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xD3], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xE3], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 2:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xD2], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xE2], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xD3], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xE3], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 3:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 3:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 4:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 4:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 5:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 5:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 6:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 6:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 7:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x70], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x61], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 7:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x70], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x61], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 8:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x44], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x54], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x45], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x55], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 8:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x44], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x54], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x45], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x55], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 9:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x46], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x56], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x47], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x57], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 9:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x46], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x56], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x47], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x57], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 10:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x48], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x58], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x49], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x59], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 10:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x48], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x58], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x49], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x59], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 11:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
-                                    break;
+                //                case 11:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 13:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x4E], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x5E], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x4F], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x5F], x + 8, y + 8, 4, data);
-                                    break;
+                //                case 13:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x4E], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x5E], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x4F], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x5F], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 14:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x26], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x36], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x27], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x37], x + 8, y + 8, 4, data);
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch ((int)bpLow)
-                            {
-                                case 1:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
-                                    break;
+                //                case 14:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x26], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x36], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x27], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x37], x + 8, y + 8, 4, data);
+                //                    break;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            switch ((int)bpLow)
+                //            {
+                //                case 1:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x40], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x50], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x41], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x51], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 2:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x62], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x72], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x63], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x73], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 2:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x62], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x72], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x63], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x73], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 3:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 3:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x28], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x38], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 4:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 4:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x29], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x39], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 5:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 5:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2A], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2B], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 6:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
-                                    break;
+                //                case 6:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3A], x, y + 8, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y, 1, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3B], x + 8, y + 8, 1, data);
+                //                    break;
 
-                                case 7:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x64], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x74], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x65], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x75], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 7:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x64], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x74], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x65], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x75], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 8:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x66], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x76], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x67], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x77], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 8:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x66], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x76], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x67], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x77], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 9:
-                                    RenderSpecialTileAlpha(_SpecialTable[0xA4], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xA5], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xA6], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0xA7], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 9:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xA4], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xA5], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xA6], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0xA7], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 10:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x61], x, y + 8, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x70], x + 8, y, 0, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
-                                    break;
+                //                case 10:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x60], x, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x61], x, y + 8, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x70], x + 8, y, 0, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x71], x + 8, y + 8, 0, data);
+                //                    break;
 
-                                case 11:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
-                                    break;
+                //                case 11:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2E], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3E], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x2F], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x3F], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 12:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x08], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x18], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x09], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x19], x + 8, y + 8, 4, data);
-                                    break;
+                //                case 12:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x08], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x18], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x09], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x19], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 13:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x6E], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x7E], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x6F], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x7F], x + 8, y + 8, 4, data);
-                                    break;
+                //                case 13:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x6E], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x7E], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x6F], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x7F], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 14:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x4C], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x5C], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x4D], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x5D], x + 8, y + 8, 4, data);
-                                    break;
+                //                case 14:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x4C], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x5C], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x4D], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x5D], x + 8, y + 8, 4, data);
+                //                    break;
 
-                                case 15:
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 4, data);
-                                    RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 4, data);
-                                    break;
-                            }
-                        }
-                    }
-                }
-                if (_ShowSpecialBlocks)
-                {
-                    if (bpHi == BlockProperty.MaskHi)
-                    {
-                        switch (bpHi | bpLow)
-                        {
-                            case BlockProperty.FireFlower:
-                                RenderSpecialTileAlpha(_SpecialTable[0x00], x, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x10], x, y + 8, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x01], x + 8, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x11], x + 8, y + 8, 0, data);
-                                break;
+                //                case 15:
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 4, data);
+                //                    RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 4, data);
+                //                    break;
+                //            }
+                //        }
+                //    }
+                //}
+                //if (_ShowSpecialBlocks)
+                //{
+                //    if (bpHi == BlockProperty.MaskHi)
+                //    {
+                //        switch (bpHi | bpLow)
+                //        {
+                //            case BlockProperty.FireFlower:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x00], x, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x10], x, y + 8, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x01], x + 8, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x11], x + 8, y + 8, 0, data);
+                //                break;
 
-                            case BlockProperty.IceFlower:
-                                RenderSpecialTileAlpha(_SpecialTable[0xE0], x, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF0], x, y + 8, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE1], x + 8, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF1], x + 8, y + 8, 0, data);
-                                break;
+                //            case BlockProperty.IceFlower:
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE0], x, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF0], x, y + 8, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE1], x + 8, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF1], x + 8, y + 8, 0, data);
+                //                break;
 
-                            case BlockProperty.SuperLeaf:
-                                RenderSpecialTileAlpha(_SpecialTable[0x02], x, y, 3, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x12], x, y + 8, 3, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x03], x + 8, y, 3, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x13], x + 8, y + 8, 3, data);
-                                break;
+                //            case BlockProperty.SuperLeaf:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x02], x, y, 3, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x12], x, y + 8, 3, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x03], x + 8, y, 3, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x13], x + 8, y + 8, 3, data);
+                //                break;
 
-                            case BlockProperty.FireFoxSuit:
-                                RenderSpecialTileAlpha(_SpecialTable[0x0E], x, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x1E], x, y + 8, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x0F], x + 8, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x1F], x + 8, y + 8, 2, data);
-                                break;
+                //            case BlockProperty.FireFoxSuit:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x0E], x, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x1E], x, y + 8, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x0F], x + 8, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x1F], x + 8, y + 8, 2, data);
+                //                break;
 
-                            case BlockProperty.FrogSuit:
-                                RenderSpecialTileAlpha(_SpecialTable[0x20], x, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x30], x, y + 8, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x21], x + 8, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x31], x + 8, y + 8, 0, data);
-                                break;
+                //            case BlockProperty.FrogSuit:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x20], x, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x30], x, y + 8, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x21], x + 8, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x31], x + 8, y + 8, 0, data);
+                //                break;
 
-                            case BlockProperty.KoopaSuit:
-                                RenderSpecialTileAlpha(_SpecialTable[0xE4], x, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF4], x, y + 8, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE5], x + 8, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF5], x + 8, y + 8, 0, data);
-                                break;
+                //            case BlockProperty.KoopaSuit:
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE4], x, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF4], x, y + 8, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE5], x + 8, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF5], x + 8, y + 8, 0, data);
+                //                break;
 
-                            case BlockProperty.BooSuit:
-                                RenderSpecialTileAlpha(_SpecialTable[0xE8], x, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF8], x, y + 8, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE9], x + 8, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF9], x + 8, y + 8, 2, data);
-                                break;
+                //            case BlockProperty.BooSuit:
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE8], x, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF8], x, y + 8, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE9], x + 8, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF9], x + 8, y + 8, 2, data);
+                //                break;
 
-                            case BlockProperty.SledgeSuit:
-                                RenderSpecialTileAlpha(_SpecialTable[0xE6], x, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF6], x, y + 8, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE7], x + 8, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF7], x + 8, y + 8, 2, data);
-                                break;
+                //            case BlockProperty.SledgeSuit:
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE6], x, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF6], x, y + 8, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE7], x + 8, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF7], x + 8, y + 8, 2, data);
+                //                break;
 
-                            case BlockProperty.NinjaSuit:
-                                RenderSpecialTileAlpha(_SpecialTable[0xE8], x, y, 3, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF8], x, y + 8, 3, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xE9], x + 8, y, 3, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xF9], x + 8, y + 8, 3, data);
-                                break;
+                //            case BlockProperty.NinjaSuit:
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE8], x, y, 3, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF8], x, y + 8, 3, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xE9], x + 8, y, 3, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xF9], x + 8, y + 8, 3, data);
+                //                break;
 
-                            case BlockProperty.Starman:
-                                RenderSpecialTileAlpha(_SpecialTable[0x06], x, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x16], x, y + 8, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x07], x + 8, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x17], x + 8, y + 8, 0, data);
-                                break;
+                //            case BlockProperty.Starman:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x06], x, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x16], x, y + 8, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x07], x + 8, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x17], x + 8, y + 8, 0, data);
+                //                break;
 
-                            case BlockProperty.CoinBlock:
-                                RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 2, data);
-                                break;
+                //            case BlockProperty.CoinBlock:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x0A], x, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x1A], x, y + 8, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x0B], x + 8, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x1B], x + 8, y + 8, 2, data);
+                //                break;
 
-                            case BlockProperty.Vine:
-                                RenderSpecialTileAlpha(_SpecialTable[0x24], x, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x34], x, y + 8, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x25], x + 8, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x35], x + 8, y + 8, 0, data);
-                                break;
+                //            case BlockProperty.Vine:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x24], x, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x34], x, y + 8, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x25], x + 8, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x35], x + 8, y + 8, 0, data);
+                //                break;
 
-                            case BlockProperty.PSwitchBlock:
-                                RenderSpecialTileAlpha(_SpecialTable[0x0C], x, y, 1, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x1C], x, y + 8, 1, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x0D], x + 8, y, 1, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x1D], x + 8, y + 8, 1, data);
-                                break;
+                //            case BlockProperty.PSwitchBlock:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x0C], x, y, 1, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x1C], x, y + 8, 1, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x0D], x + 8, y, 1, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x1D], x + 8, y + 8, 1, data);
+                //                break;
 
-                            case BlockProperty.Spinner:
-                                RenderSpecialTileAlpha(_SpecialTable[0x04], x, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x14], x, y + 8, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x05], x + 8, y, 0, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0x15], x + 8, y + 8, 0, data);
-                                break;
+                //            case BlockProperty.Spinner:
+                //                RenderSpecialTileAlpha(_SpecialTable[0x04], x, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x14], x, y + 8, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x05], x + 8, y, 0, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0x15], x + 8, y + 8, 0, data);
+                //                break;
 
-                            case BlockProperty.Brick:
-                                RenderSpecialTileAlpha(_SpecialTable[0xDC], x, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xEC], x, y + 8, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xDD], x + 8, y, 2, data);
-                                RenderSpecialTileAlpha(_SpecialTable[0xED], x + 8, y + 8, 2, data);
-                                break;
-                        }
-                    }
-                }
-                #endregion
+                //            case BlockProperty.Brick:
+                //                RenderSpecialTileAlpha(_SpecialTable[0xDC], x, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xEC], x, y + 8, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xDD], x + 8, y, 2, data);
+                //                RenderSpecialTileAlpha(_SpecialTable[0xED], x + 8, y + 8, 2, data);
+                //                break;
+                //        }
+                //    }
+                //}
+                //#endregion
             }
             else
             {
@@ -1093,87 +1030,17 @@ namespace Daiz.NES.Reuben
                 RenderBlank(8, 0, data);
                 RenderBlank(8, 8, data);
             }
-            BackBuffer.UnlockBits(data);
+            backBuffer.UnlockBits(data);
             Invalidate(rect);
         }
 
-        public int SelectedTileIndex
-        {
-            get
-            {
-                if (BlockLayout == null || BlockLayout.Layout == null) return 0;
-                if (BlockLayout.Layout[SelectedIndex] < 0) return 0;
-                return BlockLayout.Layout[SelectedIndex];
-            }
-            set
-            {
-                if (BlockLayout == null || BlockLayout.Layout == null) return;
-                bool found = false;
-                for (int i = 0; i < 256; i++)
-                {
-                    if (BlockLayout.Layout[i] == value)
-                    {
-                        SelectedIndex = i;
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found)
-                {
-                    BlockLayout = ProjectController.LayoutManager.BlockLayouts[0];
-                    SelectedIndex = value;
-                }
-
-                SelectedBlock = _CurrentDefiniton[BlockLayout.Layout[SelectedIndex]];
-
-                if (SelectionChanged != null)
-                {
-                    SelectionChanged(this, null);
-                }
-
-                Invalidate();
-            }
-        }
-
-        private int _SelectedIndex;
-        public int SelectedIndex
-        {
-            get { return _SelectedIndex; }
-            set
-            {
-                _SelectedIndex = value;
-            }
-        }
+        public int SelectedIndex { get; private set; }
         public Block SelectedBlock { get; private set; }
 
         private void PatternTableViewer_MouseDown(object sender, MouseEventArgs e)
         {
-            if (BlockLayout == null || CurrentDefiniton == null)
-            {
-                MessageBox.Show("There is no selected layout to edit. Click add to add a new layout before editing");
-                return;
-            }
-
-            if (SelectedBlock != null)
-            {
-                SelectedBlock.DefinitionChanged -= SelectedBlock_DefinitionChanged;
-            }
-
             SelectedIndex = e.X / 16 + ((e.Y / 16) * 16);
-            if (BlockLayout.Layout[SelectedIndex] == -1)
-            {
-                Invalidate();
-                return;
-            }
-
-            SelectedBlock = CurrentDefiniton[BlockLayout.Layout[SelectedIndex]];
-            if (SelectionChanged != null)
-            {
-                SelectionChanged(this, new TEventArgs<MouseButtons>(e.Button));
-            }
-
-            SelectedBlock.DefinitionChanged += new EventHandler(SelectedBlock_DefinitionChanged);
+            SelectedBlock = blocks[SelectedIndex];
             Invalidate();
         }
 
@@ -1215,12 +1082,6 @@ namespace Daiz.NES.Reuben
                 _ShowTileInteractions = value;
                 FullRender();
             }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
-            base.Dispose(disposing);
         }
     }
 }

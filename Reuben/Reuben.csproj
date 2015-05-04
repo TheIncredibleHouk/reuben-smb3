@@ -8,9 +8,9 @@
     <ProjectGuid>{B6EDED74-9C63-46AC-A946-4E81190B60A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Daiz.NES.Reuben</RootNamespace>
-    <AssemblyName>Daiz.NES.Reuben</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Reuben.UI</RootNamespace>
+    <AssemblyName>Reuben.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>reuben.ico</ApplicationIcon>
     <FileUpgradeFlags>
@@ -44,6 +44,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -54,6 +55,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>..\Daiz.NES.Reuben.ProjectManagement\custom_ruleset.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Daiz.Library, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -290,6 +292,18 @@
     <ProjectReference Include="..\Daiz.NES.Reuben.ProjectManagement\Daiz.NES.Reuben.ProjectManagement.csproj">
       <Project>{5A27B53A-5311-481F-B6AA-3EC390E89FE9}</Project>
       <Name>Daiz.NES.Reuben.ProjectManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reuben.Controllers\Reuben.Controllers.csproj">
+      <Project>{64db43f7-e1e9-48d9-9c1a-6ca15c952455}</Project>
+      <Name>Reuben.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reuben.Graphics\Reuben.NESGraphics.csproj">
+      <Project>{8c98927a-af90-44b4-92e9-9134939b7d31}</Project>
+      <Name>Reuben.NESGraphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reuben.Model\Reuben.Model.csproj">
+      <Project>{eb481cb8-5656-499a-b189-32dbff50a101}</Project>
+      <Name>Reuben.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

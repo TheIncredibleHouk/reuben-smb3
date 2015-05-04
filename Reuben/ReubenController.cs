@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.UI.ProjectManagement;
 using Daiz.Library;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public static class ReubenController
     {

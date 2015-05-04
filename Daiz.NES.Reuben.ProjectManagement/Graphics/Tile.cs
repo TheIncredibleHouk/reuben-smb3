@@ -6,7 +6,7 @@ using System.Text;
 
 using Daiz.Library;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public class Tile
     {

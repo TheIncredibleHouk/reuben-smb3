@@ -1,4 +1,4 @@
-﻿namespace Daiz.NES.Reuben
+﻿namespace Reuben.UI
 {
     partial class NewLevelForm
     {

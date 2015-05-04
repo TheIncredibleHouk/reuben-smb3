@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 using Daiz.Library;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public class PaletteManager : IXmlIO
     {

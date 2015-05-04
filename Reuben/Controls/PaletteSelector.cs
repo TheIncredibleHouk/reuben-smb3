@@ -9,144 +9,99 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.Model;
+using Reuben.Controllers;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public unsafe class PaletteSelector : Control
     {
-        public event EventHandler SelectedIndexChanged;
-        public event EventHandler SelectedOffsetChanged;
-
         public bool SelectablePaletteMode { get; set; }
+
+        private Palette currentPalette;
+        private Bitmap backBuffer;
+        private GraphicsController graphicsController;
 
         public PaletteSelector()
         {
-            BackBuffer = new Bitmap(256, 32);
-            _CurrentPalette = null;
+            backBuffer = new Bitmap(256, 32);
+
             this.Size = new Size(256, 32);
             this.MouseDown += new MouseEventHandler(PaletteSelector_MouseDown);
         }
 
-        private PaletteInfo _CurrentPalette;
-        public PaletteInfo CurrentPalette
+        public void SetGraphicsController(GraphicsController controller)
         {
-            get
-            {
-                return _CurrentPalette;
-            }
-            set
-            {
-                if (_CurrentPalette != value)
-                {
-                    if (_CurrentPalette != null)
-                    {
-                        _CurrentPalette.PaletteChanged -= _CurrentPalette_PaletteChanged;
-                    }
-
-                    _CurrentPalette = value;
-
-                    if (value != null)
-                    {
-                        _CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(_CurrentPalette_PaletteChanged);
-                    }
-                }
-                RenderFull();
-            }
+            graphicsController = controller;
         }
 
-        void _CurrentPalette_PaletteChanged(object sender, TEventArgs<DoubleValue<int, int>> e)
+        public void SetPalette(Palette palette)
         {
-            if (!DelayedRender)
-            {
-                Graphics g = Graphics.FromImage(BackBuffer);
-                UpdateColor(g, e.Data.Value1, e.Data.Value2);
-                g.Dispose();
-                Invalidate();
-            }
-        }
-
-        private bool DelayedRender = false;
-        Bitmap BackBuffer;
-
-        public void BeginRender()
-        {
-            DelayedRender = true;
-        }
-
-        public void EndRender()
-        {
-            DelayedRender = false;
+            currentPalette = palette;
             RenderFull();
         }
 
-        private void RenderFull()
+
+        public void RenderFull()
         {
-            Graphics g = Graphics.FromImage(BackBuffer);
-            if (CurrentPalette == null)
+            using (Graphics graphicsContext = System.Drawing.Graphics.FromImage(backBuffer))
             {
-                g.Clear(Color.Black);
-            }
-            else
-            {
-                g.Clear(ProjectController.ColorManager.Colors[CurrentPalette.Background]);
-                for (int i = 0; i < 8; i++)
+                if (currentPalette == null)
                 {
-                    for (int j = 0; j < 4; j++)
+                    graphicsContext.Clear(Color.Black);
+                }
+                else
+                {
+                    graphicsContext.Clear(graphicsController.ColorReference[currentPalette.BackgroundValues[0]]);
+                    for (int i = 0; i < 8; i++)
                     {
-                        UpdateColor(g, i, j);
+                        for (int j = 0; j < 4; j++)
+                        {
+                            UpdateColor(graphicsContext, i, j, graphicsController.ColorReference[currentPalette.GetColorIndex(i, j)]);
+                        }
                     }
                 }
             }
-            g.Dispose();
             Invalidate();
         }
 
 
-        private void UpdateColor(Graphics g, int index, int offset)
+        private void UpdateColor(Graphics graphicsContext, int index, int offset, Color color)
         {
-            Color c = ProjectController.ColorManager.Colors[_CurrentPalette[index, offset]];
             bool isTransparent = false;
-            if(c == Color.Empty)
-            {
-                c = Color.Black;
-                isTransparent = true;
-            }
 
-            Brush brush = new SolidBrush(c);
+            Brush brush = new SolidBrush(color);
             Rectangle rect = new Rectangle(((index % 4) * 64) + (offset * 16),
                                            (index / 4) * 16,
                                            16, 16);
-            g.FillRectangle(brush, rect);
+            graphicsContext.FillRectangle(brush, rect);
 
             if (isTransparent)
             {
-                g.FillRectangle(Brushes.White, rect.X + 4, rect.Y + 4, rect.Width / 2, rect.Height / 2);
+                graphicsContext.FillRectangle(Brushes.White, rect.X + 4, rect.Y + 4, rect.Width / 2, rect.Height / 2);
             }
 
             if (SelectablePaletteMode && SelectedIndex == index && SelectedOffset == offset)
             {
                 rect.Width -= 1;
                 rect.Height -= 1;
-                g.DrawRectangle(Pens.White, rect);
+                graphicsContext.DrawRectangle(Pens.White, rect);
                 rect.X += 1;
                 rect.Y += 1;
                 rect.Width -= 2;
                 rect.Height -= 2;
-                g.DrawRectangle(Pens.Red, rect);
+                graphicsContext.DrawRectangle(Pens.Red, rect);
             }
-
-            brush.Dispose();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(BackBuffer, 0, 0);
+            e.Graphics.DrawImage(backBuffer, 0, 0);
         }
 
-        protected override void  OnPaintBackground(PaintEventArgs pevent)
+        protected override void OnPaintBackground(PaintEventArgs pevent)
         {
-             	 
+
         }
 
         private void InitializeComponent()
@@ -165,8 +120,11 @@ namespace Daiz.NES.Reuben
 
         private void PaletteSelector_MouseDown(object sender, MouseEventArgs e)
         {
-            if(!SelectablePaletteMode)
+            if (!SelectablePaletteMode)
+            {
                 return;
+            }
+
             int offset = (e.X % 64) / 16;
             int index = ((e.Y / 16) * 4) + (e.X / 64);
 
@@ -176,36 +134,18 @@ namespace Daiz.NES.Reuben
             int oldOffset = SelectedOffset;
 
             SelectablePaletteMode = false;
-            Graphics g = Graphics.FromImage(BackBuffer);
-            UpdateColor(g, SelectedIndex, SelectedOffset);
-            SelectablePaletteMode = true;
-            SelectedOffset = offset;
-            SelectedIndex = index;
-            UpdateColor(g, SelectedIndex, SelectedOffset);
-
-            if (oldIndex != SelectedIndex)
+            using (Graphics graphicsContext = Graphics.FromImage(backBuffer))
             {
-                if (SelectedIndexChanged != null)
-                {
-                    SelectedIndexChanged(this, null);
-                }
-            }
+                UpdateColor(g, SelectedIndex, SelectedOffset);
 
-            if (oldOffset != SelectedOffset)
-            {
-                if (SelectedOffsetChanged != null)
-                {
-                    SelectedOffsetChanged(this, null);
-                }
+                SelectablePaletteMode = true;
+                SelectedOffset = offset;
+                SelectedIndex = index;
+                UpdateColor(g, SelectedIndex, SelectedOffset);
             }
 
             Invalidate();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            _CurrentPalette.PaletteChanged -= _CurrentPalette_PaletteChanged;
-            base.Dispose(disposing);
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Daiz.NES.Reuben
+﻿namespace Reuben.UI
 {
     partial class PaletteManager
     {
@@ -44,8 +44,8 @@
             this.LblTransparent = new System.Windows.Forms.Label();
             this.LblPaletteHover = new System.Windows.Forms.Label();
             this.LblHover2 = new System.Windows.Forms.Label();
-            this.FpsFull = new Daiz.NES.Reuben.FullPaletteSelector();
-            this.PslCurrent = new Daiz.NES.Reuben.PaletteSelector();
+            this.FpsFull = new Reuben.UI.FullPaletteSelector();
+            this.PslCurrent = new Reuben.UI.PaletteSelector();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -225,7 +225,7 @@
             // 
             // PslCurrent
             // 
-            this.PslCurrent.CurrentPalette = null;
+            this.PslCurrent.currentPalette = null;
             this.PslCurrent.Location = new System.Drawing.Point(27, 158);
             this.PslCurrent.Name = "PslCurrent";
             this.PslCurrent.SelectablePaletteMode = false;

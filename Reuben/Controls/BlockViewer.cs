@@ -8,100 +8,60 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
 
-using Daiz.Library;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.Controllers;
+using Reuben.NESGraphics;
+using Reuben.Model;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public unsafe class BlockViewer : Control
     {
-        public BlockViewer()
+        private Bitmap backBuffer;
+        private PatternTable currentTable;
+        private Palette currentPalette;
+        private int paletteIndex;
+        private Block currentBlock;
+        private GraphicsController graphicsController;
+
+        public BlockViewer(GraphicsController gfxController)
         {
-            BackBuffer = new Bitmap(16, 16);
-            QuickColorLookup = new Color[4, 4];
-            CurrentBlock = null;
+            backBuffer = new Bitmap(16, 16);
+            currentBlock = null;
+            graphicsController = gfxController;
             this.Width = this.Height = 32;
             FullRender();
         }
 
-        private PatternTable _CurrentTable;
-        public PatternTable CurrentTable
+        public void SetPatternTable(PatternTable table)
         {
-            set
-            {
-                if (_CurrentTable != null)
-                {
-                    _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
-                }
-
-                if (_CurrentTable != value)
-                {
-                    _CurrentTable = value;
-
-                    if (_CurrentTable != null)
-                    {
-                        _CurrentTable.GraphicsChanged += new EventHandler<TEventArgs<int>>(_CurrentTable_GraphicsChanged);
-                    }
-
-                    FullRender();
-                }
-            }
-        }
-
-        void _CurrentTable_GraphicsChanged(object sender, TEventArgs<int> e)
-        {
+            currentTable = table;
             FullRender();
         }
 
-
-        private PaletteInfo _CurrentPalette;
-        public PaletteInfo CurrentPalette
+        public void SetPallete(Palette palette)
         {
-            set
-            {
-                _CurrentPalette = value;
-                UpdateColors();
-                FullRender();
-            }
+            currentPalette = palette;
+            UpdateColors();
+            FullRender();
         }
 
-        private Block _CurrentBlock;
-        public Block CurrentBlock
+        public void SetCurrentBlock(Block block)
         {
-            get
-            {
-                return _CurrentBlock;
-            }
-            set
-            {
-                if (_CurrentBlock == value) return;
-                _CurrentBlock = value;
-                FullRender();
-            }
+            currentBlock = block;
+            FullRender();
         }
-
-        private int _PaletteIndex;
-        public int PaletteIndex
-        {
-            set
-            {
-                _PaletteIndex = value;
-            }
-        }
-
-        Bitmap BackBuffer;
 
         private Color[,] QuickColorLookup;
 
         private void UpdateColors()
         {
-            if (_CurrentPalette != null)
+            if (currentPalette != null)
             {
                 for (int j = 0; j < 4; j++)
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        QuickColorLookup[j, i] = ProjectController.ColorManager.Colors[_CurrentPalette[j, i]];
+                        QuickColorLookup[j, i] = graphicsController.ColorReference[currentPalette.GetColorIndex(j, i)];
                     }
                 }
             }
@@ -109,20 +69,20 @@ namespace Daiz.NES.Reuben
 
         private void FullRender()
         {
-            if (_CurrentTable == null || _CurrentPalette == null || _CurrentBlock == null)
+            if (currentTable == null || currentPalette == null || currentBlock == null)
             {
-                Graphics.FromImage(BackBuffer).Clear(Color.Black);
+                Graphics.FromImage(backBuffer).Clear(Color.Black);
                 return;
             }
 
-            BitmapData data = BackBuffer.LockBits(new Rectangle(0, 0, 16, 16), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            BitmapData data = backBuffer.LockBits(new Rectangle(0, 0, 16, 16), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
-            RenderTile(_CurrentTable[_CurrentBlock[0, 0]], 0, 0, _PaletteIndex, data);
-            RenderTile(_CurrentTable[_CurrentBlock[0, 1]], 0, 8, _PaletteIndex, data);
-            RenderTile(_CurrentTable[_CurrentBlock[1, 0]], 8, 0, _PaletteIndex, data);
-            RenderTile(_CurrentTable[_CurrentBlock[1, 1]], 8, 8, _PaletteIndex, data);
+            RenderTile(currentTable.GetTileByIndex(currentBlock.UpperLeft), 0, 0, paletteIndex, data);
+            RenderTile(currentTable.GetTileByIndex(currentBlock.UpperRight), 0, 8, paletteIndex, data);
+            RenderTile(currentTable.GetTileByIndex(currentBlock.LowerLeft), 8, 0, paletteIndex, data);
+            RenderTile(currentTable.GetTileByIndex(currentBlock.LowerRight), 8, 8, paletteIndex, data);
 
-            BackBuffer.UnlockBits(data);
+            backBuffer.UnlockBits(data);
             Invalidate();
         }
 
@@ -136,7 +96,7 @@ namespace Daiz.NES.Reuben
                 {
                     long offset = (data.Stride * (y + i)) + (x * 3);
                     long xOffset = (j * 3) + offset;
-                    Color c = QuickColorLookup[PaletteIndex, tile[j, i]];
+                    Color c = QuickColorLookup[PaletteIndex, tile.Pixels[j, i]];
                     *(dataPointer + xOffset) = c.B;
                     *(dataPointer + xOffset + 1) = c.G;
                     *(dataPointer + xOffset + 2) = c.R;
@@ -148,27 +108,13 @@ namespace Daiz.NES.Reuben
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            e.Graphics.DrawImage(BackBuffer, new Rectangle(0, 0, 33, 33), new Rectangle(0, 0, 16, 16), GraphicsUnit.Pixel);
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs pevent)
-        {
-
+            e.Graphics.DrawImage(backBuffer, new Rectangle(0, 0, 33, 33), new Rectangle(0, 0, 16, 16), GraphicsUnit.Pixel);
         }
 
         public void SetTile(int x, int y, byte value)
         {
-            _CurrentBlock[x, y] = value;
+            currentBlock.SetTileByPoint(x, y, value);
             FullRender();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (_CurrentTable != null)
-            {
-                _CurrentTable.GraphicsChanged -= _CurrentTable_GraphicsChanged;
-            }
-            base.Dispose(disposing);
         }
     }
 }

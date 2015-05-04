@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class ConfirmForm : Form
     {

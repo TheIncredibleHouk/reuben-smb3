@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public static class ProjectController
     {
@@ -66,10 +66,6 @@ namespace Daiz.NES.Reuben.ProjectManagement
             BlockManager.SaveDefinitions(string.Format("{0}{1}{2}.tsa", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
             BlockManager.SaveBlockStrings(string.Format("{0}{1}strings.xml", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
 
-
-            GraphicsManager.LoadDefault();
-            GraphicsManager.SaveGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName));
-
             LevelManager.Default();
             WorldManager.Default();
             ColorManager.LoadDefaultColor();
@@ -105,8 +101,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             BlockManager.LoadBlockStrings(string.Format("{0}{1}strings.xml", RootDirectory, Path.DirectorySeparatorChar));
 
-            if (!GraphicsManager.LoadGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
-                GraphicsManager.LoadDefault();
+            //if (!GraphicsManager.LoadGraphics(string.Format("{0}{1}{2}.chr", RootDirectory, Path.DirectorySeparatorChar, ProjectName)))
+            //    //GraphicsManager.LoadDefault();
 
             if (!SpecialManager.LoadSpecialGraphics(string.Format("{0}{1}special.chr", RootDirectory, Path.DirectorySeparatorChar)))
                 SpecialManager.LoadDefaultSpecialGraphics();

@@ -1,4 +1,4 @@
-﻿namespace Daiz.NES.Reuben
+﻿namespace Reuben.UI
 {
     partial class GraphicsEditor
     {
@@ -54,9 +54,9 @@
             this.ChkTileGrid = new System.Windows.Forms.CheckBox();
             this.ChkTableGrid = new System.Windows.Forms.CheckBox();
             this.BtnClose = new System.Windows.Forms.Button();
-            this.TlvEditTiles = new Daiz.NES.Reuben.TileViewer();
-            this.PslView = new Daiz.NES.Reuben.PaletteSelector();
-            this.PtvTileSelector = new Daiz.NES.Reuben.PatternTableViewer();
+            this.TlvEditTiles = new Reuben.UI.TileViewer();
+            this.PslView = new Reuben.UI.PaletteSelector();
+            this.PtvTileSelector = new Reuben.UI.PatternTableViewer();
             this.LblHexGraphics1 = new System.Windows.Forms.Label();
             this.LblHexGraphics2 = new System.Windows.Forms.Label();
             this.LblHexGraphics3 = new System.Windows.Forms.Label();
@@ -340,7 +340,7 @@
             // 
             // PslView
             // 
-            this.PslView.CurrentPalette = null;
+            this.PslView.currentPalette = null;
             this.PslView.Location = new System.Drawing.Point(492, 80);
             this.PslView.Name = "PslView";
             this.PslView.SelectablePaletteMode = true;
@@ -356,7 +356,7 @@
             this.PtvTileSelector.Size = new System.Drawing.Size(256, 256);
             this.PtvTileSelector.TabIndex = 0;
             this.PtvTileSelector.Text = "patternTableViewer1";
-            this.PtvTileSelector.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.TileBlock;
+            this.PtvTileSelector.TileSelectionMode = Reuben.UI.TileSelectionMode.TileBlock;
             // 
             // LblHexGraphics1
             // 
@@ -451,7 +451,7 @@
 
         #endregion
 
-        private Daiz.NES.Reuben.PatternTableViewer PtvTileSelector;
+        private Reuben.UI.PatternTableViewer PtvTileSelector;
         private System.Windows.Forms.ComboBox CmbPalettes;
         private PaletteSelector PslView;
         private System.Windows.Forms.ComboBox CmbGraphics1;

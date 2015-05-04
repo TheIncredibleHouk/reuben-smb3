@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public interface IUndoableAction
     {

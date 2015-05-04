@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public class Line
     {

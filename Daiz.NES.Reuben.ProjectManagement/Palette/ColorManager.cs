@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace Daiz.NES.Reuben.ProjectManagement
+namespace Reuben.UI.ProjectManagement
 {
     public class ColorManager
     {
@@ -24,12 +24,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public void LoadDefaultColor()
         {
-            byte[] data = Resource.default_palette;
-            for (var i = 0; i < 0x040; i++)
-            {
-                Colors[i] = Color.FromArgb(data[i * 0x03], data[i * 0x03 + 1], data[i * 0x03 + 2]);
-            }
-            Colors[0x40] = Color.Empty;
+            //byte[] data = Resource.default_palette;
+            //for (var i = 0; i < 0x040; i++)
+            //{
+            //    Colors[i] = Color.FromArgb(data[i * 0x03], data[i * 0x03 + 1], data[i * 0x03 + 2]);
+            //}
+            //Colors[0x40] = Color.Empty;
         }
 
         public bool LoadColorInfo(string filename)

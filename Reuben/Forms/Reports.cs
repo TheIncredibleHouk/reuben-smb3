@@ -6,9 +6,9 @@ using System.Text;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Daiz.NES.Reuben.ProjectManagement;
+using Reuben.UI.ProjectManagement;
 
-namespace Daiz.NES.Reuben
+namespace Reuben.UI
 {
     public partial class Reports : Form
     {
