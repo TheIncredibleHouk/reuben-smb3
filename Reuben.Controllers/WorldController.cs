@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reuben.Controllers
 {
-    class WorldController
+    public class WorldController
     {
     }
 }

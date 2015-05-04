@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace Reuben.Model
 {
     [DataContract]
-    public class PSwitchBlockActor
+    public class BlockActor
     {
         [DataMember]
         public int BlockValue { get; set; }

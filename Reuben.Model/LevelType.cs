@@ -12,10 +12,10 @@ namespace Reuben.Model
     {
         public LevelType()
         {
-            BlocksAffectedByFire = new byte[8];
-            BlocksAffectedByIce = new byte[8];
-            BlockActors = new byte[8];
-            Blocks = new byte[256];
+            FireBlockActors = new BlockActor[4];
+            IceBlockActors = new BlockActor[4];
+            PSwitchBlockActors = new BlockActor[8];
+            Blocks = new Block[256];
         }
 
         [DataMember]
@@ -28,15 +28,15 @@ namespace Reuben.Model
         public int DefaultPaletteID { get; set; }
 
         [DataMember]
-        public byte[] BlocksAffectedByFire { get; set; }
+        public BlockActor[] FireBlockActors { get; set; }
 
         [DataMember]
-        public byte[] BlocksAffectedByIce { get; set; }
+        public BlockActor[] IceBlockActors { get; set; }
 
         [DataMember]
-        public byte[] BlockActors { get; set; }
+        public BlockActor[] PSwitchBlockActors { get; set; }
 
         [DataMember]
-        public byte[] Blocks { get; set; }
+        public Block[] Blocks { get; set; }
     }
 }

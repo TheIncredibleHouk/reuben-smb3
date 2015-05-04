@@ -29,7 +29,7 @@ namespace Reuben.Controllers
 
         public bool LoadFromFile(string fileName)
         {
-            if(!File.Exists(fileName))
+            if (!File.Exists(fileName))
             {
                 throw new FileNotFoundException();
             }
@@ -51,6 +51,41 @@ namespace Reuben.Controllers
             }
 
             return true;
+        }
+
+        public void AddLevelType(LevelType type)
+        {
+            if(currentProject.LevelTypes.Count > 15)
+            {
+                throw new Exception("Maximum number of level types allowed reached (15).");
+            }
+
+            currentProject.LevelTypes.Add(type);
+        }
+
+        public LevelType GetLevelTypeByID(int id)
+        {
+            return currentProject.LevelTypes[id];
+        }
+
+        public void AddWorldInfo(WorldInfo world)
+        {
+            if(currentProject.Worlds.Count > 9)
+            {
+                throw new Exception("Maximum number of words allowed reached (9).");
+            }
+
+            currentProject.Worlds.Add(world);
+        }
+
+        public WorldInfo GetWorldByNumber(int number)
+        {
+            return currentProject.Worlds.Where(w => w.WorldNumber == number).FirstOrDefault();
+        }
+
+        public WorldInfo GetNoWorld()
+        {
+            return currentProject.NoWorld;
         }
     }
 }
