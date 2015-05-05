@@ -8,15 +8,9 @@ using System.Runtime.Serialization;
 namespace Reuben.Model
 {
     [DataContract]
-    public class LevelInfo
+    public class SpriteData
     {
         [DataMember]
-        public string Name { get; set; }
-
-        [DataMember]
-        public Guid ID { get; set; }
-
-        [DataMember]
-        public string File { get; set; }
+        public List<SpriteDefinition> Definitions { get; set; }
     }
 }

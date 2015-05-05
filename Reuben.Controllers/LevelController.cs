@@ -1,23 +1,53 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 using Reuben.Model;
 
 namespace Reuben.Controllers
 {
     public class LevelController
     {
-        private Project project;
-        public LevelController(Project controller)
+        public LevelData LevelData { get; set; }
+
+        public LevelController()
         {
-            project = controller;
+            LevelData = new LevelData();
         }
 
-        public IEnumerable<string> GetLevelTypeNames()
+        public void Load(string fileName)
         {
-            return project.LevelTypes.Select(l => l.Name);
+            if (!File.Exists(fileName))
+            {
+                throw new FileNotFoundException();
+            }
+
+            LevelData = JsonConvert.DeserializeObject<LevelData>(File.ReadAllText(fileName));
+        }
+
+        public void Save(string fileName)
+        {
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(LevelData));
+        }
+
+        public void SaveLevel(Level level)
+        {
+            LevelInfo info = GetLevelInfoByID(level.ID);
+            File.WriteAllText(info.File, JsonConvert.SerializeObject(level));
+        }
+
+        public Level LoadLevel(LevelInfo info)
+        {
+            return JsonConvert.DeserializeObject<Level>(File.ReadAllText(info.File));
+        }
+
+        public LevelInfo GetLevelInfoByID(Guid id)
+        {
+            return LevelData.Levels.Where(l => l.ID == id).FirstOrDefault();
         }
     }
 }

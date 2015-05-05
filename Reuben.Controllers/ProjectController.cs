@@ -11,39 +11,40 @@ namespace Reuben.Controllers
 {
     public class ProjectController
     {
-        private Project currentProject;
+        public Project Project { get; private set; }
+
         public ProjectController()
         {
         }
 
         public void NewProject(string name)
         {
-            currentProject = new Project();
-            currentProject.Name = name;
+            Project = new Project();
+            Project.Name = name;
         }
 
-        public void AddPalette(Palette palette)
-        {
-            currentProject.Palettes.Add(palette);
-        }
-
-        public bool LoadFromFile(string fileName)
+        public bool Load(string fileName)
         {
             if (!File.Exists(fileName))
             {
                 throw new FileNotFoundException();
             }
 
-            currentProject = JsonConvert.DeserializeObject<Project>(File.ReadAllText(fileName));
-
-            return currentProject != null;
+            Project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(fileName));
+            return Project != null;
         }
 
-        public bool SaveToFile(string fileName)
+        public bool Save(string fileName)
         {
             try
             {
-                File.WriteAllText(fileName, JsonConvert.SerializeObject(currentProject));
+                Project.GraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\graphics.chr";
+                Project.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
+                Project.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
+                Project.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
+                Project.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
+                Project.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
+                File.WriteAllText(fileName, JsonConvert.SerializeObject(Project));
             }
             catch
             {
@@ -51,41 +52,6 @@ namespace Reuben.Controllers
             }
 
             return true;
-        }
-
-        public void AddLevelType(LevelType type)
-        {
-            if(currentProject.LevelTypes.Count > 15)
-            {
-                throw new Exception("Maximum number of level types allowed reached (15).");
-            }
-
-            currentProject.LevelTypes.Add(type);
-        }
-
-        public LevelType GetLevelTypeByID(int id)
-        {
-            return currentProject.LevelTypes[id];
-        }
-
-        public void AddWorldInfo(WorldInfo world)
-        {
-            if(currentProject.Worlds.Count > 9)
-            {
-                throw new Exception("Maximum number of words allowed reached (9).");
-            }
-
-            currentProject.Worlds.Add(world);
-        }
-
-        public WorldInfo GetWorldByNumber(int number)
-        {
-            return currentProject.Worlds.Where(w => w.WorldNumber == number).FirstOrDefault();
-        }
-
-        public WorldInfo GetNoWorld()
-        {
-            return currentProject.NoWorld;
         }
     }
 }

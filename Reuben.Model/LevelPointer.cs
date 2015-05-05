@@ -41,6 +41,6 @@ namespace Reuben.Model
         public bool ExitLevel { get; set; }
 
         [DataMember]
-        public Guid WorldToExitTo { get; set; }
+        public int WorldNumberToExitTo { get; set; }
     }
 }

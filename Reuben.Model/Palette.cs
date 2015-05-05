@@ -17,6 +17,9 @@ namespace Reuben.Model
         }
 
         [DataMember]
+        public Guid ID { get; set; }
+
+        [DataMember]
         public int[] BackgroundValues { get; set; }
 
         [DataMember]

@@ -8,5 +8,8 @@ namespace Reuben.Controllers
 {
     public class SpriteController
     {
+        public SpriteController()
+        {
+        }
     }
 }

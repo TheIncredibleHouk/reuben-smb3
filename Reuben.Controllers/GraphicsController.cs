@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Newtonsoft.Json;
 
 using Reuben.Model;
 using Reuben.NESGraphics;
@@ -13,18 +14,17 @@ namespace Reuben.Controllers
 {
     public class GraphicsController
     {
-        private Color[] colorReference;
-        private List<Palette> palettes;
-        private Tile[] graphicTiles;
+        public GraphicsData GraphicsData { get; private set; }
+        public Tile[] Tiles { get; private set; }
 
         public GraphicsController()
         {
-            colorReference = new Color[0x40];
-            palettes = new List<Palette>();
-            graphicTiles = new Tile[16 * 4 * 256]; // 16 tiles, 4 rows per bank, 256 banks
+            
+            Tiles = new Tile[16 * 4 * 256]; // 16 tiles, 4 rows per bank, 256 banks
+            GraphicsData = new GraphicsData();
         }
 
-        public void LoadGraphicsFromFile(string fileName)
+        public void LoadGraphics(string fileName)
         {
             if (!File.Exists(fileName))
             {
@@ -35,7 +35,7 @@ namespace Reuben.Controllers
 
             fs.Read(graphicsData, 0, (int)fs.Length);
             fs.Close();
-            for (int dataPointer = 0, i = 0; dataPointer < graphicTiles.Length; i++)
+            for (int dataPointer = 0, i = 0; dataPointer < Tiles.Length; i++)
             {
                 for (int j = 0; j < 64; j++)
                 {
@@ -44,29 +44,24 @@ namespace Reuben.Controllers
                     {
                         nextTileChunk[dataPointer] = graphicsData[dataPointer++];
                     }
-                    graphicTiles[i] = new Tile(nextTileChunk);
+                    Tiles[i] = new Tile(nextTileChunk);
                 }
             }
         }
 
+        public void LoadPalettes(string fileName)
+        {
+            GraphicsData = JsonConvert.DeserializeObject<GraphicsData>(File.ReadAllText(fileName));
+        }
+
+        public void SavePalettes(string fileName)
+        {
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(GraphicsData));
+        }
+
         public Tile GetTileByBankIndex(int bank, int index)
         {
-            return graphicTiles[(bank * (16 * 4)) + index];
-        }
-
-        public Color GetColorReferenceByIndex(int index)
-        {
-            if (index < 0 || index > 0x40)
-            {
-                index = 0;
-            }
-
-            return colorReference[index];
-        }
-
-        public IEnumerable<Palette> GetPalettes()
-        {
-            return palettes.AsReadOnly();
+            return Tiles[(bank * (16 * 4)) + index];
         }
     }
 }

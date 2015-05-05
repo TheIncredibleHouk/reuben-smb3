@@ -12,26 +12,25 @@ namespace Reuben.Model
     {
         public Project()
         {
-            LevelTypes = new List<LevelType>(){ };
-            Palettes = new List<Palette>();
-            Worlds = new List<WorldInfo>() { };
-            NoWorld = new WorldInfo();
         }
 
         [DataMember]
-        public List<LevelType> LevelTypes { get; set; }
+        public string GraphicsFile { get; set; }
 
         [DataMember]
-        public List<Palette> Palettes { get; set; }
+        public string PaletteFile { get; set; }
 
         [DataMember]
-        public List<WorldInfo> Worlds { get; set; }
+        public string WorldDataFile { get; set; }
 
         [DataMember]
-        public WorldInfo NoWorld { get; set; }
+        public string LevelDataFile { get; set; }
 
         [DataMember]
-        public List<LevelInfo> Levels { get; set; }
+        public string LevelsDirectory { get; set; }
+
+        [DataMember]
+        public string WorldsDirectory { get; set; }
 
         [DataMember]
         public string Name { get; set; }

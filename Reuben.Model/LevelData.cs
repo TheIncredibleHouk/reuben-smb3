@@ -8,23 +8,18 @@ using System.Runtime.Serialization;
 namespace Reuben.Model
 {
     [DataContract]
-    public class WorldInfo
+    public class LevelData
     {
-        public WorldInfo()
+        public LevelData()
         {
-
+            Levels = new List<LevelInfo>();
+            Types = new List<LevelType>();
         }
 
         [DataMember]
-        public Guid ID { get; set; }
+        public List<LevelInfo> Levels { get; set; }
 
         [DataMember]
-        public string Name { get; set; }
-
-        [DataMember]
-        public int WorldNumber { get; set; }
-
-        [DataMember]
-        public string File { get; set; }
+        public List<LevelType> Types { get; set; }
     }
 }

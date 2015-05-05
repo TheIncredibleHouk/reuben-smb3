@@ -18,10 +18,10 @@ namespace Reuben.Model
         }
 
         [DataMember]
-        public int LevelType { get; set; }
+        public Guid ID { get; set; }
 
         [DataMember]
-        public string Name { get; set; }
+        public int LevelType { get; set; }
 
         [DataMember]
         public int TypeID { get; set; }

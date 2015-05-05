@@ -4,27 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.Drawing;
+
 
 namespace Reuben.Model
 {
     [DataContract]
-    public class WorldInfo
+    public class GraphicsData
     {
-        public WorldInfo()
+        public GraphicsData()
         {
-
+            Colors = new Color[0x40];
+            Palettes = new List<Palette>();
         }
 
         [DataMember]
-        public Guid ID { get; set; }
+        public List<Palette> Palettes { get; set; }
 
         [DataMember]
-        public string Name { get; set; }
+        public Color[] Colors { get; set; }
 
-        [DataMember]
-        public int WorldNumber { get; set; }
-
-        [DataMember]
-        public string File { get; set; }
     }
 }
