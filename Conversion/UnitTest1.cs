@@ -209,6 +209,33 @@ namespace Conversion
 
             worlds.Save(projectController.Project.WorldDataFile);
 
+
+            foreach (var w in Reuben.UI.ProjectManagement.ProjectController.WorldManager.Worlds)
+            {
+                Reuben.Model.World newWorld = new NEW.World();
+                if (!w.IsNoWorld)
+                {
+                    OLD.World oldWorld = new OLD.World();
+                    oldWorld.Load(w);
+                    newWorld.Data = oldWorld.LevelData;
+                    newWorld.GraphicsBankID = oldWorld.GraphicsBank;
+                    newWorld.MusicID = oldWorld.Music;
+                    newWorld.NumberOfScreens = oldWorld.Length;
+                    newWorld.PaletteID = oldWorld.Palette;
+                    newWorld.ID = oldWorld.Guid;
+                    foreach (var p in oldWorld.Pointers)
+                    {
+                        NEW.WorldPointer newPointer = new NEW.WorldPointer();
+                        newPointer.X = p.X;
+                        newPointer.Y = p.Y;
+                        newPointer.LevelID = p.LevelGuid;
+                        newWorld.Pointers.Add(newPointer);
+                    }
+
+                    worlds.SaveWorld(newWorld);
+                }
+            }
+
             //foreach(var d in Reuben.UI.ProjectManagement.ProjectController
         }
     }

@@ -38,5 +38,11 @@ namespace Reuben.Controllers
         {
             return WorldData.Worlds.Where(w => w.ID == id).FirstOrDefault();
         }
+
+        public void SaveWorld(World world)
+        {
+            WorldInfo info = GetWorldByID(world.ID);
+            File.WriteAllText(info.File, JsonConvert.SerializeObject(world));
+        }
     }
 }

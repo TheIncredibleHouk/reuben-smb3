@@ -17,7 +17,7 @@ namespace Reuben.Model
         }
 
         [DataMember]
-        public string Name { get; set; }
+        public Guid ID { get; set; }
 
         [DataMember]
         public int GraphicsBankID { get; set; }
