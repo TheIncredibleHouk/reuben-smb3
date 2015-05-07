@@ -50,6 +50,8 @@
     <Compile Include="LevelType.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="ProjectNode.cs" />
+    <Compile Include="ProjectStructure.cs" />
     <Compile Include="PSwitchBlockActor.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteData.cs" />

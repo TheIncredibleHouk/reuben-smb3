@@ -5,21 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
+
 namespace Reuben.Model
 {
     [DataContract]
-    public class WorldData
+    public class ProjectNode
     {
-        public WorldData()
+        public ProjectNode()
         {
-            Worlds = new List<WorldInfo>();
-            Blocks = new Block[256];
+            Nodes = new List<ProjectNode>();
         }
 
         [DataMember]
-        public Block[] Blocks { get; set; }
+        public Guid ID { get; set; }
 
         [DataMember]
-        public List<WorldInfo> Worlds { get; set; }
+        public string Name { get; set; }
+
+        [DataMember]
+        public List<ProjectNode> Nodes { get; set; }
     }
 }

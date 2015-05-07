@@ -1,8 +1,11 @@
 ﻿<Window x:Class="Reuben.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Dock>
-        <x:PRo
-    </Dock>
+        Title="Project Viewer" Height="400" Width="300">
+    <DockPanel Background="Red" LastChildFill="True">
+        <StackPanel DockPanel.Dock="Bottom" Height="150">
+            
+        </StackPanel>
+        <TreeView DockPanel.Dock="Top" Background="LightBlue"></TreeView>
+    </DockPanel>
 </Window>

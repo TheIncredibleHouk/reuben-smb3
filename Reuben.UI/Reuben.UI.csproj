@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FFB237C4-2008-4400-A840-8BF4544F3615}</ProjectGuid>
+    <ProjectGuid>{184A694F-E94F-48ED-83DB-3BA6DB0AB879}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Reuben.UI</RootNamespace>

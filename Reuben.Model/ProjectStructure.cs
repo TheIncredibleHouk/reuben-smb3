@@ -8,18 +8,14 @@ using System.Runtime.Serialization;
 namespace Reuben.Model
 {
     [DataContract]
-    public class WorldData
+    public class ProjectStructure
     {
-        public WorldData()
+        public ProjectStructure()
         {
-            Worlds = new List<WorldInfo>();
-            Blocks = new Block[256];
+            Nodes = new List<ProjectNode>();
         }
 
         [DataMember]
-        public Block[] Blocks { get; set; }
-
-        [DataMember]
-        public List<WorldInfo> Worlds { get; set; }
+        public List<ProjectNode> Nodes { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -20,6 +21,41 @@ namespace Conversion
 
             ProjectController projectController = new ProjectController();
             projectController.NewProject("Koopa Kingdom Escape");
+
+            List<Guid> processed = new List<Guid>();
+            OLD.WorldInfo noWorld = null;
+            foreach (var wi in OLD.ProjectController.WorldManager.Worlds)
+            {
+                if (wi.IsNoWorld)
+                {
+                    noWorld = wi;
+                    continue;
+                }
+
+                projectController.Project.Structure.Nodes.Add(new NEW.ProjectNode() { Name = wi.Name, ID = wi.WorldGuid });
+            }
+
+            projectController.Project.Structure.Nodes.Add(new NEW.ProjectNode() { Name = "No World", ID = Guid.Empty });
+
+            List<OLD.LevelInfo> needsPostProcessing = new List<OLD.LevelInfo>();
+            foreach (var li in OLD.ProjectController.LevelManager.Levels)
+            {
+                if (li.BonusAreaFor != Guid.Empty)
+                {
+                    needsPostProcessing.Add(li);
+                    continue;
+                }
+
+                var projectNode = projectController.Project.Structure.Nodes.Where(n => n.ID == li.WorldGuid).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last();
+                projectNode.Nodes.Add(new NEW.ProjectNode() { Name = li.Name, ID = li.LevelGuid });
+            }
+
+            foreach (var li in needsPostProcessing)
+            {
+                ((projectController.Project.Structure.Nodes.Where(n => n.ID == li.WorldGuid).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last()).Nodes.Where(n => n.ID == li.BonusAreaFor).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last()).Nodes.Add(new NEW.ProjectNode() { Name = li.Name, ID = li.LevelGuid });
+            }
+
+
             projectController.Save(@"F:\ROM Hacking\Mario Adventure 3\Mario Adventure 3 Project\Koopa Kingdom Escape.json");
 
             int index = 0;
@@ -184,12 +220,7 @@ namespace Conversion
                     newInfo.File = projectController.Project.WorldsDirectory + "\\" + newInfo.Name + ".json";
                     newInfo.ID = w.WorldGuid;
                     worlds.WorldData.Worlds.Add(newInfo);
-                    worlds.WorldData.WorldLevelTable[newInfo.ID] = new System.Collections.Generic.List<Guid>();
-                }
 
-                foreach (var l in Reuben.UI.ProjectManagement.ProjectController.LevelManager.Levels.Where(lv => lv.WorldGuid == w.WorldGuid))
-                {
-                    worlds.WorldData.WorldLevelTable[w.IsNoWorld ? Guid.Empty : newInfo.ID].Add(l.LevelGuid);
                 }
             }
 

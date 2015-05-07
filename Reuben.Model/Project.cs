@@ -12,6 +12,7 @@ namespace Reuben.Model
     {
         public Project()
         {
+            Structure = new ProjectStructure();
         }
 
         [DataMember]
@@ -37,5 +38,8 @@ namespace Reuben.Model
 
         [DataMember]
         public string RomFile { get; set; }
+
+        [DataMember]
+        public ProjectStructure Structure { get; set; }
     }
 }
