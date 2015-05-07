@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,14 +15,14 @@ using System.Windows.Shapes;
 
 namespace Reuben.UI
 {
-  /// <summary>
-  /// Interaction logic for AppView.xaml
-  /// </summary>
-  public partial class AppView : UserControl
-  {
-    public AppView()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-      InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
-  }
 }
