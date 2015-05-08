@@ -35,3 +35,6 @@ C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Prompt.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Confirm.resources

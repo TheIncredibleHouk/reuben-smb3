@@ -31,6 +31,12 @@ namespace Reuben.Controllers
             }
 
             Project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(fileName));
+            Project.GraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\graphics.chr";
+            Project.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
+            Project.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
+            Project.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
+            Project.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
+            Project.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
             return Project != null;
         }
 

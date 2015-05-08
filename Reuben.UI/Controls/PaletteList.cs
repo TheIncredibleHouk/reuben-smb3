@@ -66,5 +66,25 @@ namespace Reuben.UI.Controls
             this.Items.AddRange(Palettes.Select(s => new PaletteView(s, ColorReference)).ToArray());
             this.EndUpdate();
         }
+
+        public Palette SelectedPalette
+        {
+            get
+            {
+                if(this.SelectedIndex < 0 || this.SelectedIndex > Palettes.Count - 1)
+                {
+                    return null;
+                }
+
+                return Palettes[this.SelectedIndex];
+            }
+            set
+            {
+                if (Palettes != null)
+                {
+                    this.SelectedIndex = Palettes.IndexOf(value);
+                }
+            }
+        }
     }
 }

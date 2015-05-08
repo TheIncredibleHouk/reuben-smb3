@@ -56,9 +56,28 @@ namespace Reuben.UI.Controls
             gfx.FillRectangle(brush, rect);
         }
 
+        private Point selectionPoint;
+        public Point SelectionPoint
+        {
+            get
+            {
+                return selectionPoint;
+            }
+            set
+            {
+                selectionPoint = value;
+                Invalidate();
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawImage(buffer, 0, 0);
+            if(selectionPoint != null)
+            {
+                e.Graphics.DrawRectangle(Pens.Red, SelectionPoint.X, selectionPoint.Y, 15, 15);
+                e.Graphics.DrawRectangle(Pens.White, SelectionPoint.X + 1, selectionPoint.Y + 1, 13, 13);
+            }
         }
     }
 }

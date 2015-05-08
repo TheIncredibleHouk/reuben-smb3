@@ -14,6 +14,7 @@ namespace Reuben.Model
         {
             BackgroundValues = new int[16];
             SpriteValues = new int[16];
+            ID = Guid.NewGuid();
         }
 
         [DataMember]

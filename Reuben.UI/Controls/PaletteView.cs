@@ -42,7 +42,7 @@ namespace Reuben.UI.Controls
         }
         
 
-        private void UpdateAll()
+        public void UpdateAll()
         {
             using (Graphics gfx = Graphics.FromImage(buffer))
             {

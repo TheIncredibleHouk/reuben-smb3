@@ -17,6 +17,7 @@ namespace Reuben.Controllers
         public GraphicsData GraphicsData { get; private set; }
         public Tile[] Tiles { get; private set; }
 
+        private string lastFile;
         public GraphicsController()
         {
             
@@ -51,7 +52,13 @@ namespace Reuben.Controllers
 
         public void LoadPalettes(string fileName)
         {
+            lastFile = fileName;
             GraphicsData = JsonConvert.DeserializeObject<GraphicsData>(File.ReadAllText(fileName));
+        }
+
+        public void SavePalettes()
+        {
+            SavePalettes(lastFile);
         }
 
         public void SavePalettes(string fileName)
