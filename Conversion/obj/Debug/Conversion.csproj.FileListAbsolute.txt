@@ -14,3 +14,19 @@ F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Graphics.pdb
 F:\ROM Hacking\Reuben\Conversion\bin\Debug\Newtonsoft.Json.xml
 F:\ROM Hacking\Reuben\Conversion\obj\Debug\Conversion.dll
 F:\ROM Hacking\Reuben\Conversion\obj\Debug\Conversion.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Conversion.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Conversion.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Daiz.Library.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Daiz.NES.Reuben.ProjectManagement.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Controllers.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Model.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Graphics.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Daiz.NES.Reuben.ProjectManagement.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Controllers.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Model.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Graphics.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Personal\Reuben\Conversion\obj\Debug\Conversion.csprojResolveAssemblyReference.cache
+C:\Projects\Personal\Reuben\Conversion\obj\Debug\Conversion.dll
+C:\Projects\Personal\Reuben\Conversion\obj\Debug\Conversion.pdb

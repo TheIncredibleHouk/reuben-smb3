@@ -16,3 +16,21 @@ F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Model.pdb
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe.config
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csprojResolveAssemblyReference.cache
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.ProjectView.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Main.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Properties.Resources.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csproj.GenerateResource.Cache
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.UI.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.Controllers.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.Model.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.Controllers.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.Model.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb

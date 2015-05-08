@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\PaletteView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ProjectView.cs">
       <SubType>UserControl</SubType>
     </Compile>

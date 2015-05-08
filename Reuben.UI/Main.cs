@@ -20,24 +20,5 @@ namespace Reuben.UI
         {
             InitializeComponent();
         }
-
-        ProjectController mainProject = new ProjectController();
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "JSON File (*.json)|*json|All Files|*";
-            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if(!mainProject.Load(openDialog.FileName))
-                {
-                    MessageBox.Show("Unable to load " + openDialog.FileName + ". Please verify the file is a proper Reuben project file.");
-                }
-                else
-                {
-                    projectView.SetProjectController(mainProject);
-                    projectView.RefreshTreeView();
-                }
-            }
-        }
     }
 }
