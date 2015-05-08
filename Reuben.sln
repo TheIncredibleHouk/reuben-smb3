@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reuben.Controllers", "Reube
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conversion", "Conversion\Conversion.csproj", "{1C2808F3-3791-4B53-AFD8-C7A5D967936E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reuben.UI", "Reuben.UI\Reuben.UI.csproj", "{184A694F-E94F-48ED-83DB-3BA6DB0AB879}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reuben.UI", "Reuben.UI\Reuben.UI.csproj", "{D64BDEC4-28E1-4E9F-BBD0-9EDFAF469AAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +45,10 @@ Global
 		{1C2808F3-3791-4B53-AFD8-C7A5D967936E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C2808F3-3791-4B53-AFD8-C7A5D967936E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C2808F3-3791-4B53-AFD8-C7A5D967936E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{184A694F-E94F-48ED-83DB-3BA6DB0AB879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{184A694F-E94F-48ED-83DB-3BA6DB0AB879}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{184A694F-E94F-48ED-83DB-3BA6DB0AB879}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{184A694F-E94F-48ED-83DB-3BA6DB0AB879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D64BDEC4-28E1-4E9F-BBD0-9EDFAF469AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64BDEC4-28E1-4E9F-BBD0-9EDFAF469AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64BDEC4-28E1-4E9F-BBD0-9EDFAF469AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64BDEC4-28E1-4E9F-BBD0-9EDFAF469AAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
