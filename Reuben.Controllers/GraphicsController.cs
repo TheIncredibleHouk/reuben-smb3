@@ -25,6 +25,23 @@ namespace Reuben.Controllers
             GraphicsData = new GraphicsData();
         }
 
+        public PatternTable MakePatternTable(List<int> banks)
+        {
+            PatternTable patternTable = new PatternTable();
+            foreach (int bank in banks)
+            {
+                for (int x = 0; x < 16; x++)
+                {
+                    for (int y = 0; y < 4; y++)
+                    {
+                        patternTable.SetTile(x, y, GetTileByBankIndex(bank, y * 4 + x));
+                    }
+                }
+            }
+
+            return patternTable;
+        }
+
         public void LoadGraphics(string fileName)
         {
             if (!File.Exists(fileName))

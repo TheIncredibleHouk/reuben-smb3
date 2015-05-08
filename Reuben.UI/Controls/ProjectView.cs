@@ -18,6 +18,7 @@ namespace Reuben.UI.Controls
     {
         ProjectController projectController;
         GraphicsController graphicsController;
+        LevelController levelController;
 
         public ProjectView()
         {
@@ -27,9 +28,14 @@ namespace Reuben.UI.Controls
         public void SetProjectController(ProjectController controller)
         {
             projectController = controller;
+
             graphicsController = new GraphicsController();
             graphicsController.LoadGraphics(controller.Project.GraphicsFile);
             graphicsController.LoadPalettes(controller.Project.PaletteFile);
+
+            levelController = new LevelController();
+            levelController.Load(controller.Project.LevelDataFile);
+
             savebutton.Enabled =
             palettesButton.Enabled =
             blocksButton.Enabled =
@@ -94,6 +100,20 @@ namespace Reuben.UI.Controls
             PaletteManager mgr = new PaletteManager();
             mgr.SetGraphicsController(graphicsController);
             mgr.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (projectTree.SelectedNode != null)
+            {
+                LevelInfo levelInfo = levelController.LevelData.Levels.Where(l => l.ID == (Guid) projectTree.SelectedNode.Tag).FirstOrDefault();
+                if(levelInfo != null)
+                {     
+                    LevelEditor editor = new LevelEditor();
+                    editor.Show();
+                    editor.LoadLevel(levelInfo, levelController, graphicsController);
+                }
+            }
         }
     }
 }

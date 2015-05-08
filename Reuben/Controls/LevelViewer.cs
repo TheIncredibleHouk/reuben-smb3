@@ -1338,7 +1338,7 @@ namespace Reuben.UI
 
             Rectangle destRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
             Rectangle sourceRect = new Rectangle(e.ClipRectangle.X / Zoom, e.ClipRectangle.Y / Zoom, e.ClipRectangle.Width / Zoom, e.ClipRectangle.Height / Zoom);
-
+            g.DrawImage(backBuffer, sourceRect, sourceRect, GraphicsUnit.Pixel);
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             if (Zoom > 1)

@@ -16,11 +16,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +52,9 @@
     <Compile Include="Controls\ColorView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\LevelViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\PaletteList.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -69,6 +73,12 @@
     </Compile>
     <Compile Include="Forms\Confirm.Designer.cs">
       <DependentUpon>Confirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LevelEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LevelEditor.Designer.cs">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Prompt.cs">
       <SubType>Form</SubType>
@@ -95,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Confirm.resx">
       <DependentUpon>Confirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LevelEditor.resx">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PaletteManager.resx">
       <DependentUpon>PaletteManager.cs</DependentUpon>
