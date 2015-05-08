@@ -12,50 +12,36 @@ using Reuben.Model;
 
 namespace Reuben.UI.Controls
 {
-    public class PaletteView : Control
+    public class ColorView : Control
     {
-        public Palette Palette { get; private set; }
-        public Color[] ColorReference { get; set; }
-
+        private Color[] colorReference;
         private Bitmap buffer;
 
-        public PaletteView()
+        public ColorView()
         {
-            this.Size = new Size(256, 32);
-            buffer = new Bitmap(256, 32);
+            this.Size = new Size(16 * 16, 16 * 4);
+            buffer = new Bitmap(16 *16, 16 * 4);
         }
 
-        public PaletteView(Palette palette, Color[] colors)
+        public void SetColorReference(Color[] colors)
         {
-            this.Size = new Size(256, 32);
-            buffer = new Bitmap(256, 32);
-            Palette = palette;
-            ColorReference = colors;
+            colorReference = colors;
             UpdateAll();
         }
-
-        public void SetPalette(Palette palette)
-        {
-            Palette = palette;
-            UpdateAll();
-            Invalidate();
-        }
-        
 
         private void UpdateAll()
         {
             using (Graphics gfx = Graphics.FromImage(buffer))
             {
-                if (ColorReference == null || Palette == null)
+                if (colorReference == null)
                 {
                     gfx.Clear(Color.Black);
                     return;
                 }
 
-                for (int i = 0; i < 16; i++)
+                for (int i = 0; i < 0x40; i++)
                 {
-                    DrawColor(gfx, ColorReference[Palette.BackgroundValues[i]], i, 0);
-                    DrawColor(gfx, ColorReference[Palette.SpriteValues[i]], i, 1);
+                    DrawColor(gfx, colorReference[i], (int) i % 0x10, (int) i / 0x10);
                 }
             }
         }
@@ -73,11 +59,6 @@ namespace Reuben.UI.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawImage(buffer, 0, 0);
-        }
-
-        public Bitmap GetImage()
-        {
-            return buffer;
         }
     }
 }

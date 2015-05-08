@@ -56,7 +56,7 @@ namespace Conversion
             }
 
 
-            projectController.Save(@"F:\ROM Hacking\Mario Adventure 3\Mario Adventure 3 Project\Koopa Kingdom Escape.json");
+            projectController.Save(@"F:\ROM Hacking\Reuben\Mario Adventure 3 Project\Koopa Kingdom Escape.json");
 
             int index = 0;
             GraphicsController graphics = new GraphicsController();
@@ -83,6 +83,8 @@ namespace Conversion
                         p.SpriteValues[index++] = (byte)r[i, j];
                     }
                 }
+                p.Name = r.Name;
+                p.ID = r.Guid;
                 graphics.GraphicsData.Palettes.Add(p);
             }
 

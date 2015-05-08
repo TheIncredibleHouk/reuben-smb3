@@ -46,7 +46,7 @@
             this.ClientSize = new System.Drawing.Size(279, 362);
             this.Controls.Add(this.projectView);
             this.Name = "Main";
-            this.Text = "Form1";
+            this.Text = "Reuben";
             this.ResumeLayout(false);
 
         }

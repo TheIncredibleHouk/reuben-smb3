@@ -42,7 +42,7 @@ namespace Reuben.Controllers
                     byte[] nextTileChunk = new byte[16];
                     for (int k = 0; k < 16; k++)
                     {
-                        nextTileChunk[dataPointer] = graphicsData[dataPointer++];
+                        nextTileChunk[k] = graphicsData[dataPointer++];
                     }
                     Tiles[i] = new Tile(nextTileChunk);
                 }

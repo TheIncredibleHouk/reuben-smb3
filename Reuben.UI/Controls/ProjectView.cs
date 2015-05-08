@@ -16,6 +16,7 @@ namespace Reuben.UI.Controls
     public partial class ProjectView : UserControl
     {
         ProjectController projectController;
+        GraphicsController graphicsController;
 
         public ProjectView()
         {
@@ -25,7 +26,19 @@ namespace Reuben.UI.Controls
         public void SetProjectController(ProjectController controller)
         {
             projectController = controller;
-            savebutton.Enabled = true;
+            graphicsController = new GraphicsController();
+            graphicsController.LoadGraphics(controller.Project.GraphicsFile);
+            graphicsController.LoadPalettes(controller.Project.PaletteFile);
+            savebutton.Enabled =
+            palettesButton.Enabled =
+            blocksButton.Enabled =
+            spritesButton.Enabled =
+            asmButton.Enabled = 
+            textButton.Enabled = 
+            defaultsButton.Enabled =
+            projectName.Enabled = true;
+
+            projectName.Text = controller.Project.Name;
         }
 
         public void RefreshTreeView()
@@ -73,6 +86,13 @@ namespace Reuben.UI.Controls
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFile();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PaletteManager mgr = new PaletteManager();
+            mgr.SetGraphicsController(graphicsController);
+            mgr.ShowDialog();
         }
     }
 }
