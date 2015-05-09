@@ -18,7 +18,7 @@ namespace Reuben.UI.Controls
         {
             this.DoubleBuffered = true;
             this.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.DropDownHeight = 200;
+            this.DropDownHeight = 400;
             this.DropDownWidth = 256 + 32;
             this.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
 
@@ -56,14 +56,29 @@ namespace Reuben.UI.Controls
             
         }
 
-        public List<Palette> Palettes { get; set; }
+        private List<Palette> palettes;
+        public List<Palette> Palettes
+        {
+            get
+            {
+                return palettes;
+            }
+            set
+            {
+                palettes = value;
+                UpdateList();
+            }
+        }
         public Color[] ColorReference { get; set; }
 
         public void UpdateList()
         {
             this.BeginUpdate();
             this.Items.Clear();
-            this.Items.AddRange(Palettes.Select(s => new PaletteView(s, ColorReference)).ToArray());
+            if (palettes != null)
+            {
+                this.Items.AddRange(Palettes.Select(s => new PaletteView(s, ColorReference)).ToArray());
+            }
             this.EndUpdate();
         }
 

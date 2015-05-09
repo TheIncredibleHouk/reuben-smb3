@@ -30,7 +30,6 @@ namespace Reuben.UI
             paletteList.Palettes = localPalettes;
             selectedPalette.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
             colorView.SetColorReference(paletteList.ColorReference);
-            paletteList.UpdateList();
         }
 
         private void allPalettes_SelectedIndexChanged(object sender, EventArgs e)

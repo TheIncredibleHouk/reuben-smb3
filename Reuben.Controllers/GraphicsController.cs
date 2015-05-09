@@ -20,7 +20,7 @@ namespace Reuben.Controllers
         private string lastFile;
         public GraphicsController()
         {
-            
+
             Tiles = new Tile[16 * 4 * 256]; // 16 tiles, 4 rows per bank, 256 banks
             GraphicsData = new GraphicsData();
         }
@@ -28,15 +28,17 @@ namespace Reuben.Controllers
         public PatternTable MakePatternTable(List<int> banks)
         {
             PatternTable patternTable = new PatternTable();
+            int patternSection = 0;
             foreach (int bank in banks)
             {
-                for (int x = 0; x < 16; x++)
+                for (int row = 0; row < 4; row++)
                 {
-                    for (int y = 0; y < 4; y++)
+                    for (int col = 0; col < 16; col++)
                     {
-                        patternTable.SetTile(x, y, GetTileByBankIndex(bank, y * 4 + x));
+                        patternTable.SetTile(col, row + (patternSection * 4), GetTileByBankIndex(bank, (row * 16 + col)));
                     }
                 }
+                patternSection++;
             }
 
             return patternTable;
@@ -53,18 +55,17 @@ namespace Reuben.Controllers
 
             fs.Read(graphicsData, 0, (int)fs.Length);
             fs.Close();
-            for (int dataPointer = 0, i = 0; dataPointer < Tiles.Length; i++)
+            int dataPointer = 0;
+            for (int i = 0; i < Tiles.Length; i++)
             {
-                for (int j = 0; j < 64; j++)
+                byte[] nextTileChunk = new byte[16];
+                for (int k = 0; k < 16; k++)
                 {
-                    byte[] nextTileChunk = new byte[16];
-                    for (int k = 0; k < 16; k++)
-                    {
-                        nextTileChunk[k] = graphicsData[dataPointer++];
-                    }
-                    Tiles[i] = new Tile(nextTileChunk);
+                    nextTileChunk[k] = graphicsData[dataPointer++];
                 }
+                Tiles[i] = new Tile(nextTileChunk);
             }
+
         }
 
         public void LoadPalettes(string fileName)

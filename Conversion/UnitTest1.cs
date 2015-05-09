@@ -173,7 +173,7 @@ namespace Conversion
                 newLevel.MusicID = oldLevel.Music;
                 newLevel.NumberOfScreens = oldLevel.Length;
                 newLevel.PaletteEffectType = oldLevel.PaletteEffect;
-                newLevel.PaletteID = oldLevel.Palette;
+                newLevel.PaletteID = OLD.ProjectController.PaletteManager.Palettes[oldLevel.Palette].Guid;
                 foreach (var oldPointer in oldLevel.Pointers)
                 {
                     var newPointer = new NEW.LevelPointer();

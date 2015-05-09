@@ -160,10 +160,6 @@
             // allPalettes
             // 
             this.paletteList.ColorReference = null;
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 200;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
             this.paletteList.FormattingEnabled = true;
             this.paletteList.IntegralHeight = false;
             this.paletteList.Location = new System.Drawing.Point(13, 34);

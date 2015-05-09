@@ -66,7 +66,7 @@ namespace Reuben.Model
         public int PaletteEffectType { get; set; }
 
         [DataMember]
-        public int PaletteID { get; set; }
+        public Guid PaletteID { get; set; }
 
         [DataMember]
         public int MiscByte1 { get; set; }

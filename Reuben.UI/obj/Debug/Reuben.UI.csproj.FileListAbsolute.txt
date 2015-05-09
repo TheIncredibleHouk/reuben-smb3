@@ -39,3 +39,6 @@ C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resourc
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Prompt.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Confirm.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.LevelEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Confirm.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.LevelEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Prompt.resources
