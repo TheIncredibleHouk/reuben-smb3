@@ -280,7 +280,7 @@ namespace Reuben.UI
                 {
                     Rectangle drawRectangle = Sprites.GetBounds(s);
                     e.Graphics.DrawRectangle(Pens.White, drawRectangle);
-                    e.Graphics.DrawRectangle(Pens.Red, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
+                    e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
                 }
 
                 blockUpdating = spriteUpdating = false;
