@@ -17,11 +17,11 @@ namespace Reuben.UI
     public partial class Map16Editor : Form
     {
         private PatternTable currentTable;
-        private ResourceController resources;
+        private StringController resources;
         private GraphicsController graphics;
         private LevelController levels;
 
-        public void SetResourceController(ResourceController controller)
+        public void SetResourceController(StringController controller)
         {
             resources = controller;
             CmbGraphics1.DataSource = CmbGraphics2.DataSource = resources.GetStringList("graphics");

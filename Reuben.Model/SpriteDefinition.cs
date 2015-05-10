@@ -11,19 +11,13 @@ namespace Reuben.Model
     public class SpriteDefinition
     {
         [DataMember]
-        public List<SpriteInfo> Sprites { get; private set; }
+        public List<SpriteInfo> SpriteInfo { get; private set; }
 
         [DataMember]
         public List<String> PropertyDescriptions { get; set; }
 
         [DataMember]
         public int GameID { get; set; }
-
-        [DataMember]
-        public int Width { get; set; }
-
-        [DataMember]
-        public int Height { get; set; }
 
         [DataMember]
         public string Name { get; set; }
@@ -34,15 +28,10 @@ namespace Reuben.Model
         [DataMember]
         public string Group { get; set; }
 
-        public int LeftDrawBox { get; set; }
-        public int RightDrawBox { get; set; }
-        public int TopDrawBox { get; set; }
-        public int BottomDrawBox { get; set; }
-
 
         public SpriteDefinition()
         {
-            Sprites = new List<SpriteInfo>();
+            SpriteInfo = new List<SpriteInfo>();
             PropertyDescriptions = new List<string>();
         }
     }

@@ -32,7 +32,7 @@ namespace Conversion
                     continue;
                 }
 
-                projectController.Project.Structure.Nodes.Add(new NEW.ProjectNode() { Name = wi.Name, ID = wi.WorldGuid });
+                projectController.Project.Structure.Nodes.Add(new NEW.ProjectNode() { Name = wi.Name, ID = wi.WorldGuid, Type = NEW.NodeType.World });
             }
 
             projectController.Project.Structure.Nodes.Add(new NEW.ProjectNode() { Name = "No World", ID = Guid.Empty });
@@ -47,12 +47,12 @@ namespace Conversion
                 }
 
                 var projectNode = projectController.Project.Structure.Nodes.Where(n => n.ID == li.WorldGuid).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last();
-                projectNode.Nodes.Add(new NEW.ProjectNode() { Name = li.Name, ID = li.LevelGuid });
+                projectNode.Nodes.Add(new NEW.ProjectNode() { Name = li.Name, ID = li.LevelGuid, Type = NEW.NodeType.Level });
             }
 
             foreach (var li in needsPostProcessing)
             {
-                ((projectController.Project.Structure.Nodes.Where(n => n.ID == li.WorldGuid).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last()).Nodes.Where(n => n.ID == li.BonusAreaFor).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last()).Nodes.Add(new NEW.ProjectNode() { Name = li.Name, ID = li.LevelGuid });
+                ((projectController.Project.Structure.Nodes.Where(n => n.ID == li.WorldGuid).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last()).Nodes.Where(n => n.ID == li.BonusAreaFor).FirstOrDefault() ?? projectController.Project.Structure.Nodes.Last()).Nodes.Add(new NEW.ProjectNode() { Type = NEW.NodeType.Level, Name = li.Name, ID = li.LevelGuid });
             }
 
 
@@ -170,7 +170,7 @@ namespace Conversion
                 newLevel.MiscByte1 = oldLevel.MiscByte1;
                 newLevel.MiscByte2 = oldLevel.MiscByte2;
                 newLevel.MiscByte3 = oldLevel.MiscByte3;
-                newLevel.MusicID = oldLevel.Music;
+                newLevel.MusicID = 0;
                 newLevel.NumberOfScreens = oldLevel.Length;
                 newLevel.PaletteEffectType = oldLevel.PaletteEffect;
                 newLevel.PaletteID = OLD.ProjectController.PaletteManager.Palettes[oldLevel.Palette].Guid;
@@ -208,6 +208,35 @@ namespace Conversion
                 newLevel.TypeID = oldLevel.Type;
                 levels.SaveLevel(newLevel);
             }
+            SpriteController sprites = new SpriteController();
+
+            foreach (var p in Reuben.UI.ProjectManagement.ProjectController.SpriteManager.SpriteDefinitions.Values)
+            {
+                NEW.SpriteDefinition def = new NEW.SpriteDefinition();
+                def.Class = p.Class;
+                def.GameID = p.InGameId;
+                def.Group = p.Group;
+                def.Name = p.Name;
+                def.PropertyDescriptions = p.PropertyDescriptions;
+                foreach (var s in p.Sprites)
+                {
+                    NEW.SpriteInfo sp = new NEW.SpriteInfo();
+                    sp.HorizontalFlip = s.HorizontalFlip;
+                    sp.Palette = s.Palette;
+                    sp.Properties = s.Property ?? new List<int>();
+                    sp.Table = s.Table;
+                    sp.Value = s.Value;
+                    sp.VerticalFlip = s.VerticalFlip;
+                    sp.X = s.X;
+                    sp.Y = s.Y;
+                    def.SpriteInfo.Add(sp);
+                }
+
+                sprites.SpriteData.Definitions.Add(def);
+            }
+
+            sprites.Save(projectController.Project.SpriteDataFile);
+
             WorldController worlds = new WorldController();
 
             foreach (var w in Reuben.UI.ProjectManagement.ProjectController.WorldManager.Worlds)

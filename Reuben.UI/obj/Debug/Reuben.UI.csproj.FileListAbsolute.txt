@@ -1,21 +1,3 @@
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csprojResolveAssemblyReference.cache
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.ProjectView.resources
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Main.resources
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Properties.Resources.resources
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csproj.GenerateResource.Cache
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe.config
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.pdb
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Controllers.dll
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.dll
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Model.dll
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.dll
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Controllers.pdb
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.pdb
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Model.pdb
-F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
 C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe.config
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csprojResolveAssemblyReference.cache
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.ProjectView.resources
@@ -34,11 +16,30 @@ C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Reuben.Model.pdb
 C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Prompt.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Confirm.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.LevelEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe.config
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.pdb
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.dll
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Controllers.dll
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.dll
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Model.dll
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Controllers.pdb
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.pdb
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Model.pdb
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csprojResolveAssemblyReference.cache
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.ProjectView.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Confirm.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.LevelEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Prompt.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Main.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Properties.Resources.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.StringManager.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csproj.GenerateResource.Cache
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb

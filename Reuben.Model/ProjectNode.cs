@@ -17,6 +17,9 @@ namespace Reuben.Model
         }
 
         [DataMember]
+        public NodeType Type { get; set; }
+
+        [DataMember]
         public Guid ID { get; set; }
 
         [DataMember]

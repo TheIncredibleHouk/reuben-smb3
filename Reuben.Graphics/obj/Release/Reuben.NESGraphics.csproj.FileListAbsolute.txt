@@ -1,0 +1,4 @@
+F:\ROM Hacking\Reuben\Reuben.Graphics\bin\Release\Reuben.Graphics.dll
+F:\ROM Hacking\Reuben\Reuben.Graphics\bin\Release\Reuben.Graphics.pdb
+F:\ROM Hacking\Reuben\Reuben.Graphics\obj\Release\Reuben.Graphics.dll
+F:\ROM Hacking\Reuben\Reuben.Graphics\obj\Release\Reuben.Graphics.pdb

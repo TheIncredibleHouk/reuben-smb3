@@ -1,10 +1,10 @@
-F:\ROM Hacking\Reuben\Reuben.Graphics\bin\Debug\Reuben.Graphics.dll
-F:\ROM Hacking\Reuben\Reuben.Graphics\bin\Debug\Reuben.Graphics.pdb
-F:\ROM Hacking\Reuben\Reuben.Graphics\obj\Debug\Reuben.Graphics.dll
-F:\ROM Hacking\Reuben\Reuben.Graphics\obj\Debug\Reuben.Graphics.pdb
 C:\Projects\Personal\Reuben\Reuben.Graphics\bin\Debug\Reuben.Graphics.dll
 C:\Projects\Personal\Reuben\Reuben.Graphics\bin\Debug\Reuben.Graphics.pdb
 C:\Projects\Personal\Reuben\Reuben.Graphics\obj\Debug\Reuben.NESGraphics.csprojResolveAssemblyReference.cache
 C:\Projects\Personal\Reuben\Reuben.Graphics\obj\Debug\Reuben.Graphics.dll
 C:\Projects\Personal\Reuben\Reuben.Graphics\obj\Debug\Reuben.Graphics.pdb
+F:\ROM Hacking\Reuben\Reuben.Graphics\bin\Debug\Reuben.Graphics.dll
+F:\ROM Hacking\Reuben\Reuben.Graphics\bin\Debug\Reuben.Graphics.pdb
 F:\ROM Hacking\Reuben\Reuben.Graphics\obj\Debug\Reuben.NESGraphics.csprojResolveAssemblyReference.cache
+F:\ROM Hacking\Reuben\Reuben.Graphics\obj\Debug\Reuben.Graphics.dll
+F:\ROM Hacking\Reuben\Reuben.Graphics\obj\Debug\Reuben.Graphics.pdb

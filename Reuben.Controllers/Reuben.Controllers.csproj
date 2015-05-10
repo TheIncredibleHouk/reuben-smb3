@@ -48,7 +48,7 @@
     <Compile Include="LevelController.cs" />
     <Compile Include="ProjectController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourceController.cs" />
+    <Compile Include="StringController.cs" />
     <Compile Include="SpriteController.cs" />
     <Compile Include="WorldController.cs" />
   </ItemGroup>

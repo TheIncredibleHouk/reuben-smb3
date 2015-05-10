@@ -30,9 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lvlHost = new System.Windows.Forms.Panel();
-            this.levelViewer = new Reuben.UI.LevelViewer();
-            this.musicList = new System.Windows.Forms.Panel();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
+            this.panel23 = new System.Windows.Forms.Panel();
             this.effectList = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.animationList = new System.Windows.Forms.ComboBox();
@@ -46,12 +44,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.screenList = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.musicList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.levelViewer = new Reuben.UI.LevelViewer();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
-            this.musicList.SuspendLayout();
+            this.panel23.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -73,56 +73,29 @@
             this.lvlHost.Size = new System.Drawing.Size(0, 432);
             this.lvlHost.TabIndex = 0;
             // 
-            // levelViewer
+            // panel23
             // 
-            this.levelViewer.ColorReference = null;
-            this.levelViewer.Graphics = null;
-            this.levelViewer.Level = null;
-            this.levelViewer.LevelType = null;
-            this.levelViewer.Location = new System.Drawing.Point(0, 0);
-            this.levelViewer.Name = "levelViewer";
-            this.levelViewer.Palette = null;
-            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
-            this.levelViewer.TabIndex = 0;
-            this.levelViewer.Text = "levelViewer1";
-            // 
-            // musicList
-            // 
-            this.musicList.Controls.Add(this.paletteList);
-            this.musicList.Controls.Add(this.effectList);
-            this.musicList.Controls.Add(this.label8);
-            this.musicList.Controls.Add(this.animationList);
-            this.musicList.Controls.Add(this.label7);
-            this.musicList.Controls.Add(this.label6);
-            this.musicList.Controls.Add(this.graphicsList);
-            this.musicList.Controls.Add(this.label5);
-            this.musicList.Controls.Add(this.levelTypeList);
-            this.musicList.Controls.Add(this.label4);
-            this.musicList.Controls.Add(this.scrollList);
-            this.musicList.Controls.Add(this.label3);
-            this.musicList.Controls.Add(this.screenList);
-            this.musicList.Controls.Add(this.label2);
-            this.musicList.Controls.Add(this.comboBox1);
-            this.musicList.Controls.Add(this.label1);
-            this.musicList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.musicList.Location = new System.Drawing.Point(0, 0);
-            this.musicList.Name = "musicList";
-            this.musicList.Size = new System.Drawing.Size(692, 114);
-            this.musicList.TabIndex = 1;
-            // 
-            // paletteList
-            // 
-            this.paletteList.ColorReference = null;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(156, 84);
-            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.Palettes = null;
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(132, 21);
-            this.paletteList.TabIndex = 16;
-            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
+            this.panel23.Controls.Add(this.paletteList);
+            this.panel23.Controls.Add(this.effectList);
+            this.panel23.Controls.Add(this.label8);
+            this.panel23.Controls.Add(this.animationList);
+            this.panel23.Controls.Add(this.label7);
+            this.panel23.Controls.Add(this.label6);
+            this.panel23.Controls.Add(this.graphicsList);
+            this.panel23.Controls.Add(this.label5);
+            this.panel23.Controls.Add(this.levelTypeList);
+            this.panel23.Controls.Add(this.label4);
+            this.panel23.Controls.Add(this.scrollList);
+            this.panel23.Controls.Add(this.label3);
+            this.panel23.Controls.Add(this.screenList);
+            this.panel23.Controls.Add(this.label2);
+            this.panel23.Controls.Add(this.musicList);
+            this.panel23.Controls.Add(this.label1);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel23.Location = new System.Drawing.Point(0, 0);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(692, 114);
+            this.panel23.TabIndex = 1;
             // 
             // effectList
             // 
@@ -254,15 +227,15 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Screens";
             // 
-            // comboBox1
+            // musicList
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(16, 34);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(132, 21);
-            this.comboBox1.TabIndex = 1;
+            this.musicList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.musicList.FormattingEnabled = true;
+            this.musicList.Location = new System.Drawing.Point(16, 34);
+            this.musicList.Margin = new System.Windows.Forms.Padding(4);
+            this.musicList.Name = "musicList";
+            this.musicList.Size = new System.Drawing.Size(132, 21);
+            this.musicList.TabIndex = 1;
             // 
             // label1
             // 
@@ -282,6 +255,41 @@
             this.panel3.Size = new System.Drawing.Size(692, 186);
             this.panel3.TabIndex = 2;
             // 
+            // levelViewer
+            // 
+            this.levelViewer.ColorReference = null;
+            this.levelViewer.Graphics = null;
+            this.levelViewer.Level = null;
+            this.levelViewer.LevelType = null;
+            this.levelViewer.Location = new System.Drawing.Point(0, 0);
+            this.levelViewer.Name = "levelViewer";
+            this.levelViewer.Palette = null;
+            this.levelViewer.PatternTable = null;
+            this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
+            this.levelViewer.Sprites = null;
+            this.levelViewer.TabIndex = 0;
+            this.levelViewer.Text = "levelViewer1";
+            this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
+            // 
+            // paletteList
+            // 
+            this.paletteList.ColorReference = null;
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(156, 84);
+            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.Palettes = null;
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(132, 21);
+            this.paletteList.TabIndex = 16;
+            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,13 +297,13 @@
             this.ClientSize = new System.Drawing.Size(692, 679);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.musicList);
+            this.Controls.Add(this.panel23);
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
             this.panel1.ResumeLayout(false);
             this.lvlHost.ResumeLayout(false);
-            this.musicList.ResumeLayout(false);
-            this.musicList.PerformLayout();
+            this.panel23.ResumeLayout(false);
+            this.panel23.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -305,7 +313,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel lvlHost;
         private LevelViewer levelViewer;
-        private System.Windows.Forms.Panel musicList;
+        private System.Windows.Forms.Panel panel23;
         private Controls.PaletteList paletteList;
         private System.Windows.Forms.ComboBox effectList;
         private System.Windows.Forms.Label label8;
@@ -320,7 +328,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox screenList;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox musicList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
 

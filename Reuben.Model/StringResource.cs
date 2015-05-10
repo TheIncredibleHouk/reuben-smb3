@@ -11,9 +11,6 @@ namespace Reuben.Model
     public class StringResource
     {
         [DataMember]
-        public Dictionary<string, string> ResourceTable { get; set; }
-
-        [DataMember]
         public Dictionary<string, List<string>> ResourceLists { get; set; }
     }
 }

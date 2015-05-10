@@ -1,0 +1,11 @@
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Reuben.Controllers.dll
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Reuben.Controllers.pdb
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Newtonsoft.Json.dll
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Reuben.Graphics.dll
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Reuben.Model.dll
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Reuben.Graphics.pdb
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Reuben.Model.pdb
+F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Newtonsoft.Json.xml
+F:\ROM Hacking\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.csprojResolveAssemblyReference.cache
+F:\ROM Hacking\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.dll
+F:\ROM Hacking\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.pdb

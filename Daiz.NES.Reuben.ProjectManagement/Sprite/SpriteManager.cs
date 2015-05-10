@@ -12,7 +12,7 @@ namespace Reuben.UI.ProjectManagement
     public class SpriteManager
     {
         public Dictionary<int, Dictionary<string, List<SpriteDefinition>>> SpriteGroups { get; private set; }
-        private Dictionary<int, SpriteDefinition> SpriteDefinitions;
+        public Dictionary<int, SpriteDefinition> SpriteDefinitions;
         public Dictionary<int, SpriteDefinition> MapSpriteDefinitions { get; private set; }
 
         public SpriteManager()

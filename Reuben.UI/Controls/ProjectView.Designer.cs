@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.projectTree = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -43,24 +44,33 @@
             this.spritesButton = new System.Windows.Forms.Button();
             this.blocksButton = new System.Windows.Forms.Button();
             this.palettesButton = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.levelContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.worldContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.editWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.levelContext.SuspendLayout();
+            this.worldContext.SuspendLayout();
             this.SuspendLayout();
             // 
             // projectTree
             // 
+            this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.projectTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.projectTree.Location = new System.Drawing.Point(0, 32);
+            this.projectTree.Location = new System.Drawing.Point(0, 0);
             this.projectTree.Name = "projectTree";
-            this.projectTree.Size = new System.Drawing.Size(263, 225);
+            this.projectTree.Size = new System.Drawing.Size(263, 257);
             this.projectTree.TabIndex = 0;
+            this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
             // 
             // panel1
             // 
@@ -133,6 +143,7 @@
             // 
             // projectName
             // 
+            this.projectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.projectName.Enabled = false;
             this.projectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.projectName.Location = new System.Drawing.Point(10, 29);
@@ -178,6 +189,7 @@
             this.textButton.TabIndex = 4;
             this.textButton.Text = "Text";
             this.textButton.UseVisualStyleBackColor = true;
+            this.textButton.Click += new System.EventHandler(this.textButton_Click);
             // 
             // asmButton
             // 
@@ -225,55 +237,78 @@
             this.palettesButton.UseVisualStyleBackColor = true;
             this.palettesButton.Click += new System.EventHandler(this.button2_Click);
             // 
-            // panel2
+            // levelContext
             // 
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(263, 32);
-            this.panel2.TabIndex = 2;
+            this.levelContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openLevelToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.openToolStripMenuItem,
+            this.deleteLevelToolStripMenuItem});
+            this.levelContext.Name = "levelContext";
+            this.levelContext.Size = new System.Drawing.Size(138, 76);
             // 
-            // button2
+            // openLevelToolStripMenuItem
             // 
-            this.button2.Location = new System.Drawing.Point(4, 4);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "New";
-            this.button2.UseVisualStyleBackColor = true;
+            this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
+            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.openLevelToolStripMenuItem.Text = "Open Level";
+            this.openLevelToolStripMenuItem.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
             // 
-            // button3
+            // toolStripSeparator1
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(87, 4);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Open";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(134, 6);
             // 
-            // button4
+            // openToolStripMenuItem
             // 
-            this.button4.Location = new System.Drawing.Point(170, 4);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.openToolStripMenuItem.Text = "New Level";
+            // 
+            // deleteLevelToolStripMenuItem
+            // 
+            this.deleteLevelToolStripMenuItem.Name = "deleteLevelToolStripMenuItem";
+            this.deleteLevelToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.deleteLevelToolStripMenuItem.Text = "Delete Level";
+            // 
+            // worldContext
+            // 
+            this.worldContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openWorldToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.editWorldToolStripMenuItem,
+            this.deleteWorldToolStripMenuItem});
+            this.worldContext.Name = "worldContext";
+            this.worldContext.Size = new System.Drawing.Size(143, 76);
+            // 
+            // openWorldToolStripMenuItem
+            // 
+            this.openWorldToolStripMenuItem.Name = "openWorldToolStripMenuItem";
+            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.openWorldToolStripMenuItem.Text = "Open World";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(139, 6);
+            // 
+            // editWorldToolStripMenuItem
+            // 
+            this.editWorldToolStripMenuItem.Name = "editWorldToolStripMenuItem";
+            this.editWorldToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.editWorldToolStripMenuItem.Text = "Edit World";
+            // 
+            // deleteWorldToolStripMenuItem
+            // 
+            this.deleteWorldToolStripMenuItem.Name = "deleteWorldToolStripMenuItem";
+            this.deleteWorldToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.deleteWorldToolStripMenuItem.Text = "Delete World";
             // 
             // ProjectView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.projectTree);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "ProjectView";
             this.Size = new System.Drawing.Size(263, 368);
@@ -282,7 +317,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.levelContext.ResumeLayout(false);
+            this.worldContext.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -304,9 +340,15 @@
         private System.Windows.Forms.Button spritesButton;
         private System.Windows.Forms.Button blocksButton;
         private System.Windows.Forms.Button palettesButton;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ContextMenuStrip levelContext;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteLevelToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip worldContext;
+        private System.Windows.Forms.ToolStripMenuItem openWorldToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editWorldToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteWorldToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

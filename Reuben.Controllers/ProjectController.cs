@@ -35,6 +35,8 @@ namespace Reuben.Controllers
             Project.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
             Project.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
             Project.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
+            Project.StringDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\strings.json";
+            Project.SpriteDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\sprites.json";
             Project.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
             Project.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
             return Project != null;
@@ -48,6 +50,8 @@ namespace Reuben.Controllers
                 Project.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
                 Project.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
                 Project.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
+                Project.StringDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\strings.json";
+                Project.SpriteDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\sprites.json";
                 Project.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
                 Project.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
                 File.WriteAllText(fileName, JsonConvert.SerializeObject(Project));

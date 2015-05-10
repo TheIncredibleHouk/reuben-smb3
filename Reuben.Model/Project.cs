@@ -28,6 +28,12 @@ namespace Reuben.Model
         public string LevelDataFile { get; set; }
 
         [DataMember]
+        public string StringDataFile { get; set; }
+
+        [DataMember]
+        public string SpriteDataFile { get; set; }
+
+        [DataMember]
         public string LevelsDirectory { get; set; }
 
         [DataMember]

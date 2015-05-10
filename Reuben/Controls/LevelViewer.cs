@@ -607,7 +607,7 @@ namespace Reuben.UI
             {
                 SpriteDefinition def = ProjectController.SpriteManager.GetDefinition(s.InGameID);
                 if (def == null) continue;
-                foreach (var sp in def.Sprites)
+                foreach (var sp in def.SpriteInfo)
                 {
                     if (sp.Table < 0 && !_ShowSpecial) continue;
                     if (sp.Property != null && !sp.Property.Contains(s.Property)) continue;

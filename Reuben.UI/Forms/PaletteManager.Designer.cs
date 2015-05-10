@@ -128,6 +128,7 @@
             // 
             // paletteName
             // 
+            this.paletteName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.paletteName.Enabled = false;
             this.paletteName.Location = new System.Drawing.Point(13, 264);
             this.paletteName.Margin = new System.Windows.Forms.Padding(4);
@@ -157,14 +158,18 @@
             this.colorView.Text = "colorView1";
             this.colorView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colorView_MouseClick);
             // 
-            // allPalettes
+            // paletteList
             // 
             this.paletteList.ColorReference = null;
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
             this.paletteList.FormattingEnabled = true;
             this.paletteList.IntegralHeight = false;
             this.paletteList.Location = new System.Drawing.Point(13, 34);
             this.paletteList.Margin = new System.Windows.Forms.Padding(4);
-            this.paletteList.Name = "allPalettes";
+            this.paletteList.Name = "paletteList";
             this.paletteList.Palettes = null;
             this.paletteList.SelectedPalette = null;
             this.paletteList.Size = new System.Drawing.Size(256, 21);

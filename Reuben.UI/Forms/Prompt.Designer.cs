@@ -70,10 +70,11 @@
             // 
             // textValue
             // 
+            this.textValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textValue.Location = new System.Drawing.Point(13, 34);
             this.textValue.Margin = new System.Windows.Forms.Padding(4);
             this.textValue.Name = "textValue";
-            this.textValue.Size = new System.Drawing.Size(255, 20);
+            this.textValue.Size = new System.Drawing.Size(258, 20);
             this.textValue.TabIndex = 3;
             // 
             // Prompt

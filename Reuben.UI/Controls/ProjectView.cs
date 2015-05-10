@@ -19,6 +19,8 @@ namespace Reuben.UI.Controls
         ProjectController projectController;
         GraphicsController graphicsController;
         LevelController levelController;
+        StringController resourceController;
+        SpriteController spriteController;
 
         public ProjectView()
         {
@@ -35,6 +37,12 @@ namespace Reuben.UI.Controls
 
             levelController = new LevelController();
             levelController.Load(controller.Project.LevelDataFile);
+
+            resourceController = new StringController();
+            resourceController.Load(controller.Project.StringDataFile);
+
+            spriteController = new SpriteController();
+            spriteController.Load(controller.Project.SpriteDataFile);
 
             savebutton.Enabled =
             palettesButton.Enabled =
@@ -61,7 +69,7 @@ namespace Reuben.UI.Controls
 
         public void AddNode(TreeNodeCollection nodes, ProjectNode currentNode)
         {
-            var newNode = new TreeNode() { Text = currentNode.Name, Tag = currentNode.ID };
+            var newNode = new TreeNode() { Text = currentNode.Name, Tag = currentNode };
             nodes.Add(newNode);
             foreach (var n in currentNode.Nodes)
             {
@@ -102,18 +110,34 @@ namespace Reuben.UI.Controls
             mgr.ShowDialog();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void projectTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (projectTree.SelectedNode != null)
+            if(projectTree.SelectedNode != null && ((ProjectNode)projectTree.SelectedNode.Tag).Type == NodeType.Level)
             {
-                LevelInfo levelInfo = levelController.LevelData.Levels.Where(l => l.ID == (Guid) projectTree.SelectedNode.Tag).FirstOrDefault();
-                if(levelInfo != null)
-                {     
-                    LevelEditor editor = new LevelEditor();
-                    editor.Show();
-                    editor.LoadLevel(levelInfo, levelController, graphicsController);
-                }
+                projectTree.ContextMenuStrip = levelContext;
             }
+            else
+            {
+                projectTree.ContextMenuStrip = worldContext;
+            }
+        }
+
+        private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LevelInfo levelInfo = levelController.LevelData.Levels.Where(l => l.ID == ((ProjectNode) projectTree.SelectedNode.Tag).ID).FirstOrDefault();
+            if (levelInfo != null)
+            {
+                LevelEditor editor = new LevelEditor();
+                editor.Show();
+                editor.LoadLevel(levelInfo, levelController, graphicsController, resourceController, spriteController);
+            }
+        }
+
+        private void textButton_Click(object sender, EventArgs e)
+        {
+            StringManager mgr = new StringManager();
+            mgr.Show();
+            mgr.SetResources(resourceController);
         }
     }
 }

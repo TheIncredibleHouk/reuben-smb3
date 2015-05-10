@@ -10,6 +10,11 @@ namespace Reuben.Model
     [DataContract]
     public class SpriteData
     {
+        public SpriteData()
+        {
+            Definitions = new List<SpriteDefinition>();
+        }
+
         [DataMember]
         public List<SpriteDefinition> Definitions { get; set; }
     }
