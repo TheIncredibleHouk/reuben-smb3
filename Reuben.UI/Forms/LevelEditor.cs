@@ -36,7 +36,7 @@ namespace Reuben.UI
             levelInfo = info;
             levelViewer.Level = level = levels.LoadLevel(info.File);
             levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
-            
+
             paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
 
             sprites = spriteController;
@@ -56,10 +56,14 @@ namespace Reuben.UI
 
             strings = stringController;
 
-            
+
 
             musicList.DataSource = strings.GetStringList("music");
             musicList.SelectedIndex = level.MusicID;
+
+            screenList.DataSource = strings.GetStringList("screens");
+            screenList.SelectedIndex = level.NumberOfScreens - 1;
+
             UpdatePalette();
         }
 
@@ -76,11 +80,85 @@ namespace Reuben.UI
             UpdatePalette();
         }
 
+        private int mouseStartX = 0;
+        private int mouseStartY = 0;
         private void levelViewer_MouseDown(object sender, MouseEventArgs e)
         {
-            int col = e.X / 16;
-            int row = e.Y / 16;
-            levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, 15, 15);
+            if (editTypeTab.SelectedIndex == 0)
+            {
+                int col = e.X / 16;
+                int row = e.Y / 16;
+                mouseStartX = e.X;
+                mouseStartY = e.Y;
+                levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, 15, 15);
+                mouseDrag = true;
+            }
+            else if (editTypeTab.SelectedIndex == 1)
+            {
+                if (!mouseDragged)
+                {
+
+                    List<Tuple<Sprite, Rectangle>> boundCache = sprites.GetBounds(level.Sprites).ToList();
+                    Sprite selectedSprite = boundCache.Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
+
+                    if (selectedSprite != null)
+                    {
+                        if (levelViewer.SelectedSprites.Count > 0)
+                        {
+
+                            List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
+                            affectedArea.Add(sprites.GetBounds(selectedSprite)); // add the new sprite to the list
+                            Rectangle updateArea = affectedArea.Combine();
+                            levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
+                        }
+                        else
+                        {
+                            Rectangle updateArea = sprites.GetBounds(selectedSprite);
+                            levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
+                        }
+
+                        levelViewer.SelectedSprites.Clear();
+                        levelViewer.SelectedSprites.Add(selectedSprite);
+                    }
+
+                }
+            }
+        }
+
+        private bool mouseDrag = false;
+        private bool mouseDragged = false;
+
+        private void levelViewer_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (editTypeTab.SelectedIndex == 0)
+            {
+                if (mouseDrag)
+                {
+                    mouseDragged = true;
+                    int minX = Math.Min(e.X, mouseStartX);
+                    int minY = Math.Min(e.Y, mouseStartY);
+                    int maxX = Math.Max(e.X, mouseStartX);
+                    int maxY = Math.Max(e.Y, mouseStartY);
+
+                    var col = Math.Max(minX, 0) / 16;
+                    var row = Math.Max(minY, 0) / 16;
+                    var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
+                    var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
+                    levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
+                }
+            }
+        }
+
+        private void levelViewer_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (editTypeTab.SelectedIndex == 0)
+            {
+                mouseDrag = false;
+            }
+            else if (editTypeTab.SelectedIndex == 1)
+            {
+
+            }
         }
     }
 }

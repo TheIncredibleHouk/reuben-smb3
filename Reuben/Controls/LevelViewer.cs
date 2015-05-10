@@ -38,6 +38,7 @@ namespace Reuben.UI
             backBuffer = new Bitmap(bufferWidth, bufferHeight, PixelFormat.Format32bppArgb);
             spriteBuffer = new Bitmap(bufferWidth, bufferHeight, PixelFormat.Format32bppArgb);
             compositeBuffer = new Bitmap(bufferWidth, bufferHeight, PixelFormat.Format32bppArgb);
+            this.DoubleBuffered = true;
         }
 
         public void SetGraphicsController(GraphicsController controller)

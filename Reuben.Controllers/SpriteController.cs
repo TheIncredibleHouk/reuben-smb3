@@ -33,9 +33,14 @@ namespace Reuben.Controllers
             boundCache = new Dictionary<int, Rectangle>();
             foreach (SpriteDefinition definition in SpriteData.Definitions)
             {
-                int minX = 0, maxX = 0, minY = 0, maxY = 0;
+                int minX = 1000, maxX = 0, minY = 1000, maxY = 0;
                 foreach (SpriteInfo info in definition.SpriteInfo)
                 {
+                    if (info.Table == -1)
+                    {
+                        continue;
+                    }
+
                     if (info.X < minX)
                     {
                         minX = info.X;
@@ -51,13 +56,13 @@ namespace Reuben.Controllers
                         minY = info.Y;
                     }
 
-                    if (info.X + 8 > maxX)
+                    if (info.Y + 16 > maxY)
                     {
-                        maxY = info.Y + 8;
+                        maxY = info.Y + 16;
                     }
-
-                    boundCache[definition.GameID] = new Rectangle(minX, minY, maxX - minX, maxY - maxY);
                 }
+
+                boundCache[definition.GameID] = new Rectangle(minX, minY, maxX - minX, maxY - minY);
             }
         }
 
@@ -79,7 +84,12 @@ namespace Reuben.Controllers
         public Rectangle GetBounds(Sprite sprite)
         {
             Rectangle r = boundCache[sprite.ObjectID];
-            return new Rectangle(r.X + sprite.X, r.Y + sprite.Y, r.Width, r.Height);
+            return new Rectangle(r.X + sprite.X * 16, r.Y + sprite.Y * 16, r.Width, r.Height);
+        }
+
+        public IEnumerable<Tuple<Sprite, Rectangle>> GetBounds(IEnumerable<Sprite> sprites)
+        {
+            return sprites.Select(s => new Tuple<Sprite, Rectangle>(s, GetBounds(s)));
         }
     }
 }

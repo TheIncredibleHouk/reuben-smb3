@@ -30,7 +30,9 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lvlHost = new System.Windows.Forms.Panel();
+            this.levelViewer = new Reuben.UI.LevelViewer();
             this.panel23 = new System.Windows.Forms.Panel();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.effectList = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.animationList = new System.Windows.Forms.ComboBox();
@@ -47,11 +49,15 @@
             this.musicList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.levelViewer = new Reuben.UI.LevelViewer();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
+            this.editTypeTab = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
             this.panel23.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.editTypeTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -61,7 +67,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 114);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(692, 379);
+            this.panel1.Size = new System.Drawing.Size(692, 402);
             this.panel1.TabIndex = 0;
             // 
             // lvlHost
@@ -72,6 +78,25 @@
             this.lvlHost.Name = "lvlHost";
             this.lvlHost.Size = new System.Drawing.Size(0, 432);
             this.lvlHost.TabIndex = 0;
+            // 
+            // levelViewer
+            // 
+            this.levelViewer.ColorReference = null;
+            this.levelViewer.Graphics = null;
+            this.levelViewer.Level = null;
+            this.levelViewer.LevelType = null;
+            this.levelViewer.Location = new System.Drawing.Point(0, 0);
+            this.levelViewer.Name = "levelViewer";
+            this.levelViewer.Palette = null;
+            this.levelViewer.PatternTable = null;
+            this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
+            this.levelViewer.Sprites = null;
+            this.levelViewer.TabIndex = 0;
+            this.levelViewer.Text = "levelViewer1";
+            this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
+            this.levelViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseMove);
+            this.levelViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseUp);
             // 
             // panel23
             // 
@@ -96,6 +121,24 @@
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(692, 114);
             this.panel23.TabIndex = 1;
+            // 
+            // paletteList
+            // 
+            this.paletteList.ColorReference = null;
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(156, 84);
+            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.Palettes = null;
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(132, 21);
+            this.paletteList.TabIndex = 16;
+            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
             // 
             // effectList
             // 
@@ -249,46 +292,54 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.editTypeTab);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 493);
+            this.panel3.Location = new System.Drawing.Point(0, 516);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(692, 186);
+            this.panel3.Size = new System.Drawing.Size(692, 163);
             this.panel3.TabIndex = 2;
             // 
-            // levelViewer
+            // editTypeTab
             // 
-            this.levelViewer.ColorReference = null;
-            this.levelViewer.Graphics = null;
-            this.levelViewer.Level = null;
-            this.levelViewer.LevelType = null;
-            this.levelViewer.Location = new System.Drawing.Point(0, 0);
-            this.levelViewer.Name = "levelViewer";
-            this.levelViewer.Palette = null;
-            this.levelViewer.PatternTable = null;
-            this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
-            this.levelViewer.Sprites = null;
-            this.levelViewer.TabIndex = 0;
-            this.levelViewer.Text = "levelViewer1";
-            this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
+            this.editTypeTab.Controls.Add(this.tabPage1);
+            this.editTypeTab.Controls.Add(this.tabPage2);
+            this.editTypeTab.Controls.Add(this.tabPage3);
+            this.editTypeTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editTypeTab.Location = new System.Drawing.Point(0, 0);
+            this.editTypeTab.Margin = new System.Windows.Forms.Padding(4);
+            this.editTypeTab.Name = "editTypeTab";
+            this.editTypeTab.SelectedIndex = 0;
+            this.editTypeTab.Size = new System.Drawing.Size(692, 163);
+            this.editTypeTab.TabIndex = 0;
             // 
-            // paletteList
+            // tabPage1
             // 
-            this.paletteList.ColorReference = null;
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(156, 84);
-            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.Palettes = null;
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(132, 21);
-            this.paletteList.TabIndex = 16;
-            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(684, 137);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Blocks";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(684, 137);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Sprites";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(684, 160);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Pointers";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // LevelEditor
             // 
@@ -304,6 +355,8 @@
             this.lvlHost.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             this.panel23.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.editTypeTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -331,6 +384,10 @@
         private System.Windows.Forms.ComboBox musicList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TabControl editTypeTab;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
 
     }
 }

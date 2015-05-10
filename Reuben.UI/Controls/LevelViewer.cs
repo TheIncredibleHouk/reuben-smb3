@@ -29,6 +29,7 @@ namespace Reuben.UI
             bgBuffer = new Bitmap(levelBitmapWidth, levelBitmapHeight, PixelFormat.Format24bppRgb);
             spriteBuffer = new Bitmap(levelBitmapWidth, levelBitmapHeight, PixelFormat.Format32bppArgb);
             compositeBuffer = new Bitmap(levelBitmapWidth, levelBitmapHeight, PixelFormat.Format32bppArgb);
+            SelectedSprites = new List<Sprite>();
             this.Width = levelBitmapWidth;
             this.Height = levelBitmapHeight;
         }
@@ -136,11 +137,12 @@ namespace Reuben.UI
             spriteUpdating = true;
         }
 
+        public List<Sprite> SelectedSprites { get; set; }
         private void UpdateSpriteArea(int row, int column, int width, int height)
         {
-            Rectangle area = new Rectangle(column * 16, row * 16, width, height);
-            IEnumerable<Tuple<Sprite, Rectangle>> spriteBounds = Level.Sprites.Select(s => new Tuple<Sprite, Rectangle>(s, Sprites.GetBounds(s))); // generate all bound areas
-            IEnumerable<Tuple<Sprite, Rectangle>> affectedSprites = spriteBounds.Where(r => r.Item2.IntersectsWith(area)); // find the ones that are affected by the update
+            Rectangle area = new Rectangle(column * 16, row * 16, width * 16, height * 16);
+            List<Tuple<Sprite, Rectangle>> spriteBounds = Sprites.GetBounds(Level.Sprites).ToList(); // generate all bound areas
+            List<Tuple<Sprite, Rectangle>> affectedSprites = spriteBounds.Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
             int minX = Math.Max(spriteBounds.Min(r => r.Item2.X), 0);
             int maxX = Math.Min(spriteBounds.Max(r => r.Item2.X), levelBitmapWidth);
             int minY = Math.Max(spriteBounds.Min(r => r.Item2.Y), 0);
@@ -271,7 +273,14 @@ namespace Reuben.UI
                 if (SelectionRectangle != null)
                 {
                     e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
-                    e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, selectionRectangle.Height - 2));
+                    e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                }
+
+                foreach (Sprite s in SelectedSprites)
+                {
+                    Rectangle drawRectangle = Sprites.GetBounds(s);
+                    e.Graphics.DrawRectangle(Pens.White, drawRectangle);
+                    e.Graphics.DrawRectangle(Pens.Red, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
                 }
 
                 blockUpdating = spriteUpdating = false;
@@ -288,6 +297,11 @@ namespace Reuben.UI
             }
             set
             {
+                if (selectionRectangle == value)
+                {
+                    return;
+                }
+
                 var oldRectangle = selectionRectangle;
                 selectionRectangle = value;
                 var minX = Math.Min(oldRectangle.Left, selectionRectangle.Left);
