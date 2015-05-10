@@ -127,6 +127,7 @@ namespace Reuben.UI.Controls
             LevelInfo levelInfo = levelController.LevelData.Levels.Where(l => l.ID == ((ProjectNode) projectTree.SelectedNode.Tag).ID).FirstOrDefault();
             if (levelInfo != null)
             {
+                levelInfo.File = projectController.Project.LevelsDirectory + "\\" + levelInfo.Name + ".json";
                 LevelEditor editor = new LevelEditor();
                 editor.Show();
                 editor.LoadLevel(levelInfo, levelController, graphicsController, resourceController, spriteController);

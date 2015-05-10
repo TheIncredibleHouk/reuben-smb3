@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Linq;
 
 using Reuben.Model;
 
@@ -40,9 +41,9 @@ namespace Reuben.Controllers
             File.WriteAllText(info.File, JsonConvert.SerializeObject(level));
         }
 
-        public Level LoadLevel(LevelInfo info)
+        public Level LoadLevel(string fileName)
         {
-            return JsonConvert.DeserializeObject<Level>(File.ReadAllText(info.File));
+            return JsonConvert.DeserializeObject<Level>(File.ReadAllText(fileName));
         }
 
         public LevelInfo GetLevelInfoByID(Guid id)

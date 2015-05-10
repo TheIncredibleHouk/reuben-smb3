@@ -34,7 +34,7 @@ namespace Reuben.UI
             graphics = graphicsController;
 
             levelInfo = info;
-            levelViewer.Level = level = levels.LoadLevel(levelInfo);
+            levelViewer.Level = level = levels.LoadLevel(info.File);
             levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
             
             paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;

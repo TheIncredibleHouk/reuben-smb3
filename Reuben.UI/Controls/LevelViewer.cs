@@ -294,7 +294,7 @@ namespace Reuben.UI
                 var minY = Math.Min(oldRectangle.Top, selectionRectangle.Top);
                 var maxX = Math.Max(oldRectangle.Right, selectionRectangle.Right);
                 var maxY = Math.Max(oldRectangle.Bottom, selectionRectangle.Bottom);
-                Invalidate(new Rectangle(minX, minX, maxX - minX, maxY - minY));
+                Invalidate(new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1));
             }
         }
 
