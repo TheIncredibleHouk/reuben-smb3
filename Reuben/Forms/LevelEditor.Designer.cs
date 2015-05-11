@@ -757,8 +757,7 @@
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseMove);
             // 
             // BlvLeft
-            // 
-            this.BlvLeft.CurrentBlock = null;
+            //
             this.BlvLeft.Location = new System.Drawing.Point(186, 293);
             this.BlvLeft.Name = "BlvLeft";
             this.BlvLeft.Size = new System.Drawing.Size(32, 32);

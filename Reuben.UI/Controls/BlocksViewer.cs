@@ -20,7 +20,7 @@ namespace Reuben.UI.Controls
 
         public BlocksViewer()
         {
-            buffer = new Bitmap(1024, 64, PixelFormat.Format24bppRgb);
+            buffer = new Bitmap(256, 256, PixelFormat.Format24bppRgb);
             this.Width = buffer.Width;
             this.Height = buffer.Height;
         }
@@ -111,20 +111,18 @@ namespace Reuben.UI.Controls
             }
 
             BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
-            for (var section = 0; section < 4; section++)
+
+            for (var row = 0; row < 16; row++)
             {
-                for (var row = 0; row < 4; row++)
+                for (var col = 0; col < 16; col++)
                 {
-                    for (var col = 0; col < 16; col++)
-                    {
-                        Block block = blocks[section * 32 + row * 16 + col];
-                        int x = section * 256 + col * 16;
-                        int y = row * 16;
-                        Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), x, y, quickBGReference[section], data);
-                        Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[section], data);
-                        Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[section], data);
-                        Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[section], data);
-                    }
+                    Block block = blocks[row * 16 + col];
+                    int x = col * 16;
+                    int y = row * 16;
+                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), x, y, quickBGReference[row / 4], data);
+                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
+                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
+                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
                 }
             }
             buffer.UnlockBits(data);

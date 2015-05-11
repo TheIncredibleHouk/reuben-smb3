@@ -122,7 +122,7 @@ namespace Reuben.UI
             }
 
             UpdateBGArea(column, row, width, height);
-            Rectangle area = new Rectangle(row * 16, column * 16, width * 16, height * 16);
+            Rectangle area = new Rectangle(column * 16, row * 16, width * 16, height * 16);
             UpdateLayers(area);
             Invalidate(area);
             blockUpdating = true;
@@ -181,14 +181,14 @@ namespace Reuben.UI
             spriteBuffer.UnlockBits(bitmap);
         }
 
-        private void UpdateBGArea(int row, int column, int width, int height)
+        private void UpdateBGArea( int column, int row, int width, int height)
         {
             BitmapData bitmap = bgBuffer.LockBits(new Rectangle(0, 0, bgBuffer.Width, bgBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
-            for (var x = column; x < width; x++)
+            for (int x = 0, i = column; x < width; i++, x++)
             {
-                for (var y = row; y < height; y++)
+                for (int y = 0, j = row; y < height; j++, y++)
                 {
-                    DrawBGBlock(x, y, bitmap);
+                    DrawBGBlock(i, j, bitmap);
                 }
             }
 

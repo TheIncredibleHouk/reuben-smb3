@@ -28,6 +28,8 @@ namespace Reuben.UI
         private StringController strings;
         private SpriteController sprites;
 
+        private BlockSelector blockSelector;
+
         public void LoadLevel(LevelInfo info, LevelController levelController, GraphicsController graphicsController, StringController stringController, SpriteController spriteController)
         {
             levels = levelController;
@@ -36,6 +38,7 @@ namespace Reuben.UI
             levelInfo = info;
             levelViewer.Level = level = levels.LoadLevel(info.File);
             levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
+            blockSelector = new BlockSelector();
 
             blockSelector.ColorReference = paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
 
@@ -68,7 +71,10 @@ namespace Reuben.UI
             screenList.SelectedIndex = level.NumberOfScreens - 1;
 
             UpdatePalette();
+
+            blockSelector.Show();
             blockSelector.UpdateGraphics();
+            MoveBlockSelector();
         }
 
         public void UpdatePalette()
@@ -153,19 +159,36 @@ namespace Reuben.UI
             }
         }
 
+        private List<DataChange> undoBuffer = new List<DataChange>();
         private void levelViewer_MouseUp(object sender, MouseEventArgs e)
         {
             if (editTypeTab.SelectedIndex == 0)
             {
-                if (levelViewer.SelectionRectangle.Width == 15 &&
-                    levelViewer.SelectionRectangle.Height == 15)
+                int minX = Math.Min(e.X, mouseStartX);
+                int minY = Math.Min(e.Y, mouseStartY);
+                int maxX = Math.Max(e.X, mouseStartX);
+                int maxY = Math.Max(e.Y, mouseStartY);
+
+                var col = Math.Max(minX, 0) / 16;
+                var row = Math.Max(minY, 0) / 16;
+                var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
+                var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
+
+                DataChange change = new DataChange();
+                change.Column = col;
+                change.Row = row;
+                change.Data = new byte[width, height];
+                for (int i = 0; i < width; i++)
                 {
-                    int col = (e.X / 16);
-                    int row = (e.Y / 16);
-                    level.Data[col, row] = (byte) selectedTile;
-                    levelViewer.UpdateBlockDisplay(col, row, 1, 1);
+                    for (int j = 0; j < height; j++)
+                    {
+                        change.Data[i, j] = level.Data[col + i, row + j];
+                        level.Data[col + i, row + j] = (byte)blockSelector.SelectedBlock;
+                    }
                 }
 
+                undoBuffer.Add(change);
+                levelViewer.UpdateBlockDisplay(col, row, width, height);
                 mouseDrag = false;
             }
             else if (editTypeTab.SelectedIndex == 1)
@@ -174,13 +197,55 @@ namespace Reuben.UI
             }
         }
 
-        private int selectedTile;
-        private void blockSelector_MouseDown(object sender, MouseEventArgs e)
+        private void MoveBlockSelector()
         {
-            int col = (e.X / 16) * 16;
-            int row = (e.Y / 16) * 16;
-            blockSelector.SelectionRectangle = new Rectangle(col, row, 15, 15);
-            selectedTile = ((e.X  / 16) % 16) + (((e.X / 16) / 256) * 0x40) + (e.Y / 16);
+            if (blockSelector != null)
+            {
+                blockSelector.Location = new Point(this.Location.X - blockSelector.Width, this.Location.Y + 146);
+            }
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            blockSelector.Close();
+            base.OnClosed(e);
+        }
+
+        private void LevelEditor_Move(object sender, EventArgs e)
+        {
+            MoveBlockSelector();
+        }
+
+        private void Undo()
+        {
+            if (undoBuffer.Count > 0)
+            {
+                DataChange change = undoBuffer.Last();
+                int width = change.Data.GetLength(0), height = change.Data.GetLength(1);
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                    {
+                        level.Data[i + change.Column, j + change.Row] = change.Data[i, j];
+                    }
+                }
+
+                levelViewer.UpdateBlockDisplay(change.Column, change.Row, width, height);
+
+                undoBuffer.Remove(change);
+            }
+        }
+
+        private void LevelEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control)
+            {
+                switch(e.KeyCode)
+                {
+                    case Keys.Z:
+                        Undo();
+                        break;
+                }
+            }
         }
 
     }
