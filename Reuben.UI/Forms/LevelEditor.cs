@@ -37,17 +37,20 @@ namespace Reuben.UI
             levelViewer.Level = level = levels.LoadLevel(info.File);
             levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
 
-            paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
+            blockSelector.ColorReference = paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
 
             sprites = spriteController;
 
             levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
-            levelViewer.PatternTable = graphics.MakePatternTable(new List<int>() { level.GraphicsID, level.GraphicsID + 1, 0xD0, 0xD1 });
+            blockSelector.PatternTable = levelViewer.PatternTable = graphics.MakePatternTable(new List<int>() { level.GraphicsID, level.GraphicsID + 1, 0xD0, 0xD1 });
             levelViewer.Sprites = sprites;
             levelViewer.Sprites = sprites;
             levelViewer.Graphics = graphics;
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
             levelViewer.UpdateSpriteDisplay(0, 0, 16 * 15, 0x1B);
+
+            blockSelector.BlockList = levelViewer.LevelType.Blocks;
+
 
             lvlHost.Width = level.NumberOfScreens * 16 * 16;
 
@@ -65,11 +68,12 @@ namespace Reuben.UI
             screenList.SelectedIndex = level.NumberOfScreens - 1;
 
             UpdatePalette();
+            blockSelector.UpdateGraphics();
         }
 
         public void UpdatePalette()
         {
-            levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+            blockSelector.Palette = levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
             levelViewer.UpdateSpriteDisplay(0, 0, 16 * 15, 0x1B);
         }
@@ -153,6 +157,15 @@ namespace Reuben.UI
         {
             if (editTypeTab.SelectedIndex == 0)
             {
+                if (levelViewer.SelectionRectangle.Width == 15 &&
+                    levelViewer.SelectionRectangle.Height == 15)
+                {
+                    int col = (e.X / 16);
+                    int row = (e.Y / 16);
+                    level.Data[col, row] = (byte) selectedTile;
+                    levelViewer.UpdateBlockDisplay(col, row, 1, 1);
+                }
+
                 mouseDrag = false;
             }
             else if (editTypeTab.SelectedIndex == 1)
@@ -160,5 +173,15 @@ namespace Reuben.UI
 
             }
         }
+
+        private int selectedTile;
+        private void blockSelector_MouseDown(object sender, MouseEventArgs e)
+        {
+            int col = (e.X / 16) * 16;
+            int row = (e.Y / 16) * 16;
+            blockSelector.SelectionRectangle = new Rectangle(col, row, 15, 15);
+            selectedTile = ((e.X  / 16) % 16) + (((e.X / 16) / 256) * 0x40) + (e.Y / 16);
+        }
+
     }
 }

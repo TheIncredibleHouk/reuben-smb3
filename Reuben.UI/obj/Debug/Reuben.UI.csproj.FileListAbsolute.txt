@@ -20,6 +20,7 @@ C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resourc
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Prompt.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Confirm.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.LevelEditor.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.StringManager.resources
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe.config
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.pdb
@@ -43,4 +44,3 @@ F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.StringManager.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csproj.GenerateResource.Cache
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
-C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.StringManager.resources

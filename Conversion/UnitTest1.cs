@@ -104,8 +104,8 @@ namespace Conversion
                 {
                     Reuben.Model.Block b = new Reuben.Model.Block();
                     b.UpperLeft = bd.BlockList[i][0, 0];
-                    b.UpperRight = bd.BlockList[i][0, 1];
-                    b.LowerLeft = bd.BlockList[i][1, 0];
+                    b.UpperRight = bd.BlockList[i][1, 0];
+                    b.LowerLeft = bd.BlockList[i][0, 1];
                     b.LowerRight = bd.BlockList[i][1, 1];
                     b.Description = bd.BlockList[i].Description;
                     b.BlockSolidity = ((int)bd.BlockList[i].BlockProperty & 0xF0);

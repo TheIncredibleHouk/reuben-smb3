@@ -57,6 +57,7 @@ namespace Reuben.UI.Controls
         }
 
         private Point selectionPoint;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public Point SelectionPoint
         {
             get

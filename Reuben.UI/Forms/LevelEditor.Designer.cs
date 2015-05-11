@@ -51,6 +51,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.editTypeTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.blockSelector = new Reuben.UI.Controls.BlocksViewer();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
@@ -58,6 +59,7 @@
             this.panel23.SuspendLayout();
             this.panel3.SuspendLayout();
             this.editTypeTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -81,17 +83,10 @@
             // 
             // levelViewer
             // 
-            this.levelViewer.ColorReference = null;
-            this.levelViewer.Graphics = null;
-            this.levelViewer.Level = null;
-            this.levelViewer.LevelType = null;
             this.levelViewer.Location = new System.Drawing.Point(0, 0);
             this.levelViewer.Name = "levelViewer";
-            this.levelViewer.Palette = null;
-            this.levelViewer.PatternTable = null;
             this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.levelViewer.Size = new System.Drawing.Size(6912, 432);
-            this.levelViewer.Sprites = null;
             this.levelViewer.TabIndex = 0;
             this.levelViewer.Text = "levelViewer1";
             this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
@@ -124,7 +119,6 @@
             // 
             // paletteList
             // 
-            this.paletteList.ColorReference = null;
             this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.paletteList.DropDownHeight = 400;
             this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -134,7 +128,6 @@
             this.paletteList.Location = new System.Drawing.Point(156, 84);
             this.paletteList.Margin = new System.Windows.Forms.Padding(4);
             this.paletteList.Name = "paletteList";
-            this.paletteList.Palettes = null;
             this.paletteList.SelectedPalette = null;
             this.paletteList.Size = new System.Drawing.Size(132, 21);
             this.paletteList.TabIndex = 16;
@@ -314,6 +307,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.blockSelector);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -321,6 +316,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Blocks";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // blockSelector
+            // 
+            this.blockSelector.Location = new System.Drawing.Point(6, 14);
+            this.blockSelector.Name = "blockSelector";
+            this.blockSelector.Size = new System.Drawing.Size(1024, 64);
+            this.blockSelector.TabIndex = 0;
+            this.blockSelector.Text = "blocksViewer1";
+            this.blockSelector.MouseDown += new System.Windows.Forms.MouseEventHandler(this.blockSelector_MouseDown);
             // 
             // tabPage2
             // 
@@ -336,7 +340,7 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(684, 160);
+            this.tabPage3.Size = new System.Drawing.Size(684, 137);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pointers";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -357,6 +361,7 @@
             this.panel23.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.editTypeTab.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -388,6 +393,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
+        private Controls.BlocksViewer blockSelector;
 
     }
 }

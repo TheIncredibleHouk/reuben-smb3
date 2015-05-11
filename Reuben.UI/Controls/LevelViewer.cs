@@ -34,10 +34,15 @@ namespace Reuben.UI
             this.Height = levelBitmapHeight;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public Level Level { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public LevelType LevelType { get; set; }
 
         private Palette palette;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public Palette Palette
         {
             get { return palette; }
@@ -49,6 +54,8 @@ namespace Reuben.UI
         }
 
         private Color[] colorRefrence;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public Color[] ColorReference
         {
             get { return colorRefrence; }
@@ -59,9 +66,13 @@ namespace Reuben.UI
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public PatternTable PatternTable { get; set; }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public GraphicsController Graphics { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public SpriteController Sprites { get; set; }
 
         private Color[][] quickBGReference;
@@ -137,6 +148,7 @@ namespace Reuben.UI
             spriteUpdating = true;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public List<Sprite> SelectedSprites { get; set; }
         private void UpdateSpriteArea(int row, int column, int width, int height)
         {
@@ -183,17 +195,17 @@ namespace Reuben.UI
             bgBuffer.UnlockBits(bitmap);
         }
 
-        private void DrawBGBlock(int row, int column, BitmapData bitmap)
+        private void DrawBGBlock(int column, int row, BitmapData bitmap)
         {
 
-            int blockValue = Level.Data[row, column];
+            int blockValue = Level.Data[column, row];
 
             Block block = LevelType.Blocks[blockValue];
             int paletteIndex = (blockValue & 0xC0) >> 6;
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperLeft), row * 16, column * 16, quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperRight), row * 16, column * 16 + 8, quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerLeft), row * 16 + 8, column * 16, quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerRight), row * 16 + 8, column * 16 + 8, quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperLeft), column * 16, row * 16, quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperRight),column * 16 + 8, row * 16,  quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerLeft),column * 16, row * 16 + 8,  quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerRight), column * 16 + 8, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
         }
 
 

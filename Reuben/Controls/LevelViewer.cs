@@ -162,8 +162,8 @@ namespace Reuben.UI
                     int x = j * 16, y = i * 16;
 
                     RenderTile(currentTable.GetTileByIndex(b.UpperLeft), x, y, PaletteIndex, data);
-                    RenderTile(currentTable.GetTileByIndex(b.UpperRight), x, y + 8, PaletteIndex, data);
-                    RenderTile(currentTable.GetTileByIndex(b.LowerLeft), x + 8, y, PaletteIndex, data);
+                    RenderTile(currentTable.GetTileByIndex(b.UpperRight), x + 8, y, PaletteIndex, data);
+                    RenderTile(currentTable.GetTileByIndex(b.LowerLeft), x, y + 8, PaletteIndex, data);
                     RenderTile(currentTable.GetTileByIndex(b.LowerRight), x + 8, y + 8, PaletteIndex, data);
 
                     //#region draw special overlays

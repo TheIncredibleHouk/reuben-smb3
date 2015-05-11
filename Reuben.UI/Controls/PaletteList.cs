@@ -57,6 +57,7 @@ namespace Reuben.UI.Controls
         }
 
         private List<Palette> palettes;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public List<Palette> Palettes
         {
             get
@@ -69,6 +70,7 @@ namespace Reuben.UI.Controls
                 UpdateList();
             }
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public Color[] ColorReference { get; set; }
 
         public void UpdateList()
