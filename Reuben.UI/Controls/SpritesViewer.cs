@@ -13,45 +13,16 @@ using Reuben.NESGraphics;
 using Reuben.Model;
 using Reuben.Controllers;
 
-namespace Reuben.UI
+namespace Reuben.UI.Controls
 {
-    public class BlocksViewer : Control
+    public class SpritesViewer : Control
     {
         private Bitmap buffer;
 
-        public BlocksViewer()
+        public SpritesViewer()
         {
             drawBoundCache = new List<Tuple<Sprite, Rectangle>>();
             this.Width = 128;
-            this.Height = 256;
-        }
-
-        private PatternTable graphics;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public PatternTable PatternTable
-        {
-            get
-            {
-                return graphics;
-            }
-            set
-            {
-                graphics = value;
-            }
-        }
-
-        private Block[] blocks;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Block[] BlockList
-        {
-            get
-            {
-                return blocks;
-            }
-            set
-            {
-                blocks = value;
-            }
         }
 
         private Color[] colors;
@@ -69,18 +40,18 @@ namespace Reuben.UI
             }
         }
 
-        private GraphicsController gfx;
+        private GraphicsController graphics;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public GraphicsController Graphics
         {
             get
             {
-                return gfx;
+                return graphics;
             }
             set
             {
-                gfx = value;
+                graphics = value;
             }
         }
 
@@ -102,7 +73,7 @@ namespace Reuben.UI
                 {
                     Sprite s = new Sprite();
                     s.X = 0;
-                    s.Y = lastY;
+                    s.Y = lastY / 16;
                     s.ObjectID = def.GameID;
                     Rectangle drawArea = Sprites.GetClipBounds(s);
                     lastY = drawArea.Bottom + 16;
@@ -110,6 +81,7 @@ namespace Reuben.UI
                 }
 
                 buffer = new Bitmap(128, lastY, PixelFormat.Format32bppArgb);
+                this.Height = lastY;
             }
         }
 
@@ -138,7 +110,7 @@ namespace Reuben.UI
 
                     for (int i = 0; i < 16; i++)
                     {
-                        quickSpriteReference[i / 4][i % 4] = ColorReference[Palette.BackgroundValues[i]];
+                        quickSpriteReference[i / 4][i % 4] = ColorReference[Palette.SpriteValues[i]];
                     }
                 }
             }
@@ -148,7 +120,7 @@ namespace Reuben.UI
 
         public void UpdateGraphics()
         {
-            if (colors == null || graphics == null || blocks == null || palette == null)
+            if (colors == null || graphics == null || sprites == null || palette == null)
             {
                 using (Graphics gfx2 = System.Drawing.Graphics.FromImage(buffer))
                 {
@@ -158,7 +130,7 @@ namespace Reuben.UI
                 return;
             }
 
-            BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb);
 
             foreach (var item in drawBoundCache)
             {
@@ -166,6 +138,11 @@ namespace Reuben.UI
             }
 
             buffer.UnlockBits(data);
+
+            foreach(var item in drawBoundCache)
+            {
+
+            }
         }
 
         private void DrawSprite(Sprite sprite, BitmapData bitmap)
@@ -197,8 +174,8 @@ namespace Reuben.UI
                     continue;
                 }
 
-                Tile tile1 = Graphics.GetTileByBankIndex(info.Table, info.Value);
-                Tile tile2 = Graphics.GetTileByBankIndex(info.Table, info.Value + 1);
+                Tile tile1 = Graphics.GetTileByBankIndex(info.Table, info.Value % 0x40);
+                Tile tile2 = Graphics.GetTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
                 if (info.HorizontalFlip && info.VerticalFlip)
                 {
                     Drawer.DrawTileHorizontalVerticalFlipAlpha(tile1, xOffset, yOffset, quickSpriteReference[paletteIndex], bitmap);
@@ -250,11 +227,18 @@ namespace Reuben.UI
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(buffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
-            if (SelectionRectangle != null)
+            if (buffer == null)
             {
-                e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
-                e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                e.Graphics.Clear(Color.Gray);
+            }
+            else
+            {
+                e.Graphics.DrawImage(buffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
+                if (SelectionRectangle != null)
+                {
+                    e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
+                    e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                }
             }
         }
     }

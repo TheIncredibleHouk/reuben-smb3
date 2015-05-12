@@ -28,14 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.sprites = new Reuben.UI.Controls.SpritesViewer();
             this.SuspendLayout();
+            // 
+            // sprites
+            // 
+            this.sprites.Location = new System.Drawing.Point(12, 12);
+            this.sprites.Name = "sprites";
+            this.sprites.Size = new System.Drawing.Size(125, 23);
+            this.sprites.TabIndex = 0;
+            this.sprites.Text = "spritesViewer1";
             // 
             // SpriteSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(254, 256);
             this.ControlBox = false;
+            this.Controls.Add(this.sprites);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SpriteSelector";
             this.Text = "Sprites";
@@ -48,5 +59,7 @@
         }
 
         #endregion
+
+        private Controls.SpritesViewer sprites;
     }
 }

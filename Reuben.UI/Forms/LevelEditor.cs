@@ -42,15 +42,14 @@ namespace Reuben.UI
             blockSelector = new BlockSelector();
             spriteSelector = new SpriteSelector();
 
-            blockSelector.ColorReference = paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
+            spriteSelector.ColorReference = blockSelector.ColorReference = paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
 
-            sprites = spriteController;
+            sprites = spriteSelector.Sprites = spriteController;
 
             levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
             blockSelector.PatternTable = levelViewer.PatternTable = graphics.MakePatternTable(new List<int>() { level.GraphicsID, level.GraphicsID + 1, 0xD0, 0xD1 });
             levelViewer.Sprites = sprites;
-            levelViewer.Sprites = sprites;
-            levelViewer.Graphics = graphics;
+            spriteSelector.Graphics = levelViewer.Graphics = graphics;
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
             levelViewer.UpdateSpriteDisplay(0, 0, 16 * 15, 0x1B);
 
@@ -63,8 +62,6 @@ namespace Reuben.UI
             paletteList.SelectedPalette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
 
             strings = stringController;
-
-
 
             musicList.DataSource = strings.GetStringList("music");
             musicList.SelectedIndex = level.MusicID;
@@ -80,10 +77,11 @@ namespace Reuben.UI
 
         public void UpdatePalette()
         {
-            blockSelector.Palette = levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+            spriteSelector.Palette = blockSelector.Palette = levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
             levelViewer.UpdateSpriteDisplay(0, 0, 16 * 15, 0x1B);
             blockSelector.UpdateGraphics();
+            spriteSelector.UpdateGraphics();
         }
 
         private void paletteList_SelectedIndexChanged(object sender, EventArgs e)

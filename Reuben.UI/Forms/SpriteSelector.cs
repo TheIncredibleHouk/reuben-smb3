@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Reuben.Model;
+using Reuben.Controllers;
+
 namespace Reuben.UI
 {
     public partial class SpriteSelector : Form
@@ -15,6 +18,36 @@ namespace Reuben.UI
         public SpriteSelector()
         {
             InitializeComponent();
+        }
+
+
+        public Color[] ColorReference
+        {
+            get { return sprites.ColorReference; }
+            set { sprites.ColorReference = value; }
+        }
+
+        public Palette Palette
+        {
+            get { return sprites.Palette; }
+            set { sprites.Palette = value; }
+        }
+
+        public SpriteController Sprites
+        {
+            get { return sprites.Sprites; }
+            set { sprites.Sprites = value; }
+        }
+
+        public GraphicsController Graphics
+        {
+            get { return sprites.Graphics; }
+            set { sprites.Graphics = value; }
+        }
+
+        public void UpdateGraphics()
+        {
+            sprites.UpdateGraphics();
         }
 
         public LevelEditor Editor { get; set; }
