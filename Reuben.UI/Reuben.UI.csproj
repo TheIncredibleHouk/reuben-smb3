@@ -75,7 +75,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Extras\DataChange.cs" />
-    <Compile Include="Extras\EditMode.cs" />
+    <Compile Include="Extras\Enums.cs" />
     <Compile Include="Extras\Extensions.cs" />
     <Compile Include="Extras\SnapSide.cs" />
     <Compile Include="Extras\TileDrawer.cs" />

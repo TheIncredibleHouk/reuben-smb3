@@ -95,7 +95,6 @@ namespace Reuben.UI
         private int mouseStartX = 0;
         private int mouseStartY = 0;
 
-        private EditMode editMode;
         public EditMode EditMode
         {
             get { return (EditMode)editList.SelectedIndex; }
@@ -104,14 +103,24 @@ namespace Reuben.UI
 
         private void levelViewer_MouseDown(object sender, MouseEventArgs e)
         {
-            if (EditMode == UI.EditMode.Blocks && e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (EditMode == UI.EditMode.Blocks && !rightMouseDragged && !leftMouseDragged)
             {
+                if (e.Button == System.Windows.Forms.MouseButtons.Left && !rightMouseDrag)
+                {
+                    levelViewer.SelectionType = SelectionType.Draw;
+                    leftMouseDrag = true;
+                }
+                else if (e.Button == System.Windows.Forms.MouseButtons.Right && !leftMouseDrag)
+                {
+                    levelViewer.SelectionType = SelectionType.Select;
+                    rightMouseDrag = true;
+                }
+
                 int col = e.X / 16;
                 int row = e.Y / 16;
                 mouseStartX = e.X;
                 mouseStartY = e.Y;
                 levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, 15, 15);
-                leftMouseDrag = true;
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
@@ -147,14 +156,17 @@ namespace Reuben.UI
 
         private bool leftMouseDrag = false;
         private bool leftMouseDragged = false;
+        private bool rightMouseDrag = false;
+        private bool rightMouseDragged = false;
 
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            if (EditMode == UI.EditMode.Blocks && e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (EditMode == UI.EditMode.Blocks)
             {
-                if (leftMouseDrag)
+                if (leftMouseDrag || rightMouseDrag)
                 {
-                    leftMouseDragged = true;
+                    leftMouseDragged = leftMouseDrag;
+                    rightMouseDragged = rightMouseDrag;
                     int minX = Math.Min(e.X, mouseStartX);
                     int minY = Math.Min(e.Y, mouseStartY);
                     int maxX = Math.Max(e.X, mouseStartX);
@@ -170,9 +182,11 @@ namespace Reuben.UI
         }
 
         private List<DataChange> undoBuffer = new List<DataChange>();
+        private byte[,] blockClipBoard;
+        private int deletetile = 0x80;
         private void levelViewer_MouseUp(object sender, MouseEventArgs e)
         {
-            if (EditMode == UI.EditMode.Blocks && e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (EditMode == UI.EditMode.Blocks)
             {
                 int minX = Math.Min(e.X, mouseStartX);
                 int minY = Math.Min(e.Y, mouseStartY);
@@ -184,22 +198,106 @@ namespace Reuben.UI
                 var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
                 var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
 
-                DataChange change = new DataChange();
-                change.Column = col;
-                change.Row = row;
-                change.Data = new byte[width, height];
-                for (int i = 0; i < width; i++)
+                // left mouse dragged, left mouse up
+                if (e.Button == System.Windows.Forms.MouseButtons.Left && leftMouseDragged)
                 {
-                    for (int j = 0; j < height; j++)
+                    DataChange change = new DataChange();
+                    change.Column = col;
+                    change.Row = row;
+                    change.Data = new byte[width, height];
+                    for (int i = 0; i < width; i++)
                     {
-                        change.Data[i, j] = level.Data[col + i, row + j];
-                        level.Data[col + i, row + j] = (byte)blockSelector.SelectedBlock;
+                        for (int j = 0; j < height; j++)
+                        {
+                            change.Data[i, j] = level.Data[col + i, row + j];
+                            level.Data[col + i, row + j] = (byte)blockSelector.SelectedBlock;
+                        }
+                    }
+
+                    undoBuffer.Add(change);
+                    levelViewer.UpdateBlockDisplay(col, row, width, height);
+                }
+
+                // left mouse drag, right mouse up
+                else if (e.Button == System.Windows.Forms.MouseButtons.Right && leftMouseDrag)
+                {
+                    if (blockClipBoard != null)
+                    {
+
+                        int maxWidth = blockClipBoard.GetLength(0);
+                        int maxHeight = blockClipBoard.GetLength(1);
+                        if (width == 1 && height == 1)
+                        {
+                            width = maxWidth;
+                            height = maxHeight;
+                        }
+
+                        DataChange change = new DataChange();
+                        change.Column = col;
+                        change.Row = row;
+                        change.Data = new byte[width, height];
+                        for (int i = 0; i < width; i++)
+                        {
+                            for (int j = 0; j < height; j++)
+                            {
+                                change.Data[i, j] = level.Data[col + i, row + j];
+                                level.Data[col + i, row + j] = blockClipBoard[i % maxWidth, j % maxHeight];
+                            }
+                        }
+
+                        undoBuffer.Add(change);
+                        levelViewer.UpdateBlockDisplay(col, row, width, height);
+                    }
+                }
+                //  right mouse drag, right mouse up
+                else if (e.Button == System.Windows.Forms.MouseButtons.Right && rightMouseDragged)
+                {
+                    if (width == 1 && height == 1)
+                    {
+                        blockSelector.SelectedBlock = level.Data[col, row];
+                    }
+                    else
+                    {
+                        blockClipBoard = new byte[width, height];
+                        for (int i = 0; i < width; i++)
+                        {
+                            for (int j = 0; j < height; j++)
+                            {
+                                blockClipBoard[i, j] = level.Data[col + i, row + j];
+                            }
+                        }
                     }
                 }
 
-                undoBuffer.Add(change);
-                levelViewer.UpdateBlockDisplay(col, row, width, height);
-                leftMouseDrag = false;
+                // right mouse drag, left mouse up
+                else if (e.Button == System.Windows.Forms.MouseButtons.Left && rightMouseDragged)
+                {
+                    DataChange change = new DataChange();
+                    change.Column = col;
+                    change.Row = row;
+                    change.Data = new byte[width, height];
+                    blockClipBoard = new byte[width, height];
+                    for (int i = 0; i < width; i++)
+                    {
+                        for (int j = 0; j < height; j++)
+                        {
+                            change.Data[i, j] = blockClipBoard[i, j] = level.Data[col + i, row + j];
+                            level.Data[col + i, row + j] = (byte)deletetile;
+                        }
+                    }
+
+                    levelViewer.UpdateBlockDisplay(col, row, width, height);
+
+                    undoBuffer.Add(change);
+                }
+                // right mouse click
+                else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                {
+                    blockSelector.SelectedBlock = level.Data[col, row];
+                }
+
+                rightMouseDrag = leftMouseDrag = leftMouseDragged = rightMouseDragged = false;
+
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
@@ -217,7 +315,7 @@ namespace Reuben.UI
 
             if (spriteSelector != null && spriteSelector.Snapped)
             {
-                if(blockSelector.Snapped)
+                if (blockSelector.Snapped)
                 {
                     spriteSelector.Location = new Point(this.Location.X - blockSelector.Width, blockSelector.Bottom);
                 }
@@ -275,7 +373,7 @@ namespace Reuben.UI
 
         private void LevelEditor_Activated(object sender, EventArgs e)
         {
-      
+
         }
 
         private void LevelEditor_SizeChanged(object sender, EventArgs e)

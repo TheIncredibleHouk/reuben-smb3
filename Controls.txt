@@ -1,0 +1,8 @@
+Mouse Controls
+------------------------
+Left click drag let go - draw selected tile
+Left click drag, right click - paste from clip board to fill area
+Left click hold, right click - paste form clip board at point
+Right click drag let go - copy clipboard
+Right click drag, left click - cut/delete
+Right click - select tile

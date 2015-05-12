@@ -13,4 +13,10 @@ namespace Reuben.UI
         Pointers,
         StartPosition
     }
+
+    public enum SelectionType
+    {
+        Draw,
+        Select
+    }
 }

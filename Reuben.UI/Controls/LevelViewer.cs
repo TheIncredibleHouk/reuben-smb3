@@ -34,15 +34,15 @@ namespace Reuben.UI
             this.Height = levelBitmapHeight;
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Level Level { get; set; }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LevelType LevelType { get; set; }
 
         private Palette palette;
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Palette Palette
         {
             get { return palette; }
@@ -55,7 +55,7 @@ namespace Reuben.UI
 
         private Color[] colorRefrence;
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color[] ColorReference
         {
             get { return colorRefrence; }
@@ -66,13 +66,13 @@ namespace Reuben.UI
             }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PatternTable PatternTable { get; set; }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public GraphicsController Graphics { get; set; }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SpriteController Sprites { get; set; }
 
         private Color[][] quickBGReference;
@@ -148,7 +148,7 @@ namespace Reuben.UI
             spriteUpdating = true;
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Sprite> SelectedSprites { get; set; }
         private void UpdateSpriteArea(int row, int column, int width, int height)
         {
@@ -166,7 +166,7 @@ namespace Reuben.UI
             maxY = maxY / 16;
 
             Rectangle updateArea = new Rectangle(minX, minY, maxX - minX, maxY - minY);
-            using(var gfx = System.Drawing.Graphics.FromImage(spriteBuffer))
+            using (var gfx = System.Drawing.Graphics.FromImage(spriteBuffer))
             {
                 gfx.FillRectangle(Brushes.Transparent, area);
             }
@@ -181,7 +181,7 @@ namespace Reuben.UI
             spriteBuffer.UnlockBits(bitmap);
         }
 
-        private void UpdateBGArea( int column, int row, int width, int height)
+        private void UpdateBGArea(int column, int row, int width, int height)
         {
             BitmapData bitmap = bgBuffer.LockBits(new Rectangle(0, 0, bgBuffer.Width, bgBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
             for (int x = 0, i = column; x < width; i++, x++)
@@ -203,8 +203,8 @@ namespace Reuben.UI
             Block block = LevelType.Blocks[blockValue];
             int paletteIndex = (blockValue & 0xC0) >> 6;
             Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperLeft), column * 16, row * 16, quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperRight),column * 16 + 8, row * 16,  quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerLeft),column * 16, row * 16 + 8,  quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperRight), column * 16 + 8, row * 16, quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerLeft), column * 16, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
             Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerRight), column * 16 + 8, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
         }
 
@@ -266,7 +266,7 @@ namespace Reuben.UI
 
         private void UpdateLayers(Rectangle area)
         {
-            using(var gfx = System.Drawing.Graphics.FromImage(compositeBuffer))
+            using (var gfx = System.Drawing.Graphics.FromImage(compositeBuffer))
             {
                 gfx.DrawImage(bgBuffer, area, area, GraphicsUnit.Pixel);
                 gfx.DrawImage(spriteBuffer, area, area, GraphicsUnit.Pixel);
@@ -282,10 +282,13 @@ namespace Reuben.UI
             else
             {
                 e.Graphics.DrawImage(compositeBuffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
-                if (SelectionRectangle != null)
+                if (SelectionRectangle != Rectangle.Empty)
                 {
-                    e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
-                    e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                    Pen pen = new Pen(Brushes.White);
+                    pen.DashStyle = SelectionType == UI.SelectionType.Draw ? System.Drawing.Drawing2D.DashStyle.Solid : System.Drawing.Drawing2D.DashStyle.Dot;
+                    e.Graphics.DrawRectangle(pen, SelectionRectangle);
+                    pen.Color = Color.Red;
+                    e.Graphics.DrawRectangle(pen, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
                 }
 
                 foreach (Sprite s in SelectedSprites)
@@ -299,6 +302,8 @@ namespace Reuben.UI
             }
         }
 
+
+        public SelectionType SelectionType { get; set; }
 
         private Rectangle selectionRectangle;
         public Rectangle SelectionRectangle

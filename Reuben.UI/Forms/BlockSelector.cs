@@ -60,7 +60,11 @@ namespace Reuben.UI
         public int SelectedBlock
         {
             get { return selectedBlock; }
-            set { selectedBlock = value; }
+            set
+            {
+                selectedBlock = value;
+                blocks.SelectionRectangle = new Rectangle((value % 16) * 16, (value / 16) * 16, 15, 15);
+            }
         }
         private void blocks_MouseDown(object sender, MouseEventArgs e)
         {
