@@ -29,6 +29,7 @@ namespace Reuben.UI
         private SpriteController sprites;
 
         private BlockSelector blockSelector;
+        private SpriteSelector spriteSelector;
 
         public void LoadLevel(LevelInfo info, LevelController levelController, GraphicsController graphicsController, StringController stringController, SpriteController spriteController)
         {
@@ -39,6 +40,7 @@ namespace Reuben.UI
             levelViewer.Level = level = levels.LoadLevel(info.File);
             levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
             blockSelector = new BlockSelector();
+            spriteSelector = new SpriteSelector();
 
             blockSelector.ColorReference = paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
 
@@ -70,11 +72,10 @@ namespace Reuben.UI
             screenList.DataSource = strings.GetStringList("screens");
             screenList.SelectedIndex = level.NumberOfScreens - 1;
 
-            UpdatePalette();
-
             blockSelector.Show();
-            blockSelector.UpdateGraphics();
-            MoveBlockSelector();
+            spriteSelector.Show();
+            blockSelector.Editor = spriteSelector.Editor = this;
+            MoveSelectors();
         }
 
         public void UpdatePalette()
@@ -82,6 +83,7 @@ namespace Reuben.UI
             blockSelector.Palette = levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
             levelViewer.UpdateSpriteDisplay(0, 0, 16 * 15, 0x1B);
+            blockSelector.UpdateGraphics();
         }
 
         private void paletteList_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,20 +94,28 @@ namespace Reuben.UI
 
         private int mouseStartX = 0;
         private int mouseStartY = 0;
+
+        private EditMode editMode;
+        public EditMode EditMode
+        {
+            get { return (EditMode)editList.SelectedIndex; }
+            set { editList.SelectedIndex = (int)value; }
+        }
+
         private void levelViewer_MouseDown(object sender, MouseEventArgs e)
         {
-            if (editTypeTab.SelectedIndex == 0)
+            if (EditMode == UI.EditMode.Blocks && e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 int col = e.X / 16;
                 int row = e.Y / 16;
                 mouseStartX = e.X;
                 mouseStartY = e.Y;
                 levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, 15, 15);
-                mouseDrag = true;
+                leftMouseDrag = true;
             }
-            else if (editTypeTab.SelectedIndex == 1)
+            else if (EditMode == UI.EditMode.Sprites)
             {
-                if (!mouseDragged)
+                if (!leftMouseDragged)
                 {
 
                     List<Tuple<Sprite, Rectangle>> boundCache = sprites.GetBounds(level.Sprites).ToList();
@@ -117,13 +127,13 @@ namespace Reuben.UI
                         {
 
                             List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
-                            affectedArea.Add(sprites.GetBounds(selectedSprite)); // add the new sprite to the list
+                            affectedArea.Add(sprites.GetClipBounds(selectedSprite)); // add the new sprite to the list
                             Rectangle updateArea = affectedArea.Combine();
                             levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
                         }
                         else
                         {
-                            Rectangle updateArea = sprites.GetBounds(selectedSprite);
+                            Rectangle updateArea = sprites.GetClipBounds(selectedSprite);
                             levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
                         }
 
@@ -135,16 +145,16 @@ namespace Reuben.UI
             }
         }
 
-        private bool mouseDrag = false;
-        private bool mouseDragged = false;
+        private bool leftMouseDrag = false;
+        private bool leftMouseDragged = false;
 
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            if (editTypeTab.SelectedIndex == 0)
+            if (EditMode == UI.EditMode.Blocks && e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                if (mouseDrag)
+                if (leftMouseDrag)
                 {
-                    mouseDragged = true;
+                    leftMouseDragged = true;
                     int minX = Math.Min(e.X, mouseStartX);
                     int minY = Math.Min(e.Y, mouseStartY);
                     int maxX = Math.Max(e.X, mouseStartX);
@@ -162,7 +172,7 @@ namespace Reuben.UI
         private List<DataChange> undoBuffer = new List<DataChange>();
         private void levelViewer_MouseUp(object sender, MouseEventArgs e)
         {
-            if (editTypeTab.SelectedIndex == 0)
+            if (EditMode == UI.EditMode.Blocks && e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 int minX = Math.Min(e.X, mouseStartX);
                 int minY = Math.Min(e.Y, mouseStartY);
@@ -189,30 +199,45 @@ namespace Reuben.UI
 
                 undoBuffer.Add(change);
                 levelViewer.UpdateBlockDisplay(col, row, width, height);
-                mouseDrag = false;
+                leftMouseDrag = false;
             }
-            else if (editTypeTab.SelectedIndex == 1)
+            else if (EditMode == UI.EditMode.Sprites)
             {
 
             }
         }
 
-        private void MoveBlockSelector()
+        public void MoveSelectors()
         {
-            if (blockSelector != null)
+            if (blockSelector != null && blockSelector.Snapped)
             {
-                blockSelector.Location = new Point(this.Location.X - blockSelector.Width, this.Location.Y + 146);
+                blockSelector.Location = new Point(this.Location.X - blockSelector.Width, this.Location.Y);
+                blockSelector.Snapped = true;
+            }
+
+            if (spriteSelector != null && spriteSelector.Snapped)
+            {
+                if(blockSelector.Snapped)
+                {
+                    spriteSelector.Location = new Point(this.Location.X - blockSelector.Width, blockSelector.Bottom);
+                }
+                else
+                {
+                    spriteSelector.Location = new Point(this.Location.X - spriteSelector.Width, this.Location.Y);
+                }
+                spriteSelector.Snapped = true;
             }
         }
         protected override void OnClosed(EventArgs e)
         {
             blockSelector.Close();
+            spriteSelector.Close();
             base.OnClosed(e);
         }
 
         private void LevelEditor_Move(object sender, EventArgs e)
         {
-            MoveBlockSelector();
+            MoveSelectors();
         }
 
         private void Undo()
@@ -237,14 +262,27 @@ namespace Reuben.UI
 
         private void LevelEditor_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Control)
+            if (e.Control)
             {
-                switch(e.KeyCode)
+                switch (e.KeyCode)
                 {
                     case Keys.Z:
                         Undo();
                         break;
                 }
+            }
+        }
+
+        private void LevelEditor_Activated(object sender, EventArgs e)
+        {
+      
+        }
+
+        private void LevelEditor_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized || WindowState == FormWindowState.Normal)
+            {
+                blockSelector.WindowState = spriteSelector.WindowState = WindowState;
             }
         }
 

@@ -45,3 +45,5 @@ F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csproj.GenerateResource.Cach
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockSelector.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockSelector.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteSelector.resources

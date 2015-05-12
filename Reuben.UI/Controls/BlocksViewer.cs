@@ -126,6 +126,7 @@ namespace Reuben.UI.Controls
                 }
             }
             buffer.UnlockBits(data);
+            Invalidate();
         }
 
         private Rectangle selectionRectangle;

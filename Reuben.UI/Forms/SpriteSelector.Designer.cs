@@ -1,6 +1,6 @@
 ﻿namespace Reuben.UI
 {
-    partial class BlockSelector
+    partial class SpriteSelector
     {
         /// <summary>
         /// Required designer variable.
@@ -28,36 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.blocks = new Reuben.UI.Controls.BlocksViewer();
             this.SuspendLayout();
             // 
-            // blocks
-            // 
-            this.blocks.Location = new System.Drawing.Point(-2, 0);
-            this.blocks.Name = "blocks";
-            this.blocks.Size = new System.Drawing.Size(256, 256);
-            this.blocks.TabIndex = 0;
-            this.blocks.Text = "blocksViewer1";
-            this.blocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.blocks_MouseDown);
-            // 
-            // BlockSelector
+            // SpriteSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(254, 256);
             this.ControlBox = false;
-            this.Controls.Add(this.blocks);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "BlockSelector";
-            this.Text = "Blocks";
-            this.SizeChanged += new System.EventHandler(this.BlockSelector_SizeChanged);
-            this.Move += new System.EventHandler(this.BlockSelector_Move);
+            this.Name = "SpriteSelector";
+            this.Text = "Sprites";
+            this.SizeChanged += new System.EventHandler(this.SpriteSelector_SizeChanged_1);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_Move);
+            this.Move += new System.EventHandler(this.SpriteSelector_Move);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Controls.BlocksViewer blocks;
     }
 }

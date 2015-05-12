@@ -290,7 +290,7 @@ namespace Reuben.UI
 
                 foreach (Sprite s in SelectedSprites)
                 {
-                    Rectangle drawRectangle = Sprites.GetBounds(s);
+                    Rectangle drawRectangle = Sprites.GetClipBounds(s);
                     e.Graphics.DrawRectangle(Pens.White, drawRectangle);
                     e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
                 }

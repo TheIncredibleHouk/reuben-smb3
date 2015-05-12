@@ -31,6 +31,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lvlHost = new System.Windows.Forms.Panel();
             this.panel23 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.editList = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.effectList = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.animationList = new System.Windows.Forms.ComboBox();
@@ -46,18 +49,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.musicList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.editTypeTab = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.levelViewer = new Reuben.UI.LevelViewer();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
             this.panel23.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.editTypeTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -65,9 +61,9 @@
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.lvlHost);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 114);
+            this.panel1.Location = new System.Drawing.Point(0, 177);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(692, 402);
+            this.panel1.Size = new System.Drawing.Size(692, 502);
             this.panel1.TabIndex = 0;
             // 
             // lvlHost
@@ -81,7 +77,10 @@
             // 
             // panel23
             // 
+            this.panel23.Controls.Add(this.label10);
+            this.panel23.Controls.Add(this.editList);
             this.panel23.Controls.Add(this.paletteList);
+            this.panel23.Controls.Add(this.label9);
             this.panel23.Controls.Add(this.effectList);
             this.panel23.Controls.Add(this.label8);
             this.panel23.Controls.Add(this.animationList);
@@ -100,8 +99,40 @@
             this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel23.Location = new System.Drawing.Point(0, 0);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(692, 114);
+            this.panel23.Size = new System.Drawing.Size(692, 177);
             this.panel23.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Location = new System.Drawing.Point(16, 113);
+            this.label10.Margin = new System.Windows.Forms.Padding(4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(552, 1);
+            this.label10.TabIndex = 19;
+            // 
+            // editList
+            // 
+            this.editList.FormattingEnabled = true;
+            this.editList.Items.AddRange(new object[] {
+            "Blocks",
+            "Sprites",
+            "Pointers"});
+            this.editList.Location = new System.Drawing.Point(16, 145);
+            this.editList.Margin = new System.Windows.Forms.Padding(4);
+            this.editList.Name = "editList";
+            this.editList.Size = new System.Drawing.Size(121, 21);
+            this.editList.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 122);
+            this.label9.Margin = new System.Windows.Forms.Padding(4);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Edit Mode";
             // 
             // effectList
             // 
@@ -253,58 +284,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Music";
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.editTypeTab);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 516);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(692, 163);
-            this.panel3.TabIndex = 2;
-            // 
-            // editTypeTab
-            // 
-            this.editTypeTab.Controls.Add(this.tabPage1);
-            this.editTypeTab.Controls.Add(this.tabPage2);
-            this.editTypeTab.Controls.Add(this.tabPage3);
-            this.editTypeTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editTypeTab.Location = new System.Drawing.Point(0, 0);
-            this.editTypeTab.Margin = new System.Windows.Forms.Padding(4);
-            this.editTypeTab.Name = "editTypeTab";
-            this.editTypeTab.SelectedIndex = 0;
-            this.editTypeTab.Size = new System.Drawing.Size(692, 163);
-            this.editTypeTab.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.AutoScroll = true;
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(684, 137);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Blocks";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(684, 137);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Sprites";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(684, 137);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Pointers";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // levelViewer
             // 
             this.levelViewer.Location = new System.Drawing.Point(0, 0);
@@ -339,19 +318,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(692, 679);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel23);
             this.KeyPreview = true;
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
+            this.SizeChanged += new System.EventHandler(this.LevelEditor_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LevelEditor_KeyDown);
             this.Move += new System.EventHandler(this.LevelEditor_Move);
             this.panel1.ResumeLayout(false);
             this.lvlHost.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             this.panel23.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.editTypeTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -378,11 +355,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox musicList;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TabControl editTypeTab;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ComboBox editList;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
 
     }
 }

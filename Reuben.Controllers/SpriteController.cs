@@ -81,7 +81,7 @@ namespace Reuben.Controllers
             return SpriteData.Definitions.Where(s => s.GameID == spriteid).FirstOrDefault();
         }
 
-        public Rectangle GetBounds(Sprite sprite)
+        public Rectangle GetClipBounds(Sprite sprite)
         {
             Rectangle r = boundCache[sprite.ObjectID];
             return new Rectangle(r.X + sprite.X * 16, r.Y + sprite.Y * 16, r.Width, r.Height);
@@ -89,7 +89,7 @@ namespace Reuben.Controllers
 
         public IEnumerable<Tuple<Sprite, Rectangle>> GetBounds(IEnumerable<Sprite> sprites)
         {
-            return sprites.Select(s => new Tuple<Sprite, Rectangle>(s, GetBounds(s)));
+            return sprites.Select(s => new Tuple<Sprite, Rectangle>(s, GetClipBounds(s)));
         }
     }
 }

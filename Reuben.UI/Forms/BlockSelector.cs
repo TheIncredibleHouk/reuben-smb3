@@ -68,6 +68,26 @@ namespace Reuben.UI
             int row = (e.Y / 16) * 16;
             blocks.SelectionRectangle = new Rectangle(col, row, 15, 15);
             selectedBlock = e.X / 16 + ((e.Y / 16) * 16);
+            Editor.EditMode = EditMode.Blocks;
+        }
+
+        public LevelEditor Editor { get; set; }
+
+        public bool Snapped { get; set; }
+
+        private void BlockSelector_Move(object sender, EventArgs e)
+        {
+            Snapped = false;
+        }
+
+        private void BlockSelector_SizeChanged(object sender, EventArgs e)
+        {
+            if (Editor != null && this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                Snapped = true;
+                Editor.MoveSelectors();
+            }
         }
     }
 }
