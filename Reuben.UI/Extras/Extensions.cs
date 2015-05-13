@@ -23,6 +23,8 @@ namespace Reuben.UI
                 original = Rectangle.Union(original, r);
             }
 
+            original.Width++;
+            original.Height++;
             return original;
         }
     }

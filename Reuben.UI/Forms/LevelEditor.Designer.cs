@@ -113,6 +113,7 @@
             // 
             // editList
             // 
+            this.editList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.editList.FormattingEnabled = true;
             this.editList.Items.AddRange(new object[] {
             "Blocks",
@@ -121,8 +122,9 @@
             this.editList.Location = new System.Drawing.Point(16, 145);
             this.editList.Margin = new System.Windows.Forms.Padding(4);
             this.editList.Name = "editList";
-            this.editList.Size = new System.Drawing.Size(121, 21);
+            this.editList.Size = new System.Drawing.Size(132, 21);
             this.editList.TabIndex = 18;
+            this.editList.SelectedIndexChanged += new System.EventHandler(this.editList_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -253,6 +255,7 @@
             this.screenList.Name = "screenList";
             this.screenList.Size = new System.Drawing.Size(132, 21);
             this.screenList.TabIndex = 3;
+            this.screenList.SelectedIndexChanged += new System.EventHandler(this.screenList_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -286,9 +289,11 @@
             // 
             // levelViewer
             // 
+            this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
             this.levelViewer.Location = new System.Drawing.Point(0, 0);
             this.levelViewer.Name = "levelViewer";
             this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.levelViewer.SelectionType = Reuben.UI.SelectionType.Draw;
             this.levelViewer.Size = new System.Drawing.Size(6912, 432);
             this.levelViewer.TabIndex = 0;
             this.levelViewer.Text = "levelViewer1";

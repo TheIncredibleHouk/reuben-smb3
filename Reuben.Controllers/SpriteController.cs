@@ -62,7 +62,7 @@ namespace Reuben.Controllers
                     }
                 }
 
-                boundCache[definition.GameID] = new Rectangle(minX, minY, maxX - minX, maxY - minY);
+                boundCache[definition.GameID] = new Rectangle(minX, minY, maxX - minX - 1, maxY - minY - 1);
             }
         }
 

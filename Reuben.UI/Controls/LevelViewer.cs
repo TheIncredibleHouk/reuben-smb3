@@ -282,20 +282,35 @@ namespace Reuben.UI
             else
             {
                 e.Graphics.DrawImage(compositeBuffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
-                if (SelectionRectangle != Rectangle.Empty)
+                if (EditMode == UI.EditMode.Blocks)
                 {
-                    Pen pen = new Pen(Brushes.White);
-                    pen.DashStyle = SelectionType == UI.SelectionType.Draw ? System.Drawing.Drawing2D.DashStyle.Solid : System.Drawing.Drawing2D.DashStyle.Dot;
-                    e.Graphics.DrawRectangle(pen, SelectionRectangle);
-                    pen.Color = Color.Red;
-                    e.Graphics.DrawRectangle(pen, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                    if (SelectionRectangle != Rectangle.Empty)
+                    {
+                        Pen pen = new Pen(Brushes.White);
+                        pen.DashStyle = SelectionType == UI.SelectionType.Draw ? System.Drawing.Drawing2D.DashStyle.Solid : System.Drawing.Drawing2D.DashStyle.Dot;
+                        e.Graphics.DrawRectangle(pen, SelectionRectangle);
+                        pen.Color = Color.Red;
+                        e.Graphics.DrawRectangle(pen, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                    }
                 }
 
-                foreach (Sprite s in SelectedSprites)
+                if (EditMode == UI.EditMode.Sprites)
                 {
-                    Rectangle drawRectangle = Sprites.GetClipBounds(s);
-                    e.Graphics.DrawRectangle(Pens.White, drawRectangle);
-                    e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
+                    if (SelectionRectangle != Rectangle.Empty)
+                    {
+                        Pen pen = new Pen(Brushes.White);
+                        pen.DashStyle = SelectionType == UI.SelectionType.Draw ? System.Drawing.Drawing2D.DashStyle.Solid : System.Drawing.Drawing2D.DashStyle.Dot;
+                        e.Graphics.DrawRectangle(pen, SelectionRectangle);
+                        pen.Color = Color.Blue;
+                        e.Graphics.DrawRectangle(pen, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                    }
+
+                    foreach (Sprite s in SelectedSprites)
+                    {
+                        Rectangle drawRectangle = Sprites.GetClipBounds(s);
+                        e.Graphics.DrawRectangle(Pens.White, drawRectangle);
+                        e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
+                    }
                 }
 
                 blockUpdating = spriteUpdating = false;
@@ -304,6 +319,7 @@ namespace Reuben.UI
 
 
         public SelectionType SelectionType { get; set; }
+        public EditMode EditMode { get; set; }
 
         private Rectangle selectionRectangle;
         public Rectangle SelectionRectangle
@@ -321,11 +337,7 @@ namespace Reuben.UI
 
                 var oldRectangle = selectionRectangle;
                 selectionRectangle = value;
-                var minX = Math.Min(oldRectangle.Left, selectionRectangle.Left);
-                var minY = Math.Min(oldRectangle.Top, selectionRectangle.Top);
-                var maxX = Math.Max(oldRectangle.Right, selectionRectangle.Right);
-                var maxY = Math.Max(oldRectangle.Bottom, selectionRectangle.Bottom);
-                Invalidate(new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1));
+                Invalidate(new Rectangle[] { oldRectangle, selectionRectangle}.Combine());
             }
         }
 

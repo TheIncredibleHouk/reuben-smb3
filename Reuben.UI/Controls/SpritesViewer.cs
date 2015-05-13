@@ -92,6 +92,7 @@ namespace Reuben.UI.Controls
                 }
 
                 buffer = new Bitmap(256, lastY, PixelFormat.Format32bppArgb);
+                
                 this.Height = lastY;
             }
         }
@@ -145,8 +146,9 @@ namespace Reuben.UI.Controls
                 return;
             }
 
-            BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb);
-
+            
+            BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            
             foreach (var item in drawBoundCache)
             {
                 DrawSprite(item.Item1, data);
@@ -223,7 +225,7 @@ namespace Reuben.UI.Controls
                 {
                     continue;
                 }
-                Drawer.DrawTileAlpha(Graphics.GetExtraTileByBankIndex(0, tile), i * 8, y - 8, quickSpriteReference[0], bitmap);
+                Drawer.DrawTileAlpha(Graphics.GetExtraTileByBankIndex(0, tile), i * 8 + 4, y - 8, quickSpriteReference[0], bitmap);
             }
         }
 

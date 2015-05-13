@@ -30,9 +30,10 @@ namespace Reuben.UI
 
         private BlockSelector blockSelector;
         private SpriteSelector spriteSelector;
-
+        private bool initializing = false;
         public void LoadLevel(LevelInfo info, LevelController levelController, GraphicsController graphicsController, StringController stringController, SpriteController spriteController)
         {
+            initializing = true;
             levels = levelController;
             graphics = graphicsController;
 
@@ -56,8 +57,6 @@ namespace Reuben.UI
             blockSelector.BlockList = levelViewer.LevelType.Blocks;
 
 
-            lvlHost.Width = level.NumberOfScreens * 16 * 16;
-
             paletteList.Palettes = graphics.GraphicsData.Palettes;
             paletteList.SelectedPalette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
 
@@ -69,10 +68,13 @@ namespace Reuben.UI
             screenList.DataSource = strings.GetStringList("screens");
             screenList.SelectedIndex = level.NumberOfScreens - 1;
 
+            UpdateScreenSize();
+
             blockSelector.Show();
             spriteSelector.Show();
             blockSelector.Editor = spriteSelector.Editor = this;
             MoveSelectors();
+            initializing = false;
         }
 
         public void UpdatePalette()
@@ -96,7 +98,10 @@ namespace Reuben.UI
         public EditMode EditMode
         {
             get { return (EditMode)editList.SelectedIndex; }
-            set { editList.SelectedIndex = (int)value; }
+            set
+            {
+                editList.SelectedIndex = (int)value;
+            }
         }
 
         private void levelViewer_MouseDown(object sender, MouseEventArgs e)
@@ -122,32 +127,46 @@ namespace Reuben.UI
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
-                if (!leftMouseDragged)
+                List<Tuple<Sprite, Rectangle>> boundCache = sprites.GetBounds(level.Sprites).ToList();
+                Sprite selectedSprite = boundCache.Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
+
+                if (selectedSprite != null)
                 {
-
-                    List<Tuple<Sprite, Rectangle>> boundCache = sprites.GetBounds(level.Sprites).ToList();
-                    Sprite selectedSprite = boundCache.Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
-
-                    if (selectedSprite != null)
+                    if (levelViewer.SelectedSprites.Count > 0)
                     {
-                        if (levelViewer.SelectedSprites.Count > 0)
-                        {
 
-                            List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
-                            affectedArea.Add(sprites.GetClipBounds(selectedSprite)); // add the new sprite to the list
-                            Rectangle updateArea = affectedArea.Combine();
-                            levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
-                        }
-                        else
-                        {
-                            Rectangle updateArea = sprites.GetClipBounds(selectedSprite);
-                            levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
-                        }
-
-                        levelViewer.SelectedSprites.Clear();
-                        levelViewer.SelectedSprites.Add(selectedSprite);
+                        List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
+                        affectedArea.Add(sprites.GetClipBounds(selectedSprite)); // add the new sprite to the list
+                        Rectangle updateArea = affectedArea.Combine();
+                        levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
+                    }
+                    else
+                    {
+                        Rectangle updateArea = sprites.GetClipBounds(selectedSprite);
+                        levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
                     }
 
+                    levelViewer.SelectedSprites.Clear();
+                    levelViewer.SelectedSprites.Add(selectedSprite);
+                }
+                else
+                {
+                    if (e.Button == System.Windows.Forms.MouseButtons.Left && !rightMouseDrag)
+                    {
+                        levelViewer.SelectionType = SelectionType.Draw;
+                        leftMouseDrag = true;
+                    }
+                    else if (e.Button == System.Windows.Forms.MouseButtons.Right && !leftMouseDrag)
+                    {
+                        levelViewer.SelectionType = SelectionType.Select;
+                        rightMouseDrag = true;
+                    }
+
+                    int col = e.X / 16;
+                    int row = e.Y / 16;
+                    mouseStartX = e.X;
+                    mouseStartY = e.Y;
+                    levelViewer.SelectionRectangle = Rectangle.Empty;
                 }
             }
         }
@@ -159,33 +178,11 @@ namespace Reuben.UI
 
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            if (EditMode == UI.EditMode.Blocks)
-            {
-                if (leftMouseDrag || rightMouseDrag)
-                {
-                    leftMouseDragged = leftMouseDrag;
-                    rightMouseDragged = rightMouseDrag;
-                    int minX = Math.Min(e.X, mouseStartX);
-                    int minY = Math.Min(e.Y, mouseStartY);
-                    int maxX = Math.Max(e.X, mouseStartX);
-                    int maxY = Math.Max(e.Y, mouseStartY);
 
-                    var col = Math.Max(minX, 0) / 16;
-                    var row = Math.Max(minY, 0) / 16;
-                    var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
-                    var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
-                    levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
-                }
-            }
-        }
-
-        private List<DataChange> undoBuffer = new List<DataChange>();
-        private byte[,] blockClipBoard;
-        private int deletetile = 0x80;
-        private void levelViewer_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (EditMode == UI.EditMode.Blocks)
+            if (leftMouseDrag || rightMouseDrag)
             {
+                leftMouseDragged = leftMouseDrag;
+                rightMouseDragged = rightMouseDrag;
                 int minX = Math.Min(e.X, mouseStartX);
                 int minY = Math.Min(e.Y, mouseStartY);
                 int maxX = Math.Max(e.X, mouseStartX);
@@ -195,7 +192,27 @@ namespace Reuben.UI
                 var row = Math.Max(minY, 0) / 16;
                 var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
                 var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
+                levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
+            }
 
+        }
+
+        private List<DataChange> undoBuffer = new List<DataChange>();
+        private byte[,] blockClipBoard;
+        private int deletetile = 0x80;
+        private void levelViewer_MouseUp(object sender, MouseEventArgs e)
+        {
+            int minX = Math.Min(e.X, mouseStartX);
+            int minY = Math.Min(e.Y, mouseStartY);
+            int maxX = Math.Max(e.X, mouseStartX);
+            int maxY = Math.Max(e.Y, mouseStartY);
+
+            var col = Math.Max(minX, 0) / 16;
+            var row = Math.Max(minY, 0) / 16;
+            var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
+            var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
+            if (EditMode == UI.EditMode.Blocks)
+            {
                 // left mouse dragged, left mouse up
                 if (e.Button == System.Windows.Forms.MouseButtons.Left && leftMouseDragged)
                 {
@@ -268,7 +285,7 @@ namespace Reuben.UI
                 }
 
                 // right mouse drag, left mouse up
-                else if (e.Button == System.Windows.Forms.MouseButtons.Left && rightMouseDragged)
+                else if (e.Button == System.Windows.Forms.MouseButtons.Left && rightMouseDrag)
                 {
                     DataChange change = new DataChange();
                     change.Column = col;
@@ -299,7 +316,20 @@ namespace Reuben.UI
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
-
+                if(leftMouseDragged)
+                {
+                    List<Tuple<Sprite, Rectangle>> boundCache = sprites.GetBounds(level.Sprites).ToList();
+                    levelViewer.SelectedSprites.Clear();
+                    List<Tuple<Sprite, Rectangle>> affectedSprites = boundCache.Where(t => t.Item2.IntersectsWith(levelViewer.SelectionRectangle)).ToList();
+                    levelViewer.SelectedSprites.AddRange(affectedSprites.Select(s => s.Item1));
+                    levelViewer.Invalidate(levelViewer.SelectionRectangle);
+                    levelViewer.SelectionRectangle = Rectangle.Empty;
+                }
+                else if(leftMouseDrag)
+                {
+                    levelViewer.SelectedSprites.Clear();
+                }
+                rightMouseDrag = leftMouseDrag = leftMouseDragged = rightMouseDragged = false;
             }
         }
 
@@ -380,6 +410,25 @@ namespace Reuben.UI
             {
                 blockSelector.WindowState = spriteSelector.WindowState = WindowState;
             }
+        }
+
+        public void UpdateScreenSize()
+        {
+            lvlHost.Width = level.NumberOfScreens * 16 * 16;
+        }
+
+        private void screenList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!initializing)
+            {
+                level.NumberOfScreens = screenList.SelectedIndex + 1;
+                UpdateScreenSize();
+            }
+        }
+
+        private void editList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            levelViewer.EditMode = EditMode;
         }
 
     }
