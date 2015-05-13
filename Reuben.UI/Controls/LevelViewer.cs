@@ -173,6 +173,7 @@ namespace Reuben.UI
 
 
             BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            Drawer.FillArea(updateArea.X, updateArea.Y, updateArea.Width, updateArea.Height, quickSpriteReference[1][0], bitmap);
             foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
             {
                 DrawSprite(sprite, bitmap);
@@ -337,7 +338,7 @@ namespace Reuben.UI
 
                 var oldRectangle = selectionRectangle;
                 selectionRectangle = value;
-                Invalidate(new Rectangle[] { oldRectangle, selectionRectangle}.Combine());
+                Invalidate(new Rectangle[] { oldRectangle, selectionRectangle }.Combine());
             }
         }
 

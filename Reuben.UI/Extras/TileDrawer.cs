@@ -34,6 +34,24 @@ namespace Reuben.UI
             }
         }
 
+        public unsafe static void FillArea(int x, int y, int width, int height, Color color, BitmapData bitmap)
+        {
+            byte* dataPointer = (byte*)bitmap.Scan0;
+
+            for (int row = 0; row < height; row++)
+            {
+                for (int col = 0; col < height; col++)
+                {
+                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
+
+                    *(dataPointer + offset) = color.B;
+                    *(dataPointer + offset + 1) = color.G;
+                    *(dataPointer + offset + 2) = color.R;
+                    *(dataPointer + offset + 3) = 255;
+                }
+            }
+        }
+
         public unsafe static void DrawTileAlpha(Tile tile, int x, int y, Color[] reference, BitmapData bitmap)
         {
             byte* dataPointer = (byte*)bitmap.Scan0;
@@ -66,7 +84,7 @@ namespace Reuben.UI
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    int pixel = tile.Pixels[col, 7- row];
+                    int pixel = tile.Pixels[col, 7 - row];
                     if (pixel == 0)
                     {
                         continue;
@@ -91,7 +109,7 @@ namespace Reuben.UI
                 for (int col = 0; col < 8; col++)
                 {
                     int pixel = tile.Pixels[7 - col, row];
-                    if(pixel == 0)
+                    if (pixel == 0)
                     {
                         continue;
                     }
@@ -115,7 +133,7 @@ namespace Reuben.UI
                 for (int col = 0; col < 8; col++)
                 {
                     int pixel = tile.Pixels[7 - col, 7 - row];
-                    if(pixel == 0)
+                    if (pixel == 0)
                     {
                         continue;
                     }

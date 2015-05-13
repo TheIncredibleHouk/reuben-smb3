@@ -148,6 +148,9 @@ namespace Reuben.UI
 
                     levelViewer.SelectedSprites.Clear();
                     levelViewer.SelectedSprites.Add(selectedSprite);
+                    movingSprites.Clear();
+                    movingSprites.Add(selectedSprite.MakeCopy());
+                    leftMouseDrag = true;
                 }
                 else
                 {
@@ -166,7 +169,13 @@ namespace Reuben.UI
                     int row = e.Y / 16;
                     mouseStartX = e.X;
                     mouseStartY = e.Y;
-                    levelViewer.SelectionRectangle = Rectangle.Empty;
+                    var affectedArea = sprites.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
+                    if (affectedArea.Count > 0)
+                    {
+                        levelViewer.Invalidate(affectedArea.Combine());
+                        levelViewer.SelectedSprites.Clear();
+                        levelViewer.SelectionRectangle = Rectangle.Empty;
+                    }
                 }
             }
         }
@@ -176,25 +185,68 @@ namespace Reuben.UI
         private bool rightMouseDrag = false;
         private bool rightMouseDragged = false;
 
+        private List<Sprite> movingSprites = new List<Sprite>();
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
 
-            if (leftMouseDrag || rightMouseDrag)
+            int minX = Math.Min(e.X, mouseStartX);
+            int minY = Math.Min(e.Y, mouseStartY);
+            int maxX = Math.Max(e.X, mouseStartX);
+            int maxY = Math.Max(e.Y, mouseStartY);
+
+            var col = Math.Max(minX, 0) / 16;
+            var row = Math.Max(minY, 0) / 16;
+            var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
+            var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
+
+            if (EditMode == UI.EditMode.Blocks)
             {
-                leftMouseDragged = leftMouseDrag;
-                rightMouseDragged = rightMouseDrag;
-                int minX = Math.Min(e.X, mouseStartX);
-                int minY = Math.Min(e.Y, mouseStartY);
-                int maxX = Math.Max(e.X, mouseStartX);
-                int maxY = Math.Max(e.Y, mouseStartY);
-
-                var col = Math.Max(minX, 0) / 16;
-                var row = Math.Max(minY, 0) / 16;
-                var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
-                var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
-                levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
+                if (leftMouseDrag || rightMouseDrag)
+                {
+                    leftMouseDragged = leftMouseDrag;
+                    rightMouseDragged = rightMouseDrag;
+                    levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
+                }
             }
+            else if (EditMode == UI.EditMode.Sprites)
+            {
+                if (leftMouseDrag && levelViewer.SelectedSprites.Count == 0)
+                {
+                    leftMouseDragged = leftMouseDrag;
+                    levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
+                }
+                else if (leftMouseDrag && movingSprites.Count > 0)
+                {
+                    minX = 1000;
+                    minY = 1000;
+                    maxX = -1;
+                    maxY = -1;
+                    for (int i = 0; i < movingSprites.Count; i++)
+                    {
+                        levelViewer.SelectedSprites[i].X = movingSprites[i].X + (mouseStartX - e.X);
+                        levelViewer.SelectedSprites[i].Y = movingSprites[i].Y + (mouseStartX - e.Y);
+                        if (levelViewer.SelectedSprites[i].X < minX)
+                        {
+                            minX = levelViewer.SelectedSprites[i].X;
+                        }
 
+                        if (levelViewer.SelectedSprites[i].X > maxX)
+                        {
+                            maxX = levelViewer.SelectedSprites[i].X;
+                        }
+
+                        if (levelViewer.SelectedSprites[i].Y < minY)
+                        {
+                            minY = levelViewer.SelectedSprites[i].Y;
+                        }
+
+                        if (levelViewer.SelectedSprites[i].Y > maxY)
+                        {
+                            maxY = levelViewer.SelectedSprites[i].Y;
+                        }
+                    }
+                }
+            }
         }
 
         private List<DataChange> undoBuffer = new List<DataChange>();
@@ -214,7 +266,7 @@ namespace Reuben.UI
             if (EditMode == UI.EditMode.Blocks)
             {
                 // left mouse dragged, left mouse up
-                if (e.Button == System.Windows.Forms.MouseButtons.Left && leftMouseDragged)
+                if (e.Button == System.Windows.Forms.MouseButtons.Left && leftMouseDrag)
                 {
                     DataChange change = new DataChange();
                     change.Column = col;
@@ -316,18 +368,13 @@ namespace Reuben.UI
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
-                if(leftMouseDragged)
+                if (leftMouseDragged && levelViewer.SelectionRectangle != Rectangle.Empty)
                 {
                     List<Tuple<Sprite, Rectangle>> boundCache = sprites.GetBounds(level.Sprites).ToList();
                     levelViewer.SelectedSprites.Clear();
                     List<Tuple<Sprite, Rectangle>> affectedSprites = boundCache.Where(t => t.Item2.IntersectsWith(levelViewer.SelectionRectangle)).ToList();
                     levelViewer.SelectedSprites.AddRange(affectedSprites.Select(s => s.Item1));
                     levelViewer.Invalidate(levelViewer.SelectionRectangle);
-                    levelViewer.SelectionRectangle = Rectangle.Empty;
-                }
-                else if(leftMouseDrag)
-                {
-                    levelViewer.SelectedSprites.Clear();
                 }
                 rightMouseDrag = leftMouseDrag = leftMouseDragged = rightMouseDragged = false;
             }
