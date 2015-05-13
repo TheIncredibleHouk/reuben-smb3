@@ -16,12 +16,14 @@ namespace Reuben.Controllers
     {
         public GraphicsData GraphicsData { get; private set; }
         public Tile[] Tiles { get; private set; }
+        public Tile[] ExtraTiles { get; set; }
 
         private string lastFile;
         public GraphicsController()
         {
 
             Tiles = new Tile[16 * 4 * 256]; // 16 tiles, 4 rows per bank, 256 banks
+            ExtraTiles = new Tile[256];
             GraphicsData = new GraphicsData();
         }
 
@@ -68,6 +70,29 @@ namespace Reuben.Controllers
 
         }
 
+        public void LoadExtraGraphics(string fileName)
+        {
+            if (!File.Exists(fileName))
+            {
+                throw new ArgumentException("File not found.");
+            }
+            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            byte[] graphicsData = new byte[fs.Length];
+
+            fs.Read(graphicsData, 0, (int)fs.Length);
+            fs.Close();
+            int dataPointer = 0;
+            for (int i = 0; i < ExtraTiles.Length; i++)
+            {
+                byte[] nextTileChunk = new byte[16];
+                for (int k = 0; k < 16; k++)
+                {
+                    nextTileChunk[k] = graphicsData[dataPointer++];
+                }
+                ExtraTiles[i] = new Tile(nextTileChunk);
+            }
+        }
+
         public void LoadPalettes(string fileName)
         {
             lastFile = fileName;
@@ -87,6 +112,11 @@ namespace Reuben.Controllers
         public Tile GetTileByBankIndex(int bank, int index)
         {
             return Tiles[(bank * (16 * 4)) + index];
+        }
+
+        public Tile GetExtraTileByBankIndex(int bank, int index)
+        {
+            return ExtraTiles[(bank * (16 * 4)) + index];
         }
     }
 }

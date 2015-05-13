@@ -33,6 +33,7 @@ namespace Reuben.UI.Controls
 
             graphicsController = new GraphicsController();
             graphicsController.LoadGraphics(controller.Project.GraphicsFile);
+            graphicsController.LoadExtraGraphics(controller.Project.ExtraGraphicsFile);
             graphicsController.LoadPalettes(controller.Project.PaletteFile);
 
             levelController = new LevelController();

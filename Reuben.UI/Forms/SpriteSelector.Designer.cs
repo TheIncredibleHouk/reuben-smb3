@@ -33,9 +33,10 @@
             // 
             // sprites
             // 
-            this.sprites.Location = new System.Drawing.Point(12, 12);
+            this.sprites.Location = new System.Drawing.Point(-2, 0);
+            this.sprites.Margin = new System.Windows.Forms.Padding(0);
             this.sprites.Name = "sprites";
-            this.sprites.Size = new System.Drawing.Size(125, 23);
+            this.sprites.Size = new System.Drawing.Size(256, 23);
             this.sprites.TabIndex = 0;
             this.sprites.Text = "spritesViewer1";
             // 

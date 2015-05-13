@@ -42,13 +42,13 @@ namespace Reuben.UI
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
-                    Color c = reference[tile.Pixels[col, row]];
-
-                    if (c == Color.Transparent)
+                    int pixel = tile.Pixels[col, row];
+                    if (pixel == 0)
                     {
                         continue;
                     }
+                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
+                    Color c = reference[pixel];
 
                     *(dataPointer + offset) = c.B;
                     *(dataPointer + offset + 1) = c.G;
@@ -66,13 +66,13 @@ namespace Reuben.UI
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
-                    Color c = reference[tile.Pixels[col, 7 - row]];
-
-                    if (c == Color.Transparent)
+                    int pixel = tile.Pixels[col, 7- row];
+                    if (pixel == 0)
                     {
                         continue;
                     }
+                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
+                    Color c = reference[pixel];
 
                     *(dataPointer + offset) = c.B;
                     *(dataPointer + offset + 1) = c.G;
@@ -90,13 +90,13 @@ namespace Reuben.UI
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
-                    Color c = reference[tile.Pixels[7 - col, row]];
-
-                    if (c == Color.Transparent)
+                    int pixel = tile.Pixels[7 - col, row];
+                    if(pixel == 0)
                     {
                         continue;
                     }
+                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
+                    Color c = reference[pixel];
 
                     *(dataPointer + offset) = c.B;
                     *(dataPointer + offset + 1) = c.G;
@@ -114,13 +114,13 @@ namespace Reuben.UI
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
-                    Color c = reference[tile.Pixels[7 - col, 7 - row]];
-
-                    if (c == Color.Transparent)
+                    int pixel = tile.Pixels[7 - col, 7 - row];
+                    if(pixel == 0)
                     {
                         continue;
                     }
+                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
+                    Color c = reference[pixel];
 
                     *(dataPointer + offset) = c.B;
                     *(dataPointer + offset + 1) = c.G;

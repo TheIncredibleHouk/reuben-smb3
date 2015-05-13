@@ -19,6 +19,9 @@ namespace Reuben.Model
         public string GraphicsFile { get; set; }
 
         [DataMember]
+        public string ExtraGraphicsFile { get; set; }
+
+        [DataMember]
         public string PaletteFile { get; set; }
 
         [DataMember]

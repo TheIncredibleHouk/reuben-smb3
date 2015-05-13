@@ -32,6 +32,7 @@ namespace Reuben.Controllers
 
             Project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(fileName));
             Project.GraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\graphics.chr";
+            Project.ExtraGraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\extra.chr";
             Project.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
             Project.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
             Project.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
@@ -47,6 +48,7 @@ namespace Reuben.Controllers
             try
             {
                 Project.GraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\graphics.chr";
+                Project.ExtraGraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\extra.chr";
                 Project.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
                 Project.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
                 Project.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
