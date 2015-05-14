@@ -124,62 +124,40 @@ namespace Reuben.UI
             UpdateBGArea(column, row, width, height);
             Rectangle area = new Rectangle(column * 16, row * 16, width * 16, height * 16);
             UpdateLayers(area);
-            Invalidate(area);
             blockUpdating = true;
-        }
-
-        private bool spriteUpdating;
-        public void UpdateSpriteDisplay(int column, int row, int width, int height)
-        {
-            if (spriteUpdating)
-            {
-                return;
-            }
-
-            if (quickBGReference == null || palette == null || PatternTable == null || Graphics == null)
-            {
-                return;
-            }
-
-            UpdateSpriteArea(column, row, width, height);
-            Rectangle area = new Rectangle(row * 16, column * 16, width * 16, height * 16);
-            UpdateLayers(area);
-            Invalidate(area);
-            spriteUpdating = true;
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Sprite> SelectedSprites { get; set; }
-        private void UpdateSpriteArea(int row, int column, int width, int height)
+
+
+        public void UpdateSprites(IEnumerable<Sprite> sprites)
         {
-            Rectangle area = new Rectangle(column * 16, row * 16, width * 16, height * 16);
-            List<Tuple<Sprite, Rectangle>> spriteBounds = Sprites.GetBounds(Level.Sprites).ToList(); // generate all bound areas
-            List<Tuple<Sprite, Rectangle>> affectedSprites = spriteBounds.Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
-            int minX = Math.Max(spriteBounds.Min(r => r.Item2.X), 0);
-            int maxX = Math.Min(spriteBounds.Max(r => r.Item2.X), levelBitmapWidth);
-            int minY = Math.Max(spriteBounds.Min(r => r.Item2.Y), 0);
-            int maxY = Math.Max(spriteBounds.Max(r => r.Item2.Y), levelBitmapHeight);
+            UpdateSprites(sprites, Rectangle.Empty);
+        }
 
-            minX = minX / 16;
-            maxX = maxX / 16;
-            minY = minY / 16;
-            maxY = maxY / 16;
-
-            Rectangle updateArea = new Rectangle(minX, minY, maxX - minX, maxY - minY);
-            using (var gfx = System.Drawing.Graphics.FromImage(spriteBuffer))
+        public void UpdateSprites(IEnumerable<Sprite> sprites, Rectangle invalidatedArea)
+        {
+            List<Tuple<Sprite, Rectangle>> spriteBounds = Sprites.GetBounds(sprites).ToList();
+            Rectangle area = spriteBounds.Select(a => a.Item2).Combine();// generate all bound areas
+            if (invalidatedArea != Rectangle.Empty)
             {
-                gfx.FillRectangle(Brushes.Transparent, area);
+                area = Rectangle.Union(area, invalidatedArea);
             }
 
+            List<Tuple<Sprite, Rectangle>> affectedSprites = spriteBounds.Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
+            area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), invalidatedArea);
 
             BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-            Drawer.FillArea(updateArea.X, updateArea.Y, updateArea.Width, updateArea.Height, quickSpriteReference[1][0], bitmap);
+            Drawer.FillArea(area, Color.Transparent, bitmap);
             foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
             {
                 DrawSprite(sprite, bitmap);
             }
 
+            
             spriteBuffer.UnlockBits(bitmap);
+            UpdateLayers(area);
         }
 
         private void UpdateBGArea(int column, int row, int width, int height)
@@ -264,7 +242,6 @@ namespace Reuben.UI
             }
         }
 
-
         private void UpdateLayers(Rectangle area)
         {
             using (var gfx = System.Drawing.Graphics.FromImage(compositeBuffer))
@@ -272,6 +249,8 @@ namespace Reuben.UI
                 gfx.DrawImage(bgBuffer, area, area, GraphicsUnit.Pixel);
                 gfx.DrawImage(spriteBuffer, area, area, GraphicsUnit.Pixel);
             }
+
+            Invalidate(area);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -314,7 +293,7 @@ namespace Reuben.UI
                     }
                 }
 
-                blockUpdating = spriteUpdating = false;
+                blockUpdating = false;
             }
         }
 

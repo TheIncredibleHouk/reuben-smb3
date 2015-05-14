@@ -34,8 +34,9 @@ namespace Reuben.UI
             }
         }
 
-        public unsafe static void FillArea(int x, int y, int width, int height, Color color, BitmapData bitmap)
+        public unsafe static void FillArea(Rectangle area, Color color, BitmapData bitmap)
         {
+            int x = area.X, y = area.Y, width = area.Width, height = area.Height;
             byte* dataPointer = (byte*)bitmap.Scan0;
 
             for (int row = 0; row < height; row++)
@@ -47,7 +48,7 @@ namespace Reuben.UI
                     *(dataPointer + offset) = color.B;
                     *(dataPointer + offset + 1) = color.G;
                     *(dataPointer + offset + 2) = color.R;
-                    *(dataPointer + offset + 3) = 255;
+                    *(dataPointer + offset + 3) = color.A;
                 }
             }
         }

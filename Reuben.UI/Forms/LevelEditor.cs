@@ -51,8 +51,9 @@ namespace Reuben.UI
             blockSelector.PatternTable = levelViewer.PatternTable = graphics.MakePatternTable(new List<int>() { level.GraphicsID, level.GraphicsID + 1, 0xD0, 0xD1 });
             levelViewer.Sprites = sprites;
             spriteSelector.Graphics = levelViewer.Graphics = graphics;
+
+            levelViewer.UpdateSprites(level.Sprites);
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
-            levelViewer.UpdateSpriteDisplay(0, 0, 16 * 15, 0x1B);
 
             blockSelector.BlockList = levelViewer.LevelType.Blocks;
 
@@ -81,7 +82,7 @@ namespace Reuben.UI
         {
             spriteSelector.Palette = blockSelector.Palette = levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
-            levelViewer.UpdateSpriteDisplay(0, 0, 16 * 15, 0x1B);
+            levelViewer.UpdateSprites(level.Sprites);
             blockSelector.UpdateGraphics();
             spriteSelector.UpdateGraphics();
         }
@@ -130,26 +131,38 @@ namespace Reuben.UI
                 List<Tuple<Sprite, Rectangle>> boundCache = sprites.GetBounds(level.Sprites).ToList();
                 Sprite selectedSprite = boundCache.Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
 
+                mouseStartX = e.X;
+                mouseStartY = e.Y;
+                startCol = e.X / 16;
+                startRow = e.Y / 16;
                 if (selectedSprite != null)
                 {
-                    if (levelViewer.SelectedSprites.Count > 0)
+                    if (levelViewer.SelectedSprites.Count > 0 && !levelViewer.SelectedSprites.Contains(selectedSprite))
                     {
 
                         List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
                         affectedArea.Add(sprites.GetClipBounds(selectedSprite)); // add the new sprite to the list
                         Rectangle updateArea = affectedArea.Combine();
                         levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
+                        levelViewer.SelectedSprites.Clear();
+                        levelViewer.SelectedSprites.Add(selectedSprite);
+                        movingSprites.Clear();
+                        movingSprites.Add(selectedSprite);
+                    }
+                    else if (levelViewer.SelectedSprites.Count > 0 && levelViewer.SelectedSprites.Contains(selectedSprite))
+                    {
                     }
                     else
                     {
                         Rectangle updateArea = sprites.GetClipBounds(selectedSprite);
                         levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
+                        levelViewer.SelectedSprites.Clear();
+                        levelViewer.SelectedSprites.Add(selectedSprite);
+                        movingSprites.Clear();
+                        movingSprites.Add(selectedSprite);
                     }
 
-                    levelViewer.SelectedSprites.Clear();
-                    levelViewer.SelectedSprites.Add(selectedSprite);
-                    movingSprites.Clear();
-                    movingSprites.Add(selectedSprite.MakeCopy());
+
                     leftMouseDrag = true;
                 }
                 else
@@ -165,10 +178,6 @@ namespace Reuben.UI
                         rightMouseDrag = true;
                     }
 
-                    int col = e.X / 16;
-                    int row = e.Y / 16;
-                    mouseStartX = e.X;
-                    mouseStartY = e.Y;
                     var affectedArea = sprites.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
                     if (affectedArea.Count > 0)
                     {
@@ -176,6 +185,8 @@ namespace Reuben.UI
                         levelViewer.SelectedSprites.Clear();
                         levelViewer.SelectionRectangle = Rectangle.Empty;
                     }
+
+                    leftMouseDrag = true;
                 }
             }
         }
@@ -186,6 +197,7 @@ namespace Reuben.UI
         private bool rightMouseDragged = false;
 
         private List<Sprite> movingSprites = new List<Sprite>();
+        private int startCol, startRow;
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
 
@@ -217,33 +229,23 @@ namespace Reuben.UI
                 }
                 else if (leftMouseDrag && movingSprites.Count > 0)
                 {
-                    minX = 1000;
-                    minY = 1000;
-                    maxX = -1;
-                    maxY = -1;
-                    for (int i = 0; i < movingSprites.Count; i++)
+                    int index = 0;
+                    int colChange = (e.X / 16) - startCol;
+                    int rowChange = (e.Y / 16) - startRow;
+                    if (colChange != 0 || rowChange != 0)
                     {
-                        levelViewer.SelectedSprites[i].X = movingSprites[i].X + (mouseStartX - e.X);
-                        levelViewer.SelectedSprites[i].Y = movingSprites[i].Y + (mouseStartX - e.Y);
-                        if (levelViewer.SelectedSprites[i].X < minX)
+                        Rectangle invalidArea = sprites.GetClipBounds(levelViewer.SelectedSprites).Combine();
+                        foreach (Sprite sprite in movingSprites)
                         {
-                            minX = levelViewer.SelectedSprites[i].X;
+                            levelViewer.SelectedSprites[index].X = sprite.X + colChange;
+                            levelViewer.SelectedSprites[index].Y = sprite.Y + rowChange;
+                            index++;
                         }
 
-                        if (levelViewer.SelectedSprites[i].X > maxX)
-                        {
-                            maxX = levelViewer.SelectedSprites[i].X;
-                        }
+                        startCol = e.X / 16;
+                        startRow = e.Y / 16;
 
-                        if (levelViewer.SelectedSprites[i].Y < minY)
-                        {
-                            minY = levelViewer.SelectedSprites[i].Y;
-                        }
-
-                        if (levelViewer.SelectedSprites[i].Y > maxY)
-                        {
-                            maxY = levelViewer.SelectedSprites[i].Y;
-                        }
+                        levelViewer.UpdateSprites(levelViewer.SelectedSprites, invalidArea);
                     }
                 }
             }
@@ -374,7 +376,9 @@ namespace Reuben.UI
                     levelViewer.SelectedSprites.Clear();
                     List<Tuple<Sprite, Rectangle>> affectedSprites = boundCache.Where(t => t.Item2.IntersectsWith(levelViewer.SelectionRectangle)).ToList();
                     levelViewer.SelectedSprites.AddRange(affectedSprites.Select(s => s.Item1));
-                    levelViewer.Invalidate(levelViewer.SelectionRectangle);
+                    movingSprites.Clear();
+                    movingSprites.AddRange(levelViewer.SelectedSprites.MakeCopy());
+                    levelViewer.SelectionRectangle = Rectangle.Empty;
                 }
                 rightMouseDrag = leftMouseDrag = leftMouseDragged = rightMouseDragged = false;
             }

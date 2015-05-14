@@ -87,6 +87,12 @@ namespace Reuben.Controllers
             return new Rectangle(r.X + sprite.X * 16, r.Y + sprite.Y * 16, r.Width, r.Height);
         }
 
+
+        public IEnumerable<Rectangle> GetClipBounds(IEnumerable<Sprite> sprites)
+        {
+            return sprites.Select(s => GetClipBounds(s));
+        }
+
         public IEnumerable<Tuple<Sprite, Rectangle>> GetBounds(IEnumerable<Sprite> sprites)
         {
             return sprites.Select(s => new Tuple<Sprite, Rectangle>(s, GetClipBounds(s)));
