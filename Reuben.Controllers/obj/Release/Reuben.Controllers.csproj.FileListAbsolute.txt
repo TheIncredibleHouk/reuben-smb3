@@ -9,3 +9,14 @@ F:\ROM Hacking\Reuben\Reuben.Controllers\bin\Release\Newtonsoft.Json.xml
 F:\ROM Hacking\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.csprojResolveAssemblyReference.cache
 F:\ROM Hacking\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.dll
 F:\ROM Hacking\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.pdb
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Reuben.Controllers.dll
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Reuben.Controllers.pdb
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Newtonsoft.Json.dll
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Reuben.Graphics.dll
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Reuben.Model.dll
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Reuben.Graphics.pdb
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Reuben.Model.pdb
+C:\Projects\Personal\Reuben\Reuben.Controllers\bin\Release\Newtonsoft.Json.xml
+C:\Projects\Personal\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.csprojResolveAssemblyReference.cache
+C:\Projects\Personal\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.dll
+C:\Projects\Personal\Reuben\Reuben.Controllers\obj\Release\Reuben.Controllers.pdb

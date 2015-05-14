@@ -146,8 +146,6 @@ namespace Reuben.UI
                         levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
                         levelViewer.SelectedSprites.Clear();
                         levelViewer.SelectedSprites.Add(selectedSprite);
-                        movingSprites.Clear();
-                        movingSprites.Add(selectedSprite);
                     }
                     else if (levelViewer.SelectedSprites.Count > 0 && levelViewer.SelectedSprites.Contains(selectedSprite))
                     {
@@ -158,8 +156,6 @@ namespace Reuben.UI
                         levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
                         levelViewer.SelectedSprites.Clear();
                         levelViewer.SelectedSprites.Add(selectedSprite);
-                        movingSprites.Clear();
-                        movingSprites.Add(selectedSprite);
                     }
 
 
@@ -196,7 +192,6 @@ namespace Reuben.UI
         private bool rightMouseDrag = false;
         private bool rightMouseDragged = false;
 
-        private List<Sprite> movingSprites = new List<Sprite>();
         private int startCol, startRow;
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
@@ -227,25 +222,25 @@ namespace Reuben.UI
                     leftMouseDragged = leftMouseDrag;
                     levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
                 }
-                else if (leftMouseDrag && movingSprites.Count > 0)
+                else if (leftMouseDrag && levelViewer.SelectedSprites.Count > 0)
                 {
                     int index = 0;
                     int colChange = (e.X / 16) - startCol;
                     int rowChange = (e.Y / 16) - startRow;
                     if (colChange != 0 || rowChange != 0)
                     {
-                        Rectangle invalidArea = sprites.GetClipBounds(levelViewer.SelectedSprites).Combine();
-                        foreach (Sprite sprite in movingSprites)
+                        IEnumerable<Rectangle> existingAreas = sprites.GetClipBounds(levelViewer.SelectedSprites).ToList();
+                        foreach (Sprite sprite in levelViewer.SelectedSprites)
                         {
-                            levelViewer.SelectedSprites[index].X = sprite.X + colChange;
-                            levelViewer.SelectedSprites[index].Y = sprite.Y + rowChange;
+                            levelViewer.SelectedSprites[index].X += colChange;
+                            levelViewer.SelectedSprites[index].Y += rowChange;
                             index++;
                         }
 
                         startCol = e.X / 16;
                         startRow = e.Y / 16;
 
-                        levelViewer.UpdateSprites(levelViewer.SelectedSprites, invalidArea);
+                        levelViewer.UpdateSprites(levelViewer.SelectedSprites, existingAreas);
                     }
                 }
             }
@@ -376,8 +371,6 @@ namespace Reuben.UI
                     levelViewer.SelectedSprites.Clear();
                     List<Tuple<Sprite, Rectangle>> affectedSprites = boundCache.Where(t => t.Item2.IntersectsWith(levelViewer.SelectionRectangle)).ToList();
                     levelViewer.SelectedSprites.AddRange(affectedSprites.Select(s => s.Item1));
-                    movingSprites.Clear();
-                    movingSprites.AddRange(levelViewer.SelectedSprites.MakeCopy());
                     levelViewer.SelectionRectangle = Rectangle.Empty;
                 }
                 rightMouseDrag = leftMouseDrag = leftMouseDragged = rightMouseDragged = false;

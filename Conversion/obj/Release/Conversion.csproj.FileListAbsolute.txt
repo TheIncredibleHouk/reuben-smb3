@@ -13,3 +13,18 @@ F:\ROM Hacking\Reuben\Conversion\bin\Release\Newtonsoft.Json.xml
 F:\ROM Hacking\Reuben\Conversion\obj\Release\Conversion.csprojResolveAssemblyReference.cache
 F:\ROM Hacking\Reuben\Conversion\obj\Release\Conversion.dll
 F:\ROM Hacking\Reuben\Conversion\obj\Release\Conversion.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Conversion.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Conversion.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Daiz.Library.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Daiz.NES.Reuben.ProjectManagement.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Reuben.Controllers.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Reuben.Model.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Reuben.Graphics.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Newtonsoft.Json.dll
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Reuben.Controllers.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Reuben.Model.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Reuben.Graphics.pdb
+C:\Projects\Personal\Reuben\Conversion\bin\Release\Newtonsoft.Json.xml
+C:\Projects\Personal\Reuben\Conversion\obj\Release\Conversion.csprojResolveAssemblyReference.cache
+C:\Projects\Personal\Reuben\Conversion\obj\Release\Conversion.dll
+C:\Projects\Personal\Reuben\Conversion\obj\Release\Conversion.pdb

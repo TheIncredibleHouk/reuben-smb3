@@ -2,3 +2,7 @@ F:\ROM Hacking\Reuben\Reuben.Model\bin\Release\Reuben.Model.dll
 F:\ROM Hacking\Reuben\Reuben.Model\bin\Release\Reuben.Model.pdb
 F:\ROM Hacking\Reuben\Reuben.Model\obj\Release\Reuben.Model.dll
 F:\ROM Hacking\Reuben\Reuben.Model\obj\Release\Reuben.Model.pdb
+C:\Projects\Personal\Reuben\Reuben.Model\bin\Release\Reuben.Model.dll
+C:\Projects\Personal\Reuben\Reuben.Model\bin\Release\Reuben.Model.pdb
+C:\Projects\Personal\Reuben\Reuben.Model\obj\Release\Reuben.Model.dll
+C:\Projects\Personal\Reuben\Reuben.Model\obj\Release\Reuben.Model.pdb

@@ -21,3 +21,28 @@ F:\ROM Hacking\Reuben\Reuben.UI\bin\Release\Reuben.Model.pdb
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Release\Newtonsoft.Json.xml
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Release\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Release\Reuben.UI.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.UI.exe.config
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.UI.exe
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.UI.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Newtonsoft.Json.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Controllers.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Graphics.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Model.dll
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Controllers.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Graphics.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Model.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Newtonsoft.Json.xml
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.csprojResolveAssemblyReference.cache
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.Controls.ProjectView.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.BlockSelector.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.Confirm.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.LevelEditor.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.PaletteManager.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.Prompt.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.SpriteSelector.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.Main.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.Properties.Resources.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.StringManager.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.csproj.GenerateResource.Cache
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.exe
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.pdb

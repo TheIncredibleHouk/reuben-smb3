@@ -133,29 +133,33 @@ namespace Reuben.UI
 
         public void UpdateSprites(IEnumerable<Sprite> sprites)
         {
-            UpdateSprites(sprites, Rectangle.Empty);
+            UpdateSprites(sprites, null);
         }
 
-        public void UpdateSprites(IEnumerable<Sprite> sprites, Rectangle invalidatedArea)
+        public void UpdateSprites(IEnumerable<Sprite> sprites, IEnumerable<Rectangle> clearAreas)
         {
             List<Tuple<Sprite, Rectangle>> spriteBounds = Sprites.GetBounds(sprites).ToList();
             Rectangle area = spriteBounds.Select(a => a.Item2).Combine();// generate all bound areas
-            if (invalidatedArea != Rectangle.Empty)
-            {
-                area = Rectangle.Union(area, invalidatedArea);
-            }
-
-            List<Tuple<Sprite, Rectangle>> affectedSprites = spriteBounds.Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
-            area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), invalidatedArea);
 
             BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-            Drawer.FillArea(area, Color.Transparent, bitmap);
+            if (clearAreas != null)
+            {
+                area = Rectangle.Union(area, clearAreas.Combine());
+                foreach (var r in clearAreas)
+                {
+                    Drawer.FillArea(new Rectangle(r.X, r.Y, r.Width + 1, r.Height + 1), Color.Transparent, bitmap);
+                }
+            }
+
+            List<Tuple<Sprite, Rectangle>> affectedSprites = Sprites.GetBounds(Level.Sprites).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
+            area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), area);
+
             foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
             {
                 DrawSprite(sprite, bitmap);
             }
 
-            
+
             spriteBuffer.UnlockBits(bitmap);
             UpdateLayers(area);
         }

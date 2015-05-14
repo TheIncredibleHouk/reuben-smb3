@@ -41,7 +41,7 @@ namespace Reuben.UI
 
             for (int row = 0; row < height; row++)
             {
-                for (int col = 0; col < height; col++)
+                for (int col = 0; col < width; col++)
                 {
                     long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 4) + (x * 4));
 
