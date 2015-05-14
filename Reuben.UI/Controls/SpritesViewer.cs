@@ -21,7 +21,7 @@ namespace Reuben.UI.Controls
 
         public SpritesViewer()
         {
-            drawBoundCache = new List<Tuple<Sprite, Rectangle>>();
+            SpriteDrawBoundsCache = new List<Tuple<Sprite, Rectangle>>();
             this.Width = 256;
         }
 
@@ -67,9 +67,9 @@ namespace Reuben.UI.Controls
             set
             {
                 sprites = value;
-                drawBoundCache.Clear();
+                SpriteDrawBoundsCache.Clear();
                 int lastY = 0, targetY =0;
-                foreach (SpriteDefinition def in Sprites.SpriteData.Definitions)
+                foreach (SpriteDefinition def in Sprites.SpriteData.Definitions.OrderBy(d => d.Name.ToLower()))
                 {
                     Sprite s = new Sprite();
                     s.X = 1;
@@ -88,7 +88,7 @@ namespace Reuben.UI.Controls
                     }
 
                     lastY = drawArea.Bottom + 16;
-                    drawBoundCache.Add(new Tuple<Sprite, Rectangle>(s, drawArea));
+                    SpriteDrawBoundsCache.Add(new Tuple<Sprite, Rectangle>(s, drawArea));
                 }
 
                 buffer = new Bitmap(256, lastY, PixelFormat.Format32bppArgb);
@@ -98,7 +98,7 @@ namespace Reuben.UI.Controls
         }
 
 
-        private List<Tuple<Sprite, Rectangle>> drawBoundCache;
+        public List<Tuple<Sprite, Rectangle>> SpriteDrawBoundsCache { get; private set; }
 
         private Palette palette;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -149,7 +149,7 @@ namespace Reuben.UI.Controls
             
             BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
             
-            foreach (var item in drawBoundCache)
+            foreach (var item in SpriteDrawBoundsCache)
             {
                 DrawSprite(item.Item1, data);
             }
@@ -254,7 +254,6 @@ namespace Reuben.UI.Controls
                 Invalidate(new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1));
             }
         }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             if (buffer == null)

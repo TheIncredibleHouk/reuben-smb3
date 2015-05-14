@@ -39,6 +39,7 @@
             this.sprites.Size = new System.Drawing.Size(256, 23);
             this.sprites.TabIndex = 0;
             this.sprites.Text = "spritesViewer1";
+            this.sprites.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_MouseDown);
             // 
             // SpriteSelector
             // 
@@ -52,9 +53,6 @@
             this.Name = "SpriteSelector";
             this.Text = "Sprites";
             this.SizeChanged += new System.EventHandler(this.SpriteSelector_SizeChanged_1);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_Move);
-            this.Move += new System.EventHandler(this.SpriteSelector_Move);
             this.ResumeLayout(false);
 
         }

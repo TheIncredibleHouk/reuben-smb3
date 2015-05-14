@@ -33,6 +33,7 @@ namespace Reuben.UI
             set { sprites.Palette = value; }
         }
 
+        private Sprite spriteList = new Sprite();
         public SpriteController Sprites
         {
             get { return sprites.Sprites; }
@@ -55,6 +56,7 @@ namespace Reuben.UI
         private void SpriteSelector_MouseDown(object sender, MouseEventArgs e)
         {
             Editor.EditMode = EditMode.Sprites;
+            SelectedSprite = sprites.SpriteDrawBoundsCache.Where(r => r.Item2.Contains(e.X, e.Y)).Select(r => r.Item1).FirstOrDefault();
         }
 
         public bool Snapped { get; set; }
@@ -73,6 +75,27 @@ namespace Reuben.UI
         {
             Snapped = false;
 
+        }
+
+        private Sprite selectedSprite;
+        public Sprite SelectedSprite
+        {
+            get
+            {
+                return selectedSprite;
+            }
+            set
+            {
+                selectedSprite = value;
+                if (value != null)
+                {
+                    sprites.SelectionRectangle = Sprites.GetClipBounds(selectedSprite);
+                }
+                else
+                {
+                    sprites.SelectionRectangle = Rectangle.Empty;
+                }
+            }
         }
     }
 }
