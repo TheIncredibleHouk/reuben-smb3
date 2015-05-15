@@ -28,8 +28,6 @@ namespace Reuben.UI
         private StringController strings;
         private SpriteController sprites;
 
-        private BlockSelector blockSelector;
-        private SpriteSelector spriteSelector;
         private bool initializing = false;
         public void LoadLevel(LevelInfo info, LevelController levelController, GraphicsController graphicsController, StringController stringController, SpriteController spriteController)
         {
@@ -40,8 +38,6 @@ namespace Reuben.UI
             levelInfo = info;
             levelViewer.Level = level = levels.LoadLevel(info.File);
             levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
-            blockSelector = new BlockSelector();
-            spriteSelector = new SpriteSelector();
 
             spriteSelector.ColorReference = blockSelector.ColorReference = paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
 
@@ -71,10 +67,8 @@ namespace Reuben.UI
 
             UpdateScreenSize();
 
-            blockSelector.Show();
-            spriteSelector.Show();
             blockSelector.Editor = spriteSelector.Editor = this;
-            MoveSelectors();
+
             initializing = false;
         }
 
@@ -135,54 +129,113 @@ namespace Reuben.UI
                 mouseStartY = e.Y;
                 startCol = e.X / 16;
                 startRow = e.Y / 16;
-                if (selectedSprite != null)
+                if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 {
-                    if (levelViewer.SelectedSprites.Count > 0 && !levelViewer.SelectedSprites.Contains(selectedSprite))
+                    if (selectedSprite != null)
                     {
+                        if (levelViewer.SelectedSprites.Count > 0 && !levelViewer.SelectedSprites.Contains(selectedSprite))
+                        {
 
-                        List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
-                        affectedArea.Add(sprites.GetClipBounds(selectedSprite)); // add the new sprite to the list
-                        Rectangle updateArea = affectedArea.Combine();
-                        levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
-                        levelViewer.SelectedSprites.Clear();
-                        levelViewer.SelectedSprites.Add(selectedSprite);
-                    }
-                    else if (levelViewer.SelectedSprites.Count > 0 && levelViewer.SelectedSprites.Contains(selectedSprite))
-                    {
+                            List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
+                            affectedArea.Add(sprites.GetClipBounds(selectedSprite)); // add the new sprite to the list
+                            Rectangle updateArea = affectedArea.Combine();
+                            levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
+                            levelViewer.SelectedSprites.Clear();
+                            levelViewer.SelectedSprites.Add(selectedSprite);
+                        }
+                        else if (levelViewer.SelectedSprites.Count > 0 && levelViewer.SelectedSprites.Contains(selectedSprite))
+                        {
+                        }
+                        else
+                        {
+                            Rectangle updateArea = sprites.GetClipBounds(selectedSprite);
+                            levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
+                            levelViewer.SelectedSprites.Clear();
+                            levelViewer.SelectedSprites.Add(selectedSprite);
+                        }
+
+
+                        leftMouseDrag = true;
                     }
                     else
                     {
-                        Rectangle updateArea = sprites.GetClipBounds(selectedSprite);
-                        levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
-                        levelViewer.SelectedSprites.Clear();
-                        levelViewer.SelectedSprites.Add(selectedSprite);
+                        if (e.Button == System.Windows.Forms.MouseButtons.Left && !rightMouseDrag)
+                        {
+                            levelViewer.SelectionType = SelectionType.Draw;
+                            leftMouseDrag = true;
+                        }
+                        else if (e.Button == System.Windows.Forms.MouseButtons.Right && !leftMouseDrag)
+                        {
+                            levelViewer.SelectionType = SelectionType.Select;
+                            rightMouseDrag = true;
+                        }
+
+                        var affectedArea = sprites.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
+                        if (affectedArea.Count > 0)
+                        {
+                            levelViewer.Invalidate(affectedArea.Combine());
+                            levelViewer.SelectedSprites.Clear();
+                            levelViewer.SelectionRectangle = Rectangle.Empty;
+                        }
+
+                        leftMouseDrag = true;
                     }
-
-
-                    leftMouseDrag = true;
                 }
                 else
                 {
-                    if (e.Button == System.Windows.Forms.MouseButtons.Left && !rightMouseDrag)
+                    if (leftMouseDrag)
                     {
-                        levelViewer.SelectionType = SelectionType.Draw;
+                        List<Tuple<Sprite, Rectangle>> affectedSprites = boundCache.Where(t => t.Item2.IntersectsWith(levelViewer.SelectionRectangle) || t.Item2.Contains(e.X, e.Y)).ToList();
+                        foreach (var s in affectedSprites)
+                        {
+                            level.Sprites.Remove(s.Item1);
+                        }
+
+                        levelViewer.SelectedSprites.Clear();
+                        levelViewer.UpdateSprites(new List<Sprite>(), affectedSprites.Select(s => s.Item2));
+                    }
+
+                    else if (spriteSelector.SelectedSprite != null)
+                    {
+                        Sprite clickedSprite = sprites.GetBounds(level.Sprites).ToList().Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
+                        if (clickedSprite != null)
+                        {
+                            if (levelViewer.SelectedSprites.Contains(clickedSprite))
+                            {
+                                var affectedArea = sprites.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
+                                foreach (Sprite s in levelViewer.SelectedSprites)
+                                {
+                                    s.ObjectID = spriteSelector.SelectedSprite.ObjectID;
+                                }
+
+                                levelViewer.UpdateSprites(levelViewer.SelectedSprites, affectedArea);
+                            }
+                            else
+                            {
+                                var affectedArea = sprites.GetClipBounds(selectedSprite);
+                                levelViewer.SelectedSprites.Clear();
+                                levelViewer.SelectedSprites.Add(selectedSprite);
+                                foreach (Sprite s in levelViewer.SelectedSprites)
+                                {
+                                    s.ObjectID = spriteSelector.SelectedSprite.ObjectID;
+                                }
+
+                                levelViewer.UpdateSprites(levelViewer.SelectedSprites, new List<Rectangle>() { affectedArea });
+                            }
+                        }
+                        else
+                        {
+                            var affectedArea = sprites.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
+                            selectedSprite = spriteSelector.SelectedSprite.MakeCopy();
+                            selectedSprite.X = startCol;
+                            selectedSprite.Y = startRow;
+                            level.Sprites.Add(selectedSprite);
+                            levelViewer.SelectedSprites.Clear();
+                            levelViewer.SelectedSprites.Add(selectedSprite);
+                            levelViewer.UpdateSprites(levelViewer.SelectedSprites, affectedArea);
+                        }
                         leftMouseDrag = true;
                     }
-                    else if (e.Button == System.Windows.Forms.MouseButtons.Right && !leftMouseDrag)
-                    {
-                        levelViewer.SelectionType = SelectionType.Select;
-                        rightMouseDrag = true;
-                    }
-
-                    var affectedArea = sprites.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
-                    if (affectedArea.Count > 0)
-                    {
-                        levelViewer.Invalidate(affectedArea.Combine());
-                        levelViewer.SelectedSprites.Clear();
-                        levelViewer.SelectionRectangle = Rectangle.Empty;
-                    }
-
-                    leftMouseDrag = true;
                 }
             }
         }
@@ -208,6 +261,38 @@ namespace Reuben.UI
 
             if (EditMode == UI.EditMode.Blocks)
             {
+                Block block = levels.LevelData.Types[level.LevelType].Blocks[level.Data[e.X / 16, e.Y / 16]];
+                switch (block.BlockSolidity)
+                {
+                    case 0x00:
+                    case 0x10:
+                    case 0x20:
+                    case 0x30:
+                        solidity.Text = strings.GetStringList("solidity")[block.BlockSolidity >> 4];
+                        interaction.Text = strings.GetStringList("interaction")[block.BlockInteraction];
+                        break;
+
+                    case 0x40:
+                        solidity.Text = strings.GetStringList("solidity")[4];
+                        interaction.Text = strings.GetStringList("solid interaction")[block.BlockInteraction];
+                        break;
+
+                    case 0x80:
+                        solidity.Text = strings.GetStringList("solidity")[5];
+                        interaction.Text = strings.GetStringList("interaction")[block.BlockInteraction];
+                        break;
+
+                    case 0xC0:
+                        solidity.Text = strings.GetStringList("solidity")[6];
+                        interaction.Text = strings.GetStringList("solid interaction")[block.BlockInteraction];
+                        break;
+
+                    case 0xF0:
+                        solidity.Text = strings.GetStringList("solidity")[7];
+                        interaction.Text = strings.GetStringList("item box")[block.BlockInteraction];
+                        break;
+                }
+
                 if (leftMouseDrag || rightMouseDrag)
                 {
                     leftMouseDragged = leftMouseDrag;
@@ -377,37 +462,14 @@ namespace Reuben.UI
             }
         }
 
-        public void MoveSelectors()
-        {
-            if (blockSelector != null && blockSelector.Snapped)
-            {
-                blockSelector.Location = new Point(this.Location.X - blockSelector.Width, this.Location.Y);
-                blockSelector.Snapped = true;
-            }
-
-            if (spriteSelector != null && spriteSelector.Snapped)
-            {
-                if (blockSelector.Snapped)
-                {
-                    spriteSelector.Location = new Point(this.Location.X - blockSelector.Width, blockSelector.Bottom);
-                }
-                else
-                {
-                    spriteSelector.Location = new Point(this.Location.X - spriteSelector.Width, this.Location.Y);
-                }
-                spriteSelector.Snapped = true;
-            }
-        }
         protected override void OnClosed(EventArgs e)
         {
-            blockSelector.Close();
-            spriteSelector.Close();
             base.OnClosed(e);
         }
 
         private void LevelEditor_Move(object sender, EventArgs e)
         {
-            MoveSelectors();
+
         }
 
         private void Undo()
@@ -450,10 +512,7 @@ namespace Reuben.UI
 
         private void LevelEditor_SizeChanged(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized || WindowState == FormWindowState.Normal)
-            {
-                blockSelector.WindowState = spriteSelector.WindowState = WindowState;
-            }
+
         }
 
         public void UpdateScreenSize()
@@ -473,6 +532,11 @@ namespace Reuben.UI
         private void editList_SelectedIndexChanged(object sender, EventArgs e)
         {
             levelViewer.EditMode = EditMode;
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
     }

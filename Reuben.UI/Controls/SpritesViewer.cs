@@ -67,33 +67,10 @@ namespace Reuben.UI.Controls
             set
             {
                 sprites = value;
-                SpriteDrawBoundsCache.Clear();
-                int lastY = 0, targetY =0;
-                foreach (SpriteDefinition def in Sprites.SpriteData.Definitions.OrderBy(d => d.Name.ToLower()))
-                {
-                    Sprite s = new Sprite();
-                    s.X = 1;
-                    targetY = s.Y = lastY / 16 + 1;
-                    s.ObjectID = def.GameID;
-                    Rectangle drawArea = Sprites.GetClipBounds(s);
-                    while (drawArea.X < 0)
-                    {
-                        s.X++;
-                        drawArea = Sprites.GetClipBounds(s);
-                    }
-                    while (drawArea.Y < targetY * 16)
-                    {
-                        s.Y++;
-                        drawArea = Sprites.GetClipBounds(s);
-                    }
+                int resultHeight = FilterSprites("");
+                buffer = new Bitmap(256, resultHeight, PixelFormat.Format32bppArgb);
 
-                    lastY = drawArea.Bottom + 16;
-                    SpriteDrawBoundsCache.Add(new Tuple<Sprite, Rectangle>(s, drawArea));
-                }
-
-                buffer = new Bitmap(256, lastY, PixelFormat.Format32bppArgb);
-                
-                this.Height = lastY;
+                this.Height = resultHeight;
             }
         }
 
@@ -128,11 +105,6 @@ namespace Reuben.UI.Controls
                     quickSpriteReference[0][1] = Color.Black;
                     quickSpriteReference[0][2] = Color.White;
                     quickSpriteReference[0][3] = Color.White;
-
-                    using (Graphics gfx = System.Drawing.Graphics.FromImage(buffer))
-                    {
-                        gfx.Clear(quickSpriteReference[1][0]);
-                    }
                 }
             }
         }
@@ -146,9 +118,13 @@ namespace Reuben.UI.Controls
                 return;
             }
 
-            
+            using (Graphics gfx = System.Drawing.Graphics.FromImage(buffer))
+            {
+                gfx.Clear(quickSpriteReference[1][0]);
+            }
+
             BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-            
+
             foreach (var item in SpriteDrawBoundsCache)
             {
                 DrawSprite(item.Item1, data);
@@ -156,6 +132,47 @@ namespace Reuben.UI.Controls
 
             buffer.UnlockBits(data);
 
+        }
+
+        public int FilterSprites(string filter)
+        {
+            filter = filter.ToLower();
+            IEnumerable<SpriteDefinition> definitions;
+            if (filter.Length > 0)
+            {
+                definitions = Sprites.SpriteData.Definitions.Where(d => d.Name.ToLower().Contains(filter));
+            }
+            else
+            {
+                definitions = Sprites.SpriteData.Definitions;
+            }
+
+            SpriteDrawBoundsCache.Clear();
+            int lastY = 0, targetY = 0;
+            foreach (SpriteDefinition def in definitions.OrderBy(d => d.Name.ToUpper()))
+            {
+                Sprite s = new Sprite();
+                s.X = 1;
+                targetY = s.Y = lastY / 16 + 1;
+                s.ObjectID = def.GameID;
+                Rectangle drawArea = Sprites.GetClipBounds(s);
+                while (drawArea.X < 0)
+                {
+                    s.X++;
+                    drawArea = Sprites.GetClipBounds(s);
+                }
+                while (drawArea.Y < targetY * 16)
+                {
+                    s.Y++;
+                    drawArea = Sprites.GetClipBounds(s);
+                }
+
+                lastY = drawArea.Bottom + 16;
+                SpriteDrawBoundsCache.Add(new Tuple<Sprite, Rectangle>(s, drawArea));
+            }
+
+            Invalidate();
+            return lastY;
         }
 
         private void DrawSprite(Sprite sprite, BitmapData bitmap)
@@ -212,7 +229,7 @@ namespace Reuben.UI.Controls
                 }
             }
 
-            string safeName = definition.Name.ToUpper();
+            string safeName = definition.Name.ToUpper().Trim();
             for (int i = 0; i < safeName.Length; i++)
             {
                 if (i >= 32)
@@ -220,7 +237,7 @@ namespace Reuben.UI.Controls
                     break;
                 }
 
-                int tile = safeName[i] - 'A';
+                int tile = safeName[i] - '0';
                 if (tile < 0)
                 {
                     continue;
@@ -273,7 +290,7 @@ namespace Reuben.UI.Controls
 
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
-            
+
         }
     }
 }

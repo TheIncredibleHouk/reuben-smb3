@@ -17,6 +17,11 @@ namespace Reuben.UI
 
         public static Rectangle Combine(this IEnumerable<Rectangle> rectangles)
         {
+            if (rectangles.Count() == 0)
+            {
+                return Rectangle.Empty;
+            }
+
             Rectangle original = rectangles.First();
             foreach (var r in rectangles)
             {

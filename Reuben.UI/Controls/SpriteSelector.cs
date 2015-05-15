@@ -13,20 +13,21 @@ using Reuben.Controllers;
 
 namespace Reuben.UI
 {
-    public partial class SpriteSelector : Form
+    public partial class SpriteSelector : UserControl
     {
         public SpriteSelector()
         {
             InitializeComponent();
         }
 
-
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color[] ColorReference
         {
             get { return sprites.ColorReference; }
             set { sprites.ColorReference = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Palette Palette
         {
             get { return sprites.Palette; }
@@ -34,12 +35,14 @@ namespace Reuben.UI
         }
 
         private Sprite spriteList = new Sprite();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SpriteController Sprites
         {
             get { return sprites.Sprites; }
             set { sprites.Sprites = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public GraphicsController Graphics
         {
             get { return sprites.Graphics; }
@@ -51,30 +54,13 @@ namespace Reuben.UI
             sprites.UpdateGraphics();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LevelEditor Editor { get; set; }
 
         private void SpriteSelector_MouseDown(object sender, MouseEventArgs e)
         {
             Editor.EditMode = EditMode.Sprites;
             SelectedSprite = sprites.SpriteDrawBoundsCache.Where(r => r.Item2.Contains(e.X, e.Y)).Select(r => r.Item1).FirstOrDefault();
-        }
-
-        public bool Snapped { get; set; }
-
-        private void SpriteSelector_SizeChanged_1(object sender, EventArgs e)
-        {
-            if (Editor != null && this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-                Snapped = true;
-                Editor.MoveSelectors();
-            }
-        }
-
-        private void SpriteSelector_Move(object sender, EventArgs e)
-        {
-            Snapped = false;
-
         }
 
         private Sprite selectedSprite;
@@ -96,6 +82,18 @@ namespace Reuben.UI
                     sprites.SelectionRectangle = Rectangle.Empty;
                 }
             }
+        }
+
+        private void filter_TextChanged(object sender, EventArgs e)
+        {
+            sprites.FilterSprites(filter.Text);
+            sprites.UpdateGraphics();
+
+        }
+
+        private void sprites_MouseMove(object sender, MouseEventArgs e)
+        {
+            mouseCap.Focus();
         }
     }
 }

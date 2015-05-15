@@ -49,21 +49,41 @@
             this.label2 = new System.Windows.Forms.Label();
             this.musicList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.interaction = new System.Windows.Forms.Label();
+            this.solidity = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.levelViewer = new Reuben.UI.LevelViewer();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
+            this.blockSelector = new Reuben.UI.BlockSelector();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
             this.panel23.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.lvlHost);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 177);
+            this.panel1.Location = new System.Drawing.Point(257, 177);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(692, 502);
+            this.panel1.Size = new System.Drawing.Size(659, 425);
             this.panel1.TabIndex = 0;
             // 
             // lvlHost
@@ -77,6 +97,7 @@
             // 
             // panel23
             // 
+            this.panel23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel23.Controls.Add(this.label10);
             this.panel23.Controls.Add(this.editList);
             this.panel23.Controls.Add(this.paletteList);
@@ -97,9 +118,9 @@
             this.panel23.Controls.Add(this.musicList);
             this.panel23.Controls.Add(this.label1);
             this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel23.Location = new System.Drawing.Point(0, 0);
+            this.panel23.Location = new System.Drawing.Point(257, 0);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(692, 177);
+            this.panel23.Size = new System.Drawing.Size(659, 177);
             this.panel23.TabIndex = 1;
             // 
             // label10
@@ -287,6 +308,133 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Music";
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(257, 679);
+            this.panel2.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.spriteSelector);
+            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 265);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(253, 410);
+            this.panel3.TabIndex = 1;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label12);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(253, 21);
+            this.panel5.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(103, 5);
+            this.label12.Margin = new System.Windows.Forms.Padding(4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(50, 13);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Objects";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label11);
+            this.panel4.Controls.Add(this.blockSelector);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(253, 265);
+            this.panel4.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(106, 7);
+            this.label11.Margin = new System.Windows.Forms.Padding(4);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(45, 13);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Blocks";
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.interaction);
+            this.panel6.Controls.Add(this.solidity);
+            this.panel6.Controls.Add(this.label16);
+            this.panel6.Controls.Add(this.label14);
+            this.panel6.Controls.Add(this.label13);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(257, 602);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(659, 77);
+            this.panel6.TabIndex = 3;
+            // 
+            // interaction
+            // 
+            this.interaction.AutoSize = true;
+            this.interaction.Location = new System.Drawing.Point(85, 49);
+            this.interaction.Margin = new System.Windows.Forms.Padding(4);
+            this.interaction.Name = "interaction";
+            this.interaction.Size = new System.Drawing.Size(35, 13);
+            this.interaction.TabIndex = 24;
+            this.interaction.Text = "Music";
+            // 
+            // solidity
+            // 
+            this.solidity.AutoSize = true;
+            this.solidity.Location = new System.Drawing.Point(85, 28);
+            this.solidity.Margin = new System.Windows.Forms.Padding(4);
+            this.solidity.Name = "solidity";
+            this.solidity.Size = new System.Drawing.Size(35, 13);
+            this.solidity.TabIndex = 20;
+            this.solidity.Text = "Music";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(17, 49);
+            this.label16.Margin = new System.Windows.Forms.Padding(4);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(60, 13);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "Interaction:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(34, 28);
+            this.label14.Margin = new System.Windows.Forms.Padding(4);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 13);
+            this.label14.TabIndex = 20;
+            this.label14.Text = "Solidity:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(7, 7);
+            this.label13.Margin = new System.Windows.Forms.Padding(4);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(70, 13);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "Information";
+            // 
             // levelViewer
             // 
             this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
@@ -317,13 +465,31 @@
             this.paletteList.TabIndex = 16;
             this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
             // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 21);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.SelectedSprite = null;
+            this.spriteSelector.Size = new System.Drawing.Size(253, 389);
+            this.spriteSelector.TabIndex = 0;
+            // 
+            // blockSelector
+            // 
+            this.blockSelector.Location = new System.Drawing.Point(2, 27);
+            this.blockSelector.Name = "blockSelector";
+            this.blockSelector.Size = new System.Drawing.Size(254, 236);
+            this.blockSelector.TabIndex = 0;
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 679);
+            this.ClientSize = new System.Drawing.Size(916, 679);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel23);
+            this.Controls.Add(this.panel2);
             this.KeyPreview = true;
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
@@ -334,6 +500,14 @@
             this.lvlHost.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             this.panel23.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -363,6 +537,20 @@
         private System.Windows.Forms.ComboBox editList;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private SpriteSelector spriteSelector;
+        private BlockSelector blockSelector;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label interaction;
+        private System.Windows.Forms.Label solidity;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
 
     }
 }

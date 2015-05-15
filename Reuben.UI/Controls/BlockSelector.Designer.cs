@@ -1,6 +1,6 @@
 ﻿namespace Reuben.UI
 {
-    partial class SpriteSelector
+    partial class BlockSelector
     {
         /// <summary>
         /// Required designer variable.
@@ -28,37 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.sprites = new Reuben.UI.Controls.SpritesViewer();
+            this.blocks = new Reuben.UI.Controls.BlocksViewer();
             this.SuspendLayout();
             // 
-            // sprites
+            // blocks
             // 
-            this.sprites.Location = new System.Drawing.Point(-2, 0);
-            this.sprites.Margin = new System.Windows.Forms.Padding(0);
-            this.sprites.Name = "sprites";
-            this.sprites.Size = new System.Drawing.Size(256, 23);
-            this.sprites.TabIndex = 0;
-            this.sprites.Text = "spritesViewer1";
-            this.sprites.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_MouseDown);
+            this.blocks.Location = new System.Drawing.Point(-2, 0);
+            this.blocks.Name = "blocks";
+            this.blocks.Size = new System.Drawing.Size(256, 256);
+            this.blocks.TabIndex = 0;
+            this.blocks.Text = "blocksViewer1";
+            this.blocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.blocks_MouseDown);
             // 
-            // SpriteSelector
+            // BlockSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(254, 256);
-            this.ControlBox = false;
-            this.Controls.Add(this.sprites);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "SpriteSelector";
-            this.Text = "Sprites";
-            this.SizeChanged += new System.EventHandler(this.SpriteSelector_SizeChanged_1);
+            this.Controls.Add(this.blocks);
+            this.Name = "BlockSelector";
+            this.Text = "Blocks";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Controls.SpritesViewer sprites;
+        private Controls.BlocksViewer blocks;
     }
 }

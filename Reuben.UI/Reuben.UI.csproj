@@ -79,10 +79,10 @@
     <Compile Include="Extras\Extensions.cs" />
     <Compile Include="Extras\SnapSide.cs" />
     <Compile Include="Extras\TileDrawer.cs" />
-    <Compile Include="Forms\BlockSelector.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Controls\BlockSelector.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\BlockSelector.Designer.cs">
+    <Compile Include="Controls\BlockSelector.Designer.cs">
       <DependentUpon>BlockSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Confirm.cs">
@@ -103,10 +103,10 @@
     <Compile Include="Forms\Prompt.Designer.cs">
       <DependentUpon>Prompt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SpriteSelector.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Controls\SpriteSelector.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\SpriteSelector.Designer.cs">
+    <Compile Include="Controls\SpriteSelector.Designer.cs">
       <DependentUpon>SpriteSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
@@ -132,7 +132,7 @@
     <EmbeddedResource Include="Controls\ProjectView.resx">
       <DependentUpon>ProjectView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BlockSelector.resx">
+    <EmbeddedResource Include="Controls\BlockSelector.resx">
       <DependentUpon>BlockSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Confirm.resx">
@@ -147,7 +147,7 @@
     <EmbeddedResource Include="Forms\Prompt.resx">
       <DependentUpon>Prompt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SpriteSelector.resx">
+    <EmbeddedResource Include="Controls\SpriteSelector.resx">
       <DependentUpon>SpriteSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">

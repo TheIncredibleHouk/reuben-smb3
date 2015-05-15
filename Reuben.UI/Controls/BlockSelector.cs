@@ -14,25 +14,28 @@ using Reuben.NESGraphics;
 
 namespace Reuben.UI
 {
-    public partial class BlockSelector : Form
+    public partial class BlockSelector : UserControl
     {
         public BlockSelector()
         {
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color[] ColorReference
         {
             get { return blocks.ColorReference; }
             set { blocks.ColorReference = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PatternTable PatternTable
         {
             get { return blocks.PatternTable; }
             set { blocks.PatternTable = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Block[] BlockList
         {
             get { return blocks.BlockList; }
@@ -44,12 +47,14 @@ namespace Reuben.UI
             blocks.UpdateGraphics();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Palette Palette
         {
             get { return blocks.Palette; }
             set { blocks.Palette = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Rectangle SelectionRectangle
         {
             get { return blocks.SelectionRectangle; }
@@ -57,6 +62,7 @@ namespace Reuben.UI
         }
 
         private int selectedBlock;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SelectedBlock
         {
             get { return selectedBlock; }
@@ -75,23 +81,7 @@ namespace Reuben.UI
             Editor.EditMode = EditMode.Blocks;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LevelEditor Editor { get; set; }
-
-        public bool Snapped { get; set; }
-
-        private void BlockSelector_Move(object sender, EventArgs e)
-        {
-            Snapped = false;
-        }
-
-        private void BlockSelector_SizeChanged(object sender, EventArgs e)
-        {
-            if (Editor != null && this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-                Snapped = true;
-                Editor.MoveSelectors();
-            }
-        }
     }
 }
