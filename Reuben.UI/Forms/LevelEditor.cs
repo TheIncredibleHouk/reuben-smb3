@@ -354,6 +354,14 @@ namespace Reuben.UI
                     change.Column = col;
                     change.Row = row;
                     change.Data = new byte[width, height];
+                    if(width == height && width == 1)
+                    {
+                        if(level.Data[col, row] == (byte) blockSelector.SelectedBlock)
+                        {
+                            return;
+                        }
+                    }
+
                     for (int i = 0; i < width; i++)
                     {
                         for (int j = 0; j < height; j++)
@@ -539,5 +547,20 @@ namespace Reuben.UI
 
         }
 
-    }
+
+        private void FloodFill(int fillValue, Point point)
+        {
+
+        }
+
+        private void lvlHost_MouseDoubleClick()
+        {
+            DataChange change = undoBuffer.LastOrDefault();
+            if(change == null)
+            {
+                return;
+            }
+            
+            int replaceTile = change.Data[0, 0];
+        }
 }
