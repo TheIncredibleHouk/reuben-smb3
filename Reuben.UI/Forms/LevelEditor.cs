@@ -21,6 +21,9 @@ namespace Reuben.UI
             InitializeComponent();
         }
 
+        private const int colBounds = 0xF0;
+        private const int rowBounds = 0x1B;
+
         private Level level;
         private LevelInfo levelInfo;
         private LevelController levels;
@@ -116,9 +119,91 @@ namespace Reuben.UI
 
                 int col = e.X / 16;
                 int row = e.Y / 16;
-                mouseStartX = e.X;
-                mouseStartY = e.Y;
-                levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, 15, 15);
+                if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+                {
+                    Point start = new Point(col, row);
+                    Stack<Point> stack = new Stack<Point>();
+                    stack.Push(start);
+                    int checkValue = level.Data[col, row];
+                    if (checkValue == blockSelector.SelectedBlock)
+                    {
+                        return;
+                    }
+
+                    int lowestX, highestX;
+                    int lowestY, highestY;
+                    lowestX = lowestY = 1000;
+                    highestX = highestY = -1;
+
+                    List<Point> changes = new List<Point>();
+                    while (stack.Count > 0)
+                    {
+                        Point p = stack.Pop();
+
+                        col = p.X;
+                        row = p.Y;
+
+                        if (row < 0 || row > 0x1A || col < 0 || col > 0xEF)
+                        {
+                            continue;
+                        }
+
+                        Point currentPoint = new Point(col, row);
+                        Point hasPoint = changes.Where(o => o.X == col && o.Y == row).FirstOrDefault();
+                        if (checkValue == level.Data[col, row] && (hasPoint.X == 0 && hasPoint.Y == 0))
+                        {
+                            changes.Add(currentPoint);
+                            if (col < lowestX)
+                            {
+                                lowestX = col;
+                            }
+                            if (col > highestX)
+                            {
+                                highestX = col;
+                            }
+                            if (row < lowestY)
+                            {
+                                lowestY = row;
+                            }
+                            if (row > highestY)
+                            {
+                                highestY = row;
+                            }
+
+                            stack.Push(new Point(col + 1, row));
+                            stack.Push(new Point(col - 1, row));
+                            stack.Push(new Point(col, row + 1));
+                            stack.Push(new Point(col, row - 1));
+                        }
+                    }
+                    int width = highestX - lowestX + 1;
+                    int height = highestY - lowestY + 1;
+                    DataChange change = new DataChange();
+                    change.Column = lowestX;
+                    change.Row = lowestY;
+                    change.Data = new byte[width, height];
+
+                    for (int i = 0; i < width; i++)
+                    {
+                        for (int j = 0; j < height; j++)
+                        {
+                            change.Data[i, j] = level.Data[i + lowestX, j + lowestY];
+                        }
+                    }
+                    foreach (Point p in changes)
+                    {
+                        level.Data[p.X, p.Y] = (byte)blockSelector.SelectedBlock;
+                    } 
+
+                    undoBuffer.Add(change);
+                    levelViewer.UpdateBlockDisplay(lowestX, lowestY, width, height);
+                }
+                else
+                {
+                    mouseStartX = e.X;
+                    mouseStartY = e.Y;
+                    levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, 15, 15);
+                }
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
@@ -354,9 +439,9 @@ namespace Reuben.UI
                     change.Column = col;
                     change.Row = row;
                     change.Data = new byte[width, height];
-                    if(width == height && width == 1)
+                    if (width == height && width == 1)
                     {
-                        if(level.Data[col, row] == (byte) blockSelector.SelectedBlock)
+                        if (level.Data[col, row] == (byte)blockSelector.SelectedBlock)
                         {
                             return;
                         }
@@ -541,26 +626,5 @@ namespace Reuben.UI
         {
             levelViewer.EditMode = EditMode;
         }
-
-        private void panel6_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-
-        private void FloodFill(int fillValue, Point point)
-        {
-
-        }
-
-        private void lvlHost_MouseDoubleClick()
-        {
-            DataChange change = undoBuffer.LastOrDefault();
-            if(change == null)
-            {
-                return;
-            }
-            
-            int replaceTile = change.Data[0, 0];
-        }
+    }
 }
