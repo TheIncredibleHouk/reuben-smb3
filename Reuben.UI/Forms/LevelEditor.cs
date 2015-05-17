@@ -19,6 +19,12 @@ namespace Reuben.UI
         public LevelEditor()
         {
             InitializeComponent();
+            panel1.MouseWheel += panel1_MouseWheel;
+        }
+
+        void panel1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            mouseCap.Location = new Point(4, 4);
         }
 
         private const int colBounds = 0xF0;
@@ -333,7 +339,7 @@ namespace Reuben.UI
         private int startCol, startRow;
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
-
+            mouseCap.Focus();
             int minX = Math.Min(e.X, mouseStartX);
             int minY = Math.Min(e.Y, mouseStartY);
             int maxX = Math.Max(e.X, mouseStartX);
@@ -625,6 +631,11 @@ namespace Reuben.UI
         private void editList_SelectedIndexChanged(object sender, EventArgs e)
         {
             levelViewer.EditMode = EditMode;
+        }
+
+        private void panel1_Scroll(object sender, ScrollEventArgs e)
+        {
+            mouseCap.Location = new Point(4, 4);
         }
     }
 }

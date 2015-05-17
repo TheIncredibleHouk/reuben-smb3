@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\BlocksViewer.cs">
+    <Compile Include="Controls\BlockListViewer.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ColorView.cs">
@@ -63,6 +63,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\PaletteView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PatternTableView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ProjectView.cs">
@@ -84,6 +87,12 @@
     </Compile>
     <Compile Include="Controls\BlockSelector.Designer.cs">
       <DependentUpon>BlockSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BlockEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BlockEditor.Designer.cs">
+      <DependentUpon>BlockEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Confirm.cs">
       <SubType>Form</SubType>
@@ -134,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BlockSelector.resx">
       <DependentUpon>BlockSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BlockEditor.resx">
+      <DependentUpon>BlockEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Confirm.resx">
       <DependentUpon>Confirm.cs</DependentUpon>

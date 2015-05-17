@@ -18,6 +18,9 @@ namespace Reuben.UI
         public StringManager()
         {
             InitializeComponent();
+            ColumnHeader h = new ColumnHeader();
+            h.Width = resourceDisplay.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            resourceDisplay.Columns.Add(h);
         }
 
         private StringController stringController;

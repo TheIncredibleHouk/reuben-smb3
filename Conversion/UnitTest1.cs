@@ -107,7 +107,6 @@ namespace Conversion
                     b.UpperRight = bd.BlockList[i][1, 0];
                     b.LowerLeft = bd.BlockList[i][0, 1];
                     b.LowerRight = bd.BlockList[i][1, 1];
-                    b.Description = bd.BlockList[i].Description;
                     b.BlockSolidity = ((int)bd.BlockList[i].BlockProperty & 0xF0);
                     b.BlockInteraction = ((int)bd.BlockList[i].BlockProperty & 0x0F);
                     newLevelType.Blocks[i] = b;
@@ -263,7 +262,6 @@ namespace Conversion
                 b.UpperRight = bd[0, 1];
                 b.LowerLeft = bd[1, 0];
                 b.LowerRight = bd[1, 1];
-                b.Description = bd.Description;
                 b.BlockSolidity = ((int)bd.BlockProperty & 0xF0);
                 b.BlockInteraction = ((int)bd.BlockProperty & 0x0F);
                 worlds.WorldData.Blocks[index++] = b;

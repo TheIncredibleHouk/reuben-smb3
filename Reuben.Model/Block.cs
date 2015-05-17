@@ -28,9 +28,6 @@ namespace Reuben.Model
         [DataMember]
         public int BlockInteraction { get; set; }
 
-        [DataMember]
-        public string Description { get; set; }
-
         public void SetTileByPoint(int x, int y, int value)
         {
             if (x == 0 && y == 0)

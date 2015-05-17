@@ -18,6 +18,12 @@ namespace Reuben.UI
         public SpriteSelector()
         {
             InitializeComponent();
+            panel1.MouseWheel += panel1_MouseWheel;
+        }
+
+        void panel1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            mouseCap.Location = new Point(mouseCap.Location.X, 2);
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -95,5 +101,11 @@ namespace Reuben.UI
         {
             mouseCap.Focus();
         }
+
+        private void panel1_Scroll(object sender, ScrollEventArgs e)
+        {
+            mouseCap.Location = new Point(mouseCap.Location.X, 2);
+        }
+
     }
 }

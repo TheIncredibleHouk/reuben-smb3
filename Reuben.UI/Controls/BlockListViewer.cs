@@ -14,11 +14,11 @@ using Reuben.Model;
 
 namespace Reuben.UI.Controls
 {
-    public unsafe class BlocksViewer : Control
+    public unsafe class BlockListViewer : Control
     {
         private Bitmap buffer;
 
-        public BlocksViewer()
+        public BlockListViewer()
         {
             buffer = new Bitmap(256, 256, PixelFormat.Format24bppRgb);
             this.Width = buffer.Width;

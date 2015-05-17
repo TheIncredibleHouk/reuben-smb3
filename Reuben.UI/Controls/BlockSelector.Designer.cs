@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.blocks = new Reuben.UI.Controls.BlocksViewer();
+            this.blocks = new Reuben.UI.Controls.BlockListViewer();
             this.SuspendLayout();
             // 
             // blocks
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private Controls.BlocksViewer blocks;
+        private Controls.BlockListViewer blocks;
     }
 }

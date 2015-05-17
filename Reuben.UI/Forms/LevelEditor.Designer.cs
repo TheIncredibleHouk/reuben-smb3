@@ -62,6 +62,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.mouseCap = new System.Windows.Forms.Button();
             this.levelViewer = new Reuben.UI.LevelViewer();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.spriteSelector = new Reuben.UI.SpriteSelector();
@@ -79,13 +80,14 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.mouseCap);
             this.panel1.Controls.Add(this.lvlHost);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(257, 177);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(659, 425);
             this.panel1.TabIndex = 0;
+            this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             // 
             // lvlHost
             // 
@@ -447,6 +449,14 @@
             this.label13.TabIndex = 21;
             this.label13.Text = "Information";
             // 
+            // mouseCap
+            // 
+            this.mouseCap.Location = new System.Drawing.Point(16, 5);
+            this.mouseCap.Name = "mouseCap";
+            this.mouseCap.Size = new System.Drawing.Size(0, 0);
+            this.mouseCap.TabIndex = 1;
+            this.mouseCap.UseVisualStyleBackColor = true;
+            // 
             // levelViewer
             // 
             this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
@@ -457,7 +467,6 @@
             this.levelViewer.Size = new System.Drawing.Size(6912, 432);
             this.levelViewer.TabIndex = 0;
             this.levelViewer.Text = "levelViewer1";
-            
             this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
             this.levelViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseMove);
             this.levelViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseUp);
@@ -565,6 +574,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button mouseCap;
 
     }
 }

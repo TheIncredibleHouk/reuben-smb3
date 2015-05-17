@@ -70,6 +70,7 @@
             // resourceDisplay
             // 
             this.resourceDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.resourceDisplay.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.resourceDisplay.LabelWrap = false;
             this.resourceDisplay.Location = new System.Drawing.Point(13, 67);
             this.resourceDisplay.Margin = new System.Windows.Forms.Padding(4);
@@ -77,7 +78,7 @@
             this.resourceDisplay.Size = new System.Drawing.Size(256, 89);
             this.resourceDisplay.TabIndex = 3;
             this.resourceDisplay.UseCompatibleStateImageBehavior = false;
-            this.resourceDisplay.View = System.Windows.Forms.View.List;
+            this.resourceDisplay.View = System.Windows.Forms.View.Details;
             this.resourceDisplay.SelectedIndexChanged += new System.EventHandler(this.resourceDisplay_SelectedIndexChanged);
             // 
             // button1
