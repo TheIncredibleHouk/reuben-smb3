@@ -141,5 +141,12 @@ namespace Reuben.UI.Controls
             mgr.Show();
             mgr.SetResources(resourceController);
         }
+
+        private void blocksButton_Click(object sender, EventArgs e)
+        {
+            BlockEditor editor = new BlockEditor();
+            editor.Show();
+            editor.Initialize(levelController, graphicsController);
+        }
     }
 }

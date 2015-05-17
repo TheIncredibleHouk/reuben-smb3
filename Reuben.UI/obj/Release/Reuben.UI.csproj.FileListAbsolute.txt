@@ -46,3 +46,4 @@ C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.StringManager.resour
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.csproj.GenerateResource.Cache
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.exe
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.pdb
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.BlockEditor.resources

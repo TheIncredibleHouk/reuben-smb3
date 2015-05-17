@@ -25,7 +25,7 @@ namespace Reuben.Model
         public int DefaultGraphicsID { get; set; }
 
         [DataMember]
-        public int DefaultPaletteID { get; set; }
+        public Guid DefaultPaletteID { get; set; }
 
         [DataMember]
         public BlockActor[] FireBlockActors { get; set; }

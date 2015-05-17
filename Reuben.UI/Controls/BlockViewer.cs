@@ -14,17 +14,45 @@ using Reuben.Model;
 
 namespace Reuben.UI
 {
-    public class PatternTableView : Control
+
+    public class BlockViewer : Control
     {
         private Bitmap buffer;
         private Bitmap displayBuffer;
 
-        public PatternTableView()
+        public BlockViewer()
         {
-            buffer = new Bitmap(128, 128, PixelFormat.Format24bppRgb);
-            displayBuffer = new Bitmap(256, 256, PixelFormat.Format24bppRgb);
+            buffer = new Bitmap(16, 16, PixelFormat.Format24bppRgb);
+            displayBuffer = new Bitmap(64, 64, PixelFormat.Format24bppRgb);
             this.Width = displayBuffer.Width;
             this.Height = displayBuffer.Height;
+        }
+
+
+        private Block block;
+        public Block Block
+        {
+            get
+            {
+                return block;
+            }
+            set
+            {
+                block = value;
+            }
+        }
+
+        private int paletteIndex;
+        public int PaletteIndex
+        {
+            get
+            {
+                return paletteIndex;
+            }
+            set
+            {
+                paletteIndex = value;
+            }
         }
 
         private PatternTable graphics;
@@ -55,8 +83,6 @@ namespace Reuben.UI
                 colors = value;
             }
         }
-
-        public int PaletteIndex { get; set; }
 
         private Palette palette;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -90,7 +116,7 @@ namespace Reuben.UI
 
         public void UpdateGraphics()
         {
-            if (colors == null || graphics == null || palette == null)
+            if (block == null || colors == null || graphics == null || palette == null)
             {
                 using (Graphics gfx = Graphics.FromImage(displayBuffer))
                 {
@@ -102,59 +128,23 @@ namespace Reuben.UI
 
             BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
-            for (var row = 0; row < 16; row++)
-            {
-                for (var col = 0; col < 16; col++)
-                {
-                    int x = col * 8;
-                    int y = row * 8;
-                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(col + (row * 16)), x, y, quickBGReference[PaletteIndex], data);
-                }
-            }
-            buffer.UnlockBits(data);
+
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 0, 0, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 8, 0, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 0, 8, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 8, 8, quickBGReference[paletteIndex], data);
+
             using (Graphics gfx = Graphics.FromImage(displayBuffer))
             {
-                gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-                gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 gfx.DrawImage(buffer, new Rectangle(0, 0, displayBuffer.Width, displayBuffer.Height), new Rectangle(0, 0, buffer.Width, buffer.Height), GraphicsUnit.Pixel);
             }
             Invalidate();
         }
 
-        private Rectangle selectionRectangle;
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Rectangle SelectionRectangle
-        {
-            get
-            {
-                return selectionRectangle;
-            }
-            set
-            {
-                if (selectionRectangle == value)
-                {
-                    return;
-                }
-
-                var oldRectangle = selectionRectangle;
-                selectionRectangle = value;
-                var minX = Math.Min(oldRectangle.Left, selectionRectangle.Left);
-                var minY = Math.Min(oldRectangle.Top, selectionRectangle.Top);
-                var maxX = Math.Max(oldRectangle.Right, selectionRectangle.Right);
-                var maxY = Math.Max(oldRectangle.Bottom, selectionRectangle.Bottom);
-                Invalidate(new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1));
-            }
-        }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawImage(displayBuffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
-            if (SelectionRectangle != null)
-            {
-                e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
-                e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
-            }
+
         }
     }
 }

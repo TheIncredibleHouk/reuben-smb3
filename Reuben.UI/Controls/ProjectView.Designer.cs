@@ -224,6 +224,7 @@
             this.blocksButton.TabIndex = 1;
             this.blocksButton.Text = "Blocks";
             this.blocksButton.UseVisualStyleBackColor = true;
+            this.blocksButton.Click += new System.EventHandler(this.blocksButton_Click);
             // 
             // palettesButton
             // 
