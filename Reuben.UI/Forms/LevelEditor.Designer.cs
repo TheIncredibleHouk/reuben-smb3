@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.mouseCap = new System.Windows.Forms.Button();
             this.lvlHost = new System.Windows.Forms.Panel();
             this.panel23 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,7 +63,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.mouseCap = new System.Windows.Forms.Button();
             this.levelViewer = new Reuben.UI.LevelViewer();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.spriteSelector = new Reuben.UI.SpriteSelector();
@@ -83,11 +83,19 @@
             this.panel1.Controls.Add(this.mouseCap);
             this.panel1.Controls.Add(this.lvlHost);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(257, 177);
+            this.panel1.Location = new System.Drawing.Point(267, 177);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(659, 425);
+            this.panel1.Size = new System.Drawing.Size(649, 425);
             this.panel1.TabIndex = 0;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
+            // 
+            // mouseCap
+            // 
+            this.mouseCap.Location = new System.Drawing.Point(16, 5);
+            this.mouseCap.Name = "mouseCap";
+            this.mouseCap.Size = new System.Drawing.Size(0, 0);
+            this.mouseCap.TabIndex = 1;
+            this.mouseCap.UseVisualStyleBackColor = true;
             // 
             // lvlHost
             // 
@@ -121,9 +129,9 @@
             this.panel23.Controls.Add(this.musicList);
             this.panel23.Controls.Add(this.label1);
             this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel23.Location = new System.Drawing.Point(257, 0);
+            this.panel23.Location = new System.Drawing.Point(267, 0);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(659, 177);
+            this.panel23.Size = new System.Drawing.Size(649, 177);
             this.panel23.TabIndex = 1;
             // 
             // label10
@@ -319,7 +327,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(257, 679);
+            this.panel2.Size = new System.Drawing.Size(267, 679);
             this.panel2.TabIndex = 2;
             // 
             // panel3
@@ -327,9 +335,9 @@
             this.panel3.Controls.Add(this.spriteSelector);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 265);
+            this.panel3.Location = new System.Drawing.Point(0, 288);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(253, 410);
+            this.panel3.Size = new System.Drawing.Size(263, 387);
             this.panel3.TabIndex = 1;
             // 
             // panel5
@@ -338,14 +346,14 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(253, 21);
+            this.panel5.Size = new System.Drawing.Size(263, 28);
             this.panel5.TabIndex = 1;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(103, 5);
+            this.label12.Location = new System.Drawing.Point(101, 7);
             this.label12.Margin = new System.Windows.Forms.Padding(4);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(50, 13);
@@ -359,7 +367,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(253, 265);
+            this.panel4.Size = new System.Drawing.Size(263, 288);
             this.panel4.TabIndex = 4;
             // 
             // label11
@@ -383,9 +391,9 @@
             this.panel6.Controls.Add(this.label14);
             this.panel6.Controls.Add(this.label13);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(257, 602);
+            this.panel6.Location = new System.Drawing.Point(267, 602);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(659, 77);
+            this.panel6.Size = new System.Drawing.Size(649, 77);
             this.panel6.TabIndex = 3;
             // 
             // label15
@@ -449,14 +457,6 @@
             this.label13.TabIndex = 21;
             this.label13.Text = "Information";
             // 
-            // mouseCap
-            // 
-            this.mouseCap.Location = new System.Drawing.Point(16, 5);
-            this.mouseCap.Name = "mouseCap";
-            this.mouseCap.Size = new System.Drawing.Size(0, 0);
-            this.mouseCap.TabIndex = 1;
-            this.mouseCap.UseVisualStyleBackColor = true;
-            // 
             // levelViewer
             // 
             this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
@@ -490,17 +490,18 @@
             // spriteSelector
             // 
             this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 21);
+            this.spriteSelector.Location = new System.Drawing.Point(0, 28);
             this.spriteSelector.Name = "spriteSelector";
             this.spriteSelector.SelectedSprite = null;
-            this.spriteSelector.Size = new System.Drawing.Size(253, 389);
+            this.spriteSelector.Size = new System.Drawing.Size(263, 359);
             this.spriteSelector.TabIndex = 0;
             // 
             // blockSelector
             // 
-            this.blockSelector.Location = new System.Drawing.Point(2, 27);
+            this.blockSelector.Location = new System.Drawing.Point(5, 27);
+            this.blockSelector.Margin = new System.Windows.Forms.Padding(0);
             this.blockSelector.Name = "blockSelector";
-            this.blockSelector.Size = new System.Drawing.Size(254, 236);
+            this.blockSelector.Size = new System.Drawing.Size(256, 256);
             this.blockSelector.TabIndex = 0;
             // 
             // LevelEditor

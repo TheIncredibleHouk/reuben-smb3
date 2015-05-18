@@ -48,5 +48,5 @@ C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockSelector.resource
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockSelector.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteSelector.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteSelector.resources
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Forms.BlockEditor.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockEditor.resources

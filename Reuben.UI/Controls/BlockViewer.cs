@@ -120,7 +120,7 @@ namespace Reuben.UI
             {
                 using (Graphics gfx = Graphics.FromImage(displayBuffer))
                 {
-                    gfx.Clear(Color.Black);
+                    gfx.Clear(Color.White);
                 }
 
                 return;
@@ -130,12 +130,15 @@ namespace Reuben.UI
 
 
             Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 0, 0, quickBGReference[paletteIndex], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 8, 0, quickBGReference[paletteIndex], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 0, 8, quickBGReference[paletteIndex], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 8, 8, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperRight), 8, 0, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerLeft), 0, 8, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerRight), 8, 8, quickBGReference[paletteIndex], data);
 
+            buffer.UnlockBits(data);
             using (Graphics gfx = Graphics.FromImage(displayBuffer))
             {
+                gfx.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 gfx.DrawImage(buffer, new Rectangle(0, 0, displayBuffer.Width, displayBuffer.Height), new Rectangle(0, 0, buffer.Width, buffer.Height), GraphicsUnit.Pixel);
             }
             Invalidate();
@@ -143,8 +146,12 @@ namespace Reuben.UI
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(displayBuffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
+            e.Graphics.DrawImage(displayBuffer, 0, 0);
+        }
 
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            
         }
     }
 }

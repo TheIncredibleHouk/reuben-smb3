@@ -25,6 +25,9 @@ namespace Reuben.Model
         public int DefaultGraphicsID { get; set; }
 
         [DataMember]
+        public int DefaultGraphicsID2 { get; set; }
+
+        [DataMember]
         public Guid DefaultPaletteID { get; set; }
 
         [DataMember]

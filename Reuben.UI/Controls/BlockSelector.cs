@@ -78,10 +78,20 @@ namespace Reuben.UI
             int row = (e.Y / 16) * 16;
             blocks.SelectionRectangle = new Rectangle(col, row, 15, 15);
             selectedBlock = e.X / 16 + ((e.Y / 16) * 16);
-            Editor.EditMode = EditMode.Blocks;
+            if (Editor != null)
+            {
+                Editor.EditMode = EditMode.Blocks;
+            }
+
+            if (SelectedBlockChanged != null)
+            {
+                SelectedBlockChanged(null, null);
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LevelEditor Editor { get; set; }
+
+        public event EventHandler SelectedBlockChanged;
     }
 }

@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.patternTable = new Reuben.UI.PatternTableView();
-            this.blockList = new Reuben.UI.BlockSelector();
-            this.blockView = new Reuben.UI.BlockViewer();
             this.label1 = new System.Windows.Forms.Label();
             this.solidity = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,7 +35,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.levelTypes = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.graphics1 = new System.Windows.Forms.ComboBox();
@@ -50,36 +46,11 @@
             this.button3 = new System.Windows.Forms.Button();
             this.typeName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
+            this.blockView = new Reuben.UI.BlockViewer();
+            this.blockList = new Reuben.UI.BlockSelector();
+            this.patternTable = new Reuben.UI.PatternTableView();
             this.SuspendLayout();
-            // 
-            // patternTable
-            // 
-            this.patternTable.Location = new System.Drawing.Point(13, 84);
-            this.patternTable.Margin = new System.Windows.Forms.Padding(4);
-            this.patternTable.Name = "patternTable";
-            this.patternTable.PaletteIndex = 0;
-            this.patternTable.Size = new System.Drawing.Size(256, 256);
-            this.patternTable.TabIndex = 0;
-            this.patternTable.Text = "patternTableView1";
-            // 
-            // blockList
-            // 
-            this.blockList.Location = new System.Drawing.Point(415, 83);
-            this.blockList.Margin = new System.Windows.Forms.Padding(4);
-            this.blockList.Name = "blockList";
-            this.blockList.Size = new System.Drawing.Size(254, 256);
-            this.blockList.TabIndex = 1;
-            // 
-            // blockView
-            // 
-            this.blockView.Block = null;
-            this.blockView.Location = new System.Drawing.Point(308, 184);
-            this.blockView.Margin = new System.Windows.Forms.Padding(4);
-            this.blockView.Name = "blockView";
-            this.blockView.PaletteIndex = 0;
-            this.blockView.Size = new System.Drawing.Size(64, 64);
-            this.blockView.TabIndex = 2;
-            this.blockView.Text = "blockViewer1";
             // 
             // label1
             // 
@@ -150,22 +121,6 @@
             this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Level Types";
-            // 
-            // paletteList
-            // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(265, 377);
-            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(130, 21);
-            this.paletteList.TabIndex = 10;
-            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.graphics1_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -280,11 +235,60 @@
             this.label9.TabIndex = 21;
             this.label9.Text = "Type Name";
             // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(265, 377);
+            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(130, 21);
+            this.paletteList.TabIndex = 10;
+            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.graphics1_SelectedIndexChanged);
+            // 
+            // blockView
+            // 
+            this.blockView.Block = null;
+            this.blockView.Location = new System.Drawing.Point(308, 184);
+            this.blockView.Margin = new System.Windows.Forms.Padding(4);
+            this.blockView.Name = "blockView";
+            this.blockView.PaletteIndex = 0;
+            this.blockView.Size = new System.Drawing.Size(64, 64);
+            this.blockView.TabIndex = 2;
+            this.blockView.Text = "blockViewer1";
+            this.blockView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.blockView_MouseDown);
+            // 
+            // blockList
+            // 
+            this.blockList.Location = new System.Drawing.Point(415, 83);
+            this.blockList.Margin = new System.Windows.Forms.Padding(4);
+            this.blockList.Name = "blockList";
+            this.blockList.Size = new System.Drawing.Size(256, 256);
+            this.blockList.TabIndex = 1;
+            this.blockList.SelectedBlockChanged += new System.EventHandler(this.blockList_SelectedBlockChanged);
+            // 
+            // patternTable
+            // 
+            this.patternTable.Location = new System.Drawing.Point(13, 84);
+            this.patternTable.Margin = new System.Windows.Forms.Padding(4);
+            this.patternTable.Name = "patternTable";
+            this.patternTable.PaletteIndex = 0;
+            this.patternTable.Size = new System.Drawing.Size(256, 256);
+            this.patternTable.TabIndex = 0;
+            this.patternTable.Text = "patternTableView1";
+            this.patternTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.patternTable_MouseDown);
+            // 
             // BlockEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(681, 412);
+            this.ControlBox = false;
             this.Controls.Add(this.label9);
             this.Controls.Add(this.typeName);
             this.Controls.Add(this.button3);

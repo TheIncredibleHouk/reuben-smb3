@@ -23,6 +23,7 @@ namespace Reuben.UI.Controls
             buffer = new Bitmap(256, 256, PixelFormat.Format24bppRgb);
             this.Width = buffer.Width;
             this.Height = buffer.Height;
+            this.Padding = new Padding(0, 0, 0, 0);
         }
 
         private PatternTable graphics;

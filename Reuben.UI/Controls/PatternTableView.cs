@@ -114,7 +114,7 @@ namespace Reuben.UI
             buffer.UnlockBits(data);
             using (Graphics gfx = Graphics.FromImage(displayBuffer))
             {
-                gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                gfx.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
                 gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 gfx.DrawImage(buffer, new Rectangle(0, 0, displayBuffer.Width, displayBuffer.Height), new Rectangle(0, 0, buffer.Width, buffer.Height), GraphicsUnit.Pixel);
             }
@@ -155,6 +155,11 @@ namespace Reuben.UI
                 e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
                 e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
             }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+
         }
     }
 }

@@ -145,8 +145,12 @@ namespace Reuben.UI.Controls
         private void blocksButton_Click(object sender, EventArgs e)
         {
             BlockEditor editor = new BlockEditor();
-            editor.Show();
             editor.Initialize(levelController, graphicsController);
+            if (editor.ShowDialog() == DialogResult.OK)
+            {
+                levelController.LevelData.Types = editor.LocalLevelTypes;
+                levelController.Save();
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Reuben.Controllers
     public class LevelController
     {
         public LevelData LevelData { get; set; }
+        private string lastFile;
 
         public LevelController()
         {
@@ -27,11 +28,18 @@ namespace Reuben.Controllers
                 throw new FileNotFoundException();
             }
 
+            lastFile = fileName;
             LevelData = JsonConvert.DeserializeObject<LevelData>(File.ReadAllText(fileName));
+        }
+
+        public void Save()
+        {
+            Save(lastFile);
         }
 
         public void Save(string fileName)
         {
+            lastFile = fileName;
             File.WriteAllText(fileName, JsonConvert.SerializeObject(LevelData));
         }
 
