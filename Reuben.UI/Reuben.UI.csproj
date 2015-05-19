@@ -53,6 +53,9 @@
     <Compile Include="Controls\BlockListViewer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\BlockSelector.Designer.cs">
+      <DependentUpon>BlockSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BlockViewer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,9 +90,6 @@
     <Compile Include="Extras\TileDrawer.cs" />
     <Compile Include="Controls\BlockSelector.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\BlockSelector.Designer.cs">
-      <DependentUpon>BlockSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\BlockEditor.cs">
       <SubType>Form</SubType>
@@ -141,11 +141,11 @@
     <Compile Include="Forms\StringManager.Designer.cs">
       <DependentUpon>StringManager.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Controls\ProjectView.resx">
-      <DependentUpon>ProjectView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BlockSelector.resx">
       <DependentUpon>BlockSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectView.resx">
+      <DependentUpon>ProjectView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BlockEditor.resx">
       <DependentUpon>BlockEditor.cs</DependentUpon>

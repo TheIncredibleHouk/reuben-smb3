@@ -23,7 +23,6 @@ namespace Reuben.UI.Controls
             buffer = new Bitmap(256, 256, PixelFormat.Format24bppRgb);
             this.Width = buffer.Width;
             this.Height = buffer.Height;
-            this.Padding = new Padding(0, 0, 0, 0);
         }
 
         private PatternTable graphics;
@@ -164,6 +163,11 @@ namespace Reuben.UI.Controls
                 e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
                 e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
             }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            
         }
     }
 }

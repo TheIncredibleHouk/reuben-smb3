@@ -146,7 +146,7 @@
             this.sprites.Location = new System.Drawing.Point(0, 0);
             this.sprites.Margin = new System.Windows.Forms.Padding(0);
             this.sprites.Name = "sprites";
-            this.sprites.Size = new System.Drawing.Size(254, 18);
+            this.sprites.Size = new System.Drawing.Size(256, 18);
             this.sprites.TabIndex = 0;
             this.sprites.Text = "spritesViewer1";
             this.sprites.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_MouseDown);

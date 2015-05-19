@@ -160,7 +160,6 @@
             // 
             // paletteList
             // 
-            this.paletteList.ColorReference = null;
             this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.paletteList.DropDownHeight = 400;
             this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -170,8 +169,6 @@
             this.paletteList.Location = new System.Drawing.Point(13, 34);
             this.paletteList.Margin = new System.Windows.Forms.Padding(4);
             this.paletteList.Name = "paletteList";
-            this.paletteList.Palettes = null;
-            this.paletteList.SelectedPalette = null;
             this.paletteList.Size = new System.Drawing.Size(256, 21);
             this.paletteList.TabIndex = 0;
             this.paletteList.SelectedIndexChanged += new System.EventHandler(this.allPalettes_SelectedIndexChanged);

@@ -22,14 +22,23 @@ namespace Reuben.UI
         }
 
         private GraphicsController graphics;
-        private List<Palette> localPalettes;
-        public void SetGraphicsController(GraphicsController controller)
+        private LevelController levels;
+
+        public List<Palette> LocalPalettes { get; set; }
+        public Palette OverlayPalette { get; set; }
+
+        public void Initialize(GraphicsController controller, LevelController levelController)
         {
             graphics = controller;
-            localPalettes = graphics.GraphicsData.Palettes.OrderBy(p => p.Name).ToList();
-            paletteList.Palettes = localPalettes;
+            levels = levelController;
+            OverlayPalette = levels.LevelData.OverlayPalette.MakeCopy();
+            LocalPalettes = graphics.GraphicsData.Palettes.OrderBy(p => p.Name).ToList();
+            LocalPalettes.Add(OverlayPalette);
+            paletteList.Palettes = LocalPalettes;
             selectedPalette.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
             colorView.SetColorReference(paletteList.ColorReference);
+            paletteList.UpdateList();
+            paletteList.SelectedPalette = LocalPalettes[0];
         }
 
         private void allPalettes_SelectedIndexChanged(object sender, EventArgs e)
@@ -38,6 +47,7 @@ namespace Reuben.UI
             {
                 selectedPalette.SetPalette(paletteList.SelectedPalette);
                 paletteName.Text = paletteList.SelectedPalette.Name;
+                paletteName.Enabled = paletteList.SelectedPalette != OverlayPalette;
             }
         }
 
@@ -58,8 +68,11 @@ namespace Reuben.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            graphics.GraphicsData.Palettes = localPalettes;
+            graphics.GraphicsData.Palettes = LocalPalettes;
+            LocalPalettes.Remove(OverlayPalette);
+            levels.LevelData.OverlayPalette = OverlayPalette;
             graphics.SavePalettes();
+            levels.Save();
             this.Close();
         }
 
@@ -70,7 +83,7 @@ namespace Reuben.UI
             {
                 Palette p = new Palette();
                 p.Name = text;
-                localPalettes.Add(p);
+                LocalPalettes.Add(p);
                 paletteList.UpdateList();
                 paletteList.SelectedPalette = p;
             }
@@ -78,9 +91,9 @@ namespace Reuben.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(Confirm.GetConfirmation("Are you sure you want to remove this palette?"))
+            if (Confirm.GetConfirmation("Are you sure you want to remove this palette?"))
             {
-                localPalettes.Remove(paletteList.SelectedPalette);
+                LocalPalettes.Remove(paletteList.SelectedPalette);
                 paletteName.Text = "";
                 paletteName.Enabled = false;
                 paletteList.UpdateList();
@@ -100,7 +113,7 @@ namespace Reuben.UI
         {
             int column = e.X / 16;
             int row = e.Y / 16;
-            if(paletteList.SelectedPalette != null)
+            if (paletteList.SelectedPalette != null)
             {
                 if (column % 4 == 0)
                 {

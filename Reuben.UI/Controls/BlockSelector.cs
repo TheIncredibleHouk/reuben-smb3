@@ -69,7 +69,12 @@ namespace Reuben.UI
             set
             {
                 selectedBlock = value;
+
                 blocks.SelectionRectangle = new Rectangle((value % 16) * 16, (value / 16) * 16, 15, 15);
+                if (SelectedBlockChanged != null)
+                {
+                    SelectedBlockChanged(null, null);
+                }
             }
         }
         private void blocks_MouseDown(object sender, MouseEventArgs e)
@@ -77,16 +82,12 @@ namespace Reuben.UI
             int col = (e.X / 16) * 16;
             int row = (e.Y / 16) * 16;
             blocks.SelectionRectangle = new Rectangle(col, row, 15, 15);
-            selectedBlock = e.X / 16 + ((e.Y / 16) * 16);
             if (Editor != null)
             {
                 Editor.EditMode = EditMode.Blocks;
             }
 
-            if (SelectedBlockChanged != null)
-            {
-                SelectedBlockChanged(null, null);
-            }
+            SelectedBlock = e.X / 16 + ((e.Y / 16) * 16);
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

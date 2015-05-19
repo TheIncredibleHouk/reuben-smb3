@@ -80,5 +80,10 @@ namespace Reuben.UI.Controls
                 e.Graphics.DrawRectangle(Pens.White, SelectionPoint.X + 1, selectionPoint.Y + 1, 13, 13);
             }
         }
+
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Reuben.UI.Controls
         ProjectController projectController;
         GraphicsController graphicsController;
         LevelController levelController;
-        StringController resourceController;
+        StringController stringController;
         SpriteController spriteController;
 
         public ProjectView()
@@ -39,8 +39,8 @@ namespace Reuben.UI.Controls
             levelController = new LevelController();
             levelController.Load(controller.Project.LevelDataFile);
 
-            resourceController = new StringController();
-            resourceController.Load(controller.Project.StringDataFile);
+            stringController = new StringController();
+            stringController.Load(controller.Project.StringDataFile);
 
             spriteController = new SpriteController();
             spriteController.Load(controller.Project.SpriteDataFile);
@@ -107,7 +107,7 @@ namespace Reuben.UI.Controls
         private void button2_Click(object sender, EventArgs e)
         {
             PaletteManager mgr = new PaletteManager();
-            mgr.SetGraphicsController(graphicsController);
+            mgr.Initialize(graphicsController, levelController);
             mgr.ShowDialog();
         }
 
@@ -131,7 +131,7 @@ namespace Reuben.UI.Controls
                 levelInfo.File = projectController.Project.LevelsDirectory + "\\" + levelInfo.Name + ".json";
                 LevelEditor editor = new LevelEditor();
                 editor.Show();
-                editor.LoadLevel(levelInfo, levelController, graphicsController, resourceController, spriteController);
+                editor.LoadLevel(levelInfo, levelController, graphicsController, stringController, spriteController);
             }
         }
 
@@ -139,13 +139,13 @@ namespace Reuben.UI.Controls
         {
             StringManager mgr = new StringManager();
             mgr.Show();
-            mgr.SetResources(resourceController);
+            mgr.SetResources(stringController);
         }
 
         private void blocksButton_Click(object sender, EventArgs e)
         {
             BlockEditor editor = new BlockEditor();
-            editor.Initialize(levelController, graphicsController);
+            editor.Initialize(levelController, graphicsController, stringController);
             if (editor.ShowDialog() == DialogResult.OK)
             {
                 levelController.LevelData.Types = editor.LocalLevelTypes;

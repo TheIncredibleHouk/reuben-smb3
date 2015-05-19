@@ -40,7 +40,7 @@ namespace Reuben.Controllers
         public void Save(string fileName)
         {
             lastFile = fileName;
-            File.WriteAllText(fileName, JsonConvert.SerializeObject(LevelData));
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(LevelData, Formatting.Indented));
         }
 
         public void SaveLevel(Level level)
@@ -57,6 +57,11 @@ namespace Reuben.Controllers
         public LevelInfo GetLevelInfoByID(Guid id)
         {
             return LevelData.Levels.Where(l => l.ID == id).FirstOrDefault();
+        }
+
+        public Block GetOverlay(Block block)
+        {
+            return LevelData.Overlays.Where(o => o.BlockInteraction == block.BlockInteraction && o.BlockSolidity == block.BlockSolidity).FirstOrDefault();
         }
     }
 }

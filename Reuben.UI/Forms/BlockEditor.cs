@@ -21,12 +21,18 @@ namespace Reuben.UI
         }
 
         GraphicsController gfxController;
-        public List<LevelType> LocalLevelTypes { get; private set; }
+        StringController stringController;
+        Palette overlayPalette;
+        Block[] overlays;
 
-        public void Initialize(LevelController levels, GraphicsController graphics, int selectedLevelType = 1)
+        public List<LevelType> LocalLevelTypes { get; private set; }
+        
+        public void Initialize(LevelController levels, GraphicsController graphics, StringController strings, int selectedLevelType = 1)
         {
             LocalLevelTypes = levels.LevelData.Types.MakeCopy();
             gfxController = graphics;
+            overlays = levels.LevelData.Overlays.MakeCopy();
+            overlayPalette = levels.LevelData.OverlayPalette;
 
             delayUpdate = true;
             for (int i = 0; i < 256; i++)
@@ -34,7 +40,13 @@ namespace Reuben.UI
                 graphics1.Items.Add(i.ToString("X2"));
                 graphics2.Items.Add(i.ToString("X2"));
             }
+
+            stringController = strings;
+            solidity.Items.AddRange(strings.GetStringList("solidity").ToArray());
+
             levelTypes.Items.AddRange(LocalLevelTypes.Select(l => l.Name ?? "").ToArray());
+            levelTypes.Items.Add("Overlays");
+
             paletteList.Palettes = graphics.GraphicsData.Palettes.OrderBy(p => p.Name.ToLower()).ToList();
             patternTable.ColorReference = blockList.ColorReference = blockView.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
             paletteList.UpdateList();
@@ -42,41 +54,65 @@ namespace Reuben.UI
             levelTypes.SelectedIndex = selectedLevelType;
             blockView.Block = LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock];
             blockView.UpdateGraphics();
-            this.blockList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.blockList_MouseDown);
+            blockList.SelectedBlock = 0;
         }
 
 
         private bool delayUpdate;
         private void graphics1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!delayUpdate && graphics1.SelectedIndex != -1 && graphics2.SelectedIndex != -1)
+            if (!delayUpdate && graphics1.SelectedIndex != -1 && graphics2.SelectedIndex != -1 && graphics1.Enabled && graphics2.Enabled)
             {
                 blockView.Palette = blockList.Palette = patternTable.Palette = paletteList.SelectedPalette;
                 blockView.PatternTable = blockList.PatternTable = patternTable.PatternTable = gfxController.MakePatternTable(new List<int>() { graphics1.SelectedIndex, graphics1.SelectedIndex + 1, graphics2.SelectedIndex, graphics2.SelectedIndex + 1 });
                 blockList.UpdateGraphics();
                 patternTable.UpdateGraphics();
+                blockList_SelectedBlockChanged(null, null);
             }
         }
 
         private void levelTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             delayUpdate = true;
-            typeName.Text = LocalLevelTypes[levelTypes.SelectedIndex].Name;
-            blockList.BlockList = LocalLevelTypes[levelTypes.SelectedIndex].Blocks;
-            graphics1.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID;
-            graphics2.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID2;
-            delayUpdate = false;
-            paletteList.SelectedPalette = gfxController.GraphicsData.Palettes.Where(p => p.ID == LocalLevelTypes[levelTypes.SelectedIndex].DefaultPaletteID).FirstOrDefault();
+            if ((string)levelTypes.SelectedItem == "Overlays")
+            {
+                typeName.Enabled = setDefaultButton.Enabled = paletteList.Enabled = graphics1.Enabled = graphics2.Enabled = false;
+
+                typeName.Text = "Overlays";
+                blockList.BlockList = overlays;
+
+                delayUpdate = false;
+                patternTable.Palette = blockView.Palette = blockList.Palette = overlayPalette;
+                patternTable.PatternTable = blockView.PatternTable = blockList.PatternTable = gfxController.MakeExtraPatternTable(new List<int>() { 4, 5, 6, 7 });
+                patternTable.UpdateGraphics();
+                blockView.Update();
+                blockList.UpdateGraphics();
+            }
+            else
+            {
+                typeName.Enabled = setDefaultButton.Enabled = paletteList.Enabled = graphics1.Enabled = graphics2.Enabled = true;
+
+                typeName.Text = LocalLevelTypes[levelTypes.SelectedIndex].Name;
+                blockList.BlockList = LocalLevelTypes[levelTypes.SelectedIndex].Blocks;
+                
+                graphics1.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID;
+                graphics2.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID2;
+                delayUpdate = false;
+                paletteList.SelectedPalette = gfxController.GraphicsData.Palettes.Where(p => p.ID == LocalLevelTypes[levelTypes.SelectedIndex].DefaultPaletteID).FirstOrDefault();
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            LocalLevelTypes[levelTypes.SelectedIndex].Name = typeName.Text;
-            int oldIndex = levelTypes.SelectedIndex;
-            delayUpdate= true;
-            levelTypes.Items[levelTypes.SelectedIndex] = typeName.Text;
-            levelTypes.SelectedIndex = oldIndex;
-            delayUpdate = false;
+            if (typeName.Enabled)
+            {
+                LocalLevelTypes[levelTypes.SelectedIndex].Name = typeName.Text;
+                int oldIndex = levelTypes.SelectedIndex;
+                delayUpdate = true;
+                levelTypes.Items[levelTypes.SelectedIndex] = typeName.Text;
+                levelTypes.SelectedIndex = oldIndex;
+                delayUpdate = false;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -94,20 +130,62 @@ namespace Reuben.UI
             LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID = graphics1.SelectedIndex;
             LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID2 = graphics2.SelectedIndex;
             LocalLevelTypes[levelTypes.SelectedIndex].DefaultPaletteID = paletteList.SelectedPalette.ID;
-            
-        }
 
-        private void blockList_MouseDown(object sender, MouseEventArgs e)
-        {
-            
         }
 
         private void blockList_SelectedBlockChanged(object sender, EventArgs e)
         {
-            blockView.Block = LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock];
+            if ((string)levelTypes.SelectedItem != "Overlays")
+            {
+                blockView.Block = LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock];
+            }
+            else
+            {
+                blockView.Block = overlays[blockList.SelectedBlock];
+            }
+
             patternTable.PaletteIndex = blockView.PaletteIndex = (blockList.SelectedBlock & 0xC0) >> 6;
             patternTable.UpdateGraphics();
             blockView.UpdateGraphics();
+
+            switch (blockView.Block.BlockSolidity)
+            {
+                case 0x00:
+                case 0x10:
+                case 0x20:
+                case 0x30:
+                    solidity.SelectedIndex = (blockView.Block.BlockSolidity & 0xF0) >> 4;
+                    interaction.Items.Clear();
+                    interaction.Items.AddRange(stringController.GetStringList("interaction").ToArray());
+                    break;
+
+                case 0x40:
+                    solidity.SelectedIndex = 4;
+                    interaction.Items.Clear();
+                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
+                    break;
+
+                case 0x80:
+                    solidity.SelectedIndex = 5;
+                    interaction.Items.Clear();
+                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
+                    break;
+
+                case 0xC0:
+                    solidity.SelectedIndex = 6;
+                    interaction.Items.Clear();
+                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
+                    break;
+
+
+                case 0xF0:
+                    solidity.SelectedIndex = 7;
+                    interaction.Items.Clear();
+                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
+                    break;
+            }
+
+            interaction.SelectedIndex = blockView.Block.BlockInteraction & 0x0F;
         }
 
         private int selectedTile;
@@ -147,6 +225,35 @@ namespace Reuben.UI
                 }
 
                 blockView.UpdateGraphics();
+            }
+        }
+
+        private void solidity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            blockView.Block.BlockInteraction = interaction.SelectedIndex;
+
+            switch (solidity.SelectedIndex)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    blockView.Block.BlockSolidity = (solidity.SelectedIndex << 4);
+                    break;
+
+                case 5:
+                    blockView.Block.BlockSolidity = 0x80;
+                    break;
+
+                case 6:
+                    blockView.Block.BlockSolidity = 0xC0;
+                    break;
+
+
+                case 7:
+                    blockView.Block.BlockSolidity = 0xF0;
+                    break;
             }
         }
     }

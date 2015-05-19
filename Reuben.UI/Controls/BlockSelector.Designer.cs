@@ -33,7 +33,7 @@
             // 
             // blocks
             // 
-            this.blocks.Location = new System.Drawing.Point(-2, 0);
+            this.blocks.Location = new System.Drawing.Point(0, 0);
             this.blocks.Name = "blocks";
             this.blocks.Size = new System.Drawing.Size(256, 256);
             this.blocks.TabIndex = 0;
@@ -44,10 +44,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 256);
             this.Controls.Add(this.blocks);
             this.Name = "BlockSelector";
-            this.Text = "Blocks";
+            this.Size = new System.Drawing.Size(256, 256);
             this.ResumeLayout(false);
 
         }

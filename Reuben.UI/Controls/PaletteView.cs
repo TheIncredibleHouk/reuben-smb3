@@ -79,5 +79,10 @@ namespace Reuben.UI.Controls
         {
             return buffer;
         }
+
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            
+        }
     }
 }

@@ -23,8 +23,27 @@ namespace Reuben.Controllers
         {
 
             Tiles = new Tile[16 * 4 * 256]; // 16 tiles, 4 rows per bank, 256 banks
-            ExtraTiles = new Tile[256];
+            ExtraTiles = new Tile[256 * 3];
             GraphicsData = new GraphicsData();
+        }
+
+        public PatternTable MakeExtraPatternTable(List<int> banks)
+        {
+            PatternTable patternTable = new PatternTable();
+            int patternSection = 0;
+            foreach (int bank in banks)
+            {
+                for (int row = 0; row < 4; row++)
+                {
+                    for (int col = 0; col < 16; col++)
+                    {
+                        patternTable.SetTile(col, row + (patternSection * 4), GetExtraTileByBankIndex(bank, (row * 16 + col)));
+                    }
+                }
+                patternSection++;
+            }
+
+            return patternTable;
         }
 
         public PatternTable MakePatternTable(List<int> banks)

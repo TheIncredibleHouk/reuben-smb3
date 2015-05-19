@@ -14,6 +14,13 @@ namespace Reuben.Model
         {
             Levels = new List<LevelInfo>();
             Types = new List<LevelType>();
+            Overlays = new Block[256];
+            for (int i = 0; i < 256; i++)
+            {
+                Overlays[i] = new Block();
+            }
+
+            OverlayPalette = new Palette();
         }
 
         [DataMember]
@@ -21,5 +28,11 @@ namespace Reuben.Model
 
         [DataMember]
         public List<LevelType> Types { get; set; }
+
+        [DataMember]
+        public Block[] Overlays { get; set; }
+
+        [DataMember]
+        public Palette OverlayPalette { get; set; }
     }
 }

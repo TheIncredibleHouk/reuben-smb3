@@ -41,7 +41,7 @@
             this.graphics2 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.setDefaultButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.typeName = new System.Windows.Forms.TextBox();
@@ -71,6 +71,7 @@
             this.solidity.Name = "solidity";
             this.solidity.Size = new System.Drawing.Size(130, 21);
             this.solidity.TabIndex = 4;
+            this.solidity.SelectedIndexChanged += new System.EventHandler(this.solidity_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -183,16 +184,16 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Palette";
             // 
-            // button1
+            // setDefaultButton
             // 
-            this.button1.Location = new System.Drawing.Point(509, 375);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Set As Level Type Defaults";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.setDefaultButton.Location = new System.Drawing.Point(509, 375);
+            this.setDefaultButton.Margin = new System.Windows.Forms.Padding(4);
+            this.setDefaultButton.Name = "setDefaultButton";
+            this.setDefaultButton.Size = new System.Drawing.Size(160, 23);
+            this.setDefaultButton.TabIndex = 17;
+            this.setDefaultButton.Text = "Set As Level Type Defaults";
+            this.setDefaultButton.UseVisualStyleBackColor = true;
+            this.setDefaultButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -293,7 +294,7 @@
             this.Controls.Add(this.typeName);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.setDefaultButton);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.graphics2);
             this.Controls.Add(this.label7);
@@ -337,7 +338,7 @@
         private System.Windows.Forms.ComboBox graphics2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button setDefaultButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox typeName;
