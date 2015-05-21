@@ -23,15 +23,15 @@ namespace Reuben.UI
         GraphicsController gfxController;
         StringController stringController;
         Palette overlayPalette;
-        Block[] overlays;
+        public Block[] Overlays { get; set; }
 
         public List<LevelType> LocalLevelTypes { get; private set; }
-        
+
         public void Initialize(LevelController levels, GraphicsController graphics, StringController strings, int selectedLevelType = 1)
         {
             LocalLevelTypes = levels.LevelData.Types.MakeCopy();
             gfxController = graphics;
-            overlays = levels.LevelData.Overlays.MakeCopy();
+            Overlays = levels.LevelData.Overlays.MakeCopy();
             overlayPalette = levels.LevelData.OverlayPalette;
 
             delayUpdate = true;
@@ -52,7 +52,9 @@ namespace Reuben.UI
             paletteList.UpdateList();
             delayUpdate = false;
             levelTypes.SelectedIndex = selectedLevelType;
-            blockView.Block = LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock];
+
+            blockView.Block = selectedBlock;
+
             blockView.UpdateGraphics();
             blockList.SelectedBlock = 0;
         }
@@ -79,13 +81,16 @@ namespace Reuben.UI
                 typeName.Enabled = setDefaultButton.Enabled = paletteList.Enabled = graphics1.Enabled = graphics2.Enabled = false;
 
                 typeName.Text = "Overlays";
-                blockList.BlockList = overlays;
+                blockList.BlockList = Overlays;
 
                 delayUpdate = false;
                 patternTable.Palette = blockView.Palette = blockList.Palette = overlayPalette;
                 patternTable.PatternTable = blockView.PatternTable = blockList.PatternTable = gfxController.MakeExtraPatternTable(new List<int>() { 4, 5, 6, 7 });
+
+                blockList.BlockList = Overlays;
+                blockList.SelectedBlock = blockList.SelectedBlock;
                 patternTable.UpdateGraphics();
-                blockView.Update();
+                blockView.UpdateGraphics();
                 blockList.UpdateGraphics();
             }
             else
@@ -94,7 +99,9 @@ namespace Reuben.UI
 
                 typeName.Text = LocalLevelTypes[levelTypes.SelectedIndex].Name;
                 blockList.BlockList = LocalLevelTypes[levelTypes.SelectedIndex].Blocks;
-                
+
+                blockList.SelectedBlock = blockList.SelectedBlock;
+
                 graphics1.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID;
                 graphics2.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID2;
                 delayUpdate = false;
@@ -137,17 +144,18 @@ namespace Reuben.UI
         {
             if ((string)levelTypes.SelectedItem != "Overlays")
             {
-                blockView.Block = LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock];
+                selectedBlock = blockView.Block = LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock];
             }
             else
             {
-                blockView.Block = overlays[blockList.SelectedBlock];
+                selectedBlock = blockView.Block = Overlays[blockList.SelectedBlock];
             }
 
             patternTable.PaletteIndex = blockView.PaletteIndex = (blockList.SelectedBlock & 0xC0) >> 6;
             patternTable.UpdateGraphics();
             blockView.UpdateGraphics();
 
+            blockUpdating = true;
             switch (blockView.Block.BlockSolidity)
             {
                 case 0x00:
@@ -155,37 +163,28 @@ namespace Reuben.UI
                 case 0x20:
                 case 0x30:
                     solidity.SelectedIndex = (blockView.Block.BlockSolidity & 0xF0) >> 4;
-                    interaction.Items.Clear();
-                    interaction.Items.AddRange(stringController.GetStringList("interaction").ToArray());
                     break;
 
                 case 0x40:
                     solidity.SelectedIndex = 4;
-                    interaction.Items.Clear();
-                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
                     break;
 
                 case 0x80:
                     solidity.SelectedIndex = 5;
-                    interaction.Items.Clear();
-                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
                     break;
 
                 case 0xC0:
                     solidity.SelectedIndex = 6;
-                    interaction.Items.Clear();
-                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
                     break;
 
 
                 case 0xF0:
                     solidity.SelectedIndex = 7;
-                    interaction.Items.Clear();
-                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
                     break;
             }
 
             interaction.SelectedIndex = blockView.Block.BlockInteraction & 0x0F;
+            blockUpdating = false;
         }
 
         private int selectedTile;
@@ -198,6 +197,7 @@ namespace Reuben.UI
             selectedTile = col + (row * 16);
         }
 
+        private Block selectedBlock;
         private void blockView_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -206,55 +206,90 @@ namespace Reuben.UI
                 int row = e.Y / 32;
                 if (col == 0 && row == 0)
                 {
-                    LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock].UpperLeft = selectedTile;
+                    selectedBlock.UpperLeft = selectedTile;
                 }
 
                 else if (col == 1 && row == 0)
                 {
-                    LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock].UpperRight = selectedTile;
+                    selectedBlock.UpperRight = selectedTile;
                 }
 
                 else if (col == 0 && row == 1)
                 {
-                    LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock].LowerLeft = selectedTile;
+                    selectedBlock.LowerLeft = selectedTile;
                 }
 
                 else if (col == 1 && row == 1)
                 {
-                    LocalLevelTypes[levelTypes.SelectedIndex].Blocks[blockList.SelectedBlock].LowerRight = selectedTile;
+                    selectedBlock.LowerRight = selectedTile;
                 }
 
                 blockView.UpdateGraphics();
+                blockList.UpdateBlock(blockList.SelectedBlock % 16, blockList.SelectedBlock /16);
             }
         }
 
+        private bool blockUpdating;
         private void solidity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            blockView.Block.BlockInteraction = interaction.SelectedIndex;
-
+            interaction.Items.Clear();
             switch (solidity.SelectedIndex)
             {
                 case 0:
                 case 1:
                 case 2:
                 case 3:
+                    interaction.Items.AddRange(stringController.GetStringList("interaction").ToArray());
+                    blockView.Block.BlockSolidity = (solidity.SelectedIndex << 4);
+                    break;
+
                 case 4:
+                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
                     blockView.Block.BlockSolidity = (solidity.SelectedIndex << 4);
                     break;
 
                 case 5:
                     blockView.Block.BlockSolidity = 0x80;
+                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
                     break;
 
                 case 6:
                     blockView.Block.BlockSolidity = 0xC0;
+                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
                     break;
 
 
                 case 7:
                     blockView.Block.BlockSolidity = 0xF0;
+                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
                     break;
             }
+
+            interaction.SelectedIndex = blockView.Block.BlockInteraction & 0x0F;
+        }
+
+
+        private void blockList_MouseDown(object sender, EventArgs e)
+        {
+            MouseEventArgs m = (MouseEventArgs)e;
+            if (m.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                int col = m.X / 16;
+                int row = m.Y / 16;
+                Block block = blockList.BlockList[(col % 16) + (row * 16)];
+                block.UpperLeft = blockView.Block.UpperLeft;
+                block.UpperRight = blockView.Block.UpperRight;
+                block.LowerLeft = blockView.Block.LowerLeft;
+                block.LowerRight = blockView.Block.LowerRight;
+                block.BlockInteraction = blockView.Block.BlockInteraction;
+                block.BlockSolidity = blockView.Block.BlockSolidity;
+                blockList.UpdateBlock(col, row);
+            }
+        }
+
+        private void interaction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            blockView.Block.BlockInteraction = interaction.SelectedIndex;
         }
     }
 }

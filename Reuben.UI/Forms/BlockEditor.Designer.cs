@@ -92,6 +92,7 @@
             this.interaction.Name = "interaction";
             this.interaction.Size = new System.Drawing.Size(130, 21);
             this.interaction.TabIndex = 6;
+            this.interaction.SelectedIndexChanged += new System.EventHandler(this.interaction_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -271,6 +272,7 @@
             this.blockList.Name = "blockList";
             this.blockList.Size = new System.Drawing.Size(256, 256);
             this.blockList.TabIndex = 1;
+            this.blockList.BubbledMouseDown += new System.EventHandler(this.blockList_MouseDown);
             this.blockList.SelectedBlockChanged += new System.EventHandler(this.blockList_SelectedBlockChanged);
             // 
             // patternTable

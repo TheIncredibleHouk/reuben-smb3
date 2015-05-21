@@ -2585,7 +2585,7 @@
           "LowerLeft": 255,
           "LowerRight": 255,
           "BlockSolidity": 0,
-          "BlockInteraction": -1
+          "BlockInteraction": 0
         },
         {
           "UpperLeft": 255,
@@ -4273,7 +4273,7 @@
           "LowerLeft": 188,
           "LowerRight": 189,
           "BlockSolidity": 48,
-          "BlockInteraction": 12
+          "BlockInteraction": 14
         },
         {
           "UpperLeft": 4,
@@ -6399,7 +6399,7 @@
           "LowerLeft": 51,
           "LowerRight": 52,
           "BlockSolidity": 192,
-          "BlockInteraction": 12
+          "BlockInteraction": 0
         },
         {
           "UpperLeft": 255,
@@ -32270,100 +32270,100 @@
   ],
   "Overlays": [
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 40,
+      "UpperRight": 41,
+      "LowerLeft": 56,
+      "LowerRight": 57,
+      "BlockSolidity": 192,
+      "BlockInteraction": 2
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 40,
+      "UpperRight": 41,
+      "LowerLeft": 56,
+      "LowerRight": 57,
+      "BlockSolidity": 64,
+      "BlockInteraction": 2
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 5,
+      "UpperRight": 5,
+      "LowerLeft": 21,
+      "LowerRight": 21,
+      "BlockSolidity": 192,
+      "BlockInteraction": 3
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 4,
+      "UpperRight": 4,
+      "LowerLeft": 20,
+      "LowerRight": 20,
+      "BlockSolidity": 192,
+      "BlockInteraction": 4
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 6,
+      "UpperRight": 7,
+      "LowerLeft": 6,
+      "LowerRight": 7,
+      "BlockSolidity": 192,
+      "BlockInteraction": 5
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 22,
+      "UpperRight": 23,
+      "LowerLeft": 22,
+      "LowerRight": 23,
+      "BlockSolidity": 192,
+      "BlockInteraction": 6
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 64,
+      "UpperRight": 65,
+      "LowerLeft": 80,
+      "LowerRight": 81,
+      "BlockSolidity": 64,
+      "BlockInteraction": 13
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 64,
+      "UpperRight": 65,
+      "LowerLeft": 80,
+      "LowerRight": 81,
+      "BlockSolidity": 192,
+      "BlockInteraction": 13
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 66,
+      "UpperRight": 67,
+      "LowerLeft": 82,
+      "LowerRight": 83,
+      "BlockSolidity": 64,
+      "BlockInteraction": 14
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 66,
+      "UpperRight": 67,
+      "LowerLeft": 82,
+      "LowerRight": 83,
+      "BlockSolidity": 192,
+      "BlockInteraction": 14
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 68,
+      "UpperRight": 69,
+      "LowerLeft": 84,
+      "LowerRight": 85,
+      "BlockSolidity": 64,
+      "BlockInteraction": 15
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 68,
+      "UpperRight": 69,
+      "LowerLeft": 84,
+      "LowerRight": 85,
+      "BlockSolidity": 192,
+      "BlockInteraction": 15
     },
     {
       "UpperLeft": 0,
@@ -32398,20 +32398,20 @@
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 66,
+      "UpperRight": 67,
+      "LowerLeft": 82,
+      "LowerRight": 83,
+      "BlockSolidity": 128,
+      "BlockInteraction": 12
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 66,
+      "UpperRight": 67,
+      "LowerLeft": 82,
+      "LowerRight": 83,
+      "BlockSolidity": 240,
+      "BlockInteraction": 12
     },
     {
       "UpperLeft": 0,
@@ -32782,228 +32782,228 @@
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 2,
+      "UpperRight": 3,
+      "LowerLeft": 18,
+      "LowerRight": 19,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 2
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 2,
+      "UpperRight": 3,
+      "LowerLeft": 18,
+      "LowerRight": 19,
+      "BlockSolidity": 16,
+      "BlockInteraction": 2
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 5,
+      "UpperRight": 5,
+      "LowerLeft": 21,
+      "LowerRight": 21,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 3
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 5,
+      "UpperRight": 5,
+      "LowerLeft": 21,
+      "LowerRight": 21,
+      "BlockSolidity": 16,
+      "BlockInteraction": 3
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 5,
+      "UpperRight": 5,
+      "LowerLeft": 21,
+      "LowerRight": 21,
+      "BlockSolidity": 32,
+      "BlockInteraction": 3
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 5,
+      "UpperRight": 5,
+      "LowerLeft": 21,
+      "LowerRight": 21,
+      "BlockSolidity": 48,
+      "BlockInteraction": 3
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 4,
+      "UpperRight": 4,
+      "LowerLeft": 20,
+      "LowerRight": 20,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 4
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 4,
+      "UpperRight": 4,
+      "LowerLeft": 20,
+      "LowerRight": 20,
+      "BlockSolidity": 16,
+      "BlockInteraction": 4
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 4,
+      "UpperRight": 4,
+      "LowerLeft": 20,
+      "LowerRight": 20,
+      "BlockSolidity": 32,
+      "BlockInteraction": 4
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 4,
+      "UpperRight": 4,
+      "LowerLeft": 20,
+      "LowerRight": 20,
+      "BlockSolidity": 48,
+      "BlockInteraction": 4
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 6,
+      "UpperRight": 7,
+      "LowerLeft": 6,
+      "LowerRight": 7,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 5
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 6,
+      "UpperRight": 7,
+      "LowerLeft": 6,
+      "LowerRight": 7,
+      "BlockSolidity": 16,
+      "BlockInteraction": 5
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 6,
+      "UpperRight": 7,
+      "LowerLeft": 6,
+      "LowerRight": 7,
+      "BlockSolidity": 32,
+      "BlockInteraction": 5
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 6,
+      "UpperRight": 7,
+      "LowerLeft": 6,
+      "LowerRight": 7,
+      "BlockSolidity": 48,
+      "BlockInteraction": 5
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 14,
+      "UpperRight": 15,
+      "LowerLeft": 30,
+      "LowerRight": 31,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 10
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 14,
+      "UpperRight": 15,
+      "LowerLeft": 30,
+      "LowerRight": 31,
+      "BlockSolidity": 16,
+      "BlockInteraction": 10
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 22,
+      "UpperRight": 23,
+      "LowerLeft": 22,
+      "LowerRight": 23,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 6
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 22,
+      "UpperRight": 23,
+      "LowerLeft": 22,
+      "LowerRight": 23,
+      "BlockSolidity": 16,
+      "BlockInteraction": 6
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 22,
+      "UpperRight": 23,
+      "LowerLeft": 22,
+      "LowerRight": 23,
+      "BlockSolidity": 32,
+      "BlockInteraction": 6
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 22,
+      "UpperRight": 23,
+      "LowerLeft": 22,
+      "LowerRight": 23,
+      "BlockSolidity": 48,
+      "BlockInteraction": 6
     },
     {
       "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperRight": 1,
+      "LowerLeft": 16,
+      "LowerRight": 17,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 1
     },
     {
       "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperRight": 1,
+      "LowerLeft": 16,
+      "LowerRight": 17,
+      "BlockSolidity": 16,
+      "BlockInteraction": 1
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 32,
+      "UpperRight": 33,
+      "LowerLeft": 48,
+      "LowerRight": 49,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 11
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 32,
+      "UpperRight": 33,
+      "LowerLeft": 48,
+      "LowerRight": 49,
+      "BlockSolidity": 64,
+      "BlockInteraction": 11
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 36,
+      "UpperRight": 37,
+      "LowerLeft": 52,
+      "LowerRight": 53,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 13
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 36,
+      "UpperRight": 37,
+      "LowerLeft": 52,
+      "LowerRight": 53,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 13
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 38,
+      "UpperRight": 39,
+      "LowerLeft": 54,
+      "LowerRight": 55,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 14
     },
     {
       "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperRight": 1,
+      "LowerLeft": 16,
+      "LowerRight": 17,
+      "BlockSolidity": 192,
+      "BlockInteraction": 1
     },
     {
       "UpperLeft": 0,
@@ -33038,52 +33038,52 @@
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 98,
+      "UpperRight": 99,
+      "LowerLeft": 114,
+      "LowerRight": 115,
+      "BlockSolidity": 128,
+      "BlockInteraction": 2
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 98,
+      "UpperRight": 99,
+      "LowerLeft": 114,
+      "LowerRight": 115,
+      "BlockSolidity": 240,
+      "BlockInteraction": 2
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 110,
+      "UpperRight": 111,
+      "LowerLeft": 126,
+      "LowerRight": 127,
+      "BlockSolidity": 128,
+      "BlockInteraction": 9
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 110,
+      "UpperRight": 111,
+      "LowerLeft": 126,
+      "LowerRight": 127,
+      "BlockSolidity": 240,
+      "BlockInteraction": 9
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 130,
+      "UpperRight": 131,
+      "LowerLeft": 146,
+      "LowerRight": 147,
+      "BlockSolidity": 128,
+      "BlockInteraction": 10
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 130,
+      "UpperRight": 131,
+      "LowerLeft": 146,
+      "LowerRight": 147,
+      "BlockSolidity": 192,
+      "BlockInteraction": 10
     },
     {
       "UpperLeft": 0,
@@ -33294,84 +33294,84 @@
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 96,
+      "UpperRight": 97,
+      "LowerLeft": 112,
+      "LowerRight": 113,
+      "BlockSolidity": 128,
+      "BlockInteraction": 1
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 96,
+      "UpperRight": 97,
+      "LowerLeft": 112,
+      "LowerRight": 113,
+      "BlockSolidity": 240,
+      "BlockInteraction": 1
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 100,
+      "UpperRight": 101,
+      "LowerLeft": 116,
+      "LowerRight": 117,
+      "BlockSolidity": 128,
+      "BlockInteraction": 4
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 100,
+      "UpperRight": 101,
+      "LowerLeft": 116,
+      "LowerRight": 117,
+      "BlockSolidity": 240,
+      "BlockInteraction": 4
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 106,
+      "UpperRight": 107,
+      "LowerLeft": 122,
+      "LowerRight": 123,
+      "BlockSolidity": 128,
+      "BlockInteraction": 3
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 106,
+      "UpperRight": 107,
+      "LowerLeft": 122,
+      "LowerRight": 123,
+      "BlockSolidity": 240,
+      "BlockInteraction": 3
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 102,
+      "UpperRight": 103,
+      "LowerLeft": 118,
+      "LowerRight": 119,
+      "BlockSolidity": 128,
+      "BlockInteraction": 6
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 102,
+      "UpperRight": 103,
+      "LowerLeft": 118,
+      "LowerRight": 119,
+      "BlockSolidity": 240,
+      "BlockInteraction": 6
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 132,
+      "UpperRight": 133,
+      "LowerLeft": 148,
+      "LowerRight": 149,
+      "BlockSolidity": 128,
+      "BlockInteraction": 11
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 132,
+      "UpperRight": 133,
+      "LowerLeft": 148,
+      "LowerRight": 149,
+      "BlockSolidity": 240,
+      "BlockInteraction": 11
     },
     {
       "UpperLeft": 0,
@@ -33422,28 +33422,28 @@
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 42,
+      "UpperRight": 43,
+      "LowerLeft": 58,
+      "LowerRight": 59,
+      "BlockSolidity": 192,
+      "BlockInteraction": 8
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 44,
+      "UpperRight": 45,
+      "LowerLeft": 60,
+      "LowerRight": 61,
+      "BlockSolidity": 192,
+      "BlockInteraction": 9
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 46,
+      "UpperRight": 47,
+      "LowerLeft": 62,
+      "LowerRight": 63,
+      "BlockSolidity": 192,
+      "BlockInteraction": 10
     },
     {
       "UpperLeft": 0,
@@ -33806,83 +33806,83 @@
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 8,
+      "UpperRight": 9,
+      "LowerLeft": 24,
+      "LowerRight": 25,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 7
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 10,
+      "UpperRight": 11,
+      "LowerLeft": 26,
+      "LowerRight": 27,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 8
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 12,
+      "UpperRight": 13,
+      "LowerLeft": 28,
+      "LowerRight": 29,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 9
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 12,
+      "UpperRight": 13,
+      "LowerLeft": 28,
+      "LowerRight": 29,
+      "BlockSolidity": 16,
+      "BlockInteraction": 9
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 12,
+      "UpperRight": 13,
+      "LowerLeft": 28,
+      "LowerRight": 29,
+      "BlockSolidity": 16,
+      "BlockInteraction": 9
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 12,
+      "UpperRight": 13,
+      "LowerLeft": 28,
+      "LowerRight": 29,
+      "BlockSolidity": 16,
+      "BlockInteraction": 9
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
+      "UpperLeft": 34,
+      "UpperRight": 35,
+      "LowerLeft": 50,
+      "LowerRight": 51,
       "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "BlockInteraction": 12
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 34,
+      "UpperRight": 35,
+      "LowerLeft": 50,
+      "LowerRight": 51,
+      "BlockSolidity": 32,
+      "BlockInteraction": 12
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
+      "UpperLeft": 34,
+      "UpperRight": 35,
+      "LowerLeft": 50,
+      "LowerRight": 51,
+      "BlockSolidity": 128,
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
+      "UpperLeft": 34,
+      "UpperRight": 35,
+      "LowerLeft": 50,
+      "LowerRight": 51,
+      "BlockSolidity": 240,
       "BlockInteraction": 0
     },
     {
@@ -33934,84 +33934,84 @@
       "BlockInteraction": 0
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 128,
+      "UpperRight": 129,
+      "LowerLeft": 144,
+      "LowerRight": 145,
+      "BlockSolidity": 128,
+      "BlockInteraction": 5
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 128,
+      "UpperRight": 129,
+      "LowerLeft": 144,
+      "LowerRight": 145,
+      "BlockSolidity": 240,
+      "BlockInteraction": 5
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 104,
+      "UpperRight": 105,
+      "LowerLeft": 120,
+      "LowerRight": 121,
+      "BlockSolidity": 128,
+      "BlockInteraction": 8
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 104,
+      "UpperRight": 105,
+      "LowerLeft": 120,
+      "LowerRight": 121,
+      "BlockSolidity": 240,
+      "BlockInteraction": 8
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 108,
+      "UpperRight": 109,
+      "LowerLeft": 124,
+      "LowerRight": 125,
+      "BlockSolidity": 128,
+      "BlockInteraction": 7
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 108,
+      "UpperRight": 109,
+      "LowerLeft": 124,
+      "LowerRight": 125,
+      "BlockSolidity": 240,
+      "BlockInteraction": 7
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 70,
+      "UpperRight": 71,
+      "LowerLeft": 86,
+      "LowerRight": 87,
+      "BlockSolidity": 240,
+      "BlockInteraction": 13
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 72,
+      "UpperRight": 73,
+      "LowerLeft": 88,
+      "LowerRight": 89,
+      "BlockSolidity": 240,
+      "BlockInteraction": 14
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 74,
+      "UpperRight": 75,
+      "LowerLeft": 90,
+      "LowerRight": 91,
+      "BlockSolidity": 240,
+      "BlockInteraction": 15
     },
     {
-      "UpperLeft": 0,
-      "UpperRight": 0,
-      "LowerLeft": 0,
-      "LowerRight": 0,
-      "BlockSolidity": 0,
-      "BlockInteraction": 0
+      "UpperLeft": 74,
+      "UpperRight": 75,
+      "LowerLeft": 90,
+      "LowerRight": 91,
+      "BlockSolidity": 128,
+      "BlockInteraction": 15
     },
     {
       "UpperLeft": 0,
@@ -34334,9 +34334,9 @@
       48,
       26,
       0,
-      0,
-      0,
-      0
+      15,
+      55,
+      40
     ],
     "SpriteValues": [
       0,

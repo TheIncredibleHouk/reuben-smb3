@@ -149,6 +149,7 @@ namespace Reuben.UI.Controls
             if (editor.ShowDialog() == DialogResult.OK)
             {
                 levelController.LevelData.Types = editor.LocalLevelTypes;
+                levelController.LevelData.Overlays = editor.Overlays;
                 levelController.Save();
             }
         }

@@ -100,7 +100,7 @@ namespace Conversion
             //index = 0;
             LevelController levels = new LevelController();
             levels.Load(projectController.Project.LevelDataFile);
-            for (int index = 0; index < 16; index++)
+            for (int index = 0; index < 15; index++)
             {
                 var bd = Reuben.UI.ProjectManagement.ProjectController.BlockManager.AllDefinitions[index];
                 NEW.LevelType newLevelType = levels.LevelData.Types[index];

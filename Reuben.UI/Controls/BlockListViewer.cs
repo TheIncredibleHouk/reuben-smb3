@@ -129,6 +129,33 @@ namespace Reuben.UI.Controls
             Invalidate();
         }
 
+        public void UpdateBlock(int col, int row)
+        {
+            if (colors == null || graphics == null || blocks == null || palette == null)
+            {
+                using (Graphics gfx = Graphics.FromImage(buffer))
+                {
+                    gfx.Clear(Color.Black);
+                }
+
+                return;
+            }
+
+            BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+
+
+            Block block = blocks[row * 16 + col];
+            int x = col * 16;
+            int y = row * 16;
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), x, y, quickBGReference[row / 4], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
+            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
+
+            buffer.UnlockBits(data);
+            Invalidate(new Rectangle(col * 16, row * 16, 17, 17));
+        }
+
         private Rectangle selectionRectangle;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -167,7 +194,7 @@ namespace Reuben.UI.Controls
 
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
-            
+
         }
     }
 }

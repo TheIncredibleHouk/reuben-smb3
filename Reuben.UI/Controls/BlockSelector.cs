@@ -77,17 +77,34 @@ namespace Reuben.UI
                 }
             }
         }
+
+        public void UpdateBlock(int col, int row)
+        {
+            blocks.UpdateBlock(col, row);
+        }
+
+        public event EventHandler BubbledMouseDown;
         private void blocks_MouseDown(object sender, MouseEventArgs e)
         {
-            int col = (e.X / 16) * 16;
-            int row = (e.Y / 16) * 16;
-            blocks.SelectionRectangle = new Rectangle(col, row, 15, 15);
-            if (Editor != null)
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                Editor.EditMode = EditMode.Blocks;
-            }
+                int col = (e.X / 16) * 16;
+                int row = (e.Y / 16) * 16;
+                blocks.SelectionRectangle = new Rectangle(col, row, 15, 15);
+                if (Editor != null)
+                {
+                    Editor.EditMode = EditMode.Blocks;
+                }
 
-            SelectedBlock = e.X / 16 + ((e.Y / 16) * 16);
+                SelectedBlock = e.X / 16 + ((e.Y / 16) * 16);
+            }
+            else
+            {
+                if (BubbledMouseDown != null)
+                {
+                    BubbledMouseDown(sender, e);
+                }
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
