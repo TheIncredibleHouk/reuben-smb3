@@ -50,6 +50,8 @@
             this.blockView = new Reuben.UI.BlockViewer();
             this.blockList = new Reuben.UI.BlockSelector();
             this.patternTable = new Reuben.UI.PatternTableView();
+            this.solidityOverlay = new System.Windows.Forms.CheckBox();
+            this.interactionOverlay = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -286,12 +288,38 @@
             this.patternTable.Text = "patternTableView1";
             this.patternTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.patternTable_MouseDown);
             // 
+            // solidityOverlay
+            // 
+            this.solidityOverlay.AutoSize = true;
+            this.solidityOverlay.Location = new System.Drawing.Point(302, 38);
+            this.solidityOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.solidityOverlay.Name = "solidityOverlay";
+            this.solidityOverlay.Size = new System.Drawing.Size(133, 17);
+            this.solidityOverlay.TabIndex = 25;
+            this.solidityOverlay.Text = "Show Solidity Overlays";
+            this.solidityOverlay.UseVisualStyleBackColor = true;
+            this.solidityOverlay.CheckedChanged += new System.EventHandler(this.solidityOverlay_CheckedChanged);
+            // 
+            // interactionOverlay
+            // 
+            this.interactionOverlay.AutoSize = true;
+            this.interactionOverlay.Location = new System.Drawing.Point(302, 12);
+            this.interactionOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.interactionOverlay.Name = "interactionOverlay";
+            this.interactionOverlay.Size = new System.Drawing.Size(150, 17);
+            this.interactionOverlay.TabIndex = 24;
+            this.interactionOverlay.Text = "Show Interaction Overlays";
+            this.interactionOverlay.UseVisualStyleBackColor = true;
+            this.interactionOverlay.CheckedChanged += new System.EventHandler(this.interactionOverlay_CheckedChanged);
+            // 
             // BlockEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(681, 412);
             this.ControlBox = false;
+            this.Controls.Add(this.solidityOverlay);
+            this.Controls.Add(this.interactionOverlay);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.typeName);
             this.Controls.Add(this.button3);
@@ -345,5 +373,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox typeName;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox solidityOverlay;
+        private System.Windows.Forms.CheckBox interactionOverlay;
     }
 }

@@ -52,9 +52,9 @@ namespace Reuben.UI
             var palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
             var overlayPatternTable = graphics.MakeExtraPatternTable(4, 5, 6, 7);
 
-            levelViewer.Initialize(level, levelType, palette, levels.LevelData.OverlayPalette, graphics.GraphicsData.Colors, patternTable, overlayPatternTable, spriteController, levels, graphics);
+            levelViewer.Initialize(level, levelType, palette, levels.LevelData.OverlayPalette, graphics.GraphicsData.Colors, levels.LevelData.Overlays, patternTable, overlayPatternTable, spriteController, graphics);
 
-            blockSelector.Initialize(patternTable, levelType.Blocks, palette, graphics.GraphicsData.Colors);
+            blockSelector.Initialize(patternTable, overlayPatternTable, levelType.Blocks, levels.LevelData.Overlays, palette, levels.LevelData.OverlayPalette, graphics.GraphicsData.Colors);
 
             spriteSelector.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
 
@@ -646,6 +646,13 @@ namespace Reuben.UI
         private void interactionOverlay_CheckedChanged(object sender, EventArgs e)
         {
             levelViewer.ShowInteractionOverlays = interactionOverlay.Checked;
+            levelViewer.UpdateBlockDisplay(0, 0, 0xF0, 0x1B);
+        }
+
+        private void solidityOverlay_CheckedChanged(object sender, EventArgs e)
+        {
+
+            levelViewer.ShowSolidityOverlays = solidityOverlay.Checked;
             levelViewer.UpdateBlockDisplay(0, 0, 0xF0, 0x1B);
         }
     }

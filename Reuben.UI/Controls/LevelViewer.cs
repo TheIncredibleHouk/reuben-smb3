@@ -34,7 +34,7 @@ namespace Reuben.UI
             this.Height = levelBitmapHeight;
         }
 
-        public void Initialize(Level level, LevelType levelType, Palette levelPalette, Palette overlayPalette, Color[] colors, PatternTable patternTable, PatternTable overlayTable, SpriteController spriteController, LevelController levelController, GraphicsController grahicsController)
+        public void Initialize(Level level, LevelType levelType, Palette levelPalette, Palette overlayPalette, Color[] colors, Block[] overlayBlocks, PatternTable patternTable, PatternTable overlayTable, SpriteController spriteController, GraphicsController grahicsController)
         {
             localLevel = level;
             localLevelType = levelType;
@@ -45,7 +45,7 @@ namespace Reuben.UI
             localOverlayTable = overlayTable;
             localSpriteController = spriteController;
             localGraphicsController = grahicsController;
-            localLevelController = levelController;
+            localOverlayBlocks = overlayBlocks;
 
             if (localPalette != null && localColors != null)
             {
@@ -97,15 +97,16 @@ namespace Reuben.UI
             }
         }
 
-        public void Update(Level level = null, LevelType levelType = null, Palette levelPalette = null, Palette overlayPalette = null, Color[] colors = null, PatternTable patternTable = null, PatternTable overlayTable = null)
+        public void Update(Level level = null, LevelType levelType = null, Palette levelPalette = null, Palette overlayPalette = null, Color[] colors = null, Block[] overlayBlocks = null, PatternTable patternTable = null, PatternTable overlayTable = null)
         {
             localLevel = level ?? localLevel;
             localLevelType = levelType ?? localLevelType;
             localPalette = levelPalette ?? localPalette;
-            localColors = colors;
+            localColors = colors ?? localColors;
             localOverlayPalette = overlayPalette ?? localOverlayPalette;
             localPatternTable = patternTable ?? localPatternTable;
             localOverlayTable = overlayTable ?? localOverlayTable;
+            localOverlayBlocks = overlayBlocks ?? localOverlayBlocks;
 
             if (localPalette != null && localColors != null)
             {
@@ -138,8 +139,8 @@ namespace Reuben.UI
                 {
                     quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
                     quickSpriteReference[i / 4][i % 4] = localColors[localPalette.SpriteValues[i]];
-                    quickBGOverlayReference[i / 4][i % 4] = localColors[overlayPalette.BackgroundValues[i]];
-                    quickSpriteOverlayReference[i / 4][i % 4] = localColors[overlayPalette.SpriteValues[i]];
+                    quickBGOverlayReference[i / 4][i % 4] = localColors[localOverlayPalette.BackgroundValues[i]];
+                    quickSpriteOverlayReference[i / 4][i % 4] = localColors[localOverlayPalette.SpriteValues[i]];
                 }
 
                 quickBGOverlayReference[0][0] =
@@ -164,10 +165,10 @@ namespace Reuben.UI
         private Palette localPalette;
         private Palette localOverlayPalette;
         private Color[] localColors;
+        private Block[] localOverlayBlocks;
         private PatternTable localOverlayTable;
         private PatternTable localPatternTable;
         private SpriteController localSpriteController;
-        private LevelController localLevelController;
         private GraphicsController localGraphicsController;
 
         private Color[][] quickBGReference;
@@ -178,10 +179,9 @@ namespace Reuben.UI
         public bool ShowInteractionOverlays { get; set; }
         public bool ShowSolidityOverlays { get; set; }
 
-        private bool blockUpdating;
         public void UpdateBlockDisplay(int column, int row, int width, int height)
         {
-           
+
             if (quickBGReference == null || localPalette == null || localPatternTable == null || localPatternTable == null)
             {
                 return;
@@ -250,29 +250,78 @@ namespace Reuben.UI
 
             Block block = localLevelType.Blocks[blockValue];
             int paletteIndex = (blockValue & 0xC0) >> 6;
+
             Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperLeft), column * 16, row * 16, quickBGReference[paletteIndex], bitmap);
             Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperRight), column * 16 + 8, row * 16, quickBGReference[paletteIndex], bitmap);
             Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerLeft), column * 16, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
             Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerRight), column * 16 + 8, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
 
-            if (ShowSolidityOverlays)
-            {
-
-            }
 
             if (ShowInteractionOverlays)
             {
                 if (block.BlockSolidity == 0x80 || block.BlockSolidity == 0xF0 || block.BlockInteraction > 0x00)
                 {
-                    Block overlayBlock = localLevelController.GetOverlay(block);
+                    Block overlayBlock = null;
+                    int index = 0;
+                    for (; index < 0x100; index++)
+                    {
+                        if (localOverlayBlocks[index].BlockInteraction == block.BlockInteraction &&
+                            localOverlayBlocks[index].BlockSolidity == block.BlockSolidity)
+                        {
+                            overlayBlock = localOverlayBlocks[index];
+                            break;
+                        }
+                    }
+
                     if (overlayBlock != null)
                     {
-                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperLeft), column * 16, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
-                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperRight), column * 16 + 8, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
-                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerLeft), column * 16, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
-                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerRight), column * 16 + 8, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperLeft), column * 16, row * 16, quickBGOverlayReference[index / 0x40], .75, bitmap);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperRight), column * 16 + 8, row * 16, quickBGOverlayReference[index / 0x40], .75, bitmap);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerLeft), column * 16, row * 16 + 8, quickBGOverlayReference[index / 0x40], .75, bitmap);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerRight), column * 16 + 8, row * 16 + 8, quickBGOverlayReference[index / 0x40], .75, bitmap);
                     }
                 }
+            }
+
+            if (ShowSolidityOverlays)
+            {
+                switch(block.BlockSolidity)
+                {
+                    case 0x10:
+                        Drawer.FillTileWithAlpha(column * 16, row * 16 + 8, Color.White, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16, row * 16, Color.White, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16, Color.White, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16 + 8, Color.White, .5, bitmap);
+                        break;
+
+                    case 0x20:
+                        Drawer.FillTileWithAlpha(column * 16, row * 16 + 8, Color.Blue, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16, row * 16, Color.Blue, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16, Color.Blue, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16 + 8, Color.Blue, .5, bitmap);
+                        break;
+
+                    case 0x30:
+                        Drawer.FillTileWithAlpha(column * 16, row * 16 + 8, Color.LightBlue, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16, row * 16, Color.LightBlue, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16, Color.LightBlue, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16 + 8, Color.LightBlue, .5, bitmap);
+                        break;
+
+                    case 0x40:
+                        Drawer.FillTileWithAlpha(column * 16, row * 16, Color.Brown, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16, Color.Brown, .5, bitmap);
+                        break;
+
+                    case 0xC0:
+                    case 0xF0:
+                        Drawer.FillTileWithAlpha(column * 16, row * 16 + 8, Color.Brown, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16, row * 16, Color.Brown, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16, Color.Brown, .5, bitmap);
+                        Drawer.FillTileWithAlpha(column * 16 + 8, row * 16 + 8, Color.Brown, .5, bitmap);
+                        break;
+                }
+                
             }
         }
 
@@ -335,7 +384,7 @@ namespace Reuben.UI
         {
             using (var gfx = System.Drawing.Graphics.FromImage(compositeBuffer))
             {
-                //gfx.DrawImage(bgBuffer, area, area, GraphicsUnit.Pixel);
+                gfx.DrawImage(bgBuffer, area, area, GraphicsUnit.Pixel);
                 gfx.DrawImage(spriteBuffer, area, area, GraphicsUnit.Pixel);
             }
 
@@ -381,8 +430,6 @@ namespace Reuben.UI
                         e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
                     }
                 }
-
-                blockUpdating = false;
             }
         }
 

@@ -29,6 +29,8 @@ namespace Reuben.UI
 
         public void Initialize(LevelController levels, GraphicsController graphics, StringController strings, int selectedLevelType = 1)
         {
+
+            var overlayTable = graphics.MakeExtraPatternTable(4, 5, 6, 7);
             LocalLevelTypes = levels.LevelData.Types.MakeCopy();
             gfxController = graphics;
             Overlays = levels.LevelData.Overlays.MakeCopy();
@@ -49,9 +51,10 @@ namespace Reuben.UI
 
             paletteList.Palettes = graphics.GraphicsData.Palettes.OrderBy(p => p.Name.ToLower()).ToList();
             patternTable.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
-            blockList.Update(colors: graphics.GraphicsData.Colors);
 
+            blockList.Update(colors: graphics.GraphicsData.Colors, overlayBlocks: Overlays, overlayPalette: overlayPalette, overlayTable: overlayTable);
             blockView.Update(colors: graphics.GraphicsData.Colors);
+
             paletteList.UpdateList();
             delayUpdate = false;
             levelTypes.SelectedIndex = selectedLevelType;
@@ -311,6 +314,18 @@ namespace Reuben.UI
         private void interaction_SelectedIndexChanged(object sender, EventArgs e)
         {
             blockView.Block.BlockInteraction = interaction.SelectedIndex;
+        }
+
+        private void interactionOverlay_CheckedChanged(object sender, EventArgs e)
+        {
+            blockList.ShowInteractionOverlays = interactionOverlay.Checked;
+            blockList.UpdateAll();
+        }
+
+        private void solidityOverlay_CheckedChanged(object sender, EventArgs e)
+        {
+            blockList.ShowSolidityOverlays = solidityOverlay.Checked;
+            blockList.UpdateAll();
         }
     }
 }

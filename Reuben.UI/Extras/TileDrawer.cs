@@ -42,8 +42,32 @@ namespace Reuben.UI
             {
                 for (int col = 0; col < 8; col++)
                 {
+                    int pixel = tile.Pixels[col, row];
+                    if (pixel == 0)
+                    {
+                        continue;
+                    }
+                    Color c = reference[pixel];
+
                     long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 3) + (x * 3));
-                    Color c = reference[tile.Pixels[col, row]];
+
+
+                    *(dataPointer + offset) = (byte)((1 - alpha) * (*(dataPointer + offset)) + (alpha * c.B));
+                    *(dataPointer + offset + 1) = (byte)((1 - alpha) * (*(dataPointer + offset + 1)) + (alpha * c.G));
+                    *(dataPointer + offset + 2) = (byte)((1 - alpha) * (*(dataPointer + offset + 2)) + (alpha * c.R));
+                }
+            }
+        }
+
+        public unsafe static void FillTileWithAlpha(int x, int y, Color c, double alpha, BitmapData bitmap)
+        {
+            byte* dataPointer = (byte*)bitmap.Scan0;
+
+            for (int row = 0; row < 8; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    long offset = (bitmap.Stride * y + (row * bitmap.Stride)) + ((col * 3) + (x * 3));
 
 
                     *(dataPointer + offset) = (byte)((1 - alpha) * (*(dataPointer + offset)) + (alpha * c.B));
