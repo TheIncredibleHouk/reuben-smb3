@@ -34,9 +34,10 @@ namespace Reuben.UI
             blocks = blockSet;
         }
 
-        public void SetGraphicsController(GraphicsController controller)
+        private Color[] localColors;
+        public void Initialize(Color[] colors)
         {
-            graphicsController = controller;
+            localColors = colors;
         }
 
         private PatternTable _SpecialTable;
@@ -98,7 +99,7 @@ namespace Reuben.UI
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        quickColorLookup[j, i] = graphicsController.GetColorReferenceByIndex(currentPalette.GetColorIndex(j, i));
+                        quickColorLookup[j, i] = localColors[currentPalette.GetColorIndex(j, i)];
                     }
                 }
             }

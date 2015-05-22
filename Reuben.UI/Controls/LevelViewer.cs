@@ -34,58 +34,20 @@ namespace Reuben.UI
             this.Height = levelBitmapHeight;
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Level Level { get; set; }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public LevelType LevelType { get; set; }
-
-        private Palette palette;
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Palette Palette
+        public void Initialize(Level level, LevelType levelType, Palette levelPalette, Palette overlayPalette, Color[] colors, PatternTable patternTable, PatternTable overlayTable, SpriteController spriteController, LevelController levelController, GraphicsController grahicsController)
         {
-            get { return palette; }
-            set
-            {
-                palette = value;
-                UpdateColorReferences();
-            }
-        }
+            localLevel = level;
+            localLevelType = levelType;
+            localPalette = levelPalette;
+            localColors = colors;
+            localOverlayPalette = overlayPalette;
+            localPatternTable = patternTable;
+            localOverlayTable = overlayTable;
+            localSpriteController = spriteController;
+            localGraphicsController = grahicsController;
+            localLevelController = levelController;
 
-        private Color[] colorRefrence;
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Color[] ColorReference
-        {
-            get { return colorRefrence; }
-            set
-            {
-                colorRefrence = value;
-                UpdateColorReferences();
-            }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public PatternTable PatternTable { get; set; }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public GraphicsController Graphics { get; set; }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public LevelController Levels { get; set; }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SpriteController Sprites { get; set; }
-
-        private Color[][] quickBGReference;
-        private Color[][] quickSpriteReference;
-        private Color[][] quickBGOverlayReference;
-        private Color[][] quickSpriteOverlayReference;
-
-        private void UpdateColorReferences()
-        {
-            if (Palette != null && ColorReference != null)
+            if (localPalette != null && localColors != null)
             {
                 quickBGReference = new Color[4][];
                 quickSpriteReference = new Color[4][];
@@ -114,13 +76,76 @@ namespace Reuben.UI
 
                 for (int i = 0; i < 16; i++)
                 {
-                    quickBGReference[i / 4][i % 4] = ColorReference[Palette.BackgroundValues[i]];
-                    quickSpriteReference[i / 4][i % 4] = ColorReference[Palette.SpriteValues[i]];
-                    quickBGOverlayReference[i / 4][i % 4] = ColorReference[Levels.LevelData.OverlayPalette.BackgroundValues[i]];
-                    quickSpriteOverlayReference[i / 4][i % 4] = ColorReference[Levels.LevelData.OverlayPalette.SpriteValues[i]];
+                    quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
+                    quickSpriteReference[i / 4][i % 4] = localColors[localPalette.SpriteValues[i]];
+                    quickBGOverlayReference[i / 4][i % 4] = localColors[localOverlayPalette.BackgroundValues[i]];
+                    quickSpriteOverlayReference[i / 4][i % 4] = localColors[localOverlayPalette.SpriteValues[i]];
                 }
 
+                quickBGOverlayReference[0][0] =
+                quickBGOverlayReference[1][0] =
+                quickBGOverlayReference[2][0] =
+                quickBGOverlayReference[3][0] =
+                quickSpriteReference[0][0] =
+                quickSpriteReference[1][0] =
+                quickSpriteReference[2][0] =
+                quickSpriteReference[3][0] =
+                quickSpriteOverlayReference[0][0] =
+                quickSpriteOverlayReference[1][0] =
+                quickSpriteOverlayReference[2][0] =
+                quickSpriteOverlayReference[3][0] = Color.Transparent;
+            }
+        }
 
+        public void Update(Level level = null, LevelType levelType = null, Palette levelPalette = null, Palette overlayPalette = null, Color[] colors = null, PatternTable patternTable = null, PatternTable overlayTable = null)
+        {
+            localLevel = level ?? localLevel;
+            localLevelType = levelType ?? localLevelType;
+            localPalette = levelPalette ?? localPalette;
+            localColors = colors;
+            localOverlayPalette = overlayPalette ?? localOverlayPalette;
+            localPatternTable = patternTable ?? localPatternTable;
+            localOverlayTable = overlayTable ?? localOverlayTable;
+
+            if (localPalette != null && localColors != null)
+            {
+                quickBGReference = new Color[4][];
+                quickSpriteReference = new Color[4][];
+                quickBGOverlayReference = new Color[4][];
+                quickSpriteOverlayReference = new Color[4][];
+
+                quickBGReference[0] = new Color[4];
+                quickBGReference[1] = new Color[4];
+                quickBGReference[2] = new Color[4];
+                quickBGReference[3] = new Color[4];
+
+                quickSpriteReference[0] = new Color[4];
+                quickSpriteReference[1] = new Color[4];
+                quickSpriteReference[2] = new Color[4];
+                quickSpriteReference[3] = new Color[4];
+
+                quickBGOverlayReference[0] = new Color[4];
+                quickBGOverlayReference[1] = new Color[4];
+                quickBGOverlayReference[2] = new Color[4];
+                quickBGOverlayReference[3] = new Color[4];
+
+                quickSpriteOverlayReference[0] = new Color[4];
+                quickSpriteOverlayReference[1] = new Color[4];
+                quickSpriteOverlayReference[2] = new Color[4];
+                quickSpriteOverlayReference[3] = new Color[4];
+
+                for (int i = 0; i < 16; i++)
+                {
+                    quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
+                    quickSpriteReference[i / 4][i % 4] = localColors[localPalette.SpriteValues[i]];
+                    quickBGOverlayReference[i / 4][i % 4] = localColors[overlayPalette.BackgroundValues[i]];
+                    quickSpriteOverlayReference[i / 4][i % 4] = localColors[overlayPalette.SpriteValues[i]];
+                }
+
+                quickBGOverlayReference[0][0] =
+                quickBGOverlayReference[1][0] =
+                quickBGOverlayReference[2][0] =
+                quickBGOverlayReference[3][0] =
                 quickSpriteReference[0][0] =
                 quickSpriteReference[1][0] =
                 quickSpriteReference[2][0] =
@@ -131,7 +156,24 @@ namespace Reuben.UI
                 quickSpriteOverlayReference[3][0] = Color.Transparent;
             }
 
+            UpdateBGArea(0, 0, 0xF0, 0x1B);
         }
+
+        private Level localLevel;
+        private LevelType localLevelType;
+        private Palette localPalette;
+        private Palette localOverlayPalette;
+        private Color[] localColors;
+        private PatternTable localOverlayTable;
+        private PatternTable localPatternTable;
+        private SpriteController localSpriteController;
+        private LevelController localLevelController;
+        private GraphicsController localGraphicsController;
+
+        private Color[][] quickBGReference;
+        private Color[][] quickSpriteReference;
+        private Color[][] quickBGOverlayReference;
+        private Color[][] quickSpriteOverlayReference;
 
         public bool ShowInteractionOverlays { get; set; }
         public bool ShowSolidityOverlays { get; set; }
@@ -139,12 +181,8 @@ namespace Reuben.UI
         private bool blockUpdating;
         public void UpdateBlockDisplay(int column, int row, int width, int height)
         {
-            if (blockUpdating)
-            {
-                return;
-            }
-
-            if (quickBGReference == null || palette == null || PatternTable == null || Graphics == null)
+           
+            if (quickBGReference == null || localPalette == null || localPatternTable == null || localPatternTable == null)
             {
                 return;
             }
@@ -152,7 +190,6 @@ namespace Reuben.UI
             UpdateBGArea(column, row, width, height);
             Rectangle area = new Rectangle(column * 16, row * 16, width * 16, height * 16);
             UpdateLayers(area);
-            blockUpdating = true;
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -166,7 +203,7 @@ namespace Reuben.UI
 
         public void UpdateSprites(IEnumerable<Sprite> sprites, IEnumerable<Rectangle> clearAreas)
         {
-            List<Tuple<Sprite, Rectangle>> spriteBounds = Sprites.GetBounds(sprites).ToList();
+            List<Tuple<Sprite, Rectangle>> spriteBounds = localSpriteController.GetBounds(sprites).ToList();
             Rectangle area = spriteBounds.Select(a => a.Item2).Combine();// generate all bound areas
 
             BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
@@ -179,7 +216,7 @@ namespace Reuben.UI
                 }
             }
 
-            List<Tuple<Sprite, Rectangle>> affectedSprites = Sprites.GetBounds(Level.Sprites).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
+            List<Tuple<Sprite, Rectangle>> affectedSprites = localSpriteController.GetBounds(localLevel.Sprites).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
             area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), area);
 
             foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
@@ -209,14 +246,14 @@ namespace Reuben.UI
         private void DrawBGBlock(int column, int row, BitmapData bitmap)
         {
 
-            int blockValue = Level.Data[column, row];
+            int blockValue = localLevel.Data[column, row];
 
-            Block block = LevelType.Blocks[blockValue];
+            Block block = localLevelType.Blocks[blockValue];
             int paletteIndex = (blockValue & 0xC0) >> 6;
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperLeft), column * 16, row * 16, quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperRight), column * 16 + 8, row * 16, quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerLeft), column * 16, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
-            Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerRight), column * 16 + 8, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperLeft), column * 16, row * 16, quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperRight), column * 16 + 8, row * 16, quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerLeft), column * 16, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerRight), column * 16 + 8, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
 
             if (ShowSolidityOverlays)
             {
@@ -225,13 +262,16 @@ namespace Reuben.UI
 
             if (ShowInteractionOverlays)
             {
-                Block overlayBlock = Levels.GetOverlay(block);
-                if (overlayBlock != null)
+                if (block.BlockSolidity == 0x80 || block.BlockSolidity == 0xF0 || block.BlockInteraction > 0x00)
                 {
-                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.UpperLeft), column * 16, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
-                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.UpperRight), column * 16 + 8, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
-                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.LowerLeft), column * 16, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
-                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.LowerRight), column * 16 + 8, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                    Block overlayBlock = localLevelController.GetOverlay(block);
+                    if (overlayBlock != null)
+                    {
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperLeft), column * 16, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperRight), column * 16 + 8, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerLeft), column * 16, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerRight), column * 16 + 8, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                    }
                 }
             }
         }
@@ -242,7 +282,7 @@ namespace Reuben.UI
             int x = sprite.X * 16;
             int y = sprite.Y * 16;
 
-            foreach (var info in Sprites.GetDefinition(sprite.ObjectID).SpriteInfo)
+            foreach (var info in localSpriteController.GetDefinition(sprite.ObjectID).SpriteInfo)
             {
                 if (info.Properties.Count > 0 && !info.Properties.Contains(sprite.Property))
                 {
@@ -266,8 +306,8 @@ namespace Reuben.UI
                     continue;
                 }
 
-                Tile tile1 = Graphics.GetTileByBankIndex(info.Table, info.Value);
-                Tile tile2 = Graphics.GetTileByBankIndex(info.Table, info.Value + 1);
+                Tile tile1 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value);
+                Tile tile2 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value + 1);
                 if (info.HorizontalFlip && info.VerticalFlip)
                 {
                     Drawer.DrawTileHorizontalVerticalFlipAlpha(tile1, xOffset, yOffset, quickSpriteReference[paletteIndex], bitmap);
@@ -295,7 +335,7 @@ namespace Reuben.UI
         {
             using (var gfx = System.Drawing.Graphics.FromImage(compositeBuffer))
             {
-                gfx.DrawImage(bgBuffer, area, area, GraphicsUnit.Pixel);
+                //gfx.DrawImage(bgBuffer, area, area, GraphicsUnit.Pixel);
                 gfx.DrawImage(spriteBuffer, area, area, GraphicsUnit.Pixel);
             }
 
@@ -304,7 +344,7 @@ namespace Reuben.UI
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Level == null || PatternTable == null || ColorReference == null)
+            if (localLevel == null || localPatternTable == null || localColors == null)
             {
                 e.Graphics.Clear(Color.Black);
             }
@@ -336,7 +376,7 @@ namespace Reuben.UI
 
                     foreach (Sprite s in SelectedSprites)
                     {
-                        Rectangle drawRectangle = Sprites.GetClipBounds(s);
+                        Rectangle drawRectangle = localSpriteController.GetClipBounds(s);
                         e.Graphics.DrawRectangle(Pens.White, drawRectangle);
                         e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
                     }

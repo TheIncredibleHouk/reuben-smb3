@@ -21,44 +21,18 @@ namespace Reuben.UI
             InitializeComponent();
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Color[] ColorReference
+        public void Initialize(PatternTable patternTable, Block[] blockList, Palette palette, Color[] colors)
         {
-            get { return blocks.ColorReference; }
-            set { blocks.ColorReference = value; }
+            blocks.Initialize(patternTable, blockList, palette, colors);
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public PatternTable PatternTable
+        public void Update(PatternTable patternTable = null, Block[] blockList = null, Palette palette = null, Color[] colors = null)
         {
-            get { return blocks.PatternTable; }
-            set { blocks.PatternTable = value; }
+            blocks.Update(patternTable, blockList, palette, colors);
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Block[] BlockList
+        public void SetSelectionRectangle(Rectangle r)
         {
-            get { return blocks.BlockList; }
-            set { blocks.BlockList = value; }
-        }
-
-        public void UpdateGraphics()
-        {
-            blocks.UpdateGraphics();
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Palette Palette
-        {
-            get { return blocks.Palette; }
-            set { blocks.Palette = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Rectangle SelectionRectangle
-        {
-            get { return blocks.SelectionRectangle; }
-            set { blocks.SelectionRectangle = value; }
         }
 
         private int selectedBlock;
@@ -70,7 +44,7 @@ namespace Reuben.UI
             {
                 selectedBlock = value;
 
-                blocks.SelectionRectangle = new Rectangle((value % 16) * 16, (value / 16) * 16, 15, 15);
+                blocks.SetSelectionRectangle(new Rectangle((value % 16) * 16, (value / 16) * 16, 15, 15));
                 if (SelectedBlockChanged != null)
                 {
                     SelectedBlockChanged(null, null);
@@ -90,7 +64,7 @@ namespace Reuben.UI
             {
                 int col = (e.X / 16) * 16;
                 int row = (e.Y / 16) * 16;
-                blocks.SelectionRectangle = new Rectangle(col, row, 15, 15);
+                blocks.SetSelectionRectangle(new Rectangle(col, row, 15, 15));
                 if (Editor != null)
                 {
                     Editor.EditMode = EditMode.Blocks;

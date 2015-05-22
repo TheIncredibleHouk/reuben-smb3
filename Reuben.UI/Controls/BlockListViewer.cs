@@ -25,82 +25,65 @@ namespace Reuben.UI.Controls
             this.Height = buffer.Height;
         }
 
-        private PatternTable graphics;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public PatternTable PatternTable
+        public void Initialize(PatternTable patternTable, Block[] blocks, Palette palette, Color[] colors)
         {
-            get
-            {
-                return graphics;
-            }
-            set
-            {
-                graphics = value;
-            }
-        }
+            localPatternTable = patternTable;
+            localBlockList = blocks;
+            localPalette = palette;
+            localColors = colors;
 
-        private Block[] blocks;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Block[] BlockList
-        {
-            get
+            if (localPalette != null && localColors != null)
             {
-                return blocks;
-            }
-            set
-            {
-                blocks = value;
-            }
-        }
+                quickBGReference = new Color[4][];
 
-        private Color[] colors;
+                quickBGReference[0] = new Color[4];
+                quickBGReference[1] = new Color[4];
+                quickBGReference[2] = new Color[4];
+                quickBGReference[3] = new Color[4];
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Color[] ColorReference
-        {
-            get
-            {
-                return colors;
-            }
-            set
-            {
-                colors = value;
-            }
-        }
-
-        private Palette palette;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Palette Palette
-        {
-            get
-            {
-                return palette;
-            }
-            set
-            {
-                palette = value;
-                if (Palette != null && ColorReference != null)
+                for (int i = 0; i < 16; i++)
                 {
-                    quickBGReference = new Color[4][];
-
-                    quickBGReference[0] = new Color[4];
-                    quickBGReference[1] = new Color[4];
-                    quickBGReference[2] = new Color[4];
-                    quickBGReference[3] = new Color[4];
-
-                    for (int i = 0; i < 16; i++)
-                    {
-                        quickBGReference[i / 4][i % 4] = ColorReference[Palette.BackgroundValues[i]];
-                    }
+                    quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
                 }
             }
+
+            UpdateGraphics();
         }
 
+        public void Update(PatternTable patternTable = null, Block[] blocks = null, Palette palette = null, Color[] colors = null)
+        {
+            localPatternTable = patternTable ?? localPatternTable;
+            localBlockList = blocks ?? localBlockList;
+            localPalette = palette ?? localPalette;
+            localColors = colors ?? localColors;
+
+            if (localPalette != null && localColors != null)
+            {
+                quickBGReference = new Color[4][];
+
+                quickBGReference[0] = new Color[4];
+                quickBGReference[1] = new Color[4];
+                quickBGReference[2] = new Color[4];
+                quickBGReference[3] = new Color[4];
+
+                for (int i = 0; i < 16; i++)
+                {
+                    quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
+                }
+            }
+            UpdateGraphics();
+        }
+
+        private PatternTable localPatternTable;
+        private Block[] localBlockList;
+        private Color[] localColors;
+        private Palette localPalette;
         private Color[][] quickBGReference;
 
-        public void UpdateGraphics()
+
+        private void UpdateGraphics()
         {
-            if (colors == null || graphics == null || blocks == null || palette == null)
+            if (localColors == null || localPatternTable == null || localBlockList == null || localPalette == null)
             {
                 using (Graphics gfx = Graphics.FromImage(buffer))
                 {
@@ -116,13 +99,13 @@ namespace Reuben.UI.Controls
             {
                 for (var col = 0; col < 16; col++)
                 {
-                    Block block = blocks[row * 16 + col];
+                    Block block = localBlockList[row * 16 + col];
                     int x = col * 16;
                     int y = row * 16;
-                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), x, y, quickBGReference[row / 4], data);
-                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
-                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
-                    Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
+                    Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperLeft), x, y, quickBGReference[row / 4], data);
+                    Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
+                    Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
+                    Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
                 }
             }
             buffer.UnlockBits(data);
@@ -131,7 +114,7 @@ namespace Reuben.UI.Controls
 
         public void UpdateBlock(int col, int row)
         {
-            if (colors == null || graphics == null || blocks == null || palette == null)
+            if (localColors == null || localPatternTable == null || localBlockList == null || localPalette == null)
             {
                 using (Graphics gfx = Graphics.FromImage(buffer))
                 {
@@ -143,14 +126,13 @@ namespace Reuben.UI.Controls
 
             BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
-
-            Block block = blocks[row * 16 + col];
+            Block block = localBlockList[row * 16 + col];
             int x = col * 16;
             int y = row * 16;
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), x, y, quickBGReference[row / 4], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperLeft), x, y, quickBGReference[row / 4], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
 
             buffer.UnlockBits(data);
             Invalidate(new Rectangle(col * 16, row * 16, 17, 17));
@@ -158,37 +140,29 @@ namespace Reuben.UI.Controls
 
         private Rectangle selectionRectangle;
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Rectangle SelectionRectangle
+        public void SetSelectionRectangle(Rectangle r)
         {
-            get
+            if (selectionRectangle == r)
             {
-                return selectionRectangle;
+                return;
             }
-            set
-            {
-                if (selectionRectangle == value)
-                {
-                    return;
-                }
 
-                var oldRectangle = selectionRectangle;
-                selectionRectangle = value;
-                var minX = Math.Min(oldRectangle.Left, selectionRectangle.Left);
-                var minY = Math.Min(oldRectangle.Top, selectionRectangle.Top);
-                var maxX = Math.Max(oldRectangle.Right, selectionRectangle.Right);
-                var maxY = Math.Max(oldRectangle.Bottom, selectionRectangle.Bottom);
-                Invalidate(new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1));
-            }
+            var oldRectangle = selectionRectangle;
+            selectionRectangle = r;
+            var minX = Math.Min(oldRectangle.Left, selectionRectangle.Left);
+            var minY = Math.Min(oldRectangle.Top, selectionRectangle.Top);
+            var maxX = Math.Max(oldRectangle.Right, selectionRectangle.Right);
+            var maxY = Math.Max(oldRectangle.Bottom, selectionRectangle.Bottom);
+            Invalidate(new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1));
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawImage(buffer, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
-            if (SelectionRectangle != null)
+            if (selectionRectangle != null)
             {
-                e.Graphics.DrawRectangle(Pens.White, SelectionRectangle);
-                e.Graphics.DrawRectangle(Pens.Red, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                e.Graphics.DrawRectangle(Pens.White, selectionRectangle);
+                e.Graphics.DrawRectangle(Pens.Red, new Rectangle(selectionRectangle.X + 1, selectionRectangle.Y + 1, selectionRectangle.Width - 2, selectionRectangle.Height - 2));
             }
         }
 

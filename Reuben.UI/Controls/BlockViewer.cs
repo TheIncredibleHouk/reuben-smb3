@@ -28,6 +28,52 @@ namespace Reuben.UI
             this.Height = displayBuffer.Height;
         }
 
+        public void Initialize(PatternTable patternTable, Color[] colors, Palette palette)
+        {
+            localPatternTable = patternTable;
+            localColors = colors;
+            localPalette = palette;
+            if (localPalette != null && localColors != null)
+            {
+                quickBGReference = new Color[4][];
+
+                quickBGReference[0] = new Color[4];
+                quickBGReference[1] = new Color[4];
+                quickBGReference[2] = new Color[4];
+                quickBGReference[3] = new Color[4];
+
+                for (int i = 0; i < 16; i++)
+                {
+                    quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
+                }
+            }
+        }
+
+        public void Update(PatternTable patternTable = null, Color[] colors = null, Palette palette = null)
+        {
+            localPatternTable = patternTable ?? localPatternTable;
+            localColors = colors ?? localColors;
+            localPalette = palette ?? localPalette;
+            if (localPalette != null && localColors != null)
+            {
+                quickBGReference = new Color[4][];
+
+                quickBGReference[0] = new Color[4];
+                quickBGReference[1] = new Color[4];
+                quickBGReference[2] = new Color[4];
+                quickBGReference[3] = new Color[4];
+
+                for (int i = 0; i < 16; i++)
+                {
+                    quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
+                }
+            }
+        }
+
+        private PatternTable localPatternTable;
+        private Color[] localColors;
+        private Palette localPalette;
+        private Color[][] quickBGReference;
 
         private Block block;
         public Block Block
@@ -55,68 +101,12 @@ namespace Reuben.UI
             }
         }
 
-        private PatternTable graphics;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public PatternTable PatternTable
-        {
-            get
-            {
-                return graphics;
-            }
-            set
-            {
-                graphics = value;
-            }
-        }
 
-        private Color[] colors;
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Color[] ColorReference
-        {
-            get
-            {
-                return colors;
-            }
-            set
-            {
-                colors = value;
-            }
-        }
-
-        private Palette palette;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Palette Palette
-        {
-            get
-            {
-                return palette;
-            }
-            set
-            {
-                palette = value;
-                if (Palette != null && ColorReference != null)
-                {
-                    quickBGReference = new Color[4][];
-
-                    quickBGReference[0] = new Color[4];
-                    quickBGReference[1] = new Color[4];
-                    quickBGReference[2] = new Color[4];
-                    quickBGReference[3] = new Color[4];
-
-                    for (int i = 0; i < 16; i++)
-                    {
-                        quickBGReference[i / 4][i % 4] = ColorReference[Palette.BackgroundValues[i]];
-                    }
-                }
-            }
-        }
-
-        private Color[][] quickBGReference;
+        
 
         public void UpdateGraphics()
         {
-            if (block == null || colors == null || graphics == null || palette == null)
+            if (block == null || localColors == null || localPatternTable == null || localPalette == null)
             {
                 using (Graphics gfx = Graphics.FromImage(displayBuffer))
                 {
@@ -129,10 +119,10 @@ namespace Reuben.UI
             BitmapData data = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
 
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperLeft), 0, 0, quickBGReference[paletteIndex], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.UpperRight), 8, 0, quickBGReference[paletteIndex], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerLeft), 0, 8, quickBGReference[paletteIndex], data);
-            Drawer.DrawTileNoAlpha(graphics.GetTileByIndex(block.LowerRight), 8, 8, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperLeft), 0, 0, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperRight), 8, 0, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerLeft), 0, 8, quickBGReference[paletteIndex], data);
+            Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerRight), 8, 8, quickBGReference[paletteIndex], data);
 
             buffer.UnlockBits(data);
             using (Graphics gfx = Graphics.FromImage(displayBuffer))
@@ -151,7 +141,7 @@ namespace Reuben.UI
 
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
-            
+
         }
     }
 }

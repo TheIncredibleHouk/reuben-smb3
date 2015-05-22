@@ -48,7 +48,10 @@ namespace Reuben.UI
             levelTypes.Items.Add("Overlays");
 
             paletteList.Palettes = graphics.GraphicsData.Palettes.OrderBy(p => p.Name.ToLower()).ToList();
-            patternTable.ColorReference = blockList.ColorReference = blockView.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
+            patternTable.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
+            blockList.Update(colors: graphics.GraphicsData.Colors);
+
+            blockView.Update(colors: graphics.GraphicsData.Colors);
             paletteList.UpdateList();
             delayUpdate = false;
             levelTypes.SelectedIndex = selectedLevelType;
@@ -65,9 +68,15 @@ namespace Reuben.UI
         {
             if (!delayUpdate && graphics1.SelectedIndex != -1 && graphics2.SelectedIndex != -1 && graphics1.Enabled && graphics2.Enabled)
             {
-                blockView.Palette = blockList.Palette = patternTable.Palette = paletteList.SelectedPalette;
-                blockView.PatternTable = blockList.PatternTable = patternTable.PatternTable = gfxController.MakePatternTable(new List<int>() { graphics1.SelectedIndex, graphics1.SelectedIndex + 1, graphics2.SelectedIndex, graphics2.SelectedIndex + 1 });
-                blockList.UpdateGraphics();
+                var palette = paletteList.SelectedPalette;
+                var newPatternTable = gfxController.MakePatternTable(graphics1.SelectedIndex, graphics1.SelectedIndex + 1, graphics2.SelectedIndex, graphics2.SelectedIndex + 1);
+
+                
+                patternTable.Palette = palette;
+                patternTable.PatternTable = newPatternTable;
+                blockList.Update(palette: palette, patternTable: newPatternTable);
+                blockView.Update(patternTable: newPatternTable, palette: palette);
+
                 patternTable.UpdateGraphics();
                 blockList_SelectedBlockChanged(null, null);
             }
@@ -80,25 +89,25 @@ namespace Reuben.UI
             {
                 typeName.Enabled = setDefaultButton.Enabled = paletteList.Enabled = graphics1.Enabled = graphics2.Enabled = false;
 
+                var newPatternTable = gfxController.MakeExtraPatternTable(4, 5, 6, 7);
                 typeName.Text = "Overlays";
-                blockList.BlockList = Overlays;
+                blockList.Update(blockList: Overlays, palette: overlayPalette, patternTable: newPatternTable);
 
-                delayUpdate = false;
-                patternTable.Palette = blockView.Palette = blockList.Palette = overlayPalette;
-                patternTable.PatternTable = blockView.PatternTable = blockList.PatternTable = gfxController.MakeExtraPatternTable(new List<int>() { 4, 5, 6, 7 });
+                patternTable.Palette = overlayPalette;
+                patternTable.PatternTable = newPatternTable;
 
-                blockList.BlockList = Overlays;
+                blockView.Update(palette: overlayPalette, patternTable: newPatternTable);
                 blockList.SelectedBlock = blockList.SelectedBlock;
                 patternTable.UpdateGraphics();
                 blockView.UpdateGraphics();
-                blockList.UpdateGraphics();
             }
             else
             {
                 typeName.Enabled = setDefaultButton.Enabled = paletteList.Enabled = graphics1.Enabled = graphics2.Enabled = true;
 
                 typeName.Text = LocalLevelTypes[levelTypes.SelectedIndex].Name;
-                blockList.BlockList = LocalLevelTypes[levelTypes.SelectedIndex].Blocks;
+
+                blockList.Update(blockList: LocalLevelTypes[levelTypes.SelectedIndex].Blocks);
 
                 blockList.SelectedBlock = blockList.SelectedBlock;
 
@@ -225,7 +234,7 @@ namespace Reuben.UI
                 }
 
                 blockView.UpdateGraphics();
-                blockList.UpdateBlock(blockList.SelectedBlock % 16, blockList.SelectedBlock /16);
+                blockList.UpdateBlock(blockList.SelectedBlock % 16, blockList.SelectedBlock / 16);
             }
         }
 
@@ -268,6 +277,18 @@ namespace Reuben.UI
             interaction.SelectedIndex = blockView.Block.BlockInteraction & 0x0F;
         }
 
+        private Block[] currentBlocks
+        {
+            get
+            {
+                if ((string)levelTypes.SelectedItem != "Overlays")
+                {
+                    return LocalLevelTypes[levelTypes.SelectedIndex].Blocks;
+                }
+
+                return Overlays;
+            }
+        }
 
         private void blockList_MouseDown(object sender, EventArgs e)
         {
@@ -276,7 +297,7 @@ namespace Reuben.UI
             {
                 int col = m.X / 16;
                 int row = m.Y / 16;
-                Block block = blockList.BlockList[(col % 16) + (row * 16)];
+                Block block = currentBlocks[(col % 16) + (row * 16)];
                 block.UpperLeft = blockView.Block.UpperLeft;
                 block.UpperRight = blockView.Block.UpperRight;
                 block.LowerLeft = blockView.Block.LowerLeft;

@@ -45,24 +45,25 @@ namespace Reuben.UI
             graphics = graphicsController;
 
             levelInfo = info;
-            levelViewer.Levels = levelController;
-            levelViewer.Level = level = levels.LoadLevel(info.File);
-            levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
+            level = levels.LoadLevel(info.File);
 
-            spriteSelector.ColorReference = blockSelector.ColorReference = paletteList.ColorReference = levelViewer.ColorReference = graphics.GraphicsData.Colors;
+            var patternTable = graphics.MakePatternTable(level.GraphicsID, level.GraphicsID + 1, 0xD0, 0xD1);
+            var levelType = levels.LevelData.Types[level.LevelType];
+            var palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+            var overlayPatternTable = graphics.MakeExtraPatternTable(4, 5, 6, 7);
+
+            levelViewer.Initialize(level, levelType, palette, levels.LevelData.OverlayPalette, graphics.GraphicsData.Colors, patternTable, overlayPatternTable, spriteController, levels, graphics);
+
+            blockSelector.Initialize(patternTable, levelType.Blocks, palette, graphics.GraphicsData.Colors);
+
+            spriteSelector.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
 
             sprites = spriteSelector.Sprites = spriteController;
 
-            levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
-            blockSelector.PatternTable = levelViewer.PatternTable = graphics.MakePatternTable(new List<int>() { level.GraphicsID, level.GraphicsID + 1, 0xD0, 0xD1 });
-            levelViewer.Sprites = sprites;
-            spriteSelector.Graphics = levelViewer.Graphics = graphics;
+            spriteSelector.Graphics = graphics;
 
             levelViewer.UpdateSprites(level.Sprites);
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
-
-            blockSelector.BlockList = levelViewer.LevelType.Blocks;
-
 
             paletteList.Palettes = graphics.GraphicsData.Palettes;
             paletteList.SelectedPalette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
@@ -84,10 +85,13 @@ namespace Reuben.UI
 
         public void UpdatePalette()
         {
-            spriteSelector.Palette = blockSelector.Palette = levelViewer.Palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+            var palette = graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+
+            levelViewer.Update(levelPalette: palette);
+            spriteSelector.Palette = palette;
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
             levelViewer.UpdateSprites(level.Sprites);
-            blockSelector.UpdateGraphics();
+            blockSelector.Update(palette: palette);
             spriteSelector.UpdateGraphics();
         }
 
@@ -200,7 +204,7 @@ namespace Reuben.UI
                     foreach (Point p in changes)
                     {
                         level.Data[p.X, p.Y] = (byte)blockSelector.SelectedBlock;
-                    } 
+                    }
 
                     undoBuffer.Add(change);
                     levelViewer.UpdateBlockDisplay(lowestX, lowestY, width, height);

@@ -27,10 +27,11 @@ namespace Reuben.Controllers
             GraphicsData = new GraphicsData();
         }
 
-        public PatternTable MakeExtraPatternTable(List<int> banks)
+        public PatternTable MakeExtraPatternTable(int bank1, int bank2, int bank3, int bank4)
         {
             PatternTable patternTable = new PatternTable();
             int patternSection = 0;
+            List<int> banks = new List<int>() { bank1, bank2, bank3, bank4 };
             foreach (int bank in banks)
             {
                 for (int row = 0; row < 4; row++)
@@ -46,10 +47,11 @@ namespace Reuben.Controllers
             return patternTable;
         }
 
-        public PatternTable MakePatternTable(List<int> banks)
+        public PatternTable MakePatternTable(int bank1, int bank2, int bank3, int bank4)
         {
             PatternTable patternTable = new PatternTable();
             int patternSection = 0;
+            List<int> banks = new List<int>() { bank1, bank2, bank3, bank4 };
             foreach (int bank in banks)
             {
                 for (int row = 0; row < 4; row++)
