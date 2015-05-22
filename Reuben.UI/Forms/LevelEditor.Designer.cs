@@ -33,6 +33,8 @@
             this.lvlHost = new System.Windows.Forms.Panel();
             this.levelViewer = new Reuben.UI.LevelViewer();
             this.panel23 = new System.Windows.Forms.Panel();
+            this.solidityOverlay = new System.Windows.Forms.CheckBox();
+            this.interactionOverlay = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.editList = new System.Windows.Forms.ComboBox();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
@@ -67,8 +69,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.interactionOverlay = new System.Windows.Forms.CheckBox();
-            this.solidityOverlay = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
             this.panel23.SuspendLayout();
@@ -115,6 +115,8 @@
             this.levelViewer.Name = "levelViewer";
             this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.levelViewer.SelectionType = Reuben.UI.SelectionType.Draw;
+            this.levelViewer.ShowInteractionOverlays = false;
+            this.levelViewer.ShowSolidityOverlays = false;
             this.levelViewer.Size = new System.Drawing.Size(6912, 432);
             this.levelViewer.TabIndex = 0;
             this.levelViewer.Text = "levelViewer1";
@@ -151,6 +153,30 @@
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(649, 177);
             this.panel23.TabIndex = 1;
+            // 
+            // solidityOverlay
+            // 
+            this.solidityOverlay.AutoSize = true;
+            this.solidityOverlay.Location = new System.Drawing.Point(156, 147);
+            this.solidityOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.solidityOverlay.Name = "solidityOverlay";
+            this.solidityOverlay.Size = new System.Drawing.Size(133, 17);
+            this.solidityOverlay.TabIndex = 23;
+            this.solidityOverlay.Text = "Show Solidity Overlays";
+            this.solidityOverlay.UseVisualStyleBackColor = true;
+            this.solidityOverlay.CheckedChanged += new System.EventHandler(this.solidityOverlay_CheckedChanged);
+            // 
+            // interactionOverlay
+            // 
+            this.interactionOverlay.AutoSize = true;
+            this.interactionOverlay.Location = new System.Drawing.Point(156, 121);
+            this.interactionOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.interactionOverlay.Name = "interactionOverlay";
+            this.interactionOverlay.Size = new System.Drawing.Size(150, 17);
+            this.interactionOverlay.TabIndex = 22;
+            this.interactionOverlay.Text = "Show Interaction Overlays";
+            this.interactionOverlay.UseVisualStyleBackColor = true;
+            this.interactionOverlay.CheckedChanged += new System.EventHandler(this.interactionOverlay_CheckedChanged);
             // 
             // label10
             // 
@@ -507,29 +533,6 @@
             this.label13.Size = new System.Drawing.Size(70, 13);
             this.label13.TabIndex = 21;
             this.label13.Text = "Information";
-            // 
-            // interactionOverlay
-            // 
-            this.interactionOverlay.AutoSize = true;
-            this.interactionOverlay.Location = new System.Drawing.Point(156, 121);
-            this.interactionOverlay.Margin = new System.Windows.Forms.Padding(4);
-            this.interactionOverlay.Name = "interactionOverlay";
-            this.interactionOverlay.Size = new System.Drawing.Size(150, 17);
-            this.interactionOverlay.TabIndex = 22;
-            this.interactionOverlay.Text = "Show Interaction Overlays";
-            this.interactionOverlay.UseVisualStyleBackColor = true;
-            this.interactionOverlay.CheckedChanged += new System.EventHandler(this.interactionOverlay_CheckedChanged);
-            // 
-            // solidityOverlay
-            // 
-            this.solidityOverlay.AutoSize = true;
-            this.solidityOverlay.Location = new System.Drawing.Point(156, 147);
-            this.solidityOverlay.Margin = new System.Windows.Forms.Padding(4);
-            this.solidityOverlay.Name = "solidityOverlay";
-            this.solidityOverlay.Size = new System.Drawing.Size(133, 17);
-            this.solidityOverlay.TabIndex = 23;
-            this.solidityOverlay.Text = "Show Solidity Overlays";
-            this.solidityOverlay.UseVisualStyleBackColor = true;
             // 
             // LevelEditor
             // 

@@ -58,10 +58,5 @@ namespace Reuben.Controllers
         {
             return LevelData.Levels.Where(l => l.ID == id).FirstOrDefault();
         }
-
-        public Block GetOverlay(Block block)
-        {
-            return LevelData.Overlays.Where(o => o.BlockInteraction == block.BlockInteraction && o.BlockSolidity == block.BlockSolidity).FirstOrDefault();
-        }
     }
 }

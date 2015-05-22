@@ -21,18 +21,36 @@ namespace Reuben.UI
             InitializeComponent();
         }
 
-        public void Initialize(PatternTable patternTable, Block[] blockList, Palette palette, Color[] colors)
+        public void Initialize(PatternTable patternTable, PatternTable overlayTable, Block[] blockList, Block[] overlayBlocks, Palette palette, Palette overlayPalette, Color[] colors)
         {
-            blocks.Initialize(patternTable, blockList, palette, colors);
+            blocks.Initialize(patternTable, overlayTable, blockList, overlayBlocks, palette, overlayPalette, colors);
         }
 
-        public void Update(PatternTable patternTable = null, Block[] blockList = null, Palette palette = null, Color[] colors = null)
+        public void Update(PatternTable patternTable = null, PatternTable overlayTable = null, Block[] blockList = null, Block[] overlayBlocks = null, Palette palette = null, Palette overlayPalette = null, Color[] colors = null)
         {
-            blocks.Update(patternTable, blockList, palette, colors);
+            blocks.Update(patternTable, overlayTable, blockList, overlayBlocks, palette, overlayPalette, colors);
         }
 
         public void SetSelectionRectangle(Rectangle r)
         {
+            blocks.SetSelectionRectangle(r);
+        }
+
+        public bool ShowInteractionOverlays
+        {
+            get { return blocks.ShowInteractionOverlays; }
+            set { blocks.ShowInteractionOverlays = value; }
+        }
+
+        public bool ShowSolidityOverlays
+        {
+            get { return blocks.ShowSolidityOverlays; }
+            set { blocks.ShowSolidityOverlays = value; }
+        }
+
+        public void UpdateAll()
+        {
+            blocks.UpdateAll();
         }
 
         private int selectedBlock;

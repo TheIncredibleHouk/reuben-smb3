@@ -25,12 +25,15 @@ namespace Reuben.UI.Controls
             this.Height = buffer.Height;
         }
 
-        public void Initialize(PatternTable patternTable, Block[] blocks, Palette palette, Color[] colors)
+        public void Initialize(PatternTable patternTable, PatternTable overlayTable, Block[] blocks, Block[] overlays, Palette palette, Palette overlayPalette, Color[] colors)
         {
             localPatternTable = patternTable;
+            localOverlayTable = overlayTable;
             localBlockList = blocks;
             localPalette = palette;
             localColors = colors;
+            localOverlayBlocks = overlays;
+            localOverlayPalette = overlayPalette;
 
             if (localPalette != null && localColors != null)
             {
@@ -50,35 +53,54 @@ namespace Reuben.UI.Controls
             UpdateGraphics();
         }
 
-        public void Update(PatternTable patternTable = null, Block[] blocks = null, Palette palette = null, Color[] colors = null)
+        public void Update(PatternTable patternTable = null, PatternTable overlayTable = null, Block[] blocks = null, Block[] overlays = null, Palette palette = null, Palette overlayPalette = null, Color[] colors = null)
         {
             localPatternTable = patternTable ?? localPatternTable;
+            localOverlayTable = overlayTable ?? localOverlayTable;
             localBlockList = blocks ?? localBlockList;
             localPalette = palette ?? localPalette;
             localColors = colors ?? localColors;
+            localOverlayBlocks = overlays ?? localOverlayBlocks;
+            localOverlayPalette = overlayPalette ?? localOverlayPalette;
 
             if (localPalette != null && localColors != null)
             {
                 quickBGReference = new Color[4][];
+                quickBGOverlayReference = new Color[4][];
 
                 quickBGReference[0] = new Color[4];
                 quickBGReference[1] = new Color[4];
                 quickBGReference[2] = new Color[4];
                 quickBGReference[3] = new Color[4];
 
+                quickBGOverlayReference[0] = new Color[4];
+                quickBGOverlayReference[1] = new Color[4];
+                quickBGOverlayReference[2] = new Color[4];
+                quickBGOverlayReference[3] = new Color[4];
+
                 for (int i = 0; i < 16; i++)
                 {
                     quickBGReference[i / 4][i % 4] = localColors[localPalette.BackgroundValues[i]];
+                    quickBGOverlayReference[i / 4][i % 4] = localColors[localOverlayPalette.BackgroundValues[i]];
                 }
+
+                quickBGOverlayReference[0][0] =
+                quickBGOverlayReference[1][0] =
+                quickBGOverlayReference[2][0] =
+                quickBGOverlayReference[3][0] = Color.Transparent;
             }
             UpdateGraphics();
         }
 
         private PatternTable localPatternTable;
+        private PatternTable localOverlayTable;
         private Block[] localBlockList;
         private Color[] localColors;
         private Palette localPalette;
+        private Palette localOverlayPalette;
         private Color[][] quickBGReference;
+        private Color[][] quickBGOverlayReference;
+        private Block[] localOverlayBlocks;
 
 
         private void UpdateGraphics()
@@ -106,12 +128,86 @@ namespace Reuben.UI.Controls
                     Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
                     Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
                     Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
+
+                    if (ShowInteractionOverlays)
+                    {
+                        if (block.BlockSolidity == 0x80 || block.BlockSolidity == 0xF0 || block.BlockInteraction > 0x00)
+                        {
+                            Block overlayBlock = null;
+                            int index = 0;
+                            for (; index < 0x100; index++)
+                            {
+                                if (localOverlayBlocks[index].BlockInteraction == block.BlockInteraction &&
+                                    localOverlayBlocks[index].BlockSolidity == block.BlockSolidity)
+                                {
+                                    overlayBlock = localOverlayBlocks[index];
+                                    break;
+                                }
+                            }
+
+                            if (overlayBlock != null)
+                            {
+                                Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperLeft), col * 16, row * 16, quickBGOverlayReference[index / 0x40], .75, data);
+                                Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperRight), col * 16 + 8, row * 16, quickBGOverlayReference[index / 0x40], .75, data);
+                                Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerLeft), col * 16, row * 16 + 8, quickBGOverlayReference[index / 0x40], .75, data);
+                                Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerRight), col * 16 + 8, row * 16 + 8, quickBGOverlayReference[index / 0x40], .75, data);
+                            }
+                        }
+                    }
+
+                    if (ShowSolidityOverlays)
+                    {
+                        switch (block.BlockSolidity)
+                        {
+                            case 0x10:
+                                Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.White, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16, row * 16, Color.White, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.White, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.White, .5, data);
+                                break;
+
+                            case 0x20:
+                                Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.Blue, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16, row * 16, Color.Blue, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.Blue, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.Blue, .5, data);
+                                break;
+
+                            case 0x30:
+                                Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.LightBlue, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16, row * 16, Color.LightBlue, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.LightBlue, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.LightBlue, .5, data);
+                                break;
+
+                            case 0x40:
+                                Drawer.FillTileWithAlpha(col * 16, row * 16, Color.Brown, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.Brown, .5, data);
+                                break;
+
+                            case 0xC0:
+                            case 0xF0:
+                                Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.Brown, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16, row * 16, Color.Brown, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.Brown, .5, data);
+                                Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.Brown, .5, data);
+                                break;
+                        }
+
+                    }
                 }
             }
             buffer.UnlockBits(data);
             Invalidate();
         }
 
+        public void UpdateAll()
+        {
+            UpdateGraphics();
+        }
+
+        public bool ShowInteractionOverlays { get; set; }
+        public bool ShowSolidityOverlays { get; set; }
         public void UpdateBlock(int col, int row)
         {
             if (localColors == null || localPatternTable == null || localBlockList == null || localPalette == null)
@@ -133,6 +229,73 @@ namespace Reuben.UI.Controls
             Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.UpperRight), x + 8, y, quickBGReference[row / 4], data);
             Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerLeft), x, y + 8, quickBGReference[row / 4], data);
             Drawer.DrawTileNoAlpha(localPatternTable.GetTileByIndex(block.LowerRight), x + 8, y + 8, quickBGReference[row / 4], data);
+
+            if (ShowInteractionOverlays)
+            {
+                if (block.BlockSolidity == 0x80 || block.BlockSolidity == 0xF0 || block.BlockInteraction > 0x00)
+                {
+                    Block overlayBlock = null;
+                    int index = 0;
+                    for (; index < 0x100; index++)
+                    {
+                        if (localOverlayBlocks[index].BlockInteraction == block.BlockInteraction &&
+                            localOverlayBlocks[index].BlockSolidity == block.BlockSolidity)
+                        {
+                            overlayBlock = localOverlayBlocks[index];
+                            break;
+                        }
+                    }
+
+                    if (overlayBlock != null)
+                    {
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperLeft), col * 16, row * 16, quickBGOverlayReference[index / 0x40], .75, data);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.UpperRight), col * 16 + 8, row * 16, quickBGOverlayReference[index / 0x40], .75, data);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerLeft), col * 16, row * 16 + 8, quickBGOverlayReference[index / 0x40], .75, data);
+                        Drawer.DrawTileAsAlpha(localOverlayTable.GetTileByIndex(overlayBlock.LowerRight), col * 16 + 8, row * 16 + 8, quickBGOverlayReference[index / 0x40], .75, data);
+                    }
+                }
+            }
+
+            if (ShowSolidityOverlays)
+            {
+                switch (block.BlockSolidity)
+                {
+                    case 0x10:
+                        Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.White, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16, row * 16, Color.White, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.White, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.White, .5, data);
+                        break;
+
+                    case 0x20:
+                        Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.Blue, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16, row * 16, Color.Blue, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.Blue, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.Blue, .5, data);
+                        break;
+
+                    case 0x30:
+                        Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.LightBlue, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16, row * 16, Color.LightBlue, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.LightBlue, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.LightBlue, .5, data);
+                        break;
+
+                    case 0x40:
+                        Drawer.FillTileWithAlpha(col * 16, row * 16, Color.Brown, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.Brown, .5, data);
+                        break;
+
+                    case 0xC0:
+                    case 0xF0:
+                        Drawer.FillTileWithAlpha(col * 16, row * 16 + 8, Color.Brown, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16, row * 16, Color.Brown, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16, Color.Brown, .5, data);
+                        Drawer.FillTileWithAlpha(col * 16 + 8, row * 16 + 8, Color.Brown, .5, data);
+                        break;
+                }
+
+            }
 
             buffer.UnlockBits(data);
             Invalidate(new Rectangle(col * 16, row * 16, 17, 17));
