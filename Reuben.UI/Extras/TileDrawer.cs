@@ -34,7 +34,7 @@ namespace Reuben.UI
             }
         }
 
-        public unsafe static void DrawTileAsAlpha(Tile tile, int x, int y, Color[] reference, float alpha, BitmapData bitmap)
+        public unsafe static void DrawTileAsAlpha(Tile tile, int x, int y, Color[] reference, double alpha, BitmapData bitmap)
         {
             byte* dataPointer = (byte*)bitmap.Scan0;
 

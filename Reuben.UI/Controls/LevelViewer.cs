@@ -73,16 +73,24 @@ namespace Reuben.UI
         public GraphicsController Graphics { get; set; }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public LevelController Levels { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SpriteController Sprites { get; set; }
 
         private Color[][] quickBGReference;
         private Color[][] quickSpriteReference;
+        private Color[][] quickBGOverlayReference;
+        private Color[][] quickSpriteOverlayReference;
+
         private void UpdateColorReferences()
         {
             if (Palette != null && ColorReference != null)
             {
                 quickBGReference = new Color[4][];
                 quickSpriteReference = new Color[4][];
+                quickBGOverlayReference = new Color[4][];
+                quickSpriteOverlayReference = new Color[4][];
 
                 quickBGReference[0] = new Color[4];
                 quickBGReference[1] = new Color[4];
@@ -94,19 +102,39 @@ namespace Reuben.UI
                 quickSpriteReference[2] = new Color[4];
                 quickSpriteReference[3] = new Color[4];
 
+                quickBGOverlayReference[0] = new Color[4];
+                quickBGOverlayReference[1] = new Color[4];
+                quickBGOverlayReference[2] = new Color[4];
+                quickBGOverlayReference[3] = new Color[4];
+
+                quickSpriteOverlayReference[0] = new Color[4];
+                quickSpriteOverlayReference[1] = new Color[4];
+                quickSpriteOverlayReference[2] = new Color[4];
+                quickSpriteOverlayReference[3] = new Color[4];
+
                 for (int i = 0; i < 16; i++)
                 {
                     quickBGReference[i / 4][i % 4] = ColorReference[Palette.BackgroundValues[i]];
                     quickSpriteReference[i / 4][i % 4] = ColorReference[Palette.SpriteValues[i]];
+                    quickBGOverlayReference[i / 4][i % 4] = ColorReference[Levels.LevelData.OverlayPalette.BackgroundValues[i]];
+                    quickSpriteOverlayReference[i / 4][i % 4] = ColorReference[Levels.LevelData.OverlayPalette.SpriteValues[i]];
                 }
+
 
                 quickSpriteReference[0][0] =
                 quickSpriteReference[1][0] =
                 quickSpriteReference[2][0] =
-                quickSpriteReference[3][0] = Color.Transparent;
+                quickSpriteReference[3][0] =
+                quickSpriteOverlayReference[0][0] =
+                quickSpriteOverlayReference[1][0] =
+                quickSpriteOverlayReference[2][0] =
+                quickSpriteOverlayReference[3][0] = Color.Transparent;
             }
 
         }
+
+        public bool ShowInteractionOverlays { get; set; }
+        public bool ShowSolidityOverlays { get; set; }
 
         private bool blockUpdating;
         public void UpdateBlockDisplay(int column, int row, int width, int height)
@@ -189,6 +217,23 @@ namespace Reuben.UI
             Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.UpperRight), column * 16 + 8, row * 16, quickBGReference[paletteIndex], bitmap);
             Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerLeft), column * 16, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
             Drawer.DrawTileNoAlpha(PatternTable.GetTileByIndex(block.LowerRight), column * 16 + 8, row * 16 + 8, quickBGReference[paletteIndex], bitmap);
+
+            if (ShowSolidityOverlays)
+            {
+
+            }
+
+            if (ShowInteractionOverlays)
+            {
+                Block overlayBlock = Levels.GetOverlay(block);
+                if (overlayBlock != null)
+                {
+                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.UpperLeft), column * 16, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.UpperRight), column * 16 + 8, row * 16, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.LowerLeft), column * 16, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                    Drawer.DrawTileAsAlpha(Graphics.GetExtraTileByBankIndex(1, overlayBlock.LowerRight), column * 16 + 8, row * 16 + 8, quickBGOverlayReference[paletteIndex], .75, bitmap);
+                }
+            }
         }
 
 

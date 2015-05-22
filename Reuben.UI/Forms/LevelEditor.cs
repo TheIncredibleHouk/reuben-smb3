@@ -45,6 +45,7 @@ namespace Reuben.UI
             graphics = graphicsController;
 
             levelInfo = info;
+            levelViewer.Levels = levelController;
             levelViewer.Level = level = levels.LoadLevel(info.File);
             levelViewer.LevelType = levels.LevelData.Types[level.LevelType];
 
@@ -636,6 +637,12 @@ namespace Reuben.UI
         private void panel1_Scroll(object sender, ScrollEventArgs e)
         {
             mouseCap.Location = new Point(4, 4);
+        }
+
+        private void interactionOverlay_CheckedChanged(object sender, EventArgs e)
+        {
+            levelViewer.ShowInteractionOverlays = interactionOverlay.Checked;
+            levelViewer.UpdateBlockDisplay(0, 0, 0xF0, 0x1B);
         }
     }
 }

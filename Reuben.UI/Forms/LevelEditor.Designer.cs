@@ -31,9 +31,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mouseCap = new System.Windows.Forms.Button();
             this.lvlHost = new System.Windows.Forms.Panel();
+            this.levelViewer = new Reuben.UI.LevelViewer();
             this.panel23 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.editList = new System.Windows.Forms.ComboBox();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label9 = new System.Windows.Forms.Label();
             this.effectList = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -52,10 +54,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
+            this.blockSelector = new Reuben.UI.BlockSelector();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.interaction = new System.Windows.Forms.Label();
@@ -63,10 +67,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.levelViewer = new Reuben.UI.LevelViewer();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
-            this.spriteSelector = new Reuben.UI.SpriteSelector();
-            this.blockSelector = new Reuben.UI.BlockSelector();
+            this.interactionOverlay = new System.Windows.Forms.CheckBox();
+            this.solidityOverlay = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
             this.panel23.SuspendLayout();
@@ -106,9 +108,25 @@
             this.lvlHost.Size = new System.Drawing.Size(0, 432);
             this.lvlHost.TabIndex = 0;
             // 
+            // levelViewer
+            // 
+            this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
+            this.levelViewer.Location = new System.Drawing.Point(0, 0);
+            this.levelViewer.Name = "levelViewer";
+            this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.levelViewer.SelectionType = Reuben.UI.SelectionType.Draw;
+            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
+            this.levelViewer.TabIndex = 0;
+            this.levelViewer.Text = "levelViewer1";
+            this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
+            this.levelViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseMove);
+            this.levelViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseUp);
+            // 
             // panel23
             // 
             this.panel23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel23.Controls.Add(this.solidityOverlay);
+            this.panel23.Controls.Add(this.interactionOverlay);
             this.panel23.Controls.Add(this.label10);
             this.panel23.Controls.Add(this.editList);
             this.panel23.Controls.Add(this.paletteList);
@@ -157,6 +175,22 @@
             this.editList.Size = new System.Drawing.Size(132, 21);
             this.editList.TabIndex = 18;
             this.editList.SelectedIndexChanged += new System.EventHandler(this.editList_SelectedIndexChanged);
+            // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(156, 84);
+            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(132, 21);
+            this.paletteList.TabIndex = 16;
+            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -340,6 +374,15 @@
             this.panel3.Size = new System.Drawing.Size(263, 387);
             this.panel3.TabIndex = 1;
             // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 28);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.SelectedSprite = null;
+            this.spriteSelector.Size = new System.Drawing.Size(263, 359);
+            this.spriteSelector.TabIndex = 0;
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.label12);
@@ -380,6 +423,14 @@
             this.label11.Size = new System.Drawing.Size(45, 13);
             this.label11.TabIndex = 20;
             this.label11.Text = "Blocks";
+            // 
+            // blockSelector
+            // 
+            this.blockSelector.Location = new System.Drawing.Point(5, 27);
+            this.blockSelector.Margin = new System.Windows.Forms.Padding(0);
+            this.blockSelector.Name = "blockSelector";
+            this.blockSelector.Size = new System.Drawing.Size(256, 256);
+            this.blockSelector.TabIndex = 0;
             // 
             // panel6
             // 
@@ -457,52 +508,28 @@
             this.label13.TabIndex = 21;
             this.label13.Text = "Information";
             // 
-            // levelViewer
+            // interactionOverlay
             // 
-            this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
-            this.levelViewer.Location = new System.Drawing.Point(0, 0);
-            this.levelViewer.Name = "levelViewer";
-            this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.levelViewer.SelectionType = Reuben.UI.SelectionType.Draw;
-            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
-            this.levelViewer.TabIndex = 0;
-            this.levelViewer.Text = "levelViewer1";
-            this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
-            this.levelViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseMove);
-            this.levelViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseUp);
+            this.interactionOverlay.AutoSize = true;
+            this.interactionOverlay.Location = new System.Drawing.Point(156, 121);
+            this.interactionOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.interactionOverlay.Name = "interactionOverlay";
+            this.interactionOverlay.Size = new System.Drawing.Size(150, 17);
+            this.interactionOverlay.TabIndex = 22;
+            this.interactionOverlay.Text = "Show Interaction Overlays";
+            this.interactionOverlay.UseVisualStyleBackColor = true;
+            this.interactionOverlay.CheckedChanged += new System.EventHandler(this.interactionOverlay_CheckedChanged);
             // 
-            // paletteList
+            // solidityOverlay
             // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(156, 84);
-            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(132, 21);
-            this.paletteList.TabIndex = 16;
-            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
-            // 
-            // spriteSelector
-            // 
-            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 28);
-            this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.SelectedSprite = null;
-            this.spriteSelector.Size = new System.Drawing.Size(263, 359);
-            this.spriteSelector.TabIndex = 0;
-            // 
-            // blockSelector
-            // 
-            this.blockSelector.Location = new System.Drawing.Point(5, 27);
-            this.blockSelector.Margin = new System.Windows.Forms.Padding(0);
-            this.blockSelector.Name = "blockSelector";
-            this.blockSelector.Size = new System.Drawing.Size(256, 256);
-            this.blockSelector.TabIndex = 0;
+            this.solidityOverlay.AutoSize = true;
+            this.solidityOverlay.Location = new System.Drawing.Point(156, 147);
+            this.solidityOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.solidityOverlay.Name = "solidityOverlay";
+            this.solidityOverlay.Size = new System.Drawing.Size(133, 17);
+            this.solidityOverlay.TabIndex = 23;
+            this.solidityOverlay.Text = "Show Solidity Overlays";
+            this.solidityOverlay.UseVisualStyleBackColor = true;
             // 
             // LevelEditor
             // 
@@ -576,6 +603,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button mouseCap;
+        private System.Windows.Forms.CheckBox solidityOverlay;
+        private System.Windows.Forms.CheckBox interactionOverlay;
 
     }
 }
