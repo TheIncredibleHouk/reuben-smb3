@@ -202,6 +202,7 @@
             this.asmButton.Tag = "";
             this.asmButton.Text = "ASM";
             this.asmButton.UseVisualStyleBackColor = true;
+            this.asmButton.Click += new System.EventHandler(this.asmButton_Click);
             // 
             // spritesButton
             // 

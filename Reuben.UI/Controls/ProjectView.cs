@@ -153,5 +153,12 @@ namespace Reuben.UI.Controls
                 levelController.Save();
             }
         }
+
+        private void asmButton_Click(object sender, EventArgs e)
+        {
+            ASMEditor editor = new ASMEditor();
+            editor.Initialize(projectController.Project.ASMDirectory + @"\asmlexer.xml");
+            editor.ShowDialog();
+        }
     }
 }

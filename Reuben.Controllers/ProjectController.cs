@@ -40,6 +40,7 @@ namespace Reuben.Controllers
             Project.SpriteDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\sprites.json";
             Project.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
             Project.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
+            Project.ASMDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\asm";
             return Project != null;
         }
 
@@ -56,6 +57,7 @@ namespace Reuben.Controllers
                 Project.SpriteDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\sprites.json";
                 Project.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
                 Project.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
+                Project.ASMDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\asm";
                 File.WriteAllText(fileName, JsonConvert.SerializeObject(Project));
             }
             catch

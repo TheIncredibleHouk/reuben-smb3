@@ -40,6 +40,9 @@ namespace Reuben.Model
         public string LevelsDirectory { get; set; }
 
         [DataMember]
+        public string ASMDirectory { get; set; }
+
+        [DataMember]
         public string WorldsDirectory { get; set; }
 
         [DataMember]

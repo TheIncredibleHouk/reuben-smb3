@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.3.0\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ASMScintilla.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\BlockListViewer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -83,12 +90,19 @@
     <Compile Include="Controls\SpritesViewer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extras\ASMLexer.cs" />
     <Compile Include="Extras\DataChange.cs" />
     <Compile Include="Extras\Enums.cs" />
     <Compile Include="Extras\Extensions.cs" />
     <Compile Include="Extras\TileDrawer.cs" />
     <Compile Include="Controls\BlockSelector.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ASMEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ASMEditor.Designer.cs">
+      <DependentUpon>ASMEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\BlockEditor.cs">
       <SubType>Form</SubType>
@@ -145,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProjectView.resx">
       <DependentUpon>ProjectView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ASMEditor.resx">
+      <DependentUpon>ASMEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BlockEditor.resx">
       <DependentUpon>BlockEditor.cs</DependentUpon>
