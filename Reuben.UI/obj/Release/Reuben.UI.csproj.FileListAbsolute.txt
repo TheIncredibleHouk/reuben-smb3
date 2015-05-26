@@ -33,7 +33,6 @@ C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Graphics.pdb
 C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Reuben.Model.pdb
 C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\Newtonsoft.Json.xml
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.csprojResolveAssemblyReference.cache
-C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.Controls.ProjectView.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.BlockSelector.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.Confirm.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.LevelEditor.resources
@@ -47,6 +46,7 @@ C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.csproj.GenerateResou
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.exe
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.pdb
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.BlockEditor.resources
-C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\ScintillaNET.dll
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.ASMEditor.resources
-C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\ScintillaNET.xml
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.ProjectView.resources
+C:\Projects\Personal\Reuben\Reuben.UI\bin\Release\FastColoredTextBox.dll
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Release\Reuben.UI.SpriteEditor.resources

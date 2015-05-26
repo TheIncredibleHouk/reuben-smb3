@@ -171,7 +171,7 @@
             // defaultsButton
             // 
             this.defaultsButton.Enabled = false;
-            this.defaultsButton.Location = new System.Drawing.Point(173, 37);
+            this.defaultsButton.Location = new System.Drawing.Point(173, 46);
             this.defaultsButton.Margin = new System.Windows.Forms.Padding(4);
             this.defaultsButton.Name = "defaultsButton";
             this.defaultsButton.Size = new System.Drawing.Size(75, 23);
@@ -182,7 +182,7 @@
             // textButton
             // 
             this.textButton.Enabled = false;
-            this.textButton.Location = new System.Drawing.Point(90, 37);
+            this.textButton.Location = new System.Drawing.Point(90, 46);
             this.textButton.Margin = new System.Windows.Forms.Padding(4);
             this.textButton.Name = "textButton";
             this.textButton.Size = new System.Drawing.Size(75, 23);
@@ -194,7 +194,7 @@
             // asmButton
             // 
             this.asmButton.Enabled = false;
-            this.asmButton.Location = new System.Drawing.Point(7, 37);
+            this.asmButton.Location = new System.Drawing.Point(7, 46);
             this.asmButton.Margin = new System.Windows.Forms.Padding(4);
             this.asmButton.Name = "asmButton";
             this.asmButton.Size = new System.Drawing.Size(75, 23);
@@ -207,7 +207,7 @@
             // spritesButton
             // 
             this.spritesButton.Enabled = false;
-            this.spritesButton.Location = new System.Drawing.Point(173, 7);
+            this.spritesButton.Location = new System.Drawing.Point(173, 16);
             this.spritesButton.Margin = new System.Windows.Forms.Padding(4);
             this.spritesButton.Name = "spritesButton";
             this.spritesButton.Size = new System.Drawing.Size(75, 23);
@@ -219,7 +219,7 @@
             // blocksButton
             // 
             this.blocksButton.Enabled = false;
-            this.blocksButton.Location = new System.Drawing.Point(90, 7);
+            this.blocksButton.Location = new System.Drawing.Point(90, 16);
             this.blocksButton.Margin = new System.Windows.Forms.Padding(4);
             this.blocksButton.Name = "blocksButton";
             this.blocksButton.Size = new System.Drawing.Size(75, 23);
@@ -231,7 +231,7 @@
             // palettesButton
             // 
             this.palettesButton.Enabled = false;
-            this.palettesButton.Location = new System.Drawing.Point(7, 7);
+            this.palettesButton.Location = new System.Drawing.Point(7, 16);
             this.palettesButton.Margin = new System.Windows.Forms.Padding(4);
             this.palettesButton.Name = "palettesButton";
             this.palettesButton.Size = new System.Drawing.Size(75, 23);

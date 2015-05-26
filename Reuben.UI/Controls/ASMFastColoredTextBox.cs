@@ -164,7 +164,7 @@ namespace Reuben.UI
 
             if (foundLine != null)
             {
-                return GetLine(foundLine.FromLine).Text;
+                return GetLine(foundLine.End.iLine).Text;
             }
 
             return null;

@@ -203,8 +203,19 @@ namespace Reuben.UI
             ShowSpriteEditor();
         }
 
+        private static SpriteEditor SpriteEditor;        
         public void ShowSpriteEditor(int spriteId = -1)
         {
+            if (ProjectView.SpriteEditor == null)
+            {
+                ProjectView.SpriteEditor = new SpriteEditor();
+                ProjectView.SpriteEditor.Initialize(graphicsController, spriteController, levelController);
+                ProjectView.SpriteEditor.Show();
+            }
+            else
+            {
+                ProjectView.SpriteEditor.Focus();
+            }
         }
     }
 }

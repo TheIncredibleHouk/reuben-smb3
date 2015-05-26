@@ -1,6 +1,5 @@
 C:\Projects\Personal\Reuben\Conversion\bin\Debug\Conversion.dll
 C:\Projects\Personal\Reuben\Conversion\bin\Debug\Conversion.pdb
-C:\Projects\Personal\Reuben\Conversion\bin\Debug\Daiz.Library.dll
 C:\Projects\Personal\Reuben\Conversion\bin\Debug\Daiz.NES.Reuben.ProjectManagement.dll
 C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Controllers.dll
 C:\Projects\Personal\Reuben\Conversion\bin\Debug\Reuben.Model.dll

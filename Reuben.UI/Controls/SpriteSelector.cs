@@ -30,8 +30,13 @@ namespace Reuben.UI
         {
             localColorReference = colors;
             localGraphicsController = graphicsController;
-            spriteController = localSpriteController;
+            localSpriteController = spriteController;
             localPalette = palette;
+
+            sprites.ColorReference = localColorReference;
+            sprites.Graphics = localGraphicsController;
+            sprites.Sprites = localSpriteController;
+            sprites.Palette = localPalette;
             sprites.UpdateGraphics();
         }
 
@@ -39,6 +44,11 @@ namespace Reuben.UI
         {
             localColorReference = colors ?? localColorReference;
             localPalette = palette ?? localPalette;
+
+            sprites.ColorReference = localColorReference;
+            sprites.Graphics = localGraphicsController;
+            sprites.Sprites = localSpriteController;
+            sprites.Palette = localPalette;
             sprites.UpdateGraphics();
         }
 
@@ -50,10 +60,18 @@ namespace Reuben.UI
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LevelEditor Editor { get; set; }
 
+        public event EventHandler SelectedSpriteChanged;
         private void SpriteSelector_MouseDown(object sender, MouseEventArgs e)
         {
-            Editor.EditMode = EditMode.Sprites;
+            if (Editor != null)
+            {
+                Editor.EditMode = EditMode.Sprites;
+            }
             SelectedSprite = sprites.SpriteDrawBoundsCache.Where(r => r.Item2.Contains(e.X, e.Y)).Select(r => r.Item1).FirstOrDefault();
+            if(SelectedSpriteChanged != null)
+            {
+                SelectedSpriteChanged(this, null);
+            }
         }
 
         private Sprite selectedSprite;

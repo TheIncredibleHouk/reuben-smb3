@@ -21,15 +21,15 @@ namespace Reuben.UI
 
         public SpriteViewer()
         {
-            buffer = new Bitmap(512, 512, PixelFormat.Format32bppArgb);
+            buffer = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
         }
 
         GraphicsController localGraphicsController;
         SpriteController localSpriteController;
         public void Initialize(GraphicsController graphicsController, SpriteController spriteController, Color[] colors, Palette palette, Palette overlayPalette)
         {
-            graphicsController = localGraphicsController;
-            spriteController = localSpriteController;
+            localGraphicsController = graphicsController;
+            localSpriteController = spriteController;
             
 
             localColorReference = colors;
@@ -106,10 +106,11 @@ namespace Reuben.UI
                 Graphics.FromImage(buffer).Clear(Color.Black);
             }
 
-            int x = 512;
-            int y = 512;
+            int x = 128;
+            int y = 128;
 
             BitmapData bitmap = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            Drawer.FillArea(new Rectangle(0, 0, buffer.Width, buffer.Height), quickSpriteReference[0][0], bitmap);
             foreach (var info in definition.SpriteInfo)
             {
                 if (info.Properties.Count > 0 && !info.Properties.Contains(Property))
