@@ -60,6 +60,7 @@
     <Compile Include="SpriteInfo.cs" />
     <Compile Include="StringResource.cs" />
     <Compile Include="StringResourceType.cs" />
+    <Compile Include="CodeTag.cs" />
     <Compile Include="World.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorldData.cs" />

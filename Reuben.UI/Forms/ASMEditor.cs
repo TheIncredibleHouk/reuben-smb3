@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,23 +8,124 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ScintillaNET;
+
+using Reuben.Controllers;
+using FastColoredTextBoxNS;
 
 namespace Reuben.UI
 {
     public partial class ASMEditor : Form
     {
+
         public ASMEditor()
         {
             InitializeComponent();
+            ColumnHeader h = new ColumnHeader();
+            h.Width = asmFiles.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            asmFiles.Columns.Add(h);
         }
-        public void Initialize(string lexerFile)
+
+        private ProjectController localProjectController;
+        private List<string> symbols;
+        public void Initialize(ProjectController controller)
         {
-            scintilla1.StyleResetDefault();
-            scintilla1.Styles[Style.Default].Font = "Consolas";
-            scintilla1.Styles[Style.Default].Size = 10;
-            scintilla1.StyleClearAll();
-            //scintilla1.Styles[Style.ASM6502.CommentLine].BackColor
+            localProjectController = controller;
+
+            // load symbols now, for more value of course
+            symbols = (new ASMController().ParseSymbols(File.ReadAllText(controller.Project.ASMDirectory + @"\smb3.asm")));
+
+            // now list the things
+            asmFiles.Items.Add(new ListViewItem("smb3.asm"));
+            asmFiles.Items.AddRange(Directory.GetFiles(localProjectController.Project.ASMDirectory + @"\PRG\").Select(f => new ListViewItem(Path.GetFileName(f))).ToArray());
+        }
+
+
+        Dictionary<string, TabPage> filesOpenedSoFar = new Dictionary<string, TabPage>();
+        public void OpenFile(string file)
+        {
+            if (filesOpenedSoFar.ContainsKey(file))
+            {
+                filesOpened.SelectedTab = filesOpenedSoFar[file];
+                return;
+            }
+
+            TabPage page = new TabPage();
+            page.Text = Path.GetFileName(file);
+
+            ASMFastColoredTextBox textBox = new ASMFastColoredTextBox();
+            page.Controls.Add(textBox);
+            page.Tag = textBox;
+            textBox.Dock = DockStyle.Fill;
+            filesOpened.TabPages.Add(page);
+            filesOpenedSoFar[file] = page;
+            textBox.Initiliaze(symbols, file);
+
+            filesOpened.SelectedTab = page;
+        }
+
+        private void asmFiles_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (asmFiles.SelectedItems.Count > 0)
+            {
+                if (asmFiles.SelectedItems[0].Text != "smb3.asm")
+                {
+                    OpenFile(localProjectController.Project.ASMDirectory + @"\PRG\" + asmFiles.SelectedItems[0].Text);
+                }
+                else
+                {
+                    OpenFile(localProjectController.Project.ASMDirectory + @"\" + asmFiles.SelectedItems[0].Text);
+                }
+
+                saveButton.Enabled = closeButton.Enabled = true;
+            }
+        }
+
+        private void filesOpened_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (filesOpened.SelectedTab != null)
+            {
+                ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).Focus();
+            }
+
+            saveButton.Enabled = closeButton.Enabled = filesOpened.TabPages.Count > 0;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (filesOpened.SelectedTab != null)
+            {
+                filesOpenedSoFar.Remove(filesOpenedSoFar.Where(k => k.Value == filesOpened.SelectedTab).Select(k => k.Key).FirstOrDefault());
+                filesOpened.TabPages.Remove(filesOpened.SelectedTab);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (filesOpened.SelectedTab != null)
+            {
+                ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).Save();
+            }
+        }
+
+        public void GoToTag(string tag, string file)
+        {
+            
+            if (file == "smb3.asm")
+            {
+                OpenFile(localProjectController.Project.ASMDirectory + @"\" + file);
+            }
+            else
+            {
+                OpenFile(localProjectController.Project.ASMDirectory + @"\PRG\" + file);
+            }
+            
+            
+            ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).GoToTag(tag);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).GoToTag(codeTag.Text);
         }
     }
 }

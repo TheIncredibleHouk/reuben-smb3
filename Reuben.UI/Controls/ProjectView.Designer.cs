@@ -1,4 +1,4 @@
-﻿namespace Reuben.UI.Controls
+﻿namespace Reuben.UI
 {
     partial class ProjectView
     {
@@ -214,6 +214,7 @@
             this.spritesButton.TabIndex = 2;
             this.spritesButton.Text = "Sprites";
             this.spritesButton.UseVisualStyleBackColor = true;
+            this.spritesButton.Click += new System.EventHandler(this.spritesButton_Click);
             // 
             // blocksButton
             // 

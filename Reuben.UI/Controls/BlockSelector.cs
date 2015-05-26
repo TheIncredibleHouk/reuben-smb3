@@ -103,5 +103,14 @@ namespace Reuben.UI
         public LevelEditor Editor { get; set; }
 
         public event EventHandler SelectedBlockChanged;
+        public event EventHandler DoubleClicked;
+
+        private void blocks_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (DoubleClicked != null)
+            {
+                DoubleClicked(sender, e);
+            }
+        }
     }
 }

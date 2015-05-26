@@ -34,13 +34,13 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.7.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\FastColoredTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="ScintillaNET, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\jacobslusser.ScintillaNET.3.3.0\lib\net40\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,8 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ASMScintilla.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Controls\ASMFastColoredTextBox.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\BlockListViewer.cs">
       <SubType>Component</SubType>
@@ -87,10 +87,12 @@
     <Compile Include="Controls\ProjectView.Designer.cs">
       <DependentUpon>ProjectView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SpritesViewer.cs">
+    <Compile Include="Controls\SpriteListViewer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Extras\ASMLexer.cs" />
+    <Compile Include="Controls\SpriteViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Extras\DataChange.cs" />
     <Compile Include="Extras\Enums.cs" />
     <Compile Include="Extras\Extensions.cs" />
@@ -133,6 +135,12 @@
     </Compile>
     <Compile Include="Controls\SpriteSelector.Designer.cs">
       <DependentUpon>SpriteSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SpriteEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SpriteEditor.Designer.cs">
+      <DependentUpon>SpriteEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -180,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SpriteSelector.resx">
       <DependentUpon>SpriteSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SpriteEditor.resx">
+      <DependentUpon>SpriteEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

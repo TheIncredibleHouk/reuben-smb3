@@ -23,13 +23,14 @@ namespace Reuben.UI
         GraphicsController gfxController;
         StringController stringController;
         Palette overlayPalette;
+        ProjectController localProjectController;
         public Block[] Overlays { get; set; }
 
         public List<LevelType> LocalLevelTypes { get; private set; }
 
-        public void Initialize(LevelController levels, GraphicsController graphics, StringController strings, int selectedLevelType = 1)
+        public void Initialize(ProjectController projectController, LevelController levels, GraphicsController graphics, StringController strings, int selectedLevelType = 1)
         {
-
+            localProjectController = projectController;
             var overlayTable = graphics.MakeExtraPatternTable(4, 5, 6, 7);
             LocalLevelTypes = levels.LevelData.Types.MakeCopy();
             gfxController = graphics;
@@ -65,6 +66,12 @@ namespace Reuben.UI
             blockList.SelectedBlock = 0;
         }
 
+
+        public void SelectBlock(int levelType, int block)
+        {
+            levelTypes.SelectedIndex = levelType;
+            blockList.SelectedBlock = block;
+        }
 
         private bool delayUpdate;
         private void graphics1_SelectedIndexChanged(object sender, EventArgs e)
@@ -326,6 +333,25 @@ namespace Reuben.UI
         {
             blockList.ShowSolidityOverlays = solidityOverlay.Checked;
             blockList.UpdateAll();
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void goCodeTag_Click(object sender, EventArgs e)
+        {
+            if (Main.ASMEditor == null)
+            {
+                Main.ASMEditor = new ASMEditor();
+                Main.ASMEditor.Initialize(localProjectController);
+                Main.ASMEditor.Show();
+            }
+            else
+            {
+                Main.ASMEditor.Focus();
+            }
         }
     }
 }

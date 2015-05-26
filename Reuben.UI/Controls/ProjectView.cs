@@ -12,15 +12,15 @@ using System.Windows.Forms;
 using Reuben.Model;
 using Reuben.Controllers;
 
-namespace Reuben.UI.Controls
+namespace Reuben.UI
 {
     public partial class ProjectView : UserControl
     {
-        ProjectController projectController;
-        GraphicsController graphicsController;
-        LevelController levelController;
-        StringController stringController;
-        SpriteController spriteController;
+        static ProjectController projectController;
+        static GraphicsController graphicsController;
+        static LevelController levelController;
+        static StringController stringController;
+        static SpriteController spriteController;
 
         public ProjectView()
         {
@@ -144,21 +144,67 @@ namespace Reuben.UI.Controls
 
         private void blocksButton_Click(object sender, EventArgs e)
         {
-            BlockEditor editor = new BlockEditor();
-            editor.Initialize(levelController, graphicsController, stringController);
-            if (editor.ShowDialog() == DialogResult.OK)
+            ProjectView.ShowBlockEditor();
+        }
+
+        private static BlockEditor BlockEditor;
+        public static void ShowBlockEditor()
+        {
+            ShowBlockEditor(-1, -1);
+        }
+
+        public static void ShowBlockEditor(int levelType, int blockSelected)
+        {
+            if (ProjectView.BlockEditor == null)
             {
-                levelController.LevelData.Types = editor.LocalLevelTypes;
-                levelController.LevelData.Overlays = editor.Overlays;
+                ProjectView.BlockEditor = new BlockEditor();
+                ProjectView.BlockEditor.Initialize(projectController, levelController, graphicsController, stringController);
+                ProjectView.BlockEditor.Show();
+                ProjectView.BlockEditor.FormClosing += BlockEditor_FormClosing;
+            }
+            else
+            {
+                ProjectView.BlockEditor.Focus();
+            }
+
+            if(levelType >= 0 && blockSelected >= 0)
+            {
+                ProjectView.BlockEditor.SelectBlock(levelType, blockSelected);
+            }
+        }
+
+        static void BlockEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ProjectView.BlockEditor.DialogResult == DialogResult.OK)
+            {
+                levelController.LevelData.Types = ProjectView.BlockEditor.LocalLevelTypes;
+                levelController.LevelData.Overlays = ProjectView.BlockEditor.Overlays;
                 levelController.Save();
             }
+            ProjectView.BlockEditor.FormClosing -= BlockEditor_FormClosing;
         }
 
         private void asmButton_Click(object sender, EventArgs e)
         {
-            ASMEditor editor = new ASMEditor();
-            editor.Initialize(projectController.Project.ASMDirectory + @"\asmlexer.xml");
-            editor.ShowDialog();
+            if (Main.ASMEditor == null)
+            {
+                Main.ASMEditor = new ASMEditor();
+                Main.ASMEditor.Initialize(projectController);
+                Main.ASMEditor.Show();
+            }
+            else
+            {
+                Main.ASMEditor.Focus();
+            }
+        }
+
+        private void spritesButton_Click(object sender, EventArgs e)
+        {
+            ShowSpriteEditor();
+        }
+
+        public void ShowSpriteEditor(int spriteId = -1)
+        {
         }
     }
 }

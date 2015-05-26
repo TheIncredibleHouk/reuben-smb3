@@ -33,7 +33,6 @@ F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.pdb
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Model.pdb
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csprojResolveAssemblyReference.cache
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.ProjectView.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Confirm.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.LevelEditor.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.PaletteManager.resources
@@ -50,3 +49,7 @@ F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteSelector.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteSelector.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockEditor.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\FastColoredTextBox.dll
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ProjectView.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Forms.SpriteEditor.resources

@@ -16,7 +16,6 @@ C:\Projects\Personal\Reuben\Conversion\obj\Debug\Conversion.dll
 C:\Projects\Personal\Reuben\Conversion\obj\Debug\Conversion.pdb
 F:\ROM Hacking\Reuben\Conversion\bin\Debug\Conversion.dll
 F:\ROM Hacking\Reuben\Conversion\bin\Debug\Conversion.pdb
-F:\ROM Hacking\Reuben\Conversion\bin\Debug\Daiz.Library.dll
 F:\ROM Hacking\Reuben\Conversion\bin\Debug\Daiz.NES.Reuben.ProjectManagement.dll
 F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Controllers.dll
 F:\ROM Hacking\Reuben\Conversion\bin\Debug\Reuben.Model.dll

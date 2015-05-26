@@ -26,39 +26,26 @@ namespace Reuben.UI
             mouseCap.Location = new Point(mouseCap.Location.X, 2);
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Color[] ColorReference
+        public void Initialize(GraphicsController graphicsController, SpriteController spriteController, Color[] colors, Palette palette)
         {
-            get { return sprites.ColorReference; }
-            set { sprites.ColorReference = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Palette Palette
-        {
-            get { return sprites.Palette; }
-            set { sprites.Palette = value; }
-        }
-
-        private Sprite spriteList = new Sprite();
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SpriteController Sprites
-        {
-            get { return sprites.Sprites; }
-            set { sprites.Sprites = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public GraphicsController Graphics
-        {
-            get { return sprites.Graphics; }
-            set { sprites.Graphics = value; }
-        }
-
-        public void UpdateGraphics()
-        {
+            localColorReference = colors;
+            localGraphicsController = graphicsController;
+            spriteController = localSpriteController;
+            localPalette = palette;
             sprites.UpdateGraphics();
         }
+
+        public void Update(Color[] colors = null, Palette palette = null)
+        {
+            localColorReference = colors ?? localColorReference;
+            localPalette = palette ?? localPalette;
+            sprites.UpdateGraphics();
+        }
+
+        private Color[] localColorReference;
+        private Palette localPalette;
+        private SpriteController localSpriteController;
+        private GraphicsController localGraphicsController;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LevelEditor Editor { get; set; }
@@ -70,6 +57,7 @@ namespace Reuben.UI
         }
 
         private Sprite selectedSprite;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Sprite SelectedSprite
         {
             get
@@ -81,7 +69,7 @@ namespace Reuben.UI
                 selectedSprite = value;
                 if (value != null)
                 {
-                    sprites.SelectionRectangle = Sprites.GetClipBounds(selectedSprite);
+                    sprites.SelectionRectangle = localSpriteController.GetClipBounds(selectedSprite);
                 }
                 else
                 {
@@ -106,6 +94,5 @@ namespace Reuben.UI
         {
             mouseCap.Location = new Point(mouseCap.Location.X, 2);
         }
-
     }
 }

@@ -119,6 +119,7 @@
             this.values.Margin = new System.Windows.Forms.Padding(4);
             this.values.Multiline = true;
             this.values.Name = "values";
+            this.values.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.values.Size = new System.Drawing.Size(256, 137);
             this.values.TabIndex = 7;
             // 

@@ -216,7 +216,6 @@
             this.paletteList.SelectedPalette = null;
             this.paletteList.Size = new System.Drawing.Size(132, 21);
             this.paletteList.TabIndex = 16;
-            this.paletteList.SelectedIndexChanged += new System.EventHandler(this.paletteList_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -347,7 +346,6 @@
             this.screenList.Name = "screenList";
             this.screenList.Size = new System.Drawing.Size(132, 21);
             this.screenList.TabIndex = 3;
-            this.screenList.SelectedIndexChanged += new System.EventHandler(this.screenList_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -455,8 +453,11 @@
             this.blockSelector.Location = new System.Drawing.Point(5, 27);
             this.blockSelector.Margin = new System.Windows.Forms.Padding(0);
             this.blockSelector.Name = "blockSelector";
+            this.blockSelector.ShowInteractionOverlays = false;
+            this.blockSelector.ShowSolidityOverlays = false;
             this.blockSelector.Size = new System.Drawing.Size(256, 256);
             this.blockSelector.TabIndex = 0;
+            this.blockSelector.DoubleClicked += new System.EventHandler(this.blockSelector_MouseDoubleClick);
             // 
             // panel6
             // 
@@ -469,6 +470,7 @@
             this.panel6.Controls.Add(this.label13);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Location = new System.Drawing.Point(267, 602);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(649, 77);
             this.panel6.TabIndex = 3;

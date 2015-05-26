@@ -35,9 +35,12 @@
             // 
             this.blocks.Location = new System.Drawing.Point(0, 0);
             this.blocks.Name = "blocks";
+            this.blocks.ShowInteractionOverlays = false;
+            this.blocks.ShowSolidityOverlays = false;
             this.blocks.Size = new System.Drawing.Size(256, 256);
             this.blocks.TabIndex = 0;
             this.blocks.Text = "blocksViewer1";
+            this.blocks.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.blocks_MouseDoubleClick);
             this.blocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.blocks_MouseDown);
             // 
             // BlockSelector

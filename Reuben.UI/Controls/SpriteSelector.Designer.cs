@@ -37,7 +37,7 @@
             this.mouseCap = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.sprites = new Reuben.UI.Controls.SpritesViewer();
+            this.sprites = new Reuben.UI.Controls.SpriteListViewer();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -167,7 +167,7 @@
 
         #endregion
 
-        private Controls.SpritesViewer sprites;
+        private Controls.SpriteListViewer sprites;
         private System.Windows.Forms.TextBox filter;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;

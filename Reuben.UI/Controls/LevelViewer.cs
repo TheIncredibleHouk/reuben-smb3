@@ -157,7 +157,7 @@ namespace Reuben.UI
                 quickSpriteOverlayReference[3][0] = Color.Transparent;
             }
 
-            UpdateBGArea(0, 0, 0xF0, 0x1B);
+            UpdateBlockDisplay(0, 0, 0xF0, 0x1B);
         }
 
         private Level localLevel;

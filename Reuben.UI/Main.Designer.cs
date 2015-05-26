@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.projectView = new Reuben.UI.Controls.ProjectView();
+            this.projectView = new Reuben.UI.ProjectView();
             this.SuspendLayout();
             // 
             // projectView
@@ -53,7 +53,7 @@
 
         #endregion
 
-        private Controls.ProjectView projectView;
+        private ProjectView projectView;
     }
 }
 
