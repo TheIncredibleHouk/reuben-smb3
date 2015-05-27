@@ -36,7 +36,10 @@ namespace Reuben.UI
 
         void spriteSelector_SelectedSpriteChanged(object sender, EventArgs e)
         {
-            spriteViewer.CurrentDefinition = localSpriteController.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
+            if (spriteSelector.SelectedSprite != null)
+            {
+                spriteViewer.CurrentDefinition = localSpriteController.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
+            }
         }
 
         void paletteList_SelectedIndexChanged(object sender, EventArgs e)

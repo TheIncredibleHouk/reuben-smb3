@@ -51,8 +51,8 @@ F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockEditor.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMEditor.resources
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\FastColoredTextBox.dll
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ProjectView.resources
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Forms.SpriteEditor.resources
 C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\FastColoredTextBox.dll
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ProjectView.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMEditor.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteEditor.resources
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteEditor.resources

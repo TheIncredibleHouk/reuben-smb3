@@ -28,6 +28,7 @@ namespace Reuben.UI
         SpriteController localSpriteController;
         public void Initialize(GraphicsController graphicsController, SpriteController spriteController, Color[] colors, Palette palette, Palette overlayPalette)
         {
+            currentSprite = new Sprite() { X = 0, Y = 0 };
             localGraphicsController = graphicsController;
             localSpriteController = spriteController;
             
@@ -99,6 +100,7 @@ namespace Reuben.UI
         private Palette localPalette;
         private Palette localOverlayPalette;
 
+        private Sprite currentSprite;
         public void UpdateGraphics()
         {
             if (localPalette == null || localColorReference == null || localGraphicsController == null || localSpriteController == null || localOverlayPalette == null)
@@ -106,9 +108,13 @@ namespace Reuben.UI
                 Graphics.FromImage(buffer).Clear(Color.Black);
             }
 
-            int x = 128;
-            int y = 128;
+            currentSprite.ObjectID = CurrentDefinition.GameID;
+            Rectangle bounds = localSpriteController.GetClipBounds(currentSprite);
 
+            int x = 128 - bounds.Width / 2;
+            int y = 128 - bounds.Height / 2;
+
+            
             BitmapData bitmap = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
             Drawer.FillArea(new Rectangle(0, 0, buffer.Width, buffer.Height), quickSpriteReference[0][0], bitmap);
             foreach (var info in definition.SpriteInfo)
