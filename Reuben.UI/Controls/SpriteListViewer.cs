@@ -131,7 +131,6 @@ namespace Reuben.UI.Controls
             }
 
             buffer.UnlockBits(data);
-
         }
 
         public int FilterSprites(string filter)
@@ -149,7 +148,8 @@ namespace Reuben.UI.Controls
 
             SpriteDrawBoundsCache.Clear();
             int lastY = 0, targetY = 0;
-            foreach (SpriteDefinition def in definitions.OrderBy(d => d.Name.ToUpper()))
+            var defs = definitions.OrderBy(d => d.Name.ToUpper()).ToList();
+            foreach (SpriteDefinition def in defs)
             {
                 Sprite s = new Sprite();
                 s.X = 1;
@@ -186,7 +186,7 @@ namespace Reuben.UI.Controls
                 if (info.Properties.Count > 0 && !info.Properties.Contains(sprite.Property))
                 {
                     // if the info is property specific, only sprites with that sprite draw that tile
-                    return;
+                    continue;
                 }
 
 
@@ -198,7 +198,7 @@ namespace Reuben.UI.Controls
                     yOffset >= buffer.Height - 8)
                 {
                     // prevent overflow drawing
-                    return;
+                    continue;
                 }
                 if (info.Table == -1)
                 {
@@ -232,7 +232,7 @@ namespace Reuben.UI.Controls
             string safeName = definition.Name.ToUpper().Trim();
             for (int i = 0; i < safeName.Length; i++)
             {
-                if (i >= 32)
+                if (i >= 31)
                 {
                     break;
                 }

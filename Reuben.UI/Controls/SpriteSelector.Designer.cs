@@ -33,12 +33,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.scrollPanel = new System.Windows.Forms.Panel();
             this.mouseCap = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.sprites = new Reuben.UI.Controls.SpriteListViewer();
-            this.panel1.SuspendLayout();
+            this.scrollPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,17 +95,17 @@
             this.comboBox2.Size = new System.Drawing.Size(110, 21);
             this.comboBox2.TabIndex = 5;
             // 
-            // panel1
+            // scrollPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.mouseCap);
-            this.panel1.Controls.Add(this.sprites);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 109);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(256, 261);
-            this.panel1.TabIndex = 7;
-            this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
+            this.scrollPanel.AutoScroll = true;
+            this.scrollPanel.Controls.Add(this.mouseCap);
+            this.scrollPanel.Controls.Add(this.sprites);
+            this.scrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scrollPanel.Location = new System.Drawing.Point(0, 109);
+            this.scrollPanel.Name = "scrollPanel";
+            this.scrollPanel.Size = new System.Drawing.Size(279, 261);
+            this.scrollPanel.TabIndex = 7;
+            this.scrollPanel.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             // 
             // mouseCap
             // 
@@ -138,7 +138,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.panel2.Size = new System.Drawing.Size(256, 109);
+            this.panel2.Size = new System.Drawing.Size(279, 109);
             this.panel2.TabIndex = 9;
             // 
             // sprites
@@ -154,11 +154,11 @@
             // 
             // SpriteSelector
             // 
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.scrollPanel);
             this.Controls.Add(this.panel2);
             this.Name = "SpriteSelector";
-            this.Size = new System.Drawing.Size(256, 370);
-            this.panel1.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(279, 370);
+            this.scrollPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -173,7 +173,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel scrollPanel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button mouseCap;
         private System.Windows.Forms.Panel panel2;

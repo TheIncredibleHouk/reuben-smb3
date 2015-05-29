@@ -22,9 +22,11 @@ namespace Reuben.UI
         }
 
         private SpriteController localSpriteController;
+        private List<SpriteDefinition> backUpDefinitions;
         public void Initialize(GraphicsController graphicsController, SpriteController spriteController, LevelController levelController)
         {
             localSpriteController = spriteController;
+            backUpDefinitions = spriteController.SpriteData.Definitions.MakeCopy();
             spriteSelector.Initialize(graphicsController, spriteController, graphicsController.GraphicsData.Colors, graphicsController.GraphicsData.Palettes[0]);
             spriteViewer.Initialize(graphicsController, spriteController, graphicsController.GraphicsData.Colors, graphicsController.GraphicsData.Palettes[0], levelController.LevelData.OverlayPalette);
             paletteList.Palettes = graphicsController.GraphicsData.Palettes;
@@ -39,6 +41,7 @@ namespace Reuben.UI
             if (spriteSelector.SelectedSprite != null)
             {
                 spriteViewer.CurrentDefinition = localSpriteController.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
+                spriteName.Text = spriteViewer.CurrentDefinition.Name;
                 editorPropertyList.Text = String.Join("\r\n", spriteViewer.CurrentDefinition.PropertyDescriptions);
                 displayProperty.Items.Clear();
                 displayProperty.Items.AddRange(spriteViewer.CurrentDefinition.PropertyDescriptions.ToArray());
@@ -87,6 +90,24 @@ namespace Reuben.UI
             {
                 displayProperty.SelectedIndex = 0;
             }
+        }
+
+        private void spriteName_TextChanged(object sender, EventArgs e)
+        {
+            spriteViewer.CurrentDefinition.Name = spriteName.Text;
+            spriteSelector.Update(colors: null);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            localSpriteController.SpriteData.Definitions = backUpDefinitions;
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            localSpriteController.Save();
+            this.Close();
         }
     }
 }

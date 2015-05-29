@@ -18,7 +18,7 @@ namespace Reuben.UI
         public SpriteSelector()
         {
             InitializeComponent();
-            panel1.MouseWheel += panel1_MouseWheel;
+            scrollPanel.MouseWheel += panel1_MouseWheel;
         }
 
         void panel1_MouseWheel(object sender, MouseEventArgs e)
@@ -68,7 +68,7 @@ namespace Reuben.UI
                 Editor.EditMode = EditMode.Sprites;
             }
             SelectedSprite = sprites.SpriteDrawBoundsCache.Where(r => r.Item2.Contains(e.X, e.Y)).Select(r => r.Item1).FirstOrDefault();
-            if(SelectedSpriteChanged != null)
+            if (SelectedSpriteChanged != null)
             {
                 SelectedSpriteChanged(this, null);
             }
@@ -99,8 +99,21 @@ namespace Reuben.UI
         private void filter_TextChanged(object sender, EventArgs e)
         {
             sprites.FilterSprites(filter.Text);
-            sprites.UpdateGraphics();
-
+            if (selectedSprite != null)
+            {
+                sprites.UpdateGraphics();
+                var newSprite = sprites.SpriteDrawBoundsCache.Where(t => t.Item1.ObjectID == selectedSprite.ObjectID).Select(t => t.Item1).FirstOrDefault();
+                if (newSprite != null)
+                {
+                    SelectedSprite = newSprite;
+                    scrollPanel.VerticalScroll.Value = selectedSprite.Y * 16 - 16;
+                    mouseCap.Location = new Point(mouseCap.Location.X, 2);
+                }
+                else
+                {
+                    sprites.SelectionRectangle = Rectangle.Empty;
+                }
+            }
         }
 
         private void sprites_MouseMove(object sender, MouseEventArgs e)
