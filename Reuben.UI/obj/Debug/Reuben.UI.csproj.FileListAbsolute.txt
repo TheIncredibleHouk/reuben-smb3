@@ -56,3 +56,4 @@ C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ProjectView.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMEditor.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteEditor.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteEditor.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.DefinitionSpriteEditor.resources
