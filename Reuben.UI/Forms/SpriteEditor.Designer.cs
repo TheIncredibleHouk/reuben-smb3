@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.editorPropertyList = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.displayProperty = new System.Windows.Forms.ComboBox();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.spriteSelector = new Reuben.UI.SpriteSelector();
@@ -43,78 +45,71 @@
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // editorPropertyList
             // 
-            this.textBox1.Location = new System.Drawing.Point(21, 363);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(197, 132);
-            this.textBox1.TabIndex = 1;
+            this.editorPropertyList.Location = new System.Drawing.Point(20, 474);
+            this.editorPropertyList.Multiline = true;
+            this.editorPropertyList.Name = "editorPropertyList";
+            this.editorPropertyList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.editorPropertyList.Size = new System.Drawing.Size(306, 132);
+            this.editorPropertyList.TabIndex = 1;
+            this.editorPropertyList.TextChanged += new System.EventHandler(this.editorPropertyList_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 296);
+            this.label1.Location = new System.Drawing.Point(17, 308);
             this.label1.Margin = new System.Windows.Forms.Padding(4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Name";
+            this.label1.Text = "Editor Name";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(21, 316);
+            this.textBox2.Location = new System.Drawing.Point(20, 328);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(197, 20);
+            this.textBox2.Size = new System.Drawing.Size(306, 20);
             this.textBox2.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 343);
+            this.label2.Location = new System.Drawing.Point(17, 454);
             this.label2.Margin = new System.Windows.Forms.Padding(4);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Properties";
+            this.label2.Text = "Editor Properties";
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.displayProperty);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.paletteList);
             this.panel1.Controls.Add(this.spriteViewer);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.editorPropertyList);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(261, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(429, 631);
+            this.panel1.Size = new System.Drawing.Size(345, 631);
             this.panel1.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(225, 295);
-            this.label4.Margin = new System.Windows.Forms.Padding(4);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1, 200);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "label4";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(234, 295);
+            this.label3.Location = new System.Drawing.Point(17, 355);
             this.label3.Margin = new System.Windows.Forms.Padding(4);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Palette";
+            this.label3.Text = "Display Palette";
             // 
             // panel2
             // 
@@ -126,6 +121,39 @@
             this.panel2.Size = new System.Drawing.Size(261, 631);
             this.panel2.TabIndex = 6;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(20, 283);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(104, 17);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "Display Overlays";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 404);
+            this.label7.Margin = new System.Windows.Forms.Padding(4);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Display Property";
+            // 
+            // displayProperty
+            // 
+            this.displayProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.displayProperty.FormattingEnabled = true;
+            this.displayProperty.Location = new System.Drawing.Point(20, 425);
+            this.displayProperty.Margin = new System.Windows.Forms.Padding(4);
+            this.displayProperty.Name = "displayProperty";
+            this.displayProperty.Size = new System.Drawing.Size(306, 21);
+            this.displayProperty.TabIndex = 14;
+            this.displayProperty.SelectedIndexChanged += new System.EventHandler(this.displayProperty_SelectedIndexChanged);
+            // 
             // paletteList
             // 
             this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -134,15 +162,15 @@
             this.paletteList.DropDownWidth = 288;
             this.paletteList.FormattingEnabled = true;
             this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(237, 316);
+            this.paletteList.Location = new System.Drawing.Point(20, 376);
             this.paletteList.Name = "paletteList";
             this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(172, 21);
+            this.paletteList.Size = new System.Drawing.Size(306, 21);
             this.paletteList.TabIndex = 5;
             // 
             // spriteViewer
             // 
-            this.spriteViewer.Location = new System.Drawing.Point(84, 10);
+            this.spriteViewer.Location = new System.Drawing.Point(42, 10);
             this.spriteViewer.Name = "spriteViewer";
             this.spriteViewer.Size = new System.Drawing.Size(256, 256);
             this.spriteViewer.TabIndex = 0;
@@ -160,7 +188,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 631);
+            this.ClientSize = new System.Drawing.Size(606, 631);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "SpriteEditor";
@@ -175,16 +203,18 @@
         #endregion
 
         private SpriteViewer spriteViewer;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox editorPropertyList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private SpriteSelector spriteSelector;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private Controls.PaletteList paletteList;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox displayProperty;
+        private System.Windows.Forms.Label label7;
 
     }
 }
