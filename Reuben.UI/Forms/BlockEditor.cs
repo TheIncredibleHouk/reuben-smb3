@@ -20,8 +20,8 @@ namespace Reuben.UI
             InitializeComponent();
         }
 
-        GraphicsController gfxController;
-        StringController stringController;
+        GraphicsController localGraphicsController;
+        StringController localStringController;
         Palette overlayPalette;
         ProjectController localProjectController;
         public Block[] Overlays { get; set; }
@@ -33,7 +33,7 @@ namespace Reuben.UI
             localProjectController = projectController;
             var overlayTable = graphics.MakeExtraPatternTable(4, 5, 6, 7);
             LocalLevelTypes = levels.LevelData.Types.MakeCopy();
-            gfxController = graphics;
+            localGraphicsController = graphics;
             Overlays = levels.LevelData.Overlays.MakeCopy();
             overlayPalette = levels.LevelData.OverlayPalette;
 
@@ -44,7 +44,7 @@ namespace Reuben.UI
                 graphics2.Items.Add(i.ToString("X2"));
             }
 
-            stringController = strings;
+            localStringController = strings;
             solidity.Items.AddRange(strings.GetStringList("solidity").ToArray());
 
             levelTypes.Items.AddRange(LocalLevelTypes.Select(l => l.Name ?? "").ToArray());
@@ -64,6 +64,25 @@ namespace Reuben.UI
 
             blockView.UpdateGraphics();
             blockList.SelectedBlock = 0;
+
+            graphics.GraphicsUpdated += graphics_GraphicsUpdated;
+            graphics.ExtraGraphicsUpdated += graphics_ExtraGraphicsUpdated;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            localGraphicsController.GraphicsUpdated -= graphics_GraphicsUpdated;
+            localGraphicsController.ExtraGraphicsUpdated -= graphics_ExtraGraphicsUpdated;
+        }
+
+        void graphics_ExtraGraphicsUpdated(object sender, EventArgs e)
+        {
+            levelTypes_SelectedIndexChanged(null, null);
+        }
+
+        void graphics_GraphicsUpdated(object sender, EventArgs e)
+        {
+            levelTypes_SelectedIndexChanged(null, null);
         }
 
 
@@ -79,7 +98,7 @@ namespace Reuben.UI
             if (!delayUpdate && graphics1.SelectedIndex != -1 && graphics2.SelectedIndex != -1 && graphics1.Enabled && graphics2.Enabled)
             {
                 var palette = paletteList.SelectedPalette;
-                var newPatternTable = gfxController.MakePatternTable(graphics1.SelectedIndex, graphics1.SelectedIndex + 1, graphics2.SelectedIndex, graphics2.SelectedIndex + 1);
+                var newPatternTable = localGraphicsController.MakePatternTable(graphics1.SelectedIndex, graphics1.SelectedIndex + 1, graphics2.SelectedIndex, graphics2.SelectedIndex + 1);
 
                 
                 patternTable.Palette = palette;
@@ -99,7 +118,7 @@ namespace Reuben.UI
             {
                 typeName.Enabled = setDefaultButton.Enabled = paletteList.Enabled = graphics1.Enabled = graphics2.Enabled = false;
 
-                var newPatternTable = gfxController.MakeExtraPatternTable(4, 5, 6, 7);
+                var newPatternTable = localGraphicsController.MakeExtraPatternTable(4, 5, 6, 7);
                 typeName.Text = "Overlays";
                 blockList.Update(blockList: Overlays, palette: overlayPalette, patternTable: newPatternTable);
 
@@ -124,7 +143,7 @@ namespace Reuben.UI
                 graphics1.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID;
                 graphics2.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID2;
                 delayUpdate = false;
-                paletteList.SelectedPalette = gfxController.GraphicsData.Palettes.Where(p => p.ID == LocalLevelTypes[levelTypes.SelectedIndex].DefaultPaletteID).FirstOrDefault();
+                paletteList.SelectedPalette = localGraphicsController.GraphicsData.Palettes.Where(p => p.ID == LocalLevelTypes[levelTypes.SelectedIndex].DefaultPaletteID).FirstOrDefault();
             }
         }
 
@@ -174,7 +193,6 @@ namespace Reuben.UI
             patternTable.UpdateGraphics();
             blockView.UpdateGraphics();
 
-            blockUpdating = true;
             switch (blockView.Block.BlockSolidity)
             {
                 case 0x00:
@@ -203,7 +221,6 @@ namespace Reuben.UI
             }
 
             interaction.SelectedIndex = blockView.Block.BlockInteraction & 0x0F;
-            blockUpdating = false;
         }
 
         private int selectedTile;
@@ -248,7 +265,6 @@ namespace Reuben.UI
             }
         }
 
-        private bool blockUpdating;
         private void solidity_SelectedIndexChanged(object sender, EventArgs e)
         {
             interaction.Items.Clear();
@@ -258,29 +274,29 @@ namespace Reuben.UI
                 case 1:
                 case 2:
                 case 3:
-                    interaction.Items.AddRange(stringController.GetStringList("interaction").ToArray());
+                    interaction.Items.AddRange(localStringController.GetStringList("interaction").ToArray());
                     blockView.Block.BlockSolidity = (solidity.SelectedIndex << 4);
                     break;
 
                 case 4:
-                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
+                    interaction.Items.AddRange(localStringController.GetStringList("solid interaction").ToArray());
                     blockView.Block.BlockSolidity = (solidity.SelectedIndex << 4);
                     break;
 
                 case 5:
                     blockView.Block.BlockSolidity = 0x80;
-                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
+                    interaction.Items.AddRange(localStringController.GetStringList("item box").ToArray());
                     break;
 
                 case 6:
                     blockView.Block.BlockSolidity = 0xC0;
-                    interaction.Items.AddRange(stringController.GetStringList("solid interaction").ToArray());
+                    interaction.Items.AddRange(localStringController.GetStringList("solid interaction").ToArray());
                     break;
 
 
                 case 7:
                     blockView.Block.BlockSolidity = 0xF0;
-                    interaction.Items.AddRange(stringController.GetStringList("item box").ToArray());
+                    interaction.Items.AddRange(localStringController.GetStringList("item box").ToArray());
                     break;
             }
 
@@ -352,6 +368,11 @@ namespace Reuben.UI
             {
                 Main.ASMEditor.Focus();
             }
+        }
+
+        private void BlockEditor_Activated(object sender, EventArgs e)
+        {
+            localGraphicsController.CheckFiles();
         }
     }
 }

@@ -68,11 +68,11 @@
     <Compile Include="Controls\ColorView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DefinitionSpriteEditor.cs">
+    <Compile Include="Controls\SpriteInfoEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DefinitionSpriteEditor.Designer.cs">
-      <DependentUpon>DefinitionSpriteEditor.cs</DependentUpon>
+    <Compile Include="Controls\SpriteInfoEditor.Designer.cs">
+      <DependentUpon>SpriteInfoEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\LevelViewer.cs">
       <SubType>Component</SubType>
@@ -99,6 +99,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Extras\DataChange.cs" />
+    <Compile Include="Extras\EditorSpriteInfo.cs" />
     <Compile Include="Extras\Enums.cs" />
     <Compile Include="Extras\Extensions.cs" />
     <Compile Include="Extras\TileDrawer.cs" />
@@ -170,8 +171,8 @@
     <EmbeddedResource Include="Controls\BlockSelector.resx">
       <DependentUpon>BlockSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DefinitionSpriteEditor.resx">
-      <DependentUpon>DefinitionSpriteEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SpriteInfoEditor.resx">
+      <DependentUpon>SpriteInfoEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProjectView.resx">
       <DependentUpon>ProjectView.cs</DependentUpon>

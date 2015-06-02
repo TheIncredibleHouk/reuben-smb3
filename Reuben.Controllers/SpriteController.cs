@@ -34,9 +34,10 @@ namespace Reuben.Controllers
             foreach (SpriteDefinition definition in SpriteData.Definitions)
             {
                 int minX = 1000, maxX = 0, minY = 1000, maxY = 0;
+                bool useOverlays = definition.SpriteInfo.Where(s => !s.Overlay).Count() == 0;
                 foreach (SpriteInfo info in definition.SpriteInfo)
                 {
-                    if (info.Table == -1)
+                    if (info.Overlay && !useOverlays)
                     {
                         continue;
                     }

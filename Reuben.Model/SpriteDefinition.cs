@@ -11,7 +11,7 @@ namespace Reuben.Model
     public class SpriteDefinition
     {
         [DataMember]
-        public List<SpriteInfo> SpriteInfo { get; private set; }
+        public List<SpriteInfo> SpriteInfo { get; set; }
 
         [DataMember]
         public List<String> PropertyDescriptions { get; set; }

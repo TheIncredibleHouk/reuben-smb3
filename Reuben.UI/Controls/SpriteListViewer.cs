@@ -200,7 +200,7 @@ namespace Reuben.UI.Controls
                     // prevent overflow drawing
                     continue;
                 }
-                if (info.Table == -1)
+                if (info.Overlay)
                 {
                     continue;
                 }

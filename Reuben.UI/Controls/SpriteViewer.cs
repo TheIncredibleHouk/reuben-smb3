@@ -21,7 +21,8 @@ namespace Reuben.UI
 
         public SpriteViewer()
         {
-            buffer = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
+            buffer = new Bitmap(512, 512, PixelFormat.Format32bppArgb);
+            HighlightedSpriteInfo = new List<SpriteInfo>();
         }
 
         GraphicsController localGraphicsController;
@@ -72,7 +73,32 @@ namespace Reuben.UI
             localColorReference = colors ?? localColorReference;
             localPalette = palette ?? localPalette;
             localOverlayPalette = overlayPalette ?? localOverlayPalette;
-            
+            if (localPalette != null && localColorReference != null && localOverlayPalette != null)
+            {
+                quickSpriteReference = new Color[4][];
+                quickOverlayReference = new Color[4][];
+
+                quickSpriteReference[0] = new Color[4];
+                quickSpriteReference[1] = new Color[4];
+                quickSpriteReference[2] = new Color[4];
+                quickSpriteReference[3] = new Color[4];
+
+                quickOverlayReference[0] = new Color[4];
+                quickOverlayReference[1] = new Color[4];
+                quickOverlayReference[2] = new Color[4];
+                quickOverlayReference[3] = new Color[4];
+
+                for (int i = 0; i < 16; i++)
+                {
+                    quickSpriteReference[i / 4][i % 4] = localColorReference[localPalette.SpriteValues[i]];
+                    quickOverlayReference[i / 4][i % 4] = localColorReference[localOverlayPalette.SpriteValues[i]];
+                }
+
+                quickSpriteReference[0][1] = Color.Black;
+                quickSpriteReference[0][2] = Color.White;
+                quickSpriteReference[0][3] = Color.White;
+            }
+            UpdateGraphics();
         }
 
         private SpriteDefinition definition;
@@ -84,7 +110,10 @@ namespace Reuben.UI
             set
             {
                 definition = value;
-                UpdateGraphics();
+                if (definition != null)
+                {
+                    UpdateGraphics();
+                }
             }
         }
 
@@ -111,8 +140,8 @@ namespace Reuben.UI
             currentSprite.ObjectID = CurrentDefinition.GameID;
             Rectangle bounds = localSpriteController.GetClipBounds(currentSprite);
 
-            int x = 128 - bounds.Width / 2;
-            int y = 128 - bounds.Height / 2;
+            int x = (buffer.Width / 2) - bounds.Width / 2;
+            int y = (buffer.Height / 2) - bounds.Height / 2;
 
             
             BitmapData bitmap = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
@@ -134,16 +163,21 @@ namespace Reuben.UI
                     yOffset >= buffer.Height - 8)
                 {
                     // prevent overflow drawing
-                    return;
+                    continue;
                 }
 
                 Tile tile1, tile2;
                 Color[][] colorReference;
 
-                if (info.Table == -1)
+                if (info.Overlay)
                 {
-                    tile1 = localGraphicsController.GetExtraTileByBankIndex(info.Table * -1 - 1, info.Value);
-                    tile2 = localGraphicsController.GetExtraTileByBankIndex(info.Table * -1 - 1, info.Value + 1);
+                    if (!DisplaySpecialTiles)
+                    {
+                        continue;
+                    }
+
+                    tile1 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value);
+                    tile2 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value + 1);
                     colorReference = quickOverlayReference;
                     
                 }
@@ -176,11 +210,20 @@ namespace Reuben.UI
                     Drawer.DrawTileAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
                     Drawer.DrawTileAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
                 }
+
+                if (HighlightedSpriteInfo.Contains(info))
+                {
+                    Drawer.FillTileAsAlpha(xOffset, yOffset, Color.White, .25, bitmap);
+                    Drawer.FillTileAsAlpha(xOffset, yOffset + 8, Color.White, .25, bitmap);
+                }
             }
 
             buffer.UnlockBits(bitmap);
             Invalidate();
         }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public List<SpriteInfo> HighlightedSpriteInfo { get; set; }
 
         protected override void OnPaint(PaintEventArgs e)
         {

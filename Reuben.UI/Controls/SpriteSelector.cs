@@ -50,6 +50,22 @@ namespace Reuben.UI
             sprites.Sprites = localSpriteController;
             sprites.Palette = localPalette;
             sprites.UpdateGraphics();
+
+
+            if (selectedSprite != null)
+            {
+                var newSprite = sprites.SpriteDrawBoundsCache.Where(t => t.Item1.ObjectID == selectedSprite.ObjectID).Select(t => t.Item1).FirstOrDefault();
+                if (newSprite != null)
+                {
+                    SelectedSprite = newSprite;
+                    scrollPanel.VerticalScroll.Value = selectedSprite.Y * 16 - 16;
+                    mouseCap.Location = new Point(mouseCap.Location.X, 2);
+                }
+                else
+                {
+                    sprites.SelectionRectangle = Rectangle.Empty;
+                }
+            }
         }
 
         private Color[] localColorReference;
@@ -84,9 +100,9 @@ namespace Reuben.UI
             }
             set
             {
-                selectedSprite = value;
                 if (value != null)
                 {
+                    selectedSprite = sprites.SpriteDrawBoundsCache.Where(s => s.Item1.ObjectID == value.ObjectID).Select(s => s.Item1).FirstOrDefault();
                     sprites.SelectionRectangle = localSpriteController.GetClipBounds(selectedSprite);
                 }
                 else
@@ -99,9 +115,10 @@ namespace Reuben.UI
         private void filter_TextChanged(object sender, EventArgs e)
         {
             sprites.FilterSprites(filter.Text);
+            sprites.UpdateGraphics();
+
             if (selectedSprite != null)
             {
-                sprites.UpdateGraphics();
                 var newSprite = sprites.SpriteDrawBoundsCache.Where(t => t.Item1.ObjectID == selectedSprite.ObjectID).Select(t => t.Item1).FirstOrDefault();
                 if (newSprite != null)
                 {

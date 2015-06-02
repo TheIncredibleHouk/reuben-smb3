@@ -38,6 +38,9 @@ namespace Reuben.Model
 
         [DataMember]
         public int Table { get; set; }
+
+        [DataMember]
+        public bool Overlay { get; set; }
         
     }
 }

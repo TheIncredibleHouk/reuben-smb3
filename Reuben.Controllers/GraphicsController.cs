@@ -19,6 +19,9 @@ namespace Reuben.Controllers
         public Tile[] ExtraTiles { get; set; }
 
         private string lastFile;
+        private DateTime lastModified;
+        private string lastExtraFile;
+        private DateTime lastExtraModified;
         public GraphicsController()
         {
 
@@ -78,6 +81,8 @@ namespace Reuben.Controllers
 
             fs.Read(graphicsData, 0, (int)fs.Length);
             fs.Close();
+            lastFile = fileName;
+            lastModified = File.GetLastWriteTime(lastFile);
             int dataPointer = 0;
             for (int i = 0; i < Tiles.Length; i++)
             {
@@ -102,6 +107,8 @@ namespace Reuben.Controllers
 
             fs.Read(graphicsData, 0, (int)fs.Length);
             fs.Close();
+            lastExtraFile = fileName;
+            lastModified = File.GetLastWriteTime(lastExtraFile);
             int dataPointer = 0;
             for (int i = 0; i < ExtraTiles.Length; i++)
             {
@@ -111,6 +118,29 @@ namespace Reuben.Controllers
                     nextTileChunk[k] = graphicsData[dataPointer++];
                 }
                 ExtraTiles[i] = new Tile(nextTileChunk);
+            }
+        }
+
+        public event EventHandler GraphicsUpdated;
+        public event EventHandler ExtraGraphicsUpdated;
+        public void CheckFiles()
+        {
+            if (File.GetLastWriteTime(lastFile) >= lastModified)
+            {
+                LoadGraphics(lastFile);
+                if (GraphicsUpdated != null)
+                {
+                    GraphicsUpdated(null, null);
+                }
+            }
+
+            if (File.GetLastWriteTime(lastExtraFile) >= lastExtraModified)
+            {
+                LoadGraphics(lastExtraFile);
+                if (ExtraGraphicsUpdated != null)
+                {
+                    ExtraGraphicsUpdated(null, null);
+                }
             }
         }
 
@@ -137,7 +167,12 @@ namespace Reuben.Controllers
 
         public Tile GetExtraTileByBankIndex(int bank, int index)
         {
-            return ExtraTiles[(bank * (16 * 4)) + index];
+            var val = (bank * (16 * 4)) + index;
+            if(val >= ExtraTiles.Length)
+            {
+                val = 0;
+            }
+            return ExtraTiles[val];
         }
     }
 }

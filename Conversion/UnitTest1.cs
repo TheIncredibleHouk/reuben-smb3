@@ -98,54 +98,54 @@ namespace Conversion
             //graphics.SavePalettes(projectController.Project.PaletteFile);
 
             //index = 0;
-            LevelController levels = new LevelController();
-            levels.Load(projectController.Project.LevelDataFile);
-            for (int index = 0; index < 15; index++)
-            {
-                var bd = Reuben.UI.ProjectManagement.ProjectController.BlockManager.AllDefinitions[index];
-                NEW.LevelType newLevelType = levels.LevelData.Types[index];
-                for (var i = 0; i < 256; i++)
-                {
-                    Reuben.Model.Block b = newLevelType.Blocks[i];
-                    b.UpperLeft = bd.BlockList[i][0, 0];
-                    b.UpperRight = bd.BlockList[i][1, 0];
-                    b.LowerLeft = bd.BlockList[i][0, 1];
-                    b.LowerRight = bd.BlockList[i][1, 1];
-                    b.BlockSolidity = ((int)bd.BlockList[i].BlockProperty & 0xF0);
-                    b.BlockInteraction = ((int)bd.BlockList[i].BlockProperty & 0x0F);
-                }
+            //LevelController levels = new LevelController();
+            //levels.Load(projectController.Project.LevelDataFile);
+            //for (int index = 0; index < 15; index++)
+            //{
+            //    var bd = Reuben.UI.ProjectManagement.ProjectController.BlockManager.AllDefinitions[index];
+            //    NEW.LevelType newLevelType = levels.LevelData.Types[index];
+            //    for (var i = 0; i < 256; i++)
+            //    {
+            //        Reuben.Model.Block b = newLevelType.Blocks[i];
+            //        b.UpperLeft = bd.BlockList[i][0, 0];
+            //        b.UpperRight = bd.BlockList[i][1, 0];
+            //        b.LowerLeft = bd.BlockList[i][0, 1];
+            //        b.LowerRight = bd.BlockList[i][1, 1];
+            //        b.BlockSolidity = ((int)bd.BlockList[i].BlockProperty & 0xF0);
+            //        b.BlockInteraction = ((int)bd.BlockList[i].BlockProperty & 0x0F);
+            //    }
 
-                //for (var i = 0; i < 4; i++)
-                //{
-                //    var v = bd.FireBallTransitions[i];
-                //    Reuben.Model.BlockActor a = new Reuben.Model.BlockActor();
-                //    a.BlockValue = v.FromValue;
-                //    a.ActsLikeBlockValue = v.ToValue;
-                //    newLevelType.FireBlockActors[i] = a;
-                //}
+            //    //for (var i = 0; i < 4; i++)
+            //    //{
+            //    //    var v = bd.FireBallTransitions[i];
+            //    //    Reuben.Model.BlockActor a = new Reuben.Model.BlockActor();
+            //    //    a.BlockValue = v.FromValue;
+            //    //    a.ActsLikeBlockValue = v.ToValue;
+            //    //    newLevelType.FireBlockActors[i] = a;
+            //    //}
 
-                //for (var i = 0; i < 4; i++)
-                //{
-                //    var v = bd.IceBallTransitions[i];
-                //    Reuben.Model.BlockActor a = new Reuben.Model.BlockActor();
-                //    a.BlockValue = v.FromValue;
-                //    a.ActsLikeBlockValue = v.ToValue;
-                //    newLevelType.IceBlockActors[i] = a;
-                //}
+            //    //for (var i = 0; i < 4; i++)
+            //    //{
+            //    //    var v = bd.IceBallTransitions[i];
+            //    //    Reuben.Model.BlockActor a = new Reuben.Model.BlockActor();
+            //    //    a.BlockValue = v.FromValue;
+            //    //    a.ActsLikeBlockValue = v.ToValue;
+            //    //    newLevelType.IceBlockActors[i] = a;
+            //    //}
 
-                //for (var i = 0; i < 8; i++)
-                //{
-                //    var v = bd.PSwitchTransitions[i];
-                //    Reuben.Model.BlockActor a = new Reuben.Model.BlockActor();
-                //    a.BlockValue = v.FromValue;
-                //    a.ActsLikeBlockValue = v.ToValue;
-                //    newLevelType.PSwitchBlockActors[i] = a;
-                //}
+            //    //for (var i = 0; i < 8; i++)
+            //    //{
+            //    //    var v = bd.PSwitchTransitions[i];
+            //    //    Reuben.Model.BlockActor a = new Reuben.Model.BlockActor();
+            //    //    a.BlockValue = v.FromValue;
+            //    //    a.ActsLikeBlockValue = v.ToValue;
+            //    //    newLevelType.PSwitchBlockActors[i] = a;
+            //    //}
 
-                //levels.LevelData.Types.Add(newLevelType);
-            }
+            //    //levels.LevelData.Types.Add(newLevelType);
+            //}
 
-            levels.Save();
+            //levels.Save();
 
             //foreach (var lInfo in OLD.ProjectController.LevelManager.Levels)
             //{
@@ -212,34 +212,53 @@ namespace Conversion
             //    newLevel.TypeID = oldLevel.Type;
             //    levels.SaveLevel(newLevel);
             //}
-            //SpriteController sprites = new SpriteController();
+            SpriteController sprites = new SpriteController();
 
-            //foreach (var p in Reuben.UI.ProjectManagement.ProjectController.SpriteManager.SpriteDefinitions.Values)
-            //{
-            //    NEW.SpriteDefinition def = new NEW.SpriteDefinition();
-            //    def.Class = p.Class;
-            //    def.GameID = p.InGameId;
-            //    def.Group = p.Group;
-            //    def.Name = p.Name;
-            //    def.PropertyDescriptions = p.PropertyDescriptions;
-            //    foreach (var s in p.Sprites)
-            //    {
-            //        NEW.SpriteInfo sp = new NEW.SpriteInfo();
-            //        sp.HorizontalFlip = s.HorizontalFlip;
-            //        sp.Palette = s.Palette;
-            //        sp.Properties = s.Property ?? new List<int>();
-            //        sp.Table = s.Table;
-            //        sp.Value = s.Value;
-            //        sp.VerticalFlip = s.VerticalFlip;
-            //        sp.X = s.X;
-            //        sp.Y = s.Y;
-            //        def.SpriteInfo.Add(sp);
-            //    }
+            foreach (var p in Reuben.UI.ProjectManagement.ProjectController.SpriteManager.SpriteDefinitions.Values.OrderBy(v => v.Name.ToUpper()))
+            {
+                NEW.SpriteDefinition def = new NEW.SpriteDefinition();
+                def.Class = p.Class;
+                def.GameID = p.InGameId;
+                def.Group = p.Group;
+                def.Name = p.Name;
+                def.PropertyDescriptions = p.PropertyDescriptions;
+                foreach (var s in p.Sprites)
+                {
+                    NEW.SpriteInfo sp = new NEW.SpriteInfo();
+                    if (s.Value > 200)
+                    {
+                        continue;
+                    }
 
-            //    sprites.SpriteData.Definitions.Add(def);
-            //}
+                    sp.HorizontalFlip = s.HorizontalFlip;
+                    sp.Palette = s.Palette % 4;
+                    if (sp.Palette < 0)
+                    {
+                        sp.Palette = sp.Palette * -1;
+                    }
 
-            //sprites.Save(projectController.Project.SpriteDataFile);
+                    sp.Properties = s.Property ?? new List<int>();
+                    if (s.Table < 0)
+                    {
+                        sp.Table = s.Table * -1;
+                        sp.Overlay = true;
+                    }
+                    else
+                    {
+                        sp.Table = s.Table;
+                    }
+
+                    sp.Value = s.Value;
+                    sp.VerticalFlip = s.VerticalFlip;
+                    sp.X = s.X;
+                    sp.Y = s.Y;
+                    def.SpriteInfo.Add(sp);
+                }
+
+                sprites.SpriteData.Definitions.Add(def);
+            }
+
+            sprites.Save(projectController.Project.SpriteDataFile);
 
             //WorldController worlds = new WorldController();
 

@@ -346,6 +346,7 @@
             this.Controls.Add(this.patternTable);
             this.Name = "BlockEditor";
             this.Text = "Level Type Editor";
+            this.Activated += new System.EventHandler(this.BlockEditor_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
