@@ -136,7 +136,7 @@ namespace Reuben.Controllers
 
             if (File.GetLastWriteTime(lastExtraFile) >= lastExtraModified)
             {
-                LoadGraphics(lastExtraFile);
+                LoadExtraGraphics(lastExtraFile);
                 if (ExtraGraphicsUpdated != null)
                 {
                     ExtraGraphicsUpdated(null, null);

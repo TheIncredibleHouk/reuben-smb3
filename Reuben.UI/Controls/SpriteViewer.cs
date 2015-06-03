@@ -132,9 +132,10 @@ namespace Reuben.UI
         private Sprite currentSprite;
         public void UpdateGraphics()
         {
-            if (localPalette == null || localColorReference == null || localGraphicsController == null || localSpriteController == null || localOverlayPalette == null)
+            if (CurrentDefinition == null || localPalette == null || localColorReference == null || localGraphicsController == null || localSpriteController == null || localOverlayPalette == null)
             {
                 Graphics.FromImage(buffer).Clear(Color.Black);
+                return;
             }
 
             currentSprite.ObjectID = CurrentDefinition.GameID;

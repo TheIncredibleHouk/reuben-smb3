@@ -15,7 +15,7 @@ namespace Reuben.UI
             List<string> strings = new List<string>();
             foreach(SpriteInfo info in infos)
             {
-            strings.Add(string.Format("X={0} Y={1} Sprite={2:X2} Table={3:X2} Palette={4:X2} Overlay={5} HFlip={6} VFlip={7}",
+            strings.Add(string.Format("X={0} Y={1} Sprite={2:X2} Table={3:X2} Palette={4:X2} Overlay={5} HFlip={6} VFlip={7} Properties={8}",
                                     info.X,
                                     info.Y,
                                     info.Value,
@@ -23,7 +23,8 @@ namespace Reuben.UI
                                     info.Palette,
                                     info.Overlay,
                                     info.HorizontalFlip,
-                                    info.VerticalFlip
+                                    info.VerticalFlip,
+                                    String.Join(",", info.Properties.OrderBy(p => p).Select(p => p.ToString()))
                                     ));
             }
 
@@ -74,6 +75,10 @@ namespace Reuben.UI
 
                             case "VFLIP":
                                 spriteInfo.VerticalFlip = Convert.ToBoolean(split2[1]);
+                                break;
+
+                            case "PROPERTIES":
+                                spriteInfo.Properties = split2[1].Split(',').Select(p => Convert.ToInt32(p)).OrderBy(p => p).ToList();
                                 break;
                         }
                     }

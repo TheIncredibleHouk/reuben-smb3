@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.spriteName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.syntaxError = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.definitionCode = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
@@ -45,8 +47,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.syntaxError = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.spriteSelector = new Reuben.UI.SpriteSelector();
@@ -95,8 +95,32 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(277, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(583, 808);
+            this.panel1.Size = new System.Drawing.Size(741, 808);
             this.panel1.TabIndex = 5;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(646, 749);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Update";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // syntaxError
+            // 
+            this.syntaxError.AutoSize = true;
+            this.syntaxError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.syntaxError.ForeColor = System.Drawing.Color.Red;
+            this.syntaxError.Location = new System.Drawing.Point(17, 749);
+            this.syntaxError.Margin = new System.Windows.Forms.Padding(4);
+            this.syntaxError.Name = "syntaxError";
+            this.syntaxError.Size = new System.Drawing.Size(149, 13);
+            this.syntaxError.TabIndex = 22;
+            this.syntaxError.Text = "Syntax error in definition.";
+            this.syntaxError.Visible = false;
             // 
             // label2
             // 
@@ -110,18 +134,18 @@
             // 
             // definitionCode
             // 
-            this.definitionCode.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.definitionCode.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.definitionCode.Location = new System.Drawing.Point(20, 617);
             this.definitionCode.Multiline = true;
             this.definitionCode.Name = "definitionCode";
             this.definitionCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.definitionCode.Size = new System.Drawing.Size(535, 125);
+            this.definitionCode.Size = new System.Drawing.Size(701, 125);
             this.definitionCode.TabIndex = 20;
             this.definitionCode.WordWrap = false;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(480, 587);
+            this.button10.Location = new System.Drawing.Point(646, 561);
             this.button10.Margin = new System.Windows.Forms.Padding(4);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 23);
@@ -131,7 +155,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(397, 587);
+            this.button9.Location = new System.Drawing.Point(563, 561);
             this.button9.Margin = new System.Windows.Forms.Padding(4);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
@@ -173,7 +197,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(480, 777);
+            this.button2.Location = new System.Drawing.Point(646, 780);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -185,7 +209,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(397, 777);
+            this.button1.Location = new System.Drawing.Point(563, 780);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -247,30 +271,6 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // syntaxError
-            // 
-            this.syntaxError.AutoSize = true;
-            this.syntaxError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.syntaxError.ForeColor = System.Drawing.Color.Red;
-            this.syntaxError.Location = new System.Drawing.Point(129, 597);
-            this.syntaxError.Margin = new System.Windows.Forms.Padding(4);
-            this.syntaxError.Name = "syntaxError";
-            this.syntaxError.Size = new System.Drawing.Size(149, 13);
-            this.syntaxError.TabIndex = 22;
-            this.syntaxError.Text = "Syntax error in definition.";
-            this.syntaxError.Visible = false;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(480, 746);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 23;
-            this.button3.Text = "Update";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // paletteList
             // 
             this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -287,7 +287,7 @@
             // 
             // spriteViewer
             // 
-            this.spriteViewer.Location = new System.Drawing.Point(32, 11);
+            this.spriteViewer.Location = new System.Drawing.Point(112, 11);
             this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
             this.spriteViewer.Name = "spriteViewer";
             this.spriteViewer.Size = new System.Drawing.Size(512, 512);
@@ -306,7 +306,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(860, 808);
+            this.ClientSize = new System.Drawing.Size(1018, 808);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "SpriteEditor";
