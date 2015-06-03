@@ -61,6 +61,14 @@ namespace Reuben.UI
             textBox.Initiliaze(symbols, file);
 
             filesOpened.SelectedTab = page;
+            textBox.TextChanged += textBox_TextChanged;
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            filesOpened.SelectedTab.Text = filesOpened.SelectedTab.Text + "*";
+            ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).TextChanged -= textBox_TextChanged;
+
         }
 
         private void asmFiles_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -103,24 +111,31 @@ namespace Reuben.UI
         {
             if (filesOpened.SelectedTab != null)
             {
+                filesOpened.SelectedTab.Text = filesOpened.SelectedTab.Text.Trim('*');
                 ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).Save();
+                ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).TextChanged += textBox_TextChanged;
             }
         }
 
-        public void GoToTag(string tag, string file)
+        public void GoToTag(string file, string tag)
         {
-            
-            if (file == "smb3.asm")
+            foreach (string f in file.Split('|'))
             {
-                OpenFile(localProjectController.Project.ASMDirectory + @"\" + file);
+                if (f == "smb3.asm")
+                {
+                    OpenFile(localProjectController.Project.ASMDirectory + @"\" + f);
+                }
+                else
+                {
+                    OpenFile(localProjectController.Project.ASMDirectory + @"\PRG\" + f);
+                }
+
+                tag = ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).GoToTag(tag);
+                if (tag == null)
+                {
+                    break;
+                }
             }
-            else
-            {
-                OpenFile(localProjectController.Project.ASMDirectory + @"\PRG\" + file);
-            }
-            
-            
-            ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).GoToTag(tag);
         }
     }
 }

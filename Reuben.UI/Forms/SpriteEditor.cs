@@ -86,29 +86,40 @@ namespace Reuben.UI
                 string file = "";
                 if(spriteSelector.SelectedSprite.ObjectID < 0x24)
                 {
-                    file = "001.asm";
+                    file = "prg001.asm";
                 }
                 else if(spriteSelector.SelectedSprite.ObjectID < 0x48)
                 {
-                    file = "002.asm";
+                    file = "prg002.asm";
                 }
                 else if(spriteSelector.SelectedSprite.ObjectID < 0x6C)
                 {
-                    file = "003.asm";
+                    file = "prg003.asm";
                 }
                 else if (spriteSelector.SelectedSprite.ObjectID < 0x9B)
                 {
-                    file = "004.asm";
+                    file = "prg004.asm";
                 }
                 else
                 {
-                    file = "005.asm";
+                    file = "prg005.asm";
                 }
 
                 ListViewItem item1 = new ListViewItem();
                 item1.Text = "Initialization";
-                item1.Tag = new Tuple<string, string>("ObjectsInit@" + spriteSelector.SelectedSprite.ObjectID.ToString("X2"), file);
+                item1.Tag = new Tuple<string, string>(file + "|prg000.asm", "ObjectsInit@" + spriteSelector.SelectedSprite.ObjectID.ToString("X2"));
+
+                ListViewItem item2 = new ListViewItem();
+                item2.Text = "Game Loop";
+                item2.Tag = new Tuple<string, string>(file + "|prg000.asm", "ObjectsNorm@" + spriteSelector.SelectedSprite.ObjectID.ToString("X2"));
+
+                ListViewItem item3 = new ListViewItem();
+                item3.Text = "Player Collision";
+                item3.Tag = new Tuple<string, string>(file + "|prg000.asm", "ObjectsHit@" + spriteSelector.SelectedSprite.ObjectID.ToString("X2"));
+
                 codeTags.Items.Add(item1);
+                codeTags.Items.Add(item2);
+                codeTags.Items.Add(item3);
             }
         }
 

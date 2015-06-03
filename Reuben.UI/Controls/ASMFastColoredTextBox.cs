@@ -79,7 +79,7 @@ namespace Reuben.UI
         }
 
 
-        public void GoToTag(string text)
+        public string GoToTag(string text)
         {
             if (text.Contains("@"))
             {
@@ -95,7 +95,7 @@ namespace Reuben.UI
                 string[] split2 = tagLine.Split('.', '@'); // ;#ObjectsInit, word, 28
 
                 int startOffset = Convert.ToInt32(split2[2].Substring(0, 2), 16); // 0x28
-                int actualOffset = myOffset - startOffset; // 0x11
+                int actualOffset = (myOffset - startOffset) + 1; // 0x11
 
                 string foundLine = FindAndGetLine(split2[1], actualOffset);
                 string[] words = foundLine.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -111,11 +111,11 @@ namespace Reuben.UI
                     }
                 }
 
-                InternalFindNext(indirection + ":");
+                return InternalFindNext(indirection + ":") != null ? null : indirection;
             }
             else
             {
-                InternalFindNext(text);
+                return InternalFindNext(text) != null ? null : text;
             }
         }
 

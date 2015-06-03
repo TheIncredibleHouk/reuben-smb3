@@ -200,6 +200,10 @@ namespace Reuben.UI
                 ProjectView.ASMEditor.Initialize(projectController);
                 ProjectView.ASMEditor.Show();
                 ProjectView.ASMEditor.FormClosing += ASMEditor_FormClosing;
+                if(file != null && tag != null)
+                {
+                    ProjectView.ASMEditor.GoToTag(file,tag);
+                }
             }
             else
             {
