@@ -20,7 +20,6 @@ namespace Reuben.UI
         {
             InitializeComponent();
         }
-
-        public static ASMEditor ASMEditor { get; set; }
+        
     }
 }

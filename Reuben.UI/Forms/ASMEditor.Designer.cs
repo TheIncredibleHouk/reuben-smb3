@@ -34,10 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.filesOpened = new System.Windows.Forms.TabControl();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.saveButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
-            this.codeTag = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -60,10 +58,10 @@
             this.asmFiles.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.asmFiles.HideSelection = false;
             this.asmFiles.LabelWrap = false;
-            this.asmFiles.Location = new System.Drawing.Point(0, 39);
+            this.asmFiles.Location = new System.Drawing.Point(0, 32);
             this.asmFiles.Margin = new System.Windows.Forms.Padding(4);
             this.asmFiles.Name = "asmFiles";
-            this.asmFiles.Size = new System.Drawing.Size(177, 580);
+            this.asmFiles.Size = new System.Drawing.Size(177, 587);
             this.asmFiles.TabIndex = 4;
             this.asmFiles.UseCompatibleStateImageBehavior = false;
             this.asmFiles.View = System.Windows.Forms.View.Details;
@@ -75,13 +73,13 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(177, 39);
+            this.panel2.Size = new System.Drawing.Size(177, 32);
             this.panel2.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 11);
+            this.label1.Location = new System.Drawing.Point(60, 11);
             this.label1.Margin = new System.Windows.Forms.Padding(4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
@@ -91,7 +89,7 @@
             // filesOpened
             // 
             this.filesOpened.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filesOpened.Location = new System.Drawing.Point(181, 41);
+            this.filesOpened.Location = new System.Drawing.Point(181, 0);
             this.filesOpened.Name = "filesOpened";
             this.filesOpened.SelectedIndex = 0;
             this.filesOpened.Size = new System.Drawing.Size(604, 582);
@@ -100,28 +98,14 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.codeTag);
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.closeButton);
             this.panel3.Controls.Add(this.saveButton);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(181, 0);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(181, 582);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(604, 41);
             this.panel3.TabIndex = 4;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Enabled = false;
-            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(7, 8);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(4);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 1;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // closeButton
             // 
@@ -136,23 +120,18 @@
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // codeTag
+            // saveButton
             // 
-            this.codeTag.Cursor = System.Windows.Forms.Cursors.Default;
-            this.codeTag.Location = new System.Drawing.Point(89, 10);
-            this.codeTag.Name = "codeTag";
-            this.codeTag.Size = new System.Drawing.Size(100, 20);
-            this.codeTag.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(195, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.saveButton.Enabled = false;
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(433, 8);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(4);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 1;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // ASMEditor
             // 
@@ -168,7 +147,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -183,7 +161,5 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox codeTag;
     }
 }

@@ -122,10 +122,5 @@ namespace Reuben.UI
             
             ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).GoToTag(tag);
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).GoToTag(codeTag.Text);
-        }
     }
 }

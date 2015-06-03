@@ -356,20 +356,6 @@ namespace Reuben.UI
             
         }
 
-        private void goCodeTag_Click(object sender, EventArgs e)
-        {
-            if (Main.ASMEditor == null)
-            {
-                Main.ASMEditor = new ASMEditor();
-                Main.ASMEditor.Initialize(localProjectController);
-                Main.ASMEditor.Show();
-            }
-            else
-            {
-                Main.ASMEditor.Focus();
-            }
-        }
-
         private void BlockEditor_Activated(object sender, EventArgs e)
         {
             localGraphicsController.CheckFiles();

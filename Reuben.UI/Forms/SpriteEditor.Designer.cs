@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.spriteName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.codeTags = new System.Windows.Forms.ListView();
             this.button3 = new System.Windows.Forms.Button();
             this.syntaxError = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,18 +40,18 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.displayProperty = new System.Windows.Forms.ComboBox();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
-            this.spriteViewer = new Reuben.UI.SpriteViewer();
-            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -76,6 +78,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.codeTags);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.syntaxError);
             this.panel1.Controls.Add(this.label2);
@@ -97,6 +101,30 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(741, 808);
             this.panel1.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(537, 359);
+            this.label4.Margin = new System.Windows.Forms.Padding(4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Code Tags";
+            // 
+            // codeTags
+            // 
+            this.codeTags.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.codeTags.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.codeTags.LabelWrap = false;
+            this.codeTags.Location = new System.Drawing.Point(540, 380);
+            this.codeTags.Margin = new System.Windows.Forms.Padding(4);
+            this.codeTags.Name = "codeTags";
+            this.codeTags.Size = new System.Drawing.Size(193, 143);
+            this.codeTags.TabIndex = 24;
+            this.codeTags.UseCompatibleStateImageBehavior = false;
+            this.codeTags.View = System.Windows.Forms.View.Details;
+            this.codeTags.DoubleClick += new System.EventHandler(this.codeTags_DoubleClick);
             // 
             // button3
             // 
@@ -174,6 +202,20 @@
             this.displayProperty.TabIndex = 14;
             this.displayProperty.SelectedIndexChanged += new System.EventHandler(this.displayProperty_SelectedIndexChanged);
             // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(200, 563);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(174, 21);
+            this.paletteList.TabIndex = 5;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -230,6 +272,15 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // spriteViewer
+            // 
+            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
+            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.spriteViewer.Name = "spriteViewer";
+            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
+            this.spriteViewer.TabIndex = 0;
+            this.spriteViewer.Text = "spriteViewer1";
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -240,6 +291,14 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(277, 808);
             this.panel2.TabIndex = 6;
+            // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
+            this.spriteSelector.TabIndex = 0;
             // 
             // panel3
             // 
@@ -270,37 +329,6 @@
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // paletteList
-            // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(200, 563);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(174, 21);
-            this.paletteList.TabIndex = 5;
-            // 
-            // spriteViewer
-            // 
-            this.spriteViewer.Location = new System.Drawing.Point(112, 11);
-            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
-            this.spriteViewer.Name = "spriteViewer";
-            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
-            this.spriteViewer.TabIndex = 0;
-            this.spriteViewer.Text = "spriteViewer1";
-            // 
-            // spriteSelector
-            // 
-            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
-            this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
-            this.spriteSelector.TabIndex = 0;
             // 
             // SpriteEditor
             // 
@@ -344,6 +372,8 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label syntaxError;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView codeTags;
 
     }
 }

@@ -27,7 +27,7 @@ namespace Reuben.UI
             InitializeComponent();
         }
 
-        public void SetProjectController(ProjectController controller)
+        public void Initialize(ProjectController controller)
         {
             projectController = controller;
 
@@ -91,7 +91,7 @@ namespace Reuben.UI
                 }
                 else
                 {
-                    SetProjectController(mainProject);
+                    Initialize(mainProject);
                     RefreshTreeView();
                 }
             }
@@ -173,7 +173,7 @@ namespace Reuben.UI
             }
         }
 
-        static void BlockEditor_FormClosing(object sender, FormClosingEventArgs e)
+        private static void BlockEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ProjectView.BlockEditor.DialogResult == DialogResult.OK)
             {
@@ -182,20 +182,35 @@ namespace Reuben.UI
                 levelController.Save();
             }
             ProjectView.BlockEditor.FormClosing -= BlockEditor_FormClosing;
+            ProjectView.BlockEditor = null;
         }
 
         private void asmButton_Click(object sender, EventArgs e)
         {
-            if (Main.ASMEditor == null)
+            ShowASMEditor();
+        }
+
+        private static ASMEditor ASMEditor;
+        public static void ShowASMEditor(string file = null, string tag = null)
+        {
+            
+            if (ProjectView.ASMEditor == null)
             {
-                Main.ASMEditor = new ASMEditor();
-                Main.ASMEditor.Initialize(projectController);
-                Main.ASMEditor.Show();
+                ProjectView.ASMEditor = new ASMEditor();
+                ProjectView.ASMEditor.Initialize(projectController);
+                ProjectView.ASMEditor.Show();
+                ProjectView.ASMEditor.FormClosing += ASMEditor_FormClosing;
             }
             else
             {
-                Main.ASMEditor.Focus();
+                ProjectView.ASMEditor.Focus();
             }
+        }
+
+        private static void ASMEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ProjectView.ASMEditor.FormClosing -= ASMEditor_FormClosing;
+            ProjectView.ASMEditor = null;
         }
 
         private void spritesButton_Click(object sender, EventArgs e)
@@ -204,18 +219,25 @@ namespace Reuben.UI
         }
 
         private static SpriteEditor SpriteEditor;        
-        public void ShowSpriteEditor(int spriteId = -1)
+        public static void ShowSpriteEditor(int spriteId = -1)
         {
             if (ProjectView.SpriteEditor == null)
             {
                 ProjectView.SpriteEditor = new SpriteEditor();
                 ProjectView.SpriteEditor.Initialize(graphicsController, spriteController, levelController);
                 ProjectView.SpriteEditor.Show();
+                ProjectView.SpriteEditor.FormClosed += SpriteEditor_FormClosed;
             }
             else
             {
                 ProjectView.SpriteEditor.Focus();
             }
+        }
+
+        private static void SpriteEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ProjectView.SpriteEditor.FormClosed -= SpriteEditor_FormClosed;
+            ProjectView.SpriteEditor = null;
         }
     }
 }
