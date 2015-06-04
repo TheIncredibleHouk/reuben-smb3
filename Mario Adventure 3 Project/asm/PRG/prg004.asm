@@ -149,7 +149,7 @@ ObjectGroup03_CollideJumpTable:
 
     
     ; Object group $03 (i.e. objects starting at ID $6C) attribute bits set 1 (OA1_* flags valid here)
-;#ObjectsGfxAttr.word@6C
+    ;#ObjectsGfxAttr.byte@6C
     .org ObjectGroup_Attributes    ; <-- help enforce this table *here*
 ObjectGroup03_Attributes:
     .byte OA1_PAL2 | OA1_HEIGHT32 | OA1_WIDTH16    ; Object $6C - OBJ_GREENTROOPA
@@ -190,7 +190,7 @@ ObjectGroup03_Attributes:
     .byte OA1_PAL2 | OA1_HEIGHT32 | OA1_WIDTH48    ; Object $8F - OBJ_THWOMPDIAGONALDL
 
     ; Object group $03 (i.e. objects starting at ID $6C) second set attribute bits
-;#ObjectsHitBox.word@6C
+;#ObjectsHitBox.byte@6C
     .org ObjectGroup_Attributes2    ; <-- help enforce this table *here*
 ObjectGroup03_Attributes2:
     .byte OA2_GNDPLAYERMOD | OA2_TDOGRP1    ; Object $6C - OBJ_GREENTROOPA
@@ -232,7 +232,7 @@ ObjectGroup03_Attributes2:
 
 
     ; Object group $03 (i.e. objects starting at ID $6C) third set attribute bits
-;#ObjectsAttributes2.word@6C
+;#ObjectsAttributes2.byte@6C
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup03_Attributes3:
     .byte OA3_HALT_NORMALONLY | OA3_DIESHELLED             ; Object $6C - OBJ_GREENTROOPA
@@ -274,7 +274,7 @@ ObjectGroup03_Attributes3:
 
 
     ; Object group $03 (i.e. objects starting at ID $6C) Pattern Table Select
-;#ObjectsPatTable.word@48
+;#ObjectsPatTable.byte@48
     .org ObjectGroup_PatTableSel    ; <-- help enforce this table *here*
 ObjectGroup03_PatTableSel:
     .byte OPTS_SETPT6 | $4F    ; Object $6C - OBJ_GREENTROOPA
@@ -316,7 +316,7 @@ ObjectGroup03_PatTableSel:
 
 
     ; Object group $03 (i.e. objects starting at ID $6C) "Kill Action"
-;#ObjectsKill.word@48
+;#ObjectsKill.byte@48
     .org ObjectGroup_KillAction    ; <-- help enforce this table *here*
 ObjectGroup03_KillAction:
     .byte KILLACT_JUSTDRAWMIRROR    ; Object $6C - OBJ_GREENTROOPA

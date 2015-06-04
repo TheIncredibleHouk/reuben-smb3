@@ -155,11 +155,11 @@ ObjectGroup00_CollideJumpTable:
 
     ;#ObjectsGfxAttr.byte@00
     .org ObjectGroup_Attributes ; <-- help enforce this table *here*
-ObjectGroup00_Attributes:
+ObjectGroup00_Attributes: 
     .byte OA1_PAL0 | OA1_HEIGHT16 | OA1_WIDTH8  ; Object $00
     .byte OA1_PAL1 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $01
     .byte OA1_PAL2 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $02
-    .byte OA1_PAL3 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $03
+    .byte OA1_PAL1 | OA1_WIDTH16 | OA1_HEIGHT16 ; Object03
     .byte OA1_PAL3 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $04
     .byte OA1_PAL1 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $05
     .byte OA1_PAL0 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $06 - OBJ_BOUNCEDOWNUP

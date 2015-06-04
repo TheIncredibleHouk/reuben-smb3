@@ -31,7 +31,7 @@ namespace Reuben.UI
 
 
         private ASMController localASMController;
-        private string fileName;
+        public string File { get; private set;  }
         public void Initiliaze(ASMController asmController, string file)
         {
             localASMController = asmController;
@@ -55,21 +55,27 @@ namespace Reuben.UI
             popupMenu.AllowTabKey = true;
 
 
-            fileName = file;
+            File = file;
             this.TextChangedDelayed += ASMFastColoredTextBox_TextChangedDelayed;
         }
 
 
         public void Save()
         {
-            localASMController.Save(fileName, this.Text);
+            localASMController.Save(File, this.Text);
         }
 
 
-        void ASMFastColoredTextBox_TextChangedDelayed(object sender, TextChangedEventArgs e)
-        {
-            Range.ClearStyle(ASMCommandStyle, ASMCommentStyle, ASMDirectiveStyle, ASMNumericalStyle, ASMRegisterStyle, ASMTagStyle);
 
+        public void UpdateLine(int line, string text)
+        {
+            text = text.Replace("\t", "    ");
+            TextSource[line].Clear();
+            TextSource[line].AddRange(text.Select(c => new FastColoredTextBoxNS.Char(c)));
+
+            Range Range = new Range(this, 0, line, text.Length, line);
+
+            Range.ClearStyle(ASMCommandStyle, ASMCommentStyle, ASMDirectiveStyle, ASMNumericalStyle, ASMRegisterStyle, ASMTagStyle);
             Range.SetStyle(ASMTagStyle, ASMTagRegEx);
             Range.SetStyle(ASMCommentStyle, ASMCommentRegEx, RegexOptions.Multiline);
             Range.SetStyle(ASMCommandStyle, ASMCommandRegEx, RegexOptions.Multiline);
@@ -77,7 +83,18 @@ namespace Reuben.UI
             Range.SetStyle(ASMNumericalStyle, ASMNumericalRegEx);
             Range.SetStyle(ASMNumericalStyle, ASMMemoryRegEx);
             Range.SetStyle(ASMRegisterStyle, ASMRegisterRegEx);
-
+            Invalidate();
+        }
+        void ASMFastColoredTextBox_TextChangedDelayed(object sender, TextChangedEventArgs e)
+        {
+            Range.ClearStyle(ASMCommandStyle, ASMCommentStyle, ASMDirectiveStyle, ASMNumericalStyle, ASMRegisterStyle, ASMTagStyle);
+            Range.SetStyle(ASMTagStyle, ASMTagRegEx);
+            Range.SetStyle(ASMCommentStyle, ASMCommentRegEx, RegexOptions.Multiline);
+            Range.SetStyle(ASMCommandStyle, ASMCommandRegEx, RegexOptions.Multiline);
+            Range.SetStyle(ASMDirectiveStyle, ASMDirectiveRegEx);
+            Range.SetStyle(ASMNumericalStyle, ASMNumericalRegEx);
+            Range.SetStyle(ASMNumericalStyle, ASMMemoryRegEx);
+            Range.SetStyle(ASMRegisterStyle, ASMRegisterRegEx);
         }
 
 
@@ -119,6 +136,7 @@ namespace Reuben.UI
             {
                 return InternalFindNext(text) != null ? null : text;
             }
+          
         }
 
         private Range InternalFindNext(string pattern)

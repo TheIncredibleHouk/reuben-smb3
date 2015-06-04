@@ -26,12 +26,27 @@ namespace Reuben.UI
         }
 
         private ASMController localASMController;
-        private List<string> symbols;
+
         public void Initialize(ASMController controller)
         {
             localASMController = controller;
 
             asmFiles.Items.AddRange(localASMController.GetFileList().Select(l => new ListViewItem(l)).ToArray());
+            localASMController.CodeChanged += localASMController_CodeChanged;
+        }
+
+        private void localASMController_CodeChanged(object sender, EventArgs e)
+        {
+            TextLocation loc = (TextLocation)sender;
+            if (filesOpenedSoFar.ContainsKey(loc.File))
+            {
+                ASMFastColoredTextBox textbox = (ASMFastColoredTextBox)filesOpenedSoFar[loc.File].Tag;
+                textbox.UpdateLine(loc.LineNumber, loc.Text);
+                //((LinesAccessor) textbox.Lines).
+                //textbox.Lin
+                //Range r = textbox.GetRange(new Place(0, loc.LineNumber), new Place(textbox.GetLineLength(loc.LineNumber), loc.LineNumber));
+                //textbox.TextSource.InsertLine(loc.LineNumber, newLine);
+            }
         }
 
 
@@ -62,7 +77,9 @@ namespace Reuben.UI
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             filesOpened.SelectedTab.Text = filesOpened.SelectedTab.Text + "*";
-            ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).TextChanged -= textBox_TextChanged;
+
+            ASMFastColoredTextBox textBox = ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag);
+            textBox.TextChanged -= textBox_TextChanged;
 
         }
 
@@ -99,6 +116,7 @@ namespace Reuben.UI
             if (filesOpened.SelectedTab != null)
             {
                 filesOpened.SelectedTab.Text = filesOpened.SelectedTab.Text.Trim('*');
+
                 ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).Save();
                 ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).TextChanged += textBox_TextChanged;
             }
@@ -114,6 +132,18 @@ namespace Reuben.UI
                 if (tag == null)
                 {
                     break;
+                }
+            }
+        }
+
+        private void ASMEditor_Deactivate(object sender, EventArgs e)
+        {
+            foreach (TabPage page in filesOpenedSoFar.Values)
+            {
+                if (page.Text.EndsWith("*"))
+                {
+                    ASMFastColoredTextBox textbox = ((ASMFastColoredTextBox)page.Tag);
+                    localASMController.MarkAsDirty(textbox.File, textbox.Lines.ToArray());
                 }
             }
         }

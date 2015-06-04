@@ -65,9 +65,11 @@ namespace Reuben.UI
             spriteSelector.Update(colors: null);
             spriteViewer.UpdateGraphics();
         }
+        private bool spriteUpdating = false;
 
         void spriteSelector_SelectedSpriteChanged(object sender, EventArgs e)
         {
+            spriteUpdating = true;
             if (spriteSelector.SelectedSprite != null)
             {
                 spriteViewer.CurrentDefinition = localSpriteController.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
@@ -105,8 +107,10 @@ namespace Reuben.UI
                 codeTags.Items.Add(item2);
                 codeTags.Items.Add(item3);
 
-                LoadGfxAttributes2();
+                LoadGfxAttributes();
+                LoadHitBoxOptions();
             }
+            spriteUpdating = false;
         }
 
         private string GetFileLocation(int spriteId)
@@ -133,11 +137,193 @@ namespace Reuben.UI
             }
         }
 
-        private void LoadGfxAttributes2()
+        private void LoadGfxAttributes()
         {
-            string line = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
-            line = line;
+            spriteUpdating = true;
+            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            if (loc == null)
+            {
+                MessageBox.Show("Unable to locate the tag for this property.");
+                return;
+            }
+
+            string line = loc.Text;
+            foreach (string s in line.Split(' ', '|'))
+            {
+                switch (s.Trim())
+                {
+                    case "OA1_PAL0":
+                        gamePalette.SelectedIndex = 0;
+                        break;
+
+                    case "OA1_PAL1":
+                        gamePalette.SelectedIndex = 1;
+                        break;
+
+                    case "OA1_PAL2":
+                        gamePalette.SelectedIndex = 2;
+                        break;
+
+                    case "OA1_PAL3":
+                        gamePalette.SelectedIndex = 3;
+                        break;
+
+                    case "OA1_HEIGHT16":
+                        clipHeight.SelectedIndex = 0;
+                        break;
+
+                    case "OA1_HEIGHT32":
+                        clipHeight.SelectedIndex = 1;
+                        break;
+
+                    case "OA1_HEIGHT48":
+                        clipHeight.SelectedIndex = 2;
+                        break;
+
+                    case "OA1_HEIGHT64":
+                        clipHeight.SelectedIndex = 3;
+                        break;
+
+                    case "OA1_WIDTH8":
+                        clipWidth.SelectedIndex = 0;
+                        break;
+
+                    case "OA1_WIDTH16":
+                        clipWidth.SelectedIndex = 1;
+                        break;
+
+                    case "OA1_WIDTH24":
+                        clipWidth.SelectedIndex = 2;
+                        break;
+
+                    case "OA1_WIDTH32":
+                        clipWidth.SelectedIndex = 3;
+                        break;
+
+                    case "OA1_WIDTH40":
+                        clipWidth.SelectedIndex = 4;
+                        break;
+
+                    case "OA1_WIDTH48":
+                        clipWidth.SelectedIndex = 5;
+                        break;
+
+                    case "OA1_WIDTH64":
+                        clipWidth.SelectedIndex = 6;
+                        break;
+
+                }
+            }
+
+            spriteUpdating = false;
         }
+
+        private void UpdateGfxAttributesString()
+        {
+            string palValue = "OA1_PAL" + gamePalette.SelectedIndex;
+            string clipHeightValue = "OA1_HEIGHT" + (clipHeight.SelectedIndex + 1) * 16;
+            string clipWidthValue = "OA1_WIDTH" + (clipWidth.SelectedIndex + 1) * 8;
+
+            string newLine = string.Format("\t.byte {0} | {1} | {2} ; Object{3:X2}", palValue, clipWidthValue, clipHeightValue, spriteViewer.CurrentDefinition.GameID);
+            string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
+
+            spriteViewer.CurrentDefinition.GfxAttributes2Code = newLine;
+            localASMController.UpdateTagLine("ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+        }
+
+        private void LoadHitBoxOptions()
+        {
+            spriteUpdating = true;
+            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            if (loc == null)
+            {
+                MessageBox.Show("Unable to locate the tag for this property.");
+                return;
+            }
+
+            string line = loc.Text;
+
+            stompApathy.Checked = false;
+            shellStomp.Checked = true;
+            foreach (string s in line.Split(' ', '|'))
+            {
+                switch (s.Trim())
+                {
+                    case "OA2_NOSHELLORSQUASH":
+                        shellStomp.Checked = false;
+                        break;
+
+                    case "OA2_STOMPDONTCARE":
+                        stompApathy.Checked = true;
+                        break;
+
+                    case "OA2_TDOGRP0":
+                        collisionBox.SelectedIndex = 0;
+                        break;
+
+                    case "OA2_TDOGRP1":
+                        collisionBox.SelectedIndex = 1;
+                        break;
+
+                    case "OA2_TDOGRP2":
+                        collisionBox.SelectedIndex = 2;
+                        break;
+
+                    case "OA2_TDOGRP3":
+                        collisionBox.SelectedIndex = 3;
+                        break;
+
+                    case "OA2_TDOGRP4":
+                        collisionBox.SelectedIndex = 4;
+                        break;
+
+                    case "OA2_TDOGRP5":
+                        collisionBox.SelectedIndex = 5;
+                        break;
+
+                    case "OA2_TDOGRP6":
+                        collisionBox.SelectedIndex = 6;
+                        break;
+
+                    case "OA2_TDOGRP7":
+                        collisionBox.SelectedIndex = 7;
+                        break;
+
+                    case "OA2_TDOGRP8":
+                        collisionBox.SelectedIndex = 8;
+                        break;
+
+                    case "OA2_TDOGRP9":
+                        collisionBox.SelectedIndex = 9;
+                        break;
+
+                    case "OA2_TDOGRP10":
+                        collisionBox.SelectedIndex = 10;
+                        break;
+
+                    case "OA2_TDOGRP11":
+                        collisionBox.SelectedIndex = 11;
+                        break;
+
+                    case "OA2_TDOGRP12":
+                        collisionBox.SelectedIndex = 12;
+                        break;
+                }
+            }
+            spriteUpdating = false;
+        }
+        private void UpdateHitBoxString()
+        {
+            string collisionBoxValue = "OA2_TDOGRP" + collisionBox.SelectedIndex;
+            string shellValue = !shellStomp.Checked ? " | OA2_NOSHELLORSQUASH " : "";
+            string apathyValue = stompApathy.Checked ? " | OA2_STOMPDONTCARE" : "";
+
+            string newLine = string.Format("\t.byte {0}{1}{2} ; Object{3:X2}", collisionBoxValue, shellValue, apathyValue , spriteViewer.CurrentDefinition.GameID);
+            string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
+            spriteViewer.CurrentDefinition.GfxAttributes2Code = newLine;
+            localASMController.UpdateTagLine("ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+        }
+
         private void UpdateCode()
         {
             List<SpriteInfo> info;
@@ -238,10 +424,26 @@ namespace Reuben.UI
             this.Close();
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             localSpriteController.Save();
-            this.Close();
+
+            List<string> changedFiles = new List<string>();
+            foreach (SpriteDefinition def in localSpriteController.SpriteData.Definitions.Where(d => d.GfxAttributes2Code != null))
+            {
+                string file = GetFileLocation(def.GameID);
+                if (localASMController.IsDirty(file))
+                {
+                    MessageBox.Show("Unable to save changes to " + file + " due to unsaved changes in the ASM Editor. Save these files then save the Sprite Editor again.");
+                    break;
+                }
+
+                localASMController.UpdateTagLine("ObjectsGfxAttr@" + def.GameID.ToString("X2"), file, def.GfxAttributes2Code);
+                changedFiles.Add(file);
+            }
+
+            localASMController.Save(changedFiles.Distinct().ToList());
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -301,6 +503,54 @@ namespace Reuben.UI
         {
             Tuple<string, string> tag = (Tuple<string, string>)codeTags.SelectedItems[0].Tag;
             ProjectView.ShowASMEditor(tag.Item1, tag.Item2);
+        }
+
+        private void gamePalette_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!spriteUpdating)
+            {
+                UpdateGfxAttributesString();
+            }
+        }
+
+        private void clipWidth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!spriteUpdating)
+            {
+                UpdateGfxAttributesString();
+            }
+        }
+
+        private void clipHeight_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!spriteUpdating)
+            {
+                UpdateGfxAttributesString();
+            }
+        }
+
+        private void collisionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(!spriteUpdating)
+            {
+                UpdateHitBoxString();
+            }
+        }
+
+        private void shellStomp_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!spriteUpdating)
+            {
+                UpdateHitBoxString();
+            }
+        }
+
+        private void stompApathy_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!spriteUpdating)
+            {
+                UpdateHitBoxString();
+            }
         }
     }
 }

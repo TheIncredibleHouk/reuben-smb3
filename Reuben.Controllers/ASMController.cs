@@ -12,6 +12,7 @@ namespace Reuben.Controllers
 {
     public class TextLocation
     {
+        public string File { get; set; }
         public string Text { get; set; }
         public int LineNumber { get; set; }
     }
@@ -20,11 +21,13 @@ namespace Reuben.Controllers
     {
         private Dictionary<string, string[]> codeFiles;
         private Dictionary<string, string> codeFileNames;
+        private Dictionary<string, string[]> dirtyCode;
 
         public ASMController()
         {
             codeFiles = new Dictionary<string, string[]>();
             codeFileNames = new Dictionary<string, string>();
+            dirtyCode = new Dictionary<string, string[]>();
         }
 
         public List<string> GetFileList()
@@ -42,7 +45,17 @@ namespace Reuben.Controllers
             return null;
         }
 
-        public string FindTagLine(string file, string text)
+        public void MarkAsDirty(string file, string[] dirtyLines)
+        {
+            dirtyCode[file] = dirtyLines;
+        }
+
+        public bool IsDirty(string file)
+        {
+            return dirtyCode[file] != null;
+        }
+
+        public TextLocation FindTagLine(string file, string text)
         {
             // find offset - #ObjectsInit@39
             //  ;#ObjectsInit.word@28
@@ -60,16 +73,17 @@ namespace Reuben.Controllers
             TextLocation foundLine = FindTextByLine(tagLine.LineNumber, file, split2[1], actualOffset);
             if (foundLine != null)
             {
-                return foundLine.Text;
+                return foundLine;
             }
 
             return null;
 
         }
 
+
         private TextLocation FindTextByLine(int startPlace, string file, string text, int offset = 0)
         {
-            string[] lines = codeFiles[file];
+            string[] lines = dirtyCode[file] ?? codeFiles[file];
             TextLocation location = new TextLocation();
             for (int i = startPlace; i < lines.Length; i++)
             {
@@ -79,6 +93,7 @@ namespace Reuben.Controllers
                     {
                         location.Text = lines[i];
                         location.LineNumber = i;
+                        location.File = file;
                         return location;
                     }
 
@@ -98,12 +113,14 @@ namespace Reuben.Controllers
             {
                 codeFiles["smb3.asm"] = File.ReadAllLines(directory + @"\smb3.asm");
                 codeFileNames["smb3.asm"] = directory + @"\smb3.asm";
+                dirtyCode["smb3.asm"] = null;
             }
 
             foreach (string file in Directory.GetFiles(directory + @"\PRG"))
             {
                 codeFiles[Path.GetFileName(file)] = File.ReadAllLines(file);
                 codeFileNames[Path.GetFileName(file)] = file;
+                dirtyCode[Path.GetFileName(file)] = null;
             }
         }
 
@@ -111,7 +128,9 @@ namespace Reuben.Controllers
         {
             File.WriteAllText(codeFileNames[file], contents);
             codeFiles[Path.GetFileName(file)] = File.ReadAllLines(codeFileNames[file]);
+            dirtyCode[Path.GetFileName(file)] = null;
         }
+
         public List<String> ParseSymbols(string text)
         {
             var noMatch = new Regex("(^\\s*;)");
@@ -132,6 +151,44 @@ namespace Reuben.Controllers
             }
 
             return symbols;
+        }
+
+        public string GetLatestText(string file)
+        {
+            if (IsDirty(file))
+            {
+                return String.Join("\r\n", dirtyCode[file]);
+            }
+            else
+            {
+                return String.Join("\r\n", codeFiles[file]);
+            }
+        }
+
+        public event EventHandler CodeChanged;
+
+        public void UpdateTagLine(string tag, string file, string text)
+        {
+            TextLocation loc = FindTagLine(file, tag);
+            if (IsDirty(file))
+            {
+                dirtyCode[file][loc.LineNumber] = text;
+            }
+            else
+            {
+                codeFiles[file][loc.LineNumber] = text;
+            }
+            loc.Text = text;
+
+            CodeChanged(loc, null);
+        }
+
+        public void Save(List<string> files)
+        {
+            foreach (string f in files)
+            {
+                File.WriteAllLines(codeFileNames[f], codeFiles[f]);
+            }
         }
     }
 }

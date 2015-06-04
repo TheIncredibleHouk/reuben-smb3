@@ -59,3 +59,4 @@ F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.SpriteInfoEditor.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMFastColoredTextBox.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMFastColoredTextBox.resources
