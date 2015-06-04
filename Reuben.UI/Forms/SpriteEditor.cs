@@ -29,9 +29,11 @@ namespace Reuben.UI
         private SpriteController localSpriteController;
         private List<SpriteDefinition> backUpDefinitions;
         private GraphicsController localGraphicsController;
+        private ASMController localASMController;
 
-        public void Initialize(GraphicsController graphicsController, SpriteController spriteController, LevelController levelController)
+        public void Initialize(ASMController asmController, GraphicsController graphicsController, SpriteController spriteController, LevelController levelController)
         {
+            localASMController = asmController;
             localGraphicsController = graphicsController;
             localSpriteController = spriteController;
             backUpDefinitions = spriteController.SpriteData.Definitions.MakeCopy();
@@ -83,27 +85,9 @@ namespace Reuben.UI
 
                 definitionCode.Text = EditorSpriteInfo.Serialize(spriteViewer.CurrentDefinition.SpriteInfo);
                 codeTags.Items.Clear();
-                string file = "";
-                if(spriteSelector.SelectedSprite.ObjectID < 0x24)
-                {
-                    file = "prg001.asm";
-                }
-                else if(spriteSelector.SelectedSprite.ObjectID < 0x48)
-                {
-                    file = "prg002.asm";
-                }
-                else if(spriteSelector.SelectedSprite.ObjectID < 0x6C)
-                {
-                    file = "prg003.asm";
-                }
-                else if (spriteSelector.SelectedSprite.ObjectID < 0x9B)
-                {
-                    file = "prg004.asm";
-                }
-                else
-                {
-                    file = "prg005.asm";
-                }
+
+                string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
+
 
                 ListViewItem item1 = new ListViewItem();
                 item1.Text = "Initialization";
@@ -120,9 +104,40 @@ namespace Reuben.UI
                 codeTags.Items.Add(item1);
                 codeTags.Items.Add(item2);
                 codeTags.Items.Add(item3);
+
+                LoadGfxAttributes2();
             }
         }
 
+        private string GetFileLocation(int spriteId)
+        {
+            if (spriteId < 0x24)
+            {
+                return "prg001.asm";
+            }
+            else if (spriteId < 0x48)
+            {
+                return "prg002.asm";
+            }
+            else if (spriteId < 0x6C)
+            {
+                return "prg003.asm";
+            }
+            else if (spriteId < 0x9B)
+            {
+                return "prg004.asm";
+            }
+            else
+            {
+                return "prg005.asm";
+            }
+        }
+
+        private void LoadGfxAttributes2()
+        {
+            string line = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            line = line;
+        }
         private void UpdateCode()
         {
             List<SpriteInfo> info;
@@ -284,7 +299,7 @@ namespace Reuben.UI
 
         private void codeTags_DoubleClick(object sender, EventArgs e)
         {
-            Tuple<string, string> tag = (Tuple<string, string>) codeTags.SelectedItems[0].Tag;
+            Tuple<string, string> tag = (Tuple<string, string>)codeTags.SelectedItems[0].Tag;
             ProjectView.ShowASMEditor(tag.Item1, tag.Item2);
         }
     }

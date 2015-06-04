@@ -151,6 +151,7 @@ ObjectGroup01_CollideJumpTable:
     
     ; Object group $01 (i.e. objects starting at ID $24) attribute bits set 1 (OA1_* flags valid here)
 
+    ;#ObjectsGfxAttr.byte@24
     .org ObjectGroup_Attributes    ; <-- help enforce this table *here*
 ObjectGroup01_Attributes:
     .byte OA1_PAL3 | OA1_HEIGHT16 | OA1_WIDTH48        ; Object $24 - OBJ_PLATFORMHORZ
@@ -199,6 +200,7 @@ ObjectGroup01_Attributes:
     ;    Bits 3: Object uses 16-bit X value (otherwise, Object_XHi will be zeroed)
     ;    Bits 4-7: Pick root tile detection group offset (from Object_TileDetectOffsets)
 
+;#ObjectsHitBox.byte@24
     .org ObjectGroup_Attributes2    ; <-- help enforce this table *here*
 ObjectGroup01_Attributes2:
     .byte OA2_TDOGRP1    ; Object $24 - OBJ_PLATFORMHORZ
@@ -241,6 +243,7 @@ ObjectGroup01_Attributes2:
 
     ; Object group $01 (i.e. objects starting at ID $24) third set attribute bits
 
+;#ObjectsAttributes2.byte@24
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup01_Attributes3:
     .byte OA3_HALT_NORMALONLY | OA3_TAILATKIMMUNE    ; Object $24 - OBJ_PLATFORMHORZ
@@ -283,6 +286,7 @@ ObjectGroup01_Attributes3:
 
     ; Object group $01 (i.e. objects starting at ID $24) Pattern Table Select
 
+;#ObjectsPatTable.byte@24
     .org ObjectGroup_PatTableSel    ; <-- help enforce this table *here*
 ObjectGroup01_PatTableSel:
     .byte OPTS_NOCHANGE    ; Object $24 - OBJ_PLATFORMHORZ
@@ -325,6 +329,8 @@ ObjectGroup01_PatTableSel:
 
     ; Object group $01 (i.e. objects starting at ID $24) "Kill Action"
 
+
+;#ObjectsKill.byte@24
     .org ObjectGroup_KillAction    ; <-- help enforce this table *here*
 ObjectGroup01_KillAction:
     .byte KILLACT_STANDARD    ; Object $24 - OBJ_PLATFORMHORZ

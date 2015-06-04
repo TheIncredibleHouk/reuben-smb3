@@ -25,18 +25,13 @@ namespace Reuben.UI
             asmFiles.Columns.Add(h);
         }
 
-        private ProjectController localProjectController;
+        private ASMController localASMController;
         private List<string> symbols;
-        public void Initialize(ProjectController controller)
+        public void Initialize(ASMController controller)
         {
-            localProjectController = controller;
+            localASMController = controller;
 
-            // load symbols now, for more value of course
-            symbols = (new ASMController().ParseSymbols(File.ReadAllText(controller.Project.ASMDirectory + @"\smb3.asm")));
-
-            // now list the things
-            asmFiles.Items.Add(new ListViewItem("smb3.asm"));
-            asmFiles.Items.AddRange(Directory.GetFiles(localProjectController.Project.ASMDirectory + @"\PRG\").Select(f => new ListViewItem(Path.GetFileName(f))).ToArray());
+            asmFiles.Items.AddRange(localASMController.GetFileList().Select(l => new ListViewItem(l)).ToArray());
         }
 
 
@@ -58,7 +53,7 @@ namespace Reuben.UI
             textBox.Dock = DockStyle.Fill;
             filesOpened.TabPages.Add(page);
             filesOpenedSoFar[file] = page;
-            textBox.Initiliaze(symbols, file);
+            textBox.Initiliaze(localASMController, file);
 
             filesOpened.SelectedTab = page;
             textBox.TextChanged += textBox_TextChanged;
@@ -75,15 +70,7 @@ namespace Reuben.UI
         {
             if (asmFiles.SelectedItems.Count > 0)
             {
-                if (asmFiles.SelectedItems[0].Text != "smb3.asm")
-                {
-                    OpenFile(localProjectController.Project.ASMDirectory + @"\PRG\" + asmFiles.SelectedItems[0].Text);
-                }
-                else
-                {
-                    OpenFile(localProjectController.Project.ASMDirectory + @"\" + asmFiles.SelectedItems[0].Text);
-                }
-
+                OpenFile(asmFiles.SelectedItems[0].Text);
                 saveButton.Enabled = closeButton.Enabled = true;
             }
         }
@@ -121,14 +108,7 @@ namespace Reuben.UI
         {
             foreach (string f in file.Split('|'))
             {
-                if (f == "smb3.asm")
-                {
-                    OpenFile(localProjectController.Project.ASMDirectory + @"\" + f);
-                }
-                else
-                {
-                    OpenFile(localProjectController.Project.ASMDirectory + @"\PRG\" + f);
-                }
+                OpenFile(f);
 
                 tag = ((ASMFastColoredTextBox)filesOpened.SelectedTab.Tag).GoToTag(tag);
                 if (tag == null)

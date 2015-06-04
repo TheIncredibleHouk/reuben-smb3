@@ -107,7 +107,7 @@ ObjectGroup04_NormalJumpTable:
 
     ; Object group $04 (i.e. objects starting at ID $90) Collision routine jump table (if calling Object_HitTestRespond;
     ; Special values of OCSPECIAL_KILLCHANGETO or OCSPECIAL_HIGHSCORE can be used here instead otherwise.)
-
+;#ObjectsHit.word@90
     .org ObjectGroup_CollideJumpTable    ; <-- help enforce this table *here*
 ObjectGroup04_CollideJumpTable:
     .word ObjHit_DoNothing    ; Object $90 - OBJ_FIREICEBAR
@@ -149,7 +149,7 @@ ObjectGroup04_CollideJumpTable:
 
     
     ; Object group $04 (i.e. objects starting at ID $90) attribute bits set 1 (OA1_* flags valid here)
-
+;#ObjectsGfxAttr.word@90
     .org ObjectGroup_Attributes    ; <-- help enforce this table *here*
 ObjectGroup04_Attributes:
     .byte OA1_PAL1 | OA1_WIDTH8 | OA1_WIDTH8    ; Object $90 - OBJ_FIREICEBAR
@@ -190,7 +190,7 @@ ObjectGroup04_Attributes:
     .byte OA1_PAL1 | OA1_HEIGHT16 | OA1_WIDTH16    ; Object $B3
 
     ; Object group $04 (i.e. objects starting at ID $90) second set attribute bits
-
+;#ObjectsHitBox.word@90
     .org ObjectGroup_Attributes2    ; <-- help enforce this table *here*
 ObjectGroup04_Attributes2:
     .byte OA2_TDOGRP0    ; Object $90 - OBJ_FIREICEBAR
@@ -231,7 +231,7 @@ ObjectGroup04_Attributes2:
     .byte OA2_TDOGRP11    ; Object $B3
 
     ; Object group $04 (i.e. objects starting at ID $90) third set attribute bits
-
+;#ObjectsAttributes2.word@90
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup04_Attributes3:
     .byte OA3_HALT_NORMALONLY | OA3_TAILATKIMMUNE    ; Object $90 - OBJ_FIREICEBAR
@@ -273,7 +273,7 @@ ObjectGroup04_Attributes3:
 
 
     ; Object group $04 (i.e. objects starting at ID $90) Pattern Table Select
-
+;#ObjectsPatTable.word@48
     .org ObjectGroup_PatTableSel    ; <-- help enforce this table *here*
 ObjectGroup04_PatTableSel:
     .byte OPTS_NOCHANGE    ; Object $90 - OBJ_FIREICEBAR
@@ -315,7 +315,7 @@ ObjectGroup04_PatTableSel:
 
 
     ; Object group $04 (i.e. objects starting at ID $90) "Kill Action"
-
+;#ObjectsKill.word@48
     .org ObjectGroup_KillAction    ; <-- help enforce this table *here*
 ObjectGroup04_KillAction:
     .byte KILLACT_STANDARD    ; Object $90 - OBJ_FIREICEBAR

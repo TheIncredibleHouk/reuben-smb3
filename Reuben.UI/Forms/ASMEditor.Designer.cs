@@ -36,9 +36,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.closeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -92,26 +94,25 @@
             this.filesOpened.Location = new System.Drawing.Point(181, 0);
             this.filesOpened.Name = "filesOpened";
             this.filesOpened.SelectedIndex = 0;
-            this.filesOpened.Size = new System.Drawing.Size(604, 582);
+            this.filesOpened.Size = new System.Drawing.Size(604, 588);
             this.filesOpened.TabIndex = 3;
             this.filesOpened.SelectedIndexChanged += new System.EventHandler(this.filesOpened_SelectedIndexChanged);
             // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.closeButton);
-            this.panel3.Controls.Add(this.saveButton);
+            this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(181, 582);
+            this.panel3.Location = new System.Drawing.Point(181, 588);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(604, 41);
+            this.panel3.Size = new System.Drawing.Size(604, 35);
             this.panel3.TabIndex = 4;
             // 
             // closeButton
             // 
             this.closeButton.Enabled = false;
             this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeButton.Location = new System.Drawing.Point(516, 8);
+            this.closeButton.Location = new System.Drawing.Point(87, 4);
             this.closeButton.Margin = new System.Windows.Forms.Padding(4);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
@@ -124,7 +125,7 @@
             // 
             this.saveButton.Enabled = false;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(433, 8);
+            this.saveButton.Location = new System.Drawing.Point(4, 4);
             this.saveButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
@@ -132,6 +133,16 @@
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.closeButton);
+            this.panel4.Controls.Add(this.saveButton);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(437, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(163, 31);
+            this.panel4.TabIndex = 3;
             // 
             // ASMEditor
             // 
@@ -147,6 +158,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -161,5 +173,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Panel panel4;
     }
 }

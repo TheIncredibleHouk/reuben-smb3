@@ -30,10 +30,12 @@ namespace Reuben.UI
         private string ASMTagRegEx;
 
 
+        private ASMController localASMController;
         private string fileName;
-        public void Initiliaze(List<string> symbols, string file)
+        public void Initiliaze(ASMController asmController, string file)
         {
-            AutoIndent = false;
+            localASMController = asmController;
+            AutoIndent = true;
 
             ASMCommentRegEx = ";.*$";
             ASMDirectiveRegEx = "\\.[A-Za-z]+";
@@ -43,11 +45,11 @@ namespace Reuben.UI
             ASMRegisterRegEx = "(?<=,)[AXYaxy]|(?<=, )[AXYaxy]";
             ASMTagRegEx = "\\;\\#[A-Za-z0-9\\-_.@]+";
 
-            this.Text = File.ReadAllText(file);
+            this.Text = asmController.GetFile(file);
 
             AutocompleteMenu popupMenu = new AutocompleteMenu(this);
             popupMenu.MinFragmentLength = 3;
-            popupMenu.Items.SetAutocompleteItems(symbols);
+            popupMenu.Items.SetAutocompleteItems(asmController.ParseSymbols(this.Text));
             popupMenu.Items.MaximumSize = new System.Drawing.Size(200, 300);
             popupMenu.Items.Width = 200;
             popupMenu.AllowTabKey = true;
@@ -60,7 +62,7 @@ namespace Reuben.UI
 
         public void Save()
         {
-            File.WriteAllText(fileName, Text);
+            localASMController.Save(fileName, this.Text);
         }
 
 
@@ -168,6 +170,24 @@ namespace Reuben.UI
             }
 
             return null;
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // ASMFastColoredTextBox
+            // 
+            this.AutoScrollMinSize = new System.Drawing.Size(25, 15);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.Name = "ASMFastColoredTextBox";
+            this.ResumeLayout(false);
+
+        }
+
+        private void ASMFastColoredTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

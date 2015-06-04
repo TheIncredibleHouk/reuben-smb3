@@ -40,18 +40,24 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.displayProperty = new System.Windows.Forms.ComboBox();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
+            this.spriteViewer = new Reuben.UI.SpriteViewer();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
+            this.gamePalette = new System.Windows.Forms.ComboBox();
+            this.clipHeight = new System.Windows.Forms.ComboBox();
+            this.clipWidth = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -78,6 +84,12 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.clipWidth);
+            this.panel1.Controls.Add(this.clipHeight);
+            this.panel1.Controls.Add(this.gamePalette);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.codeTags);
             this.panel1.Controls.Add(this.button3);
@@ -105,7 +117,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(537, 359);
+            this.label4.Location = new System.Drawing.Point(537, 426);
             this.label4.Margin = new System.Windows.Forms.Padding(4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
@@ -117,10 +129,10 @@
             this.codeTags.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.codeTags.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.codeTags.LabelWrap = false;
-            this.codeTags.Location = new System.Drawing.Point(540, 380);
+            this.codeTags.Location = new System.Drawing.Point(540, 447);
             this.codeTags.Margin = new System.Windows.Forms.Padding(4);
             this.codeTags.Name = "codeTags";
-            this.codeTags.Size = new System.Drawing.Size(193, 143);
+            this.codeTags.Size = new System.Drawing.Size(193, 76);
             this.codeTags.TabIndex = 24;
             this.codeTags.UseCompatibleStateImageBehavior = false;
             this.codeTags.View = System.Windows.Forms.View.Details;
@@ -202,20 +214,6 @@
             this.displayProperty.TabIndex = 14;
             this.displayProperty.SelectedIndexChanged += new System.EventHandler(this.displayProperty_SelectedIndexChanged);
             // 
-            // paletteList
-            // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(200, 563);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(174, 21);
-            this.paletteList.TabIndex = 5;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -272,15 +270,6 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // spriteViewer
-            // 
-            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
-            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
-            this.spriteViewer.Name = "spriteViewer";
-            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
-            this.spriteViewer.TabIndex = 0;
-            this.spriteViewer.Text = "spriteViewer1";
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -291,14 +280,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(277, 808);
             this.panel2.TabIndex = 6;
-            // 
-            // spriteSelector
-            // 
-            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
-            this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
-            this.spriteSelector.TabIndex = 0;
             // 
             // panel3
             // 
@@ -329,6 +310,97 @@
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(200, 563);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(174, 21);
+            this.paletteList.TabIndex = 5;
+            // 
+            // spriteViewer
+            // 
+            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
+            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.spriteViewer.Name = "spriteViewer";
+            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
+            this.spriteViewer.TabIndex = 0;
+            this.spriteViewer.Text = "spriteViewer1";
+            // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
+            this.spriteSelector.TabIndex = 0;
+            // 
+            // gamePalette
+            // 
+            this.gamePalette.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gamePalette.FormattingEnabled = true;
+            this.gamePalette.Location = new System.Drawing.Point(540, 397);
+            this.gamePalette.Margin = new System.Windows.Forms.Padding(4);
+            this.gamePalette.Name = "gamePalette";
+            this.gamePalette.Size = new System.Drawing.Size(56, 21);
+            this.gamePalette.TabIndex = 26;
+            // 
+            // clipHeight
+            // 
+            this.clipHeight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.clipHeight.FormattingEnabled = true;
+            this.clipHeight.Location = new System.Drawing.Point(668, 397);
+            this.clipHeight.Margin = new System.Windows.Forms.Padding(4);
+            this.clipHeight.Name = "clipHeight";
+            this.clipHeight.Size = new System.Drawing.Size(56, 21);
+            this.clipHeight.TabIndex = 27;
+            // 
+            // clipWidth
+            // 
+            this.clipWidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.clipWidth.FormattingEnabled = true;
+            this.clipWidth.Location = new System.Drawing.Point(604, 397);
+            this.clipWidth.Margin = new System.Windows.Forms.Padding(4);
+            this.clipWidth.Name = "clipWidth";
+            this.clipWidth.Size = new System.Drawing.Size(56, 21);
+            this.clipWidth.TabIndex = 28;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(539, 376);
+            this.label5.Margin = new System.Windows.Forms.Padding(4);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Palette";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(603, 376);
+            this.label6.Margin = new System.Windows.Forms.Padding(4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(55, 13);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Clip Width";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(669, 376);
+            this.label8.Margin = new System.Windows.Forms.Padding(4);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Clip Height";
             // 
             // SpriteEditor
             // 
@@ -374,6 +446,12 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListView codeTags;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox clipWidth;
+        private System.Windows.Forms.ComboBox clipHeight;
+        private System.Windows.Forms.ComboBox gamePalette;
 
     }
 }

@@ -1,6 +1,6 @@
 ; Super Mario Bros. 3 Full Disassembly by Southbird 2012
 ; For more info, see http://www.sonicepoch.com/sm3mix/
-;
+; test
 ; PLEASE INCLUDE A CREDIT TO THE SOUTHBIRD DISASSEMBLY
 ; AND THE ABOVE LINK SOMEWHERE IN YOUR WORKS :)
 ;
@@ -153,7 +153,7 @@ ObjectGroup00_CollideJumpTable:
     
     ; Object group $00 (i.e. objects starting at ID $00) attribute bits set 1 (OA1_* flags valid here)
 
-;#ObjectsGfxAttr.word@00
+    ;#ObjectsGfxAttr.byte@00
     .org ObjectGroup_Attributes ; <-- help enforce this table *here*
 ObjectGroup00_Attributes:
     .byte OA1_PAL0 | OA1_HEIGHT16 | OA1_WIDTH8  ; Object $00
@@ -192,7 +192,7 @@ ObjectGroup00_Attributes:
     .byte OA1_PAL2 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $21 - OBJ_POWERUP_ICEFLOWER #DAHRKDAIZ
     .byte OA1_PAL3 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $22 - OBJ_POWERUP_PUMPKIN
     .byte OA1_PAL3 | OA1_HEIGHT16 | OA1_WIDTH16 ; Object $23 - OBJ_POWERUP_FOXLEAF
-
+ 
 
     ; Object group $00 (i.e. objects starting at ID $00) second set attribute bits
 
@@ -202,7 +202,7 @@ ObjectGroup00_Attributes:
     ;   Bits 2: If set, object doesn't respond if stomped (indifferent, not same as attr 3, bit 5 which leads to hurting player)
     ;   Bits 3: Object uses 16-bit X value (otherwise, Object_XHi will be zeroed)
     ;   Bits 4-7: Pick root tile detection group offset (from Object_TileDetectOffsets)
-;#ObjectsHitBox.word@00
+;#ObjectsHitBox.byte@00
     .org ObjectGroup_Attributes2    ; <-- help enforce this table *here*
 ObjectGroup00_Attributes2:
     .byte OA2_TDOGRP0   ; Object $00
@@ -252,7 +252,7 @@ ObjectGroup00_Attributes2:
     ;   Bit 6: The CollideJumpTable entry MAY contain the "special" entry; see CollideJumpTable; also "dies" into "shell" (state 3) (i.e. object "bumps" into shell when hit from beneath)
     ;   Bit 7: If set, object cannot be tail attacked
 
-;#ObjectsAttributes2.word@00
+;#ObjectsAttributes2.byte@00
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup00_Attributes3:
     .byte OA3_HALT_NORMALONLY   ; Object $00
@@ -295,7 +295,7 @@ ObjectGroup00_Attributes3:
 
     ; Object group $00 (i.e. objects starting at ID $00) Pattern Table Select
 
-;#ObjectsPatTable.word@00
+;#ObjectsPatTable.byte@00
     .org ObjectGroup_PatTableSel    ; <-- help enforce this table *here*
 ObjectGroup00_PatTableSel:
     .byte OPTS_NOCHANGE ; Object $00

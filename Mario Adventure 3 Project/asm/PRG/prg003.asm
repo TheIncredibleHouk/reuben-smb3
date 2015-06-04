@@ -108,6 +108,7 @@ ObjectGroup02_NormalJumpTable:
     ; Object group $02 (i.e. objects starting at ID $48) Collision routine jump table (if calling Object_HitTestRespond;
     ; Special values of OCSPECIAL_KILLCHANGETO or OCSPECIAL_HIGHSCORE can be used here instead otherwise.)
 
+;#ObjectsHit.word@48
     .org ObjectGroup_CollideJumpTable    ; <-- help enforce this table *here*
 ObjectGroup02_CollideJumpTable:
     .word ObjHit_DoNothing    ; Object $48 - OBJ_NINJI
@@ -150,6 +151,7 @@ ObjectGroup02_CollideJumpTable:
     
     ; Object group $02 (i.e. objects starting at ID $48) attribute bits set 1 (OA1_* flags valid here)
 
+;#ObjectsGfxAttr.word@48
     .org ObjectGroup_Attributes    ; <-- help enforce this table *here*
 ObjectGroup02_Attributes:
     .byte OA1_PAL1 | OA1_HEIGHT16 | OA1_WIDTH16    ; Object $48 - OBJ_NINJI
@@ -191,6 +193,7 @@ ObjectGroup02_Attributes:
 
     ; Object group $02 (i.e. objects starting at ID $48) second set attribute bits
 
+;#ObjectsHitBox.word@48
     .org ObjectGroup_Attributes2    ; <-- help enforce this table *here*
 ObjectGroup02_Attributes2:
     .byte OA2_NOSHELLORSQUASH | OA2_TDOGRP1    ; Object $48 - OBJ_NINJI
@@ -233,6 +236,7 @@ ObjectGroup02_Attributes2:
 
     ; Object group $02 (i.e. objects starting at ID $48) third set attribute bits
 
+;#ObjectsAttributes2.word@48
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup02_Attributes3:
     .byte OA3_HALT_NORMALONLY      ; Object $48 - OBJ_NINJI
@@ -274,7 +278,7 @@ ObjectGroup02_Attributes3:
 
 
     ; Object group $02 (i.e. objects starting at ID $48) Pattern Table Select
-
+;#ObjectsPatTable.word@48
     .org ObjectGroup_PatTableSel    ; <-- help enforce this table *here*
 ObjectGroup02_PatTableSel:
     .byte OPTS_SETPT5 | $0F    ; Object $48 - OBJ_NINJI
@@ -319,7 +323,7 @@ ObjectGroup02_PatTableSel:
     ; Determines what action is taken when object is in "Killed" state (6)
     ; See Object_DoKillAction for the jump table
     ; NOTE: Any action type other than zero always sets the frame to 2 (unless object is not general purpose, i.e. index >= 5)
-
+;#ObjectsKill.word@48
     .org ObjectGroup_KillAction    ; <-- help enforce this table *here*
 ObjectGroup02_KillAction:
     .byte KILLACT_JUSTDRAW16X16    ; Object $48 - OBJ_NINJI

@@ -21,6 +21,7 @@ namespace Reuben.UI
         static LevelController levelController;
         static StringController stringController;
         static SpriteController spriteController;
+        static ASMController asmController;
 
         public ProjectView()
         {
@@ -44,6 +45,9 @@ namespace Reuben.UI
 
             spriteController = new SpriteController();
             spriteController.Load(controller.Project.SpriteDataFile);
+
+            asmController = new ASMController();
+            asmController.Load(projectController.Project.ASMDirectory);
 
             savebutton.Enabled =
             palettesButton.Enabled =
@@ -197,17 +201,18 @@ namespace Reuben.UI
             if (ProjectView.ASMEditor == null)
             {
                 ProjectView.ASMEditor = new ASMEditor();
-                ProjectView.ASMEditor.Initialize(projectController);
+                ProjectView.ASMEditor.Initialize(asmController);
                 ProjectView.ASMEditor.Show();
                 ProjectView.ASMEditor.FormClosing += ASMEditor_FormClosing;
-                if(file != null && tag != null)
-                {
-                    ProjectView.ASMEditor.GoToTag(file,tag);
-                }
             }
             else
             {
                 ProjectView.ASMEditor.Focus();
+            }
+
+            if (file != null && tag != null)
+            {
+                ProjectView.ASMEditor.GoToTag(file, tag);
             }
         }
 
@@ -228,7 +233,7 @@ namespace Reuben.UI
             if (ProjectView.SpriteEditor == null)
             {
                 ProjectView.SpriteEditor = new SpriteEditor();
-                ProjectView.SpriteEditor.Initialize(graphicsController, spriteController, levelController);
+                ProjectView.SpriteEditor.Initialize(asmController, graphicsController, spriteController, levelController);
                 ProjectView.SpriteEditor.Show();
                 ProjectView.SpriteEditor.FormClosed += SpriteEditor_FormClosed;
             }
