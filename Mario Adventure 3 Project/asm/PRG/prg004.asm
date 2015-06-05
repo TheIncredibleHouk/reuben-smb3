@@ -274,7 +274,7 @@ ObjectGroup03_Attributes3:
 
 
     ; Object group $03 (i.e. objects starting at ID $6C) Pattern Table Select
-;#ObjectsPatTable.byte@48
+;#ObjectsPatTable.byte@6C
     .org ObjectGroup_PatTableSel    ; <-- help enforce this table *here*
 ObjectGroup03_PatTableSel:
     .byte OPTS_SETPT6 | $4F    ; Object $6C - OBJ_GREENTROOPA

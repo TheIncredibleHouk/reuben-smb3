@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.spriteName = new System.Windows.Forms.TextBox();
-            this.panel43 = new System.Windows.Forms.Panel();
+            this.panel41 = new System.Windows.Forms.Panel();
             this.squashState = new System.Windows.Forms.CheckBox();
             this.tailImmune = new System.Windows.Forms.CheckBox();
             this.harmfulStomp = new System.Windows.Forms.CheckBox();
@@ -55,19 +55,23 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.displayProperty = new System.Windows.Forms.ComboBox();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.panel43.SuspendLayout();
+            this.label11 = new System.Windows.Forms.Label();
+            this.gfxBank = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.patTable = new System.Windows.Forms.ComboBox();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
+            this.spriteViewer = new Reuben.UI.SpriteViewer();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
+            this.panel41.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -90,52 +94,56 @@
             this.spriteName.TabIndex = 3;
             this.spriteName.TextChanged += new System.EventHandler(this.spriteName_TextChanged);
             // 
-            // panel43
+            // panel41
             // 
-            this.panel43.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel43.Controls.Add(this.squashState);
-            this.panel43.Controls.Add(this.tailImmune);
-            this.panel43.Controls.Add(this.harmfulStomp);
-            this.panel43.Controls.Add(this.label10);
-            this.panel43.Controls.Add(this.gameHalt);
-            this.panel43.Controls.Add(this.label9);
-            this.panel43.Controls.Add(this.collisionBox);
-            this.panel43.Controls.Add(this.stompApathy);
-            this.panel43.Controls.Add(this.shellStomp);
-            this.panel43.Controls.Add(this.label8);
-            this.panel43.Controls.Add(this.label6);
-            this.panel43.Controls.Add(this.label5);
-            this.panel43.Controls.Add(this.clipWidth);
-            this.panel43.Controls.Add(this.clipHeight);
-            this.panel43.Controls.Add(this.gamePalette);
-            this.panel43.Controls.Add(this.label4);
-            this.panel43.Controls.Add(this.codeTags);
-            this.panel43.Controls.Add(this.button3);
-            this.panel43.Controls.Add(this.syntaxError);
-            this.panel43.Controls.Add(this.label2);
-            this.panel43.Controls.Add(this.definitionCode);
-            this.panel43.Controls.Add(this.button10);
-            this.panel43.Controls.Add(this.button9);
-            this.panel43.Controls.Add(this.label1);
-            this.panel43.Controls.Add(this.displayProperty);
-            this.panel43.Controls.Add(this.paletteList);
-            this.panel43.Controls.Add(this.spriteName);
-            this.panel43.Controls.Add(this.label3);
-            this.panel43.Controls.Add(this.label7);
-            this.panel43.Controls.Add(this.button2);
-            this.panel43.Controls.Add(this.button1);
-            this.panel43.Controls.Add(this.checkBox1);
-            this.panel43.Controls.Add(this.spriteViewer);
-            this.panel43.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel43.Location = new System.Drawing.Point(277, 0);
-            this.panel43.Name = "panel43";
-            this.panel43.Size = new System.Drawing.Size(784, 808);
-            this.panel43.TabIndex = 5;
+            this.panel41.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel41.Controls.Add(this.label12);
+            this.panel41.Controls.Add(this.patTable);
+            this.panel41.Controls.Add(this.label11);
+            this.panel41.Controls.Add(this.gfxBank);
+            this.panel41.Controls.Add(this.squashState);
+            this.panel41.Controls.Add(this.tailImmune);
+            this.panel41.Controls.Add(this.harmfulStomp);
+            this.panel41.Controls.Add(this.label10);
+            this.panel41.Controls.Add(this.gameHalt);
+            this.panel41.Controls.Add(this.label9);
+            this.panel41.Controls.Add(this.collisionBox);
+            this.panel41.Controls.Add(this.stompApathy);
+            this.panel41.Controls.Add(this.shellStomp);
+            this.panel41.Controls.Add(this.label8);
+            this.panel41.Controls.Add(this.label6);
+            this.panel41.Controls.Add(this.label5);
+            this.panel41.Controls.Add(this.clipWidth);
+            this.panel41.Controls.Add(this.clipHeight);
+            this.panel41.Controls.Add(this.gamePalette);
+            this.panel41.Controls.Add(this.label4);
+            this.panel41.Controls.Add(this.codeTags);
+            this.panel41.Controls.Add(this.button3);
+            this.panel41.Controls.Add(this.syntaxError);
+            this.panel41.Controls.Add(this.label2);
+            this.panel41.Controls.Add(this.definitionCode);
+            this.panel41.Controls.Add(this.button10);
+            this.panel41.Controls.Add(this.button9);
+            this.panel41.Controls.Add(this.label1);
+            this.panel41.Controls.Add(this.displayProperty);
+            this.panel41.Controls.Add(this.paletteList);
+            this.panel41.Controls.Add(this.spriteName);
+            this.panel41.Controls.Add(this.label3);
+            this.panel41.Controls.Add(this.label7);
+            this.panel41.Controls.Add(this.button2);
+            this.panel41.Controls.Add(this.button1);
+            this.panel41.Controls.Add(this.checkBox1);
+            this.panel41.Controls.Add(this.spriteViewer);
+            this.panel41.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel41.Location = new System.Drawing.Point(277, 0);
+            this.panel41.Name = "panel41";
+            this.panel41.Size = new System.Drawing.Size(784, 808);
+            this.panel41.TabIndex = 5;
             // 
             // squashState
             // 
             this.squashState.AutoSize = true;
-            this.squashState.Location = new System.Drawing.Point(540, 251);
+            this.squashState.Location = new System.Drawing.Point(540, 200);
             this.squashState.Margin = new System.Windows.Forms.Padding(4);
             this.squashState.Name = "squashState";
             this.squashState.Size = new System.Drawing.Size(200, 17);
@@ -147,7 +155,7 @@
             // tailImmune
             // 
             this.tailImmune.AutoSize = true;
-            this.tailImmune.Location = new System.Drawing.Point(540, 201);
+            this.tailImmune.Location = new System.Drawing.Point(540, 150);
             this.tailImmune.Margin = new System.Windows.Forms.Padding(4);
             this.tailImmune.Name = "tailImmune";
             this.tailImmune.Size = new System.Drawing.Size(129, 17);
@@ -159,7 +167,7 @@
             // harmfulStomp
             // 
             this.harmfulStomp.AutoSize = true;
-            this.harmfulStomp.Location = new System.Drawing.Point(540, 226);
+            this.harmfulStomp.Location = new System.Drawing.Point(540, 175);
             this.harmfulStomp.Margin = new System.Windows.Forms.Padding(4);
             this.harmfulStomp.Name = "harmfulStomp";
             this.harmfulStomp.Size = new System.Drawing.Size(117, 17);
@@ -234,7 +242,7 @@
             // stompApathy
             // 
             this.stompApathy.AutoSize = true;
-            this.stompApathy.Location = new System.Drawing.Point(540, 151);
+            this.stompApathy.Location = new System.Drawing.Point(540, 100);
             this.stompApathy.Margin = new System.Windows.Forms.Padding(4);
             this.stompApathy.Name = "stompApathy";
             this.stompApathy.Size = new System.Drawing.Size(155, 17);
@@ -246,7 +254,7 @@
             // shellStomp
             // 
             this.shellStomp.AutoSize = true;
-            this.shellStomp.Location = new System.Drawing.Point(540, 176);
+            this.shellStomp.Location = new System.Drawing.Point(540, 125);
             this.shellStomp.Margin = new System.Windows.Forms.Padding(4);
             this.shellStomp.Name = "shellStomp";
             this.shellStomp.Size = new System.Drawing.Size(95, 17);
@@ -436,20 +444,6 @@
             this.displayProperty.TabIndex = 14;
             this.displayProperty.SelectedIndexChanged += new System.EventHandler(this.displayProperty_SelectedIndexChanged);
             // 
-            // paletteList
-            // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(200, 563);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(174, 21);
-            this.paletteList.TabIndex = 5;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -506,15 +500,6 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // spriteViewer
-            // 
-            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
-            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
-            this.spriteViewer.Name = "spriteViewer";
-            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
-            this.spriteViewer.TabIndex = 0;
-            this.spriteViewer.Text = "spriteViewer1";
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -525,14 +510,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(277, 808);
             this.panel2.TabIndex = 6;
-            // 
-            // spriteSelector
-            // 
-            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
-            this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
-            this.spriteSelector.TabIndex = 0;
             // 
             // panel3
             // 
@@ -564,18 +541,99 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(542, 226);
+            this.label11.Margin = new System.Windows.Forms.Padding(4);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 13);
+            this.label11.TabIndex = 43;
+            this.label11.Text = "Gfx Bank";
+            // 
+            // gfxBank
+            // 
+            this.gfxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gfxBank.FormattingEnabled = true;
+            this.gfxBank.Items.AddRange(new object[] {
+            "No Change",
+            "Bank 3",
+            "Bank 4"});
+            this.gfxBank.Location = new System.Drawing.Point(542, 247);
+            this.gfxBank.Margin = new System.Windows.Forms.Padding(4);
+            this.gfxBank.Name = "gfxBank";
+            this.gfxBank.Size = new System.Drawing.Size(66, 21);
+            this.gfxBank.TabIndex = 42;
+            this.gfxBank.SelectedIndexChanged += new System.EventHandler(this.gfxBank_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(616, 226);
+            this.label12.Margin = new System.Windows.Forms.Padding(4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.TabIndex = 45;
+            this.label12.Text = "Table\r\n";
+            // 
+            // patTable
+            // 
+            this.patTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.patTable.FormattingEnabled = true;
+            this.patTable.Items.AddRange(new object[] {
+            "No Change",
+            "Bank 3",
+            "Bank 4"});
+            this.patTable.Location = new System.Drawing.Point(616, 247);
+            this.patTable.Margin = new System.Windows.Forms.Padding(4);
+            this.patTable.Name = "patTable";
+            this.patTable.Size = new System.Drawing.Size(66, 21);
+            this.patTable.TabIndex = 44;
+            this.patTable.SelectedIndexChanged += new System.EventHandler(this.patTable_SelectedIndexChanged);
+            // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(200, 563);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(174, 21);
+            this.paletteList.TabIndex = 5;
+            // 
+            // spriteViewer
+            // 
+            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
+            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.spriteViewer.Name = "spriteViewer";
+            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
+            this.spriteViewer.TabIndex = 0;
+            this.spriteViewer.Text = "spriteViewer1";
+            // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
+            this.spriteSelector.TabIndex = 0;
+            // 
             // SpriteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1061, 808);
-            this.Controls.Add(this.panel43);
+            this.Controls.Add(this.panel41);
             this.Controls.Add(this.panel2);
             this.Name = "SpriteEditor";
             this.Text = "SpriteEditor";
             this.Activated += new System.EventHandler(this.SpriteEditor_Activated);
-            this.panel43.ResumeLayout(false);
-            this.panel43.PerformLayout();
+            this.panel41.ResumeLayout(false);
+            this.panel41.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -587,7 +645,7 @@
         private SpriteViewer spriteViewer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox spriteName;
-        private System.Windows.Forms.Panel panel43;
+        private System.Windows.Forms.Panel panel41;
         private System.Windows.Forms.Panel panel2;
         private SpriteSelector spriteSelector;
         private System.Windows.Forms.Label label3;
@@ -623,6 +681,10 @@
         private System.Windows.Forms.CheckBox harmfulStomp;
         private System.Windows.Forms.CheckBox tailImmune;
         private System.Windows.Forms.CheckBox squashState;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox gfxBank;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox patTable;
 
     }
 }

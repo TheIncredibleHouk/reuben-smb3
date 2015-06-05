@@ -41,6 +41,6 @@ namespace Reuben.Model
 
         [DataMember]
         public bool Overlay { get; set; }
-        
+       
     }
 }

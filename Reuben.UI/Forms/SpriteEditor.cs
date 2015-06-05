@@ -58,6 +58,11 @@ namespace Reuben.UI
                 string right = string.Join(",", parseCollisions[index++].Split(' ').Where(s => s.StartsWith("$")).Reverse().ToList()).Trim(',');
                 collisionBox.Items[item] = collisionBox.Items[item] + string.Format(" (L: {0} T: {1} R: {2} B: {3})", left, top, right, bottom).Replace("$", "");
             }
+
+            for(int i = 0; i < 0x80; i++)
+            {
+                patTable.Items.Add(i.ToString("X2"));
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -120,6 +125,8 @@ namespace Reuben.UI
 
                 LoadGfxAttributes();
                 LoadHitBoxOptions();
+                LoadOptions();
+                LoadPatternTableOptions();
             }
             spriteUpdating = false;
         }
@@ -238,7 +245,7 @@ namespace Reuben.UI
             string newLine = string.Format("\t.byte {0} | {1} | {2} ; Object{3:X2}", palValue, clipWidthValue, clipHeightValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
 
-            spriteViewer.CurrentDefinition.GfxAttributes2Code = newLine;
+            modifiedDefinitions.Add(spriteViewer.CurrentDefinition);
             localASMController.UpdateTagLine("ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
@@ -332,7 +339,7 @@ namespace Reuben.UI
 
             string newLine = string.Format("\t.byte {0}{1}{2} ; Object{3:X2}", collisionBoxValue, shellValue, apathyValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
-            spriteViewer.CurrentDefinition.GfxAttributes2Code = newLine;
+            modifiedDefinitions.Add(spriteViewer.CurrentDefinition);
             localASMController.UpdateTagLine("ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
@@ -348,8 +355,10 @@ namespace Reuben.UI
 
             string line = loc.Text;
 
-            tailImmune.Checked = true;
-
+            tailImmune.Checked = false;
+            harmfulStomp.Checked = false;
+            squashState.Checked = false;
+            tailImmune.Checked = false;
             foreach (string s in line.Split(' ', '|'))
             {
                 switch (s.Trim())
@@ -380,6 +389,14 @@ namespace Reuben.UI
 
                     case "OA3_TAILATKIMMUNE":
                         tailImmune.Checked = true;
+                        break;
+
+                    case "OA3_NOTSTOMPABLE":
+                        harmfulStomp.Checked = true;
+                        break;
+
+                    case "OA3_SQUASH":
+                        squashState.Checked = true;
                         break;
                 }
             }
@@ -416,15 +433,84 @@ namespace Reuben.UI
                     break;
 
             }
+
             string shellValue = shellStomp.Checked ? " | OA3_DIESHELLED " : "";
-            string stompValue = stompApathy.Checked ? " | OA3_NOTSTOMPABLE " : "";
+            string stompValue = harmfulStomp.Checked ? " | OA3_NOTSTOMPABLE " : "";
             string squashValue = squashState.Checked ? " | OA3_SQUASH " : "";
             string tailValue = tailImmune.Checked ? " | OA3_TAILATKIMMUNE " : "";
 
             string newLine = string.Format("\t.byte {0}{1}{2}{3}{4} ; Object{5:X2}", haltValue, shellValue, stompValue, squashValue, tailValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
-            spriteViewer.CurrentDefinition.GfxAttributes2Code = newLine;
+            modifiedDefinitions.Add(spriteViewer.CurrentDefinition);
             localASMController.UpdateTagLine("ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+        }
+
+
+        private void LoadPatternTableOptions()
+        {
+            spriteUpdating = true;
+            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            if (loc == null)
+            {
+                MessageBox.Show("Unable to locate the tag for this property.");
+                return;
+            }
+
+            string line = loc.Text;
+            foreach (string s in line.Split(' ', '|'))
+            {
+                string t = s.Trim();
+                if (t == "OPTS_NOCHANGE")
+                {
+                    gfxBank.SelectedIndex = 0;
+                    patTable.Enabled = false;
+                    patTable.SelectedIndex = -1;
+                    break;
+                }
+                else if (t == "OPTS_SETPT5")
+                {
+                    gfxBank.SelectedIndex = 1;
+                    patTable.Enabled = true;
+                }
+                else if (t == "OPTS_SETPT6")
+                {
+                    gfxBank.SelectedIndex = 2;
+                    patTable.Enabled = true;
+                }
+                else if (t.StartsWith("$"))
+                {
+                    patTable.SelectedIndex = Convert.ToInt32(t.Trim('$'), 16);
+                }
+            }
+            spriteUpdating = false;
+        }
+
+        private void UpdatePatternTableOptions()
+        {
+            string bank = "";
+            switch (gfxBank.SelectedIndex)
+            {
+                case 0:
+                    bank = "OPTS_NOCHANGE";
+                    break;
+
+                case 1:
+                    bank = "OPTS_SETPT5";
+                    break;
+
+                case 2:
+                    bank = "OPTS_SETPT6";
+                    break;
+            }
+
+            string patTableValue = "";
+            if (patTable.Enabled)
+            {
+                patTableValue = " | $" + patTable.SelectedIndex.ToString("X2");
+            }
+            string newLine = string.Format("\t.byte {0}{1}; Object{5:X2}", bank, patTableValue, spriteViewer.CurrentDefinition.GameID);
+            string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
+            localASMController.UpdateTagLine("ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
         private void UpdateCode()
         {
@@ -526,23 +612,15 @@ namespace Reuben.UI
             this.Close();
         }
 
-
+        private List<SpriteDefinition> modifiedDefinitions;
         private void button1_Click(object sender, EventArgs e)
         {
             localSpriteController.Save();
 
             List<string> changedFiles = new List<string>();
-            foreach (SpriteDefinition def in localSpriteController.SpriteData.Definitions.Where(d => d.GfxAttributes2Code != null))
+            foreach (SpriteDefinition def in modifiedDefinitions)
             {
-                string file = GetFileLocation(def.GameID);
-                if (localASMController.IsDirty(file))
-                {
-                    MessageBox.Show("Unable to save changes to " + file + " due to unsaved changes in the ASM Editor. Save these files then save the Sprite Editor again.");
-                    break;
-                }
-
-                localASMController.UpdateTagLine("ObjectsGfxAttr@" + def.GameID.ToString("X2"), file, def.GfxAttributes2Code);
-                changedFiles.Add(file);
+                changedFiles.Add(GetFileLocation(def.GameID));
             }
 
             localASMController.Save(changedFiles.Distinct().ToList());
@@ -685,6 +763,22 @@ namespace Reuben.UI
             if (!spriteUpdating)
             {
                 UpdateOptions();
+            }
+        }
+
+        private void gfxBank_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(!spriteUpdating)
+            {
+                UpdatePatternTableOptions();
+            }
+        }
+
+        private void patTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(!spriteUpdating)
+            {
+                UpdatePatternTableOptions();
             }
         }
     }

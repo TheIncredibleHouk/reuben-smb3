@@ -273,7 +273,7 @@ ObjectGroup04_Attributes3:
 
 
     ; Object group $04 (i.e. objects starting at ID $90) Pattern Table Select
-;#ObjectsPatTable.byte@48
+;#ObjectsPatTable.byte@90
     .org ObjectGroup_PatTableSel    ; <-- help enforce this table *here*
 ObjectGroup04_PatTableSel:
     .byte OPTS_NOCHANGE    ; Object $90 - OBJ_FIREICEBAR

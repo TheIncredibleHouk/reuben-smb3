@@ -28,9 +28,6 @@ namespace Reuben.Model
         [DataMember]
         public string Group { get; set; }
 
-        [IgnoreDataMember]
-        public string GfxAttributes2Code { get; set; }
-
 
         public SpriteDefinition()
         {
