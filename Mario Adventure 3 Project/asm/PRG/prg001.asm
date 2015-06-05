@@ -252,7 +252,7 @@ ObjectGroup00_Attributes2:
     ;   Bit 6: The CollideJumpTable entry MAY contain the "special" entry; see CollideJumpTable; also "dies" into "shell" (state 3) (i.e. object "bumps" into shell when hit from beneath)
     ;   Bit 7: If set, object cannot be tail attacked
 
-;#ObjectsAttributes2.byte@00
+;#ObjectsOptions.byte@00
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup00_Attributes3:
     .byte OA3_HALT_NORMALONLY   ; Object $00

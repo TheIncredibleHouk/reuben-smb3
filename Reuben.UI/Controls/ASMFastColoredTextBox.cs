@@ -35,7 +35,7 @@ namespace Reuben.UI
         public void Initiliaze(ASMController asmController, string file)
         {
             localASMController = asmController;
-            AutoIndent = true;
+            AutoIndent = false;
 
             ASMCommentRegEx = ";.*$";
             ASMDirectiveRegEx = "\\.[A-Za-z]+";

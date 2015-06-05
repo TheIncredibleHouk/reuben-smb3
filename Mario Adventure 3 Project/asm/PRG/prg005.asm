@@ -231,7 +231,7 @@ ObjectGroup04_Attributes2:
     .byte OA2_TDOGRP11    ; Object $B3
 
     ; Object group $04 (i.e. objects starting at ID $90) third set attribute bits
-;#ObjectsAttributes2.byte@90
+;#ObjectsOptions.byte@90
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup04_Attributes3:
     .byte OA3_HALT_NORMALONLY | OA3_TAILATKIMMUNE    ; Object $90 - OBJ_FIREICEBAR

@@ -47,6 +47,17 @@ namespace Reuben.UI
             spriteSelector.SelectedSpriteChanged += spriteSelector_SelectedSpriteChanged;
             graphicsController.GraphicsUpdated += graphicsController_GraphicsUpdated;
             graphicsController.ExtraGraphicsUpdated += graphicsController_ExtraGraphicsUpdated;
+
+            List<string> parseCollisions = localASMController.LinesFromTagOffset("prg000.asm", "ObjectCollision", 13 * 4);
+
+            for (int index = 0, item = 0; index < parseCollisions.Count; item++)
+            {
+                string bottom = string.Join(",", parseCollisions[index++].Split(' ').Where(s => s.StartsWith("$")).Reverse().ToList()).Trim(',');
+                string top = string.Join(",", parseCollisions[index++].Split(' ').Where(s => s.StartsWith("$")).Reverse().ToList()).Trim(',');
+                string left = string.Join(",", parseCollisions[index++].Split(' ').Where(s => s.StartsWith("$")).Reverse().ToList()).Trim(',');
+                string right = string.Join(",", parseCollisions[index++].Split(' ').Where(s => s.StartsWith("$")).Reverse().ToList()).Trim(',');
+                collisionBox.Items[item] = collisionBox.Items[item] + string.Format(" (L: {0} T: {1} R: {2} B: {3})", left, top, right, bottom).Replace("$", "");
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -312,18 +323,109 @@ namespace Reuben.UI
             }
             spriteUpdating = false;
         }
+
         private void UpdateHitBoxString()
         {
             string collisionBoxValue = "OA2_TDOGRP" + collisionBox.SelectedIndex;
             string shellValue = !shellStomp.Checked ? " | OA2_NOSHELLORSQUASH " : "";
             string apathyValue = stompApathy.Checked ? " | OA2_STOMPDONTCARE" : "";
 
-            string newLine = string.Format("\t.byte {0}{1}{2} ; Object{3:X2}", collisionBoxValue, shellValue, apathyValue , spriteViewer.CurrentDefinition.GameID);
+            string newLine = string.Format("\t.byte {0}{1}{2} ; Object{3:X2}", collisionBoxValue, shellValue, apathyValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
             spriteViewer.CurrentDefinition.GfxAttributes2Code = newLine;
             localASMController.UpdateTagLine("ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
+        private void LoadOptions()
+        {
+            spriteUpdating = true;
+            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            if (loc == null)
+            {
+                MessageBox.Show("Unable to locate the tag for this property.");
+                return;
+            }
+
+            string line = loc.Text;
+
+            tailImmune.Checked = true;
+
+            foreach (string s in line.Split(' ', '|'))
+            {
+                switch (s.Trim())
+                {
+                    case "OA3_HALT_JUSTDRAW":
+                        gameHalt.SelectedIndex = 2;
+                        break;
+
+                    case "OA3_HALT_JUSTDRAWTALL":
+                        gameHalt.SelectedIndex = 5;
+                        break;
+
+                    case "OA3_HALT_DONOTHING":
+                        gameHalt.SelectedIndex = 0;
+                        break;
+
+                    case "OA3_HALT_NORMALONLY":
+                        gameHalt.SelectedIndex = 1;
+                        break;
+
+                    case "OA3_HALT_JUSTDRAWWIDE":
+                        gameHalt.SelectedIndex = 5;
+                        break;
+
+                    case "OA3_HALT_JUSTDRAWMIRROR":
+                        gameHalt.SelectedIndex = 3;
+                        break;
+
+                    case "OA3_TAILATKIMMUNE":
+                        tailImmune.Checked = true;
+                        break;
+                }
+            }
+            spriteUpdating = false;
+        }
+
+        private void UpdateOptions()
+        {
+            string haltValue = "";
+            switch (gameHalt.SelectedIndex)
+            {
+                case 0:
+                    haltValue = "OA3_HALT_DONOTHING";
+                    break;
+
+                case 1:
+                    haltValue = "OA3_HALT_NORMALONLY";
+                    break;
+
+                case 2:
+                    haltValue = "OA3_HALT_JUSTDRAW";
+                    break;
+
+                case 3:
+                    haltValue = "OA3_HALT_JUSTDRAWMIRROR";
+                    break;
+
+                case 4:
+                    haltValue = "OA3_HALT_JUSTDRAWTALL";
+                    break;
+
+                case 5:
+                    haltValue = "OA3_HALT_JUSTDRAWWIDE";
+                    break;
+
+            }
+            string shellValue = shellStomp.Checked ? " | OA3_DIESHELLED " : "";
+            string stompValue = stompApathy.Checked ? " | OA3_NOTSTOMPABLE " : "";
+            string squashValue = squashState.Checked ? " | OA3_SQUASH " : "";
+            string tailValue = tailImmune.Checked ? " | OA3_TAILATKIMMUNE " : "";
+
+            string newLine = string.Format("\t.byte {0}{1}{2}{3}{4} ; Object{5:X2}", haltValue, shellValue, stompValue, squashValue, tailValue, spriteViewer.CurrentDefinition.GameID);
+            string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
+            spriteViewer.CurrentDefinition.GfxAttributes2Code = newLine;
+            localASMController.UpdateTagLine("ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+        }
         private void UpdateCode()
         {
             List<SpriteInfo> info;
@@ -531,7 +633,7 @@ namespace Reuben.UI
 
         private void collisionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!spriteUpdating)
+            if (!spriteUpdating)
             {
                 UpdateHitBoxString();
             }
@@ -539,17 +641,50 @@ namespace Reuben.UI
 
         private void shellStomp_CheckedChanged(object sender, EventArgs e)
         {
-            if(!spriteUpdating)
+            if (!spriteUpdating)
             {
                 UpdateHitBoxString();
+                UpdateOptions();
             }
         }
 
         private void stompApathy_CheckedChanged(object sender, EventArgs e)
         {
-            if(!spriteUpdating)
+            if (!spriteUpdating)
             {
                 UpdateHitBoxString();
+            }
+        }
+
+        private void harmfulStomp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!spriteUpdating)
+            {
+                UpdateOptions();
+            }
+        }
+
+        private void tailImmune_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!spriteUpdating)
+            {
+                UpdateOptions();
+            }
+        }
+
+        private void squashState_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!spriteUpdating)
+            {
+                UpdateOptions();
+            }
+        }
+
+        private void gameHalt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!spriteUpdating)
+            {
+                UpdateOptions();
             }
         }
     }

@@ -236,7 +236,7 @@ ObjectGroup02_Attributes2:
 
     ; Object group $02 (i.e. objects starting at ID $48) third set attribute bits
 
-;#ObjectsAttributes2.byte@48
+;#ObjectsOptions.byte@48
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup02_Attributes3:
     .byte OA3_HALT_NORMALONLY      ; Object $48 - OBJ_NINJI

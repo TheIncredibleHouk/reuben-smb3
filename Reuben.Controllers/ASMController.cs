@@ -80,6 +80,20 @@ namespace Reuben.Controllers
 
         }
 
+        public List<string> LinesFromTagOffset(string file, string text, int lineCount)
+        {
+            List<string> returnLines = new List<string>();
+            TextLocation tagLine = FindTextByLine(0, file, text);
+            string[] split2 = tagLine.Text.Split('.'); // ;#ObjectsInit, word, 28
+
+            while (returnLines.Count < lineCount)
+            {
+                tagLine = FindTextByLine(tagLine.LineNumber + 1, file, split2[1]);
+                returnLines.Add(tagLine.Text);
+            }
+
+            return returnLines;
+        }
 
         private TextLocation FindTextByLine(int startPlace, string file, string text, int offset = 0)
         {
@@ -180,7 +194,10 @@ namespace Reuben.Controllers
             }
             loc.Text = text;
 
-            CodeChanged(loc, null);
+            if (CodeChanged != null)
+            {
+                CodeChanged(loc, null);
+            }
         }
 
         public void Save(List<string> files)

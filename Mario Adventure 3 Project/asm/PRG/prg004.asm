@@ -232,7 +232,7 @@ ObjectGroup03_Attributes2:
 
 
     ; Object group $03 (i.e. objects starting at ID $6C) third set attribute bits
-;#ObjectsAttributes2.byte@6C
+;#ObjectsOptions.byte@6C
     .org ObjectGroup_Attributes3    ; <-- help enforce this table *here*
 ObjectGroup03_Attributes3:
     .byte OA3_HALT_NORMALONLY | OA3_DIESHELLED             ; Object $6C - OBJ_GREENTROOPA

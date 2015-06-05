@@ -30,7 +30,16 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.spriteName = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel43 = new System.Windows.Forms.Panel();
+            this.squashState = new System.Windows.Forms.CheckBox();
+            this.tailImmune = new System.Windows.Forms.CheckBox();
+            this.harmfulStomp = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.gameHalt = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.collisionBox = new System.Windows.Forms.ComboBox();
+            this.stompApathy = new System.Windows.Forms.CheckBox();
+            this.shellStomp = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,25 +55,19 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.displayProperty = new System.Windows.Forms.ComboBox();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.shellStomp = new System.Windows.Forms.CheckBox();
-            this.stompApathy = new System.Windows.Forms.CheckBox();
-            this.collisionBox = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
-            this.spriteViewer = new Reuben.UI.SpriteViewer();
-            this.spriteSelector = new Reuben.UI.SpriteSelector();
-            this.label10 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.panel1.SuspendLayout();
+            this.panel43.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -87,49 +90,175 @@
             this.spriteName.TabIndex = 3;
             this.spriteName.TextChanged += new System.EventHandler(this.spriteName_TextChanged);
             // 
-            // panel1
+            // panel43
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.collisionBox);
-            this.panel1.Controls.Add(this.stompApathy);
-            this.panel1.Controls.Add(this.shellStomp);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.clipWidth);
-            this.panel1.Controls.Add(this.clipHeight);
-            this.panel1.Controls.Add(this.gamePalette);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.codeTags);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.syntaxError);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.definitionCode);
-            this.panel1.Controls.Add(this.button10);
-            this.panel1.Controls.Add(this.button9);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.displayProperty);
-            this.panel1.Controls.Add(this.paletteList);
-            this.panel1.Controls.Add(this.spriteName);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.checkBox1);
-            this.panel1.Controls.Add(this.spriteViewer);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(277, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(741, 808);
-            this.panel1.TabIndex = 5;
+            this.panel43.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel43.Controls.Add(this.squashState);
+            this.panel43.Controls.Add(this.tailImmune);
+            this.panel43.Controls.Add(this.harmfulStomp);
+            this.panel43.Controls.Add(this.label10);
+            this.panel43.Controls.Add(this.gameHalt);
+            this.panel43.Controls.Add(this.label9);
+            this.panel43.Controls.Add(this.collisionBox);
+            this.panel43.Controls.Add(this.stompApathy);
+            this.panel43.Controls.Add(this.shellStomp);
+            this.panel43.Controls.Add(this.label8);
+            this.panel43.Controls.Add(this.label6);
+            this.panel43.Controls.Add(this.label5);
+            this.panel43.Controls.Add(this.clipWidth);
+            this.panel43.Controls.Add(this.clipHeight);
+            this.panel43.Controls.Add(this.gamePalette);
+            this.panel43.Controls.Add(this.label4);
+            this.panel43.Controls.Add(this.codeTags);
+            this.panel43.Controls.Add(this.button3);
+            this.panel43.Controls.Add(this.syntaxError);
+            this.panel43.Controls.Add(this.label2);
+            this.panel43.Controls.Add(this.definitionCode);
+            this.panel43.Controls.Add(this.button10);
+            this.panel43.Controls.Add(this.button9);
+            this.panel43.Controls.Add(this.label1);
+            this.panel43.Controls.Add(this.displayProperty);
+            this.panel43.Controls.Add(this.paletteList);
+            this.panel43.Controls.Add(this.spriteName);
+            this.panel43.Controls.Add(this.label3);
+            this.panel43.Controls.Add(this.label7);
+            this.panel43.Controls.Add(this.button2);
+            this.panel43.Controls.Add(this.button1);
+            this.panel43.Controls.Add(this.checkBox1);
+            this.panel43.Controls.Add(this.spriteViewer);
+            this.panel43.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel43.Location = new System.Drawing.Point(277, 0);
+            this.panel43.Name = "panel43";
+            this.panel43.Size = new System.Drawing.Size(784, 808);
+            this.panel43.TabIndex = 5;
+            // 
+            // squashState
+            // 
+            this.squashState.AutoSize = true;
+            this.squashState.Location = new System.Drawing.Point(540, 251);
+            this.squashState.Margin = new System.Windows.Forms.Padding(4);
+            this.squashState.Name = "squashState";
+            this.squashState.Size = new System.Drawing.Size(200, 17);
+            this.squashState.TabIndex = 41;
+            this.squashState.Text = "Squashed when stomped (Goombas)";
+            this.squashState.UseVisualStyleBackColor = true;
+            this.squashState.CheckedChanged += new System.EventHandler(this.squashState_CheckedChanged);
+            // 
+            // tailImmune
+            // 
+            this.tailImmune.AutoSize = true;
+            this.tailImmune.Location = new System.Drawing.Point(540, 201);
+            this.tailImmune.Margin = new System.Windows.Forms.Padding(4);
+            this.tailImmune.Name = "tailImmune";
+            this.tailImmune.Size = new System.Drawing.Size(129, 17);
+            this.tailImmune.TabIndex = 40;
+            this.tailImmune.Text = "Immune to tail attacks";
+            this.tailImmune.UseVisualStyleBackColor = true;
+            this.tailImmune.CheckedChanged += new System.EventHandler(this.tailImmune_CheckedChanged);
+            // 
+            // harmfulStomp
+            // 
+            this.harmfulStomp.AutoSize = true;
+            this.harmfulStomp.Location = new System.Drawing.Point(540, 226);
+            this.harmfulStomp.Margin = new System.Windows.Forms.Padding(4);
+            this.harmfulStomp.Name = "harmfulStomp";
+            this.harmfulStomp.Size = new System.Drawing.Size(117, 17);
+            this.harmfulStomp.TabIndex = 39;
+            this.harmfulStomp.Text = "Stomping is harmful";
+            this.harmfulStomp.UseVisualStyleBackColor = true;
+            this.harmfulStomp.CheckedChanged += new System.EventHandler(this.harmfulStomp_CheckedChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(542, 276);
+            this.label10.Margin = new System.Windows.Forms.Padding(4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(90, 13);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "Game Halt Action";
+            // 
+            // gameHalt
+            // 
+            this.gameHalt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gameHalt.FormattingEnabled = true;
+            this.gameHalt.Items.AddRange(new object[] {
+            "Do Nothing",
+            "Game Loop",
+            "Draw 16 x 16",
+            "Draw 16 x 16 Mirrored",
+            "Draw 16 x 32",
+            "Draw 48 x 16"});
+            this.gameHalt.Location = new System.Drawing.Point(542, 297);
+            this.gameHalt.Margin = new System.Windows.Forms.Padding(4);
+            this.gameHalt.Name = "gameHalt";
+            this.gameHalt.Size = new System.Drawing.Size(236, 21);
+            this.gameHalt.TabIndex = 37;
+            this.gameHalt.SelectedIndexChanged += new System.EventHandler(this.gameHalt_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(542, 326);
+            this.label9.Margin = new System.Windows.Forms.Padding(4);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(110, 13);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "Tile Detection Hit Box";
+            // 
+            // collisionBox
+            // 
+            this.collisionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.collisionBox.FormattingEnabled = true;
+            this.collisionBox.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
+            this.collisionBox.Location = new System.Drawing.Point(542, 347);
+            this.collisionBox.Margin = new System.Windows.Forms.Padding(4);
+            this.collisionBox.Name = "collisionBox";
+            this.collisionBox.Size = new System.Drawing.Size(236, 21);
+            this.collisionBox.TabIndex = 35;
+            this.collisionBox.SelectedIndexChanged += new System.EventHandler(this.collisionBox_SelectedIndexChanged);
+            // 
+            // stompApathy
+            // 
+            this.stompApathy.AutoSize = true;
+            this.stompApathy.Location = new System.Drawing.Point(540, 151);
+            this.stompApathy.Margin = new System.Windows.Forms.Padding(4);
+            this.stompApathy.Name = "stompApathy";
+            this.stompApathy.Size = new System.Drawing.Size(155, 17);
+            this.stompApathy.TabIndex = 34;
+            this.stompApathy.Text = "Apathetic to being stomped";
+            this.stompApathy.UseVisualStyleBackColor = true;
+            this.stompApathy.CheckedChanged += new System.EventHandler(this.stompApathy_CheckedChanged);
+            // 
+            // shellStomp
+            // 
+            this.shellStomp.AutoSize = true;
+            this.shellStomp.Location = new System.Drawing.Point(540, 176);
+            this.shellStomp.Margin = new System.Windows.Forms.Padding(4);
+            this.shellStomp.Name = "shellStomp";
+            this.shellStomp.Size = new System.Drawing.Size(95, 17);
+            this.shellStomp.TabIndex = 32;
+            this.shellStomp.Text = "Has shell state";
+            this.shellStomp.UseVisualStyleBackColor = true;
+            this.shellStomp.CheckedChanged += new System.EventHandler(this.shellStomp_CheckedChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(669, 376);
+            this.label8.Location = new System.Drawing.Point(691, 376);
             this.label8.Margin = new System.Windows.Forms.Padding(4);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(58, 13);
@@ -139,7 +268,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(603, 376);
+            this.label6.Location = new System.Drawing.Point(613, 376);
             this.label6.Margin = new System.Windows.Forms.Padding(4);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
@@ -168,10 +297,10 @@
             "40",
             "48",
             "64"});
-            this.clipWidth.Location = new System.Drawing.Point(604, 397);
+            this.clipWidth.Location = new System.Drawing.Point(692, 397);
             this.clipWidth.Margin = new System.Windows.Forms.Padding(4);
             this.clipWidth.Name = "clipWidth";
-            this.clipWidth.Size = new System.Drawing.Size(56, 21);
+            this.clipWidth.Size = new System.Drawing.Size(70, 21);
             this.clipWidth.TabIndex = 28;
             this.clipWidth.SelectedIndexChanged += new System.EventHandler(this.clipWidth_SelectedIndexChanged);
             // 
@@ -184,10 +313,10 @@
             "32",
             "48",
             "64"});
-            this.clipHeight.Location = new System.Drawing.Point(668, 397);
+            this.clipHeight.Location = new System.Drawing.Point(616, 397);
             this.clipHeight.Margin = new System.Windows.Forms.Padding(4);
             this.clipHeight.Name = "clipHeight";
-            this.clipHeight.Size = new System.Drawing.Size(56, 21);
+            this.clipHeight.Size = new System.Drawing.Size(68, 21);
             this.clipHeight.TabIndex = 27;
             this.clipHeight.SelectedIndexChanged += new System.EventHandler(this.clipHeight_SelectedIndexChanged);
             // 
@@ -200,10 +329,10 @@
             "1",
             "2",
             "3"});
-            this.gamePalette.Location = new System.Drawing.Point(540, 397);
+            this.gamePalette.Location = new System.Drawing.Point(542, 397);
             this.gamePalette.Margin = new System.Windows.Forms.Padding(4);
             this.gamePalette.Name = "gamePalette";
-            this.gamePalette.Size = new System.Drawing.Size(56, 21);
+            this.gamePalette.Size = new System.Drawing.Size(66, 21);
             this.gamePalette.TabIndex = 26;
             this.gamePalette.SelectedIndexChanged += new System.EventHandler(this.gamePalette_SelectedIndexChanged);
             // 
@@ -225,7 +354,7 @@
             this.codeTags.Location = new System.Drawing.Point(540, 447);
             this.codeTags.Margin = new System.Windows.Forms.Padding(4);
             this.codeTags.Name = "codeTags";
-            this.codeTags.Size = new System.Drawing.Size(193, 76);
+            this.codeTags.Size = new System.Drawing.Size(236, 76);
             this.codeTags.TabIndex = 24;
             this.codeTags.UseCompatibleStateImageBehavior = false;
             this.codeTags.View = System.Windows.Forms.View.Details;
@@ -233,7 +362,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(646, 749);
+            this.button3.Location = new System.Drawing.Point(695, 750);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
@@ -272,7 +401,7 @@
             this.definitionCode.Multiline = true;
             this.definitionCode.Name = "definitionCode";
             this.definitionCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.definitionCode.Size = new System.Drawing.Size(701, 125);
+            this.definitionCode.Size = new System.Drawing.Size(750, 125);
             this.definitionCode.TabIndex = 20;
             this.definitionCode.WordWrap = false;
             // 
@@ -307,6 +436,20 @@
             this.displayProperty.TabIndex = 14;
             this.displayProperty.SelectedIndexChanged += new System.EventHandler(this.displayProperty_SelectedIndexChanged);
             // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(200, 563);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(174, 21);
+            this.paletteList.TabIndex = 5;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -330,7 +473,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(646, 780);
+            this.button2.Location = new System.Drawing.Point(694, 781);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -342,7 +485,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(563, 780);
+            this.button1.Location = new System.Drawing.Point(611, 781);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -363,6 +506,15 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // spriteViewer
+            // 
+            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
+            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.spriteViewer.Name = "spriteViewer";
+            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
+            this.spriteViewer.TabIndex = 0;
+            this.spriteViewer.Text = "spriteViewer1";
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -373,6 +525,14 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(277, 808);
             this.panel2.TabIndex = 6;
+            // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
+            this.spriteSelector.TabIndex = 0;
             // 
             // panel3
             // 
@@ -404,142 +564,18 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // shellStomp
-            // 
-            this.shellStomp.AutoSize = true;
-            this.shellStomp.Location = new System.Drawing.Point(542, 351);
-            this.shellStomp.Margin = new System.Windows.Forms.Padding(4);
-            this.shellStomp.Name = "shellStomp";
-            this.shellStomp.Size = new System.Drawing.Size(95, 17);
-            this.shellStomp.TabIndex = 32;
-            this.shellStomp.Text = "Has shell state";
-            this.shellStomp.UseVisualStyleBackColor = true;
-            this.shellStomp.CheckedChanged += new System.EventHandler(this.shellStomp_CheckedChanged);
-            // 
-            // stompApathy
-            // 
-            this.stompApathy.AutoSize = true;
-            this.stompApathy.Location = new System.Drawing.Point(542, 326);
-            this.stompApathy.Margin = new System.Windows.Forms.Padding(4);
-            this.stompApathy.Name = "stompApathy";
-            this.stompApathy.Size = new System.Drawing.Size(155, 17);
-            this.stompApathy.TabIndex = 34;
-            this.stompApathy.Text = "Apathetic to being stomped";
-            this.stompApathy.UseVisualStyleBackColor = true;
-            this.stompApathy.CheckedChanged += new System.EventHandler(this.stompApathy_CheckedChanged);
-            // 
-            // collisionBox
-            // 
-            this.collisionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.collisionBox.FormattingEnabled = true;
-            this.collisionBox.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12"});
-            this.collisionBox.Location = new System.Drawing.Point(540, 297);
-            this.collisionBox.Margin = new System.Windows.Forms.Padding(4);
-            this.collisionBox.Name = "collisionBox";
-            this.collisionBox.Size = new System.Drawing.Size(187, 21);
-            this.collisionBox.TabIndex = 35;
-            this.collisionBox.SelectedIndexChanged += new System.EventHandler(this.collisionBox_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(540, 276);
-            this.label9.Margin = new System.Windows.Forms.Padding(4);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 13);
-            this.label9.TabIndex = 36;
-            this.label9.Text = "Object Collision Box";
-            // 
-            // paletteList
-            // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(200, 563);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(174, 21);
-            this.paletteList.TabIndex = 5;
-            // 
-            // spriteViewer
-            // 
-            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
-            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
-            this.spriteViewer.Name = "spriteViewer";
-            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
-            this.spriteViewer.TabIndex = 0;
-            this.spriteViewer.Text = "spriteViewer1";
-            // 
-            // spriteSelector
-            // 
-            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
-            this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
-            this.spriteSelector.TabIndex = 0;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(540, 226);
-            this.label10.Margin = new System.Windows.Forms.Padding(4);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(86, 13);
-            this.label10.TabIndex = 38;
-            this.label10.Text = "Tile Collision Box";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12"});
-            this.comboBox1.Location = new System.Drawing.Point(540, 247);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(187, 21);
-            this.comboBox1.TabIndex = 37;
-            // 
             // SpriteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1018, 808);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1061, 808);
+            this.Controls.Add(this.panel43);
             this.Controls.Add(this.panel2);
             this.Name = "SpriteEditor";
             this.Text = "SpriteEditor";
             this.Activated += new System.EventHandler(this.SpriteEditor_Activated);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel43.ResumeLayout(false);
+            this.panel43.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -551,7 +587,7 @@
         private SpriteViewer spriteViewer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox spriteName;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel43;
         private System.Windows.Forms.Panel panel2;
         private SpriteSelector spriteSelector;
         private System.Windows.Forms.Label label3;
@@ -583,7 +619,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox collisionBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox gameHalt;
+        private System.Windows.Forms.CheckBox harmfulStomp;
+        private System.Windows.Forms.CheckBox tailImmune;
+        private System.Windows.Forms.CheckBox squashState;
 
     }
 }
