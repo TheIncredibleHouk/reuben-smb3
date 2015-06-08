@@ -31,6 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.spriteName = new System.Windows.Forms.TextBox();
             this.panel41 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.patTable = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.gfxBank = new System.Windows.Forms.ComboBox();
             this.squashState = new System.Windows.Forms.CheckBox();
             this.tailImmune = new System.Windows.Forms.CheckBox();
             this.harmfulStomp = new System.Windows.Forms.CheckBox();
@@ -52,7 +56,6 @@
             this.syntaxError = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.definitionCode = new System.Windows.Forms.TextBox();
-            this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.displayProperty = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -64,22 +67,28 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.gfxBank = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.patTable = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.killAction = new System.Windows.Forms.ComboBox();
+            this.attrGroups = new System.Windows.Forms.GroupBox();
+            this.boundBox = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.bounceOthers = new System.Windows.Forms.CheckBox();
+            this.immuneIce = new System.Windows.Forms.CheckBox();
+            this.immuneFire = new System.Windows.Forms.CheckBox();
+            this.immuneNinjaHammers = new System.Windows.Forms.CheckBox();
             this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel41.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.attrGroups.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 543);
+            this.label1.Location = new System.Drawing.Point(18, 531);
             this.label1.Margin = new System.Windows.Forms.Padding(4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
@@ -88,7 +97,7 @@
             // 
             // spriteName
             // 
-            this.spriteName.Location = new System.Drawing.Point(20, 563);
+            this.spriteName.Location = new System.Drawing.Point(21, 551);
             this.spriteName.Name = "spriteName";
             this.spriteName.Size = new System.Drawing.Size(174, 20);
             this.spriteName.TabIndex = 3;
@@ -97,32 +106,11 @@
             // panel41
             // 
             this.panel41.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel41.Controls.Add(this.label12);
-            this.panel41.Controls.Add(this.patTable);
-            this.panel41.Controls.Add(this.label11);
-            this.panel41.Controls.Add(this.gfxBank);
-            this.panel41.Controls.Add(this.squashState);
-            this.panel41.Controls.Add(this.tailImmune);
-            this.panel41.Controls.Add(this.harmfulStomp);
-            this.panel41.Controls.Add(this.label10);
-            this.panel41.Controls.Add(this.gameHalt);
-            this.panel41.Controls.Add(this.label9);
-            this.panel41.Controls.Add(this.collisionBox);
-            this.panel41.Controls.Add(this.stompApathy);
-            this.panel41.Controls.Add(this.shellStomp);
-            this.panel41.Controls.Add(this.label8);
-            this.panel41.Controls.Add(this.label6);
-            this.panel41.Controls.Add(this.label5);
-            this.panel41.Controls.Add(this.clipWidth);
-            this.panel41.Controls.Add(this.clipHeight);
-            this.panel41.Controls.Add(this.gamePalette);
-            this.panel41.Controls.Add(this.label4);
-            this.panel41.Controls.Add(this.codeTags);
+            this.panel41.Controls.Add(this.attrGroups);
             this.panel41.Controls.Add(this.button3);
             this.panel41.Controls.Add(this.syntaxError);
             this.panel41.Controls.Add(this.label2);
             this.panel41.Controls.Add(this.definitionCode);
-            this.panel41.Controls.Add(this.button10);
             this.panel41.Controls.Add(this.button9);
             this.panel41.Controls.Add(this.label1);
             this.panel41.Controls.Add(this.displayProperty);
@@ -137,13 +125,63 @@
             this.panel41.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel41.Location = new System.Drawing.Point(277, 0);
             this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(784, 808);
+            this.panel41.Size = new System.Drawing.Size(810, 843);
             this.panel41.TabIndex = 5;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(125, 244);
+            this.label12.Margin = new System.Windows.Forms.Padding(4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.TabIndex = 45;
+            this.label12.Text = "Table\r\n";
+            // 
+            // patTable
+            // 
+            this.patTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.patTable.FormattingEnabled = true;
+            this.patTable.Items.AddRange(new object[] {
+            "No Change",
+            "Bank 3",
+            "Bank 4"});
+            this.patTable.Location = new System.Drawing.Point(125, 265);
+            this.patTable.Margin = new System.Windows.Forms.Padding(4);
+            this.patTable.Name = "patTable";
+            this.patTable.Size = new System.Drawing.Size(66, 21);
+            this.patTable.TabIndex = 44;
+            this.patTable.SelectedIndexChanged += new System.EventHandler(this.patTable_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 244);
+            this.label11.Margin = new System.Windows.Forms.Padding(4);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 13);
+            this.label11.TabIndex = 43;
+            this.label11.Text = "Gfx Bank";
+            // 
+            // gfxBank
+            // 
+            this.gfxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gfxBank.FormattingEnabled = true;
+            this.gfxBank.Items.AddRange(new object[] {
+            "No Change",
+            "Bank 3",
+            "Bank 4"});
+            this.gfxBank.Location = new System.Drawing.Point(7, 265);
+            this.gfxBank.Margin = new System.Windows.Forms.Padding(4);
+            this.gfxBank.Name = "gfxBank";
+            this.gfxBank.Size = new System.Drawing.Size(110, 21);
+            this.gfxBank.TabIndex = 42;
+            this.gfxBank.SelectedIndexChanged += new System.EventHandler(this.gfxBank_SelectedIndexChanged);
             // 
             // squashState
             // 
             this.squashState.AutoSize = true;
-            this.squashState.Location = new System.Drawing.Point(540, 200);
+            this.squashState.Location = new System.Drawing.Point(7, 120);
             this.squashState.Margin = new System.Windows.Forms.Padding(4);
             this.squashState.Name = "squashState";
             this.squashState.Size = new System.Drawing.Size(200, 17);
@@ -155,7 +193,7 @@
             // tailImmune
             // 
             this.tailImmune.AutoSize = true;
-            this.tailImmune.Location = new System.Drawing.Point(540, 150);
+            this.tailImmune.Location = new System.Drawing.Point(7, 70);
             this.tailImmune.Margin = new System.Windows.Forms.Padding(4);
             this.tailImmune.Name = "tailImmune";
             this.tailImmune.Size = new System.Drawing.Size(129, 17);
@@ -167,7 +205,7 @@
             // harmfulStomp
             // 
             this.harmfulStomp.AutoSize = true;
-            this.harmfulStomp.Location = new System.Drawing.Point(540, 175);
+            this.harmfulStomp.Location = new System.Drawing.Point(7, 95);
             this.harmfulStomp.Margin = new System.Windows.Forms.Padding(4);
             this.harmfulStomp.Name = "harmfulStomp";
             this.harmfulStomp.Size = new System.Drawing.Size(117, 17);
@@ -179,7 +217,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(542, 276);
+            this.label10.Location = new System.Drawing.Point(7, 344);
             this.label10.Margin = new System.Windows.Forms.Padding(4);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(90, 13);
@@ -197,7 +235,7 @@
             "Draw 16 x 16 Mirrored",
             "Draw 16 x 32",
             "Draw 48 x 16"});
-            this.gameHalt.Location = new System.Drawing.Point(542, 297);
+            this.gameHalt.Location = new System.Drawing.Point(7, 365);
             this.gameHalt.Margin = new System.Windows.Forms.Padding(4);
             this.gameHalt.Name = "gameHalt";
             this.gameHalt.Size = new System.Drawing.Size(236, 21);
@@ -207,7 +245,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(542, 326);
+            this.label9.Location = new System.Drawing.Point(7, 394);
             this.label9.Margin = new System.Windows.Forms.Padding(4);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(110, 13);
@@ -232,7 +270,7 @@
             "10",
             "11",
             "12"});
-            this.collisionBox.Location = new System.Drawing.Point(542, 347);
+            this.collisionBox.Location = new System.Drawing.Point(7, 415);
             this.collisionBox.Margin = new System.Windows.Forms.Padding(4);
             this.collisionBox.Name = "collisionBox";
             this.collisionBox.Size = new System.Drawing.Size(236, 21);
@@ -242,7 +280,7 @@
             // stompApathy
             // 
             this.stompApathy.AutoSize = true;
-            this.stompApathy.Location = new System.Drawing.Point(540, 100);
+            this.stompApathy.Location = new System.Drawing.Point(7, 20);
             this.stompApathy.Margin = new System.Windows.Forms.Padding(4);
             this.stompApathy.Name = "stompApathy";
             this.stompApathy.Size = new System.Drawing.Size(155, 17);
@@ -254,7 +292,7 @@
             // shellStomp
             // 
             this.shellStomp.AutoSize = true;
-            this.shellStomp.Location = new System.Drawing.Point(540, 125);
+            this.shellStomp.Location = new System.Drawing.Point(7, 45);
             this.shellStomp.Margin = new System.Windows.Forms.Padding(4);
             this.shellStomp.Name = "shellStomp";
             this.shellStomp.Size = new System.Drawing.Size(95, 17);
@@ -266,7 +304,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(691, 376);
+            this.label8.Location = new System.Drawing.Point(156, 494);
             this.label8.Margin = new System.Windows.Forms.Padding(4);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(58, 13);
@@ -276,7 +314,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(613, 376);
+            this.label6.Location = new System.Drawing.Point(78, 494);
             this.label6.Margin = new System.Windows.Forms.Padding(4);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
@@ -286,7 +324,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(539, 376);
+            this.label5.Location = new System.Drawing.Point(4, 494);
             this.label5.Margin = new System.Windows.Forms.Padding(4);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
@@ -305,7 +343,7 @@
             "40",
             "48",
             "64"});
-            this.clipWidth.Location = new System.Drawing.Point(692, 397);
+            this.clipWidth.Location = new System.Drawing.Point(157, 515);
             this.clipWidth.Margin = new System.Windows.Forms.Padding(4);
             this.clipWidth.Name = "clipWidth";
             this.clipWidth.Size = new System.Drawing.Size(70, 21);
@@ -321,7 +359,7 @@
             "32",
             "48",
             "64"});
-            this.clipHeight.Location = new System.Drawing.Point(616, 397);
+            this.clipHeight.Location = new System.Drawing.Point(81, 515);
             this.clipHeight.Margin = new System.Windows.Forms.Padding(4);
             this.clipHeight.Name = "clipHeight";
             this.clipHeight.Size = new System.Drawing.Size(68, 21);
@@ -337,7 +375,7 @@
             "1",
             "2",
             "3"});
-            this.gamePalette.Location = new System.Drawing.Point(542, 397);
+            this.gamePalette.Location = new System.Drawing.Point(7, 515);
             this.gamePalette.Margin = new System.Windows.Forms.Padding(4);
             this.gamePalette.Name = "gamePalette";
             this.gamePalette.Size = new System.Drawing.Size(66, 21);
@@ -347,7 +385,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(537, 426);
+            this.label4.Location = new System.Drawing.Point(4, 544);
             this.label4.Margin = new System.Windows.Forms.Padding(4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
@@ -359,10 +397,10 @@
             this.codeTags.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.codeTags.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.codeTags.LabelWrap = false;
-            this.codeTags.Location = new System.Drawing.Point(540, 447);
+            this.codeTags.Location = new System.Drawing.Point(7, 565);
             this.codeTags.Margin = new System.Windows.Forms.Padding(4);
             this.codeTags.Name = "codeTags";
-            this.codeTags.Size = new System.Drawing.Size(236, 76);
+            this.codeTags.Size = new System.Drawing.Size(241, 76);
             this.codeTags.TabIndex = 24;
             this.codeTags.UseCompatibleStateImageBehavior = false;
             this.codeTags.View = System.Windows.Forms.View.Details;
@@ -370,7 +408,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(695, 750);
+            this.button3.Location = new System.Drawing.Point(21, 805);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
@@ -384,7 +422,7 @@
             this.syntaxError.AutoSize = true;
             this.syntaxError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.syntaxError.ForeColor = System.Drawing.Color.Red;
-            this.syntaxError.Location = new System.Drawing.Point(17, 749);
+            this.syntaxError.Location = new System.Drawing.Point(104, 810);
             this.syntaxError.Margin = new System.Windows.Forms.Padding(4);
             this.syntaxError.Name = "syntaxError";
             this.syntaxError.Size = new System.Drawing.Size(149, 13);
@@ -395,7 +433,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 597);
+            this.label2.Location = new System.Drawing.Point(18, 652);
             this.label2.Margin = new System.Windows.Forms.Padding(4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
@@ -405,39 +443,29 @@
             // definitionCode
             // 
             this.definitionCode.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.definitionCode.Location = new System.Drawing.Point(20, 617);
+            this.definitionCode.Location = new System.Drawing.Point(21, 672);
             this.definitionCode.Multiline = true;
             this.definitionCode.Name = "definitionCode";
             this.definitionCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.definitionCode.Size = new System.Drawing.Size(750, 125);
+            this.definitionCode.Size = new System.Drawing.Size(774, 125);
             this.definitionCode.TabIndex = 20;
             this.definitionCode.WordWrap = false;
             // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(646, 561);
-            this.button10.Margin = new System.Windows.Forms.Padding(4);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 19;
-            this.button10.Text = "Delete";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(563, 561);
+            this.button9.Location = new System.Drawing.Point(386, 598);
             this.button9.Margin = new System.Windows.Forms.Padding(4);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 0;
-            this.button9.Text = "Add";
+            this.button9.Text = "Modify";
             this.button9.UseVisualStyleBackColor = true;
             // 
             // displayProperty
             // 
             this.displayProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.displayProperty.FormattingEnabled = true;
-            this.displayProperty.Location = new System.Drawing.Point(381, 562);
+            this.displayProperty.Location = new System.Drawing.Point(204, 600);
             this.displayProperty.Margin = new System.Windows.Forms.Padding(4);
             this.displayProperty.Name = "displayProperty";
             this.displayProperty.Size = new System.Drawing.Size(174, 21);
@@ -447,7 +475,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(197, 543);
+            this.label3.Location = new System.Drawing.Point(201, 531);
             this.label3.Margin = new System.Windows.Forms.Padding(4);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 13);
@@ -457,7 +485,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(378, 541);
+            this.label7.Location = new System.Drawing.Point(201, 579);
             this.label7.Margin = new System.Windows.Forms.Padding(4);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 13);
@@ -467,7 +495,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(694, 781);
+            this.button2.Location = new System.Drawing.Point(720, 805);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -479,7 +507,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(611, 781);
+            this.button1.Location = new System.Drawing.Point(637, 805);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -491,7 +519,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(469, 540);
+            this.checkBox1.Location = new System.Drawing.Point(21, 578);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(104, 17);
@@ -508,7 +536,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(277, 808);
+            this.panel2.Size = new System.Drawing.Size(277, 843);
             this.panel2.TabIndex = 6;
             // 
             // panel3
@@ -516,7 +544,7 @@
             this.panel3.Controls.Add(this.button8);
             this.panel3.Controls.Add(this.button7);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 773);
+            this.panel3.Location = new System.Drawing.Point(0, 808);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(273, 31);
             this.panel3.TabIndex = 1;
@@ -541,55 +569,156 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // label11
+            // label13
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(542, 226);
-            this.label11.Margin = new System.Windows.Forms.Padding(4);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 13);
-            this.label11.TabIndex = 43;
-            this.label11.Text = "Gfx Bank";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 294);
+            this.label13.Margin = new System.Windows.Forms.Padding(4);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(69, 13);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "Death Action";
             // 
-            // gfxBank
+            // killAction
             // 
-            this.gfxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.gfxBank.FormattingEnabled = true;
-            this.gfxBank.Items.AddRange(new object[] {
-            "No Change",
-            "Bank 3",
-            "Bank 4"});
-            this.gfxBank.Location = new System.Drawing.Point(542, 247);
-            this.gfxBank.Margin = new System.Windows.Forms.Padding(4);
-            this.gfxBank.Name = "gfxBank";
-            this.gfxBank.Size = new System.Drawing.Size(66, 21);
-            this.gfxBank.TabIndex = 42;
-            this.gfxBank.SelectedIndexChanged += new System.EventHandler(this.gfxBank_SelectedIndexChanged);
+            this.killAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.killAction.FormattingEnabled = true;
+            this.killAction.Items.AddRange(new object[] {
+            "Do halt action",
+            "Draw 16 x 16 ",
+            "Draw 16 x 16 Mirrored",
+            "Draw 16 x 32",
+            "Draw 16 x 32 Horizontally Flipped",
+            "Game loop & death sequence",
+            "Draw giant",
+            "Poof",
+            "Draw unless game halted",
+            "Game loop"});
+            this.killAction.Location = new System.Drawing.Point(7, 315);
+            this.killAction.Margin = new System.Windows.Forms.Padding(4);
+            this.killAction.Name = "killAction";
+            this.killAction.Size = new System.Drawing.Size(236, 21);
+            this.killAction.TabIndex = 46;
+            this.killAction.SelectedIndexChanged += new System.EventHandler(this.killAction_SelectedIndexChanged);
             // 
-            // label12
+            // attrGroups
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(616, 226);
-            this.label12.Margin = new System.Windows.Forms.Padding(4);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(34, 13);
-            this.label12.TabIndex = 45;
-            this.label12.Text = "Table\r\n";
+            this.attrGroups.Controls.Add(this.immuneNinjaHammers);
+            this.attrGroups.Controls.Add(this.immuneFire);
+            this.attrGroups.Controls.Add(this.immuneIce);
+            this.attrGroups.Controls.Add(this.bounceOthers);
+            this.attrGroups.Controls.Add(this.boundBox);
+            this.attrGroups.Controls.Add(this.label14);
+            this.attrGroups.Controls.Add(this.stompApathy);
+            this.attrGroups.Controls.Add(this.label13);
+            this.attrGroups.Controls.Add(this.codeTags);
+            this.attrGroups.Controls.Add(this.killAction);
+            this.attrGroups.Controls.Add(this.label4);
+            this.attrGroups.Controls.Add(this.label12);
+            this.attrGroups.Controls.Add(this.gamePalette);
+            this.attrGroups.Controls.Add(this.patTable);
+            this.attrGroups.Controls.Add(this.clipHeight);
+            this.attrGroups.Controls.Add(this.label11);
+            this.attrGroups.Controls.Add(this.clipWidth);
+            this.attrGroups.Controls.Add(this.gfxBank);
+            this.attrGroups.Controls.Add(this.label5);
+            this.attrGroups.Controls.Add(this.squashState);
+            this.attrGroups.Controls.Add(this.label6);
+            this.attrGroups.Controls.Add(this.tailImmune);
+            this.attrGroups.Controls.Add(this.label8);
+            this.attrGroups.Controls.Add(this.harmfulStomp);
+            this.attrGroups.Controls.Add(this.shellStomp);
+            this.attrGroups.Controls.Add(this.label10);
+            this.attrGroups.Controls.Add(this.collisionBox);
+            this.attrGroups.Controls.Add(this.gameHalt);
+            this.attrGroups.Controls.Add(this.label9);
+            this.attrGroups.Location = new System.Drawing.Point(539, 11);
+            this.attrGroups.Name = "attrGroups";
+            this.attrGroups.Size = new System.Drawing.Size(255, 654);
+            this.attrGroups.TabIndex = 48;
+            this.attrGroups.TabStop = false;
+            this.attrGroups.Text = "Attributes";
             // 
-            // patTable
+            // boundBox
             // 
-            this.patTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.patTable.FormattingEnabled = true;
-            this.patTable.Items.AddRange(new object[] {
-            "No Change",
-            "Bank 3",
-            "Bank 4"});
-            this.patTable.Location = new System.Drawing.Point(616, 247);
-            this.patTable.Margin = new System.Windows.Forms.Padding(4);
-            this.patTable.Name = "patTable";
-            this.patTable.Size = new System.Drawing.Size(66, 21);
-            this.patTable.TabIndex = 44;
-            this.patTable.SelectedIndexChanged += new System.EventHandler(this.patTable_SelectedIndexChanged);
+            this.boundBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.boundBox.FormattingEnabled = true;
+            this.boundBox.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.boundBox.Location = new System.Drawing.Point(7, 465);
+            this.boundBox.Margin = new System.Windows.Forms.Padding(4);
+            this.boundBox.Name = "boundBox";
+            this.boundBox.Size = new System.Drawing.Size(236, 21);
+            this.boundBox.TabIndex = 48;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 444);
+            this.label14.Margin = new System.Windows.Forms.Padding(4);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(100, 13);
+            this.label14.TabIndex = 49;
+            this.label14.Text = "Object Collision Box";
+            // 
+            // bounceOthers
+            // 
+            this.bounceOthers.AutoSize = true;
+            this.bounceOthers.Location = new System.Drawing.Point(7, 145);
+            this.bounceOthers.Margin = new System.Windows.Forms.Padding(4);
+            this.bounceOthers.Name = "bounceOthers";
+            this.bounceOthers.Size = new System.Drawing.Size(147, 17);
+            this.bounceOthers.TabIndex = 50;
+            this.bounceOthers.Text = "Bounces off other objects";
+            this.bounceOthers.UseVisualStyleBackColor = true;
+            // 
+            // immuneIce
+            // 
+            this.immuneIce.AutoSize = true;
+            this.immuneIce.Location = new System.Drawing.Point(7, 170);
+            this.immuneIce.Margin = new System.Windows.Forms.Padding(4);
+            this.immuneIce.Name = "immuneIce";
+            this.immuneIce.Size = new System.Drawing.Size(116, 17);
+            this.immuneIce.TabIndex = 51;
+            this.immuneIce.Text = "Immune to ice balls";
+            this.immuneIce.UseVisualStyleBackColor = true;
+            // 
+            // immuneFire
+            // 
+            this.immuneFire.AutoSize = true;
+            this.immuneFire.Location = new System.Drawing.Point(7, 195);
+            this.immuneFire.Margin = new System.Windows.Forms.Padding(4);
+            this.immuneFire.Name = "immuneFire";
+            this.immuneFire.Size = new System.Drawing.Size(116, 17);
+            this.immuneFire.TabIndex = 52;
+            this.immuneFire.Text = "Immune to fire balls";
+            this.immuneFire.UseVisualStyleBackColor = true;
+            // 
+            // immuneNinjaHammers
+            // 
+            this.immuneNinjaHammers.AutoSize = true;
+            this.immuneNinjaHammers.Location = new System.Drawing.Point(7, 220);
+            this.immuneNinjaHammers.Margin = new System.Windows.Forms.Padding(4);
+            this.immuneNinjaHammers.Name = "immuneNinjaHammers";
+            this.immuneNinjaHammers.Size = new System.Drawing.Size(223, 17);
+            this.immuneNinjaHammers.TabIndex = 53;
+            this.immuneNinjaHammers.Text = "Immune to ninja stars, hammers and shells";
+            this.immuneNinjaHammers.UseVisualStyleBackColor = true;
             // 
             // paletteList
             // 
@@ -599,7 +728,7 @@
             this.paletteList.DropDownWidth = 288;
             this.paletteList.FormattingEnabled = true;
             this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(200, 563);
+            this.paletteList.Location = new System.Drawing.Point(204, 551);
             this.paletteList.Name = "paletteList";
             this.paletteList.SelectedPalette = null;
             this.paletteList.Size = new System.Drawing.Size(174, 21);
@@ -619,14 +748,14 @@
             this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spriteSelector.Location = new System.Drawing.Point(0, 0);
             this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.Size = new System.Drawing.Size(273, 773);
+            this.spriteSelector.Size = new System.Drawing.Size(273, 808);
             this.spriteSelector.TabIndex = 0;
             // 
             // SpriteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1061, 808);
+            this.ClientSize = new System.Drawing.Size(1087, 843);
             this.Controls.Add(this.panel41);
             this.Controls.Add(this.panel2);
             this.Name = "SpriteEditor";
@@ -636,6 +765,8 @@
             this.panel41.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.attrGroups.ResumeLayout(false);
+            this.attrGroups.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -660,7 +791,6 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox definitionCode;
-        private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label syntaxError;
         private System.Windows.Forms.Button button3;
@@ -685,6 +815,15 @@
         private System.Windows.Forms.ComboBox gfxBank;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox patTable;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox killAction;
+        private System.Windows.Forms.GroupBox attrGroups;
+        private System.Windows.Forms.CheckBox immuneNinjaHammers;
+        private System.Windows.Forms.CheckBox immuneFire;
+        private System.Windows.Forms.CheckBox immuneIce;
+        private System.Windows.Forms.CheckBox bounceOthers;
+        private System.Windows.Forms.ComboBox boundBox;
+        private System.Windows.Forms.Label label14;
 
     }
 }

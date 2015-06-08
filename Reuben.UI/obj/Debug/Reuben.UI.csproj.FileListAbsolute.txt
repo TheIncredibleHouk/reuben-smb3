@@ -27,6 +27,8 @@ C:\Projects\Personal\Reuben\Reuben.UI\bin\Debug\FastColoredTextBox.dll
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ProjectView.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMEditor.resources
 C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.SpriteEditor.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.SpriteInfoEditor.resources
+C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMFastColoredTextBox.resources
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe.config
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.UI.pdb
@@ -40,6 +42,7 @@ F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Graphics.pdb
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Reuben.Model.pdb
 F:\ROM Hacking\Reuben\Reuben.UI\bin\Debug\Newtonsoft.Json.xml
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csprojResolveAssemblyReference.cache
+F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMFastColoredTextBox.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.BlockSelector.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.SpriteInfoEditor.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ProjectView.resources
@@ -57,6 +60,3 @@ F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.StringManager.resources
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.csproj.GenerateResource.Cache
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.exe
 F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.pdb
-C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.Controls.SpriteInfoEditor.resources
-F:\ROM Hacking\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMFastColoredTextBox.resources
-C:\Projects\Personal\Reuben\Reuben.UI\obj\Debug\Reuben.UI.ASMFastColoredTextBox.resources

@@ -107,6 +107,7 @@ namespace Reuben.UI
                 //  ;#ObjectsInit.word@28
 
                 //      .word DSKFWEERD
+                this.Selection = new FastColoredTextBoxNS.Range(this, new Place(0, 0), new Place(1, 0));
                 string[] split1 = text.Split('@'); // "#ObjectsInit, 39
                 int myOffset = Convert.ToInt32(split1[1].Substring(0, 2), 16); // 0x39
 
@@ -141,12 +142,11 @@ namespace Reuben.UI
 
         private Range InternalFindNext(string pattern)
         {
-            Place startPlace;
+            Place startPlace = new Place(0, 0);
             pattern = Regex.Escape(pattern);
             Range range = this.Selection.Clone();
             range.Normalize();
 
-            startPlace = range.Start;
             range.Start = range.End;
             if (range.Start >= startPlace)
             {

@@ -64,7 +64,7 @@ ObjectGroup03_InitJumpTable:
 
 
     ; Object group $03 (i.e. objects starting at ID $6C) State 2 jump table
-;#ObjectsNorm.word6C
+;#ObjectsNorm.word@6C
     .org ObjectGroup_NormalJumpTable    ; <-- help enforce this table *here*
 ObjectGroup03_NormalJumpTable:
     .word ObjNorm_GroundTroop    ; Object $6C - OBJ_GREENTROOPA
@@ -316,7 +316,7 @@ ObjectGroup03_PatTableSel:
 
 
     ; Object group $03 (i.e. objects starting at ID $6C) "Kill Action"
-;#ObjectsKill.byte@48
+;#ObjectsKill.byte@6C
     .org ObjectGroup_KillAction    ; <-- help enforce this table *here*
 ObjectGroup03_KillAction:
     .byte KILLACT_JUSTDRAWMIRROR    ; Object $6C - OBJ_GREENTROOPA

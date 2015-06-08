@@ -172,6 +172,7 @@ Object_BoundBox:
     .byte  4,   8,   5,  40 ; E
     .byte  2,  43,   2,  12 ; F
 
+;#ObjectsAttr.byte@00
 Object_AttrFlags:
     ; Defines flags which set attributes of objects
     .byte OAT_BOUNDBOX00    ; Object $00

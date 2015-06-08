@@ -315,7 +315,7 @@ ObjectGroup04_PatTableSel:
 
 
     ; Object group $04 (i.e. objects starting at ID $90) "Kill Action"
-;#ObjectsKill.byte@48
+;#ObjectsKill.byte@90
     .org ObjectGroup_KillAction    ; <-- help enforce this table *here*
 ObjectGroup04_KillAction:
     .byte KILLACT_STANDARD    ; Object $90 - OBJ_FIREICEBAR
