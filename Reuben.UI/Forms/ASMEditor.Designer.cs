@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.asmFiles = new System.Windows.Forms.ListView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -37,10 +38,13 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.closeButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.asmTextContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.goToLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.asmTextContext.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -144,6 +148,20 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.button2_Click);
             // 
+            // asmTextContext
+            // 
+            this.asmTextContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.goToLabelToolStripMenuItem});
+            this.asmTextContext.Name = "asmTextContext";
+            this.asmTextContext.Size = new System.Drawing.Size(153, 48);
+            // 
+            // goToLabelToolStripMenuItem
+            // 
+            this.goToLabelToolStripMenuItem.Name = "goToLabelToolStripMenuItem";
+            this.goToLabelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goToLabelToolStripMenuItem.Text = "Go to Label";
+            this.goToLabelToolStripMenuItem.Click += new System.EventHandler(this.goToLabelToolStripMenuItem_Click);
+            // 
             // ASMEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +178,7 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.asmTextContext.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -175,5 +194,7 @@
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ContextMenuStrip asmTextContext;
+        private System.Windows.Forms.ToolStripMenuItem goToLabelToolStripMenuItem;
     }
 }

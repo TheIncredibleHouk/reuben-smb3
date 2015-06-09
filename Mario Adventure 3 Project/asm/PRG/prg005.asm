@@ -3712,8 +3712,8 @@ LevelEvent_Do:
     JSR DynJump     ; Dynamic jump based on Level_Event... 
     
     ; THESE MUST FOLLOW DynJump FOR THE DYNAMIC JUMP TO WORK!! 
-
     .word LevelEvent_DoNothing    ; 0 - Do nothing (not used!)
+;#ObjectsEvent.word@B4
     .word LevelEvent_8WayBulletBills    ; 1 - Cheep Cheep attack
     .word LevelEvent_ProduceMines    ; 2 - Spike Cheeps float by
     .word LevelEvent_LakituFlee    ; 3 - Clears Lakitu_Active which causes an active Lakitu to flee / be removed

@@ -147,5 +147,10 @@ namespace Reuben.UI
                 }
             }
         }
+
+        private void goToLabelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

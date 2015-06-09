@@ -112,13 +112,20 @@ namespace Reuben.UI
                 if (spriteViewer.CurrentDefinition.GameID >= 0xB4 && spriteViewer.CurrentDefinition.GameID <= 0xBB)
                 {
                     attrGroups.Enabled = false;
+
+                    ListViewItem item1 = new ListViewItem();
+                    item1.Text = "Event Code";
+                    item1.Tag = new Tuple<string, string>("prg005.asm", "ObjectsEvent@" + spriteSelector.SelectedSprite.ObjectID.ToString("X2"));
+
+                    codeTags.Items.Add(item1);
                 }
                 else if (spriteViewer.CurrentDefinition.GameID >= 0xBC && spriteViewer.CurrentDefinition.GameID <= 0xD0)
                 {
-                    
+                    attrGroups.Enabled = false;
+
                     ListViewItem item1 = new ListViewItem();
                     item1.Text = "Generator Code";
-                    item1.Tag = new Tuple<string, string>("prg0007.asm", "ObjectsGenerator@" + spriteSelector.SelectedSprite.ObjectID.ToString("X2"));
+                    item1.Tag = new Tuple<string, string>("prg007.asm", "ObjectsGenerator@" + spriteSelector.SelectedSprite.ObjectID.ToString("X2"));
 
                     codeTags.Items.Add(item1);
                 }
