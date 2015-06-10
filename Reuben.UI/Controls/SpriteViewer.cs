@@ -29,10 +29,10 @@ namespace Reuben.UI
         SpriteController localSpriteController;
         public void Initialize(GraphicsController graphicsController, SpriteController spriteController, Color[] colors, Palette palette, Palette overlayPalette)
         {
-            currentSprite = new Sprite() { X = 0, Y = 0 };
+            CurrentSprite = new Sprite() { X = 0, Y = 0 };
             localGraphicsController = graphicsController;
             localSpriteController = spriteController;
-            
+
 
             localColorReference = colors;
             localOverlayPalette = overlayPalette;
@@ -129,7 +129,7 @@ namespace Reuben.UI
         private Palette localPalette;
         private Palette localOverlayPalette;
 
-        private Sprite currentSprite;
+        public Sprite CurrentSprite { get; private set; }
         public void UpdateGraphics()
         {
             if (CurrentDefinition == null || localPalette == null || localColorReference == null || localGraphicsController == null || localSpriteController == null || localOverlayPalette == null)
@@ -138,13 +138,13 @@ namespace Reuben.UI
                 return;
             }
 
-            currentSprite.ObjectID = CurrentDefinition.GameID;
-            Rectangle bounds = localSpriteController.GetClipBounds(currentSprite);
+            CurrentSprite.ObjectID = CurrentDefinition.GameID;
+            Rectangle bounds = localSpriteController.GetClipBounds(CurrentSprite);
 
             int x = (buffer.Width / 2) - bounds.Width / 2;
             int y = (buffer.Height / 2) - bounds.Height / 2;
 
-            
+
             BitmapData bitmap = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
             Drawer.FillArea(new Rectangle(0, 0, buffer.Width, buffer.Height), quickSpriteReference[0][0], bitmap);
             foreach (var info in definition.SpriteInfo)
@@ -180,7 +180,7 @@ namespace Reuben.UI
                     tile1 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value);
                     tile2 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value + 1);
                     colorReference = quickOverlayReference;
-                    
+
                 }
                 else
                 {
@@ -240,7 +240,7 @@ namespace Reuben.UI
 
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
-            
+
         }
     }
 }

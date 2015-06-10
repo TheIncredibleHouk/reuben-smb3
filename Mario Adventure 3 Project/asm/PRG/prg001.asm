@@ -338,7 +338,7 @@ ObjectGroup00_PatTableSel:
 
     ; Object group $00 (i.e. objects starting at ID $00) "Kill Action"
 
-;#ObjectsKill.word@00
+;#ObjectsKill.byte@00
     .org ObjectGroup_KillAction ; <-- help enforce this table *here*
 ObjectGroup00_KillAction:
     .byte KILLACT_STANDARD  ; Object $00

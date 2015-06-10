@@ -61,7 +61,7 @@ namespace Reuben.UI
                 collisionBox.Items[item] = collisionBox.Items[item] + string.Format(" (L: {0} T: {1} R: {2} B: {3})", left, top, right, bottom).Replace("$", "");
             }
 
-            for(int i = 0; i < 0x80; i++)
+            for (int i = 0; i < 0x80; i++)
             {
                 patTable.Items.Add(i.ToString("X2"));
             }
@@ -390,7 +390,7 @@ namespace Reuben.UI
 
         private void gfxBank_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!spriteUpdating)
+            if (!spriteUpdating)
             {
                 UpdatePatternTableOptions();
             }
@@ -398,7 +398,7 @@ namespace Reuben.UI
 
         private void patTable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!spriteUpdating)
+            if (!spriteUpdating)
             {
                 UpdatePatternTableOptions();
             }
@@ -434,7 +434,7 @@ namespace Reuben.UI
             TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
-                MessageBox.Show("Unable to locate the tag for this property.");
+                MessageBox.Show("Unable to locate the ObjectsGfxAttr tag for this property.");
                 return;
             }
 
@@ -528,7 +528,7 @@ namespace Reuben.UI
             TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
-                MessageBox.Show("Unable to locate the tag for this property.");
+                MessageBox.Show("Unable to locate the ObjectsHitBox tag for this property.");
                 return;
             }
 
@@ -622,7 +622,7 @@ namespace Reuben.UI
             TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
-                MessageBox.Show("Unable to locate the tag for this property.");
+                MessageBox.Show("Unable to locate the ObjectsOptions tag for this property.");
                 return;
             }
 
@@ -724,7 +724,7 @@ namespace Reuben.UI
             TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
-                MessageBox.Show("Unable to locate the tag for this property.");
+                MessageBox.Show("Unable to locate the ObjectsPatTable tag for this property.");
                 return;
             }
 
@@ -819,12 +819,12 @@ namespace Reuben.UI
             TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsKill@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
-                MessageBox.Show("Unable to locate the tag for this property.");
+                MessageBox.Show("Unable to locate the ObjectsKill tag for this property.");
                 return;
             }
 
             string line = loc.Text;
-            
+
             foreach (string s in line.Split(' ', '|'))
             {
                 switch (s.Trim())
@@ -932,7 +932,7 @@ namespace Reuben.UI
             TextLocation loc = localASMController.FindTagLine("prg000.asm", "ObjectsAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
-                MessageBox.Show("Unable to locate the tag for this property.");
+                MessageBox.Show("Unable to locate the ObjectsAttr tag for this property.");
                 return;
             }
 
@@ -1017,7 +1017,7 @@ namespace Reuben.UI
                     case "OAT_ICEIMMUNITY":
                         immuneIce.Checked = true;
                         break;
-                        
+
                     case "OAT_FIREIMMUNITY":
                         immuneFire.Checked = true;
                         break;
@@ -1049,6 +1049,66 @@ namespace Reuben.UI
             if (!spriteUpdating)
             {
                 UpdateKillActionOptions();
+            }
+        }
+
+        private int highlightedLine = -1;
+        private void HighlightSprites()
+        {
+
+            string[] lines = definitionCode.Text.Split('\n');
+            int start = definitionCode.SelectionStart;
+            int lineNumber = 0;
+            while (start >= lines[0].Length)
+            {
+                start -= lines[++lineNumber].Length;
+            }
+
+            if (highlightedLine != lineNumber)
+            {
+                spriteViewer.HighlightedSpriteInfo.Clear();
+                spriteViewer.HighlightedSpriteInfo.Add(spriteViewer.CurrentDefinition.SpriteInfo[lineNumber]);
+                spriteViewer.UpdateGraphics();
+                highlightedLine = lineNumber;
+            }
+        }
+
+        private void definitionCode_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateDrawingCode();
+            HighlightSprites();
+        }
+
+        private void definitionCode_MouseUp(object sender, MouseEventArgs e)
+        {
+            HighlightSprites();
+        }
+
+        private void spriteViewer_MouseDown(object sender, MouseEventArgs e)
+        {
+            Rectangle bounds = localSpriteController.GetClipBounds(spriteViewer.CurrentSprite);
+            int x = (512 / 2) - bounds.Width / 2;
+            int y = (512 / 2) - bounds.Height / 2;
+            List<Rectangle> rectangles = spriteViewer.CurrentDefinition.SpriteInfo.Select(i => new Rectangle(i.X + x, i.Y + y, 8, 16)).ToList();
+            Point p = new Point(e.X, e.Y);
+            Rectangle rect = rectangles.Where(r => r.Contains(p)).FirstOrDefault();
+            int start = 0;
+            int end = 0;
+            if (rect != default(Rectangle))
+            {
+                int index = rectangles.IndexOf(rect);
+                string[] lines = definitionCode.Text.Split('\n');
+                int i = 0;
+                while (i < index)
+                {
+                    start += lines[i++].Length + 1;
+                }
+
+                end = lines[i].Length;
+                definitionCode.Focus();
+                definitionCode.SelectionStart = start;
+                definitionCode.SelectionLength = end;
+                HighlightSprites();
             }
         }
     }
