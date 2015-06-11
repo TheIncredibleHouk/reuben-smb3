@@ -13,19 +13,19 @@ namespace Reuben.UI
         public static string Serialize(List<SpriteInfo> infos)
         {
             List<string> strings = new List<string>();
-            foreach(SpriteInfo info in infos)
+            foreach (SpriteInfo info in infos)
             {
-            strings.Add(string.Format("X={0} Y={1} Sprite={2:X2} Table={3:X2} Palette={4:X2} Overlay={5} HFlip={6} VFlip={7} Properties={8}",
-                                    info.X,
-                                    info.Y,
-                                    info.Value,
-                                    info.Table,
-                                    info.Palette,
-                                    info.Overlay,
-                                    info.HorizontalFlip,
-                                    info.VerticalFlip,
-                                    String.Join(",", info.Properties.OrderBy(p => p).Select(p => p.ToString()))
-                                    ));
+                strings.Add(string.Format("X={0} Y={1} Sprite={2:X2} Table={3:X2} Palette={4:X2} Overlay={5} HFlip={6} VFlip={7} Properties={8}",
+                                        info.X,
+                                        info.Y,
+                                        info.Value,
+                                        info.Table,
+                                        info.Palette,
+                                        info.Overlay,
+                                        info.HorizontalFlip,
+                                        info.VerticalFlip,
+                                        String.Join(",", info.Properties.OrderBy(p => p).Select(p => p.ToString()))
+                                        ));
             }
 
             return string.Join("\r\n", strings);
@@ -34,13 +34,15 @@ namespace Reuben.UI
         public static List<SpriteInfo> Deserialize(string serializedInfo)
         {
             List<SpriteInfo> infos = new List<SpriteInfo>();
+
             foreach (string info in serializedInfo.Split('\n'))
             {
                 SpriteInfo spriteInfo = new SpriteInfo();
-                try
+
+                string[] split = info.Split(' ');
+                foreach (string s in split)
                 {
-                    string[] split = info.Split(' ');
-                    foreach (string s in split)
+                    try
                     {
                         string[] split2 = s.Split('=');
                         switch (split2[0].ToUpper().Trim())
@@ -78,19 +80,24 @@ namespace Reuben.UI
                                 break;
 
                             case "PROPERTIES":
-                                spriteInfo.Properties = split2[1].Split(',').Select(p => Convert.ToInt32(p)).OrderBy(p => p).ToList();
+                                spriteInfo.Properties = split2[1].Split(new char[1] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(p => Convert.ToInt32(p)).OrderBy(p => p).ToList();
                                 break;
                         }
                     }
-                }
-                catch
-                {
+
+                    catch
+                    {
+                        continue;
+                    }
+
                 }
 
                 infos.Add(spriteInfo);
             }
 
+
             return infos;
+
         }
     }
 }

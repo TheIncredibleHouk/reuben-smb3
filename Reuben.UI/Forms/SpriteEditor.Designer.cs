@@ -66,19 +66,19 @@
             this.button9 = new System.Windows.Forms.Button();
             this.displayProperty = new System.Windows.Forms.ComboBox();
             this.codeTags = new System.Windows.Forms.ListView();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.spriteViewer = new Reuben.UI.SpriteViewer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
-            this.spriteViewer = new Reuben.UI.SpriteViewer();
-            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel41.SuspendLayout();
             this.attrGroups.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -569,7 +569,7 @@
             // 
             // definitionCode
             // 
-            this.definitionCode.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.definitionCode.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.definitionCode.Location = new System.Drawing.Point(21, 672);
             this.definitionCode.Multiline = true;
             this.definitionCode.Name = "definitionCode";
@@ -614,6 +614,20 @@
             this.codeTags.UseCompatibleStateImageBehavior = false;
             this.codeTags.View = System.Windows.Forms.View.Details;
             this.codeTags.DoubleClick += new System.EventHandler(this.codeTags_DoubleClick);
+            // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(204, 551);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(174, 21);
+            this.paletteList.TabIndex = 5;
             // 
             // label4
             // 
@@ -681,6 +695,16 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // spriteViewer
+            // 
+            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
+            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
+            this.spriteViewer.Name = "spriteViewer";
+            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
+            this.spriteViewer.TabIndex = 0;
+            this.spriteViewer.Text = "spriteViewer1";
+            this.spriteViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.spriteViewer_MouseDown);
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -691,6 +715,14 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(277, 843);
             this.panel2.TabIndex = 6;
+            // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.Size = new System.Drawing.Size(273, 808);
+            this.spriteSelector.TabIndex = 0;
             // 
             // panel3
             // 
@@ -721,38 +753,6 @@
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // paletteList
-            // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(204, 551);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(174, 21);
-            this.paletteList.TabIndex = 5;
-            // 
-            // spriteViewer
-            // 
-            this.spriteViewer.Location = new System.Drawing.Point(20, 11);
-            this.spriteViewer.Margin = new System.Windows.Forms.Padding(4);
-            this.spriteViewer.Name = "spriteViewer";
-            this.spriteViewer.Size = new System.Drawing.Size(512, 512);
-            this.spriteViewer.TabIndex = 0;
-            this.spriteViewer.Text = "spriteViewer1";
-            this.spriteViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.spriteViewer_MouseDown);
-            // 
-            // spriteSelector
-            // 
-            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 0);
-            this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.Size = new System.Drawing.Size(273, 808);
-            this.spriteSelector.TabIndex = 0;
             // 
             // SpriteEditor
             // 

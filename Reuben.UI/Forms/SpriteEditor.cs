@@ -789,28 +789,24 @@ namespace Reuben.UI
             localASMController.UpdateTagLine("ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
+        private string lastDefcode = "";
         private void UpdateDrawingCode()
         {
             List<SpriteInfo> info;
-            try
+
+
+            info = EditorSpriteInfo.Deserialize(definitionCode.Text);
+            if (info != null)
             {
-                info = EditorSpriteInfo.Deserialize(definitionCode.Text);
-                if (info != null)
-                {
-                    spriteViewer.CurrentDefinition.SpriteInfo = info;
-                    syntaxError.Visible = false;
-                    spriteViewer.UpdateGraphics();
-                    spriteSelector.Update(colors: null);
-                }
-                else
-                {
-                    syntaxError.Visible = true;
-                }
+                spriteViewer.CurrentDefinition.SpriteInfo = info;
+                syntaxError.Visible = false;
+                spriteViewer.UpdateGraphics();
+                spriteSelector.Update(colors: null);
             }
-            catch
-            {
-                syntaxError.Visible = true;
-            }
+
+            lastDefcode = definitionCode.Text;
+
+
         }
 
         private void LoadKillActionOptions()
@@ -1075,8 +1071,11 @@ namespace Reuben.UI
 
         private void definitionCode_KeyUp(object sender, KeyEventArgs e)
         {
-            UpdateDrawingCode();
             HighlightSprites();
+            if (e.KeyCode == Keys.F5)
+            {
+                UpdateDrawingCode();
+            }
         }
 
         private void definitionCode_MouseUp(object sender, MouseEventArgs e)
