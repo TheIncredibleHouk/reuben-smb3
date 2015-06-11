@@ -83,11 +83,18 @@ namespace Reuben.UI
             {
                 Editor.EditMode = EditMode.Sprites;
             }
-            SelectedSprite = sprites.SpriteDrawBoundsCache.Where(r => r.Item2.Contains(e.X, e.Y)).Select(r => r.Item1).FirstOrDefault();
-            if (SelectedSpriteChanged != null)
+            var selSprite = sprites.SpriteDrawBoundsCache.Where(r => r.Item2.Contains(e.X, e.Y)).Select(r => r.Item1).FirstOrDefault();
+            if (selSprite != null)
             {
-                SelectedSpriteChanged(this, null);
+                SelectedSprite = selSprite;
+
+                if (SelectedSpriteChanged != null)
+                {
+                    SelectedSpriteChanged(this, null);
+                }
             }
+            mouseCap.Focus();
+
         }
 
         private Sprite selectedSprite;
@@ -131,11 +138,6 @@ namespace Reuben.UI
                     sprites.SelectionRectangle = Rectangle.Empty;
                 }
             }
-        }
-
-        private void sprites_MouseMove(object sender, MouseEventArgs e)
-        {
-            mouseCap.Focus();
         }
 
         private void panel1_Scroll(object sender, ScrollEventArgs e)

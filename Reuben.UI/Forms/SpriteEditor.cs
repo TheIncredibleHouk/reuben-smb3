@@ -1052,20 +1052,35 @@ namespace Reuben.UI
         private void HighlightSprites()
         {
 
-            string[] lines = definitionCode.Text.Split('\n');
-            int start = definitionCode.SelectionStart;
-            int lineNumber = 0;
-            while (start >= lines[0].Length)
+            if (definitionCode.Text.Length > 0)
             {
-                start -= lines[++lineNumber].Length;
-            }
+                string[] lines = definitionCode.Text.Split('\n');
+                int current = lines[0].Length;
+                int lineNumber = 0;
+                while(true)
+                {
+                    if (definitionCode.SelectionStart > current)
+                    {
+                        lineNumber++;
+                        current += lines[lineNumber].Length + 1;
+                        
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
 
-            if (highlightedLine != lineNumber)
-            {
-                spriteViewer.HighlightedSpriteInfo.Clear();
-                spriteViewer.HighlightedSpriteInfo.Add(spriteViewer.CurrentDefinition.SpriteInfo[lineNumber]);
-                spriteViewer.UpdateGraphics();
-                highlightedLine = lineNumber;
+                if (highlightedLine != lineNumber)
+                {
+                    if (lineNumber < spriteViewer.CurrentDefinition.SpriteInfo.Count)
+                    {
+                        spriteViewer.HighlightedSpriteInfo.Clear();
+                        spriteViewer.HighlightedSpriteInfo.Add(spriteViewer.CurrentDefinition.SpriteInfo[lineNumber]);
+                        spriteViewer.UpdateGraphics();
+                        highlightedLine = lineNumber;
+                    }
+                }
             }
         }
 

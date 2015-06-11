@@ -179,6 +179,7 @@ namespace Reuben.UI.Controls
         {
             int x = sprite.X * 16;
             int y = sprite.Y * 16;
+            int lowestY = y;
 
             SpriteDefinition definition = Sprites.GetDefinition(sprite.ObjectID);
             foreach (var info in definition.SpriteInfo)
@@ -200,9 +201,15 @@ namespace Reuben.UI.Controls
                     // prevent overflow drawing
                     continue;
                 }
+
                 if (info.Overlay)
                 {
                     continue;
+                }
+
+                if (yOffset < lowestY)
+                {
+                    lowestY = yOffset;
                 }
 
                 Tile tile1 = Graphics.GetTileByBankIndex(info.Table, info.Value % 0x40);
@@ -230,6 +237,7 @@ namespace Reuben.UI.Controls
             }
 
             string safeName = definition.Name.ToUpper().Trim();
+            y = ((lowestY / 8) * 8) - 8;
             for (int i = 0; i < safeName.Length; i++)
             {
                 if (i >= 31)
@@ -242,7 +250,7 @@ namespace Reuben.UI.Controls
                 {
                     continue;
                 }
-                Drawer.DrawTileAlpha(Graphics.GetExtraTileByBankIndex(0, tile), i * 8 + 4, y - 8, quickSpriteReference[0], bitmap);
+                Drawer.DrawTileAlpha(Graphics.GetExtraTileByBankIndex(0, tile), i * 8 + 4, y, quickSpriteReference[0], bitmap);
             }
         }
 

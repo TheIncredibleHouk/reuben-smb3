@@ -22,6 +22,8 @@ namespace Reuben.Controllers
         private DateTime lastModified;
         private string lastExtraFile;
         private DateTime lastExtraModified;
+        private string lastPaletteFile;
+        private DateTime lastPaletteModified;
         public GraphicsController()
         {
 
@@ -107,8 +109,9 @@ namespace Reuben.Controllers
 
             fs.Read(graphicsData, 0, (int)fs.Length);
             fs.Close();
+
             lastExtraFile = fileName;
-            lastModified = File.GetLastWriteTime(lastExtraFile);
+            lastExtraModified = File.GetLastWriteTime(lastExtraFile);
             int dataPointer = 0;
             for (int i = 0; i < ExtraTiles.Length; i++)
             {
@@ -125,7 +128,7 @@ namespace Reuben.Controllers
         public event EventHandler ExtraGraphicsUpdated;
         public void CheckFiles()
         {
-            if (File.GetLastWriteTime(lastFile) >= lastModified)
+            if (File.GetLastWriteTime(lastFile) > lastModified)
             {
                 LoadGraphics(lastFile);
                 if (GraphicsUpdated != null)
@@ -134,7 +137,7 @@ namespace Reuben.Controllers
                 }
             }
 
-            if (File.GetLastWriteTime(lastExtraFile) >= lastExtraModified)
+            if (File.GetLastWriteTime(lastExtraFile) > lastExtraModified)
             {
                 LoadExtraGraphics(lastExtraFile);
                 if (ExtraGraphicsUpdated != null)
@@ -146,7 +149,7 @@ namespace Reuben.Controllers
 
         public void LoadPalettes(string fileName)
         {
-            lastFile = fileName;
+            lastPaletteFile = fileName;
             GraphicsData = JsonConvert.DeserializeObject<GraphicsData>(File.ReadAllText(fileName));
         }
 

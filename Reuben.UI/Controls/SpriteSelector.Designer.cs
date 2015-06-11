@@ -150,7 +150,6 @@
             this.sprites.TabIndex = 0;
             this.sprites.Text = "spritesViewer1";
             this.sprites.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpriteSelector_MouseDown);
-            this.sprites.MouseMove += new System.Windows.Forms.MouseEventHandler(this.sprites_MouseMove);
             // 
             // SpriteSelector
             // 
