@@ -178,6 +178,7 @@ namespace Reuben.UI
 
         public bool ShowInteractionOverlays { get; set; }
         public bool ShowSolidityOverlays { get; set; }
+        public bool ShowSpriteOverlays { get; set; }
 
         public void UpdateBlockDisplay(int column, int row, int width, int height)
         {
@@ -203,7 +204,7 @@ namespace Reuben.UI
 
         public void UpdateSprites(IEnumerable<Sprite> sprites, IEnumerable<Rectangle> clearAreas)
         {
-            List<Tuple<Sprite, Rectangle>> spriteBounds = localSpriteController.GetBounds(sprites).ToList();
+            List<Tuple<Sprite, Rectangle>> spriteBounds = localSpriteController.GetBounds(sprites, ShowSpriteOverlays).ToList();
             Rectangle area = spriteBounds.Select(a => a.Item2).Combine();// generate all bound areas
 
             BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
@@ -216,7 +217,7 @@ namespace Reuben.UI
                 }
             }
 
-            List<Tuple<Sprite, Rectangle>> affectedSprites = localSpriteController.GetBounds(localLevel.Sprites).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
+            List<Tuple<Sprite, Rectangle>> affectedSprites = localSpriteController.GetBounds(localLevel.Sprites, ShowSpriteOverlays).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
             area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), area);
 
             foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
@@ -285,7 +286,7 @@ namespace Reuben.UI
 
             if (ShowSolidityOverlays)
             {
-                switch(block.BlockSolidity)
+                switch (block.BlockSolidity)
                 {
                     case 0x10:
                         Drawer.FillTileWithAlpha(column * 16, row * 16 + 8, Color.White, .5, bitmap);
@@ -321,7 +322,7 @@ namespace Reuben.UI
                         Drawer.FillTileWithAlpha(column * 16 + 8, row * 16 + 8, Color.Brown, .5, bitmap);
                         break;
                 }
-                
+
             }
         }
 
@@ -331,8 +332,11 @@ namespace Reuben.UI
             int x = sprite.X * 16;
             int y = sprite.Y * 16;
 
-            foreach (var info in localSpriteController.GetDefinition(sprite.ObjectID).SpriteInfo)
+            SpriteDefinition def = localSpriteController.GetDefinition(sprite.ObjectID);
+            bool forceOverlay = def.SpriteInfo.Where(s => !s.Overlay).Count() == 0;
+            foreach (var info in def.SpriteInfo)
             {
+
                 if (info.Properties.Count > 0 && !info.Properties.Contains(sprite.Property))
                 {
                     // if the info is property specific, only sprites with that sprite draw that tile
@@ -350,32 +354,47 @@ namespace Reuben.UI
                     // prevent overflow drawing
                     return;
                 }
-                if (info.Table == -1)
+                if (info.Overlay && !ShowSpriteOverlays && !forceOverlay)
                 {
                     continue;
                 }
 
-                Tile tile1 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value);
-                Tile tile2 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value + 1);
-                if (info.HorizontalFlip && info.VerticalFlip)
+                Color[][] colorReference;
+                Tile tile1 = null;
+                Tile tile2 = null;
+
+                if (info.Overlay)
                 {
-                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile1, xOffset, yOffset, quickSpriteReference[paletteIndex], bitmap);
-                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile2, xOffset, yOffset + 8, quickSpriteReference[paletteIndex], bitmap);
-                }
-                else if (info.HorizontalFlip)
-                {
-                    Drawer.DrawTileHorizontalFlipAlpha(tile1, xOffset, yOffset, quickSpriteReference[paletteIndex], bitmap);
-                    Drawer.DrawTileHorizontalFlipAlpha(tile2, xOffset, yOffset + 8, quickSpriteReference[paletteIndex], bitmap);
-                }
-                else if (info.VerticalFlip)
-                {
-                    Drawer.DrawTileVerticalFlipAlpha(tile1, xOffset, yOffset, quickSpriteReference[paletteIndex], bitmap);
-                    Drawer.DrawTileVerticalFlipAlpha(tile2, xOffset, yOffset + 8, quickSpriteReference[paletteIndex], bitmap);
+                    tile1 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value);
+                    tile2 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value + 1);
+                    colorReference = quickSpriteOverlayReference;
                 }
                 else
                 {
-                    Drawer.DrawTileAlpha(tile1, xOffset, yOffset, quickSpriteReference[paletteIndex], bitmap);
-                    Drawer.DrawTileAlpha(tile2, xOffset, yOffset + 8, quickSpriteReference[paletteIndex], bitmap);
+                    tile1 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value);
+                    tile2 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value + 1);
+                    colorReference = quickSpriteReference;
+                }
+
+                if (info.HorizontalFlip && info.VerticalFlip)
+                {
+                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
+                }
+                else if (info.HorizontalFlip)
+                {
+                    Drawer.DrawTileHorizontalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileHorizontalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
+                }
+                else if (info.VerticalFlip)
+                {
+                    Drawer.DrawTileVerticalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileVerticalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
+                }
+                else
+                {
+                    Drawer.DrawTileAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
                 }
             }
         }

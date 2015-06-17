@@ -286,7 +286,7 @@ namespace Reuben.UI
                             rightMouseDrag = true;
                         }
 
-                        var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
+                        var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
                         if (affectedArea.Count > 0)
                         {
                             levelViewer.Invalidate(affectedArea.Combine());
@@ -313,12 +313,12 @@ namespace Reuben.UI
 
                     else if (spriteSelector.SelectedSprite != null)
                     {
-                        Sprite clickedSprite = localSpritesController.GetBounds(level.Sprites).ToList().Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
+                        Sprite clickedSprite = localSpritesController.GetBounds(level.Sprites, spriteOverlay.Checked).ToList().Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
                         if (clickedSprite != null)
                         {
                             if (levelViewer.SelectedSprites.Contains(clickedSprite))
                             {
-                                var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
+                                var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
                                 foreach (Sprite s in levelViewer.SelectedSprites)
                                 {
                                     s.ObjectID = spriteSelector.SelectedSprite.ObjectID;
@@ -341,7 +341,7 @@ namespace Reuben.UI
                         }
                         else
                         {
-                            var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites).Select(s => s.Item2).ToList();
+                            var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
                             selectedSprite = spriteSelector.SelectedSprite.MakeCopy();
                             selectedSprite.X = startCol;
                             selectedSprite.Y = startRow;
@@ -430,7 +430,7 @@ namespace Reuben.UI
                     int rowChange = (e.Y / 16) - startRow;
                     if (colChange != 0 || rowChange != 0)
                     {
-                        IEnumerable<Rectangle> existingAreas = localSpritesController.GetClipBounds(levelViewer.SelectedSprites).ToList();
+                        IEnumerable<Rectangle> existingAreas = localSpritesController.GetClipBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).ToList();
                         foreach (Sprite sprite in levelViewer.SelectedSprites)
                         {
                             levelViewer.SelectedSprites[index].X += colChange;
@@ -576,7 +576,7 @@ namespace Reuben.UI
             {
                 if (leftMouseDragged && levelViewer.SelectionRectangle != Rectangle.Empty)
                 {
-                    List<Tuple<Sprite, Rectangle>> boundCache = localSpritesController.GetBounds(level.Sprites).ToList();
+                    List<Tuple<Sprite, Rectangle>> boundCache = localSpritesController.GetBounds(level.Sprites, spriteOverlay.Checked).ToList();
                     levelViewer.SelectedSprites.Clear();
                     List<Tuple<Sprite, Rectangle>> affectedSprites = boundCache.Where(t => t.Item2.IntersectsWith(levelViewer.SelectionRectangle)).ToList();
                     levelViewer.SelectedSprites.AddRange(affectedSprites.Select(s => s.Item1));
@@ -589,11 +589,6 @@ namespace Reuben.UI
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-        }
-
-        private void LevelEditor_Move(object sender, EventArgs e)
-        {
-
         }
 
         private void Undo()
@@ -627,16 +622,6 @@ namespace Reuben.UI
                         break;
                 }
             }
-        }
-
-        private void LevelEditor_Activated(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LevelEditor_SizeChanged(object sender, EventArgs e)
-        {
-
         }
 
         public void UpdateScreenSize()
@@ -705,6 +690,12 @@ namespace Reuben.UI
             var newGraphics = localGraphicsController.MakePatternTable(level.GraphicsID, level.GraphicsID + 1, patternTable, patternTable + 1);
             levelViewer.Update(patternTable: newGraphics);
             blockSelector.Update(patternTable: newGraphics);
+        }
+
+        private void spriteOverlay_CheckedChanged(object sender, EventArgs e)
+        {
+            levelViewer.ShowSpriteOverlays = spriteOverlay.Checked;
+            levelViewer.UpdateSprites(level.Sprites, localSpritesController.GetClipBounds(levelViewer.SelectedSprites, !spriteOverlay.Checked));
         }
     }
 }

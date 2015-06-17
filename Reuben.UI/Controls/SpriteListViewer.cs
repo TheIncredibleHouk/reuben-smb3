@@ -182,6 +182,7 @@ namespace Reuben.UI.Controls
             int lowestY = y;
 
             SpriteDefinition definition = Sprites.GetDefinition(sprite.ObjectID);
+            bool forceOverlay = definition.SpriteInfo.Where(s => !s.Overlay).Count() == 0;
             foreach (var info in definition.SpriteInfo)
             {
                 if (info.Properties.Count > 0 && !info.Properties.Contains(sprite.Property))
@@ -202,7 +203,7 @@ namespace Reuben.UI.Controls
                     continue;
                 }
 
-                if (info.Overlay)
+                if (info.Overlay && !forceOverlay)
                 {
                     continue;
                 }
@@ -212,8 +213,20 @@ namespace Reuben.UI.Controls
                     lowestY = yOffset;
                 }
 
-                Tile tile1 = Graphics.GetTileByBankIndex(info.Table, info.Value % 0x40);
-                Tile tile2 = Graphics.GetTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
+                Tile tile1 = null;
+                Tile tile2 = null;
+
+                if (info.Overlay)
+                {
+                    tile1 = Graphics.GetExtraTileByBankIndex(info.Table, info.Value % 0x40);
+                    tile2 = Graphics.GetExtraTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
+                }
+                else
+                {
+                    tile1 = Graphics.GetTileByBankIndex(info.Table, info.Value % 0x40);
+                    tile2 = Graphics.GetTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
+                }
+
                 if (info.HorizontalFlip && info.VerticalFlip)
                 {
                     Drawer.DrawTileHorizontalVerticalFlipAlpha(tile1, xOffset, yOffset + 8, quickSpriteReference[paletteIndex], bitmap);

@@ -69,6 +69,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.spriteOverlay = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
             this.panel23.SuspendLayout();
@@ -127,6 +128,7 @@
             // panel23
             // 
             this.panel23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel23.Controls.Add(this.spriteOverlay);
             this.panel23.Controls.Add(this.solidityOverlay);
             this.panel23.Controls.Add(this.interactionOverlay);
             this.panel23.Controls.Add(this.label10);
@@ -157,7 +159,7 @@
             // solidityOverlay
             // 
             this.solidityOverlay.AutoSize = true;
-            this.solidityOverlay.Location = new System.Drawing.Point(156, 147);
+            this.solidityOverlay.Location = new System.Drawing.Point(156, 145);
             this.solidityOverlay.Margin = new System.Windows.Forms.Padding(4);
             this.solidityOverlay.Name = "solidityOverlay";
             this.solidityOverlay.Size = new System.Drawing.Size(133, 17);
@@ -535,6 +537,18 @@
             this.label13.TabIndex = 21;
             this.label13.Text = "Information";
             // 
+            // spriteOverlay
+            // 
+            this.spriteOverlay.AutoSize = true;
+            this.spriteOverlay.Location = new System.Drawing.Point(314, 121);
+            this.spriteOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.spriteOverlay.Name = "spriteOverlay";
+            this.spriteOverlay.Size = new System.Drawing.Size(127, 17);
+            this.spriteOverlay.TabIndex = 24;
+            this.spriteOverlay.Text = "Show Sprite Overlays";
+            this.spriteOverlay.UseVisualStyleBackColor = true;
+            this.spriteOverlay.CheckedChanged += new System.EventHandler(this.spriteOverlay_CheckedChanged);
+            // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,9 +561,7 @@
             this.KeyPreview = true;
             this.Name = "LevelEditor";
             this.Text = "LevelEditor";
-            this.SizeChanged += new System.EventHandler(this.LevelEditor_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LevelEditor_KeyDown);
-            this.Move += new System.EventHandler(this.LevelEditor_Move);
             this.panel1.ResumeLayout(false);
             this.lvlHost.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
@@ -609,6 +621,7 @@
         private System.Windows.Forms.Button mouseCap;
         private System.Windows.Forms.CheckBox solidityOverlay;
         private System.Windows.Forms.CheckBox interactionOverlay;
+        private System.Windows.Forms.CheckBox spriteOverlay;
 
     }
 }
