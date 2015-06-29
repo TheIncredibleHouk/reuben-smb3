@@ -699,7 +699,6 @@ namespace Reuben.UI.ProjectManagement
             savedPoint = currentPoint;
         }
 
-
         private void RestorePoint()
         {
             currentPoint = savedPoint;

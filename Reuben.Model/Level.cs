@@ -45,6 +45,9 @@ namespace Reuben.Model
         public int StartY { get; set; }
 
         [DataMember]
+        public int ScrollType { get; set; }
+
+        [DataMember]
         public int EventType { get; set; }
 
         [DataMember]

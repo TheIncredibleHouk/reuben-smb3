@@ -34,6 +34,12 @@ namespace Reuben.Controllers
             File.WriteAllText(fileName, JsonConvert.SerializeObject(WorldData));
         }
 
+
+        public World LoadWorld(string fileName)
+        {
+            return JsonConvert.DeserializeObject<World>(File.ReadAllText(fileName));
+        }
+
         public WorldInfo GetWorldByID(Guid id)
         {
             return WorldData.Worlds.Where(w => w.ID == id).FirstOrDefault();
@@ -43,6 +49,24 @@ namespace Reuben.Controllers
         {
             WorldInfo info = GetWorldByID(world.ID);
             File.WriteAllText(info.File, JsonConvert.SerializeObject(world));
+        }
+
+        public byte[] GetCompressedData(World world)
+        {
+            byte[] data = new byte[9 * 16 * world.NumberOfScreens];
+            int counter = 0;
+            for (int i = 0; i < world.NumberOfScreens; i++)
+            {
+                for (int y = 0; y < 9; y++)
+                {
+                    for (int x = 0; x < 16; x++)
+                    {
+                        data[counter++] = world.Data[(i * 16) + x, y + 0x11];
+                    }
+                }
+            }
+
+            return data;
         }
     }
 }

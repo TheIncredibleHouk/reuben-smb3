@@ -13,7 +13,11 @@ namespace Reuben.Model
         public Project()
         {
             Structure = new ProjectStructure();
+            LastAsmBuildDateTime = new DateTime(1900, 1, 1);
         }
+
+        [DataMember]
+        public DateTime LastAsmBuildDateTime { get; set; }
 
         [DataMember]
         public string GraphicsFile { get; set; }

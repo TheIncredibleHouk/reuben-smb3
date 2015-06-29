@@ -16,13 +16,6 @@ namespace Reuben.UI
 {
     public partial class ProjectView : UserControl
     {
-        static ProjectController projectController;
-        static GraphicsController graphicsController;
-        static LevelController levelController;
-        static StringController stringController;
-        static SpriteController spriteController;
-        static ASMController asmController;
-
         public ProjectView()
         {
             InitializeComponent();
@@ -37,6 +30,8 @@ namespace Reuben.UI
             graphicsController.LoadExtraGraphics(controller.Project.ExtraGraphicsFile);
             graphicsController.LoadPalettes(controller.Project.PaletteFile);
 
+            romController = new RomController();
+            
             levelController = new LevelController();
             levelController.Load(controller.Project.LevelDataFile);
 
@@ -89,7 +84,7 @@ namespace Reuben.UI
             openDialog.Filter = "JSON File (*.json)|*json|All Files|*";
             if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (!mainProject.Load(openDialog.FileName))
+                if (ControllerService.Initialize(openDialog.FileName))
                 {
                     MessageBox.Show("Unable to load " + openDialog.FileName + ". Please verify the file is a proper Reuben project file.");
                 }
@@ -247,6 +242,22 @@ namespace Reuben.UI
         {
             ProjectView.SpriteEditor.FormClosed -= SpriteEditor_FormClosed;
             ProjectView.SpriteEditor = null;
+        }
+
+        private static void BuildRom()
+        {
+            if (string.IsNullOrEmpty(projectController.Project.RomFile))
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter =
+                saveDialog.Filter = "NES File (*.nes)|*nes|All Files|*";
+            }
+            if (projectController.Project.LastAsmBuildDateTime < File.GetLastWriteTime(projectController.Project.ASMDirectory + @"\smb3.asm"))
+            {
+                romController.BuildRomFromSource(projectController.Project.ASMDirectory, projectController.Project.RomFile);
+            }
+
+            
         }
     }
 }

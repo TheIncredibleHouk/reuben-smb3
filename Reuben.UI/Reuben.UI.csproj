@@ -99,6 +99,7 @@
     <Compile Include="Controls\SpriteViewer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extras\ControllerService.cs" />
     <Compile Include="Extras\DataChange.cs" />
     <Compile Include="Extras\EditorSpriteInfo.cs" />
     <Compile Include="Extras\Enums.cs" />

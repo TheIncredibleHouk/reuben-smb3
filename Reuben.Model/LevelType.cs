@@ -22,6 +22,9 @@ namespace Reuben.Model
         public string Name { get; set; }
 
         [DataMember]
+        public int ID { get; set; }
+
+        [DataMember]
         public int DefaultGraphicsID { get; set; }
 
         [DataMember]

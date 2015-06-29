@@ -1,4 +1,4 @@
-; Super Mario Bros. 3 Full Disassembly by Southbird 2012
+;; Super Mario Bros. 3 Full Disassembly by Southbird 2012
 ; For more info, see http://www.sonicepoch.com/sm3mix/
 ;
 ; PLEASE INCLUDE A CREDIT TO THE SOUTHBIRD DISASSEMBLY
