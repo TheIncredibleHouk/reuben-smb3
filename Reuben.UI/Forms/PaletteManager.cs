@@ -27,10 +27,10 @@ namespace Reuben.UI
         public List<Palette> LocalPalettes { get; set; }
         public Palette OverlayPalette { get; set; }
 
-        public void Initialize(GraphicsController controller, LevelController levelController)
+        public void Initialize()
         {
-            graphics = controller;
-            levels = levelController;
+            graphics = Controllers.Graphics;
+            levels = Controllers.Levels;
             OverlayPalette = levels.LevelData.OverlayPalette.MakeCopy();
             LocalPalettes = graphics.GraphicsData.Palettes.OrderBy(p => p.Name).ToList();
             LocalPalettes.Add(OverlayPalette);

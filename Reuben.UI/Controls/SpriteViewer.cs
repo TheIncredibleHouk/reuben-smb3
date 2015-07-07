@@ -25,14 +25,9 @@ namespace Reuben.UI
             HighlightedSpriteInfo = new List<SpriteInfo>();
         }
 
-        GraphicsController localGraphicsController;
-        SpriteController localSpriteController;
-        public void Initialize(GraphicsController graphicsController, SpriteController spriteController, Color[] colors, Palette palette, Palette overlayPalette)
+        public void Initialize(Color[] colors, Palette palette, Palette overlayPalette)
         {
             CurrentSprite = new Sprite() { X = 0, Y = 0 };
-            localGraphicsController = graphicsController;
-            localSpriteController = spriteController;
-
 
             localColorReference = colors;
             localOverlayPalette = overlayPalette;
@@ -132,14 +127,14 @@ namespace Reuben.UI
         public Sprite CurrentSprite { get; private set; }
         public void UpdateGraphics()
         {
-            if (CurrentDefinition == null || localPalette == null || localColorReference == null || localGraphicsController == null || localSpriteController == null || localOverlayPalette == null)
+            if (CurrentDefinition == null || localPalette == null || localColorReference == null || localOverlayPalette == null)
             {
                 Graphics.FromImage(buffer).Clear(Color.Black);
                 return;
             }
 
             CurrentSprite.ObjectID = CurrentDefinition.GameID;
-            Rectangle bounds = localSpriteController.GetClipBounds(CurrentSprite);
+            Rectangle bounds = Controllers.Sprites.GetClipBounds(CurrentSprite);
 
             int x = (buffer.Width / 2) - bounds.Width / 2;
             int y = (buffer.Height / 2) - bounds.Height / 2;
@@ -177,15 +172,15 @@ namespace Reuben.UI
                         continue;
                     }
 
-                    tile1 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value);
-                    tile2 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value + 1);
+                    tile1 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value);
+                    tile2 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value + 1);
                     colorReference = quickOverlayReference;
 
                 }
                 else
                 {
-                    tile1 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value % 0x40);
-                    tile2 = localGraphicsController.GetTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
+                    tile1 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value % 0x40);
+                    tile2 = Controllers.Graphics.GetTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
                     colorReference = quickSpriteReference;
                 }
 
@@ -228,7 +223,7 @@ namespace Reuben.UI
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (localPalette == null || localColorReference == null || localGraphicsController == null || localSpriteController == null || localOverlayPalette == null)
+            if (localPalette == null || localColorReference == null || localOverlayPalette == null)
             {
                 e.Graphics.Clear(Color.Black);
             }

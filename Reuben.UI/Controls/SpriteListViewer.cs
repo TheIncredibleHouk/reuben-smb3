@@ -25,6 +25,13 @@ namespace Reuben.UI.Controls
             this.Width = 256;
         }
 
+        public void Initialize()
+        {
+            int resultHeight = FilterSprites("");
+            buffer = new Bitmap(256, resultHeight, PixelFormat.Format32bppArgb);
+            this.Height = resultHeight;
+        }
+
         private Color[] colors;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -39,41 +46,6 @@ namespace Reuben.UI.Controls
                 colors = value;
             }
         }
-
-        private GraphicsController graphics;
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public GraphicsController Graphics
-        {
-            get
-            {
-                return graphics;
-            }
-            set
-            {
-                graphics = value;
-            }
-        }
-
-        private SpriteController sprites;
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SpriteController Sprites
-        {
-            get
-            {
-                return sprites;
-            }
-            set
-            {
-                sprites = value;
-                int resultHeight = FilterSprites("");
-                buffer = new Bitmap(256, resultHeight, PixelFormat.Format32bppArgb);
-
-                this.Height = resultHeight;
-            }
-        }
-
 
         public List<Tuple<Sprite, Rectangle>> SpriteDrawBoundsCache { get; private set; }
 
@@ -113,7 +85,7 @@ namespace Reuben.UI.Controls
 
         public void UpdateGraphics()
         {
-            if (colors == null || graphics == null || sprites == null || palette == null)
+            if (colors == null || palette == null)
             {
                 return;
             }
@@ -139,11 +111,11 @@ namespace Reuben.UI.Controls
             IEnumerable<SpriteDefinition> definitions;
             if (filter.Length > 0)
             {
-                definitions = Sprites.SpriteData.Definitions.Where(d => d.Name.ToLower().Contains(filter));
+                definitions = Controllers.Sprites.SpriteData.Definitions.Where(d => d.Name.ToLower().Contains(filter));
             }
             else
             {
-                definitions = Sprites.SpriteData.Definitions;
+                definitions = Controllers.Sprites.SpriteData.Definitions;
             }
 
             SpriteDrawBoundsCache.Clear();
@@ -155,16 +127,16 @@ namespace Reuben.UI.Controls
                 s.X = 1;
                 targetY = s.Y = lastY / 16 + 1;
                 s.ObjectID = def.GameID;
-                Rectangle drawArea = Sprites.GetClipBounds(s);
+                Rectangle drawArea = Controllers.Sprites.GetClipBounds(s);
                 while (drawArea.X < 0)
                 {
                     s.X++;
-                    drawArea = Sprites.GetClipBounds(s);
+                    drawArea = Controllers.Sprites.GetClipBounds(s);
                 }
                 while (drawArea.Y < targetY * 16)
                 {
                     s.Y++;
-                    drawArea = Sprites.GetClipBounds(s);
+                    drawArea = Controllers.Sprites.GetClipBounds(s);
                 }
 
                 lastY = drawArea.Bottom + 16;
@@ -181,7 +153,7 @@ namespace Reuben.UI.Controls
             int y = sprite.Y * 16;
             int lowestY = y;
 
-            SpriteDefinition definition = Sprites.GetDefinition(sprite.ObjectID);
+            SpriteDefinition definition = Controllers.Sprites.GetDefinition(sprite.ObjectID);
             bool forceOverlay = definition.SpriteInfo.Where(s => !s.Overlay).Count() == 0;
             foreach (var info in definition.SpriteInfo)
             {
@@ -218,13 +190,13 @@ namespace Reuben.UI.Controls
 
                 if (info.Overlay)
                 {
-                    tile1 = Graphics.GetExtraTileByBankIndex(info.Table, info.Value % 0x40);
-                    tile2 = Graphics.GetExtraTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
+                    tile1 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value % 0x40);
+                    tile2 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
                 }
                 else
                 {
-                    tile1 = Graphics.GetTileByBankIndex(info.Table, info.Value % 0x40);
-                    tile2 = Graphics.GetTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
+                    tile1 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value % 0x40);
+                    tile2 = Controllers.Graphics.GetTileByBankIndex(info.Table, (info.Value % 0x40) + 1);
                 }
 
                 if (info.HorizontalFlip && info.VerticalFlip)
@@ -263,7 +235,7 @@ namespace Reuben.UI.Controls
                 {
                     continue;
                 }
-                Drawer.DrawTileAlpha(Graphics.GetExtraTileByBankIndex(0, tile), i * 8 + 4, y, quickSpriteReference[0], bitmap);
+                Drawer.DrawTileAlpha(Controllers.Graphics.GetExtraTileByBankIndex(0, tile), i * 8 + 4, y, quickSpriteReference[0], bitmap);
             }
         }
 

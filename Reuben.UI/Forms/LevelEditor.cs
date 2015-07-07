@@ -20,6 +20,7 @@ namespace Reuben.UI
         {
             InitializeComponent();
             panel1.MouseWheel += panel1_MouseWheel;
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         void panel1_MouseWheel(object sender, MouseEventArgs e)
@@ -32,18 +33,12 @@ namespace Reuben.UI
 
         private Level level;
         private LevelInfo levelInfo;
-        private LevelController localLevelController;
-        private GraphicsController localGraphicsController;
-        private StringController localStringController;
-        private SpriteController localSpritesController;
 
-        public void LoadLevel(LevelInfo info, LevelController levelController, GraphicsController graphicsController, StringController stringController, SpriteController spriteController)
+        public void LoadLevel(LevelInfo info)
         {
-            localLevelController = levelController;
-            localGraphicsController = graphicsController;
 
             levelInfo = info;
-            level = localLevelController.LoadLevel(info.File);
+            level = Controllers.Levels.LoadLevel(info.File);
 
             int animationTable = 0;
             switch (level.AnimationType)
@@ -65,48 +60,60 @@ namespace Reuben.UI
                     break;
             }
 
-            var patternTable = localGraphicsController.MakePatternTable(level.GraphicsID, level.GraphicsID + 1, animationTable, animationTable +1);
-            var levelType = localLevelController.LevelData.Types[level.LevelType];
-            var palette = localGraphicsController.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
-            var overlayPatternTable = localGraphicsController.MakeExtraPatternTable(4, 5, 6, 7);
+            var patternTable = Controllers.Graphics.MakePatternTable(level.GraphicsID, level.GraphicsID + 1, animationTable, animationTable + 1);
+            var levelType = Controllers.Levels.LevelData.Types[level.LevelType];
+            var palette = Controllers.Graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+            var overlayPatternTable = Controllers.Graphics.MakeExtraPatternTable(4, 5, 6, 7);
 
-            levelViewer.Initialize(level, levelType, palette, localLevelController.LevelData.OverlayPalette, localGraphicsController.GraphicsData.Colors, localLevelController.LevelData.Overlays, patternTable, overlayPatternTable, spriteController, localGraphicsController);
-            blockSelector.Initialize(patternTable, overlayPatternTable, levelType.Blocks, localLevelController.LevelData.Overlays, palette, localLevelController.LevelData.OverlayPalette, localGraphicsController.GraphicsData.Colors);
+            levelViewer.Initialize(level, levelType, palette, Controllers.Levels.LevelData.OverlayPalette, Controllers.Graphics.GraphicsData.Colors, Controllers.Levels.LevelData.Overlays, patternTable, overlayPatternTable);
+            blockSelector.Initialize(patternTable, overlayPatternTable, levelType.Blocks, Controllers.Levels.LevelData.Overlays, palette, Controllers.Levels.LevelData.OverlayPalette, Controllers.Graphics.GraphicsData.Colors);
 
-            spriteSelector.Initialize(graphicsController, spriteController, graphicsController.GraphicsData.Colors, palette);
-            paletteList.ColorReference = localGraphicsController.GraphicsData.Colors;
+            spriteSelector.Initialize(Controllers.Graphics.GraphicsData.Colors, palette);
+            paletteList.ColorReference = Controllers.Graphics.GraphicsData.Colors;
 
-            localSpritesController = spriteController;
-
+            
             levelViewer.UpdateSprites(level.Sprites);
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
 
-            paletteList.Palettes = localGraphicsController.GraphicsData.Palettes;
-            paletteList.SelectedPalette = localGraphicsController.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+            paletteList.Palettes = Controllers.Graphics.GraphicsData.Palettes;
+            paletteList.SelectedPalette = Controllers.Graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
 
-            localStringController = stringController;
-
-            musicList.DataSource = localStringController.GetStringList("music");
+            musicList.DataSource = Controllers.Strings.GetStringList("music");
             musicList.SelectedIndex = level.MusicID;
 
-            screenList.DataSource = localStringController.GetStringList("screens");
+            screenList.DataSource = Controllers.Strings.GetStringList("screens");
             screenList.SelectedIndex = level.NumberOfScreens - 1;
+
+            scrollList.DataSource = Controllers.Strings.GetStringList("scrolling");
+            scrollList.SelectedIndex = level.ScrollType;
+
+            levelTypeList.DataSource = Controllers.Levels.LevelData.Types.Skip(1).Select(l => l.Name).ToList();
+            levelTypeList.SelectedIndex = level.TypeID - 1;
+
+            for (int i = 0; i < 256; i++)
+            {
+                graphicsList.Items.Add(i.ToString("X2"));
+            }
+
+            graphicsList.SelectedIndex = level.GraphicsID;
 
             UpdateScreenSize();
 
             blockSelector.Editor = spriteSelector.Editor = this;
-            animationList.Items.AddRange(stringController.GetStringList("animation").ToArray());
+            animationList.Items.AddRange(Controllers.Strings.GetStringList("animation").ToArray());
             animationList.SelectedIndex = level.AnimationType;
 
             animationList.SelectedIndexChanged += UpdateGraphics;
             graphicsList.SelectedIndexChanged += UpdateGraphics;
             paletteList.SelectedIndexChanged += paletteList_SelectedIndexChanged;
             screenList.SelectedIndexChanged += screenList_SelectedIndexChanged;
+            levelTypeList.SelectedIndexChanged += levelTypeList_SelectedIndexChanged;
+            graphicsList.SelectedIndexChanged += graphicsList_SelectedIndexChanged;
         }
 
         public void UpdatePalette()
         {
-            var palette = localGraphicsController.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
+            var palette = Controllers.Graphics.GraphicsData.Palettes.Where(p => p.ID == level.PaletteID).FirstOrDefault();
 
             levelViewer.Update(levelPalette: palette);
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
@@ -238,7 +245,7 @@ namespace Reuben.UI
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
-                List<Tuple<Sprite, Rectangle>> boundCache = localSpritesController.GetBounds(level.Sprites).ToList();
+                List<Tuple<Sprite, Rectangle>> boundCache = Controllers.Sprites.GetBounds(level.Sprites).ToList();
                 Sprite selectedSprite = boundCache.Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
 
                 mouseStartX = e.X;
@@ -253,7 +260,7 @@ namespace Reuben.UI
                         {
 
                             List<Rectangle> affectedArea = boundCache.Where(s => levelViewer.SelectedSprites.Contains(s.Item1)).Select(s => s.Item2).ToList(); // only the bounds of the sprites that were previously selected                           
-                            affectedArea.Add(localSpritesController.GetClipBounds(selectedSprite)); // add the new sprite to the list
+                            affectedArea.Add(Controllers.Sprites.GetClipBounds(selectedSprite)); // add the new sprite to the list
                             Rectangle updateArea = affectedArea.Combine();
                             levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
                             levelViewer.SelectedSprites.Clear();
@@ -264,7 +271,7 @@ namespace Reuben.UI
                         }
                         else
                         {
-                            Rectangle updateArea = localSpritesController.GetClipBounds(selectedSprite);
+                            Rectangle updateArea = Controllers.Sprites.GetClipBounds(selectedSprite);
                             levelViewer.Invalidate(new Rectangle(updateArea.X, updateArea.Y, updateArea.Width + 1, updateArea.Height + 1));
                             levelViewer.SelectedSprites.Clear();
                             levelViewer.SelectedSprites.Add(selectedSprite);
@@ -286,7 +293,7 @@ namespace Reuben.UI
                             rightMouseDrag = true;
                         }
 
-                        var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
+                        var affectedArea = Controllers.Sprites.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
                         if (affectedArea.Count > 0)
                         {
                             levelViewer.Invalidate(affectedArea.Combine());
@@ -313,12 +320,12 @@ namespace Reuben.UI
 
                     else if (spriteSelector.SelectedSprite != null)
                     {
-                        Sprite clickedSprite = localSpritesController.GetBounds(level.Sprites, spriteOverlay.Checked).ToList().Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
+                        Sprite clickedSprite = Controllers.Sprites.GetBounds(level.Sprites, spriteOverlay.Checked).ToList().Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
                         if (clickedSprite != null)
                         {
                             if (levelViewer.SelectedSprites.Contains(clickedSprite))
                             {
-                                var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
+                                var affectedArea = Controllers.Sprites.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
                                 foreach (Sprite s in levelViewer.SelectedSprites)
                                 {
                                     s.ObjectID = spriteSelector.SelectedSprite.ObjectID;
@@ -328,7 +335,7 @@ namespace Reuben.UI
                             }
                             else
                             {
-                                var affectedArea = localSpritesController.GetClipBounds(selectedSprite);
+                                var affectedArea = Controllers.Sprites.GetClipBounds(selectedSprite);
                                 levelViewer.SelectedSprites.Clear();
                                 levelViewer.SelectedSprites.Add(selectedSprite);
                                 foreach (Sprite s in levelViewer.SelectedSprites)
@@ -341,7 +348,7 @@ namespace Reuben.UI
                         }
                         else
                         {
-                            var affectedArea = localSpritesController.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
+                            var affectedArea = Controllers.Sprites.GetBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).Select(s => s.Item2).ToList();
                             selectedSprite = spriteSelector.SelectedSprite.MakeCopy();
                             selectedSprite.X = startCol;
                             selectedSprite.Y = startRow;
@@ -370,50 +377,59 @@ namespace Reuben.UI
             int maxX = Math.Max(e.X, mouseStartX);
             int maxY = Math.Max(e.Y, mouseStartY);
 
-            var col = Math.Max(minX, 0) / 16;
-            var row = Math.Max(minY, 0) / 16;
-            var width = Math.Min((maxX / 16) - col, 0xEF) + 1;
-            var height = Math.Min((maxY / 16) - row, 0x1A) + 1;
+            var col = e.X / 16;
+            var row = e.Y / 17;
+            var minCol = Math.Max(minX, 0) / 16;
+            var minRow = Math.Max(minY, 0) / 16;
+            var width = Math.Min((maxX / 16) - minCol, 0xEF) + 1;
+            var height = Math.Min((maxY / 16) - minRow, 0x1A) + 1;
 
             if (EditMode == UI.EditMode.Blocks)
             {
-                Block block = localLevelController.LevelData.Types[level.LevelType].Blocks[level.Data[e.X / 16, e.Y / 16]];
+                Block block = Controllers.Levels.LevelData.Types[level.LevelType].Blocks[level.Data[e.X / 16, e.Y / 16]];
+                string solidity = "", interaction = "";
                 switch (block.BlockSolidity)
                 {
                     case 0x00:
                     case 0x10:
                     case 0x20:
                     case 0x30:
-                        solidity.Text = localStringController.GetStringList("solidity")[block.BlockSolidity >> 4];
-                        interaction.Text = localStringController.GetStringList("interaction")[block.BlockInteraction];
+                        solidity = Controllers.Strings.GetStringList("solidity")[block.BlockSolidity >> 4];
+                        interaction = Controllers.Strings.GetStringList("interaction")[block.BlockInteraction];
                         break;
 
                     case 0x40:
-                        solidity.Text = localStringController.GetStringList("solidity")[4];
-                        interaction.Text = localStringController.GetStringList("solid interaction")[block.BlockInteraction];
+                        solidity = Controllers.Strings.GetStringList("solidity")[4];
+                        interaction = Controllers.Strings.GetStringList("solid interaction")[block.BlockInteraction];
                         break;
 
                     case 0x80:
-                        solidity.Text = localStringController.GetStringList("solidity")[5];
-                        interaction.Text = localStringController.GetStringList("interaction")[block.BlockInteraction];
+                        solidity = Controllers.Strings.GetStringList("solidity")[5];
+                        interaction = Controllers.Strings.GetStringList("interaction")[block.BlockInteraction];
                         break;
 
                     case 0xC0:
-                        solidity.Text = localStringController.GetStringList("solidity")[6];
-                        interaction.Text = localStringController.GetStringList("solid interaction")[block.BlockInteraction];
+                        solidity = Controllers.Strings.GetStringList("solidity")[6];
+                        interaction = Controllers.Strings.GetStringList("solid interaction")[block.BlockInteraction];
                         break;
 
                     case 0xF0:
-                        solidity.Text = localStringController.GetStringList("solidity")[7];
-                        interaction.Text = localStringController.GetStringList("item box")[block.BlockInteraction];
+                        solidity = Controllers.Strings.GetStringList("solidity")[7];
+                        interaction = Controllers.Strings.GetStringList("item box")[block.BlockInteraction];
                         break;
                 }
 
+
                 if (leftMouseDrag || rightMouseDrag)
                 {
+                    SetStatus(string.Format("({0},{1} - {2}x{3}) [{4} / {5}]", col, row, width, height, solidity, interaction));
                     leftMouseDragged = leftMouseDrag;
                     rightMouseDragged = rightMouseDrag;
-                    levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
+                    levelViewer.SelectionRectangle = new Rectangle(minCol * 16, minRow * 16, width * 16 - 1, height * 16 - 1);
+                }
+                else
+                {
+                    SetStatus(string.Format("({0},{1}) [{2} / {3}]", col, row, solidity, interaction));
                 }
             }
             else if (EditMode == UI.EditMode.Sprites)
@@ -421,7 +437,7 @@ namespace Reuben.UI
                 if (leftMouseDrag && levelViewer.SelectedSprites.Count == 0)
                 {
                     leftMouseDragged = leftMouseDrag;
-                    levelViewer.SelectionRectangle = new Rectangle(col * 16, row * 16, width * 16 - 1, height * 16 - 1);
+                    levelViewer.SelectionRectangle = new Rectangle(minCol * 16, minRow * 16, width * 16 - 1, height * 16 - 1);
                 }
                 else if (leftMouseDrag && levelViewer.SelectedSprites.Count > 0)
                 {
@@ -430,7 +446,7 @@ namespace Reuben.UI
                     int rowChange = (e.Y / 16) - startRow;
                     if (colChange != 0 || rowChange != 0)
                     {
-                        IEnumerable<Rectangle> existingAreas = localSpritesController.GetClipBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).ToList();
+                        IEnumerable<Rectangle> existingAreas = Controllers.Sprites.GetClipBounds(levelViewer.SelectedSprites, spriteOverlay.Checked).ToList();
                         foreach (Sprite sprite in levelViewer.SelectedSprites)
                         {
                             levelViewer.SelectedSprites[index].X += colChange;
@@ -576,7 +592,7 @@ namespace Reuben.UI
             {
                 if (leftMouseDragged && levelViewer.SelectionRectangle != Rectangle.Empty)
                 {
-                    List<Tuple<Sprite, Rectangle>> boundCache = localSpritesController.GetBounds(level.Sprites, spriteOverlay.Checked).ToList();
+                    List<Tuple<Sprite, Rectangle>> boundCache = Controllers.Sprites.GetBounds(level.Sprites, spriteOverlay.Checked).ToList();
                     levelViewer.SelectedSprites.Clear();
                     List<Tuple<Sprite, Rectangle>> affectedSprites = boundCache.Where(t => t.Item2.IntersectsWith(levelViewer.SelectionRectangle)).ToList();
                     levelViewer.SelectedSprites.AddRange(affectedSprites.Select(s => s.Item1));
@@ -619,6 +635,10 @@ namespace Reuben.UI
                 {
                     case Keys.Z:
                         Undo();
+                        break;
+
+                    case Keys.S:
+                        SaveLevel();
                         break;
                 }
             }
@@ -687,7 +707,7 @@ namespace Reuben.UI
                     break;
             }
 
-            var newGraphics = localGraphicsController.MakePatternTable(level.GraphicsID, level.GraphicsID + 1, patternTable, patternTable + 1);
+            var newGraphics = Controllers.Graphics.MakePatternTable(level.GraphicsID, level.GraphicsID + 1, patternTable, patternTable + 1);
             levelViewer.Update(patternTable: newGraphics);
             blockSelector.Update(patternTable: newGraphics);
         }
@@ -695,7 +715,96 @@ namespace Reuben.UI
         private void spriteOverlay_CheckedChanged(object sender, EventArgs e)
         {
             levelViewer.ShowSpriteOverlays = spriteOverlay.Checked;
-            levelViewer.UpdateSprites(level.Sprites, localSpritesController.GetClipBounds(levelViewer.SelectedSprites, !spriteOverlay.Checked));
+            levelViewer.UpdateSprites(level.Sprites, Controllers.Sprites.GetClipBounds(levelViewer.SelectedSprites, !spriteOverlay.Checked));
+        }
+
+
+        private bool lockedStatus = false;
+        private string backupStatus = "";
+
+        private void LockStatus(string text)
+        {
+            backupStatus = status.Text;
+            status.Text = text;
+            lockedStatus = true;
+
+            System.Threading.TimerCallback callback = UnlockStatus;
+            System.Threading.Timer t = new System.Threading.Timer(callback, null, 3000, System.Threading.Timeout.Infinite);
+        }
+
+        private void UnlockStatus(object o)
+        {
+            lockedStatus = false;
+            status.Text = backupStatus;
+        }
+
+        private void SetStatus(string text)
+        {
+            if (lockedStatus)
+            {
+                backupStatus = text;
+            }
+            else
+            {
+                status.Text = text;
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            SaveLevel();
+        }
+
+        private void SaveLevel()
+        {
+            Controllers.Levels.SaveLevel(level);
+            LockStatus("Level saved.");
+        }
+
+        private void scrollList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            level.ScrollType = scrollList.SelectedIndex;
+        }
+
+        private void levelTypeList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            level.LevelType = levelTypeList.SelectedIndex + 1;
+            LevelType type = Controllers.Levels.LevelData.Types[level.LevelType];
+            levelViewer.Update(levelType: type);
+            blockSelector.Update(blockList: type.Blocks);
+        }
+
+        void graphicsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            level.GraphicsID = graphicsList.SelectedIndex;
+            int animationTable = 0;
+            switch (level.AnimationType)
+            {
+                case 0:
+                    animationTable = 0x80;
+                    break;
+
+                case 1:
+                    animationTable = 0xD0;
+                    break;
+
+                case 2:
+                    animationTable = 0xF0;
+                    break;
+
+                case 3:
+                    animationTable = 0x58;
+                    break;
+            }
+
+            var patternTable = Controllers.Graphics.MakePatternTable(level.GraphicsID, level.GraphicsID + 1, animationTable, animationTable + 1);
+            levelViewer.Update(patternTable: patternTable);
+            blockSelector.Update(patternTable: patternTable);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Controllers.ROM.BuildRomFromAssets(Controllers.Project, Controllers.Levels, Controllers.Worlds, Controllers.Strings, Controllers.Graphics);
         }
     }
 }

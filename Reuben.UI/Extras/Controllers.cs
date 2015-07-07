@@ -8,11 +8,12 @@ using Reuben.Controllers;
 
 namespace Reuben.UI
 {
-    public static class ControllerService
+    public static class Controllers
     {
         public static ProjectController Project { get; private set; }
         public static GraphicsController Graphics { get; private set; }
         public static LevelController Levels { get; private set; }
+        public static WorldController Worlds { get; private set; }
         public static StringController Strings { get; private set; }
         public static SpriteController Sprites { get; private set; }
         public static ASMController ASM { get; private set; }
@@ -27,8 +28,22 @@ namespace Reuben.UI
             Sprites = new SpriteController();
             ASM = new ASMController();
             ROM = new RomController();
+            Worlds = new WorldController();
 
-            return Project.Load(fileName);
+            if (Project.Load(fileName))
+            {
+                Graphics.LoadExtraGraphics(Project.ProjectData.ExtraGraphicsFile);
+                Graphics.LoadGraphics(Project.ProjectData.GraphicsFile);
+                Graphics.LoadPalettes(Project.ProjectData.PaletteFile);
+                Levels.Load(Project.ProjectData.LevelDataFile);
+                Strings.Load(Project.ProjectData.StringDataFile);
+                Sprites.Load(Project.ProjectData.SpriteDataFile);
+                ASM.Load(Project.ProjectData.ASMDirectory);
+                Worlds.Load(Project.ProjectData.WorldDataFile);
+                return true;
+            }
+
+            return false;
         }
     }
 }

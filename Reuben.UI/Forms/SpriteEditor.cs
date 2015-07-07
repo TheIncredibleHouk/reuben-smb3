@@ -26,31 +26,25 @@ namespace Reuben.UI
             codeTags.Columns.Add(h);
         }
 
-        private SpriteController localSpriteController;
         private List<SpriteDefinition> backUpDefinitions;
-        private GraphicsController localGraphicsController;
-        private ASMController localASMController;
         private bool spriteUpdating = false;
         private List<SpriteDefinition> modifiedDefinitions;
 
-        public void Initialize(ASMController asmController, GraphicsController graphicsController, SpriteController spriteController, LevelController levelController)
+        public void Initialize()
         {
-            localASMController = asmController;
-            localGraphicsController = graphicsController;
-            localSpriteController = spriteController;
-            backUpDefinitions = spriteController.SpriteData.Definitions.MakeCopy();
-            spriteSelector.Initialize(graphicsController, spriteController, graphicsController.GraphicsData.Colors, graphicsController.GraphicsData.Palettes[0]);
-            spriteViewer.Initialize(graphicsController, spriteController, graphicsController.GraphicsData.Colors, graphicsController.GraphicsData.Palettes[0], levelController.LevelData.OverlayPalette);
-            paletteList.Palettes = graphicsController.GraphicsData.Palettes;
-            paletteList.ColorReference = graphicsController.GraphicsData.Colors;
+            backUpDefinitions = Controllers.Sprites.SpriteData.Definitions.MakeCopy();
+            spriteSelector.Initialize(Controllers.Graphics.GraphicsData.Colors, Controllers.Graphics.GraphicsData.Palettes[0]);
+            spriteViewer.Initialize(Controllers.Graphics.GraphicsData.Colors, Controllers.Graphics.GraphicsData.Palettes[0], Controllers.Levels.LevelData.OverlayPalette);
+            paletteList.Palettes = Controllers.Graphics.GraphicsData.Palettes;
+            paletteList.ColorReference = Controllers.Graphics.GraphicsData.Colors;
             paletteList.UpdateList();
             paletteList.SelectedIndex = 0;
             paletteList.SelectedIndexChanged += paletteList_SelectedIndexChanged;
             spriteSelector.SelectedSpriteChanged += spriteSelector_SelectedSpriteChanged;
-            graphicsController.GraphicsUpdated += graphicsController_GraphicsUpdated;
-            graphicsController.ExtraGraphicsUpdated += graphicsController_ExtraGraphicsUpdated;
+            Controllers.Graphics.GraphicsUpdated += GraphicsUpdated;
+            Controllers.Graphics.ExtraGraphicsUpdated += ExtraGraphicsUpdated;
 
-            List<string> parseCollisions = localASMController.LinesFromTagOffset("prg000.asm", "ObjectCollision", 13 * 4);
+            List<string> parseCollisions = Controllers.ASM.LinesFromTagOffset("prg000.asm", "ObjectCollision", 13 * 4);
 
             for (int index = 0, item = 0; index < parseCollisions.Count; item++)
             {
@@ -71,16 +65,16 @@ namespace Reuben.UI
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            localGraphicsController.GraphicsUpdated -= graphicsController_ExtraGraphicsUpdated;
-            localGraphicsController.ExtraGraphicsUpdated -= graphicsController_ExtraGraphicsUpdated;
+            Controllers.Graphics.GraphicsUpdated -= ExtraGraphicsUpdated;
+            Controllers.Graphics.ExtraGraphicsUpdated -= GraphicsUpdated;
         }
 
-        private void graphicsController_ExtraGraphicsUpdated(object sender, EventArgs e)
+        private void ExtraGraphicsUpdated(object sender, EventArgs e)
         {
             spriteViewer.UpdateGraphics();
         }
 
-        private void graphicsController_GraphicsUpdated(object sender, EventArgs e)
+        private void GraphicsUpdated(object sender, EventArgs e)
         {
             spriteSelector.Update(colors: null);
             spriteViewer.UpdateGraphics();
@@ -91,7 +85,7 @@ namespace Reuben.UI
             spriteUpdating = true;
             if (spriteSelector.SelectedSprite != null)
             {
-                spriteViewer.CurrentDefinition = localSpriteController.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
+                spriteViewer.CurrentDefinition = Controllers.Sprites.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
                 definitionCode.Text = JsonConvert.SerializeObject(spriteViewer.CurrentDefinition.SpriteInfo, Formatting.Indented);
                 if (spriteViewer.CurrentDefinition != null)
                 {
@@ -231,13 +225,13 @@ namespace Reuben.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            localSpriteController.SpriteData.Definitions = backUpDefinitions;
+            Controllers.Sprites.SpriteData.Definitions = backUpDefinitions;
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            localSpriteController.Save();
+            Controllers.Sprites.Save();
 
             List<string> changedFiles = new List<string>();
             foreach (SpriteDefinition def in modifiedDefinitions)
@@ -245,7 +239,7 @@ namespace Reuben.UI
                 changedFiles.Add(GetFileLocation(def.GameID));
             }
 
-            localASMController.Save(changedFiles.Distinct().ToList());
+            Controllers.ASM.Save(changedFiles.Distinct().ToList());
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -261,13 +255,13 @@ namespace Reuben.UI
                         MessageBox.Show("Invalid id.");
                     }
 
-                    var existing = localSpriteController.SpriteData.Definitions.Where(d => d.GameID == val).FirstOrDefault();
+                    var existing = Controllers.Sprites.SpriteData.Definitions.Where(d => d.GameID == val).FirstOrDefault();
                     if (existing != null)
                     {
                         MessageBox.Show(text + " already exists as an object id.");
                     }
 
-                    localSpriteController.SpriteData.Definitions.Add(new SpriteDefinition() { GameID = val, Name = "New Sprite" });
+                    Controllers.Sprites.SpriteData.Definitions.Add(new SpriteDefinition() { GameID = val, Name = "New Sprite" });
                     spriteSelector.Update(colors: null);
                     spriteSelector.SelectedSprite = new Sprite() { ObjectID = val };
                 }
@@ -282,10 +276,10 @@ namespace Reuben.UI
         {
             if (spriteSelector.SelectedSprite != null)
             {
-                var def = localSpriteController.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
+                var def = Controllers.Sprites.GetDefinition(spriteSelector.SelectedSprite.ObjectID);
                 if (def != null)
                 {
-                    localSpriteController.SpriteData.Definitions.Remove(def);
+                    Controllers.Sprites.SpriteData.Definitions.Remove(def);
                     spriteSelector.Update(colors: null);
                 }
             }
@@ -293,7 +287,7 @@ namespace Reuben.UI
 
         private void SpriteEditor_Activated(object sender, EventArgs e)
         {
-            localGraphicsController.CheckFiles();
+            Controllers.Graphics.CheckFiles();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -431,7 +425,7 @@ namespace Reuben.UI
         private void LoadGfxAttributes()
         {
             spriteUpdating = true;
-            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            TextLocation loc = Controllers.ASM.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
                 MessageBox.Show("Unable to locate the ObjectsGfxAttr tag for this property.");
@@ -519,13 +513,13 @@ namespace Reuben.UI
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
 
             modifiedDefinitions.Add(spriteViewer.CurrentDefinition);
-            localASMController.UpdateTagLine("ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+            Controllers.ASM.UpdateTagLine("ObjectsGfxAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
         private void LoadHitBoxOptions()
         {
             spriteUpdating = true;
-            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            TextLocation loc = Controllers.ASM.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
                 MessageBox.Show("Unable to locate the ObjectsHitBox tag for this property.");
@@ -613,13 +607,13 @@ namespace Reuben.UI
             string newLine = string.Format("\t.byte {0}{1}{2} ; Object{3:X2}", collisionBoxValue, shellValue, apathyValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
             modifiedDefinitions.Add(spriteViewer.CurrentDefinition);
-            localASMController.UpdateTagLine("ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+            Controllers.ASM.UpdateTagLine("ObjectsHitBox@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
         private void LoadOptions()
         {
             spriteUpdating = true;
-            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            TextLocation loc = Controllers.ASM.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
                 MessageBox.Show("Unable to locate the ObjectsOptions tag for this property.");
@@ -715,13 +709,13 @@ namespace Reuben.UI
             string newLine = string.Format("\t.byte {0}{1}{2}{3}{4} ; Object{5:X2}", haltValue, shellValue, stompValue, squashValue, tailValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
             modifiedDefinitions.Add(spriteViewer.CurrentDefinition);
-            localASMController.UpdateTagLine("ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+            Controllers.ASM.UpdateTagLine("ObjectsOptions@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
         private void LoadPatternTableOptions()
         {
             spriteUpdating = true;
-            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            TextLocation loc = Controllers.ASM.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
                 MessageBox.Show("Unable to locate the ObjectsPatTable tag for this property.");
@@ -786,7 +780,7 @@ namespace Reuben.UI
             }
             string newLine = string.Format("\t.byte {0}{1}; Object{5:X2}", bank, patTableValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
-            localASMController.UpdateTagLine("ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+            Controllers.ASM.UpdateTagLine("ObjectsPatTable@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
         private string lastDefcode = "";
@@ -812,7 +806,7 @@ namespace Reuben.UI
         private void LoadKillActionOptions()
         {
             spriteUpdating = true;
-            TextLocation loc = localASMController.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsKill@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            TextLocation loc = Controllers.ASM.FindTagLine(GetFileLocation(spriteViewer.CurrentDefinition.GameID), "ObjectsKill@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
                 MessageBox.Show("Unable to locate the ObjectsKill tag for this property.");
@@ -919,13 +913,13 @@ namespace Reuben.UI
 
             string newLine = string.Format("\t.byte {0}; Object{5:X2}", killValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
-            localASMController.UpdateTagLine("ObjectsKill@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+            Controllers.ASM.UpdateTagLine("ObjectsKill@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
         private void LoadAttributeOptions()
         {
             spriteUpdating = true;
-            TextLocation loc = localASMController.FindTagLine("prg000.asm", "ObjectsAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
+            TextLocation loc = Controllers.ASM.FindTagLine("prg000.asm", "ObjectsAttr@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"));
             if (loc == null)
             {
                 MessageBox.Show("Unable to locate the ObjectsAttr tag for this property.");
@@ -1037,7 +1031,7 @@ namespace Reuben.UI
 
             string newLine = string.Format("\t.byte {0}{1}{2}{3}{4}; Object{5:X2}", boundBoxValue, bounceValue, iceValue, fireValue, ninjaHammerValue, spriteViewer.CurrentDefinition.GameID);
             string file = GetFileLocation(spriteViewer.CurrentDefinition.GameID);
-            localASMController.UpdateTagLine("ObjectsAtt@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
+            Controllers.ASM.UpdateTagLine("ObjectsAtt@" + spriteViewer.CurrentDefinition.GameID.ToString("X2"), file, newLine);
         }
 
         private void killAction_SelectedIndexChanged(object sender, EventArgs e)
@@ -1100,7 +1094,7 @@ namespace Reuben.UI
 
         private void spriteViewer_MouseDown(object sender, MouseEventArgs e)
         {
-            Rectangle bounds = localSpriteController.GetClipBounds(spriteViewer.CurrentSprite);
+            Rectangle bounds = Controllers.Sprites.GetClipBounds(spriteViewer.CurrentSprite);
             int x = (512 / 2) - bounds.Width / 2;
             int y = (512 / 2) - bounds.Height / 2;
             List<Rectangle> rectangles = spriteViewer.CurrentDefinition.SpriteInfo.Select(i => new Rectangle(i.X + x, i.Y + y, 8, 16)).ToList();

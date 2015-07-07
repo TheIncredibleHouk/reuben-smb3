@@ -23,12 +23,10 @@ namespace Reuben.UI
             resourceDisplay.Columns.Add(h);
         }
 
-        private StringController stringController;
         private Dictionary<string, List<string>> localResources;
-        public void SetResources(StringController resource)
+        public void SetResources()
         {
-            stringController = resource;
-            localResources = resource.Resource.ResourceLists.MakeCopy();
+            localResources = Controllers.Strings.Resource.ResourceLists.MakeCopy();
             FilterResources();
         }
 
@@ -96,8 +94,8 @@ namespace Reuben.UI
         private void button1_Click(object sender, EventArgs e)
         {
             SetResourceValues(previousResource);
-            stringController.Resource.ResourceLists = localResources;
-            stringController.Save();
+            Controllers.Strings.Resource.ResourceLists = localResources;
+            Controllers.Strings.Save();
             this.Close();
         }
 

@@ -21,29 +21,8 @@ namespace Reuben.UI
             InitializeComponent();
         }
 
-        public void Initialize(ProjectController controller)
+        public void Initialize()
         {
-            projectController = controller;
-
-            graphicsController = new GraphicsController();
-            graphicsController.LoadGraphics(controller.Project.GraphicsFile);
-            graphicsController.LoadExtraGraphics(controller.Project.ExtraGraphicsFile);
-            graphicsController.LoadPalettes(controller.Project.PaletteFile);
-
-            romController = new RomController();
-            
-            levelController = new LevelController();
-            levelController.Load(controller.Project.LevelDataFile);
-
-            stringController = new StringController();
-            stringController.Load(controller.Project.StringDataFile);
-
-            spriteController = new SpriteController();
-            spriteController.Load(controller.Project.SpriteDataFile);
-
-            asmController = new ASMController();
-            asmController.Load(projectController.Project.ASMDirectory);
-
             savebutton.Enabled =
             palettesButton.Enabled =
             blocksButton.Enabled =
@@ -53,14 +32,14 @@ namespace Reuben.UI
             defaultsButton.Enabled =
             projectName.Enabled = true;
 
-            projectName.Text = controller.Project.Name;
+            projectName.Text = Controllers.Project.ProjectData.Name;
         }
 
         public void RefreshTreeView()
         {
             projectTree.BeginUpdate();
             projectTree.Nodes.Clear();
-            foreach (var n in projectController.Project.Structure.Nodes)
+            foreach (var n in Controllers.Project.ProjectData.Structure.Nodes)
             {
                 AddNode(projectTree.Nodes, n);
             }
@@ -77,20 +56,19 @@ namespace Reuben.UI
             }
         }
 
-        ProjectController mainProject = new ProjectController();
         private void OpenFile()
         {
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Filter = "JSON File (*.json)|*json|All Files|*";
             if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (ControllerService.Initialize(openDialog.FileName))
+                if (!Controllers.Initialize(openDialog.FileName))
                 {
                     MessageBox.Show("Unable to load " + openDialog.FileName + ". Please verify the file is a proper Reuben project file.");
                 }
                 else
                 {
-                    Initialize(mainProject);
+                    Initialize();
                     RefreshTreeView();
                 }
             }
@@ -106,7 +84,7 @@ namespace Reuben.UI
         private void button2_Click(object sender, EventArgs e)
         {
             PaletteManager mgr = new PaletteManager();
-            mgr.Initialize(graphicsController, levelController);
+            mgr.Initialize();
             mgr.ShowDialog();
         }
 
@@ -124,13 +102,13 @@ namespace Reuben.UI
 
         private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LevelInfo levelInfo = levelController.LevelData.Levels.Where(l => l.ID == ((ProjectNode) projectTree.SelectedNode.Tag).ID).FirstOrDefault();
+            LevelInfo levelInfo = Controllers.Levels.LevelData.Levels.Where(l => l.ID == ((ProjectNode)projectTree.SelectedNode.Tag).ID).FirstOrDefault();
             if (levelInfo != null)
             {
-                levelInfo.File = projectController.Project.LevelsDirectory + "\\" + levelInfo.Name + ".json";
+                levelInfo.File = Controllers.Project.ProjectData.LevelsDirectory + "\\" + levelInfo.Name + ".json";
                 LevelEditor editor = new LevelEditor();
                 editor.Show();
-                editor.LoadLevel(levelInfo, levelController, graphicsController, stringController, spriteController);
+                editor.LoadLevel(levelInfo);
             }
         }
 
@@ -138,7 +116,7 @@ namespace Reuben.UI
         {
             StringManager mgr = new StringManager();
             mgr.Show();
-            mgr.SetResources(stringController);
+            mgr.SetResources();
         }
 
         private void blocksButton_Click(object sender, EventArgs e)
@@ -157,7 +135,7 @@ namespace Reuben.UI
             if (ProjectView.BlockEditor == null)
             {
                 ProjectView.BlockEditor = new BlockEditor();
-                ProjectView.BlockEditor.Initialize(projectController, levelController, graphicsController, stringController);
+                ProjectView.BlockEditor.Initialize();
                 ProjectView.BlockEditor.Show();
                 ProjectView.BlockEditor.FormClosing += BlockEditor_FormClosing;
             }
@@ -176,9 +154,9 @@ namespace Reuben.UI
         {
             if (ProjectView.BlockEditor.DialogResult == DialogResult.OK)
             {
-                levelController.LevelData.Types = ProjectView.BlockEditor.LocalLevelTypes;
-                levelController.LevelData.Overlays = ProjectView.BlockEditor.Overlays;
-                levelController.Save();
+               Controllers.Levels.LevelData.Types = ProjectView.BlockEditor.LocalLevelTypes;
+               Controllers.Levels.LevelData.Overlays = ProjectView.BlockEditor.Overlays;
+               Controllers.Levels.Save();
             }
             ProjectView.BlockEditor.FormClosing -= BlockEditor_FormClosing;
             ProjectView.BlockEditor = null;
@@ -196,7 +174,7 @@ namespace Reuben.UI
             if (ProjectView.ASMEditor == null)
             {
                 ProjectView.ASMEditor = new ASMEditor();
-                ProjectView.ASMEditor.Initialize(asmController);
+                ProjectView.ASMEditor.Initialize();
                 ProjectView.ASMEditor.Show();
                 ProjectView.ASMEditor.FormClosing += ASMEditor_FormClosing;
             }
@@ -228,7 +206,7 @@ namespace Reuben.UI
             if (ProjectView.SpriteEditor == null)
             {
                 ProjectView.SpriteEditor = new SpriteEditor();
-                ProjectView.SpriteEditor.Initialize(asmController, graphicsController, spriteController, levelController);
+                ProjectView.SpriteEditor.Initialize();
                 ProjectView.SpriteEditor.Show();
                 ProjectView.SpriteEditor.FormClosed += SpriteEditor_FormClosed;
             }
@@ -246,15 +224,15 @@ namespace Reuben.UI
 
         private static void BuildRom()
         {
-            if (string.IsNullOrEmpty(projectController.Project.RomFile))
+            if (string.IsNullOrEmpty(Controllers.Project.ProjectData.RomFile))
             {
                 SaveFileDialog saveDialog = new SaveFileDialog();
                 saveDialog.Filter =
                 saveDialog.Filter = "NES File (*.nes)|*nes|All Files|*";
             }
-            if (projectController.Project.LastAsmBuildDateTime < File.GetLastWriteTime(projectController.Project.ASMDirectory + @"\smb3.asm"))
+            if (Controllers.Project.ProjectData.LastAsmBuildDateTime < File.GetLastWriteTime(Controllers.Project.ProjectData.ASMDirectory + @"\smb3.asm"))
             {
-                romController.BuildRomFromSource(projectController.Project.ASMDirectory, projectController.Project.RomFile);
+                Controllers.ROM.BuildRomFromSource(Controllers.Project.ProjectData.ASMDirectory, Controllers.Project.ProjectData.RomFile);
             }
 
             

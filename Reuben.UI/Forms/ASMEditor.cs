@@ -25,17 +25,13 @@ namespace Reuben.UI
             asmFiles.Columns.Add(h);
         }
 
-        private ASMController localASMController;
-
-        public void Initialize(ASMController controller)
+        public void Initialize()
         {
-            localASMController = controller;
-
-            asmFiles.Items.AddRange(localASMController.GetFileList().Select(l => new ListViewItem(l)).ToArray());
-            localASMController.CodeChanged += localASMController_CodeChanged;
+            asmFiles.Items.AddRange(Controllers.ASM.GetFileList().Select(l => new ListViewItem(l)).ToArray());
+            Controllers.ASM.CodeChanged += CodeChanged;
         }
 
-        private void localASMController_CodeChanged(object sender, EventArgs e)
+        private void CodeChanged(object sender, EventArgs e)
         {
             TextLocation loc = (TextLocation)sender;
             if (filesOpenedSoFar.ContainsKey(loc.File))
@@ -68,7 +64,7 @@ namespace Reuben.UI
             textBox.Dock = DockStyle.Fill;
             filesOpened.TabPages.Add(page);
             filesOpenedSoFar[file] = page;
-            textBox.Initiliaze(localASMController, file);
+            textBox.Initiliaze(file);
 
             filesOpened.SelectedTab = page;
             textBox.TextChanged += textBox_TextChanged;
@@ -143,7 +139,7 @@ namespace Reuben.UI
                 if (page.Text.EndsWith("*"))
                 {
                     ASMFastColoredTextBox textbox = ((ASMFastColoredTextBox)page.Tag);
-                    localASMController.MarkAsDirty(textbox.File, textbox.Lines.ToArray());
+                    Controllers.ASM.MarkAsDirty(textbox.File, textbox.Lines.ToArray());
                 }
             }
         }

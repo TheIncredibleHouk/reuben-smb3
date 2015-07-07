@@ -13,11 +13,7 @@ namespace Reuben.Model
         public WorldData()
         {
             Worlds = new List<WorldInfo>();
-            Blocks = new Block[256];
         }
-
-        [DataMember]
-        public Block[] Blocks { get; set; }
 
         [DataMember]
         public List<WorldInfo> Worlds { get; set; }

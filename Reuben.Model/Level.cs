@@ -84,6 +84,9 @@ namespace Reuben.Model
         public byte[,] Data { get; set; }
 
         [DataMember]
+        public byte[] CompressedData { get; set; }
+
+        [DataMember]
         public List<Sprite> Sprites { get; set; }
 
         [DataMember]

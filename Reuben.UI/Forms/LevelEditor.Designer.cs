@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelEditor));
             this.panel1 = new System.Windows.Forms.Panel();
             this.mouseCap = new System.Windows.Forms.Button();
             this.lvlHost = new System.Windows.Forms.Panel();
-            this.levelViewer = new Reuben.UI.LevelViewer();
             this.panel23 = new System.Windows.Forms.Panel();
+            this.spriteOverlay = new System.Windows.Forms.CheckBox();
             this.solidityOverlay = new System.Windows.Forms.CheckBox();
             this.interactionOverlay = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.editList = new System.Windows.Forms.ComboBox();
-            this.paletteList = new Reuben.UI.Controls.PaletteList();
             this.label9 = new System.Windows.Forms.Label();
             this.effectList = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -56,20 +56,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.spriteSelector = new Reuben.UI.SpriteSelector();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
-            this.blockSelector = new Reuben.UI.BlockSelector();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.interaction = new System.Windows.Forms.Label();
-            this.solidity = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.spriteOverlay = new System.Windows.Forms.CheckBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.status = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.levelViewer = new Reuben.UI.LevelViewer();
+            this.paletteList = new Reuben.UI.Controls.PaletteList();
+            this.spriteSelector = new Reuben.UI.SpriteSelector();
+            this.blockSelector = new Reuben.UI.BlockSelector();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.lvlHost.SuspendLayout();
             this.panel23.SuspendLayout();
@@ -78,6 +79,9 @@
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -86,9 +90,9 @@
             this.panel1.Controls.Add(this.mouseCap);
             this.panel1.Controls.Add(this.lvlHost);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(283, 177);
+            this.panel1.Location = new System.Drawing.Point(283, 171);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(633, 425);
+            this.panel1.Size = new System.Drawing.Size(707, 482);
             this.panel1.TabIndex = 0;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             // 
@@ -109,57 +113,35 @@
             this.lvlHost.Size = new System.Drawing.Size(0, 432);
             this.lvlHost.TabIndex = 0;
             // 
-            // levelViewer
-            // 
-            this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
-            this.levelViewer.Location = new System.Drawing.Point(0, 0);
-            this.levelViewer.Name = "levelViewer";
-            this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.levelViewer.SelectionType = Reuben.UI.SelectionType.Draw;
-            this.levelViewer.ShowInteractionOverlays = false;
-            this.levelViewer.ShowSolidityOverlays = false;
-            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
-            this.levelViewer.TabIndex = 0;
-            this.levelViewer.Text = "levelViewer1";
-            this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
-            this.levelViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseMove);
-            this.levelViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseUp);
-            // 
             // panel23
             // 
             this.panel23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel23.Controls.Add(this.spriteOverlay);
-            this.panel23.Controls.Add(this.solidityOverlay);
-            this.panel23.Controls.Add(this.interactionOverlay);
             this.panel23.Controls.Add(this.label10);
-            this.panel23.Controls.Add(this.editList);
-            this.panel23.Controls.Add(this.paletteList);
-            this.panel23.Controls.Add(this.label9);
-            this.panel23.Controls.Add(this.effectList);
-            this.panel23.Controls.Add(this.label8);
-            this.panel23.Controls.Add(this.animationList);
-            this.panel23.Controls.Add(this.label7);
-            this.panel23.Controls.Add(this.label6);
-            this.panel23.Controls.Add(this.graphicsList);
-            this.panel23.Controls.Add(this.label5);
-            this.panel23.Controls.Add(this.levelTypeList);
-            this.panel23.Controls.Add(this.label4);
-            this.panel23.Controls.Add(this.scrollList);
-            this.panel23.Controls.Add(this.label3);
-            this.panel23.Controls.Add(this.screenList);
-            this.panel23.Controls.Add(this.label2);
-            this.panel23.Controls.Add(this.musicList);
-            this.panel23.Controls.Add(this.label1);
+            this.panel23.Controls.Add(this.panel7);
+            this.panel23.Controls.Add(this.panel8);
+            this.panel23.Controls.Add(this.toolStrip1);
             this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel23.Location = new System.Drawing.Point(283, 0);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(633, 177);
+            this.panel23.Size = new System.Drawing.Size(707, 171);
             this.panel23.TabIndex = 1;
+            // 
+            // spriteOverlay
+            // 
+            this.spriteOverlay.AutoSize = true;
+            this.spriteOverlay.Location = new System.Drawing.Point(372, 16);
+            this.spriteOverlay.Margin = new System.Windows.Forms.Padding(4);
+            this.spriteOverlay.Name = "spriteOverlay";
+            this.spriteOverlay.Size = new System.Drawing.Size(127, 17);
+            this.spriteOverlay.TabIndex = 24;
+            this.spriteOverlay.Text = "Show Sprite Overlays";
+            this.spriteOverlay.UseVisualStyleBackColor = true;
+            this.spriteOverlay.CheckedChanged += new System.EventHandler(this.spriteOverlay_CheckedChanged);
             // 
             // solidityOverlay
             // 
             this.solidityOverlay.AutoSize = true;
-            this.solidityOverlay.Location = new System.Drawing.Point(156, 145);
+            this.solidityOverlay.Location = new System.Drawing.Point(507, 16);
             this.solidityOverlay.Margin = new System.Windows.Forms.Padding(4);
             this.solidityOverlay.Name = "solidityOverlay";
             this.solidityOverlay.Size = new System.Drawing.Size(133, 17);
@@ -171,7 +153,7 @@
             // interactionOverlay
             // 
             this.interactionOverlay.AutoSize = true;
-            this.interactionOverlay.Location = new System.Drawing.Point(156, 121);
+            this.interactionOverlay.Location = new System.Drawing.Point(214, 16);
             this.interactionOverlay.Margin = new System.Windows.Forms.Padding(4);
             this.interactionOverlay.Name = "interactionOverlay";
             this.interactionOverlay.Size = new System.Drawing.Size(150, 17);
@@ -183,10 +165,11 @@
             // label10
             // 
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Location = new System.Drawing.Point(16, 113);
+            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label10.Location = new System.Drawing.Point(0, 131);
             this.label10.Margin = new System.Windows.Forms.Padding(4);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(552, 1);
+            this.label10.Size = new System.Drawing.Size(703, 1);
             this.label10.TabIndex = 19;
             // 
             // editList
@@ -197,32 +180,17 @@
             "Blocks",
             "Sprites",
             "Pointers"});
-            this.editList.Location = new System.Drawing.Point(16, 145);
+            this.editList.Location = new System.Drawing.Point(74, 14);
             this.editList.Margin = new System.Windows.Forms.Padding(4);
             this.editList.Name = "editList";
             this.editList.Size = new System.Drawing.Size(132, 21);
             this.editList.TabIndex = 18;
             this.editList.SelectedIndexChanged += new System.EventHandler(this.editList_SelectedIndexChanged);
             // 
-            // paletteList
-            // 
-            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.paletteList.DropDownHeight = 400;
-            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paletteList.DropDownWidth = 288;
-            this.paletteList.FormattingEnabled = true;
-            this.paletteList.IntegralHeight = false;
-            this.paletteList.Location = new System.Drawing.Point(156, 84);
-            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
-            this.paletteList.Name = "paletteList";
-            this.paletteList.SelectedPalette = null;
-            this.paletteList.Size = new System.Drawing.Size(132, 21);
-            this.paletteList.TabIndex = 16;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 122);
+            this.label9.Location = new System.Drawing.Point(11, 17);
             this.label9.Margin = new System.Windows.Forms.Padding(4);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 13);
@@ -233,7 +201,7 @@
             // 
             this.effectList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.effectList.FormattingEnabled = true;
-            this.effectList.Location = new System.Drawing.Point(436, 84);
+            this.effectList.Location = new System.Drawing.Point(428, 75);
             this.effectList.Margin = new System.Windows.Forms.Padding(4);
             this.effectList.Name = "effectList";
             this.effectList.Size = new System.Drawing.Size(132, 21);
@@ -242,7 +210,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(433, 63);
+            this.label8.Location = new System.Drawing.Point(425, 54);
             this.label8.Margin = new System.Windows.Forms.Padding(4);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 13);
@@ -253,7 +221,7 @@
             // 
             this.animationList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.animationList.FormattingEnabled = true;
-            this.animationList.Location = new System.Drawing.Point(296, 84);
+            this.animationList.Location = new System.Drawing.Point(288, 75);
             this.animationList.Margin = new System.Windows.Forms.Padding(4);
             this.animationList.Name = "animationList";
             this.animationList.Size = new System.Drawing.Size(132, 21);
@@ -262,7 +230,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(293, 63);
+            this.label7.Location = new System.Drawing.Point(285, 54);
             this.label7.Margin = new System.Windows.Forms.Padding(4);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 13);
@@ -272,7 +240,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(153, 63);
+            this.label6.Location = new System.Drawing.Point(145, 54);
             this.label6.Margin = new System.Windows.Forms.Padding(4);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
@@ -283,7 +251,7 @@
             // 
             this.graphicsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.graphicsList.FormattingEnabled = true;
-            this.graphicsList.Location = new System.Drawing.Point(16, 84);
+            this.graphicsList.Location = new System.Drawing.Point(8, 75);
             this.graphicsList.Margin = new System.Windows.Forms.Padding(4);
             this.graphicsList.Name = "graphicsList";
             this.graphicsList.Size = new System.Drawing.Size(132, 21);
@@ -292,7 +260,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 63);
+            this.label5.Location = new System.Drawing.Point(5, 54);
             this.label5.Margin = new System.Windows.Forms.Padding(4);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
@@ -303,7 +271,7 @@
             // 
             this.levelTypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.levelTypeList.FormattingEnabled = true;
-            this.levelTypeList.Location = new System.Drawing.Point(436, 34);
+            this.levelTypeList.Location = new System.Drawing.Point(428, 25);
             this.levelTypeList.Margin = new System.Windows.Forms.Padding(4);
             this.levelTypeList.Name = "levelTypeList";
             this.levelTypeList.Size = new System.Drawing.Size(132, 21);
@@ -312,7 +280,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(433, 13);
+            this.label4.Location = new System.Drawing.Point(425, 4);
             this.label4.Margin = new System.Windows.Forms.Padding(4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
@@ -323,16 +291,17 @@
             // 
             this.scrollList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.scrollList.FormattingEnabled = true;
-            this.scrollList.Location = new System.Drawing.Point(296, 34);
+            this.scrollList.Location = new System.Drawing.Point(288, 25);
             this.scrollList.Margin = new System.Windows.Forms.Padding(4);
             this.scrollList.Name = "scrollList";
             this.scrollList.Size = new System.Drawing.Size(132, 21);
             this.scrollList.TabIndex = 5;
+            this.scrollList.SelectedIndexChanged += new System.EventHandler(this.scrollList_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(293, 13);
+            this.label3.Location = new System.Drawing.Point(285, 4);
             this.label3.Margin = new System.Windows.Forms.Padding(4);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
@@ -343,7 +312,7 @@
             // 
             this.screenList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.screenList.FormattingEnabled = true;
-            this.screenList.Location = new System.Drawing.Point(156, 34);
+            this.screenList.Location = new System.Drawing.Point(148, 25);
             this.screenList.Margin = new System.Windows.Forms.Padding(4);
             this.screenList.Name = "screenList";
             this.screenList.Size = new System.Drawing.Size(132, 21);
@@ -352,7 +321,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(153, 13);
+            this.label2.Location = new System.Drawing.Point(145, 4);
             this.label2.Margin = new System.Windows.Forms.Padding(4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
@@ -363,7 +332,7 @@
             // 
             this.musicList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.musicList.FormattingEnabled = true;
-            this.musicList.Location = new System.Drawing.Point(16, 34);
+            this.musicList.Location = new System.Drawing.Point(8, 25);
             this.musicList.Margin = new System.Windows.Forms.Padding(4);
             this.musicList.Name = "musicList";
             this.musicList.Size = new System.Drawing.Size(132, 21);
@@ -372,7 +341,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(5, 4);
             this.label1.Margin = new System.Windows.Forms.Padding(4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
@@ -399,14 +368,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(279, 387);
             this.panel3.TabIndex = 1;
-            // 
-            // spriteSelector
-            // 
-            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spriteSelector.Location = new System.Drawing.Point(0, 28);
-            this.spriteSelector.Name = "spriteSelector";
-            this.spriteSelector.Size = new System.Drawing.Size(279, 359);
-            this.spriteSelector.TabIndex = 0;
             // 
             // panel5
             // 
@@ -449,6 +410,124 @@
             this.label11.TabIndex = 20;
             this.label11.Text = "Blocks";
             // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.status);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(283, 653);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(707, 26);
+            this.panel6.TabIndex = 3;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label1);
+            this.panel7.Controls.Add(this.musicList);
+            this.panel7.Controls.Add(this.label2);
+            this.panel7.Controls.Add(this.screenList);
+            this.panel7.Controls.Add(this.label3);
+            this.panel7.Controls.Add(this.scrollList);
+            this.panel7.Controls.Add(this.paletteList);
+            this.panel7.Controls.Add(this.label4);
+            this.panel7.Controls.Add(this.levelTypeList);
+            this.panel7.Controls.Add(this.effectList);
+            this.panel7.Controls.Add(this.label5);
+            this.panel7.Controls.Add(this.label8);
+            this.panel7.Controls.Add(this.graphicsList);
+            this.panel7.Controls.Add(this.animationList);
+            this.panel7.Controls.Add(this.label6);
+            this.panel7.Controls.Add(this.label7);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 25);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(703, 106);
+            this.panel7.TabIndex = 25;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label9);
+            this.panel8.Controls.Add(this.spriteOverlay);
+            this.panel8.Controls.Add(this.editList);
+            this.panel8.Controls.Add(this.solidityOverlay);
+            this.panel8.Controls.Add(this.interactionOverlay);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(0, 125);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(703, 42);
+            this.panel8.TabIndex = 26;
+            // 
+            // status
+            // 
+            this.status.AutoSize = true;
+            this.status.Location = new System.Drawing.Point(5, 5);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(37, 13);
+            this.status.TabIndex = 0;
+            this.status.Text = "Status";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(703, 25);
+            this.toolStrip1.TabIndex = 27;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(51, 22);
+            this.toolStripButton1.Text = "Save";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // levelViewer
+            // 
+            this.levelViewer.EditMode = Reuben.UI.EditMode.Blocks;
+            this.levelViewer.Location = new System.Drawing.Point(0, 0);
+            this.levelViewer.Name = "levelViewer";
+            this.levelViewer.SelectionRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.levelViewer.SelectionType = Reuben.UI.SelectionType.Draw;
+            this.levelViewer.ShowInteractionOverlays = false;
+            this.levelViewer.ShowSolidityOverlays = false;
+            this.levelViewer.ShowSpriteOverlays = false;
+            this.levelViewer.Size = new System.Drawing.Size(6912, 432);
+            this.levelViewer.TabIndex = 0;
+            this.levelViewer.Text = "levelViewer1";
+            this.levelViewer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseDown);
+            this.levelViewer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseMove);
+            this.levelViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.levelViewer_MouseUp);
+            // 
+            // paletteList
+            // 
+            this.paletteList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.paletteList.DropDownHeight = 400;
+            this.paletteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteList.DropDownWidth = 288;
+            this.paletteList.FormattingEnabled = true;
+            this.paletteList.IntegralHeight = false;
+            this.paletteList.Location = new System.Drawing.Point(148, 75);
+            this.paletteList.Margin = new System.Windows.Forms.Padding(4);
+            this.paletteList.Name = "paletteList";
+            this.paletteList.SelectedPalette = null;
+            this.paletteList.Size = new System.Drawing.Size(132, 21);
+            this.paletteList.TabIndex = 16;
+            // 
+            // spriteSelector
+            // 
+            this.spriteSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spriteSelector.Location = new System.Drawing.Point(0, 28);
+            this.spriteSelector.Name = "spriteSelector";
+            this.spriteSelector.Size = new System.Drawing.Size(279, 359);
+            this.spriteSelector.TabIndex = 0;
+            // 
             // blockSelector
             // 
             this.blockSelector.Location = new System.Drawing.Point(11, 27);
@@ -460,100 +539,20 @@
             this.blockSelector.TabIndex = 0;
             this.blockSelector.DoubleClicked += new System.EventHandler(this.blockSelector_MouseDoubleClick);
             // 
-            // panel6
+            // toolStripButton2
             // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel6.Controls.Add(this.label15);
-            this.panel6.Controls.Add(this.interaction);
-            this.panel6.Controls.Add(this.solidity);
-            this.panel6.Controls.Add(this.label16);
-            this.panel6.Controls.Add(this.label14);
-            this.panel6.Controls.Add(this.label13);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(283, 602);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(633, 77);
-            this.panel6.TabIndex = 3;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(194, 28);
-            this.label15.Margin = new System.Windows.Forms.Padding(4);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(43, 13);
-            this.label15.TabIndex = 25;
-            this.label15.Text = "Solidity:";
-            // 
-            // interaction
-            // 
-            this.interaction.AutoSize = true;
-            this.interaction.Location = new System.Drawing.Point(85, 49);
-            this.interaction.Margin = new System.Windows.Forms.Padding(4);
-            this.interaction.Name = "interaction";
-            this.interaction.Size = new System.Drawing.Size(35, 13);
-            this.interaction.TabIndex = 24;
-            this.interaction.Text = "Music";
-            // 
-            // solidity
-            // 
-            this.solidity.AutoSize = true;
-            this.solidity.Location = new System.Drawing.Point(85, 28);
-            this.solidity.Margin = new System.Windows.Forms.Padding(4);
-            this.solidity.Name = "solidity";
-            this.solidity.Size = new System.Drawing.Size(35, 13);
-            this.solidity.TabIndex = 20;
-            this.solidity.Text = "Music";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(17, 49);
-            this.label16.Margin = new System.Windows.Forms.Padding(4);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(60, 13);
-            this.label16.TabIndex = 23;
-            this.label16.Text = "Interaction:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(34, 28);
-            this.label14.Margin = new System.Windows.Forms.Padding(4);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(43, 13);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "Solidity:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(7, 7);
-            this.label13.Margin = new System.Windows.Forms.Padding(4);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(70, 13);
-            this.label13.TabIndex = 21;
-            this.label13.Text = "Information";
-            // 
-            // spriteOverlay
-            // 
-            this.spriteOverlay.AutoSize = true;
-            this.spriteOverlay.Location = new System.Drawing.Point(314, 121);
-            this.spriteOverlay.Margin = new System.Windows.Forms.Padding(4);
-            this.spriteOverlay.Name = "spriteOverlay";
-            this.spriteOverlay.Size = new System.Drawing.Size(127, 17);
-            this.spriteOverlay.TabIndex = 24;
-            this.spriteOverlay.Text = "Show Sprite Overlays";
-            this.spriteOverlay.UseVisualStyleBackColor = true;
-            this.spriteOverlay.CheckedChanged += new System.EventHandler(this.spriteOverlay_CheckedChanged);
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(84, 22);
+            this.toolStripButton2.Text = "Build ROM";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // LevelEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(916, 679);
+            this.ClientSize = new System.Drawing.Size(990, 679);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel23);
@@ -574,6 +573,12 @@
             this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -612,16 +617,16 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label interaction;
-        private System.Windows.Forms.Label solidity;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button mouseCap;
         private System.Windows.Forms.CheckBox solidityOverlay;
         private System.Windows.Forms.CheckBox interactionOverlay;
         private System.Windows.Forms.CheckBox spriteOverlay;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label status;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
 
     }
 }

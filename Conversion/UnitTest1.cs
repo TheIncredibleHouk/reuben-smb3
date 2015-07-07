@@ -98,8 +98,8 @@ namespace Conversion
             //graphics.SavePalettes(projectController.Project.PaletteFile);
 
             //index = 0;
-            //LevelController levels = new LevelController();
-            //levels.Load(projectController.Project.LevelDataFile);
+            LevelController levels = new LevelController();
+            levels.Load(projectController.ProjectData.LevelDataFile);
             //for (int index = 0; index < 15; index++)
             //{
             //    var bd = Reuben.UI.ProjectManagement.ProjectController.BlockManager.AllDefinitions[index];
@@ -147,118 +147,119 @@ namespace Conversion
 
             //levels.Save();
 
-            //foreach (var lInfo in OLD.ProjectController.LevelManager.Levels)
-            //{
-            //    NEW.LevelInfo newInfo = new NEW.LevelInfo();
-            //    newInfo.Name = lInfo.Name;
-            //    newInfo.File = projectController.Project.LevelsDirectory + "\\" + newInfo.Name + ".json";
-            //    newInfo.ID = lInfo.LevelGuid;
-            //    levels.LevelData.Levels.Add(newInfo);
-            //}
-
-            //levels.Save(projectController.Project.LevelDataFile);
-
-            //foreach (var lInfo in OLD.ProjectController.LevelManager.Levels)
-            //{
-            //    var oldLevel = new OLD.Level();
-            //    oldLevel.Load(lInfo);
-            //    var newLevel = new NEW.Level();
-            //    newLevel.AnimationType = oldLevel.AnimationType;
-            //    newLevel.Data = oldLevel.LevelData;
-            //    newLevel.DPadControlsTiles = oldLevel.DpadTiles;
-            //    newLevel.EventType = oldLevel.EventType;
-            //    newLevel.GraphicsID = oldLevel.GraphicsBank;
-            //    newLevel.ID = oldLevel.Guid;
-            //    newLevel.InvincibleEnemeies = oldLevel.InvincibleEnemies;
-            //    newLevel.LevelType = oldLevel.Type;
-            //    newLevel.MiscByte1 = oldLevel.MiscByte1;
-            //    newLevel.MiscByte2 = oldLevel.MiscByte2;
-            //    newLevel.MiscByte3 = oldLevel.MiscByte3;
-            //    newLevel.MusicID = 0;
-            //    newLevel.NumberOfScreens = oldLevel.Length;
-            //    newLevel.PaletteEffectType = oldLevel.PaletteEffect;
-            //    newLevel.PaletteID = OLD.ProjectController.PaletteManager.Palettes[oldLevel.Palette].Guid;
-            //    foreach (var oldPointer in oldLevel.Pointers)
-            //    {
-            //        var newPointer = new NEW.LevelPointer();
-            //        newPointer.X = oldPointer.XEnter;
-            //        newPointer.Y = oldLevel.YStart;
-            //        newPointer.DisableWeather = oldPointer.DisableWeather;
-            //        newPointer.ExitLevel = oldPointer.ExitsLevel;
-            //        newPointer.ExitType = oldPointer.ExitType;
-            //        newPointer.ExitX = oldPointer.XEnter;
-            //        newPointer.ExitY = oldPointer.YExit;
-            //        newPointer.KeepObjectData = oldPointer.KeepObjects;
-            //        newPointer.RedrawLevel = oldPointer.RedrawLevel;
-            //        newPointer.WorldNumberToExitTo = oldPointer.World;
-            //        newLevel.Pointers.Add(newPointer);
-            //    }
-
-            //    newLevel.RhythmPlatforms = oldLevel.RhythmPlatforms;
-            //    foreach (var oldSprite in oldLevel.SpriteData)
-            //    {
-            //        var newSprite = new NEW.Sprite();
-            //        newSprite.X = oldSprite.X;
-            //        newSprite.Y = oldSprite.Y;
-            //        newSprite.ObjectID = oldSprite.InGameID;
-            //        newSprite.Property = oldSprite.Property;
-            //        newLevel.Sprites.Add(newSprite);
-            //    }
-
-            //    newLevel.StartActionType = oldLevel.StartAction;
-            //    newLevel.StartX = oldLevel.XStart;
-            //    newLevel.StartY = oldLevel.YStart;
-            //    newLevel.TemporaryProjectileBlockChanges = oldLevel.ProjectileBlocksTemporary;
-            //    newLevel.TypeID = oldLevel.Type;
-            //    levels.SaveLevel(newLevel);
-            //}
-            SpriteController sprites = new SpriteController();
-
-            foreach (var p in Reuben.UI.ProjectManagement.ProjectController.SpriteManager.SpriteDefinitions.Values.OrderBy(v => v.Name.ToUpper()))
+            foreach (var lInfo in OLD.ProjectController.LevelManager.Levels)
             {
-                NEW.SpriteDefinition def = new NEW.SpriteDefinition();
-                def.Class = p.Class;
-                def.GameID = p.InGameId;
-                def.Group = p.Group;
-                def.Name = p.Name;
-                def.PropertyDescriptions = p.PropertyDescriptions;
-                foreach (var s in p.Sprites)
-                {
-                    NEW.SpriteInfo sp = new NEW.SpriteInfo();
-                    if (s.Value > 200)
-                    {
-                        continue;
-                    }
-
-                    sp.HorizontalFlip = s.HorizontalFlip;
-                    sp.Palette = s.Palette % 4;
-                    if (sp.Palette < 0)
-                    {
-                        sp.Palette = sp.Palette * -1;
-                    }
-
-                    sp.Properties = s.Property ?? new List<int>();
-                    if (s.Table < 0)
-                    {
-                        sp.Table = s.Table * -1;
-                        sp.Overlay = true;
-                    }
-                    else
-                    {
-                        sp.Table = s.Table;
-                    }
-
-                    sp.Value = s.Value;
-                    sp.VerticalFlip = s.VerticalFlip;
-                    sp.X = s.X;
-                    sp.Y = s.Y;
-                    def.SpriteInfo.Add(sp);
-                }
-
-                sprites.SpriteData.Definitions.Add(def);
+                NEW.LevelInfo newInfo = new NEW.LevelInfo();
+                newInfo.Name = lInfo.Name;
+                newInfo.File = projectController.ProjectData.LevelsDirectory + "\\" + newInfo.Name + ".json";
+                newInfo.ID = lInfo.LevelGuid;
+                levels.LevelData.Levels.Add(newInfo);
             }
 
-            sprites.Save(projectController.Project.SpriteDataFile);
+            levels.Save(projectController.ProjectData.LevelDataFile);
+
+            foreach (var lInfo in OLD.ProjectController.LevelManager.Levels)
+            {
+                var oldLevel = new OLD.Level();
+                oldLevel.Load(lInfo);
+                var newLevel = new NEW.Level();
+                newLevel.AnimationType = oldLevel.AnimationType;
+                newLevel.Data = oldLevel.LevelData;
+                newLevel.DPadControlsTiles = oldLevel.DpadTiles;
+                newLevel.EventType = oldLevel.EventType;
+                newLevel.GraphicsID = oldLevel.GraphicsBank;
+                newLevel.ID = oldLevel.Guid;
+                newLevel.InvincibleEnemeies = oldLevel.InvincibleEnemies;
+                newLevel.LevelType = oldLevel.Type;
+                newLevel.MiscByte1 = oldLevel.MiscByte1;
+                newLevel.MiscByte2 = oldLevel.MiscByte2;
+                newLevel.MiscByte3 = oldLevel.MiscByte3;
+                newLevel.MusicID = 0;
+                newLevel.NumberOfScreens = oldLevel.Length;
+                newLevel.PaletteEffectType = oldLevel.PaletteEffect;
+                newLevel.PaletteID = OLD.ProjectController.PaletteManager.Palettes[oldLevel.Palette].Guid;
+                newLevel.ScrollType = oldLevel.ScrollType;
+                foreach (var oldPointer in oldLevel.Pointers)
+                {
+                    var newPointer = new NEW.LevelPointer();
+                    newPointer.X = oldPointer.XEnter;
+                    newPointer.Y = oldLevel.YStart;
+                    newPointer.DisableWeather = oldPointer.DisableWeather;
+                    newPointer.ExitLevel = oldPointer.ExitsLevel;
+                    newPointer.ExitType = oldPointer.ExitType;
+                    newPointer.ExitX = oldPointer.XEnter;
+                    newPointer.ExitY = oldPointer.YExit;
+                    newPointer.KeepObjectData = oldPointer.KeepObjects;
+                    newPointer.RedrawLevel = oldPointer.RedrawLevel;
+                    newPointer.WorldNumberToExitTo = oldPointer.World;
+                    newLevel.Pointers.Add(newPointer);
+                }
+
+                newLevel.RhythmPlatforms = oldLevel.RhythmPlatforms;
+                foreach (var oldSprite in oldLevel.SpriteData)
+                {
+                    var newSprite = new NEW.Sprite();
+                    newSprite.X = oldSprite.X;
+                    newSprite.Y = oldSprite.Y;
+                    newSprite.ObjectID = oldSprite.InGameID;
+                    newSprite.Property = oldSprite.Property;
+                    newLevel.Sprites.Add(newSprite);
+                }
+
+                newLevel.StartActionType = oldLevel.StartAction;
+                newLevel.StartX = oldLevel.XStart;
+                newLevel.StartY = oldLevel.YStart;
+                newLevel.TemporaryProjectileBlockChanges = oldLevel.ProjectileBlocksTemporary;
+                newLevel.TypeID = oldLevel.Type;
+                levels.SaveLevel(newLevel);
+            }
+            //SpriteController sprites = new SpriteController();
+
+            //foreach (var p in Reuben.UI.ProjectManagement.ProjectController.SpriteManager.SpriteDefinitions.Values.OrderBy(v => v.Name.ToUpper()))
+            //{
+            //    NEW.SpriteDefinition def = new NEW.SpriteDefinition();
+            //    def.Class = p.Class;
+            //    def.GameID = p.InGameId;
+            //    def.Group = p.Group;
+            //    def.Name = p.Name;
+            //    def.PropertyDescriptions = p.PropertyDescriptions;
+            //    foreach (var s in p.Sprites)
+            //    {
+            //        NEW.SpriteInfo sp = new NEW.SpriteInfo();
+            //        if (s.Value > 200)
+            //        {
+            //            continue;
+            //        }
+
+            //        sp.HorizontalFlip = s.HorizontalFlip;
+            //        sp.Palette = s.Palette % 4;
+            //        if (sp.Palette < 0)
+            //        {
+            //            sp.Palette = sp.Palette * -1;
+            //        }
+
+            //        sp.Properties = s.Property ?? new List<int>();
+            //        if (s.Table < 0)
+            //        {
+            //            sp.Table = s.Table * -1;
+            //            sp.Overlay = true;
+            //        }
+            //        else
+            //        {
+            //            sp.Table = s.Table;
+            //        }
+
+            //        sp.Value = s.Value;
+            //        sp.VerticalFlip = s.VerticalFlip;
+            //        sp.X = s.X;
+            //        sp.Y = s.Y;
+            //        def.SpriteInfo.Add(sp);
+            //    }
+
+            //    sprites.SpriteData.Definitions.Add(def);
+            //}
+
+            //sprites.Save(projectController.ProjectData.SpriteDataFile);
 
             //WorldController worlds = new WorldController();
 

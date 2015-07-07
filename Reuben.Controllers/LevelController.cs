@@ -44,6 +44,7 @@ namespace Reuben.Controllers
 
         public void SaveLevel(Level level)
         {
+            level.CompressedData = GetCompressedData(level);
             LevelInfo info = GetLevelInfoByID(level.ID);
             File.WriteAllText(info.File, JsonConvert.SerializeObject(level));
         }
@@ -61,13 +62,13 @@ namespace Reuben.Controllers
         public byte GetClearTile(Level level)
         {
             Dictionary<byte, int> tileCount = new Dictionary<byte, int>();
+            for (int i = 0; i < 256; i++)
+            {
+                tileCount[(byte)i]  = 0;
+            }
+
             foreach (byte value in level.Data)
             {
-                if (!tileCount.ContainsKey(value))
-                {
-                    tileCount[value] = 0;
-                }
-
                 tileCount[value]++;
             }
 

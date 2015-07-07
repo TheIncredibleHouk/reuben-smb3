@@ -26,16 +26,13 @@ namespace Reuben.UI
             mouseCap.Location = new Point(mouseCap.Location.X, 2);
         }
 
-        public void Initialize(GraphicsController graphicsController, SpriteController spriteController, Color[] colors, Palette palette)
+        public void Initialize(Color[] colors, Palette palette)
         {
             localColorReference = colors;
-            localGraphicsController = graphicsController;
-            localSpriteController = spriteController;
             localPalette = palette;
 
+            sprites.Initialize();
             sprites.ColorReference = localColorReference;
-            sprites.Graphics = localGraphicsController;
-            sprites.Sprites = localSpriteController;
             sprites.Palette = localPalette;
             sprites.UpdateGraphics();
         }
@@ -46,8 +43,6 @@ namespace Reuben.UI
             localPalette = palette ?? localPalette;
 
             sprites.ColorReference = localColorReference;
-            sprites.Graphics = localGraphicsController;
-            sprites.Sprites = localSpriteController;
             sprites.Palette = localPalette;
             sprites.UpdateGraphics();
 
@@ -70,8 +65,6 @@ namespace Reuben.UI
 
         private Color[] localColorReference;
         private Palette localPalette;
-        private SpriteController localSpriteController;
-        private GraphicsController localGraphicsController;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LevelEditor Editor { get; set; }
@@ -110,7 +103,7 @@ namespace Reuben.UI
                 if (value != null)
                 {
                     selectedSprite = sprites.SpriteDrawBoundsCache.Where(s => s.Item1.ObjectID == value.ObjectID).Select(s => s.Item1).FirstOrDefault();
-                    sprites.SelectionRectangle = localSpriteController.GetClipBounds(selectedSprite);
+                    sprites.SelectionRectangle = Controllers.Sprites.GetClipBounds(selectedSprite);
                 }
                 else
                 {

@@ -23,7 +23,7 @@ namespace Reuben.Controllers
         private string lastExtraFile;
         private DateTime lastExtraModified;
         private string lastPaletteFile;
-        private DateTime lastPaletteModified;
+        
         public GraphicsController()
         {
 

@@ -114,7 +114,7 @@ namespace Reuben.Controllers
 
             BuildWorlds(data);
             int lastAddress = BuildLevels(data);
-            File.WriteAllBytes(localProjectController.Project.RomFile, data);
+            File.WriteAllBytes(localProjectController.ProjectData.RomFile, data);
             return 0x7C00F - lastAddress;
         }
 
@@ -341,7 +341,11 @@ namespace Reuben.Controllers
                 data[address++] = (byte)((p.ExitLevel ? 0x80 : 0x00) | (p.RedrawLevel ? 0x40 : 0x00) | (p.KeepObjectData ? 0x20 : 0x00) | (p.DisableWeather ? 0x10 : 0x00) | (p.ExitType));
             }
 
-            byte[] levelData = localLevelController.GetCompressedData(level);
+            if (level.CompressedData == null)
+            {
+                level.CompressedData = localLevelController.GetCompressedData(level);
+            }
+            byte[] levelData = level.CompressedData;
             for (int i = 0; i < levelData.Length; i++)
             {
                 data[address++] = levelData[i];

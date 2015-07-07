@@ -30,11 +30,9 @@ namespace Reuben.UI
         private string ASMTagRegEx;
 
 
-        private ASMController localASMController;
         public string File { get; private set;  }
-        public void Initiliaze(ASMController asmController, string file)
+        public void Initiliaze(string file)
         {
-            localASMController = asmController;
             AutoIndent = false;
 
             ASMCommentRegEx = ";.*$";
@@ -45,11 +43,11 @@ namespace Reuben.UI
             ASMRegisterRegEx = "(?<=,)[AXYaxy]|(?<=, )[AXYaxy]";
             ASMTagRegEx = "\\;\\#[A-Za-z0-9\\-_.@]+";
 
-            this.Text = asmController.GetFile(file);
+            this.Text = Controllers.ASM.GetFile(file);
 
             AutocompleteMenu popupMenu = new AutocompleteMenu(this);
             popupMenu.MinFragmentLength = 3;
-            popupMenu.Items.SetAutocompleteItems(asmController.ParseSymbols(this.Text));
+            popupMenu.Items.SetAutocompleteItems(Controllers.ASM.ParseSymbols(this.Text));
             popupMenu.Items.MaximumSize = new System.Drawing.Size(200, 300);
             popupMenu.Items.Width = 200;
             popupMenu.AllowTabKey = true;
@@ -62,7 +60,7 @@ namespace Reuben.UI
 
         public void Save()
         {
-            localASMController.Save(File, this.Text);
+            Controllers.ASM.Save(File, this.Text);
         }
 
 

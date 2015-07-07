@@ -20,22 +20,17 @@ namespace Reuben.UI
             InitializeComponent();
         }
 
-        GraphicsController localGraphicsController;
-        StringController localStringController;
-        Palette overlayPalette;
-        ProjectController localProjectController;
+        private Palette overlayPalette;
         public Block[] Overlays { get; set; }
 
         public List<LevelType> LocalLevelTypes { get; private set; }
 
-        public void Initialize(ProjectController projectController, LevelController levels, GraphicsController graphics, StringController strings, int selectedLevelType = 1)
+        public void Initialize(int selectedLevelType = 1)
         {
-            localProjectController = projectController;
-            var overlayTable = graphics.MakeExtraPatternTable(4, 5, 6, 7);
-            LocalLevelTypes = levels.LevelData.Types.MakeCopy();
-            localGraphicsController = graphics;
-            Overlays = levels.LevelData.Overlays.MakeCopy();
-            overlayPalette = levels.LevelData.OverlayPalette;
+            var overlayTable = Controllers.Graphics.MakeExtraPatternTable(4, 5, 6, 7);
+            LocalLevelTypes = Controllers.Levels.LevelData.Types.MakeCopy();
+            Overlays = Controllers.Levels.LevelData.Overlays.MakeCopy();
+            overlayPalette = Controllers.Levels.LevelData.OverlayPalette;
 
             delayUpdate = true;
             for (int i = 0; i < 256; i++)
@@ -44,17 +39,16 @@ namespace Reuben.UI
                 graphics2.Items.Add(i.ToString("X2"));
             }
 
-            localStringController = strings;
-            solidity.Items.AddRange(strings.GetStringList("solidity").ToArray());
+            solidity.Items.AddRange(Controllers.Strings.GetStringList("solidity").ToArray());
 
             levelTypes.Items.AddRange(LocalLevelTypes.Select(l => l.Name ?? "").ToArray());
             levelTypes.Items.Add("Overlays");
 
-            paletteList.Palettes = graphics.GraphicsData.Palettes.OrderBy(p => p.Name.ToLower()).ToList();
-            patternTable.ColorReference = paletteList.ColorReference = graphics.GraphicsData.Colors;
+            paletteList.Palettes = Controllers.Graphics.GraphicsData.Palettes.OrderBy(p => p.Name.ToLower()).ToList();
+            patternTable.ColorReference = paletteList.ColorReference = Controllers.Graphics.GraphicsData.Colors;
 
-            blockList.Update(colors: graphics.GraphicsData.Colors, overlayBlocks: Overlays, overlayPalette: overlayPalette, overlayTable: overlayTable);
-            blockView.Update(colors: graphics.GraphicsData.Colors);
+            blockList.Update(colors: Controllers.Graphics.GraphicsData.Colors, overlayBlocks: Overlays, overlayPalette: overlayPalette, overlayTable: overlayTable);
+            blockView.Update(colors: Controllers.Graphics.GraphicsData.Colors);
 
             paletteList.UpdateList();
             delayUpdate = false;
@@ -65,14 +59,14 @@ namespace Reuben.UI
             blockView.UpdateGraphics();
             blockList.SelectedBlock = 0;
 
-            graphics.GraphicsUpdated += graphics_GraphicsUpdated;
-            graphics.ExtraGraphicsUpdated += graphics_ExtraGraphicsUpdated;
+            Controllers.Graphics.GraphicsUpdated += graphics_GraphicsUpdated;
+            Controllers.Graphics.ExtraGraphicsUpdated += graphics_ExtraGraphicsUpdated;
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            localGraphicsController.GraphicsUpdated -= graphics_GraphicsUpdated;
-            localGraphicsController.ExtraGraphicsUpdated -= graphics_ExtraGraphicsUpdated;
+            Controllers.Graphics.GraphicsUpdated -= graphics_GraphicsUpdated;
+            Controllers.Graphics.ExtraGraphicsUpdated -= graphics_ExtraGraphicsUpdated;
         }
 
         void graphics_ExtraGraphicsUpdated(object sender, EventArgs e)
@@ -98,7 +92,7 @@ namespace Reuben.UI
             if (!delayUpdate && graphics1.SelectedIndex != -1 && graphics2.SelectedIndex != -1 && graphics1.Enabled && graphics2.Enabled)
             {
                 var palette = paletteList.SelectedPalette;
-                var newPatternTable = localGraphicsController.MakePatternTable(graphics1.SelectedIndex, graphics1.SelectedIndex + 1, graphics2.SelectedIndex, graphics2.SelectedIndex + 1);
+                var newPatternTable = Controllers.Graphics.MakePatternTable(graphics1.SelectedIndex, graphics1.SelectedIndex + 1, graphics2.SelectedIndex, graphics2.SelectedIndex + 1);
 
                 
                 patternTable.Palette = palette;
@@ -118,7 +112,7 @@ namespace Reuben.UI
             {
                 typeName.Enabled = setDefaultButton.Enabled = paletteList.Enabled = graphics1.Enabled = graphics2.Enabled = false;
 
-                var newPatternTable = localGraphicsController.MakeExtraPatternTable(4, 5, 6, 7);
+                var newPatternTable = Controllers.Graphics.MakeExtraPatternTable(4, 5, 6, 7);
                 typeName.Text = "Overlays";
                 blockList.Update(blockList: Overlays, palette: overlayPalette, patternTable: newPatternTable);
 
@@ -143,7 +137,7 @@ namespace Reuben.UI
                 graphics1.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID;
                 graphics2.SelectedIndex = LocalLevelTypes[levelTypes.SelectedIndex].DefaultGraphicsID2;
                 delayUpdate = false;
-                paletteList.SelectedPalette = localGraphicsController.GraphicsData.Palettes.Where(p => p.ID == LocalLevelTypes[levelTypes.SelectedIndex].DefaultPaletteID).FirstOrDefault();
+                paletteList.SelectedPalette = Controllers.Graphics.GraphicsData.Palettes.Where(p => p.ID == LocalLevelTypes[levelTypes.SelectedIndex].DefaultPaletteID).FirstOrDefault();
             }
         }
 
@@ -274,29 +268,29 @@ namespace Reuben.UI
                 case 1:
                 case 2:
                 case 3:
-                    interaction.Items.AddRange(localStringController.GetStringList("interaction").ToArray());
+                    interaction.Items.AddRange(Controllers.Strings.GetStringList("interaction").ToArray());
                     blockView.Block.BlockSolidity = (solidity.SelectedIndex << 4);
                     break;
 
                 case 4:
-                    interaction.Items.AddRange(localStringController.GetStringList("solid interaction").ToArray());
+                    interaction.Items.AddRange(Controllers.Strings.GetStringList("solid interaction").ToArray());
                     blockView.Block.BlockSolidity = (solidity.SelectedIndex << 4);
                     break;
 
                 case 5:
                     blockView.Block.BlockSolidity = 0x80;
-                    interaction.Items.AddRange(localStringController.GetStringList("item box").ToArray());
+                    interaction.Items.AddRange(Controllers.Strings.GetStringList("item box").ToArray());
                     break;
 
                 case 6:
                     blockView.Block.BlockSolidity = 0xC0;
-                    interaction.Items.AddRange(localStringController.GetStringList("solid interaction").ToArray());
+                    interaction.Items.AddRange(Controllers.Strings.GetStringList("solid interaction").ToArray());
                     break;
 
 
                 case 7:
                     blockView.Block.BlockSolidity = 0xF0;
-                    interaction.Items.AddRange(localStringController.GetStringList("item box").ToArray());
+                    interaction.Items.AddRange(Controllers.Strings.GetStringList("item box").ToArray());
                     break;
             }
 
@@ -358,7 +352,7 @@ namespace Reuben.UI
 
         private void BlockEditor_Activated(object sender, EventArgs e)
         {
-            localGraphicsController.CheckFiles();
+            Controllers.Graphics.CheckFiles();
         }
     }
 }

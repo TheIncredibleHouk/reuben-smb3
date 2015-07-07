@@ -34,7 +34,7 @@ namespace Reuben.UI
             this.Height = levelBitmapHeight;
         }
 
-        public void Initialize(Level level, LevelType levelType, Palette levelPalette, Palette overlayPalette, Color[] colors, Block[] overlayBlocks, PatternTable patternTable, PatternTable overlayTable, SpriteController spriteController, GraphicsController grahicsController)
+        public void Initialize(Level level, LevelType levelType, Palette levelPalette, Palette overlayPalette, Color[] colors, Block[] overlayBlocks, PatternTable patternTable, PatternTable overlayTable)
         {
             localLevel = level;
             localLevelType = levelType;
@@ -43,8 +43,6 @@ namespace Reuben.UI
             localOverlayPalette = overlayPalette;
             localPatternTable = patternTable;
             localOverlayTable = overlayTable;
-            localSpriteController = spriteController;
-            localGraphicsController = grahicsController;
             localOverlayBlocks = overlayBlocks;
 
             if (localPalette != null && localColors != null)
@@ -168,8 +166,6 @@ namespace Reuben.UI
         private Block[] localOverlayBlocks;
         private PatternTable localOverlayTable;
         private PatternTable localPatternTable;
-        private SpriteController localSpriteController;
-        private GraphicsController localGraphicsController;
 
         private Color[][] quickBGReference;
         private Color[][] quickSpriteReference;
@@ -204,7 +200,7 @@ namespace Reuben.UI
 
         public void UpdateSprites(IEnumerable<Sprite> sprites, IEnumerable<Rectangle> clearAreas)
         {
-            List<Tuple<Sprite, Rectangle>> spriteBounds = localSpriteController.GetBounds(sprites, ShowSpriteOverlays).ToList();
+            List<Tuple<Sprite, Rectangle>> spriteBounds = Controllers.Sprites.GetBounds(sprites, ShowSpriteOverlays).ToList();
             Rectangle area = spriteBounds.Select(a => a.Item2).Combine();// generate all bound areas
 
             BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
@@ -217,7 +213,7 @@ namespace Reuben.UI
                 }
             }
 
-            List<Tuple<Sprite, Rectangle>> affectedSprites = localSpriteController.GetBounds(localLevel.Sprites, ShowSpriteOverlays).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
+            List<Tuple<Sprite, Rectangle>> affectedSprites = Controllers.Sprites.GetBounds(localLevel.Sprites, ShowSpriteOverlays).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
             area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), area);
 
             foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
@@ -332,7 +328,7 @@ namespace Reuben.UI
             int x = sprite.X * 16;
             int y = sprite.Y * 16;
 
-            SpriteDefinition def = localSpriteController.GetDefinition(sprite.ObjectID);
+            SpriteDefinition def = Controllers.Sprites.GetDefinition(sprite.ObjectID);
             bool forceOverlay = def.SpriteInfo.Where(s => !s.Overlay).Count() == 0;
             foreach (var info in def.SpriteInfo)
             {
@@ -365,14 +361,14 @@ namespace Reuben.UI
 
                 if (info.Overlay)
                 {
-                    tile1 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value);
-                    tile2 = localGraphicsController.GetExtraTileByBankIndex(info.Table, info.Value + 1);
+                    tile1 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value);
+                    tile2 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value + 1);
                     colorReference = quickSpriteOverlayReference;
                 }
                 else
                 {
-                    tile1 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value);
-                    tile2 = localGraphicsController.GetTileByBankIndex(info.Table, info.Value + 1);
+                    tile1 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value);
+                    tile2 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value + 1);
                     colorReference = quickSpriteReference;
                 }
 
@@ -444,7 +440,7 @@ namespace Reuben.UI
 
                     foreach (Sprite s in SelectedSprites)
                     {
-                        Rectangle drawRectangle = localSpriteController.GetClipBounds(s);
+                        Rectangle drawRectangle = Controllers.Sprites.GetClipBounds(s);
                         e.Graphics.DrawRectangle(Pens.White, drawRectangle);
                         e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
                     }
