@@ -226,6 +226,33 @@ namespace Reuben.UI
             UpdateLayers(area);
         }
 
+        public void UpdatePointers(IEnumerable<LevelPointer> pointers, IEnumerable<Rectangle> clearAreas)
+        {
+            Rectangle area = pointers.Select(p => new Rectangle(p.X * 16, p.Y * 16, 32, 32)).Combine();// generate all bound areas
+
+            BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            if (clearAreas != null)
+            {
+                area = Rectangle.Union(area, clearAreas.Combine());
+                foreach (var r in clearAreas)
+                {
+                    Drawer.FillArea(new Rectangle(r.X, r.Y, r.Width + 1, r.Height + 1), Color.Transparent, bitmap);
+                }
+            }
+
+            List<Tuple<Sprite, Rectangle>> affectedSprites = Controllers.Sprites.GetBounds(localLevel.Sprites, ShowSpriteOverlays).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
+            area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), area);
+
+            foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
+            {
+                DrawSprite(sprite, bitmap);
+            }
+
+
+            spriteBuffer.UnlockBits(bitmap);
+            UpdateLayers(area);
+        }
+
         private void UpdateBGArea(int column, int row, int width, int height)
         {
             BitmapData bitmap = bgBuffer.LockBits(new Rectangle(0, 0, bgBuffer.Width, bgBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
@@ -318,7 +345,6 @@ namespace Reuben.UI
                         Drawer.FillTileWithAlpha(column * 16 + 8, row * 16 + 8, Color.Brown, .5, bitmap);
                         break;
                 }
-
             }
         }
 
