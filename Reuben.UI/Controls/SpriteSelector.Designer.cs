@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.filter = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.groupFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.graphicsFilter = new System.Windows.Forms.ComboBox();
             this.scrollPanel = new System.Windows.Forms.Panel();
             this.mouseCap = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,15 +51,16 @@
             this.filter.TabIndex = 1;
             this.filter.TextChanged += new System.EventHandler(this.filter_TextChanged);
             // 
-            // comboBox1
+            // groupFilter
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(11, 74);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(110, 21);
-            this.comboBox1.TabIndex = 3;
+            this.groupFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.groupFilter.FormattingEnabled = true;
+            this.groupFilter.Location = new System.Drawing.Point(11, 74);
+            this.groupFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.groupFilter.Name = "groupFilter";
+            this.groupFilter.Size = new System.Drawing.Size(110, 21);
+            this.groupFilter.TabIndex = 3;
+            this.groupFilter.SelectedIndexChanged += new System.EventHandler(this.groupFilter_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -81,19 +82,20 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Graphics Section";
             // 
-            // comboBox2
+            // graphicsFilter
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.graphicsFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.graphicsFilter.FormattingEnabled = true;
+            this.graphicsFilter.Items.AddRange(new object[] {
+            "Any",
             "Global",
             "Bank 3",
             "Bank 4"});
-            this.comboBox2.Location = new System.Drawing.Point(129, 74);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(110, 21);
-            this.comboBox2.TabIndex = 5;
+            this.graphicsFilter.Location = new System.Drawing.Point(129, 74);
+            this.graphicsFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.graphicsFilter.Name = "graphicsFilter";
+            this.graphicsFilter.Size = new System.Drawing.Size(110, 21);
+            this.graphicsFilter.TabIndex = 5;
             // 
             // scrollPanel
             // 
@@ -130,10 +132,10 @@
             // 
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.filter);
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.groupFilter);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.comboBox2);
+            this.panel2.Controls.Add(this.graphicsFilter);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -143,6 +145,8 @@
             // 
             // sprites
             // 
+            this.sprites.GraphicsSet = 0;
+            this.sprites.Group = null;
             this.sprites.Location = new System.Drawing.Point(0, 0);
             this.sprites.Margin = new System.Windows.Forms.Padding(0);
             this.sprites.Name = "sprites";
@@ -168,10 +172,10 @@
 
         private Controls.SpriteListViewer sprites;
         private System.Windows.Forms.TextBox filter;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox groupFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox graphicsFilter;
         private System.Windows.Forms.Panel scrollPanel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button mouseCap;

@@ -18,7 +18,28 @@ namespace Reuben.UI
         public SpriteSelector()
         {
             InitializeComponent();
+
+            var groups = Controllers.Sprites.SpriteData.Definitions.Select(d => d.Group).Distinct().OrderBy(n => n).ToList();
+            groups.Insert(0, "All Groups");
+            groupFilter.DataSource = groups;
+            graphicsFilter.SelectedIndex = 0;
+
             scrollPanel.MouseWheel += panel1_MouseWheel;
+            graphicsFilter.SelectedIndexChanged+= graphicsFilter_SelectedIndexChanged;
+            groupFilter.SelectedIndexChanged += groupFilter_SelectedIndexChanged;
+        }
+
+        private void graphicsFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sprites.GraphicsSet = graphicsFilter.SelectedIndex;
+            UpdateSpriteList();
+        }
+
+
+        private void groupFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sprites.Group = (string)(groupFilter.SelectedIndex == 0 ? "" : groupFilter.SelectedValue);
+            UpdateSpriteList();
         }
 
         void panel1_MouseWheel(object sender, MouseEventArgs e)
@@ -113,6 +134,11 @@ namespace Reuben.UI
         }
 
         private void filter_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSpriteList();
+        }
+
+        private void UpdateSpriteList()
         {
             sprites.FilterSprites(filter.Text);
             sprites.UpdateGraphics();

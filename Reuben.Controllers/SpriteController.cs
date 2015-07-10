@@ -21,7 +21,6 @@ namespace Reuben.Controllers
         public SpriteController()
         {
             SpriteData = new SpriteData();
-            pointerDefinition = new SpriteDefinition();
         }
 
         public void Load(string fileName)

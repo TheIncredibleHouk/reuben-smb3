@@ -96,6 +96,8 @@ namespace Reuben.UI
                     {
                         displayProperty.SelectedIndex = 0;
                     }
+
+                    gameID.Text = "Game Object ID: " + spriteViewer.CurrentDefinition.GameID.ToString("X2");
                 }
 
                 definitionCode.Text = EditorSpriteInfo.Serialize(spriteViewer.CurrentDefinition.SpriteInfo);
@@ -1118,6 +1120,11 @@ namespace Reuben.UI
                 definitionCode.SelectionLength = end;
                 HighlightSprites();
             }
+        }
+
+        private void spriteSelector_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -105,6 +105,9 @@ namespace Reuben.UI.Controls
             buffer.UnlockBits(data);
         }
 
+        public string Group { get; set; }
+        public int GraphicsSet { get; set; }
+
         public int FilterSprites(string filter)
         {
             filter = filter.ToLower();
@@ -116,6 +119,16 @@ namespace Reuben.UI.Controls
             else
             {
                 definitions = Controllers.Sprites.SpriteData.Definitions;
+            }
+
+            if (!string.IsNullOrEmpty(Group))
+            {
+                definitions = definitions.Where(d => d.Group == Group);
+            }
+
+            if(GraphicsSet > 0)
+            {
+                definitions = definitions.Where(d => d.Class == GraphicsSet);
             }
 
             SpriteDrawBoundsCache.Clear();

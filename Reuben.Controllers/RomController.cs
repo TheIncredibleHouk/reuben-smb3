@@ -121,10 +121,10 @@ namespace Reuben.Controllers
         private void WriteBlockData(byte[] data)
         {
             int address = 0x1E010;
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 15; i++)
             {
                 Block[] blockData = localLevelController.LevelData.Types[i].Blocks;
-                for (int j = 0; j < 0x400; j++)
+                for (int j = 0; j < 0x100; j++)
                 {
                     data[address] = (byte)blockData[j].UpperLeft;
                     data[address + 0x100] = (byte)blockData[j].LowerLeft;

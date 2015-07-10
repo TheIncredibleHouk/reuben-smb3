@@ -189,7 +189,7 @@ ObjectGroup01_Attributes:
     .byte OA1_PAL3 | OA1_HEIGHT16 | OA1_WIDTH48    ; Object $44 - OBJ_WOODENPLATUNSTABLE
     .byte OA1_PAL3 | OA1_HEIGHT16 | OA1_WIDTH16    ; Object $45 - OBJ_PWING
     .byte OA1_PAL1 | OA1_HEIGHT16 | OA1_WIDTH16    ; Object $46 - OBJ_SNIFIT
-	.byte OA2_TDOGRP2 | OA2_NOSHELLORSQUASH  ; Object47
+    .byte OA1_PAL2 | OA1_WIDTH16 | OA1_HEIGHT32 ; Object47
 
     ; Object group $01 (i.e. objects starting at ID $24) second set attribute bits
 
@@ -238,7 +238,7 @@ ObjectGroup01_Attributes2:
     .byte OA2_TDOGRP9    ; Object $44 - OBJ_WOODENPLATUNSTABLE
     .byte OA2_TDOGRP1    ; Object $45 - OBJ_PWING
     .byte  OA2_NOSHELLORSQUASH | OA2_TDOGRP1    ; Object $46 - OBJ_SNIFIT
-	.byte OA2_TDOGRP2 | OA2_NOSHELLORSQUASH  ; Object47
+    .byte OA2_TDOGRP2 | OA2_NOSHELLORSQUASH  ; Object47
 
 
     ; Object group $01 (i.e. objects starting at ID $24) third set attribute bits
