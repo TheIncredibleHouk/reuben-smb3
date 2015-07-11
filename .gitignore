@@ -8,3 +8,5 @@ Reuben.Model/obj/
 Reuben.Controllers/obj/
 Reuben.Graphics/obj/
 Reuben.UI/obj/Debug/Reuben.UI.csproj.FileListAbsolute.txt
+Reuben.UI/bin/
+Reuben.Controllers/bin/
