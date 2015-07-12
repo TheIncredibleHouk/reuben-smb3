@@ -23,7 +23,7 @@ namespace Reuben.UI
             CheckForIllegalCrossThreadCalls = false;
         }
 
-        void panel1_MouseWheel(object sender, MouseEventArgs e)
+        private void panel1_MouseWheel(object sender, MouseEventArgs e)
         {
             mouseCap.Location = new Point(4, 4);
         }
@@ -71,7 +71,7 @@ namespace Reuben.UI
             spriteSelector.Initialize(Controllers.Graphics.GraphicsData.Colors, palette);
             paletteList.ColorReference = Controllers.Graphics.GraphicsData.Colors;
 
-            
+
             levelViewer.UpdateSprites(level.Sprites);
             levelViewer.UpdateBlockDisplay(0, 0, 16 * 15, 0x1B);
 
@@ -89,6 +89,10 @@ namespace Reuben.UI
 
             levelTypeList.DataSource = Controllers.Levels.LevelData.Types.Skip(1).Select(l => l.Name).ToList();
             levelTypeList.SelectedIndex = level.TypeID - 1;
+
+
+            effectList.DataSource = Controllers.Strings.GetStringList("palette types");
+            effectList.SelectedIndex = level.PaletteEffectType;
 
             for (int i = 0; i < 256; i++)
             {
@@ -109,6 +113,14 @@ namespace Reuben.UI
             screenList.SelectedIndexChanged += screenList_SelectedIndexChanged;
             levelTypeList.SelectedIndexChanged += levelTypeList_SelectedIndexChanged;
             graphicsList.SelectedIndexChanged += graphicsList_SelectedIndexChanged;
+            effectList.SelectedIndexChanged += effectList_SelectedIndexChanged;
+
+            spriteProperty.Visible = false;
+        }
+
+        private void effectList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            level.PaletteEffectType = effectList.SelectedIndex;
         }
 
         public void UpdatePalette()
@@ -360,6 +372,28 @@ namespace Reuben.UI
                         leftMouseDrag = true;
                     }
                 }
+
+                if (levelViewer.SelectedSprites.Count == 0)
+                {
+                    spriteProperty.Visible = false;
+                }
+
+                else if (levelViewer.SelectedSprites.Count == 1)
+                {
+                    var descriptions = Controllers.Sprites.GetDefinition(hoveredSprite.ObjectID).PropertyDescriptions;
+                    if (descriptions.Count == 0)
+                    {
+                        spriteProperty.Visible = false;
+                    }
+                    else
+                    {
+                        spriteProperty.Visible = true;
+                        spriteProperty.DataSource = descriptions;
+                        spriteProperty.SelectedIndex = levelViewer.SelectedSprites[0].Property;
+                        var rect = Controllers.Sprites.GetBounds(levelViewer.SelectedSprites).FirstOrDefault();
+                        spriteProperty.Location = new Point( rect.Item2.X + rect.Item2.Width, rect.Item2.Y);
+                    }
+                }
             }
         }
 
@@ -369,6 +403,7 @@ namespace Reuben.UI
         private bool rightMouseDragged = false;
 
         private int startCol, startRow;
+        private Sprite hoveredSprite;
         private void levelViewer_MouseMove(object sender, MouseEventArgs e)
         {
             mouseCap.Focus();
@@ -434,6 +469,27 @@ namespace Reuben.UI
             }
             else if (EditMode == UI.EditMode.Sprites)
             {
+                List<Tuple<Sprite, Rectangle>> boundCache = Controllers.Sprites.GetBounds(level.Sprites).ToList();
+                Sprite newHoveredSprite = boundCache.Where(t => t.Item2.Contains(e.X, e.Y)).Select(s => s.Item1).FirstOrDefault(); // find the sprite clicked on
+                if (hoveredSprite != newHoveredSprite)
+                {
+                    hoveredSprite = newHoveredSprite;
+                    if (hoveredSprite != null)
+                    {
+                        SpriteDefinition def = Controllers.Sprites.GetDefinition(hoveredSprite.ObjectID);
+                        string displayTip = string.Format("({0:X2},{1:X2}) {2}", hoveredSprite.X, hoveredSprite.Y, def.Name);
+                        if (def.PropertyDescriptions.Count > 0)
+                        {
+                            displayTip += " - " + def.PropertyDescriptions[hoveredSprite.Property];
+                        }
+                        toolTip.SetToolTip(levelViewer, displayTip);
+                    }
+                }
+
+                if (hoveredSprite == null)
+                {
+                    toolTip.Hide(levelViewer);
+                }
                 if (leftMouseDrag && levelViewer.SelectedSprites.Count == 0)
                 {
                     leftMouseDragged = leftMouseDrag;

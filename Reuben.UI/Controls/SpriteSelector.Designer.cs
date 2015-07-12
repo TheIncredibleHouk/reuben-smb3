@@ -34,7 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.graphicsFilter = new System.Windows.Forms.ComboBox();
             this.scrollPanel = new System.Windows.Forms.Panel();
-            this.mouseCap = new System.Windows.Forms.Button();
+            this.mouseCap = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.sprites = new Reuben.UI.Controls.SpriteListViewer();
@@ -116,7 +116,6 @@
             this.mouseCap.Size = new System.Drawing.Size(0, 0);
             this.mouseCap.TabIndex = 1;
             this.mouseCap.Text = "FOCUS!";
-            this.mouseCap.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -178,7 +177,7 @@
         private System.Windows.Forms.ComboBox graphicsFilter;
         private System.Windows.Forms.Panel scrollPanel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button mouseCap;
+        private System.Windows.Forms.LinkLabel mouseCap;
         private System.Windows.Forms.Panel panel2;
     }
 }

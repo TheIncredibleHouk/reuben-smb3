@@ -19,10 +19,13 @@ namespace Reuben.UI
         {
             InitializeComponent();
 
-            var groups = Controllers.Sprites.SpriteData.Definitions.Select(d => d.Group).Distinct().OrderBy(n => n).ToList();
-            groups.Insert(0, "All Groups");
-            groupFilter.DataSource = groups;
-            graphicsFilter.SelectedIndex = 0;
+            if (Controllers.Sprites != null)
+            {
+                var groups = Controllers.Sprites.SpriteData.Definitions.Select(d => d.Group).Distinct().OrderBy(n => n).ToList();
+                groups.Insert(0, "All Groups");
+                groupFilter.DataSource = groups;
+                graphicsFilter.SelectedIndex = 0;
+            }
 
             scrollPanel.MouseWheel += panel1_MouseWheel;
             graphicsFilter.SelectedIndexChanged+= graphicsFilter_SelectedIndexChanged;
