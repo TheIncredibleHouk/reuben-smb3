@@ -161,5 +161,12 @@ namespace Reuben.UI
         {
 
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            buffer.Dispose();
+            displayBuffer.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

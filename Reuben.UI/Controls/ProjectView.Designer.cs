@@ -28,289 +28,229 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.projectTree = new System.Windows.Forms.TreeView();
-            this.savebutton = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.projectName = new System.Windows.Forms.TextBox();
-            this.defaultsLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.textLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.asmLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.spritesLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.blocksLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.palettesLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.levelContext = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.worldContext = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.editWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.levelContext.SuspendLayout();
-            this.worldContext.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.defaultsButton = new MetroFramework.Controls.MetroButton();
+            this.palettesButton = new MetroFramework.Controls.MetroButton();
+            this.blocksButton = new MetroFramework.Controls.MetroButton();
+            this.asmButton = new MetroFramework.Controls.MetroButton();
+            this.spritesButton = new MetroFramework.Controls.MetroButton();
+            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.levelsTab = new System.Windows.Forms.TabPage();
+            this.levelsPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.textButton = new MetroFramework.Controls.MetroButton();
+            this.metroTabControl1.SuspendLayout();
+            this.levelsTab.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // projectTree
-            // 
-            this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.projectTree.Dock = System.Windows.Forms.DockStyle.Left;
-            this.projectTree.Location = new System.Drawing.Point(0, 0);
-            this.projectTree.Name = "projectTree";
-            this.projectTree.Size = new System.Drawing.Size(146, 268);
-            this.projectTree.TabIndex = 0;
-            this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
-            // 
-            // savebutton
-            // 
-            this.savebutton.Enabled = false;
-            this.savebutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savebutton.Location = new System.Drawing.Point(168, 52);
-            this.savebutton.Name = "savebutton";
-            this.savebutton.Size = new System.Drawing.Size(75, 23);
-            this.savebutton.TabIndex = 3;
-            this.savebutton.Text = "Save";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(87, 52);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Open";
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(4);
-            this.label1.Size = new System.Drawing.Size(43, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
-            // 
-            // projectName
-            // 
-            this.projectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.projectName.Enabled = false;
-            this.projectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.projectName.Location = new System.Drawing.Point(6, 25);
-            this.projectName.Margin = new System.Windows.Forms.Padding(4);
-            this.projectName.Name = "projectName";
-            this.projectName.Size = new System.Drawing.Size(237, 20);
-            this.projectName.TabIndex = 1;
-            // 
-            // defaultsLinkLabel
-            // 
-            this.defaultsLinkLabel.Enabled = false;
-            this.defaultsLinkLabel.Location = new System.Drawing.Point(10, 127);
-            this.defaultsLinkLabel.Margin = new System.Windows.Forms.Padding(4);
-            this.defaultsLinkLabel.Name = "defaultsLinkLabel";
-            this.defaultsLinkLabel.Size = new System.Drawing.Size(75, 23);
-            this.defaultsLinkLabel.TabIndex = 5;
-            this.defaultsLinkLabel.Text = "Defaults";
-            // 
-            // textLinkLabel
-            // 
-            this.textLinkLabel.Enabled = false;
-            this.textLinkLabel.Location = new System.Drawing.Point(10, 65);
-            this.textLinkLabel.Margin = new System.Windows.Forms.Padding(4);
-            this.textLinkLabel.Name = "textLinkLabel";
-            this.textLinkLabel.Size = new System.Drawing.Size(75, 23);
-            this.textLinkLabel.TabIndex = 4;
-            this.textLinkLabel.Text = "Text";
-            this.textLinkLabel.Click += new System.EventHandler(this.textLinkLabel_Click);
-            // 
-            // asmLinkLabel
-            // 
-            this.asmLinkLabel.Enabled = false;
-            this.asmLinkLabel.Location = new System.Drawing.Point(10, 34);
-            this.asmLinkLabel.Margin = new System.Windows.Forms.Padding(4);
-            this.asmLinkLabel.Name = "asmLinkLabel";
-            this.asmLinkLabel.Size = new System.Drawing.Size(75, 23);
-            this.asmLinkLabel.TabIndex = 3;
-            this.asmLinkLabel.Tag = "";
-            this.asmLinkLabel.Text = "ASM";
-            this.asmLinkLabel.Click += new System.EventHandler(this.asmLinkLabel_Click);
-            // 
-            // spritesLinkLabel
-            // 
-            this.spritesLinkLabel.Enabled = false;
-            this.spritesLinkLabel.Location = new System.Drawing.Point(10, 158);
-            this.spritesLinkLabel.Margin = new System.Windows.Forms.Padding(4);
-            this.spritesLinkLabel.Name = "spritesLinkLabel";
-            this.spritesLinkLabel.Size = new System.Drawing.Size(75, 23);
-            this.spritesLinkLabel.TabIndex = 2;
-            this.spritesLinkLabel.Text = "Sprites";
-            this.spritesLinkLabel.Click += new System.EventHandler(this.spritesLinkLabel_Click);
-            // 
-            // blocksLinkLabel
-            // 
-            this.blocksLinkLabel.Enabled = false;
-            this.blocksLinkLabel.Location = new System.Drawing.Point(10, 96);
-            this.blocksLinkLabel.Margin = new System.Windows.Forms.Padding(4);
-            this.blocksLinkLabel.Name = "blocksLinkLabel";
-            this.blocksLinkLabel.Size = new System.Drawing.Size(75, 23);
-            this.blocksLinkLabel.TabIndex = 1;
-            this.blocksLinkLabel.Text = "Blocks";
-            this.blocksLinkLabel.Click += new System.EventHandler(this.blocksLinkLabel_Click);
-            // 
-            // palettesLinkLabel
-            // 
-            this.palettesLinkLabel.Enabled = false;
-            this.palettesLinkLabel.Location = new System.Drawing.Point(10, 4);
-            this.palettesLinkLabel.Margin = new System.Windows.Forms.Padding(4);
-            this.palettesLinkLabel.Name = "palettesLinkLabel";
-            this.palettesLinkLabel.Size = new System.Drawing.Size(75, 23);
-            this.palettesLinkLabel.TabIndex = 0;
-            this.palettesLinkLabel.Text = "Palettes";
-            this.palettesLinkLabel.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // levelContext
-            // 
-            this.levelContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openLevelToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.openToolStripMenuItem,
-            this.deleteLevelToolStripMenuItem});
-            this.levelContext.Name = "levelContext";
-            this.levelContext.Size = new System.Drawing.Size(138, 76);
-            // 
-            // openLevelToolStripMenuItem
-            // 
-            this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
-            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.openLevelToolStripMenuItem.Text = "Open Level";
-            this.openLevelToolStripMenuItem.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(134, 6);
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.openToolStripMenuItem.Text = "New Level";
-            // 
-            // deleteLevelToolStripMenuItem
-            // 
-            this.deleteLevelToolStripMenuItem.Name = "deleteLevelToolStripMenuItem";
-            this.deleteLevelToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.deleteLevelToolStripMenuItem.Text = "Delete Level";
-            // 
-            // worldContext
-            // 
-            this.worldContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openWorldToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.editWorldToolStripMenuItem,
-            this.deleteWorldToolStripMenuItem});
-            this.worldContext.Name = "worldContext";
-            this.worldContext.Size = new System.Drawing.Size(143, 76);
-            // 
-            // openWorldToolStripMenuItem
-            // 
-            this.openWorldToolStripMenuItem.Name = "openWorldToolStripMenuItem";
-            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.openWorldToolStripMenuItem.Text = "Open World";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(139, 6);
-            // 
-            // editWorldToolStripMenuItem
-            // 
-            this.editWorldToolStripMenuItem.Name = "editWorldToolStripMenuItem";
-            this.editWorldToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.editWorldToolStripMenuItem.Text = "Edit World";
-            // 
-            // deleteWorldToolStripMenuItem
-            // 
-            this.deleteWorldToolStripMenuItem.Name = "deleteWorldToolStripMenuItem";
-            this.deleteWorldToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.deleteWorldToolStripMenuItem.Text = "Delete World";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.savebutton);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.projectName);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 268);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(505, 100);
-            this.panel2.TabIndex = 2;
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.defaultsLinkLabel);
-            this.panel3.Controls.Add(this.palettesLinkLabel);
-            this.panel3.Controls.Add(this.textLinkLabel);
-            this.panel3.Controls.Add(this.blocksLinkLabel);
-            this.panel3.Controls.Add(this.asmLinkLabel);
-            this.panel3.Controls.Add(this.spritesLinkLabel);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(412, 0);
+            this.panel3.Location = new System.Drawing.Point(791, 75);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(93, 268);
             this.panel3.TabIndex = 3;
+            // 
+            // defaultsButton
+            // 
+            this.defaultsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.defaultsButton.Location = new System.Drawing.Point(14, 264);
+            this.defaultsButton.Margin = new System.Windows.Forms.Padding(4);
+            this.defaultsButton.Name = "defaultsButton";
+            this.defaultsButton.Size = new System.Drawing.Size(469, 48);
+            this.defaultsButton.TabIndex = 5;
+            this.defaultsButton.Text = "Manage Default Settings";
+            this.defaultsButton.UseSelectable = true;
+            // 
+            // palettesButton
+            // 
+            this.palettesButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.palettesButton.Location = new System.Drawing.Point(14, 114);
+            this.palettesButton.Margin = new System.Windows.Forms.Padding(4);
+            this.palettesButton.Name = "palettesButton";
+            this.palettesButton.Size = new System.Drawing.Size(469, 42);
+            this.palettesButton.TabIndex = 2;
+            this.palettesButton.Text = "Manage Palettes";
+            this.palettesButton.UseSelectable = true;
+            this.palettesButton.Click += new System.EventHandler(this.palettesButton_Click);
+            // 
+            // blocksButton
+            // 
+            this.blocksButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.blocksButton.Location = new System.Drawing.Point(14, 214);
+            this.blocksButton.Margin = new System.Windows.Forms.Padding(4);
+            this.blocksButton.Name = "blocksButton";
+            this.blocksButton.Size = new System.Drawing.Size(469, 42);
+            this.blocksButton.TabIndex = 4;
+            this.blocksButton.Text = "Manage Block Layouts and Properties";
+            this.blocksButton.UseSelectable = true;
+            this.blocksButton.Click += new System.EventHandler(this.blocksButton_Click_1);
+            // 
+            // asmButton
+            // 
+            this.asmButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.asmButton.Location = new System.Drawing.Point(14, 164);
+            this.asmButton.Margin = new System.Windows.Forms.Padding(4);
+            this.asmButton.Name = "asmButton";
+            this.asmButton.Size = new System.Drawing.Size(469, 42);
+            this.asmButton.TabIndex = 3;
+            this.asmButton.Tag = "";
+            this.asmButton.Text = "Manage Game Assembly Source Code";
+            this.asmButton.UseSelectable = true;
+            this.asmButton.Click += new System.EventHandler(this.asmButton_Click_1);
+            // 
+            // spritesButton
+            // 
+            this.spritesButton.AutoSize = true;
+            this.spritesButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spritesButton.Location = new System.Drawing.Point(14, 64);
+            this.spritesButton.Margin = new System.Windows.Forms.Padding(4);
+            this.spritesButton.Name = "spritesButton";
+            this.spritesButton.Size = new System.Drawing.Size(469, 42);
+            this.spritesButton.TabIndex = 1;
+            this.spritesButton.Text = "Manage Objects and Enemies";
+            this.spritesButton.UseSelectable = true;
+            this.spritesButton.Click += new System.EventHandler(this.spritesButton_Click_1);
+            // 
+            // metroTabControl1
+            // 
+            this.metroTabControl1.Controls.Add(this.levelsTab);
+            this.metroTabControl1.Controls.Add(this.tabPage5);
+            this.metroTabControl1.Controls.Add(this.tabPage2);
+            this.metroTabControl1.Controls.Add(this.tabPage3);
+            this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.metroTabControl1.Name = "metroTabControl1";
+            this.metroTabControl1.SelectedIndex = 3;
+            this.metroTabControl1.Size = new System.Drawing.Size(505, 368);
+            this.metroTabControl1.TabIndex = 4;
+            this.metroTabControl1.UseSelectable = true;
+            // 
+            // levelsTab
+            // 
+            this.levelsTab.AutoScroll = true;
+            this.levelsTab.BackColor = System.Drawing.Color.Transparent;
+            this.levelsTab.Controls.Add(this.levelsPanel);
+            this.levelsTab.Location = new System.Drawing.Point(4, 38);
+            this.levelsTab.Name = "levelsTab";
+            this.levelsTab.Size = new System.Drawing.Size(497, 326);
+            this.levelsTab.TabIndex = 0;
+            this.levelsTab.Text = "Levels";
+            // 
+            // levelsPanel
+            // 
+            this.levelsPanel.AutoSize = true;
+            this.levelsPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.levelsPanel.ColumnCount = 1;
+            this.levelsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.levelsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.levelsPanel.Location = new System.Drawing.Point(0, 0);
+            this.levelsPanel.Name = "levelsPanel";
+            this.levelsPanel.RowCount = 1;
+            this.levelsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.levelsPanel.Size = new System.Drawing.Size(497, 0);
+            this.levelsPanel.TabIndex = 0;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.AutoScroll = true;
+            this.tabPage5.Location = new System.Drawing.Point(4, 38);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(497, 326);
+            this.tabPage5.TabIndex = 3;
+            this.tabPage5.Text = "Project";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 38);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(497, 326);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Worlds";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.AutoScroll = true;
+            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage3.Controls.Add(this.tableLayoutPanel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 38);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(497, 326);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Assets";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.defaultsButton, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.blocksButton, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.asmButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.palettesButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.spritesButton, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textButton, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 326);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // textButton
+            // 
+            this.textButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textButton.Location = new System.Drawing.Point(13, 13);
+            this.textButton.Name = "textButton";
+            this.textButton.Size = new System.Drawing.Size(471, 44);
+            this.textButton.TabIndex = 0;
+            this.textButton.Text = "Manage List and Mapping Strings";
+            this.textButton.UseSelectable = true;
+            this.textButton.Click += new System.EventHandler(this.textButton_Click);
             // 
             // ProjectView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.metroTabControl1);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.projectTree);
-            this.Controls.Add(this.panel2);
             this.Name = "ProjectView";
             this.Size = new System.Drawing.Size(505, 368);
-            this.levelContext.ResumeLayout(false);
-            this.worldContext.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
+            this.metroTabControl1.ResumeLayout(false);
+            this.levelsTab.ResumeLayout(false);
+            this.levelsTab.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView projectTree;
-        private System.Windows.Forms.TextBox projectName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel savebutton;
-        private System.Windows.Forms.LinkLabel button1;
-        private System.Windows.Forms.LinkLabel defaultsLinkLabel;
-        private System.Windows.Forms.LinkLabel textLinkLabel;
-        private System.Windows.Forms.LinkLabel asmLinkLabel;
-        private System.Windows.Forms.LinkLabel spritesLinkLabel;
-        private System.Windows.Forms.LinkLabel blocksLinkLabel;
-        private System.Windows.Forms.LinkLabel palettesLinkLabel;
-        private System.Windows.Forms.ContextMenuStrip levelContext;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openLevelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteLevelToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip worldContext;
-        private System.Windows.Forms.ToolStripMenuItem openWorldToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editWorldToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteWorldToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private MetroFramework.Controls.MetroTabControl metroTabControl1;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage levelsTab;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TableLayoutPanel levelsPanel;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private MetroFramework.Controls.MetroButton defaultsButton;
+        private MetroFramework.Controls.MetroButton blocksButton;
+        private MetroFramework.Controls.MetroButton asmButton;
+        private MetroFramework.Controls.MetroButton palettesButton;
+        private MetroFramework.Controls.MetroButton spritesButton;
+        private MetroFramework.Controls.MetroButton textButton;
     }
 }

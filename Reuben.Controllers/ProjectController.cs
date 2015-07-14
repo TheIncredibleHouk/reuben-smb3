@@ -29,18 +29,18 @@ namespace Reuben.Controllers
             {
                 throw new FileNotFoundException();
             }
-
             ProjectData = JsonConvert.DeserializeObject<Project>(File.ReadAllText(fileName));
-            ProjectData.GraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\graphics.chr";
-            ProjectData.ExtraGraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\extra.chr";
-            ProjectData.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
-            ProjectData.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
-            ProjectData.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
-            ProjectData.StringDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\strings.json";
-            ProjectData.SpriteDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\sprites.json";
-            ProjectData.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
-            ProjectData.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
-            ProjectData.ASMDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\asm";
+            ProjectData.ProjectDirectory = Path.GetDirectoryName(fileName).Trim('\\');
+            ProjectData.GraphicsFile = ProjectData.ProjectDirectory + @"\assets\graphics.chr";
+            ProjectData.ExtraGraphicsFile = ProjectData.ProjectDirectory + @"\assets\extra.chr";
+            ProjectData.PaletteFile = ProjectData.ProjectDirectory + @"\assets\palettes.json";
+            ProjectData.LevelDataFile = ProjectData.ProjectDirectory + @"\assets\levels.json";
+            ProjectData.WorldDataFile = ProjectData.ProjectDirectory + @"\assets\worlds.json";
+            ProjectData.StringDataFile = ProjectData.ProjectDirectory + @"\assets\strings.json";
+            ProjectData.SpriteDataFile = ProjectData.ProjectDirectory + @"\assets\sprites.json";
+            ProjectData.LevelsDirectory = ProjectData.ProjectDirectory + @"\levels";
+            ProjectData.WorldsDirectory = ProjectData.ProjectDirectory + @"\worlds";
+            ProjectData.ASMDirectory = ProjectData.ProjectDirectory + @"\asm";
             return ProjectData != null;
         }
 
@@ -48,16 +48,19 @@ namespace Reuben.Controllers
         {
             try
             {
-                ProjectData.GraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\graphics.chr";
-                ProjectData.ExtraGraphicsFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\extra.chr";
-                ProjectData.PaletteFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\palettes.json";
-                ProjectData.LevelDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\levels.json";
-                ProjectData.WorldDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\worlds.json";
-                ProjectData.StringDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\strings.json";
-                ProjectData.SpriteDataFile = Path.GetDirectoryName(fileName).Trim('\\') + @"\assets\sprites.json";
-                ProjectData.LevelsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\levels";
-                ProjectData.WorldsDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\worlds";
-                ProjectData.ASMDirectory = Path.GetDirectoryName(fileName).Trim('\\') + @"\asm";
+                ProjectData = JsonConvert.DeserializeObject<Project>(File.ReadAllText(fileName));
+                ProjectData.ProjectDirectory = Path.GetDirectoryName(fileName).Trim('\\');
+
+                ProjectData.GraphicsFile = ProjectData.ProjectDirectory + @"\assets\graphics.chr";
+                ProjectData.ExtraGraphicsFile = ProjectData.ProjectDirectory + @"\assets\extra.chr";
+                ProjectData.PaletteFile = ProjectData.ProjectDirectory + @"\assets\palettes.json";
+                ProjectData.LevelDataFile = ProjectData.ProjectDirectory + @"\assets\levels.json";
+                ProjectData.WorldDataFile = ProjectData.ProjectDirectory + @"\assets\worlds.json";
+                ProjectData.StringDataFile = ProjectData.ProjectDirectory + @"\assets\strings.json";
+                ProjectData.SpriteDataFile = ProjectData.ProjectDirectory + @"\assets\sprites.json";
+                ProjectData.LevelsDirectory = ProjectData.ProjectDirectory + @"\levels";
+                ProjectData.WorldsDirectory = ProjectData.ProjectDirectory + @"\worlds";
+                ProjectData.ASMDirectory = ProjectData.ProjectDirectory + @"\asm";
                 File.WriteAllText(fileName, JsonConvert.SerializeObject(ProjectData));
             }
             catch

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Controls;
 
 using Reuben.Model;
 using Reuben.Controllers;
@@ -19,41 +20,82 @@ namespace Reuben.UI
         public ProjectView()
         {
             InitializeComponent();
+            OpenFile();
         }
 
         public void Initialize()
         {
-            savebutton.Enabled =
-            palettesButton.Enabled =
-            blocksButton.Enabled =
-            spritesButton.Enabled =
-            asmButton.Enabled = 
-            textButton.Enabled = 
-            defaultsButton.Enabled =
-            projectName.Enabled = true;
 
-            projectName.Text = Controllers.Project.ProjectData.Name;
         }
 
-        public void RefreshTreeView()
+        public void RefreshTileView()
         {
-            projectTree.BeginUpdate();
-            projectTree.Nodes.Clear();
-            foreach (var n in Controllers.Project.ProjectData.Structure.Nodes)
+            levelsPanel.Controls.Clear();
+            foreach (ProjectNode node in Controllers.Project.ProjectData.Structure.Nodes)
             {
-                AddNode(projectTree.Nodes, n);
+                ItemDisplay item = new ItemDisplay();
+
+                MetroHeader header = new MetroHeader();
+                header.Text = node.Name;
+                header.Dock = DockStyle.Top;
+                levelsPanel.Controls.Add(header);
+
+                FlowLayoutPanel levelsHost = new FlowLayoutPanel();
+                AddLevelNodes(node, levelsHost);
+                levelsHost.AutoSize = true;
+                levelsHost.Dock = DockStyle.Top;
+                levelsPanel.Controls.Add(levelsHost);
             }
-            projectTree.EndUpdate();
         }
 
-        public void AddNode(TreeNodeCollection nodes, ProjectNode currentNode)
+        private void AddLevelNodes(ProjectNode node, FlowLayoutPanel levelshost)
         {
-            var newNode = new TreeNode() { Text = currentNode.Name, Tag = currentNode };
-            nodes.Add(newNode);
-            foreach (var n in currentNode.Nodes)
+            
+            IEnumerable<Guid> levelGuids = node.Nodes.Select(n => n.ID);
+            IEnumerable<LevelInfo> levels = Controllers.Levels.LevelData.Levels.Where(l => levelGuids.Contains(l.ID));
+            
+            foreach (ProjectNode n in node.Nodes)
             {
-                AddNode(newNode.Nodes, n);
+                LevelInfo info = Controllers.Levels.GetLevelInfoByID(n.ID);
+                MetroTile tile = new MetroTile();
+
+                tile.Text = info.Name;
+                tile.Height = 256 + 20 + 15;
+                tile.Width = 256 + 20;
+                tile.Margin = new System.Windows.Forms.Padding(10);
+                tile.Click += tile_Click;
+                tile.Tag = info;
+
+                string filePath = Controllers.Project.ProjectData.ProjectDirectory + @"\cache\" + info.Name + ".png";
+                if (File.Exists(filePath))
+                {
+                    PictureBox box = new PictureBox();
+                    FileStream fs = new FileStream(filePath,  FileMode.Open, FileAccess.Read);
+                    box.Image = Image.FromStream(fs);
+                    fs.Close();
+                    tile.Controls.Add(box);
+                    box.Width = 256;
+                    box.Height = 256;
+                    box.Location = new Point(10, 10);
+                    box.Click += box_Click;
+                }
+
+                levelshost.Controls.Add(tile);
+                foreach (ProjectNode n2 in n.Nodes)
+                {
+                    AddLevelNodes(n2, levelshost);
+                }
             }
+        }
+
+        void box_Click(object sender, EventArgs e)
+        {
+            OpenLevel((LevelInfo) ((MetroTile) ((PictureBox)sender).Parent).Tag);
+        }
+
+        private void tile_Click(object sender, EventArgs e)
+        {
+            OpenLevel((LevelInfo) ((MetroTile) sender).Tag);
         }
 
         private void OpenFile()
@@ -69,10 +111,9 @@ namespace Reuben.UI
                 else
                 {
                     Initialize();
-                    RefreshTreeView();
+                    RefreshTileView();
                 }
             }
-
         }
 
 
@@ -81,28 +122,8 @@ namespace Reuben.UI
             OpenFile();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void OpenLevel(LevelInfo levelInfo)
         {
-            PaletteManager mgr = new PaletteManager();
-            mgr.Initialize();
-            mgr.ShowDialog();
-        }
-
-        private void projectTree_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if(projectTree.SelectedNode != null && ((ProjectNode)projectTree.SelectedNode.Tag).Type == NodeType.Level)
-            {
-                projectTree.ContextMenuStrip = levelContext;
-            }
-            else
-            {
-                projectTree.ContextMenuStrip = worldContext;
-            }
-        }
-
-        private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LevelInfo levelInfo = Controllers.Levels.LevelData.Levels.Where(l => l.ID == ((ProjectNode)projectTree.SelectedNode.Tag).ID).FirstOrDefault();
             if (levelInfo != null)
             {
                 levelInfo.File = Controllers.Project.ProjectData.LevelsDirectory + "\\" + levelInfo.Name + ".json";
@@ -110,13 +131,6 @@ namespace Reuben.UI
                 editor.Show();
                 editor.LoadLevel(levelInfo);
             }
-        }
-
-        private void textButton_Click(object sender, EventArgs e)
-        {
-            StringManager mgr = new StringManager();
-            mgr.Show();
-            mgr.SetResources();
         }
 
         private void blocksButton_Click(object sender, EventArgs e)
@@ -144,7 +158,7 @@ namespace Reuben.UI
                 ProjectView.BlockEditor.Focus();
             }
 
-            if(levelType >= 0 && blockSelected >= 0)
+            if (levelType >= 0 && blockSelected >= 0)
             {
                 ProjectView.BlockEditor.SelectBlock(levelType, blockSelected);
             }
@@ -154,9 +168,9 @@ namespace Reuben.UI
         {
             if (ProjectView.BlockEditor.DialogResult == DialogResult.OK)
             {
-               Controllers.Levels.LevelData.Types = ProjectView.BlockEditor.LocalLevelTypes;
-               Controllers.Levels.LevelData.Overlays = ProjectView.BlockEditor.Overlays;
-               Controllers.Levels.Save();
+                Controllers.Levels.LevelData.Types = ProjectView.BlockEditor.LocalLevelTypes;
+                Controllers.Levels.LevelData.Overlays = ProjectView.BlockEditor.Overlays;
+                Controllers.Levels.Save();
             }
             ProjectView.BlockEditor.FormClosing -= BlockEditor_FormClosing;
             ProjectView.BlockEditor = null;
@@ -170,7 +184,7 @@ namespace Reuben.UI
         private static ASMEditor ASMEditor;
         public static void ShowASMEditor(string file = null, string tag = null)
         {
-            
+
             if (ProjectView.ASMEditor == null)
             {
                 ProjectView.ASMEditor = new ASMEditor();
@@ -200,7 +214,7 @@ namespace Reuben.UI
             ShowSpriteEditor();
         }
 
-        private static SpriteEditor SpriteEditor;        
+        private static SpriteEditor SpriteEditor;
         public static void ShowSpriteEditor(int spriteId = -1)
         {
             if (ProjectView.SpriteEditor == null)
@@ -235,7 +249,78 @@ namespace Reuben.UI
                 Controllers.ROM.BuildRomFromSource(Controllers.Project.ProjectData.ASMDirectory, Controllers.Project.ProjectData.RomFile);
             }
 
-            
+
+        }
+
+        private static StringManager StringsEditor;
+        public static void ShowStringsEditor(string selectedStrings = null)
+        {
+            if (ProjectView.StringsEditor == null)
+            {
+                ProjectView.StringsEditor = new StringManager();
+                ProjectView.StringsEditor.Show();
+                ProjectView.StringsEditor.Initalize();
+                ProjectView.StringsEditor.FormClosed += StringsEditor_FormClosed;
+            }
+            else
+            {
+                ProjectView.StringsEditor.Focus();
+            }
+        }
+
+        static void StringsEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ProjectView.StringsEditor.FormClosed -= StringsEditor_FormClosed;
+            ProjectView.StringsEditor = null;
+        }
+
+
+        private static PaletteManager PaletteEditor;
+        public static void ShowPaletteEditor()
+        {
+            if (ProjectView.PaletteEditor == null)
+            {
+                ProjectView.PaletteEditor = new PaletteManager();
+                ProjectView.PaletteEditor.Show();
+                ProjectView.PaletteEditor.Initialize();
+                ProjectView.PaletteEditor.FormClosed += PaletteEditor_FormClosed;
+            }
+            else
+            {
+                ProjectView.PaletteEditor.Focus();
+            }
+        }
+
+        static void PaletteEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ProjectView.PaletteEditor.FormClosed -= PaletteEditor_FormClosed;
+            ProjectView.PaletteEditor = null;
+        }
+
+
+        private void textButton_Click(object sender, EventArgs e)
+        {
+            ShowStringsEditor();
+        }
+
+        private void spritesButton_Click_1(object sender, EventArgs e)
+        {
+            ShowSpriteEditor();
+        }
+
+        private void palettesButton_Click(object sender, EventArgs e)
+        {
+            ShowPaletteEditor();
+        }
+
+        private void asmButton_Click_1(object sender, EventArgs e)
+        {
+            ShowASMEditor();
+        }
+
+        private void blocksButton_Click_1(object sender, EventArgs e)
+        {
+            ShowBlockEditor();
         }
     }
 }

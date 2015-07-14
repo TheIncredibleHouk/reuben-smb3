@@ -26,6 +26,10 @@ namespace Reuben.UI
 
         public LevelViewer()
         {
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                return;
+            }
             bgBuffer = new Bitmap(levelBitmapWidth, levelBitmapHeight, PixelFormat.Format24bppRgb);
             spriteBuffer = new Bitmap(levelBitmapWidth, levelBitmapHeight, PixelFormat.Format32bppArgb);
             compositeBuffer = new Bitmap(levelBitmapWidth, levelBitmapHeight, PixelFormat.Format32bppArgb);
@@ -434,7 +438,7 @@ namespace Reuben.UI
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (localLevel == null || localPatternTable == null || localColors == null)
+            if (localLevel == null || localPatternTable == null || localColors == null || compositeBuffer == null)
             {
                 e.Graphics.Clear(Color.Black);
             }
@@ -501,6 +505,25 @@ namespace Reuben.UI
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
 
+        }
+
+        public Bitmap GetThumbnail()
+        {
+            Bitmap thumbnail = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(thumbnail);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.DrawImage(compositeBuffer, new RectangleF(0, 0, 256, 256), new RectangleF(0, 0, 432, 432), GraphicsUnit.Pixel);
+            g.Dispose();
+            return thumbnail;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            compositeBuffer.Dispose();
+            spriteBuffer.Dispose();
+            bgBuffer.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

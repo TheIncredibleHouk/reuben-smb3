@@ -50,6 +50,9 @@ namespace Reuben.Model
         public string WorldsDirectory { get; set; }
 
         [DataMember]
+        public string ProjectDirectory { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]

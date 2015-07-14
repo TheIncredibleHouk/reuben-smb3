@@ -24,7 +24,7 @@ namespace Reuben.UI
         }
 
         private Dictionary<string, List<string>> localResources;
-        public void SetResources()
+        public void Initalize()
         {
             localResources = Controllers.Strings.Resource.ResourceLists.MakeCopy();
             FilterResources();

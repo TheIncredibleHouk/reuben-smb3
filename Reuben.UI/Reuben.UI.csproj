@@ -38,6 +38,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\binref\FastColoredTextBox.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>..\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -67,6 +76,15 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ColorView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ItemDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ItemDisplay.Designer.cs">
+      <DependentUpon>ItemDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MetroHeader.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\SpriteInfoEditor.cs">
@@ -175,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BlockSelector.resx">
       <DependentUpon>BlockSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ItemDisplay.resx">
+      <DependentUpon>ItemDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SpriteInfoEditor.resx">
       <DependentUpon>SpriteInfoEditor.cs</DependentUpon>

@@ -809,6 +809,10 @@ namespace Reuben.UI
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             SaveLevel();
+            using (Bitmap image = levelViewer.GetThumbnail())
+            {
+                image.Save(Controllers.Project.ProjectData.ProjectDirectory + @"\cache\" + levelInfo.Name + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            }
         }
 
         private void SaveLevel()
