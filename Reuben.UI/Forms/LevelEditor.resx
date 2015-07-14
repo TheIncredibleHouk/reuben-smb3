@@ -117,33 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripLinkLabel1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABgSURBVDhPYwABY2Pj/yBsYGDwX1NTEy8GqVu1atV/sEYQ
-        gGkGYVwAWR7GBllGkQEgDHYJsgAugCyPrB6E6WMALABBAFk9CKMYQA6mngGkglEDBpUBsAyFnGWJwRDN
-        DAwAiX6rLwAsEYMAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="toolStripLinkLabel2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFLSURBVDhP7dNNTsJAFAfwHsB4Bu/gykN4G6ILVhDjmgiF
-        MtCWfk07084QpBYJCTXRhacwMZEALl0bn75RDGBNjHFpk3/mI3m/N4tXLZGDjpTpvWk5s1KpvMBUqidz
-        Qsi8oesLfSu1GllSKu6E7N9o+DEmxjzuQ9d04Oi4rFKpngLp2FBvGNDQ2xvRmwQCysHzxOMHkGSMS/AD
-        Bm1iqULEcP8dQMMYGI8XGwCqlu2B3fPBcenvANNyFdJzgn/gr4Czeksh60HkRwDOQsvogtE21boKnsMo
-        WQO4vNwGcBYiJtRwYTfcf0kULRXAuUjwogjAl+A9Ntgofgv+DwoYjfK9/uA8xW74bERWQFEhxrL9l2w8
-        PlRAlt3uDocXFAHXCz9TVLiK1ZPPk8nVgQLyPN9J01EzoPQpYvEME0bva1F8X8yDQD5Mp9f7mqZpr1Vf
-        ptzMWj6YAAAAAElFTkSuQmCC
-</value>
-  </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 17</value>
   </metadata>

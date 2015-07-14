@@ -380,18 +380,21 @@ namespace Reuben.UI
 
                 else if (levelViewer.SelectedSprites.Count == 1)
                 {
-                    var descriptions = Controllers.Sprites.GetDefinition(hoveredSprite.ObjectID).PropertyDescriptions;
-                    if (descriptions.Count == 0)
+                    if (hoveredSprite != null)
                     {
-                        spriteProperty.Visible = false;
-                    }
-                    else
-                    {
-                        spriteProperty.Visible = true;
-                        spriteProperty.DataSource = descriptions;
-                        spriteProperty.SelectedIndex = levelViewer.SelectedSprites[0].Property;
-                        var rect = Controllers.Sprites.GetBounds(levelViewer.SelectedSprites).FirstOrDefault();
-                        spriteProperty.Location = new Point( rect.Item2.X + rect.Item2.Width, rect.Item2.Y);
+                        var descriptions = Controllers.Sprites.GetDefinition(hoveredSprite.ObjectID).PropertyDescriptions;
+                        if (descriptions.Count == 0)
+                        {
+                            spriteProperty.Visible = false;
+                        }
+                        else
+                        {
+                            spriteProperty.Visible = true;
+                            spriteProperty.DataSource = descriptions;
+                            spriteProperty.SelectedIndex = levelViewer.SelectedSprites[0].Property;
+                            var rect = Controllers.Sprites.GetBounds(levelViewer.SelectedSprites).FirstOrDefault();
+                            spriteProperty.Location = new Point(rect.Item2.X + rect.Item2.Width, rect.Item2.Y);
+                        }
                     }
                 }
             }

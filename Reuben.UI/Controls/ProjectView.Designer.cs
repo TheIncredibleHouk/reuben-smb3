@@ -42,10 +42,13 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textButton = new MetroFramework.Controls.MetroButton();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
             this.levelsTab.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -118,14 +121,14 @@
             // 
             // metroTabControl1
             // 
-            this.metroTabControl1.Controls.Add(this.levelsTab);
             this.metroTabControl1.Controls.Add(this.tabPage5);
-            this.metroTabControl1.Controls.Add(this.tabPage2);
+            this.metroTabControl1.Controls.Add(this.levelsTab);
             this.metroTabControl1.Controls.Add(this.tabPage3);
+            this.metroTabControl1.Controls.Add(this.tabPage2);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 3;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(505, 368);
             this.metroTabControl1.TabIndex = 4;
             this.metroTabControl1.UseSelectable = true;
@@ -135,6 +138,7 @@
             this.levelsTab.AutoScroll = true;
             this.levelsTab.BackColor = System.Drawing.Color.Transparent;
             this.levelsTab.Controls.Add(this.levelsPanel);
+            this.levelsTab.Controls.Add(this.metroPanel1);
             this.levelsTab.Location = new System.Drawing.Point(4, 38);
             this.levelsTab.Name = "levelsTab";
             this.levelsTab.Size = new System.Drawing.Size(497, 326);
@@ -148,7 +152,7 @@
             this.levelsPanel.ColumnCount = 1;
             this.levelsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.levelsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.levelsPanel.Location = new System.Drawing.Point(0, 0);
+            this.levelsPanel.Location = new System.Drawing.Point(0, 38);
             this.levelsPanel.Name = "levelsPanel";
             this.levelsPanel.RowCount = 1;
             this.levelsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -218,6 +222,30 @@
             this.textButton.UseSelectable = true;
             this.textButton.Click += new System.EventHandler(this.textButton_Click);
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.metroButton1);
+            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(0, 0);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(497, 38);
+            this.metroPanel1.TabIndex = 1;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(12, 9);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(75, 23);
+            this.metroButton1.TabIndex = 2;
+            this.metroButton1.Text = "New Level";
+            this.metroButton1.UseSelectable = true;
+            // 
             // ProjectView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,6 +260,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -252,5 +281,7 @@
         private MetroFramework.Controls.MetroButton palettesButton;
         private MetroFramework.Controls.MetroButton spritesButton;
         private MetroFramework.Controls.MetroButton textButton;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }
