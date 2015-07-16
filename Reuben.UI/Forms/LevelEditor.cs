@@ -19,7 +19,7 @@ namespace Reuben.UI
         public LevelEditor()
         {
             InitializeComponent();
-            panel1.MouseWheel += panel1_MouseWheel;
+            lvlHost.MouseWheel += panel1_MouseWheel;
             CheckForIllegalCrossThreadCalls = false;
         }
 
@@ -705,7 +705,7 @@ namespace Reuben.UI
 
         public void UpdateScreenSize()
         {
-            lvlHost.Width = level.NumberOfScreens * 16 * 16;
+            levelViewer.Width = level.NumberOfScreens * 16 * 16;
         }
 
         private void screenList_SelectedIndexChanged(object sender, EventArgs e)

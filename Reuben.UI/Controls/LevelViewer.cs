@@ -196,6 +196,9 @@ namespace Reuben.UI
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Sprite> SelectedSprites { get; set; }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public LevelPointer SelectedPointer { get; set; }
+
 
         public void UpdateSprites(IEnumerable<Sprite> sprites)
         {
@@ -425,6 +428,77 @@ namespace Reuben.UI
             }
         }
 
+        private void DrawSprite(LevelPointer pointer, BitmapData bitmap)
+        {
+            int x = pointer.X * 16;
+            int y = pointer.Y * 16;
+
+            bool forceOverlay = def.SpriteInfo.Where(s => !s.Overlay).Count() == 0;
+            foreach (var info in def.SpriteInfo)
+            {
+
+                if (info.Properties.Count > 0 && !info.Properties.Contains(pointer.Property))
+                {
+                    // if the info is property specific, only sprites with that sprite draw that tile
+                    return;
+                }
+
+
+                int paletteIndex = info.Palette;
+                int xOffset = x + info.X;
+                int yOffset = y + info.Y;
+                if (xOffset < 0 || y < 0 ||
+                    xOffset >= levelBitmapWidth - 8 ||
+                    yOffset >= levelBitmapHeight - 8)
+                {
+                    // prevent overflow drawing
+                    return;
+                }
+                if (info.Overlay && !ShowSpriteOverlays && !forceOverlay)
+                {
+                    continue;
+                }
+
+                Color[][] colorReference;
+                Tile tile1 = null;
+                Tile tile2 = null;
+
+                if (info.Overlay)
+                {
+                    tile1 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value);
+                    tile2 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value + 1);
+                    colorReference = quickSpriteOverlayReference;
+                }
+                else
+                {
+                    tile1 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value);
+                    tile2 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value + 1);
+                    colorReference = quickSpriteReference;
+                }
+
+                if (info.HorizontalFlip && info.VerticalFlip)
+                {
+                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
+                }
+                else if (info.HorizontalFlip)
+                {
+                    Drawer.DrawTileHorizontalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileHorizontalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
+                }
+                else if (info.VerticalFlip)
+                {
+                    Drawer.DrawTileVerticalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileVerticalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
+                }
+                else
+                {
+                    Drawer.DrawTileAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
+                    Drawer.DrawTileAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
+                }
+            }
+        }
+
         private void UpdateLayers(Rectangle area)
         {
             using (var gfx = System.Drawing.Graphics.FromImage(compositeBuffer))
@@ -449,11 +523,13 @@ namespace Reuben.UI
                 {
                     if (SelectionRectangle != Rectangle.Empty)
                     {
-                        Pen pen = new Pen(Brushes.White);
-                        pen.DashStyle = SelectionType == UI.SelectionType.Draw ? System.Drawing.Drawing2D.DashStyle.Solid : System.Drawing.Drawing2D.DashStyle.Dot;
-                        e.Graphics.DrawRectangle(pen, SelectionRectangle);
-                        pen.Color = Color.Red;
-                        e.Graphics.DrawRectangle(pen, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                        using (Pen pen = new Pen(Brushes.White))
+                        {
+                            pen.DashStyle = SelectionType == UI.SelectionType.Draw ? System.Drawing.Drawing2D.DashStyle.Solid : System.Drawing.Drawing2D.DashStyle.Dot;
+                            e.Graphics.DrawRectangle(pen, SelectionRectangle);
+                            pen.Color = Color.Red;
+                            e.Graphics.DrawRectangle(pen, new Rectangle(SelectionRectangle.X + 1, SelectionRectangle.Y + 1, SelectionRectangle.Width - 2, SelectionRectangle.Height - 2));
+                        }
                     }
                 }
 
@@ -473,6 +549,16 @@ namespace Reuben.UI
                         Rectangle drawRectangle = Controllers.Sprites.GetClipBounds(s);
                         e.Graphics.DrawRectangle(Pens.White, drawRectangle);
                         e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
+                    }
+                }
+
+                if (EditMode == UI.EditMode.Pointers)
+                {
+                    if(SelectedPointer != null)
+                    {
+                        Rectangle drawRectangle = new Rectangle(SelectedPointer.X * 16, SelectedPointer.Y * 16, 15, 15);
+                        e.Graphics.DrawRectangle(Pens.White, drawRectangle);
+                        e.Graphics.DrawRectangle(Pens.Green, new Rectangle(drawRectangle.X + 1, drawRectangle.Y + 1, drawRectangle.Width - 2, drawRectangle.Height - 2));
                     }
                 }
             }
@@ -520,9 +606,23 @@ namespace Reuben.UI
 
         protected override void Dispose(bool disposing)
         {
-            compositeBuffer.Dispose();
-            spriteBuffer.Dispose();
-            bgBuffer.Dispose();
+            if (disposing)
+            {
+                if (compositeBuffer != null)
+                {
+                    compositeBuffer.Dispose();
+                }
+
+                if (spriteBuffer != null)
+                {
+                    spriteBuffer.Dispose();
+                }
+
+                if (bgBuffer != null)
+                {
+                    bgBuffer.Dispose();
+                }
+            }
             base.Dispose(disposing);
         }
     }

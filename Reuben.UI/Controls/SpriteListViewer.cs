@@ -301,7 +301,13 @@ namespace Reuben.UI.Controls
 
         protected override void Dispose(bool disposing)
         {
-            buffer.Dispose();
+            if(disposing)
+            {
+                if(buffer != null)
+                {
+                    buffer.Dispose();
+                }
+            }
             base.Dispose(disposing);
         }
     }

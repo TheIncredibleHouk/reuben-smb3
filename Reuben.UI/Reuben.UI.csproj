@@ -75,7 +75,7 @@
     <Compile Include="Controls\BlockViewer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ColorView.cs">
+    <Compile Include="bin\ColorView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ItemDisplay.cs">

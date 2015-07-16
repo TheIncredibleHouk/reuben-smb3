@@ -164,8 +164,19 @@ namespace Reuben.UI
 
         protected override void Dispose(bool disposing)
         {
-            buffer.Dispose();
-            displayBuffer.Dispose();
+            if(disposing)
+            {
+                if(buffer != null)
+                {
+                    buffer.Dispose();
+                }
+
+                if(displayBuffer != null)
+                {
+                    displayBuffer.Dispose();
+                }
+            }
+            
             base.Dispose(disposing);
         }
     }
