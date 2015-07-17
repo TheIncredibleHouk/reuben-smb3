@@ -233,33 +233,6 @@ namespace Reuben.UI
             UpdateLayers(area);
         }
 
-        public void UpdatePointers(IEnumerable<LevelPointer> pointers, IEnumerable<Rectangle> clearAreas)
-        {
-            Rectangle area = pointers.Select(p => new Rectangle(p.X * 16, p.Y * 16, 32, 32)).Combine();// generate all bound areas
-
-            BitmapData bitmap = spriteBuffer.LockBits(new Rectangle(0, 0, spriteBuffer.Width, spriteBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-            if (clearAreas != null)
-            {
-                area = Rectangle.Union(area, clearAreas.Combine());
-                foreach (var r in clearAreas)
-                {
-                    Drawer.FillArea(new Rectangle(r.X, r.Y, r.Width + 1, r.Height + 1), Color.Transparent, bitmap);
-                }
-            }
-
-            List<Tuple<Sprite, Rectangle>> affectedSprites = Controllers.Sprites.GetBounds(localLevel.Sprites, ShowSpriteOverlays).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
-            area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), area);
-
-            foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
-            {
-                DrawSprite(sprite, bitmap);
-            }
-
-
-            spriteBuffer.UnlockBits(bitmap);
-            UpdateLayers(area);
-        }
-
         private void UpdateBGArea(int column, int row, int width, int height)
         {
             BitmapData bitmap = bgBuffer.LockBits(new Rectangle(0, 0, bgBuffer.Width, bgBuffer.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
@@ -428,75 +401,17 @@ namespace Reuben.UI
             }
         }
 
-        private void DrawSprite(LevelPointer pointer, BitmapData bitmap)
+        private void DrawPointer(LevelPointer pointer, BitmapData bitmap)
         {
             int x = pointer.X * 16;
             int y = pointer.Y * 16;
 
-            bool forceOverlay = def.SpriteInfo.Where(s => !s.Overlay).Count() == 0;
-            foreach (var info in def.SpriteInfo)
-            {
 
-                if (info.Properties.Count > 0 && !info.Properties.Contains(pointer.Property))
-                {
-                    // if the info is property specific, only sprites with that sprite draw that tile
-                    return;
-                }
-
-
-                int paletteIndex = info.Palette;
-                int xOffset = x + info.X;
-                int yOffset = y + info.Y;
-                if (xOffset < 0 || y < 0 ||
-                    xOffset >= levelBitmapWidth - 8 ||
-                    yOffset >= levelBitmapHeight - 8)
-                {
-                    // prevent overflow drawing
-                    return;
-                }
-                if (info.Overlay && !ShowSpriteOverlays && !forceOverlay)
-                {
-                    continue;
-                }
-
-                Color[][] colorReference;
-                Tile tile1 = null;
-                Tile tile2 = null;
-
-                if (info.Overlay)
-                {
-                    tile1 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value);
-                    tile2 = Controllers.Graphics.GetExtraTileByBankIndex(info.Table, info.Value + 1);
-                    colorReference = quickSpriteOverlayReference;
-                }
-                else
-                {
-                    tile1 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value);
-                    tile2 = Controllers.Graphics.GetTileByBankIndex(info.Table, info.Value + 1);
-                    colorReference = quickSpriteReference;
-                }
-
-                if (info.HorizontalFlip && info.VerticalFlip)
-                {
-                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
-                    Drawer.DrawTileHorizontalVerticalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
-                }
-                else if (info.HorizontalFlip)
-                {
-                    Drawer.DrawTileHorizontalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
-                    Drawer.DrawTileHorizontalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
-                }
-                else if (info.VerticalFlip)
-                {
-                    Drawer.DrawTileVerticalFlipAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
-                    Drawer.DrawTileVerticalFlipAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
-                }
-                else
-                {
-                    Drawer.DrawTileAlpha(tile1, xOffset, yOffset, colorReference[paletteIndex], bitmap);
-                    Drawer.DrawTileAlpha(tile2, xOffset, yOffset + 8, colorReference[paletteIndex], bitmap);
-                }
-            }
+            Color[][] colorReference = quickSpriteOverlayReference;
+            Tile tile1 = Controllers.Graphics.GetExtraTileByBankIndex(2, 0x0C);
+            Tile tile2 = Controllers.Graphics.GetExtraTileByBankIndex(2, 0x0E);
+            Drawer.DrawTileAlpha(tile1, x, y, colorReference[0], bitmap);
+            Drawer.DrawTileAlpha(tile2, x, y + 8, colorReference[0], bitmap);
         }
 
         private void UpdateLayers(Rectangle area)
@@ -554,7 +469,7 @@ namespace Reuben.UI
 
                 if (EditMode == UI.EditMode.Pointers)
                 {
-                    if(SelectedPointer != null)
+                    if (SelectedPointer != null)
                     {
                         Rectangle drawRectangle = new Rectangle(SelectedPointer.X * 16, SelectedPointer.Y * 16, 15, 15);
                         e.Graphics.DrawRectangle(Pens.White, drawRectangle);
