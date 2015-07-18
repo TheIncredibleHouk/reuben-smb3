@@ -223,11 +223,16 @@ namespace Reuben.UI
             List<Tuple<Sprite, Rectangle>> affectedSprites = Controllers.Sprites.GetBounds(localLevel.Sprites, ShowSpriteOverlays).Where(r => r.Item2.IntersectsWith(area)).ToList(); // find the ones that are affected by the update
             area = Rectangle.Union(affectedSprites.Select(a => a.Item2).Combine(), area);
 
+            List<LevelPointer> affectedPointers = localLevel.Pointers.Select(p => new Tuple<LevelPointer, Rectangle>(p, new Rectangle(p.X * 16, p.Y * 16, 32, 32))).Where(r => r.Item2.IntersectsWith(area)).Select(t => t.Item1).ToList();
             foreach (Sprite sprite in affectedSprites.Select(s => s.Item1))
             {
                 DrawSprite(sprite, bitmap);
             }
 
+            foreach(LevelPointer pointer in affectedPointers)
+            {
+                DrawPointer(pointer, bitmap);
+            }
 
             spriteBuffer.UnlockBits(bitmap);
             UpdateLayers(area);
@@ -328,7 +333,6 @@ namespace Reuben.UI
             }
         }
 
-
         private void DrawSprite(Sprite sprite, BitmapData bitmap)
         {
             int x = sprite.X * 16;
@@ -408,8 +412,8 @@ namespace Reuben.UI
 
 
             Color[][] colorReference = quickSpriteOverlayReference;
-            Tile tile1 = Controllers.Graphics.GetExtraTileByBankIndex(2, 0x0C);
-            Tile tile2 = Controllers.Graphics.GetExtraTileByBankIndex(2, 0x0E);
+            Tile tile1 = Controllers.Graphics.GetExtraTileByBankIndex(8, 0x0C);
+            Tile tile2 = Controllers.Graphics.GetExtraTileByBankIndex(8, 0x0E);
             Drawer.DrawTileAlpha(tile1, x, y, colorReference[0], bitmap);
             Drawer.DrawTileAlpha(tile2, x, y + 8, colorReference[0], bitmap);
         }

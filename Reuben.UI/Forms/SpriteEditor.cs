@@ -155,21 +155,7 @@ namespace Reuben.UI
             spriteUpdating = false;
         }
 
-        private void editor_SpriteInfoSelected(object sender, EventArgs e)
-        {
-            var s = ((SpriteInfoEditor)sender);
-            if (s.Selected)
-            {
-                spriteViewer.HighlightedSpriteInfo.Add(s.SpriteInfo);
-            }
-            else
-            {
-                spriteViewer.HighlightedSpriteInfo.Remove(s.SpriteInfo);
-            }
-
-            spriteViewer.UpdateGraphics();
-        }
-
+        
         private void editor_SpriteInfoChanged(object sender, EventArgs e)
         {
             spriteViewer.UpdateGraphics();

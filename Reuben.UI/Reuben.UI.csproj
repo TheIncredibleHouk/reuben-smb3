@@ -87,12 +87,6 @@
     <Compile Include="Controls\MetroHeader.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\SpriteInfoEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SpriteInfoEditor.Designer.cs">
-      <DependentUpon>SpriteInfoEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LevelViewer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -196,9 +190,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ItemDisplay.resx">
       <DependentUpon>ItemDisplay.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SpriteInfoEditor.resx">
-      <DependentUpon>SpriteInfoEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProjectView.resx">
       <DependentUpon>ProjectView.cs</DependentUpon>

@@ -35,20 +35,20 @@
             this.asmButton = new MetroFramework.Controls.MetroButton();
             this.spritesButton = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.levelsTab = new System.Windows.Forms.TabPage();
             this.levelsPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textButton = new MetroFramework.Controls.MetroButton();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.metroTabControl1.SuspendLayout();
             this.levelsTab.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -133,6 +133,15 @@
             this.metroTabControl1.TabIndex = 4;
             this.metroTabControl1.UseSelectable = true;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.AutoScroll = true;
+            this.tabPage5.Location = new System.Drawing.Point(4, 38);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(497, 326);
+            this.tabPage5.TabIndex = 3;
+            this.tabPage5.Text = "Project";
+            // 
             // levelsTab
             // 
             this.levelsTab.AutoScroll = true;
@@ -159,22 +168,29 @@
             this.levelsPanel.Size = new System.Drawing.Size(497, 0);
             this.levelsPanel.TabIndex = 0;
             // 
-            // tabPage5
+            // metroPanel1
             // 
-            this.tabPage5.AutoScroll = true;
-            this.tabPage5.Location = new System.Drawing.Point(4, 38);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(497, 326);
-            this.tabPage5.TabIndex = 3;
-            this.tabPage5.Text = "Project";
+            this.metroPanel1.Controls.Add(this.metroButton1);
+            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(0, 0);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(497, 38);
+            this.metroPanel1.TabIndex = 1;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // tabPage2
+            // metroButton1
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 38);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(497, 326);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Worlds";
+            this.metroButton1.Location = new System.Drawing.Point(12, 9);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(75, 23);
+            this.metroButton1.TabIndex = 2;
+            this.metroButton1.Text = "New Level";
+            this.metroButton1.UseSelectable = true;
             // 
             // tabPage3
             // 
@@ -222,29 +238,13 @@
             this.textButton.UseSelectable = true;
             this.textButton.Click += new System.EventHandler(this.textButton_Click);
             // 
-            // metroPanel1
+            // tabPage2
             // 
-            this.metroPanel1.Controls.Add(this.metroButton1);
-            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 0);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(497, 38);
-            this.metroPanel1.TabIndex = 1;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(12, 9);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
-            this.metroButton1.TabIndex = 2;
-            this.metroButton1.Text = "New Level";
-            this.metroButton1.UseSelectable = true;
+            this.tabPage2.Location = new System.Drawing.Point(4, 38);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(497, 326);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Worlds";
             // 
             // ProjectView
             // 
@@ -257,10 +257,10 @@
             this.metroTabControl1.ResumeLayout(false);
             this.levelsTab.ResumeLayout(false);
             this.levelsTab.PerformLayout();
+            this.metroPanel1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
