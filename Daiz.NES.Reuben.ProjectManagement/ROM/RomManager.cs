@@ -251,71 +251,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 l.SpriteData.Add(new Sprite() { InGameID = 0xD4, Y = l.ChallengeType });
             }
 
-            switch (l.LevelLayout)
+
+            foreach (var s in l.SpriteData.OrderBy(s => s.X).ThenBy(s => s.Y))
             {
-                case LevelLayout.Horizontal:
-                    foreach (var s in from sprites in l.SpriteData orderby sprites.X select sprites)
-                    {
-                        Rom[levelAddress++] = (byte)s.InGameID;
-                        Rom[levelAddress++] = (byte)s.X;
-                        switch (s.InGameID)
-                        {
-                            case 0xA2:
-                                if (s.Property % 2 != 0)
-                                {
-                                    Rom[levelAddress++] = (byte)((s.Property << 5) | (s.Y + 2));
-                                }
-                                else
-                                {
-                                    Rom[levelAddress++] = (byte)((s.Property << 5) | s.Y);
-                                }
-                                break;
-
-                            case 0x6C:
-                            case 0x6D:
-                            case 0x6E:
-                            case 0x6F:
-                            case 0x80:
-                            case 0xA5:
-                            case 0xA7:
-                                Rom[levelAddress++] = (byte)((s.Property << 5) | (s.Y + 1));
-                                break;
-
-                            case 0xA1:
-                            case 0xA3:
-                                Rom[levelAddress++] = (byte)((s.Property << 5) | (s.Y - 1));
-                                break;
-
-                            default:
-                                Rom[levelAddress++] = (byte)((s.Property << 5) | s.Y);
-                                break;
-                        }
-
-                    }
-                    break;
-
-                case LevelLayout.Vertical:
-                    foreach (var s in from sprites in l.SpriteData orderby sprites.Y select sprites)
-                    {
-                        Rom[levelAddress++] = (byte)s.InGameID;
-                        Rom[levelAddress++] = (byte)s.X;
-                        switch (s.InGameID)
-                        {
-                            case 0x6C:
-                            case 0x6D:
-                            case 0x6E:
-                            case 0x6F:
-                            case 0x80:
-                                Rom[levelAddress++] = (byte)(s.Y + 1);
-                                break;
-
-                            default:
-                                Rom[levelAddress++] = (byte)s.Y;
-                                break;
-                        }
-                    }
-                    break;
+                Rom[levelAddress++] = (byte)s.InGameID;
+                Rom[levelAddress++] = (byte)s.X;
+                Rom[levelAddress++] = (byte)((s.Property << 5) | s.Y);
             }
+
             Rom[levelAddress++] = 0xFF;
             return levelAddress;
         }
