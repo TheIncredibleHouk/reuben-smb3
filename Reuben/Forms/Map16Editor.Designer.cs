@@ -59,18 +59,6 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.ibF1 = new System.Windows.Forms.NumericUpDown();
-            this.ibT1 = new System.Windows.Forms.NumericUpDown();
-            this.ibF2 = new System.Windows.Forms.NumericUpDown();
-            this.ibT2 = new System.Windows.Forms.NumericUpDown();
-            this.ibF3 = new System.Windows.Forms.NumericUpDown();
-            this.ibT3 = new System.Windows.Forms.NumericUpDown();
-            this.ibT4 = new System.Windows.Forms.NumericUpDown();
-            this.ibF4 = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
@@ -130,14 +118,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.psF6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.psT5)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF4)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GrbBlocks.SuspendLayout();
@@ -485,18 +465,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.ibF1);
-            this.tabPage3.Controls.Add(this.ibT1);
-            this.tabPage3.Controls.Add(this.ibF2);
-            this.tabPage3.Controls.Add(this.ibT2);
-            this.tabPage3.Controls.Add(this.ibF3);
-            this.tabPage3.Controls.Add(this.ibT3);
-            this.tabPage3.Controls.Add(this.ibT4);
-            this.tabPage3.Controls.Add(this.ibF4);
-            this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.label14);
-            this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -504,146 +472,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ice Ball Interactions";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // ibF1
-            // 
-            this.ibF1.Hexadecimal = true;
-            this.ibF1.Location = new System.Drawing.Point(231, 88);
-            this.ibF1.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibF1.Name = "ibF1";
-            this.ibF1.Size = new System.Drawing.Size(50, 20);
-            this.ibF1.TabIndex = 33;
-            // 
-            // ibT1
-            // 
-            this.ibT1.Hexadecimal = true;
-            this.ibT1.Location = new System.Drawing.Point(338, 89);
-            this.ibT1.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibT1.Name = "ibT1";
-            this.ibT1.Size = new System.Drawing.Size(50, 20);
-            this.ibT1.TabIndex = 32;
-            // 
-            // ibF2
-            // 
-            this.ibF2.Hexadecimal = true;
-            this.ibF2.Location = new System.Drawing.Point(231, 132);
-            this.ibF2.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibF2.Name = "ibF2";
-            this.ibF2.Size = new System.Drawing.Size(50, 20);
-            this.ibF2.TabIndex = 31;
-            // 
-            // ibT2
-            // 
-            this.ibT2.Hexadecimal = true;
-            this.ibT2.Location = new System.Drawing.Point(338, 132);
-            this.ibT2.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibT2.Name = "ibT2";
-            this.ibT2.Size = new System.Drawing.Size(50, 20);
-            this.ibT2.TabIndex = 30;
-            // 
-            // ibF3
-            // 
-            this.ibF3.Hexadecimal = true;
-            this.ibF3.Location = new System.Drawing.Point(231, 177);
-            this.ibF3.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibF3.Name = "ibF3";
-            this.ibF3.Size = new System.Drawing.Size(50, 20);
-            this.ibF3.TabIndex = 29;
-            // 
-            // ibT3
-            // 
-            this.ibT3.Hexadecimal = true;
-            this.ibT3.Location = new System.Drawing.Point(338, 177);
-            this.ibT3.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibT3.Name = "ibT3";
-            this.ibT3.Size = new System.Drawing.Size(50, 20);
-            this.ibT3.TabIndex = 28;
-            // 
-            // ibT4
-            // 
-            this.ibT4.Hexadecimal = true;
-            this.ibT4.Location = new System.Drawing.Point(338, 221);
-            this.ibT4.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibT4.Name = "ibT4";
-            this.ibT4.Size = new System.Drawing.Size(50, 20);
-            this.ibT4.TabIndex = 27;
-            // 
-            // ibF4
-            // 
-            this.ibF4.Hexadecimal = true;
-            this.ibF4.Location = new System.Drawing.Point(231, 221);
-            this.ibF4.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.ibF4.Name = "ibF4";
-            this.ibF4.Size = new System.Drawing.Size(50, 20);
-            this.ibF4.TabIndex = 26;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(282, 223);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(50, 13);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "turns into";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(282, 179);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(50, 13);
-            this.label13.TabIndex = 22;
-            this.label13.Text = "turns into";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(282, 135);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(50, 13);
-            this.label14.TabIndex = 19;
-            this.label14.Text = "turns into";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(282, 91);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(50, 13);
-            this.label15.TabIndex = 16;
-            this.label15.Text = "turns into";
             // 
             // label16
             // 
@@ -1143,14 +971,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.psT5)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibT4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibF4)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -1185,10 +1005,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label7;
@@ -1228,14 +1044,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox ChkShowInteractions;
-        private System.Windows.Forms.NumericUpDown ibF1;
-        private System.Windows.Forms.NumericUpDown ibT1;
-        private System.Windows.Forms.NumericUpDown ibF2;
-        private System.Windows.Forms.NumericUpDown ibT2;
-        private System.Windows.Forms.NumericUpDown ibF3;
-        private System.Windows.Forms.NumericUpDown ibT3;
-        private System.Windows.Forms.NumericUpDown ibT4;
-        private System.Windows.Forms.NumericUpDown ibF4;
         private System.Windows.Forms.NumericUpDown psF1;
         private System.Windows.Forms.NumericUpDown psT1;
         private System.Windows.Forms.NumericUpDown psF2;
