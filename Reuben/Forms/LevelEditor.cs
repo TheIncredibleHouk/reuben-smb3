@@ -634,11 +634,19 @@ namespace Daiz.NES.Reuben
                                         mta.AddTileChange(i, j, CurrentLevel.LevelData[i, j]);
                                         CurrentLevel.LevelData[i, j] = (byte)DrawingTile;
                                     }
+                                    else if(CurrentLevel.LevelData[i, j] == DrawingTile)
+                                    {
+                                        if(ModifierKeys == Keys.Shift)
+                                        {
+                                            mta.AddTileChange(i, j, CurrentLevel.LevelData[i, j]);
+                                            CurrentLevel.LevelData[i, j] = (byte) findTile;
+                                        }
+                                    }
                                 }
                             }
 
+                            UndoBuffer.Add(mta);
                             LvlView.DelayDrawing = false;
-                            ;
                             LvlView.FullUpdate();
                             break;
                     }
@@ -1695,7 +1703,10 @@ namespace Daiz.NES.Reuben
         private void Undo()
         {
             if (UndoBuffer.Count == 0)
+            {
                 return;
+            }
+
             IUndoableAction action = UndoBuffer[UndoBuffer.Count - 1];
             switch (action.Type)
             {

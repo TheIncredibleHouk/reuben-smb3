@@ -73,25 +73,12 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.fbF1 = new System.Windows.Forms.NumericUpDown();
-            this.fbF2 = new System.Windows.Forms.NumericUpDown();
-            this.fbT2 = new System.Windows.Forms.NumericUpDown();
-            this.fbF3 = new System.Windows.Forms.NumericUpDown();
-            this.fbT3 = new System.Windows.Forms.NumericUpDown();
-            this.fbF4 = new System.Windows.Forms.NumericUpDown();
-            this.fbT4 = new System.Windows.Forms.NumericUpDown();
-            this.fbT1 = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ChkShowInteractions = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BlockDescription = new System.Windows.Forms.TextBox();
-            this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
             this.label5 = new System.Windows.Forms.Label();
             this.CmbGraphics1 = new System.Windows.Forms.ComboBox();
             this.GrbBlocks = new System.Windows.Forms.GroupBox();
@@ -152,14 +139,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ibT4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ibF4)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT1)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.GrbBlocks.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -679,18 +658,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.fbF1);
-            this.tabPage2.Controls.Add(this.fbF2);
-            this.tabPage2.Controls.Add(this.fbT2);
-            this.tabPage2.Controls.Add(this.fbF3);
-            this.tabPage2.Controls.Add(this.fbT3);
-            this.tabPage2.Controls.Add(this.fbF4);
-            this.tabPage2.Controls.Add(this.fbT4);
-            this.tabPage2.Controls.Add(this.fbT1);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -699,146 +666,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Fire Ball Interactions";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // fbF1
-            // 
-            this.fbF1.Hexadecimal = true;
-            this.fbF1.Location = new System.Drawing.Point(231, 89);
-            this.fbF1.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbF1.Name = "fbF1";
-            this.fbF1.Size = new System.Drawing.Size(50, 20);
-            this.fbF1.TabIndex = 20;
-            // 
-            // fbF2
-            // 
-            this.fbF2.Hexadecimal = true;
-            this.fbF2.Location = new System.Drawing.Point(231, 132);
-            this.fbF2.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbF2.Name = "fbF2";
-            this.fbF2.Size = new System.Drawing.Size(50, 20);
-            this.fbF2.TabIndex = 19;
-            // 
-            // fbT2
-            // 
-            this.fbT2.Hexadecimal = true;
-            this.fbT2.Location = new System.Drawing.Point(338, 133);
-            this.fbT2.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbT2.Name = "fbT2";
-            this.fbT2.Size = new System.Drawing.Size(50, 20);
-            this.fbT2.TabIndex = 18;
-            // 
-            // fbF3
-            // 
-            this.fbF3.Hexadecimal = true;
-            this.fbF3.Location = new System.Drawing.Point(231, 176);
-            this.fbF3.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbF3.Name = "fbF3";
-            this.fbF3.Size = new System.Drawing.Size(50, 20);
-            this.fbF3.TabIndex = 17;
-            // 
-            // fbT3
-            // 
-            this.fbT3.Hexadecimal = true;
-            this.fbT3.Location = new System.Drawing.Point(338, 176);
-            this.fbT3.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbT3.Name = "fbT3";
-            this.fbT3.Size = new System.Drawing.Size(50, 20);
-            this.fbT3.TabIndex = 16;
-            // 
-            // fbF4
-            // 
-            this.fbF4.Hexadecimal = true;
-            this.fbF4.Location = new System.Drawing.Point(231, 221);
-            this.fbF4.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbF4.Name = "fbF4";
-            this.fbF4.Size = new System.Drawing.Size(50, 20);
-            this.fbF4.TabIndex = 15;
-            // 
-            // fbT4
-            // 
-            this.fbT4.Hexadecimal = true;
-            this.fbT4.Location = new System.Drawing.Point(338, 221);
-            this.fbT4.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbT4.Name = "fbT4";
-            this.fbT4.Size = new System.Drawing.Size(50, 20);
-            this.fbT4.TabIndex = 14;
-            // 
-            // fbT1
-            // 
-            this.fbT1.Hexadecimal = true;
-            this.fbT1.Location = new System.Drawing.Point(338, 89);
-            this.fbT1.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.fbT1.Name = "fbT1";
-            this.fbT1.Size = new System.Drawing.Size(50, 20);
-            this.fbT1.TabIndex = 13;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(287, 223);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(50, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "turns into";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(287, 179);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 13);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "turns into";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(287, 135);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 13);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "turns into";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(287, 91);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 13);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "turns into";
             // 
             // label7
             // 
@@ -857,7 +684,6 @@
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.BlockDescription);
-            this.tabPage1.Controls.Add(this.PtvTable);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.CmbGraphics1);
             this.tabPage1.Controls.Add(this.GrbBlocks);
@@ -920,17 +746,6 @@
             this.BlockDescription.Size = new System.Drawing.Size(250, 20);
             this.BlockDescription.TabIndex = 33;
             this.BlockDescription.TextChanged += new System.EventHandler(this.BlockDescription_TextChanged);
-            // 
-            // PtvTable
-            // 
-            this.PtvTable.Location = new System.Drawing.Point(9, 50);
-            this.PtvTable.Name = "PtvTable";
-            this.PtvTable.ShowGrid = false;
-            this.PtvTable.Size = new System.Drawing.Size(256, 256);
-            this.PtvTable.TabIndex = 0;
-            this.PtvTable.Text = "patternTableViewer1";
-            this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
-            this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
             // 
             // label5
             // 
@@ -1049,6 +864,7 @@
             this.BlsBlocks.Text = "blockSelector1";
             this.BlsBlocks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseDown);
             this.BlsBlocks.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseMove);
+            this.BlsBlocks.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BlsBlocks_MouseUp);
             this.BlsBlocks.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.BlsBlocks_PreviewKeyDown);
             // 
             // label2
@@ -1337,14 +1153,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ibF4)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbF4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbT1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.GrbBlocks.ResumeLayout(false);
@@ -1383,15 +1191,10 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox BlockDescription;
-        private PatternTableViewer PtvTable;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox CmbGraphics1;
         private System.Windows.Forms.GroupBox GrbBlocks;
@@ -1425,14 +1228,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox ChkShowInteractions;
-        private System.Windows.Forms.NumericUpDown fbF1;
-        private System.Windows.Forms.NumericUpDown fbF2;
-        private System.Windows.Forms.NumericUpDown fbT2;
-        private System.Windows.Forms.NumericUpDown fbF3;
-        private System.Windows.Forms.NumericUpDown fbT3;
-        private System.Windows.Forms.NumericUpDown fbF4;
-        private System.Windows.Forms.NumericUpDown fbT4;
-        private System.Windows.Forms.NumericUpDown fbT1;
         private System.Windows.Forms.NumericUpDown ibF1;
         private System.Windows.Forms.NumericUpDown ibT1;
         private System.Windows.Forms.NumericUpDown ibF2;

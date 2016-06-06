@@ -213,7 +213,7 @@ namespace Daiz.NES.Reuben
         private void FillBlockForTransitions()
         {
 
-            
+
         }
 
         private void LoadBlockTransitions()
@@ -256,38 +256,38 @@ namespace Daiz.NES.Reuben
 
         private void CommitBlockTransitions()
         {
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue = (int) fbF1.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue = (int) fbF2.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue = (int) fbF3.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue = (int) fbF4.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue = (int) fbT1.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue = (int) fbT2.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue = (int) fbT3.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue = (int) fbT4.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue = (int) ibF1.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue = (int) ibF2.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue = (int) ibF3.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue = (int) ibF4.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue = (int) ibT1.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue = (int) ibT2.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue = (int) ibT3.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue = (int) ibT4.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue = (int) psF1.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue = (int) psF2.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue = (int) psF3.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].FromValue = (int) psF4.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].FromValue = (int) psF5.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].FromValue = (int) psF6.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].FromValue = (int) psF7.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].FromValue = (int) psF8.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].ToValue = (int) psT1.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].ToValue = (int) psT2.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].ToValue = (int) psT3.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].ToValue = (int) psT4.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].ToValue = (int) psT5.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue = (int) psT6.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue = (int) psT7.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue = (int) psT8.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue = (int)fbF1.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue = (int)fbF2.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue = (int)fbF3.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue = (int)fbF4.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue = (int)fbT1.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue = (int)fbT2.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue = (int)fbT3.Value;
+            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue = (int)fbT4.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue = (int)ibF1.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue = (int)ibF2.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue = (int)ibF3.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue = (int)ibF4.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue = (int)ibT1.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue = (int)ibT2.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue = (int)ibT3.Value;
+            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue = (int)ibT4.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue = (int)psF1.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue = (int)psF2.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue = (int)psF3.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].FromValue = (int)psF4.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].FromValue = (int)psF5.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].FromValue = (int)psF6.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].FromValue = (int)psF7.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].FromValue = (int)psF8.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].ToValue = (int)psT1.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].ToValue = (int)psT2.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].ToValue = (int)psT3.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[3].ToValue = (int)psT4.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[4].ToValue = (int)psT5.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue = (int)psT6.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue = (int)psT7.Value;
+            BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue = (int)psT8.Value;
             BlsBlocks.CurrentDefiniton.VineTile = (byte)vineTile.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTile = (byte)pSwitchTile.Value;
         }
@@ -371,19 +371,24 @@ namespace Daiz.NES.Reuben
         private void BlsBlocks_MouseDown(object sender, MouseEventArgs e)
         {
             BlsBlocks.Focus();
+
+           
         }
 
         Block copyBlock = null;
         private void BlsBlocks_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            if (e.KeyCode == Keys.C && (e.Modifiers == Keys.Control || (e.Modifiers == (Keys.Shift | Keys.Control))))
             {
                 copyBlock = BlsBlocks.SelectedBlock;
             }
-
             else if (e.KeyCode == Keys.V && (e.Modifiers & Keys.Control) > Keys.None)
             {
-                if (copyBlock == null) return;
+
+                if (copyBlock == null)
+                {
+                    return;
+                }
                 if ((e.Modifiers & Keys.Shift) == Keys.None)
                 {
                     BlvCurrent.SetTile(0, 0, copyBlock[0, 0]);
@@ -496,6 +501,37 @@ namespace Daiz.NES.Reuben
         private void ChkShowInteractions_CheckedChanged(object sender, EventArgs e)
         {
             BlsBlocks.ShowTileInteractions = ChkShowInteractions.Checked;
+        }
+
+        private void BlsBlocks_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            {
+                Block copyBlock = Block.Deserialize(Clipboard.GetText());
+                {
+                    if (copyBlock != null)
+                    {
+
+                        BlvCurrent.SetTile(0, 0, copyBlock[0, 0]);
+                        BlvCurrent.SetTile(1, 0, copyBlock[1, 0]);
+                        BlvCurrent.SetTile(0, 1, copyBlock[0, 1]);
+                        BlvCurrent.SetTile(1, 1, copyBlock[1, 1]);
+                        BlockDescription.Text = BlvCurrent.CurrentBlock.Description = copyBlock.Description;
+                        BlvCurrent.CurrentBlock.BlockProperty = copyBlock.BlockProperty;
+                    }
+                    
+                    BlsBlocks_SelectionChanged(null, null);
+
+                    Clipboard.Clear();
+                }
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if(BlsBlocks.SelectedBlock != null)
+                {
+                    Clipboard.SetText(Block.Serialize(BlsBlocks.SelectedBlock));
+                }
+            }
         }
     }
 }

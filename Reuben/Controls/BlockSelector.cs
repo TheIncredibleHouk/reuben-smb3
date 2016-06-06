@@ -1173,6 +1173,8 @@ namespace Daiz.NES.Reuben
                 SelectionChanged(this, new TEventArgs<MouseButtons>(e.Button));
             }
 
+
+
             SelectedBlock.DefinitionChanged += new EventHandler(SelectedBlock_DefinitionChanged);
             Invalidate();
         }
