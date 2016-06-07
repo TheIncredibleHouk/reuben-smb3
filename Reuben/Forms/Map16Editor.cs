@@ -218,22 +218,8 @@ namespace Daiz.NES.Reuben
 
         private void LoadBlockTransitions()
         {
-            fbF1.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue;
-            fbF2.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue;
-            fbF3.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue;
-            fbF4.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue;
-            fbT1.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue;
-            fbT2.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue;
-            fbT3.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue;
-            fbT4.Value = BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue;
-            ibF1.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue;
-            ibF2.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue;
-            ibF3.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue;
-            ibF4.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue;
-            ibT1.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue;
-            ibT2.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue;
-            ibT3.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue;
-            ibT4.Value = BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue;
+            fireInteractionList.Text = string.Join(",", BlsBlocks.CurrentDefiniton.FireBallTransitions.Select(b => b.ToHexString()));
+            iceInteractionList.Text = string.Join(",", BlsBlocks.CurrentDefiniton.IceBallTransitions.Select(b => b.ToHexString()));
             psF1.Value = BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue;
             psF2.Value = BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue;
             psF3.Value = BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue;
@@ -250,28 +236,27 @@ namespace Daiz.NES.Reuben
             psT6.Value = BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue;
             psT7.Value = BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue;
             psT8.Value = BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue;
-            vineTile.Value = BlsBlocks.CurrentDefiniton.VineTile;
-            pSwitchTile.Value = BlsBlocks.CurrentDefiniton.PSwitchTile;
         }
 
         private void CommitBlockTransitions()
         {
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].FromValue = (int)fbF1.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].FromValue = (int)fbF2.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].FromValue = (int)fbF3.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].FromValue = (int)fbF4.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[0].ToValue = (int)fbT1.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[1].ToValue = (int)fbT2.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[2].ToValue = (int)fbT3.Value;
-            BlsBlocks.CurrentDefiniton.FireBallTransitions[3].ToValue = (int)fbT4.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].FromValue = (int)ibF1.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].FromValue = (int)ibF2.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].FromValue = (int)ibF3.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].FromValue = (int)ibF4.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[0].ToValue = (int)ibT1.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[1].ToValue = (int)ibT2.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[2].ToValue = (int)ibT3.Value;
-            BlsBlocks.CurrentDefiniton.IceBallTransitions[3].ToValue = (int)ibT4.Value;
+            try
+            {
+                BlsBlocks.CurrentDefiniton.FireBallTransitions = fireInteractionList.Text.Split(',').Select(s => (byte)s.ToIntFromHex()).Take(8).ToList();
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                BlsBlocks.CurrentDefiniton.FireBallTransitions = iceInteractionList.Text.Split(',').Select(s => (byte)s.ToIntFromHex()).Take(8).ToList();
+            }
+            catch
+            {
+            }
+            
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue = (int)psF1.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue = (int)psF2.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue = (int)psF3.Value;
@@ -288,8 +273,7 @@ namespace Daiz.NES.Reuben
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[5].ToValue = (int)psT6.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[6].ToValue = (int)psT7.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[7].ToValue = (int)psT8.Value;
-            BlsBlocks.CurrentDefiniton.VineTile = (byte)vineTile.Value;
-            BlsBlocks.CurrentDefiniton.PSwitchTile = (byte)pSwitchTile.Value;
+
         }
 
         private void BlvCurrent_MouseDown(object sender, MouseEventArgs e)
@@ -535,3 +519,4 @@ namespace Daiz.NES.Reuben
         }
     }
 }
+

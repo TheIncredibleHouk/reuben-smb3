@@ -367,14 +367,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 BlockDefinition currentDef = ProjectController.BlockManager.AllDefinitions[i];
                 foreach (var k in currentDef.FireBallTransitions)
                 {
-                    Rom[dataPointer++] = (byte)k.FromValue;
-                    Rom[dataPointer++] = (byte)k.ToValue;
+                    Rom[dataPointer++] = (byte)k;
                 }
 
                 foreach (var k in currentDef.IceBallTransitions)
                 {
-                    Rom[dataPointer++] = (byte)k.FromValue;
-                    Rom[dataPointer++] = (byte)k.ToValue;
+                    Rom[dataPointer++] = (byte)k;
                 }
 
 

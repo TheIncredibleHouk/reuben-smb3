@@ -60,8 +60,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label16 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ChkShowInteractions = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -94,12 +92,10 @@
             this.LblHexGraphics2 = new System.Windows.Forms.Label();
             this.ChkShowSpecials = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.vineTile = new System.Windows.Forms.NumericUpDown();
-            this.pSwitchTile = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.fireInteractionList = new System.Windows.Forms.TextBox();
+            this.iceInteractionList = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.psF1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.psT1)).BeginInit();
@@ -118,16 +114,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.psF6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.psT5)).BeginInit();
             this.tabPage3.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GrbBlocks.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vineTile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pSwitchTile)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnSaveClose
@@ -465,46 +457,25 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.iceInteractionList);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.fireInteractionList);
             this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(615, 564);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Ice Ball Interactions";
+            this.tabPage3.Text = "Fire/Ice Interactions";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(28, 37);
+            this.label16.Location = new System.Drawing.Point(13, 13);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(548, 26);
+            this.label16.Size = new System.Drawing.Size(254, 13);
             this.label16.TabIndex = 14;
-            this.label16.Text = "This defines ice ball interactions. When a  ice ball touches one of these blocks," +
-    " it will turn into the mentioned block.\r\nA value of 00 and transition to 00 mean" +
-    "s no interaction.";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(615, 564);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Fire Ball Interactions";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 37);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(548, 26);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "This defines fire ball interactions. When a  fire ball touches one of these block" +
-    "s, it will turn into the mentioned block.\r\nA value of 00 and transition to 00 me" +
-    "ans no interaction.";
+            this.label16.Text = "Fire Interactions - Comma delimited list of hex values.";
             // 
             // tabPage1
             // 
@@ -862,73 +833,14 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(623, 590);
             this.tabControl1.TabIndex = 34;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.vineTile);
-            this.tabPage4.Controls.Add(this.pSwitchTile);
-            this.tabPage4.Controls.Add(this.label18);
-            this.tabPage4.Controls.Add(this.label17);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(615, 564);
-            this.tabPage4.TabIndex = 5;
-            this.tabPage4.Text = "Other Interactions";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // vineTile
-            // 
-            this.vineTile.Hexadecimal = true;
-            this.vineTile.Location = new System.Drawing.Point(172, 15);
-            this.vineTile.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.vineTile.Name = "vineTile";
-            this.vineTile.Size = new System.Drawing.Size(50, 20);
-            this.vineTile.TabIndex = 57;
-            // 
-            // pSwitchTile
-            // 
-            this.pSwitchTile.Hexadecimal = true;
-            this.pSwitchTile.Location = new System.Drawing.Point(172, 48);
-            this.pSwitchTile.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.pSwitchTile.Name = "pSwitchTile";
-            this.pSwitchTile.Size = new System.Drawing.Size(50, 20);
-            this.pSwitchTile.TabIndex = 56;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(13, 50);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(156, 13);
-            this.label18.TabIndex = 29;
-            this.label18.Text = "Tile Drawn From PSwitch Block";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 18);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(153, 13);
-            this.label17.TabIndex = 28;
-            this.label17.Text = "Tile Drawn During Vine Growth";
             // 
             // button1
             // 
@@ -939,6 +851,29 @@
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // fireInteractionList
+            // 
+            this.fireInteractionList.Location = new System.Drawing.Point(16, 29);
+            this.fireInteractionList.Name = "fireInteractionList";
+            this.fireInteractionList.Size = new System.Drawing.Size(414, 20);
+            this.fireInteractionList.TabIndex = 15;
+            // 
+            // iceInteractionList
+            // 
+            this.iceInteractionList.Location = new System.Drawing.Point(16, 68);
+            this.iceInteractionList.Name = "iceInteractionList";
+            this.iceInteractionList.Size = new System.Drawing.Size(414, 20);
+            this.iceInteractionList.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(252, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Ice Interactions - Comma delimited list of hex values.";
             // 
             // Map16Editor
             // 
@@ -971,8 +906,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.psT5)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.GrbBlocks.ResumeLayout(false);
@@ -982,10 +915,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vineTile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pSwitchTile)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1006,8 +935,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox BlockDescription;
@@ -1038,9 +965,6 @@
         private System.Windows.Forms.Label LblHexGraphics2;
         private System.Windows.Forms.CheckBox ChkShowSpecials;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox ChkShowInteractions;
@@ -1060,7 +984,8 @@
         private System.Windows.Forms.NumericUpDown psT6;
         private System.Windows.Forms.NumericUpDown psF6;
         private System.Windows.Forms.NumericUpDown psT5;
-        private System.Windows.Forms.NumericUpDown vineTile;
-        private System.Windows.Forms.NumericUpDown pSwitchTile;
+        private System.Windows.Forms.TextBox iceInteractionList;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox fireInteractionList;
     }
 }

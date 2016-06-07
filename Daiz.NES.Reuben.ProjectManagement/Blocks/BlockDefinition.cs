@@ -7,8 +7,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 {
     public class BlockDefinition
     {
-        public List<BlockTransition> FireBallTransitions { get; set; }
-        public List<BlockTransition> IceBallTransitions { get; set; }
+        public List<byte> FireBallTransitions { get; set; }
+        public List<byte> IceBallTransitions { get; set; }
         public List<BlockTransition> PSwitchTransitions { get; set; }
         public byte VineTile { get; set; }
         public byte PSwitchTile { get; set; }
@@ -17,8 +17,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public BlockDefinition()
         {
-            FireBallTransitions = new List<BlockTransition>();
-            IceBallTransitions = new List<BlockTransition>();
+            FireBallTransitions = new List<byte>();
+            IceBallTransitions = new List<byte>();
             PSwitchTransitions = new List<BlockTransition>();
             VineTile = 0x85;
             PSwitchTile = 0xC2;

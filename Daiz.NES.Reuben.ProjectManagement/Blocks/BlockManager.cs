@@ -138,15 +138,15 @@ namespace Daiz.NES.Reuben.ProjectManagement
             for (int i = 0; i < 16; i++)
             {
                 lookupTable[i].FireBallTransitions.Clear();
-                for (int k = 0; k < 4; k++)
+                for (int k = 0; k < 8; k++)
                 {
-                    lookupTable[i].FireBallTransitions.Add(new BlockTransition(data[l++], data[l++]));
+                    lookupTable[i].FireBallTransitions.Add(data[l++]);
                 }
 
                 lookupTable[i].IceBallTransitions.Clear();
-                for (int k = 0; k < 4; k++)
+                for (int k = 0; k < 8; k++)
                 {
-                    lookupTable[i].IceBallTransitions.Add(new BlockTransition(data[l++], data[l++]));
+                    lookupTable[i].IceBallTransitions.Add(data[l++]);
                 }
 
                 lookupTable[i].PSwitchTransitions.Clear();
@@ -210,14 +210,12 @@ namespace Daiz.NES.Reuben.ProjectManagement
             {
                 foreach(var k in lookupTable[i].FireBallTransitions)
                 {
-                    data[dataPointer++] = (byte)k.FromValue;
-                    data[dataPointer++] = (byte)k.ToValue;
+                    data[dataPointer++] = (byte)k;
                 }
 
                 foreach (var k in lookupTable[i].IceBallTransitions)
                 {
-                    data[dataPointer++] = (byte)k.FromValue;
-                    data[dataPointer++] = (byte)k.ToValue;
+                    data[dataPointer++] = (byte)k;
                 }
 
                 foreach (var k in lookupTable[i].PSwitchTransitions)
