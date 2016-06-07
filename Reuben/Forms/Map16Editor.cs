@@ -240,23 +240,38 @@ namespace Daiz.NES.Reuben
 
         private void CommitBlockTransitions()
         {
-            try
-            {
-                BlsBlocks.CurrentDefiniton.FireBallTransitions = fireInteractionList.Text.Split(',').Select(s => (byte)s.ToIntFromHex()).Take(8).ToList();
-            }
-            catch
-            {
 
+            var hexes = fireInteractionList.Text.Split(',');
+
+            BlsBlocks.CurrentDefiniton.FireBallTransitions.Clear();
+            for (var i = 0; i < 8; i++)
+            {
+                if (i < hexes.Length && hexes[i].Length > 0)
+                {
+                    BlsBlocks.CurrentDefiniton.FireBallTransitions.Add((byte)hexes[i].ToIntFromHex());
+                }
+                else
+                {
+                    BlsBlocks.CurrentDefiniton.FireBallTransitions.Add(0);
+                }
             }
 
-            try
+
+            hexes = iceInteractionList.Text.Split(',');
+            BlsBlocks.CurrentDefiniton.IceBallTransitions.Clear();
+            for (var i = 0; i < 8; i++)
             {
-                BlsBlocks.CurrentDefiniton.FireBallTransitions = iceInteractionList.Text.Split(',').Select(s => (byte)s.ToIntFromHex()).Take(8).ToList();
+                if (i < hexes.Length && hexes[i].Length > 0)
+                {
+                    BlsBlocks.CurrentDefiniton.IceBallTransitions.Add((byte)hexes[i].ToIntFromHex());
+                }
+                else
+                {
+                    BlsBlocks.CurrentDefiniton.IceBallTransitions.Add(0);
+                }
             }
-            catch
-            {
-            }
-            
+
+
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[0].FromValue = (int)psF1.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[1].FromValue = (int)psF2.Value;
             BlsBlocks.CurrentDefiniton.PSwitchTransitions[2].FromValue = (int)psF3.Value;
@@ -356,7 +371,7 @@ namespace Daiz.NES.Reuben
         {
             BlsBlocks.Focus();
 
-           
+
         }
 
         Block copyBlock = null;
@@ -503,7 +518,7 @@ namespace Daiz.NES.Reuben
                         BlockDescription.Text = BlvCurrent.CurrentBlock.Description = copyBlock.Description;
                         BlvCurrent.CurrentBlock.BlockProperty = copyBlock.BlockProperty;
                     }
-                    
+
                     BlsBlocks_SelectionChanged(null, null);
 
                     Clipboard.Clear();
@@ -511,7 +526,7 @@ namespace Daiz.NES.Reuben
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                if(BlsBlocks.SelectedBlock != null)
+                if (BlsBlocks.SelectedBlock != null)
                 {
                     Clipboard.SetText(Block.Serialize(BlsBlocks.SelectedBlock));
                 }

@@ -65,6 +65,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BlockDescription = new System.Windows.Forms.TextBox();
+            this.PtvTable = new Daiz.NES.Reuben.PatternTableViewer();
             this.label5 = new System.Windows.Forms.Label();
             this.CmbGraphics1 = new System.Windows.Forms.ComboBox();
             this.GrbBlocks = new System.Windows.Forms.GroupBox();
@@ -483,6 +484,7 @@
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.BlockDescription);
+            this.tabPage1.Controls.Add(this.PtvTable);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.CmbGraphics1);
             this.tabPage1.Controls.Add(this.GrbBlocks);
@@ -545,6 +547,17 @@
             this.BlockDescription.Size = new System.Drawing.Size(250, 20);
             this.BlockDescription.TabIndex = 33;
             this.BlockDescription.TextChanged += new System.EventHandler(this.BlockDescription_TextChanged);
+            // 
+            // PtvTable
+            // 
+            this.PtvTable.Location = new System.Drawing.Point(9, 50);
+            this.PtvTable.Name = "PtvTable";
+            this.PtvTable.ShowGrid = false;
+            this.PtvTable.Size = new System.Drawing.Size(256, 256);
+            this.PtvTable.TabIndex = 0;
+            this.PtvTable.Text = "patternTableViewer1";
+            this.PtvTable.TileSelectionMode = Daiz.NES.Reuben.TileSelectionMode.SingleTile;
+            this.PtvTable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PtvTable_MouseMove);
             // 
             // label5
             // 
@@ -938,6 +951,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox BlockDescription;
+        private PatternTableViewer PtvTable;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox CmbGraphics1;
         private System.Windows.Forms.GroupBox GrbBlocks;
