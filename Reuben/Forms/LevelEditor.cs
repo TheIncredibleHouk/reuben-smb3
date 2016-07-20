@@ -634,12 +634,12 @@ namespace Daiz.NES.Reuben
                                         mta.AddTileChange(i, j, CurrentLevel.LevelData[i, j]);
                                         CurrentLevel.LevelData[i, j] = (byte)DrawingTile;
                                     }
-                                    else if(CurrentLevel.LevelData[i, j] == DrawingTile)
+                                    else if (CurrentLevel.LevelData[i, j] == DrawingTile)
                                     {
-                                        if(ModifierKeys == Keys.Shift)
+                                        if (ModifierKeys == Keys.Shift)
                                         {
                                             mta.AddTileChange(i, j, CurrentLevel.LevelData[i, j]);
-                                            CurrentLevel.LevelData[i, j] = (byte) findTile;
+                                            CurrentLevel.LevelData[i, j] = (byte)findTile;
                                         }
                                     }
                                 }
@@ -762,7 +762,7 @@ namespace Daiz.NES.Reuben
                     {
                         newSprite.Property = previousSprite.Property;
                     }
-                    
+
                     CurrentLevel.AddSprite(newSprite);
                     CurrentSprite = newSprite;
                     LvlView.SelectionRectangle = new Rectangle(CurrentSprite.X, CurrentSprite.Y, CurrentSprite.Width, CurrentSprite.Height);
@@ -2178,6 +2178,10 @@ namespace Daiz.NES.Reuben
                     BlockProperty property = BlsSelector.CurrentDefiniton[data[j, i]].BlockProperty;
                     if (property < (BlockProperty.SolidTop) &&
                         (property & (BlockProperty.MaskLo)) == BlockProperty.Coin)
+                    {
+                        count++;
+                    }
+                    else if (property == BlockProperty.CoinBlock)
                     {
                         count++;
                     }
