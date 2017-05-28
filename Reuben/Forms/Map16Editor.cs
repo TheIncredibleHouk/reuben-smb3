@@ -83,7 +83,7 @@ namespace Daiz.NES.Reuben
             "Coin",
             "Door",
             "Cherry",
-            "Hidden Coin Block"
+            "Power Coin"
         };
         private List<string> SolidInteractionTypes = new List<string>()
         {
@@ -94,7 +94,7 @@ namespace Daiz.NES.Reuben
             "Conveyor Right",
             "Conveyor Up",
             "Conveyor Down",
-            "Unstable",
+            "Thin Ice",
             "Vertical Pipe Left",
             "Vertical Pipe Right",
             "Horizontal Pipe Bottom",
@@ -142,7 +142,7 @@ namespace Daiz.NES.Reuben
             }
 
             updating = false;
-            int i = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
+            int i = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.PowerCoin);
             if (i > CmdInteraction.Items.Count)
             {
                 CmdInteraction.SelectedIndex = 0;
@@ -167,7 +167,7 @@ namespace Daiz.NES.Reuben
                     CmbSolidity.SelectedIndex = 0;
                 }
 
-                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
+                int b = (int)(BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.PowerCoin);
                 if (b > CmdInteraction.Items.Count)
                 {
                     b = 0;
@@ -469,7 +469,7 @@ namespace Daiz.NES.Reuben
 
         private void CmbSolidity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BlsBlocks.SelectedBlock.BlockProperty = solidityMap[CmbSolidity.SelectedIndex] | (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.HiddenCoinBlock);
+            BlsBlocks.SelectedBlock.BlockProperty = solidityMap[CmbSolidity.SelectedIndex] | (BlvCurrent.CurrentBlock.BlockProperty & BlockProperty.PowerCoin);
             UpdateInteractionSpecialList();
             BlsBlocks.UpdateSelection();
         }

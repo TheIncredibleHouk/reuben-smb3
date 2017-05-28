@@ -33,7 +33,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         Coin = 0x0C,
         Door = 0x0D,
         Cherry = 0x0E,
-        HiddenCoinBlock = 0x0F,
+        PowerCoin = 0x0F,
         CoinBlock = 0xF0,
         FireFlower = 0xF1,
         SuperLeaf = 0xF2,
@@ -161,7 +161,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                             break;
 
                         case 7:
-                            s2 = "Unstable";
+                            s2 = "Thin Ice";
                             break;
 
                         case 8:

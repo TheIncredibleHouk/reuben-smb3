@@ -206,7 +206,7 @@ namespace Daiz.NES.Reuben
                     #region draw special overlays
                     BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
                     BlockProperty bpHi = bp & BlockProperty.MaskHi;
-                    BlockProperty bpLow = bp & BlockProperty.HiddenCoinBlock;
+                    BlockProperty bpLow = bp & BlockProperty.PowerCoin;
                     if (_ShowBlockSolidity)
                     {
 
@@ -701,7 +701,7 @@ namespace Daiz.NES.Reuben
                 #region draw special overlays
                 BlockProperty bp = CurrentDefiniton[tileValue].BlockProperty;
                 BlockProperty bpHi = bp & BlockProperty.MaskHi;
-                BlockProperty bpLow = bp & BlockProperty.HiddenCoinBlock;
+                BlockProperty bpLow = bp & BlockProperty.PowerCoin;
                 if (_ShowBlockSolidity)
                 {
 
