@@ -1447,33 +1447,8 @@ namespace Daiz.NES.Reuben
                 g.DrawLine(Pens.Black, _SelectionLine.Start.X * 16 + 9, _SelectionLine.Start.Y * 16 + 9, _SelectionLine.End.X * 16 + 9, _SelectionLine.End.Y * 16 + 9);
             }
 
-            Pen hPen = new Pen(HorizontalGuide1.Color);
-            Pen vPen = new Pen(VerticalGuide1.Color);
-
-            if (VerticalGuide1.Visible)
-            {
-                g.DrawLine(vPen, 0, VerticalGuide1.Position, BackBuffer.Width, VerticalGuide1.Position);
-            }
-
-            if (VerticalGuide2.Visible)
-            {
-                g.DrawLine(vPen, 0, VerticalGuide2.Position, BackBuffer.Width, VerticalGuide2.Position);
-            }
-
-            if (HorizontalGuide1.Visible)
-            {
-                g.DrawLine(hPen, HorizontalGuide1.Position, 0, HorizontalGuide1.Position, BackBuffer.Height);
-            }
-
-            if (HorizontalGuide2.Visible)
-            {
-                g.DrawLine(hPen, HorizontalGuide2.Position, 0, HorizontalGuide2.Position, BackBuffer.Height);
-            }
-
             e.Graphics.DrawImage(CompositeBuffer, destRect, sourceRect, GraphicsUnit.Pixel);
             g.Dispose();
-            hPen.Dispose();
-            vPen.Dispose();
         }
 
         protected override void OnPaintBackground(PaintEventArgs pevent)

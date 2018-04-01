@@ -79,18 +79,10 @@ namespace Daiz.NES.Reuben
             ProjectController.LayoutManager.LayoutAdded += new EventHandler<TEventArgs<BlockLayout>>(LayoutManager_LayoutAdded);
             ProjectController.GraphicsManager.GraphicsUpdated += new EventHandler(GraphicsManager_GraphicsUpdated);
             ProjectController.LayoutManager.LayoutRemoved += new EventHandler<TEventArgs<BlockLayout>>(LayoutManager_LayoutRemoved);
-            PnlVerticalGuide.Guide1Changed += new EventHandler(PnlVerticalGuide_Guide1Changed);
-            PnlVerticalGuide.Guide2Changed += new EventHandler(PnlVerticalGuide_Guide2Changed);
-            PnlHorizontalGuide.Guide1Changed += new EventHandler(PnlHorizontalGuide_Guide1Changed);
-            PnlHorizontalGuide.Guide2Changed += new EventHandler(PnlHorizontalGuide_Guide2Changed);
             ReubenController.GraphicsReloaded += new EventHandler(ReubenController_GraphicsReloaded);
             ReubenController.LevelReloaded += new EventHandler<TEventArgs<Level>>(ReubenController_LevelReloaded);
 
             LoadSpriteSelector();
-            LvlView.HorizontalGuide1 = PnlHorizontalGuide.Guide1;
-            LvlView.HorizontalGuide2 = PnlHorizontalGuide.Guide2;
-            LvlView.VerticalGuide1 = PnlVerticalGuide.Guide1;
-            LvlView.VerticalGuide2 = PnlVerticalGuide.Guide2;
             LvlView.DelayDrawing = false;
             LvlView.FullUpdate();
         }
@@ -103,8 +95,6 @@ namespace Daiz.NES.Reuben
             {
                 previousLeftIndex = LeftMouseTile;
                 LeftMouseTile = BlsSelector.SelectedTileIndex;
-                BlvLeft.PaletteIndex = (LeftMouseTile & 0xC0) >> 6;
-                BlvLeft.CurrentBlock = BlsSelector.SelectedBlock;
             }
             else
             {
@@ -114,8 +104,6 @@ namespace Daiz.NES.Reuben
                     {
                         previousLeftIndex = LeftMouseTile;
                         LeftMouseTile = BlsSelector.SelectedTileIndex;
-                        BlvLeft.PaletteIndex = (LeftMouseTile & 0xC0) >> 6;
-                        BlvLeft.CurrentBlock = BlsSelector.SelectedBlock;
                     }
                     else
                     {
@@ -164,7 +152,6 @@ namespace Daiz.NES.Reuben
         {
             GetLevelInfo(l);
             PntEditor.CurrentLevel = l;
-            LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             TsbGrid.Checked = CurrentLevel.Settings.ShowGrid;
             TsbItems.Checked = CurrentLevel.Settings.SpecialTiles;
             TsbSriteSpecials.Checked = CurrentLevel.Settings.SpecialSprites;
@@ -233,8 +220,6 @@ namespace Daiz.NES.Reuben
             }
 
             CmbLayouts.SelectedIndex = CurrentLevel.Settings.Layout;
-            PnlHorizontalGuide.GuideColor = CurrentLevel.Settings.HGuideColor;
-            PnlVerticalGuide.GuideColor = CurrentLevel.Settings.VGuideColor;
             TsbPointers.Checked = CurrentLevel.Settings.ShowPointers;
 
             this.Text = ProjectController.LevelManager.GetLevelInfo(l.Guid).Name;
@@ -248,7 +233,6 @@ namespace Daiz.NES.Reuben
             LvlView.Zoom = 1;
             LvlView.CurrentLevel = l;
             CurrentLevel = l;
-            NumTime.Value = l.Time;
             NumBackground.Value = l.ClearValue;
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank]);
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank + 1]);
@@ -294,7 +278,6 @@ namespace Daiz.NES.Reuben
 
         private void freeGuideToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.Free;
             freeGuideToolStripMenuItem.Checked = true;
             snapToEnemyBounceHeightToolStripMenuItem.Checked =
             showScreenHeightToolStripMenuItem.Checked =
@@ -305,7 +288,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToJumpHeightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight1;
             snapToJumpHeightToolStripMenuItem.Checked = true;
             snapToEnemyBounceHeightToolStripMenuItem.Checked =
             showScreenHeightToolStripMenuItem.Checked =
@@ -316,7 +298,6 @@ namespace Daiz.NES.Reuben
 
         private void showScreenHeightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.Screen;
             showScreenHeightToolStripMenuItem.Checked = true;
             snapToEnemyBounceHeightToolStripMenuItem.Checked =
             snapToJumpHeightToolStripMenuItem.Checked =
@@ -328,7 +309,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToRunningJumpHeightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight2;
             snapToRunningJumpHeightToolStripMenuItem.Checked = true;
             snapToEnemyBounceHeightToolStripMenuItem.Checked =
             showScreenHeightToolStripMenuItem.Checked =
@@ -339,7 +319,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToFullPMeterJumpHeightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight3;
             snapToFullPMeterJumpHeightToolStripMenuItem.Checked = true;
             snapToEnemyBounceHeightToolStripMenuItem.Checked =
             snapToRunningJumpHeightToolStripMenuItem.Checked =
@@ -351,7 +330,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToEnemyBounceHeightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlVerticalGuide.GuideSnapMode = GuideMode.JumpHeight4;
             snapToEnemyBounceHeightToolStripMenuItem.Checked = true;
             snapToFullPMeterJumpHeightToolStripMenuItem.Checked =
             snapToRunningJumpHeightToolStripMenuItem.Checked =
@@ -362,14 +340,12 @@ namespace Daiz.NES.Reuben
 
         private void hideGuidesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlVerticalGuide.Guide1.Visible = PnlVerticalGuide.Guide2.Visible = false;
             LvlView.UpdateGuide(Orientation.Vertical, 1);
             LvlView.UpdateGuide(Orientation.Vertical, 2);
         }
 
         private void snapToJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength1;
             snapToScreenLengthToolStripMenuItem.Checked =
             snapToJumpLengthToolStripMenuItem.Checked = true;
             freeGuide2.Checked =
@@ -380,7 +356,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToWalkingJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength2;
             snapToWalkingJumpLengthToolStripMenuItem.Checked = true;
             snapToScreenLengthToolStripMenuItem.Checked =
             freeGuide2.Checked =
@@ -391,7 +366,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToRunningJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength3;
             snapToRunningJumpLengthToolStripMenuItem.Checked = true;
             snapToScreenLengthToolStripMenuItem.Checked =
             snapToWalkingJumpLengthToolStripMenuItem.Checked =
@@ -402,7 +376,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToFullMeterJumpLengthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.JumpLength4;
             snapToFullMeterJumpLengthToolStripMenuItem.Checked = true;
             snapToScreenLengthToolStripMenuItem.Checked =
             snapToRunningJumpHeightToolStripMenuItem.Checked =
@@ -413,7 +386,6 @@ namespace Daiz.NES.Reuben
 
         private void snapToScreenLengthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.Screen;
             snapToScreenLengthToolStripMenuItem.Checked = true;
             snapToFullMeterJumpLengthToolStripMenuItem.Checked =
             snapToRunningJumpHeightToolStripMenuItem.Checked =
@@ -457,9 +429,8 @@ namespace Daiz.NES.Reuben
             CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
             CurrentTable.SetGraphicsbank(2, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank]);
             CurrentTable.SetGraphicsbank(3, ProjectController.GraphicsManager.GraphicsBanks[CurrentLevel.AnimationBank + 1]);
-            LvlView.CurrentPalette = BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            LvlView.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             BlsSelector.CurrentDefiniton = LvlView.CurrentDefiniton = LvlView.CurrentDefiniton;
-            BlvLeft.CurrentBlock = BlvLeft.CurrentBlock;
         }
         #endregion
 
@@ -493,7 +464,6 @@ namespace Daiz.NES.Reuben
                 _SelectingStartPositionMode = false;
                 TlsTileCommands.Enabled = TlsDrawing.Enabled = TabLevelInfo.Enabled = true;
                 SetHelpText(PreviousHelperText);
-                LblStartPoint.Text = string.Format("X: {0} Y: {1}", CurrentLevel.XStart.ToHexString(), CurrentLevel.YStart.ToHexString());
             }
             else if (_PlacingPointer)
             {
@@ -1251,7 +1221,6 @@ namespace Daiz.NES.Reuben
         {
             CurrentTable.SetGraphicsbank(0, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex]);
             CurrentTable.SetGraphicsbank(1, ProjectController.GraphicsManager.GraphicsBanks[CmbGraphics.SelectedIndex + 1]);
-            LblHexGraphics.Text = "x" + CmbGraphics.SelectedIndex.ToHexString();
         }
 
         private void BtnClear_Click(object sender, EventArgs e)
@@ -1282,7 +1251,7 @@ namespace Daiz.NES.Reuben
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
             CurrentPalette = CmbPalettes.SelectedItem as PaletteInfo;
             CurrentPalette.PaletteChanged += new EventHandler<TEventArgs<DoubleValue<int, int>>>(CurrentPalette_PaletteChanged);
-            BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             foreach (var sv in SpriteViewers)
             {
                 sv.CurrentPalette = CurrentPalette;
@@ -1291,7 +1260,7 @@ namespace Daiz.NES.Reuben
 
         private void CurrentPalette_PaletteChanged(object sender, TEventArgs<DoubleValue<int, int>> e)
         {
-            BlvLeft.CurrentPalette = BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
+            BlsSelector.CurrentPalette = LvlView.CurrentPalette = CurrentPalette;
             LvlView.Redraw();
             BlsSelector.Redraw();
         }
@@ -1380,7 +1349,6 @@ namespace Daiz.NES.Reuben
         }
 
         private Sprite CurrentSelectorSprite;
-        private int currentSpriteProperty;
 
         private void spViewer_SelectionChanged(object sender, TEventArgs<Sprite> e)
         {
@@ -1550,7 +1518,6 @@ namespace Daiz.NES.Reuben
             CurrentLevel.ClearValue = (int)NumBackground.Value;
             CurrentLevel.GraphicsBank = CmbGraphics.SelectedIndex;
             CurrentLevel.Palette = CmbPalettes.SelectedIndex;
-            CurrentLevel.Time = (int)NumTime.Value;
             CurrentLevel.Type = CmbTypes.SelectedIndex + 1;
             CurrentLevel.Music = CmbMusic.SelectedIndex;
             CurrentLevel.ScrollType = CmbScroll.SelectedIndex;
@@ -1616,12 +1583,10 @@ namespace Daiz.NES.Reuben
             int tile = BlsSelector.BlockLayout.Layout[index];
             if (tile > 0)
             {
-                LblSelectorHover.Text = "Block: " + tile.ToHexString();
                 LevelToolTip.SetToolTip(BlsSelector, ProjectController.BlockManager.GetBlockString(CurrentLevel.Type, tile));
             }
             else
             {
-                LblSelectorHover.Text = "Block: None";
                 LevelToolTip.SetToolTip(BlsSelector, "No block.");
             }
         }
@@ -1652,14 +1617,12 @@ namespace Daiz.NES.Reuben
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            PnlHorizontalGuide.Guide1.Visible = PnlHorizontalGuide.Guide2.Visible = false;
             LvlView.UpdateGuide(Orientation.Horizontal, 1);
             LvlView.UpdateGuide(Orientation.Horizontal, 2);
         }
 
         private void freeGuide2_Click(object sender, EventArgs e)
         {
-            PnlHorizontalGuide.GuideSnapMode = GuideMode.Free;
             freeGuide2.Checked = true;
             snapToScreenLengthToolStripMenuItem.Checked =
             snapToFullMeterJumpLengthToolStripMenuItem.Checked =
@@ -1683,10 +1646,6 @@ namespace Daiz.NES.Reuben
             ProjectController.LayoutManager.LayoutAdded -= LayoutManager_LayoutAdded;
             ProjectController.GraphicsManager.GraphicsUpdated -= GraphicsManager_GraphicsUpdated;
             ProjectController.LayoutManager.LayoutRemoved -= LayoutManager_LayoutRemoved;
-            PnlVerticalGuide.Guide1Changed -= PnlVerticalGuide_Guide1Changed;
-            PnlVerticalGuide.Guide2Changed -= PnlVerticalGuide_Guide2Changed;
-            PnlHorizontalGuide.Guide1Changed -= PnlHorizontalGuide_Guide1Changed;
-            PnlHorizontalGuide.Guide2Changed -= PnlHorizontalGuide_Guide2Changed;
             ReubenController.GraphicsReloaded -= ReubenController_GraphicsReloaded;
             ReubenController.LevelReloaded -= ReubenController_LevelReloaded;
             BlsSelector.SelectionChanged -= BlsSelector_SelectionChanged;
@@ -1761,7 +1720,7 @@ namespace Daiz.NES.Reuben
             cDialog.Color = CurrentLevel.Settings.VGuideColor;
             if (cDialog.ShowDialog() == DialogResult.OK)
             {
-                CurrentLevel.Settings.VGuideColor = PnlVerticalGuide.GuideColor = cDialog.Color;
+                CurrentLevel.Settings.VGuideColor = cDialog.Color;
             }
         }
 
@@ -1771,7 +1730,7 @@ namespace Daiz.NES.Reuben
             cDialog.Color = CurrentLevel.Settings.HGuideColor;
             if (cDialog.ShowDialog() == DialogResult.OK)
             {
-                CurrentLevel.Settings.HGuideColor = PnlHorizontalGuide.GuideColor = cDialog.Color;
+                CurrentLevel.Settings.HGuideColor = cDialog.Color;
             }
         }
 
