@@ -1,0 +1,9 @@
+C:\Personal\Reuben\Reuben.Controls\bin\Debug\Reuben.Controls.Liquid.dll
+C:\Personal\Reuben\Reuben.Controls\bin\Debug\Reuben.Controls.Liquid.pdb
+C:\Personal\Reuben\Reuben.Controls\bin\Debug\System.Net.Http.dll
+C:\Personal\Reuben\Reuben.Controls\bin\Debug\System.Net.Http.xml
+C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.csprojResolveAssemblyReference.cache
+C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.csproj.CoreCompileInputs.cache
+C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.csproj.CopyComplete
+C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.dll
+C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.pdb
