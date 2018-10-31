@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reuben", "Reuben\Reuben.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daiz.NES.Reuben.ProjectManagement", "Daiz.NES.Reuben.ProjectManagement\Daiz.NES.Reuben.ProjectManagement.csproj", "{5A27B53A-5311-481F-B6AA-3EC390E89FE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reuben.Controls.Liquid", "Reuben.Controls\Reuben.Controls.Liquid.csproj", "{B95746E1-5CFE-4F6F-A8E9-4D8627BF4920}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +23,15 @@ Global
 		{5A27B53A-5311-481F-B6AA-3EC390E89FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A27B53A-5311-481F-B6AA-3EC390E89FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A27B53A-5311-481F-B6AA-3EC390E89FE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B95746E1-5CFE-4F6F-A8E9-4D8627BF4920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B95746E1-5CFE-4F6F-A8E9-4D8627BF4920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B95746E1-5CFE-4F6F-A8E9-4D8627BF4920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B95746E1-5CFE-4F6F-A8E9-4D8627BF4920}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18C4E914-DBEF-4EAF-9155-B497BB938F9A}
 	EndGlobalSection
 EndGlobal

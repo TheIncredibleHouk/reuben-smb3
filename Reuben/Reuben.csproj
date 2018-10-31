@@ -130,6 +130,12 @@
     <Compile Include="Controls\TileViewer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ControlTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlTest.Designer.cs">
+      <DependentUpon>ControlTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Confirm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     <EmbeddedResource Include="Controls\WorldPointerEditor.resx">
       <DependentUpon>WorldPointerEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ControlTest.resx">
+      <DependentUpon>ControlTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Confirm.resx">
       <DependentUpon>Confirm.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,6 +299,10 @@
     <ProjectReference Include="..\Daiz.NES.Reuben.ProjectManagement\Daiz.NES.Reuben.ProjectManagement.csproj">
       <Project>{5A27B53A-5311-481F-B6AA-3EC390E89FE9}</Project>
       <Name>Daiz.NES.Reuben.ProjectManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reuben.Controls\Reuben.Controls.Liquid.csproj">
+      <Project>{b95746e1-5cfe-4f6f-a8e9-4d8627bf4920}</Project>
+      <Name>Reuben.Controls.Liquid</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
