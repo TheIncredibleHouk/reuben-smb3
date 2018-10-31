@@ -66,6 +66,9 @@
             this.paletteManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicsEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.map16EditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.globalObjectReplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.layoutManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuWindows = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,8 +78,6 @@
             this.PrvProject = new Daiz.NES.Reuben.ProjectView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnShowHide = new System.Windows.Forms.Button();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.PnlRightSide.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -351,10 +352,11 @@
             this.graphicsEditorToolStripMenuItem,
             this.map16EditorToolStripMenuItem,
             this.toolStripSeparator5,
-            this.reportsToolStripMenuItem});
+            this.reportsToolStripMenuItem,
+            this.globalObjectReplaceToolStripMenuItem});
             this.MnuTools.Enabled = false;
             this.MnuTools.Name = "MnuTools";
-            this.MnuTools.Size = new System.Drawing.Size(48, 20);
+            this.MnuTools.Size = new System.Drawing.Size(47, 20);
             this.MnuTools.Text = "Tools";
             // 
             // paletteManagerToolStripMenuItem
@@ -377,6 +379,25 @@
             this.map16EditorToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.map16EditorToolStripMenuItem.Text = "Block Definitions Editor";
             this.map16EditorToolStripMenuItem.Click += new System.EventHandler(this.map16EditorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(194, 6);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
+            // 
+            // globalObjectReplaceToolStripMenuItem
+            // 
+            this.globalObjectReplaceToolStripMenuItem.Name = "globalObjectReplaceToolStripMenuItem";
+            this.globalObjectReplaceToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.globalObjectReplaceToolStripMenuItem.Text = "Global Object Replace";
+            this.globalObjectReplaceToolStripMenuItem.Click += new System.EventHandler(this.globalObjectReplaceToolStripMenuItem_Click);
             // 
             // MnuEditor
             // 
@@ -413,7 +434,7 @@
             // dumpRawLevelToFileToolStripMenuItem
             // 
             this.dumpRawLevelToFileToolStripMenuItem.Name = "dumpRawLevelToFileToolStripMenuItem";
-            this.dumpRawLevelToFileToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.dumpRawLevelToFileToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.dumpRawLevelToFileToolStripMenuItem.Text = "Dump Raw Level To File";
             this.dumpRawLevelToFileToolStripMenuItem.Click += new System.EventHandler(this.dumpRawLevelToFileToolStripMenuItem_Click);
             // 
@@ -453,18 +474,6 @@
             this.BtnShowHide.Text = ">>";
             this.BtnShowHide.UseVisualStyleBackColor = true;
             this.BtnShowHide.Click += new System.EventHandler(this.BtnShowHide_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(194, 6);
-            // 
-            // reportsToolStripMenuItem
-            // 
-            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.reportsToolStripMenuItem.Text = "Reports";
-            this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -538,7 +547,6 @@
         private System.Windows.Forms.ToolStripMenuItem levelAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
-
-
+        private System.Windows.Forms.ToolStripMenuItem globalObjectReplaceToolStripMenuItem;
     }
 }

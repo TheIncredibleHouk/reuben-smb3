@@ -56,7 +56,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 levelTypeTable.Add(levelIndex++, li.LevelType);
             }
 
-            levelDataPointer = 0x28010;
+            levelDataPointer = 0x24010;
             CompileWorlds();
 
             levelDataPointer = 0x40010;
@@ -94,10 +94,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 levelDataPointer = levelAddressTable[index];
                 bank = (byte)((levelDataPointer - 0x10) / 0x2000);
                 address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
-                Rom[0x24010 + (index * 4)] = (byte)bank;
-                Rom[0x24011 + (index * 4)] = (byte)(address & 0x00FF);
-                Rom[0x24012 + (index * 4)] = (byte)((address & 0xFF00) >> 8);
-                Rom[0x24013 + (index * 4)] = (byte)levelTypeTable[index];
+                Rom[0xDC10 + (index * 4)] = (byte)bank;
+                Rom[0xDC11 + (index * 4)] = (byte)(address & 0x00FF);
+                Rom[0xDC12 + (index * 4)] = (byte)((address & 0xFF00) >> 8);
+                Rom[0xDC13 + (index * 4)] = (byte)levelTypeTable[index];
             }
             return lastLevelPointer;
         }
@@ -115,15 +115,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
                     address = (levelDataPointer - 0x10 - (bank * 0x2000) + 0xA000);
 
                     Rom.ProtectionMode = RomWriteProtection.WorldPointers;
-                    Rom[0x22010 + ((wi.Ordinal) * 4)] = (byte)bank;
-                    Rom[0x22011 + ((wi.Ordinal) * 4)] = (byte)(address & 0x00FF);
-                    Rom[0x22012 + ((wi.Ordinal) * 4)] = (byte)((address & 0xFF00) >> 8);
+                    Rom[0x0D810 + ((wi.Ordinal) * 4)] = (byte)bank;
+                    Rom[0x0D811 + ((wi.Ordinal) * 4)] = (byte)(address & 0x00FF);
+                    Rom[0x0D812 + ((wi.Ordinal) * 4)] = (byte)((address & 0xFF00) >> 8);
 
                     Rom.ProtectionMode = RomWriteProtection.LevelData;
                     levelDataPointer = WriteWorld(w, levelDataPointer);
 
-                    Rom.ProtectionMode = RomWriteProtection.AnyData;
-                    Rom[0x15610 + wi.Ordinal] = (byte)(w.Length << 4);
+                    if(levelDataPointer > 0x26010)
+                    {
+                        throw new Exception("World data overflow!");
+                    }
 
                     if (levelDataPointer >= 0xFC000)
                         return false;
@@ -306,14 +308,14 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
         public bool WritePalettes(List<PaletteInfo> paletteInfo)
         {
-            int address = 0x2A010;
+            int address = 0x28010;
             foreach (var p in paletteInfo)
             {
                 for (int i = 0; i < 8; i++)
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        Rom[address++] = (byte)p[i, j];
+                        Rom[address++] = (byte) p[i, j];
                     }
                 }
             }
@@ -340,17 +342,17 @@ namespace Daiz.NES.Reuben.ProjectManagement
         private void SaveTSA()
         {
             List<BlockDefinition> lookupTable = ProjectController.BlockManager.AllDefinitions;
-            int dataPointer = 0x1E010;
+            int dataPointer = 0x2C010;
             for (int i = 0; i < 16; i++)
             {
                 byte[] blockData = lookupTable[i].GetBlockData();
                 for (int j = 0; j < 0x400; j++)
                 {
-                    Rom[dataPointer++] = blockData[j];
+                    Rom[dataPointer++] = (byte)blockData[j];
                 }
             }
 
-            dataPointer = 0x2C010;
+            dataPointer = 0xC010;
 
             for (int i = 0; i < 16; i++)
             {
@@ -362,12 +364,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
             for (int i = 1; i < 16; i++)
             {
-                dataPointer = 0x2E010 + (i * 0x100);
-
+                dataPointer = i * 0x40 + 0xD010;
                 BlockDefinition currentDef = ProjectController.BlockManager.AllDefinitions[i];
                 foreach (var k in currentDef.FireBallTransitions)
                 {
-                    Rom[dataPointer++] = (byte)k;
+                    Rom[dataPointer++] = (byte) k;
                 }
 
                 foreach (var k in currentDef.IceBallTransitions)

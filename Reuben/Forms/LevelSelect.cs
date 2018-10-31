@@ -47,6 +47,7 @@ namespace Daiz.NES.Reuben
                 WorldInfo wInfo = LbxWorlds.SelectedItem as WorldInfo;
                 LbxLevels.DataSource = (from l in ProjectController.LevelManager.Levels
                                         where l.WorldGuid == wInfo.WorldGuid
+                                        orderby l.Name.ToLower()
                                         select l).ToList();
             }
         }

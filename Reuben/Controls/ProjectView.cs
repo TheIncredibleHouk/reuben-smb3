@@ -63,7 +63,7 @@ namespace Daiz.NES.Reuben
                 TreeNode nextNode = new TreeNode();
                 nextNode.Text = w.Name;
                 nextNode.Tag = w;
-                foreach(var l in from lvl in ProjectController.LevelManager.Levels where lvl.WorldGuid == w.WorldGuid select lvl)
+                foreach(var l in ProjectController.LevelManager.Levels.Where(lvl => lvl.WorldGuid == w.WorldGuid).OrderBy(lvl => lvl.Name.ToLower()))
                 {
                     TreeNode nextNextNode = new TreeNode();
                     nextNextNode.Text = l.Name;

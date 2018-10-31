@@ -14,6 +14,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
         public int Y { get; set; }
         public int Property { get; set; }
         public int InGameID { get; set; }
+        public bool Replaced { get; set; }
         public bool IsMapSprite { get; set; }
         public int Item { get; set; }
         public bool IsViewable { get; internal set; }
@@ -82,6 +83,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
             x.SetAttributeValue("value", InGameID);
             x.SetAttributeValue("item", Item);
             x.SetAttributeValue("property", Property);
+            x.SetAttributeValue("replaced", Replaced);
             return x;
         }
 
@@ -109,6 +111,10 @@ namespace Daiz.NES.Reuben.ProjectManagement
 
                     case "property":
                         Property = a.Value.ToInt();
+                        break;
+
+                    case "replaced":
+                        Replaced = a.Value.ToBoolean();
                         break;
                 }
             }

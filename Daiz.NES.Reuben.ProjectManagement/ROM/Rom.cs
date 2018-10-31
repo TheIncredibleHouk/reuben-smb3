@@ -11,6 +11,8 @@ namespace Daiz.NES.Reuben.ProjectManagement
     {
         private string Filename;
         private byte[] data;
+        private bool[] dataProtection;
+
         public RomWriteProtection ProtectionMode { get; set; }
 
         public Rom()
@@ -22,6 +24,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
             get { return data[index]; }
             set
             {
+                if (dataProtection[index])
+                {
+                    throw new Exception("Data at address " + index.ToString("X") + " has already been written to!");
+                }
+
                 bool canWrite = true;
 
                 switch (ProtectionMode)
@@ -54,6 +61,7 @@ namespace Daiz.NES.Reuben.ProjectManagement
                 //if (!canWrite) throw new ArgumentOutOfRangeException("Cannot write to " + index + " because it is protected with " + ProtectionMode);
 
                 data[index] = value;
+                dataProtection[index] = true;
             }
         }
 
@@ -62,9 +70,11 @@ namespace Daiz.NES.Reuben.ProjectManagement
             if (!File.Exists(filename)) return false;
             FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             data = new byte[fs.Length];
+            dataProtection = new bool[fs.Length];
             fs.Read(data, 0, (int)fs.Length);
             fs.Close();
             Filename = filename;
+            AllowWrites();
             return true;
         }
 
@@ -73,7 +83,16 @@ namespace Daiz.NES.Reuben.ProjectManagement
             FileStream fs = new FileStream(Filename, FileMode.Open, FileAccess.Write);
             fs.Write(data, 0, data.Length);
             fs.Close();
+            AllowWrites();
             return true;
+        }
+
+        public void AllowWrites()
+        {
+            for(var i = 0; i < dataProtection.Length; i++)
+            {
+                dataProtection[i] = false;
+            }
         }
 
         //public bool IsPatchedRom

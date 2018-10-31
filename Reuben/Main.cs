@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Daiz.NES.Reuben.ProjectManagement;
+using Daiz.Library;
 
 namespace Daiz.NES.Reuben
 {
@@ -211,7 +212,7 @@ namespace Daiz.NES.Reuben
                     ReubenController.CompileRom(true);
                 }
             }
-            
+
         }
 
         private void blockPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -292,7 +293,7 @@ namespace Daiz.NES.Reuben
 
         private void levelAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReubenController.SaveCurrentLevelToFile();            
+            ReubenController.SaveCurrentLevelToFile();
         }
 
         private void Main_Activated(object sender, EventArgs e)
@@ -306,5 +307,45 @@ namespace Daiz.NES.Reuben
             Reports r = new Reports();
             r.ShowDialog();
         }
+
+        private void globalObjectReplaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InputForm iForm = new InputForm();
+            iForm.StartPosition = FormStartPosition.CenterParent;
+            iForm.Owner = ReubenController.MainWindow;
+
+            string originalObjectId = iForm.GetInput("Enter the object ID to search for.");
+
+            if (originalObjectId == null)
+            {
+                return;
+            }
+
+
+            string replaceObjectId = iForm.GetInput("Enter the object ID to replace #" + originalObjectId + " with.");
+
+            if (replaceObjectId == null)
+            {
+                return;
+            }
+
+            foreach (LevelInfo levelInfo in ProjectController.LevelManager.Levels)
+            {
+                Level level = new Level();
+                level.Load(levelInfo);
+                for (int i = 0; i < level.SpriteData.Count; i++)
+                {
+                    if (level.SpriteData[i].InGameID == originalObjectId.ToIntFromHex() &&
+                        !level.SpriteData[i].Replaced)
+                    {
+                        level.SpriteData[i].InGameID = replaceObjectId.ToIntFromHex();
+                        level.SpriteData[i].Replaced = true;
+                    }
+                }
+
+                level.Save();
+            }
+        }
+
     }
 }
