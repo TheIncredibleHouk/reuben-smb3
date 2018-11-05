@@ -21,7 +21,7 @@ namespace Daiz.NES.Reuben
             }
             else
             {
-                Application.Run(new ControlTest());
+                Application.Run(new Main());
             }
         }
     }

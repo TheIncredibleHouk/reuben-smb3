@@ -7,3 +7,10 @@ C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.csproj.CoreC
 C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.csproj.CopyComplete
 C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.dll
 C:\Personal\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.pdb
+F:\ROM Hacking\Reuben\Reuben.Controls\bin\Debug\Reuben.Controls.Liquid.dll
+F:\ROM Hacking\Reuben\Reuben.Controls\bin\Debug\Reuben.Controls.Liquid.pdb
+F:\ROM Hacking\Reuben\Reuben.Controls\bin\Debug\System.Net.Http.dll
+F:\ROM Hacking\Reuben\Reuben.Controls\bin\Debug\System.Net.Http.xml
+F:\ROM Hacking\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.csprojResolveAssemblyReference.cache
+F:\ROM Hacking\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.dll
+F:\ROM Hacking\Reuben\Reuben.Controls\obj\Debug\Reuben.Controls.Liquid.pdb
